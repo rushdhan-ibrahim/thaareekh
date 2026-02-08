@@ -225,7 +225,44 @@ const D = {
     legend_inferred: 'Inferred',
     legend_uncertain: 'Uncertain',
     about: 'About',
-    about_text: 'Nodes = individuals (multiple accessions merged). \u2640 = female sovereigns. Inferred edges are deductions; uncertain edges mark ambiguous sources. Baseline provenance defaults to the kings-list source unless an edge/person has curated citations attached.'
+    about_text: 'Nodes = individuals (multiple accessions merged). \u2640 = female sovereigns. Inferred edges are deductions; uncertain edges mark ambiguous sources. Baseline provenance defaults to the kings-list source unless an edge/person has curated citations attached.',
+    method_confidence: 'Method & Confidence',
+    method_confidence_classes: 'Confidence classes',
+    method_source_grades: 'Source grades',
+    method_conf_c: 'Confirmed (c): explicitly stated relationship in cited sources.',
+    method_conf_i: 'Inferred (i): relationship is modeled from supporting facts, but not directly stated as that exact edge.',
+    method_conf_u: 'Uncertain (u): sources conflict or remain ambiguous for this exact relationship.',
+    method_grade_a: 'Grade A: official/primary source with direct claim support.',
+    method_grade_b: 'Grade B: strong specialist or secondary source support.',
+    method_grade_c: 'Grade C: plausible but limited corroboration; keep under active review.',
+    method_grade_d: 'Grade D: contested/weak evidence; do not treat as settled.',
+    method_inference_hint: 'For inferred edges, open the relationship card to see node-specific inference logic and verification checklist.',
+    method_open_explainer: 'Open full confidence & grade explainer',
+    method_open_tracker: 'Open inference dossier tracker (edge\u2192file)',
+    method_verification_flow: 'Verification flow',
+    method_flow_1: 'Open an inferred relationship edge.',
+    method_flow_2: 'Review pair-specific inference logic and checklist.',
+    method_flow_3: 'Open the pair dossier and source trail before accepting or promoting the claim.',
+    inference_logic: 'Inference Logic',
+    inference_rule: 'Inference rule',
+    inference_rule_manual: 'Handcrafted dossier',
+    inference_rule_derived: 'Rule-derived family inference',
+    inference_rule_unknown: 'Inference detail pending curation',
+    inference_rule_shared_parent: 'Shared-parent sibling rule',
+    inference_rule_parent_of_parent: 'Parent-of-parent grandparent rule',
+    inference_rule_parent_sibling: 'Parent+sibling aunt/uncle rule',
+    inference_rule_children_of_siblings: 'Children-of-siblings cousin rule',
+    inference_no_detail: 'No handcrafted explanation is attached yet for this inferred edge.',
+    inference_verification_checklist: 'Verification Checklist',
+    inference_bases: 'Inference bases',
+    inference_open_dossier: 'Open full pair dossier (Markdown)',
+    inference_dossier_unavailable: 'No dossier path is attached for this inferred edge yet.',
+    inference_open_explainer: 'How confidence and grades are defined',
+    inference_open_tracker: 'Open inference dossier tracker',
+    inference_edge_key: 'Edge key',
+    inference_dossier_path: 'Dossier path',
+    inference_logic_steps: 'How this inference is derived',
+    inference_no_bases: 'No explicit basis sources are attached to this inferred edge.'
   },
   dv: {
     // --- ނެވިގޭޝަން / ލޭއައުޓް ---
@@ -472,7 +509,21 @@ const D = {
     legend_inferred: 'ލަފާކުރެވޭ',
     legend_uncertain: 'ޔަޤީން ނޫން',
     about: 'ތަޢާރަފު',
-    about_text: 'ނޯޑު = ފަރުދީ މީހުން (އެއް ރަސްކަލެއްގެ ތަފާތު އިސްތިލާޙު އެއްކޮށްފައި). \u2640 = އަންހެން ރަދުން (ރެހެންދި). ލަފާކުރެވޭ ގުޅުންތަކީ މަސްދަރުތަކުން ދޭހަވާ ގުޅުން؛ ޔަޤީން ނޫން ގުޅުންތަކީ ފެންނަ ހެކި ކުޑަ ގުޅުން. އެހެން ގޮތަކަށް ބަޔާންކޮށްފައި ނެތް ނަމަ، މަޢުލޫމާތުގެ އަޞްލަކީ ރަސްކަލުންގެ ލިސްޓު.'
+    about_text: 'ނޯޑު = ފަރުދީ މީހުން (އެއް ރަސްކަލެއްގެ ތަފާތު އިސްތިލާޙު އެއްކޮށްފައި). \u2640 = އަންހެން ރަދުން (ރެހެންދި). ލަފާކުރެވޭ ގުޅުންތަކީ މަސްދަރުތަކުން ދޭހަވާ ގުޅުން؛ ޔަޤީން ނޫން ގުޅުންތަކީ ފެންނަ ހެކި ކުޑަ ގުޅުން. އެހެން ގޮތަކަށް ބަޔާންކޮށްފައި ނެތް ނަމަ، މަޢުލޫމާތުގެ އަޞްލަކީ ރަސްކަލުންގެ ލިސްޓު.',
+    method_open_explainer: 'ޔަޤީންކަމާއި ދަރަޖަގެ ފުރިހަމަ ގައިޑު ހުޅުވާ',
+    method_open_tracker: 'އިންފަރެންސް ޑޯސިއަރ ޓްރެކަރ (edge→file) ހުޅުވާ',
+    method_verification_flow: 'Verification flow',
+    method_flow_1: 'Open an inferred relationship edge.',
+    method_flow_2: 'Review pair-specific inference logic and checklist.',
+    method_flow_3: 'Open the pair dossier and source trail before accepting or promoting the claim.',
+    inference_open_dossier: 'މި ދެ ނޯޑުގެ ފުރިހަމަ ޑޯސިއަރ (Markdown) ހުޅުވާ',
+    inference_dossier_unavailable: 'މި inferred edge އަށް ޑޯސިއަރ މަގު ލިންކު ނެތް.',
+    inference_open_explainer: 'ޔަޤީންކަމާއި ދަރަޖަ މާނަ ބަލާ',
+    inference_open_tracker: 'Open inference dossier tracker',
+    inference_edge_key: 'Edge key',
+    inference_dossier_path: 'Dossier path',
+    inference_logic_steps: 'How this inference is derived',
+    inference_no_bases: 'No explicit basis sources are attached to this inferred edge.'
   }
 };
 
@@ -611,6 +662,23 @@ export function refreshChromeLabels() {
   setText('lgUn', t('legend_uncertain'));
   setText('abH', t('about'));
   setText('abT', t('about_text'));
+  setText('methH', t('method_confidence'));
+  setText('mgCHead', t('method_confidence_classes'));
+  setText('mgCC', t('method_conf_c'));
+  setText('mgCI', t('method_conf_i'));
+  setText('mgCU', t('method_conf_u'));
+  setText('mgSHead', t('method_source_grades'));
+  setText('mgGA', t('method_grade_a'));
+  setText('mgGB', t('method_grade_b'));
+  setText('mgGC', t('method_grade_c'));
+  setText('mgGD', t('method_grade_d'));
+  setText('mgHint', t('method_inference_hint'));
+  setText('mgExplainerLink', t('method_open_explainer'));
+  setText('mgTrackerLink', t('method_open_tracker'));
+  setText('mgFlowHead', t('method_verification_flow'));
+  setText('mgFlow1', t('method_flow_1'));
+  setText('mgFlow2', t('method_flow_2'));
+  setText('mgFlow3', t('method_flow_3'));
 }
 
 export function setLanguage(next, { silent = false } = {}) {

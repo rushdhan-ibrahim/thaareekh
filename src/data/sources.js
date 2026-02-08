@@ -539,6 +539,114 @@ export const sources = [
     access_date: '2026-02-06',
     quality: 'C',
     notes: 'Specialist title glossary used as supplemental context; direct fetch blocked in this environment.'
+  },
+  {
+    id: 'SRC-ARCHIVES-LAW-16-2011',
+    url: 'https://archives.gov.mv/assets/source/docs/archives_law.pdf',
+    title: 'National Archives Act (Law 16/2011)',
+    publisher: 'National Archives of Maldives',
+    access_date: '2026-02-08',
+    quality: 'A',
+    notes: 'Official gazetted legal text defining archival mandate and records governance.'
+  },
+  {
+    id: 'SRC-ARCHIVES-RECORDS-DISPOSAL',
+    url: 'https://archives.gov.mv/assets/source/docs/disposal_of_records.pdf',
+    title: 'Regulation on Disposal of Records',
+    publisher: 'National Archives of Maldives',
+    access_date: '2026-02-08',
+    quality: 'A',
+    notes: 'Official archival regulation relevant for records provenance and source lifecycle policy.'
+  },
+  {
+    id: 'SRC-PO-TARIKH-LAUNCH-2021',
+    url: 'https://presidency.gov.mv/Press/Article/24486',
+    title: "President urges students to study and research Maldives' rich history",
+    publisher: "The President's Office (Maldives)",
+    access_date: '2026-02-08',
+    quality: 'A',
+    notes: 'Official statement identifying Tarikh Islam Diba Mahal as the earliest surviving local historical work.'
+  },
+  {
+    id: 'SRC-TUFS-TARIKH-DIBA-MAHALL-FACSIMILE',
+    url: 'https://tufs.repo.nii.ac.jp/records/7457',
+    title: 'Tarikh Islam Diba Mahall (facsimile edition)',
+    publisher: 'Institute for the Study of Languages and Cultures of Asia and Africa, TUFS',
+    access_date: '2026-02-08',
+    quality: 'A',
+    notes: 'Facsimile publication of Hasan Taj al-Din chronicle with continuations by Muhibb al-Din and Siraj al-Din.'
+  },
+  {
+    id: 'SRC-TUFS-TARIKH-DIBA-MAHALL-ANNOT',
+    url: 'https://tufs.repo.nii.ac.jp/records/7433',
+    title: 'Tarikh Islam Diba Mahall, vol.2 (annotations and indices)',
+    publisher: 'Institute for the Study of Languages and Cultures of Asia and Africa, TUFS',
+    access_date: '2026-02-08',
+    quality: 'B',
+    notes: 'Scholarly annotation and indexing companion to the facsimile chronicle.'
+  },
+  {
+    id: 'SRC-STANDREWS-PEACOCK-2020',
+    url: 'https://research-portal.st-andrews.ac.uk/en/publications/history-piety-and-factional-politics-in-the-arabic-chronicle-of-t/',
+    title: "History, piety and factional politics in the Arabic chronicle of the Maldives",
+    publisher: 'University of St Andrews / Asiatische Studien',
+    access_date: '2026-02-08',
+    quality: 'B',
+    notes: 'Peer-reviewed analysis of Tarikh textual tradition and authorial political context.'
+  },
+  {
+    id: 'SRC-SARUNA-LOAMAAFANU-1982',
+    url: 'https://saruna.mnu.edu.mv/items/3c1c8b78-4aea-480e-95fd-484f3134a881',
+    title: 'Loamaafaanu (Hassan Ahmed Maniku, 1982)',
+    publisher: 'National Centre for Linguistic and Historical Research / MNU Saruna repository',
+    access_date: '2026-02-08',
+    quality: 'A',
+    notes: 'Foundational Loamaafaanu publication used for inscriptional and early-Islamization evidence.'
+  },
+  {
+    id: 'SRC-SARUNA-LOAMAAFANU-2003',
+    url: 'https://saruna.mnu.edu.mv/items/4826d37f-f293-4576-b4df-a5220d9e2f3f',
+    title: 'Loamaafaanu (Naseema Mohamed, 2003)',
+    publisher: 'Dhivehibahaai Thareekhah Khidhumaiykuraa Qaumee Marukazu / MNU Saruna repository',
+    access_date: '2026-02-08',
+    quality: 'B',
+    notes: 'Later article-level synthesis and contextualization of copper-plate records.'
+  },
+  {
+    id: 'SRC-SARUNA-RAADHAVALHI-1985',
+    url: 'https://saruna.mnu.edu.mv/items/41a49f76-3727-45ef-8156-7a3119262adf',
+    title: 'Dhivehi Thaareekhaai Raadhavalhi (1985)',
+    publisher: 'Dhivehi Bahaai Thareekhah Khidhumaiy Kuraa Qaumee Marukazu / MNU Saruna repository',
+    access_date: '2026-02-08',
+    quality: 'B',
+    notes: 'Focused discussion of Raadhavalhi manuscript tradition and Dhivehi historical framing.'
+  },
+  {
+    id: 'SRC-SARUNA-PYRARD-V2P2-1887',
+    url: 'https://saruna.mnu.edu.mv/items/47e32876-8c1b-4f3d-91e8-75c6779d7eca',
+    title: 'Voyage of Francois Pyrard, vol. II part II (1887 edition)',
+    publisher: 'The Hakluyt Society / MNU Saruna repository',
+    access_date: '2026-02-08',
+    quality: 'A',
+    notes: 'Historical travel account with governance, court, office, and social-order observations.'
+  },
+  {
+    id: 'SRC-CORNELL-PYRARD-V1-1887',
+    url: 'https://digital.library.cornell.edu/catalog/sea103a',
+    title: 'Voyage of Francois Pyrard, vol. I (Cornell digital edition)',
+    publisher: 'Cornell University Library',
+    access_date: '2026-02-08',
+    quality: 'A',
+    notes: 'Digitized volume with chapter-level index including governance, offices, genealogy, and succession narratives.'
+  },
+  {
+    id: 'SRC-HEIDELBERG-BELL-1883',
+    url: 'https://digi.ub.uni-heidelberg.de/diglit/bell1883',
+    title: 'The Maldive Islands (Bell, 1883 digital facsimile)',
+    publisher: 'Heidelberg University Library',
+    access_date: '2026-02-08',
+    quality: 'B',
+    notes: 'Digitized antiquarian baseline with full-text OCR and stable DOI.'
   }
 ];
 

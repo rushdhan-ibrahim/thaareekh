@@ -45,6 +45,8 @@ Optional v2 fields:
 - `claim_type?: "direct"|"inferred"|"contested"`
 - `event_context?: string`
 - `confidence_grade?: "A"|"B"|"C"|"D"`
+- `inference_rule?: string` (for derived or curated inference typing)
+- `inference_basis?: object` (node/edge-level rationale structure for inferred claims)
 
 ## Source schema
 `src/data/sources.js` entries:

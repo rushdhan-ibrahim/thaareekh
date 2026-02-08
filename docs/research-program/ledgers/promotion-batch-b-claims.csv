@@ -1,0 +1,13 @@
+claim_id,edge_key,relation_type,source_id,target_id,label,primary_source_id,confidence_grade,reviewer,approved_date
+CLM-0129,kin|P192|P32|uncle/nephew,kin,P192,P32,uncle/nephew,SRC-MRF-HILAALY,B,phase5-promo-b,2026-02-08
+CLM-0148,kin|P32|P33|succession transition context,kin,P32,P33,succession transition context,SRC-WIKI-MONARCHS,B,phase5-promo-b,2026-02-08
+CLM-0151,kin|P32|P53|ancestor,kin,P32,P53,ancestor,SRC-MRF-KINGS,B,phase5-promo-b,2026-02-08
+CLM-0152,kin|P33|P34|succession transition context,kin,P33,P34,succession transition context,SRC-WIKI-MONARCHS,B,phase5-promo-b,2026-02-08
+CLM-0160,kin|P40|P49|grandfather,kin,P40,P49,grandfather,SRC-MRF-KINGS,B,phase5-promo-b,2026-02-08
+CLM-0161,kin|P40|P57|grandfather,kin,P40,P57,grandfather,SRC-MRF-KINGS,B,phase5-promo-b,2026-02-08
+CLM-0326,parent|P192|P38|,parent,P192,P38,,SRC-MRF-HILAALY,B,phase5-promo-b,2026-02-08
+CLM-0336,parent|P39|P46|,parent,P39,P46,,SRC-MRF-KINGS,B,phase5-promo-b,2026-02-08
+CLM-0337,parent|P40|P193|,parent,P40,P193,,SRC-MRF-KINGS,B,phase5-promo-b,2026-02-08
+CLM-0338,parent|P40|P41|,parent,P40,P41,,SRC-MRF-KINGS,B,phase5-promo-b,2026-02-08
+CLM-0431,sibling|P34|P35|brothers,sibling,P34,P35,brothers,SRC-MRF-KINGS,B,phase5-promo-b,2026-02-08
+CLM-0432,sibling|P39|P40|half-brothers,sibling,P39,P40,half-brothers,SRC-MRF-KINGS,B,phase5-promo-b,2026-02-08

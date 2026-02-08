@@ -157,7 +157,7 @@ function expandDerivedRelations(people, edges) {
   }
 
   // 1) Derive siblings from shared parent.
-  childrenByParent.forEach(children => {
+  childrenByParent.forEach((children, parent) => {
     const arr = [...children];
     for (let i = 0; i < arr.length; i++) {
       for (let j = i + 1; j < arr.length; j++) {
@@ -168,7 +168,15 @@ function expandDerivedRelations(people, edges) {
           s: a,
           d: b,
           l: 'siblings (shared parent)',
-          event_context: 'derived:shared-parent'
+          event_context: 'derived:shared-parent',
+          inference_rule: 'shared-parent-sibling',
+          inference_basis: {
+            shared_parent: parent,
+            parent_edges: [
+              { s: parent, d: a, t: 'parent' },
+              { s: parent, d: b, t: 'parent' }
+            ]
+          }
         });
         addToMapSet(siblingMap, a, b);
         addToMapSet(siblingMap, b, a);
@@ -189,7 +197,15 @@ function expandDerivedRelations(people, edges) {
           s: gp,
           d: child,
           l: 'grandparent',
-          event_context: 'derived:parent-of-parent'
+          event_context: 'derived:parent-of-parent',
+          inference_rule: 'parent-of-parent-grandparent',
+          inference_basis: {
+            via_parent: parent,
+            parent_edges: [
+              { s: gp, d: parent, t: 'parent' },
+              { s: parent, d: child, t: 'parent' }
+            ]
+          }
         });
       });
     });
@@ -207,7 +223,16 @@ function expandDerivedRelations(people, edges) {
           s: sib,
           d: child,
           l: 'aunt/uncle↔niece/nephew',
-          event_context: 'derived:parent-sibling'
+          event_context: 'derived:parent-sibling',
+          inference_rule: 'parent-sibling-aunt-uncle',
+          inference_basis: {
+            via_parent: parent,
+            via_parent_sibling: sib,
+            supporting_edges: [
+              { s: parent, d: child, t: 'parent' },
+              { s: parent, d: sib, t: 'sibling' }
+            ]
+          }
         });
       });
     });
@@ -237,7 +262,16 @@ function expandDerivedRelations(people, edges) {
           s: c1,
           d: c2,
           l: 'cousins',
-          event_context: 'derived:children-of-siblings'
+          event_context: 'derived:children-of-siblings',
+          inference_rule: 'children-of-siblings-cousin',
+          inference_basis: {
+            via_parent_siblings: [a, b],
+            child_parent_edges: [
+              { s: a, d: c1, t: 'parent' },
+              { s: b, d: c2, t: 'parent' }
+            ],
+            parent_sibling_edge: { s: a, d: b, t: 'sibling' }
+          }
         });
       });
     });

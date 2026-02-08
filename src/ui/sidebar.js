@@ -8,6 +8,7 @@ import { recordPerson, recordEdge } from './history.js';
 import { compareSummaryHtml, handlePersonViewed } from './compare.js';
 import { extractPlaceMentions, placeLabelForLang, resolvePlace } from '../data/geo.js';
 import { getLang, personName, relationLabel, t } from './i18n.js';
+import { getInferenceNote, getInferenceDossierPath, inferenceEdgeKey, isDerivedInferenceEdge } from '../data/inference-notes.js';
 
 const RULER_IDS = new Set(people.filter(p => (p.n || []).length > 0).map(p => p.id));
 const ROYAL_ADJ = new Map(people.map(p => [p.id, []]));
@@ -566,6 +567,187 @@ function relationTypeLabel(t) {
   return relationLabel(t);
 }
 
+function personLabelWithId(id) {
+  const p = byId.get(id);
+  if (!p) return id;
+  return `${personName(p)} (${id})`;
+}
+
+function edgeStepText(step) {
+  if (!step?.s || !step?.d) return '';
+  const rel = step.t || 'kin';
+  return `${personLabelWithId(step.s)} \u2192 ${personLabelWithId(step.d)} [${relationTypeLabel(rel)}]`;
+}
+
+function derivedRuleLabel(rule) {
+  if (rule === 'shared-parent-sibling') return t('inference_rule_shared_parent');
+  if (rule === 'parent-of-parent-grandparent') return t('inference_rule_parent_of_parent');
+  if (rule === 'parent-sibling-aunt-uncle') return t('inference_rule_parent_sibling');
+  if (rule === 'children-of-siblings-cousin') return t('inference_rule_children_of_siblings');
+  return t('inference_rule_derived');
+}
+
+function derivedInferenceDetail(e) {
+  const basis = e.inference_basis || {};
+  const sid = e.s;
+  const did = e.d;
+  if (e.inference_rule === 'shared-parent-sibling') {
+    const parent = basis.shared_parent;
+    return {
+      ruleLabel: derivedRuleLabel(e.inference_rule),
+      summary: parent
+        ? `${personLabelWithId(sid)} and ${personLabelWithId(did)} are inferred as siblings because both are modeled as children of ${personLabelWithId(parent)}.`
+        : `This sibling edge is derived from shared-parent logic in the current model.`,
+      logic: [
+        ...(basis.parent_edges || []).map(edgeStepText).filter(Boolean),
+        `Rule application: two child edges with the same parent yield an inferred sibling edge between the children.`
+      ],
+      verification: [
+        `Check whether primary or higher-grade secondary sources explicitly state sibling wording for this pair.`,
+        `If one child is reassigned to a different parent, remove or revise this inferred edge.`
+      ]
+    };
+  }
+
+  if (e.inference_rule === 'parent-of-parent-grandparent') {
+    const via = basis.via_parent;
+    return {
+      ruleLabel: derivedRuleLabel(e.inference_rule),
+      summary: via
+        ? `${personLabelWithId(sid)} is inferred as a grandparent-line relative of ${personLabelWithId(did)} through ${personLabelWithId(via)}.`
+        : `This kin edge is derived by parent-of-parent traversal.`,
+      logic: [
+        ...(basis.parent_edges || []).map(edgeStepText).filter(Boolean),
+        `Rule application: if A is parent of B and B is parent of C, then A is inferred as a grandparent-line kin of C.`
+      ],
+      verification: [
+        `Verify whether sources provide an explicit grandparent or ancestor phrase for this exact pair.`,
+        `Upgrade relation type if direct wording is found.`
+      ]
+    };
+  }
+
+  if (e.inference_rule === 'parent-sibling-aunt-uncle') {
+    const viaParent = basis.via_parent;
+    const viaSib = basis.via_parent_sibling;
+    return {
+      ruleLabel: derivedRuleLabel(e.inference_rule),
+      summary: viaParent && viaSib
+        ? `${personLabelWithId(sid)} is inferred as aunt/uncle-line kin of ${personLabelWithId(did)} via sibling relation with ${personLabelWithId(viaParent)}.`
+        : `This kin edge is derived from parent + sibling composition.`,
+      logic: [
+        ...(basis.supporting_edges || []).map(edgeStepText).filter(Boolean),
+        `Rule application: sibling(parent, X) + parent(parent, child) implies aunt/uncle-line kin(X, child).`
+      ],
+      verification: [
+        `Confirm whether the sibling basis edge is itself direct or inferred.`,
+        `Promote this edge only when direct aunt/uncle wording is found; otherwise keep inferred.`
+      ]
+    };
+  }
+
+  if (e.inference_rule === 'children-of-siblings-cousin') {
+    const pair = basis.via_parent_siblings || [];
+    return {
+      ruleLabel: derivedRuleLabel(e.inference_rule),
+      summary: pair.length === 2
+        ? `${personLabelWithId(sid)} and ${personLabelWithId(did)} are inferred as cousin-line kin because their parents (${personLabelWithId(pair[0])}, ${personLabelWithId(pair[1])}) are modeled as siblings.`
+        : `This kin edge is derived by children-of-siblings cousin logic.`,
+      logic: [
+        ...(basis.child_parent_edges || []).map(edgeStepText).filter(Boolean),
+        edgeStepText(basis.parent_sibling_edge),
+        `Rule application: children of sibling parents are inferred as cousins.`
+      ].filter(Boolean),
+      verification: [
+        `Confirm parent assignments for both endpoints before treating this as stronger than inferred.`,
+        `If either parent edge changes, recompute or remove this cousin inference.`
+      ]
+    };
+  }
+
+  return null;
+}
+
+function inferenceDetailForEdge(e) {
+  if (!e || e.c !== 'i') return null;
+  const note = getInferenceNote(e);
+  if (note) {
+    return {
+      ruleLabel: t('inference_rule_manual'),
+      summary: note.summary || t('inference_no_detail'),
+      dossier: note.dossier || '',
+      logic: note.logic || [],
+      verification: note.verification || []
+    };
+  }
+  if (isDerivedInferenceEdge(e)) {
+    const derived = derivedInferenceDetail(e);
+    if (derived) return derived;
+  }
+  return {
+    ruleLabel: t('inference_rule_unknown'),
+    summary: t('inference_no_detail'),
+    dossier: '',
+    logic: [],
+    verification: []
+  };
+}
+
+function localDocHref(path) {
+  if (!path) return '';
+  return String(path)
+    .split('/')
+    .map(seg => encodeURIComponent(seg))
+    .join('/');
+}
+
+function inferencePanel(e) {
+  if (!e || e.c !== 'i') return '';
+  const info = inferenceDetailForEdge(e);
+  if (!info) return '';
+  const dossierPath = info.dossier || getInferenceDossierPath(e);
+  const dossierHref = localDocHref(dossierPath);
+  const edgeKey = inferenceEdgeKey(e);
+  const gradeChip = e.confidence_grade
+    ? `<span class="rt">${esc(t('confidence_grade'))} ${esc(e.confidence_grade)}</span>`
+    : '';
+  const trackerHref = 'docs/research-program/ledgers/inference-dossier-tracker.csv';
+  const refs = (e.evidence_refs || [])
+    .filter(id => sourceById.has(id))
+    .map(id => {
+      const src = sourceById.get(id);
+      return `${src?.title || id} (${id})`;
+    });
+  const logic = (info.logic || []).filter(Boolean);
+  const checks = (info.verification || []).filter(Boolean);
+  const basisHtml = refs.length
+    ? refs.map(row => `<span class="infp-tag">${esc(row)}</span>`).join('')
+    : '';
+  return `
+    <div class="pcs infp">
+      <div class="infp-top">
+        <div class="sl">${esc(t('inference_logic'))}</div>
+        <div class="infp-meta">
+          <span class="rt rt-i">${esc(t('inferred'))}</span>
+          ${gradeChip}
+          <span class="rt">${esc(info.ruleLabel)}</span>
+        </div>
+      </div>
+      <div class="infp-summary">${esc(info.summary)}</div>
+      <div class="infp-actions">
+        ${dossierHref ? `<a class="doc-link doc-pill" href="${esc(dossierHref)}" target="_blank" rel="noopener noreferrer">${esc(t('inference_open_dossier'))}</a>` : `<span class="infp-missing">${esc(t('inference_dossier_unavailable'))}</span>`}
+        <a class="doc-link doc-pill" href="docs/confidence-grade-explainer.md" target="_blank" rel="noopener noreferrer">${esc(t('inference_open_explainer'))}</a>
+        <a class="doc-link doc-pill" href="${trackerHref}" target="_blank" rel="noopener noreferrer">${esc(t('inference_open_tracker'))}</a>
+      </div>
+      <div class="infp-path"><span>${esc(t('inference_edge_key'))}</span><code>${esc(edgeKey || '-')}</code></div>
+      ${dossierPath ? `<div class="infp-path"><span>${esc(t('inference_dossier_path'))}</span><code>${esc(dossierPath)}</code></div>` : ''}
+      ${logic.length ? `<details class="odt infp-det" open><summary>${esc(t('inference_logic_steps'))}</summary><ul class="pfl">${logic.map(row => `<li>${esc(row)}</li>`).join('')}</ul></details>` : ''}
+      ${checks.length ? `<details class="odt infp-det"><summary>${esc(t('inference_verification_checklist'))}</summary><ul class="pfl">${checks.map(row => `<li>${esc(row)}</li>`).join('')}</ul></details>` : ''}
+      ${refs.length ? `<div class="infp-bases"><div class="sl">${esc(t('inference_bases'))}</div><div class="infp-tags">${basisHtml}</div></div>` : `<div class="rs">${esc(t('inference_no_bases'))}</div>`}
+    </div>
+  `;
+}
+
 function edgeEvidencePanel(e, s, targetPerson) {
   const refs = sourceRowsFromRefs(e.evidence_refs || []);
   const uncertainty = e.c === 'c'
@@ -616,6 +798,7 @@ function relationCard(link) {
       </div>
       ${e.l ? `<div class="pcs"><div class="sl">${esc(t('edge_label'))}</div><div class="nt">${esc(e.l)}</div></div>` : ''}
       ${e.event_context ? `<div class="pcs"><div class="sl">${esc(t('edge_context'))}</div><div class="nt">${esc(e.event_context)}</div></div>` : ''}
+      ${inferencePanel(e)}
       ${edgeEvidencePanel(e, s, targetPerson)}
       <div class="pcs">
         <div class="sl">${esc(t('explore_endpoints'))}</div>
