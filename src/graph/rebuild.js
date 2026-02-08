@@ -514,6 +514,7 @@ function bindLinkInteractions(sel, tooltip) {
       state.selEdge = d;
       hiE(d);
       showLinkDetail(d);
+      if (!state.sidebarOpen) window.dispatchEvent(new CustomEvent('request-sidebar-open'));
     })
     .on("keydown", (ev, d) => {
       if (ev.key !== "Enter" && ev.key !== " ") return;
@@ -523,6 +524,7 @@ function bindLinkInteractions(sel, tooltip) {
       state.selEdge = d;
       hiE(d);
       showLinkDetail(d);
+      if (!state.sidebarOpen) window.dispatchEvent(new CustomEvent('request-sidebar-open'));
     });
 }
 
@@ -594,6 +596,7 @@ export function rebuild() {
     state.selEdge = null;
     showD(d.id);
     hiN(d.id);
+    if (!state.sidebarOpen) window.dispatchEvent(new CustomEvent('request-sidebar-open'));
   });
   state.gN.on("keydown", (ev, d) => {
     if (ev.key !== "Enter" && ev.key !== " ") return;
@@ -603,6 +606,7 @@ export function rebuild() {
     state.selEdge = null;
     showD(d.id);
     hiN(d.id);
+    if (!state.sidebarOpen) window.dispatchEvent(new CustomEvent('request-sidebar-open'));
   });
   state.svgEl.on("click", () => {
     state.selId = null;

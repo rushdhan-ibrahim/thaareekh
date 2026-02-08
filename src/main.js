@@ -283,11 +283,11 @@ function initFilterPanel() {
     }
     if (e.key === 'd' || e.key === 'D') {
       e.preventDefault();
-      setSidebarOpen(!state.sidebarOpen, { rebuildNow: true });
+      setSidebarOpen(!state.sidebarOpen);
     }
     if (e.key === 'Escape' && state.sidebarOpen) {
       e.preventDefault();
-      setSidebarOpen(false, { rebuildNow: true });
+      setSidebarOpen(false);
     }
     if (e.key === '0') {
       e.preventDefault();
@@ -348,14 +348,31 @@ function renderSidebarToggleUi() {
   }
 }
 
-function setSidebarOpen(open, { rebuildNow = true } = {}) {
+function setSidebarOpen(open, { rebuildNow = false } = {}) {
   state.sidebarOpen = Boolean(open);
   document.body.classList.toggle("sidebar-collapsed", !state.sidebarOpen);
   renderSidebarToggleUi();
   if (rebuildNow) {
     rebuild();
     setTimeout(updateTranslateExtent, 500);
+    return;
   }
+  // Lightweight viewport update — no full rebuild needed
+  requestAnimationFrame(() => {
+    const area = document.getElementById("ga");
+    state.W = area.clientWidth;
+    state.H = area.clientHeight;
+    // Nudge graph simulation center if running
+    if (state.viewMode === "graph" && state.sim) {
+      state.sim.force("center", d3.forceCenter(state.W / 2, state.H / 2));
+      const xForce = state.sim.force("x");
+      const yForce = state.sim.force("y");
+      if (xForce) xForce.x(state.W / 2);
+      if (yForce) yForce.y(state.H / 2);
+      state.sim.alpha(0.15).restart();
+    }
+    updateTranslateExtent();
+  });
 }
 
 function fitToContent() {
@@ -516,13 +533,13 @@ document.getElementById("vmi").addEventListener("click", () => {
 });
 
 document.getElementById("vms").addEventListener("click", () => {
-  setSidebarOpen(!state.sidebarOpen, { rebuildNow: true });
+  setSidebarOpen(!state.sidebarOpen);
 });
 document.getElementById("vms2")?.addEventListener("click", () => {
-  setSidebarOpen(!state.sidebarOpen, { rebuildNow: true });
+  setSidebarOpen(!state.sidebarOpen);
 });
 document.getElementById("sideClose")?.addEventListener("click", () => {
-  setSidebarOpen(false, { rebuildNow: true });
+  setSidebarOpen(false);
 });
 
 document.getElementById("fm").addEventListener("click", () => {
@@ -634,6 +651,11 @@ initTreeOptions();
 
 // Delayed onboarding after initial render
 setTimeout(() => initOnboarding(), 100);
+
+// Auto-open sidebar when a node/edge is clicked while it's collapsed
+window.addEventListener('request-sidebar-open', () => {
+  if (!state.sidebarOpen) setSidebarOpen(true);
+});
 
 // Update minimap after simulation settles
 window.addEventListener('zoom-changed', () => updateMinimap());
