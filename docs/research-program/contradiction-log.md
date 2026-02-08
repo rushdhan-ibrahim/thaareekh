@@ -71,3 +71,29 @@ Use this log for explicit claim conflicts. Do not remove older entries; append u
 - `Next verification action`: Assign an independent corroboration source for P87->P129 and rerun classification review.
 - `Last reviewed`: 2026-02-08
 <!-- CONTRADICTION-BATCH-C-END -->
+
+<!-- CONTRADICTION-BATCH-D-START -->
+### Batch Review (2026-02-09) — European Colonial Findings: Portuguese-Era Date Contradictions
+
+- `ID`: CLOG-2026-02-09-D1
+- `Topic`: P61 (Dom Manoel / Hassan IX) birth and death dates
+- `Entities`: P61
+- `Claim A`: Project data lists birth year 1525 and death year 1585 (SRC-MRF-KINGS, SRC-WIKI-MONARCHS).
+- `Claim B`: RoyalArk genealogical database lists birth c.1531 and death before July 10, 1584 (SRC-ROYALARK-M16).
+- `Sources`: SRC-MRF-KINGS, SRC-WIKI-MONARCHS, SRC-ROYALARK-M16, SRC-DESILVA-PORT-ENCOUNTERS
+- `Current stance`: Retain project data (1525, 1585) as current canonical values; flag RoyalArk dates as alternative claims requiring primary-source adjudication.
+- `Adjudication rationale`: Neither source provides primary archival citations for exact dates. The 6-year birth discrepancy and ~1-year death discrepancy require resolution via Portuguese colonial archives (Goa Historical Archives or Arquivo Nacional da Torre do Tombo).
+- `Next verification action`: Search for Dom Manoel's baptismal record (January 1, 1552, Cochin) and Goa administrative records for death date. Cross-reference with Diogo do Couto's Decadas.
+- `Last reviewed`: 2026-02-09
+
+- `ID`: CLOG-2026-02-09-D2
+- `Topic`: P67 (Dom Philippe / Dom Felipe) birth, death, and issue
+- `Entities`: P67
+- `Claim A`: Project data lists birth year 1588 and death year 1635; project edges imply P67 had descendants (SRC-MRF-KINGS, SRC-WIKI-MONARCHS).
+- `Claim B`: RoyalArk gives birth 1593, died "s.p. unm." (without issue, unmarried) before 1639 at Goa (SRC-ROYALARK-M16). The scroll.in article states Dom Philippe was killed in the 1632 expedition to Maldives, contradicting both project and RoyalArk death dates.
+- `Sources`: SRC-MRF-KINGS, SRC-WIKI-MONARCHS, SRC-ROYALARK-M16, SRC-SCROLL-GOA-KINGS
+- `Current stance`: Flag as high-priority contradiction. The "died without issue" claim from RoyalArk directly conflicts with project edge data showing P67 as a parent. The Huraagey lineage passes through P67's sister Dona Ines (P213), not through P67 himself.
+- `Adjudication rationale`: If RoyalArk is correct that P67 died unmarried without issue, any project edges showing P67 as a parent must be re-routed through P213 (Dona Ines). The current project edge P66→P67 (parent) remains valid regardless. The 5-year birth discrepancy (1588 vs 1593) and conflicting death accounts (1632 expedition vs before 1639 at Goa) require Portuguese archival verification.
+- `Next verification action`: Check project edges for any claims of P67 having children; verify whether the Huraagey bridge depends on P67's issue or on P213's issue. Consult Diogo do Couto and Goa Archives for P67 death circumstances.
+- `Last reviewed`: 2026-02-09
+<!-- CONTRADICTION-BATCH-D-END -->

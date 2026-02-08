@@ -82,7 +82,21 @@ export const people = [
   {id:"P91",n:[91,93],nm:"Mohamed Shamsuddine III",rg:"Kula Sundhura Katthiri",dy:"Huraagey",g:"M",re:[[1892,1892],[1903,1933]],yb:1863,yd:1935,pb:"Maldives",pd:"Maldives",facts:["Long-serving late-monarchy ruler across two accessions.","Represents the mature constitutional phase before the final sultans."],no:"Son of #87. Two accessions."},
   {id:"P92",n:[92],nm:"Mohamed Imaduddine VI",rg:"Keerithi Maha Radun",dy:"Huraagey",g:"M",re:[[1892,1903]],no:"Grandson of #86. Deposed in Suez."},
   {id:"P94",n:[94],nm:"Hassan Nooredine II",rg:"Kula Sudha Ira Siyaaaka",dy:"Huraagey",g:"M",re:[[1933,1943]],no:"Son of #88."},
-  {id:"P95",n:[95],nm:"Mohamed Farid",rg:"Keerithi Maha Radun",dy:"Huraagey",g:"M",re:[[1954,1968]],yb:1901,yd:1969,pb:"Malé",pd:"Malé",facts:["Last ruling Sultan before the monarchy ended.","Maternal line links back to Ibrahim Nooredine (#87)."],no:"Last sultan. Mother Don Goma was daughter of Ibrahim Nooredine (#87)."}
+  {id:"P95",n:[95],nm:"Mohamed Farid",rg:"Keerithi Maha Radun",dy:"Huraagey",g:"M",re:[[1954,1968]],yb:1901,yd:1969,pb:"Malé",pd:"Malé",facts:["Last ruling Sultan before the monarchy ended.","Maternal line links back to Ibrahim Nooredine (#87)."],no:"Last sultan. Mother Don Goma was daughter of Ibrahim Nooredine (#87)."},
+  {id:"P200",nm:"Ali Thakurufaanu",dy:"Utheemu",g:"M",no:"Brother of Mohamed Thakurufaanu (P104). Co-liberator of the Maldives from Portuguese rule in 1573."},
+  {id:"P201",nm:"Hassan Thakurufaanu",dy:"Utheemu",g:"M",no:"Brother of Mohamed Thakurufaanu (P104). Co-liberator of the Maldives from Portuguese rule in 1573."},
+  {id:"P202",nm:"Kamba Dio",dy:"Hilaaly",g:"F",no:"Daughter of Aboobakuru (#40). Mother of Sheikh Hassan (#49)."},
+  {id:"P203",nm:"Aidage Maava Kilege",dy:"Lunar",g:"F",no:"Mother of Hali (#11) and Keimi (#12)."},
+  {id:"P204",nm:"Vengihi Kalo",dy:"Lunar",g:"M",no:"Father of Hali (#11). Husband of Aidage Maava Kilege (P203)."},
+  {id:"P205",nm:"Hiriya Maava Kilege",dy:"Lunar",g:"F",no:"Parent of Hudhei (#9)."},
+  {id:"P206",nm:"Maayin Rannabandeyri Kilege",dy:"Hilaaly",g:"M",no:"Father of Hassan (#34) and Isa (#35)."},
+  {id:"P207",nm:"Recca",dy:"Hilaaly",g:"F",no:"Daughter of Aboobakuru (#40). Mother of Ali (#57)."},
+  {id:"P208",nm:"Princess Aysha Rani Kilege",dy:"Hilaaly",g:"F",no:"Daughter of Kalu Mohamed (#51). Wife of Ali (#63)."},
+  {id:"P209",nm:"Dom Francisco de Malvidas",dy:"Hilaaly",g:"M",no:"Son of Dom Manoel (P61) and Dona Leonor de Ataide. Sailed to Europe 1561; killed in street brawl at Lisbon after Feb 1583."},
+  {id:"P210",nm:"Dom Pedro de Malvidas",dy:"Hilaaly",g:"M",no:"Son of Dom Manoel (P61) and Dona Leonor de Ataide. Removed to Goa 1591; returned Cochin 1606; died after 1610."},
+  {id:"P211",nm:"Dona Leonor de Malvidas",dy:"Hilaaly",g:"F",yb:1555,no:"Daughter of Dom Manoel (P61) and Dona Leonor de Ataide. Born before Jan 27, 1555 at Goa."},
+  {id:"P212",nm:"Dona Catarina de Malvidas",dy:"Hilaaly",g:"F",no:"Daughter of Dom Manoel (P61) and Dona Leonor de Ataide."},
+  {id:"P213",nm:"Infanta Dona Ines de Malvidas",dy:"Hilaaly",g:"F",no:"Daughter of Dom Joao (P66) and Dona Francisca de Vasconcelos (P101). Married Captain Sebastiao Tavares de Souza at Goa 1610. Mother of Dom Luis de Souza (P97). Critical link in the Hilaaly-to-Huraagey bridge."}
 ];
 
 export const edges = [
@@ -155,7 +169,38 @@ export const edges = [
   {t:"kin",s:"P38",d:"P30",l:"cousins (fathers were brothers)",c:"c",evidence_refs:["SRC-MRF-HILAALY"],claim_type:"direct",confidence_grade:"B"},
   {t:"kin",s:"P74",d:"P76",l:"nephew (father was brother)",c:"c",evidence_refs:["SRC-WIKI-MONARCHS"],claim_type:"direct",confidence_grade:"B"},
   {t:"kin",s:"P87",d:"P95",l:"grandfather (via daughter)",c:"c"},
-  {t:"kin",s:"P51",d:"P63",l:"father-in-law",c:"c",evidence_refs:["SRC-MRF-KINGS"],claim_type:"direct",confidence_grade:"B"}
+  {t:"kin",s:"P51",d:"P63",l:"father-in-law",c:"c",evidence_refs:["SRC-MRF-KINGS"],claim_type:"direct",confidence_grade:"B"},
+  // Edges for new non-sovereign persons
+  {t:"sibling",s:"P200",d:"P104",l:"brothers",c:"c",evidence_refs:["SRC-MRF-UTHEEM","SRC-MRF-KINGS"],claim_type:"direct",confidence_grade:"B"},
+  {t:"sibling",s:"P201",d:"P104",l:"brothers",c:"c",evidence_refs:["SRC-MRF-UTHEEM","SRC-MRF-KINGS"],claim_type:"direct",confidence_grade:"B"},
+  {t:"sibling",s:"P200",d:"P201",l:"brothers",c:"c",evidence_refs:["SRC-MRF-UTHEEM"],claim_type:"direct",confidence_grade:"B"},
+  {t:"parent",s:"P40",d:"P202",l:"",c:"c",evidence_refs:["SRC-MRF-HILAALY","SRC-MRF-KINGS"],claim_type:"direct",confidence_grade:"B"},
+  {t:"parent",s:"P202",d:"P49",l:"",c:"c",evidence_refs:["SRC-MRF-HILAALY","SRC-MRF-KINGS"],claim_type:"direct",confidence_grade:"B"},
+  {t:"parent",s:"P203",d:"P11",l:"",c:"c",evidence_refs:["SRC-MRF-KINGS"],claim_type:"direct",confidence_grade:"B"},
+  {t:"parent",s:"P203",d:"P12",l:"",c:"c",evidence_refs:["SRC-MRF-KINGS"],claim_type:"direct",confidence_grade:"B"},
+  {t:"parent",s:"P204",d:"P11",l:"",c:"c",evidence_refs:["SRC-MRF-KINGS"],claim_type:"direct",confidence_grade:"B"},
+  {t:"spouse",s:"P204",d:"P203",l:"married",c:"c",evidence_refs:["SRC-MRF-KINGS"],claim_type:"direct",confidence_grade:"B"},
+  {t:"parent",s:"P205",d:"P9",l:"",c:"c",evidence_refs:["SRC-MRF-KINGS"],claim_type:"direct",confidence_grade:"B"},
+  {t:"parent",s:"P206",d:"P34",l:"",c:"c",evidence_refs:["SRC-MRF-KINGS"],claim_type:"direct",confidence_grade:"B"},
+  {t:"parent",s:"P206",d:"P35",l:"",c:"c",evidence_refs:["SRC-MRF-KINGS"],claim_type:"direct",confidence_grade:"B"},
+  {t:"parent",s:"P40",d:"P207",l:"",c:"c",evidence_refs:["SRC-MRF-HILAALY","SRC-MRF-KINGS"],claim_type:"direct",confidence_grade:"B"},
+  {t:"parent",s:"P207",d:"P57",l:"",c:"c",evidence_refs:["SRC-MRF-HILAALY","SRC-MRF-KINGS"],claim_type:"direct",confidence_grade:"B"},
+  {t:"parent",s:"P51",d:"P208",l:"",c:"c",evidence_refs:["SRC-MRF-KINGS"],claim_type:"direct",confidence_grade:"B"},
+  {t:"spouse",s:"P208",d:"P63",l:"married",c:"c",evidence_refs:["SRC-MRF-KINGS"],claim_type:"direct",confidence_grade:"B"},
+  // Edges for Portuguese-era children of Dom Manoel (P61)
+  {t:"parent",s:"P61",d:"P209",l:"",c:"c",evidence_refs:["SRC-ROYALARK-M16","SRC-DESILVA-PORT-ENCOUNTERS"],claim_type:"direct",confidence_grade:"A"},
+  {t:"parent",s:"P61",d:"P210",l:"",c:"c",evidence_refs:["SRC-ROYALARK-M16","SRC-DESILVA-PORT-ENCOUNTERS"],claim_type:"direct",confidence_grade:"A"},
+  {t:"parent",s:"P61",d:"P211",l:"",c:"c",evidence_refs:["SRC-ROYALARK-M16"],claim_type:"direct",confidence_grade:"B"},
+  {t:"parent",s:"P61",d:"P212",l:"",c:"c",evidence_refs:["SRC-ROYALARK-M16"],claim_type:"direct",confidence_grade:"B"},
+  {t:"sibling",s:"P209",d:"P66",l:"brothers (same parents: Dom Manoel + Dona Leonor)",c:"c",evidence_refs:["SRC-ROYALARK-M16"],claim_type:"direct",confidence_grade:"A"},
+  {t:"sibling",s:"P210",d:"P66",l:"brothers (same parents: Dom Manoel + Dona Leonor)",c:"c",evidence_refs:["SRC-ROYALARK-M16"],claim_type:"direct",confidence_grade:"A"},
+  {t:"sibling",s:"P211",d:"P66",l:"siblings (same parents: Dom Manoel + Dona Leonor)",c:"c",evidence_refs:["SRC-ROYALARK-M16"],claim_type:"direct",confidence_grade:"B"},
+  {t:"sibling",s:"P212",d:"P66",l:"siblings (same parents: Dom Manoel + Dona Leonor)",c:"c",evidence_refs:["SRC-ROYALARK-M16"],claim_type:"direct",confidence_grade:"B"},
+  // Edges for Dona Ines (P213) — daughter of Dom Joao (P66), mother of Dom Luis (P97)
+  {t:"parent",s:"P66",d:"P213",l:"",c:"c",evidence_refs:["SRC-ROYALARK-M16","SRC-DESILVA-PORT-ENCOUNTERS"],claim_type:"direct",confidence_grade:"A"},
+  {t:"spouse",s:"P101",d:"P66",l:"married at Cochin before Nov 1587",c:"c",evidence_refs:["SRC-ROYALARK-M16"],claim_type:"direct",confidence_grade:"A"},
+  {t:"sibling",s:"P213",d:"P67",l:"siblings (same parents: Dom Joao + Dona Francisca)",c:"c",evidence_refs:["SRC-ROYALARK-M16"],claim_type:"direct",confidence_grade:"A"},
+  {t:"parent",s:"P213",d:"P97",l:"",c:"c",evidence_refs:["SRC-ROYALARK-M16","SRC-MRF-HURAA"],claim_type:"direct",confidence_grade:"A"}
 ];
 
 export const byId = new Map(people.map(p => [p.id, p]));

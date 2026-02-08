@@ -1,5 +1,28 @@
 export const profileEnrichments = [
   {
+    id: 'P1',
+    known_as: [
+      {
+        name: 'Koimala Kalō',
+        type: 'historical-name',
+        c: 'c',
+        note: 'Traditional Dhivehi name-form for the legendary founder.',
+        source_refs: ['SRC-MRF-KINGS', 'SRC-WIKI-MONARCHS']
+      },
+      {
+        name: 'Theemuge Maha Kalaminja',
+        type: 'formal-style',
+        c: 'c',
+        note: 'Formal royal style attested in historical king-lists.',
+        source_refs: ['SRC-MRF-KINGS', 'SRC-WIKI-MONARCHS']
+      }
+    ],
+    extra_facts: [
+      'Traditionally described as arriving from Ceylon and establishing the first Islamic-era royal line in Malé.'
+    ],
+    source_refs: ['SRC-MRF-KINGS', 'SRC-WIKI-MONARCHS']
+  },
+  {
     id: 'P2',
     known_as: [
       {
@@ -15,12 +38,93 @@ export const profileEnrichments = [
         c: 'c',
         note: 'Honorific epithet attached to Prince/Sultan Dhovemi in historical lists.',
         source_refs: ['SRC-WIKI-DHOVEMI', 'SRC-WIKI-HEADS-STATE']
+      },
+      {
+        name: 'Sultan Muhammad al-Adil',
+        type: 'arabic-title',
+        c: 'c',
+        note: 'Post-conversion Arabic title meaning "The Just". Earliest Arabic sovereign title in Maldivian history, adopted after the 1153 CE conversion to Islam.',
+        source_refs: ['SRC-IBN-BATTUTA-RIHLA', 'SRC-HAKLUYT-IBN-BATTUTA-V4']
       }
     ],
     extra_facts: [
-      'Traditionally remembered as Dharumavantha Rasgefaanu in later chronicles and lists.'
+      'Traditionally remembered as Dharumavantha Rasgefaanu in later chronicles and lists.',
+      'After conversion to Islam in 1153 CE, adopted the Arabic title Sultan Muhammad al-Adil. Both Ibn Battuta and the Tarikh tradition agree on this post-conversion title.'
     ],
-    source_refs: ['SRC-WIKI-DHOVEMI', 'SRC-WIKI-HEADS-STATE']
+    source_refs: ['SRC-WIKI-DHOVEMI', 'SRC-WIKI-HEADS-STATE', 'SRC-IBN-BATTUTA-RIHLA', 'SRC-HAKLUYT-IBN-BATTUTA-V4']
+  },
+  {
+    id: 'P19',
+    known_as: [
+      {
+        name: 'Ahmad Shihab al-Din',
+        type: 'arabic-name',
+        c: 'c',
+        note: 'Arabic name form attested by Ibn Battuta who was present during or shortly after his reign.',
+        source_refs: ['SRC-IBN-BATTUTA-RIHLA', 'SRC-HAKLUYT-IBN-BATTUTA-V4']
+      }
+    ],
+    extra_facts: [
+      'Ibn Battuta visited the Maldives during or shortly after Ahmad Shihab al-Din\u2019s deposition by his sister Khadijah (P20) in 1347.'
+    ],
+    source_refs: ['SRC-IBN-BATTUTA-RIHLA', 'SRC-HAKLUYT-IBN-BATTUTA-V4']
+  },
+  {
+    id: 'P21',
+    known_as: [
+      {
+        name: 'Wazir Jamal al-Din',
+        type: 'arabic-name',
+        c: 'c',
+        note: 'Arabic name form from Ibn Battuta. Jamal/Jameel are the same Arabic root (j-m-l). Served as wazir and first husband of Khadijah (P20).',
+        source_refs: ['SRC-IBN-BATTUTA-RIHLA', 'SRC-HAKLUYT-IBN-BATTUTA-V4']
+      },
+      {
+        name: 'Jamal al-Din al-Misri',
+        type: 'arabic-name',
+        c: 'u',
+        note: 'Extended form with "al-Misri" (the Egyptian) epithet sometimes attached in secondary accounts. Geographic origin uncertain.',
+        source_refs: ['SRC-HAKLUYT-IBN-BATTUTA-V4']
+      }
+    ],
+    extra_facts: [
+      'Ibn Battuta identifies him as the wazir who helped Khadijah seize power from her brother Ahmad Shihab al-Din (P19).',
+      'The name "el-Jameel" in the project data corresponds to Arabic "Jamal al-Din" (Beauty of the Faith).'
+    ],
+    source_refs: ['SRC-IBN-BATTUTA-RIHLA', 'SRC-HAKLUYT-IBN-BATTUTA-V4']
+  },
+  {
+    id: 'P23',
+    known_as: [
+      {
+        name: 'Abdallah ibn Muhammad al-Hadhrami',
+        type: 'arabic-name',
+        c: 'c',
+        note: 'Full Arabic name from Ibn Battuta. The "al-Hadhrami" epithet indicates Hadhramaut (Yemen) origin.',
+        source_refs: ['SRC-IBN-BATTUTA-RIHLA', 'SRC-HAKLUYT-IBN-BATTUTA-V4']
+      }
+    ],
+    extra_facts: [
+      'Ibn Battuta identifies him as the second husband and wazir of Khadijah (P20), of Hadhrami (Yemeni) origin.',
+      'The Hadhramaut connection is significant: Hadhrami merchants and scholars were major vectors of Islamic influence across the Indian Ocean.'
+    ],
+    source_refs: ['SRC-IBN-BATTUTA-RIHLA', 'SRC-HAKLUYT-IBN-BATTUTA-V4']
+  },
+  {
+    id: 'P51',
+    known_as: [
+      {
+        name: 'Kalu Bandaarain',
+        type: 'sobriquet',
+        c: 'c',
+        note: 'Popular historical name for Sultan Kalu Mohamed; widely used in chronicles and secondary literature.',
+        source_refs: ['SRC-MRF-KINGS', 'SRC-WIKI-MONARCHS']
+      }
+    ],
+    extra_facts: [
+      'Three separate accessions spanning 1492-1529, making him one of the most persistent claimants to the Hilaaly throne.'
+    ],
+    source_refs: ['SRC-MRF-KINGS', 'SRC-WIKI-MONARCHS']
   },
   {
     id: 'P63',
@@ -53,56 +157,6 @@ export const profileEnrichments = [
       'Secondary chronology describes his reign as very short during the Isdu-Dhiyamigili transition crisis.'
     ],
     source_refs: ['SRC-WIKI-HEADS-STATE']
-  },
-  {
-    id: 'P80',
-    known_as: [
-      {
-        name: 'Dhon Bandaarain',
-        type: 'sobriquet',
-        c: 'c',
-        note: 'Commonly referenced historical name for Hassan Izzuddeen.',
-        source_refs: ['SRC-WIKI-IZZUDDIN-I', 'SRC-WIKI-HEADS-STATE']
-      },
-      {
-        name: 'Muleegey Don Hassan Maniku',
-        type: 'house-name',
-        c: 'c',
-        note: 'House-linked historical rendering.',
-        source_refs: ['SRC-WIKI-HEADS-STATE']
-      },
-      {
-        name: 'Don Bandaara',
-        type: 'variant',
-        c: 'c',
-        note: 'Variant transliteration tied to the same ruler identity.',
-        source_refs: ['SRC-WIKI-HEADS-STATE']
-      }
-    ],
-    offices_held: [
-      {
-        office_id: 'OFF-SOVEREIGN',
-        label: 'Sultan',
-        start: 1759,
-        end: 1766,
-        c: 'c',
-        note: 'Founder sovereign of the Huraagey line.',
-        source_refs: ['SRC-WIKI-HEADS-STATE', 'SRC-WIKI-IZZUDDIN-I']
-      },
-      {
-        office_id: 'OFF-NAIB',
-        label: 'De facto regent',
-        start: 1754,
-        end: 1759,
-        c: 'i',
-        note: 'Described as de facto regent before accession.',
-        source_refs: ['SRC-WIKI-IZZUDDIN-I']
-      }
-    ],
-    extra_facts: [
-      'Widely treated as the founder-figure of the restored Huraagey political line.'
-    ],
-    source_refs: ['SRC-WIKI-IZZUDDIN-I', 'SRC-WIKI-HEADS-STATE']
   },
   {
     id: 'P81',
@@ -411,6 +465,160 @@ export const profileEnrichments = [
         source_refs: ['SRC-MRF-HILAALY', 'SRC-MRF-TITLES']
       }
     ]
+  },
+  {
+    id: 'P104',
+    known_as: [
+      {
+        name: 'Bodu Thakurufaanu',
+        type: 'sobriquet',
+        c: 'c',
+        note: 'Popular epithet meaning "the Great Thakurufaanu"; universally used in Maldivian historical memory.',
+        source_refs: ['SRC-MRF-UTHEEM', 'SRC-MRF-KINGS']
+      },
+      {
+        name: 'Ghazi Mohamed Thakurufaanu al-Auzam',
+        type: 'formal-style',
+        c: 'c',
+        note: 'Full formal honorific style combining Arabic laqab (Ghazi = warrior for the faith) and Dhivehi title.',
+        source_refs: ['SRC-MRF-UTHEEM', 'SRC-MRF-KINGS']
+      }
+    ],
+    extra_facts: [
+      'National hero of the Maldives who liberated the islands from Portuguese rule in 1573.',
+      'Conducted guerrilla campaign with brothers Ali and Hassan from Utheemu island.',
+      'National Day of the Maldives commemorates his liberation victory.'
+    ],
+    source_refs: ['SRC-MRF-UTHEEM', 'SRC-MRF-KINGS']
+  },
+  {
+    id: 'P61',
+    known_as: [
+      {
+        name: 'Dom Manoel',
+        type: 'baptismal-name',
+        c: 'c',
+        note: 'Portuguese baptismal name adopted upon Catholic conversion at Cochin on January 1, 1552.',
+        source_refs: ['SRC-ROYALARK-M16', 'SRC-DESILVA-PORT-ENCOUNTERS']
+      },
+      {
+        name: 'Hassan IX',
+        type: 'sovereign-number',
+        c: 'c',
+        note: 'Ninth Hassan in the Maldivian sovereign list (accession #61, #64, #65).',
+        source_refs: ['SRC-MRF-KINGS', 'SRC-WIKI-MONARCHS', 'SRC-WIKI-HEADS-STATE']
+      },
+      {
+        name: 'Svasi Sri Dhirukusalokya Maha Radun',
+        type: 'regnal-style',
+        c: 'c',
+        note: 'Full regnal style at initial accession before Portuguese conversion.',
+        source_refs: ['SRC-ROYALARK-M16']
+      }
+    ],
+    extra_facts: [
+      'Usurped the throne from his half-brother before May 1549; fled to Cochin in 1551 after two years and nine months of reign.',
+      'Converted to Catholicism on January 1, 1552, at Cochin under Portuguese protection, taking the name Dom Manoel.',
+      'Married twice: first to Dona Maria (a Christian convert, died before 1553), then to Dona Leonor de Ataide (1554, at Goa), daughter of Dom Heitor de Sousa de Ataide.',
+      'Restored by Portuguese force on May 19, 1558, but remained in Cochin/Goa while the islands were governed by the regent Andiri Andirin (Andreas Andre).',
+      'Had at least five children: Dom Francisco (P209, killed in Lisbon), Dom Joao (P66), Dom Pedro (P210), Dona Leonor (P211), and Dona Catarina (P212).',
+      'The Portuguese period ended in 1573 when Mohamed Thakurufaanu (P104) liberated the Maldives.',
+      'Birth date contradicted: project data says 1525, RoyalArk gives 1531. Death date contradicted: project says 1585, RoyalArk says before July 10, 1584. See CLOG-2026-02-09-D1.'
+    ],
+    source_refs: ['SRC-ROYALARK-M16', 'SRC-DESILVA-PORT-ENCOUNTERS', 'SRC-MRF-KINGS', 'SRC-WIKI-MONARCHS', 'SRC-WIKI-HEADS-STATE']
+  },
+  {
+    id: 'P20',
+    known_as: [
+      {
+        name: 'Sultana Khadijah',
+        type: 'formal-style',
+        c: 'c',
+        note: 'Arabic formal title as ruling queen, attested by Ibn Battuta who visited during her first reign.',
+        source_refs: ['SRC-IBN-BATTUTA-RIHLA', 'SRC-MRF-KINGS']
+      },
+      {
+        name: 'Raadha Abarana',
+        type: 'regnal-epithet',
+        c: 'c',
+        note: 'Regnal epithet attested in king-lists.',
+        source_refs: ['SRC-MRF-KINGS']
+      },
+      {
+        name: 'Al-Sultana Khadijah',
+        type: 'arabic-title',
+        c: 'c',
+        note: 'Arabic sovereign title form used by Ibn Battuta. He described orders issued in her name written on palm leaves.',
+        source_refs: ['SRC-IBN-BATTUTA-RIHLA', 'SRC-HAKLUYT-IBN-BATTUTA-V4']
+      },
+      {
+        name: 'Al-Sultana Khadeejah Sri Raadha Abaarana Mahaa Rehendhi',
+        type: 'full-regnal-style',
+        c: 'c',
+        note: 'Full Dhivehi-Arabic compound style combining Sultana title with Dhivehi regnal epithets.',
+        source_refs: ['SRC-MRF-KINGS', 'SRC-WIKI-MONARCHS']
+      }
+    ],
+    extra_facts: [
+      'Most prominent female ruler in Maldivian history, holding the throne across three separate accessions (1347-1363, 1364-1374, 1376-1380).',
+      'Deposed her brother Ahmed Shihabuddine (P19) to seize power in 1347.',
+      'Ibn Battuta visited during her reign (c. 1343-1345) and served as chief qadi (judge); he noted that orders were issued in her name only and written on palm leaves.',
+      'Married and is said to have arranged the assassination of at least two husbands: Wazir Jamal al-Din/Mohamed el-Jameel (P21, possibly Egyptian) and Wazir Abdallah ibn Muhammad al-Hadhrami (P23, from Hadhramaut, Yemen).',
+      'Ibn Battuta recorded that her grandfather was "Sultan Salahuddin Salih al-Bangali" — a contested Bengali connection not confirmed by the Tarikh chronicle tradition.'
+    ],
+    source_refs: ['SRC-IBN-BATTUTA-RIHLA', 'SRC-MRF-KINGS', 'SRC-WIKI-MONARCHS', 'SRC-HAKLUYT-IBN-BATTUTA-V4']
+  },
+  {
+    id: 'P80',
+    known_as: [
+      {
+        name: 'Dhon Bandaarain',
+        type: 'sobriquet',
+        c: 'c',
+        note: 'Popular historical name; "Don" prefix from Portuguese-era Hilaaly lineage, "Bandaarain" from the office/title cluster.',
+        source_refs: ['SRC-WIKI-IZZUDDIN-I', 'SRC-MRF-HURAA']
+      },
+      {
+        name: 'Muleegey Don Hassan Maniku',
+        type: 'house-name',
+        c: 'c',
+        note: 'House-linked historical rendering incorporating Muleege house name.',
+        source_refs: ['SRC-WIKI-HEADS-STATE']
+      },
+      {
+        name: 'Don Bandaara',
+        type: 'variant',
+        c: 'c',
+        note: 'Variant transliteration tied to the same ruler identity.',
+        source_refs: ['SRC-WIKI-HEADS-STATE']
+      }
+    ],
+    offices_held: [
+      {
+        office_id: 'OFF-SOVEREIGN',
+        label: 'Sultan',
+        start: 1759,
+        end: 1766,
+        c: 'c',
+        note: 'Founder sovereign of the Huraagey line.',
+        source_refs: ['SRC-WIKI-HEADS-STATE', 'SRC-WIKI-IZZUDDIN-I']
+      },
+      {
+        office_id: 'OFF-NAIB',
+        label: 'De facto regent',
+        start: 1754,
+        end: 1759,
+        c: 'i',
+        note: 'Described as de facto regent before accession.',
+        source_refs: ['SRC-WIKI-IZZUDDIN-I']
+      }
+    ],
+    extra_facts: [
+      'Founder of the Huraagey dynasty, descended from the Portuguese-era Hilaaly royal house through Dom Luis de Souza lineage.',
+      'Five-generation genealogical bridge: Dom Manoel (P61) → Dom Joao (P66) → Dona Ines (P213) → Dom Luis de Souza (P97) → Dom Maraduru Fandiaiy Kaleygefan (P98) → Hussain Daharada Kaleygefan (P99) → Mohamed Faamuladeyri Thakurufan (P100) → P80.',
+      'The Huraagey dynasty he founded ruled the Maldives for approximately 200 years until the abolition of the monarchy in 1968.'
+    ],
+    source_refs: ['SRC-MRF-HURAA', 'SRC-WIKI-IZZUDDIN-I', 'SRC-ROYALARK-M5', 'SRC-WIKI-HEADS-STATE']
   }
 ];
 

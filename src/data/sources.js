@@ -665,6 +665,204 @@ export const sources = [
     access_date: '2026-02-08',
     quality: 'B',
     notes: 'Digitized antiquarian baseline with full-text OCR and stable DOI.'
+  },
+  {
+    id: 'SRC-BELL-1940',
+    url: 'https://search.worldcat.org/title/maldive-islands-monograph-on-the-history-archaeology-and-epigraphy/oclc/866581748',
+    title: 'The Maldive Islands: Monograph on the History, Archaeology and Epigraphy',
+    publisher: 'Ceylon Government Press (reprint from Ceylon sessional papers)',
+    access_date: '2026-02-09',
+    quality: 'A',
+    notes: 'Foundational European academic source on Maldivian history, archaeology and epigraphy. H.C.P. Bell compiled this posthumous monograph from decades of field work (1879-1922). Published 1940 in Colombo.'
+  },
+  {
+    id: 'SRC-IBN-BATTUTA-RIHLA',
+    url: 'https://archive.org/stream/TheRehlaOfIbnBattuta/231448482-The-Rehla-of-Ibn-Battuta_djvu.txt',
+    title: 'Rihla (The Travels of Ibn Battuta), Maldives chapters',
+    publisher: 'Hakluyt Society (Gibb/Beckingham English translation, 4 vols, 1958-1994)',
+    access_date: '2026-02-09',
+    quality: 'A',
+    notes: '14th-century eyewitness account with detailed descriptions of the Maldivian court, named officials, and queen Khadijah. Ibn Battuta served as qadi in the Maldives c. 1343-1345.'
+  },
+  {
+    id: 'SRC-MANIKU-ETYMOLOGY',
+    url: 'https://dsal.uchicago.edu/dictionaries/maniku/frontmatter/frontmatter.html',
+    title: 'A Concise Etymological Vocabulary of Dhivehi Language',
+    publisher: 'Royal Asiatic Society of Sri Lanka, Colombo (2000)',
+    access_date: '2026-02-09',
+    quality: 'B',
+    notes: 'Key reference for regnal token etymology and Sanskrit/Pali-to-Dhivehi derivation pathways. Hassan Ahmed Maniku. Could resolve 10+ E4-grade regnal epithet tokens.'
+  },
+  {
+    id: 'SRC-PYRARD-GRAY-1887',
+    url: 'https://archive.org/details/voyagefranoispy01pyragoog',
+    title: 'The Voyage of François Pyrard of Laval to the East Indies, the Maldives, the Moluccas and Brazil',
+    publisher: 'Hakluyt Society, London (translated by Albert Gray, assisted by H.C.P. Bell, 1887-1890)',
+    access_date: '2026-02-09',
+    quality: 'A',
+    notes: 'Detailed 5-year eyewitness account (1602-1607) of Maldivian court, governance, offices, and society. Gray/Bell English translation of the 1619 French edition. Complements SRC-SARUNA-PYRARD-V2P2-1887 and SRC-CORNELL-PYRARD-V1-1887.'
+  },
+  {
+    id: 'SRC-MALONEY-1980',
+    url: 'https://search.worldcat.org/title/people-of-the-maldive-islands/oclc/7462285',
+    title: 'People of the Maldive Islands',
+    publisher: 'Orient Longman, Bombay (1980)',
+    access_date: '2026-02-09',
+    quality: 'B',
+    notes: 'Comprehensive anthropological study by Clarence Maloney based on 1974-1976 fieldwork. Covers settlement, society, religion, politics, and economy. 441 pp.'
+  },
+  {
+    id: 'SRC-ROMERO-FRIAS',
+    url: 'https://openlibrary.org/books/OL3456485M/The_Maldive_Islanders',
+    title: 'The Maldive Islanders: A Study of the Popular Culture of an Ancient Ocean Kingdom',
+    publisher: 'Nova Ethnographia Indica, Barcelona (1999)',
+    access_date: '2026-02-09',
+    quality: 'B',
+    notes: 'Xavier Romero-Frias ethnography of Maldivian popular culture, folklore, and historical traditions. Based on extensive fieldwork from 1979 onward with fluent Dhivehi.'
+  },
+  {
+    id: 'SRC-GLOBALISE-VOC',
+    url: 'https://globalise.huygens.knaw.nl/',
+    title: 'GLOBALISE VOC Database',
+    publisher: 'Huygens Institute, KNAW (Netherlands)',
+    access_date: '2026-02-09',
+    quality: 'B',
+    notes: 'Digitized Dutch East India Company records (1610-1796). 5 million pages of Overgekomen Brieven en Papieren with AI-assisted transcription. Potential for Maldives trade and diplomatic references.'
+  },
+  {
+    id: 'SRC-DIOGO-COUTO',
+    url: 'https://archive.org/details/daasiadediogodec01cout',
+    title: 'Décadas da Ásia (Da Asia de Diogo de Couto)',
+    publisher: 'Regia Officina Typografica, Lisbon (1778-1788 edition of 16th-17th c. original)',
+    access_date: '2026-02-09',
+    quality: 'A',
+    notes: 'Portuguese chronicle of Asian possessions with Maldives sections. Diogo do Couto continued João de Barros\u2019 Décadas covering Portuguese activities in the Indian Ocean including Maldivian royal contacts.'
+  },
+  {
+    id: 'SRC-HAKLUYT-IBN-BATTUTA-V4',
+    url: 'https://archive.org/stream/travels-of-ibn-battuta/The%20Travels%20of%20Ibn%20Battuta-1325%E2%80%931354-Volume-IV_djvu.txt',
+    title: 'The Travels of Ibn Battuta, A.D. 1325-1354, Vol. IV (Gibb/Beckingham, Hakluyt Society)',
+    publisher: 'Hakluyt Society',
+    access_date: '2026-02-09',
+    quality: 'A',
+    notes: 'Chapter XVII contains the Maldives account. Primary eyewitness source for 1340s Maldives. Complements SRC-IBN-BATTUTA-RIHLA with volume-specific digital text.'
+  },
+  {
+    id: 'SRC-ORIAS-IBN-BATTUTA-MALDIVES',
+    url: 'https://orias.berkeley.edu/resources-teachers/travels-ibn-battuta/journey/escape-delhi-maldive-islands-and-sri-lanka-1341-1344',
+    title: 'Escape from Delhi to the Maldive Islands and Sri Lanka: 1341-1344',
+    publisher: 'UC Berkeley ORIAS',
+    access_date: '2026-02-09',
+    quality: 'B',
+    notes: 'Educational summary of Ibn Battuta\u2019s Maldives visit with key events and persons named.'
+  },
+  {
+    id: 'SRC-GENIZA-COWRIE-1141',
+    url: 'https://www.lib.cam.ac.uk/collections/departments/taylor-schechter-genizah-research-unit/fragment-month/fotm-2023/fragment-3',
+    title: 'Cairo Geniza fragment: Cowrie shell trade letter (1141 CE)',
+    publisher: 'Cambridge University Library / Taylor-Schechter Genizah Research Unit',
+    access_date: '2026-02-09',
+    quality: 'A',
+    notes: 'Primary merchant letter from 1141 CE mentioning Maldivian cowrie shells. Pre-conversion evidence of Arabic-world trade connection.'
+  },
+  {
+    id: 'SRC-UNESCO-CORAL-MOSQUES',
+    url: 'https://whc.unesco.org/en/tentativelists/5812/',
+    title: 'Coral Stone Mosques of Maldives (UNESCO Tentative List)',
+    publisher: 'UNESCO World Heritage Centre',
+    access_date: '2026-02-09',
+    quality: 'B',
+    notes: 'Documents the coral stone mosque tradition including Hukuru Miskiy Arabic inscriptions and tombstones.'
+  },
+  {
+    id: 'SRC-SUOOD-POLITICAL-SYSTEM',
+    url: 'https://justicesuood.com/public/uploads/1611685910668Political_System_of_the_Ancient_Kingdom.pdf',
+    title: 'Political System of the Ancient Kingdom of Maldives',
+    publisher: 'A. Husnu Al Suood (author website)',
+    access_date: '2026-02-09',
+    quality: 'B',
+    notes: 'Companion to SRC-SSRN-SUOOD-LEGAL. Covers court hierarchy, wazir office, and governance structure.'
+  },
+  {
+    id: 'SRC-BERCHEM-CORAL-ARCHAEOLOGY',
+    url: 'https://maxvanberchem.org/en/scientific-activities/projects/archeology/11-archeologie/171-archaeological-investigations-on-the-coral-stone-mosques-of-the-maldives',
+    title: 'Archaeological Investigations on the Coral Stone Mosques of the Maldives',
+    publisher: 'Fondation Max van Berchem',
+    access_date: '2026-02-09',
+    quality: 'B',
+    notes: 'Archaeological project documenting Arabic inscriptions and architectural evidence in Maldivian mosques.'
+  },
+  {
+    id: 'SRC-DESILVA-PORT-ENCOUNTERS',
+    url: 'https://www.routledge.com/Portuguese-Encounters-with-Sri-Lanka-and-the-Maldives/Silva/p/book/9781138383388',
+    title: 'Portuguese Encounters with Sri Lanka and the Maldives',
+    publisher: 'Ashgate/Routledge (ed. Chandra R. de Silva, 2009)',
+    access_date: '2026-02-09',
+    quality: 'A',
+    notes: 'Chapter 7 covers Portuguese-Maldives relations. Contains translated primary Portuguese texts from Barros, Correia, Queiros. ISBN 9780754601869.'
+  },
+  {
+    id: 'SRC-ROYALARK-M16',
+    url: 'https://www.royalark.net/Maldives/maldive16.htm',
+    title: 'RoyalArk: Maldive Islands - Huraa\u2019gey Dynasty (late period)',
+    publisher: 'RoyalArk',
+    access_date: '2026-02-09',
+    quality: 'B',
+    notes: 'Late Huraagey genealogy 1893-1969 including last sultans and monarchy-to-republic transition.'
+  },
+  {
+    id: 'SRC-BELL-EXCERPTA',
+    url: 'https://search.worldcat.org/title/excerpta-maldiviana/oclc/7898027',
+    title: 'Excerpta Maldiviana',
+    publisher: 'Journal of the Ceylon Branch of the Royal Asiatic Society (1922-1926, serialized)',
+    access_date: '2026-02-09',
+    quality: 'A',
+    notes: 'H.C.P. Bell\u2019s comprehensive catalog of translated Divehi historical documents including Portuguese intercourse section and ancient document reproductions. Reprinted by Asian Educational Services (ISBN 8120612213).'
+  },
+  {
+    id: 'SRC-PEACOCK-INTEL-2024',
+    url: 'https://www.tandfonline.com/doi/full/10.1080/18335330.2024.2431019',
+    title: 'Intelligence in the Sultanate of Maldives: interpreting the Tarikh',
+    publisher: 'Taylor & Francis (Intelligence and National Security)',
+    access_date: '2026-02-09',
+    quality: 'B',
+    notes: 'A.C.S. Peacock hermeneutic analysis of Tarikh; identifies intelligence/deception themes; notes Tarikh chronicles reigns 1153-1821.'
+  },
+  {
+    id: 'SRC-NAZIM-KALAAFAAN-2010',
+    url: 'https://maritimeasiaheritage.cseas.kyoto-u.ac.jp/wp-content/uploads/2022/03/Sattar-Ahmed-Nazim.-2010.-King-Kalaafaan-Manuscripts-NCLHR-Male.-English-edition.pdf',
+    title: 'King Kalaafaan Manuscripts',
+    publisher: 'National Centre for Linguistic and Historical Research, Male (2010, English ed.)',
+    access_date: '2026-02-09',
+    quality: 'B',
+    notes: 'Sattar Ahmed Nazim analysis of royal manuscripts tradition. Published via Kyoto Maritime Asia Heritage.'
+  },
+  {
+    id: 'SRC-MALDIVES-HERITAGE-SURVEY',
+    url: 'https://www.cambridge.org/core/journals/antiquity/article/maldives-heritage-survey/15F61521DF052F7FEA4CA8AEEEA554FC',
+    title: 'The Maldives Heritage Survey',
+    publisher: 'Antiquity / Cambridge Core',
+    access_date: '2026-02-09',
+    quality: 'B',
+    notes: 'First comprehensive tangible cultural heritage survey: 152 islands across 6 atolls; 292 sites; 1171 structures; 5761 objects; 410 manuscripts digitized.'
+  },
+  {
+    id: 'SRC-BELL-FAMILY-PAPERS',
+    url: 'https://www.s-asian.cam.ac.uk/archive/papers/bell-family-papers/',
+    title: 'Bell Family Papers',
+    publisher: 'Centre of South Asian Studies, Cambridge University',
+    access_date: '2026-02-09',
+    quality: 'A',
+    notes: 'Primary archival collection: 2 boxes of H.C.P. Bell\u2019s papers including letters, diaries (1916-1937), and Archaeological Survey of Ceylon reports.'
+  },
+  {
+    id: 'SRC-SCROLL-GOA-KINGS',
+    url: 'https://scroll.in/magazine/1007554/when-maldives-was-ruled-by-catholic-kings-living-all-the-way-in-goa',
+    title: 'When Maldives was ruled by Catholic kings living all the way in Goa',
+    publisher: 'Scroll.in',
+    access_date: '2026-02-09',
+    quality: 'C',
+    notes: 'Journalistic summary of Dom Manoel through Dom Philippe; cites RoyalArk and Pietro Della Valle.'
   }
 ];
 

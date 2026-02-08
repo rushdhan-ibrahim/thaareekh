@@ -73,6 +73,17 @@ Confidence scale used in this register:
 - `P83` Mohamed Muizzuddine: `Kalhu Bandaarain` (sobriquet, `c`).
   Source anchors: `SRC-WIKI-MUHAMMAD-MUIZZUDDIN`, `SRC-WIKI-HEADS-STATE`.
 
+- `P1` Koimala: `Koimala Kalō` (historical-name, `c`) and `Theemuge Maha Kalaminja` (formal-style, `c`).
+  Source anchors: `SRC-MRF-KINGS`, `SRC-WIKI-MONARCHS`.
+- `P20` Khadijah: `Sultana Khadijah` (formal-style, `c`) and `Raadha Abarana` (regnal-epithet, `c`).
+  Source anchors: `SRC-WIKI-MONARCHS`, `SRC-MRF-KINGS`, `SRC-IBN-BATTUTA-RIHLA`.
+- `P51` Kalu Mohamed: `Kalu Bandaarain` (sobriquet, `c`).
+  Source anchors: `SRC-MRF-KINGS`, `SRC-WIKI-MONARCHS`.
+- `P61` Hassan IX / Dom Manoel: `Dom Manoel` (baptismal-name, `c`) and `Hassan IX` (sovereign-number, `c`).
+  Source anchors: `SRC-MRF-KINGS`, `SRC-WIKI-MONARCHS`, `SRC-WIKI-HEADS-STATE`.
+- `P104` Mohamed Thakurufaanu: `Bodu Thakurufaanu` (sobriquet, `c`) and `Ghazi Mohamed Thakurufaanu al-Auzam` (formal-style, `c`).
+  Source anchors: `SRC-MRF-UTHEEM`, `SRC-MRF-KINGS`.
+
 ### 3.2 Uncertain sobriquet requiring hardening
 - `P75` Hassan: `Addu Hassan Manikfan` (sobriquet, `u`).
   Source anchor: `SRC-WIKI-HEADS-STATE`.
