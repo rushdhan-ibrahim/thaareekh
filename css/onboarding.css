@@ -1,0 +1,94 @@
+/* ===== Onboarding Tour ===== */
+
+.onboarding-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+}
+.onboarding-overlay.active {
+  pointer-events: auto;
+}
+.onboarding-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  transition: clip-path var(--dur-slow) var(--ease-out);
+}
+.onboarding-tooltip {
+  position: absolute;
+  z-index: 61;
+  background: var(--sf);
+  border: 1px solid var(--ac-bd);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg), 0 0 0 1px var(--ac-bd);
+  padding: var(--space-4);
+  max-width: 320px;
+  animation: slideUp var(--dur-normal) var(--ease-spring);
+}
+.onboarding-tooltip h3 {
+  font-family: var(--display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+  color: var(--tx);
+}
+.onboarding-tooltip p {
+  font-size: var(--text-base);
+  color: var(--tx2);
+  line-height: 1.5;
+  margin-bottom: var(--space-3);
+}
+.onboarding-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+.onboarding-step-indicator {
+  display: flex;
+  gap: var(--space-1);
+}
+.onboarding-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--bd2);
+  transition: background var(--dur-fast);
+}
+.onboarding-dot.active {
+  background: var(--ac);
+}
+.onboarding-btn {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--ac-bd);
+  background: var(--ac-bg);
+  color: var(--ac);
+  font: var(--text-sm) var(--sans);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+.onboarding-btn:hover {
+  background: var(--ac);
+  color: var(--bg);
+}
+.onboarding-btn-primary {
+  background: var(--ac);
+  color: var(--bg);
+}
+.onboarding-btn-primary:hover {
+  background: var(--ac-bd);
+}
+.onboarding-skip {
+  padding: 6px 10px;
+  border: none;
+  background: none;
+  color: var(--tx3);
+  font: var(--text-sm) var(--sans);
+  cursor: pointer;
+}
+.onboarding-skip:hover {
+  color: var(--tx);
+}

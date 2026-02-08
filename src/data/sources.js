@@ -467,6 +467,78 @@ export const sources = [
     access_date: '2026-02-06',
     quality: 'B',
     notes: 'Contains the southern branch chain listing Princess Aishath Didi and Kondey Ali Manikfan as spouses with descendants.'
+  },
+  {
+    id: 'SRC-WIKI-DHOVEMI',
+    url: 'https://en.wikipedia.org/wiki/Dhovemi',
+    title: 'Dhovemi of the Maldives',
+    publisher: 'Wikipedia',
+    access_date: '2026-02-06',
+    quality: 'B',
+    notes: 'Used for Dhovemi historical-name variants and sobriquet mapping.'
+  },
+  {
+    id: 'SRC-WIKI-IZZUDDIN-I',
+    url: 'https://en.wikipedia.org/wiki/Izzuddin_of_the_Maldives',
+    title: 'Izzuddin of the Maldives',
+    publisher: 'Wikipedia',
+    access_date: '2026-02-06',
+    quality: 'B',
+    notes: 'Used for Dhon Bandaarain naming and regency-context details.'
+  },
+  {
+    id: 'SRC-WIKI-MUHAMMAD-GHIYATH-AL-DIN',
+    url: 'https://en.wikipedia.org/wiki/Muhammed_Ghiya%27as_ud-din',
+    title: "Muhammed Ghiya'as ud-din",
+    publisher: 'Wikipedia',
+    access_date: '2026-02-06',
+    quality: 'B',
+    notes: 'Used for Haajee Bandaarain name-form and reign context.'
+  },
+  {
+    id: 'SRC-HISTORY-MV-GHIYAS',
+    url: 'https://historymv.org/articles/55',
+    title: "Shaheed Kulha Bandaarain: Sultan Muhammad Ghiyathuddin",
+    publisher: 'History Maldives',
+    access_date: '2026-02-06',
+    quality: 'C',
+    notes: 'Secondary historical narrative used as supplemental naming context.'
+  },
+  {
+    id: 'SRC-WIKI-MUHAMMAD-MUIZZUDDIN',
+    url: 'https://en.wikipedia.org/wiki/Muhammad_Mu%27iz_ud-din',
+    title: "Muhammad Mu'iz ud-din",
+    publisher: 'Wikipedia',
+    access_date: '2026-02-06',
+    quality: 'B',
+    notes: 'Used for Kalhu Bandaarain popular-name form and reign chronology.'
+  },
+  {
+    id: 'SRC-SSRN-SUOOD-LEGAL',
+    url: 'https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3800802',
+    title: 'Ancient and Islamic Foundations of the Law of the Maldives',
+    publisher: 'SSRN (A. Husnu Al Suood)',
+    access_date: '2026-02-06',
+    quality: 'A',
+    notes: 'Primary legal-historical study used for Furadaana and office-role evolution (Kilege, Bandeyri, Hakuraa, Fandiyaaru, etc.).'
+  },
+  {
+    id: 'SRC-WIKI-CASTE-SYSTEM',
+    url: 'https://en.wikipedia.org/wiki/Caste_system_in_Maldives',
+    title: 'Caste system in Maldives',
+    publisher: 'Wikipedia',
+    access_date: '2026-02-06',
+    quality: 'C',
+    notes: 'Supplementary source for traditional office-title lists and late-monarchy role descriptions.'
+  },
+  {
+    id: 'SRC-MRF-TITLES',
+    url: 'https://maldivesroyalfamily.com/maldives_titles.shtml',
+    title: 'Maldivian Titles and Offices',
+    publisher: 'Maldives Royal Family',
+    access_date: '2026-02-06',
+    quality: 'C',
+    notes: 'Specialist title glossary used as supplemental context; direct fetch blocked in this environment.'
   }
 ];
 

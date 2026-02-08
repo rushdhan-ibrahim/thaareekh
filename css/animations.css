@@ -1,0 +1,72 @@
+/* ===== Animations & Keyframes ===== */
+
+@keyframes sp {
+  to { transform: rotate(360deg) }
+}
+
+@keyframes flowedge {
+  to { stroke-dashoffset: -30 }
+}
+
+@keyframes selectedPulse {
+  0%, 100% { filter: drop-shadow(0 0 4px var(--ac)) }
+  50% { filter: drop-shadow(0 0 10px var(--ac)) drop-shadow(0 0 18px rgba(217,121,83,0.3)) }
+}
+
+@keyframes connectedNodePulse {
+  0%, 100% { filter: drop-shadow(0 0 2px var(--ac)) }
+  50% { filter: drop-shadow(0 0 5px var(--ac)) drop-shadow(0 0 10px rgba(224,144,96,0.15)) }
+}
+
+@keyframes edgeGlowPulse {
+  0%, 100% { filter: drop-shadow(0 0 5px var(--ac)) drop-shadow(0 0 2px var(--ac)) }
+  50% { filter: drop-shadow(0 0 12px var(--ac)) drop-shadow(0 0 20px rgba(224,144,96,0.35)) }
+}
+
+@keyframes cmdSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes nodeEntrance {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1 }
+  to { opacity: 0 }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(8px) }
+  to { opacity: 1; transform: translateY(0) }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(217,121,83,0.2) }
+  50% { box-shadow: 0 0 16px rgba(217,121,83,0.4) }
+}
+
+/* Onboarding spotlight */
+@keyframes spotlightPulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(217,121,83,0.3) }
+  50% { box-shadow: 0 0 0 8px rgba(217,121,83,0.15) }
+}

@@ -1,5 +1,6 @@
 import { people as corePeople, edges as coreEdges } from './sovereigns.core.js';
 import { people as researchPeople, edges as researchEdges } from './sovereigns.research.js';
+import { profileEnrichmentById } from './profile.enrichments.js';
 
 const VALID_MODES = new Set(['canonical', 'research']);
 
@@ -19,6 +20,69 @@ function mergePeople(base, extra) {
     }
   });
   return out;
+}
+
+function uniqStrings(items) {
+  return [...new Set((items || []).filter(Boolean))];
+}
+
+function normalizeKnownAs(items) {
+  const out = [];
+  const seen = new Set();
+  (items || []).forEach(item => {
+    const row = typeof item === 'string' ? { name: item } : { ...item };
+    if (!row.name) return;
+    const key = row.name.toLowerCase();
+    if (seen.has(key)) return;
+    seen.add(key);
+    row.type = row.type || 'variant';
+    row.c = row.c || 'u';
+    row.source_refs = uniqStrings(row.source_refs || []);
+    out.push(row);
+  });
+  return out;
+}
+
+function mergeOfficeAssignments(base, extra) {
+  const out = [];
+  const seen = new Set();
+  [...(base || []), ...(extra || [])].forEach(item => {
+    const row = { ...item };
+    const key = [
+      row.office_id || '',
+      row.label || '',
+      row.start ?? '',
+      row.end ?? '',
+      row.note || ''
+    ].join('|');
+    if (seen.has(key)) return;
+    seen.add(key);
+    row.c = row.c || 'u';
+    row.source_refs = uniqStrings(row.source_refs || []);
+    out.push(row);
+  });
+  return out;
+}
+
+function enrichPerson(p) {
+  const ex = profileEnrichmentById.get(p.id);
+  if (!ex) return p;
+  const merged = { ...p };
+  merged.aliases = uniqStrings([...(p.aliases || []), ...(ex.aliases || [])]);
+  merged.regnal_names = uniqStrings([...(p.regnal_names || []), ...(ex.regnal_names || [])]);
+  merged.titles = uniqStrings([...(p.titles || []), ...(ex.titles || [])]);
+  merged.facts = uniqStrings([...(p.facts || []), ...(ex.extra_facts || []), ...(ex.facts || [])]);
+  merged.source_refs = uniqStrings([...(p.source_refs || []), ...(ex.source_refs || [])]);
+  const knownAs = normalizeKnownAs([...(p.known_as || []), ...(ex.known_as || [])]);
+  if (knownAs.length) merged.known_as = knownAs;
+  const offices = mergeOfficeAssignments(p.offices_held, ex.offices_held);
+  if (offices.length) merged.offices_held = offices;
+  if (ex.royal_link) merged.royal_link = { ...ex.royal_link };
+  return merged;
+}
+
+function applyPeopleEnrichments(list) {
+  return list.map(enrichPerson);
 }
 
 function edgeKey(e) {
@@ -203,7 +267,7 @@ function normalizeEdges(list) {
 
 export function getDataset(mode = resolveDataMode()) {
   if (mode === 'research') {
-    const people = mergePeople(corePeople, researchPeople);
+    const people = applyPeopleEnrichments(mergePeople(corePeople, researchPeople));
     const edges = mergeEdges(coreEdges, researchEdges);
     const derived = expandDerivedRelations(people, edges);
     return {
@@ -213,7 +277,7 @@ export function getDataset(mode = resolveDataMode()) {
     };
   }
   {
-    const people = corePeople;
+    const people = applyPeopleEnrichments(corePeople);
     const edges = coreEdges;
     const derived = expandDerivedRelations(people, edges);
     return { mode: 'canonical', people, edges: normalizeEdges(mergeEdges(edges, derived)) };

@@ -1,0 +1,136 @@
+/* ===== Design Tokens ===== */
+
+:root {
+  /* Typography stacks */
+  --sans: "Source Sans 3", "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --display: "Fraunces", "Cormorant Garamond", "Iowan Old Style", "Times New Roman", serif;
+  --mono: "JetBrains Mono", "SF Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --thaana: "Noto Sans Thaana", "MV Waheed", var(--sans);
+
+  /* Radii */
+  --radius: 14px;
+  --radius-sm: 9px;
+
+  /* Era atmosphere (driven by JS) */
+  --era-light: .08;
+  --era-warm: .08;
+
+  /* Spacing scale (4px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-9: 36px;
+  --space-10: 40px;
+  --space-11: 44px;
+  --space-12: 48px;
+
+  /* Type scale */
+  --text-2xs: 9px;
+  --text-xs: 10px;
+  --text-sm: 11px;
+  --text-base: 13px;
+  --text-md: 14px;
+  --text-lg: 16px;
+  --text-xl: 18px;
+  --text-2xl: 22px;
+  --text-3xl: 28px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.12);
+  --shadow-md: 0 6px 20px rgba(0,0,0,0.22);
+  --shadow-lg: 0 10px 30px rgba(0,0,0,0.36);
+  --shadow-glow-coral: 0 0 18px rgba(224,144,96,0.22);
+  --shadow-glow-lagoon: 0 0 18px rgba(70,191,189,0.22);
+
+  /* Transition durations */
+  --dur-fast: 120ms;
+  --dur-normal: 250ms;
+  --dur-slow: 400ms;
+
+  /* Easing */
+  --ease-out: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ===== Dark Theme ===== */
+[data-theme="dark"] {
+  --bg: #111a1f;
+  --bg2: #162028;
+  --sf: #1c2830;
+  --sf2: #24323c;
+  --tx: #ede8df;
+  --tx2: #b5a898;
+  --tx3: #8e8070;
+  --bd: rgba(220,200,170,0.1);
+  --bd2: rgba(220,200,170,0.18);
+  --ac: #e09060;
+  --ac-bg: rgba(224,144,96,0.14);
+  --ac-bd: rgba(224,144,96,0.28);
+  --ac2: #46bfbd;
+  --sq-a: #58c9b6;
+  --sq-b: #c8a365;
+  --sq-c: #e09060;
+  --sq-d: #c4514d;
+  --sh: 0 10px 30px rgba(0,0,0,0.4);
+  --hov: rgba(255,255,255,0.06);
+  --dy-lunar: #5dd4db;
+  --dy-hilaaly: #e092a8;
+  --dy-utheemu: #78b4f0;
+  --dy-dhiyamigili: #e4b866;
+  --dy-isdu: #68d4a0;
+  --dy-huraagey: #f09080;
+  --dy-devadu: #b4aef0;
+  --dy-unknown: #90a098;
+  --nt: #f5ede3;
+  --ep: rgba(200,220,210,0.55);
+  --es: rgba(93,212,219,0.75);
+  --esp: rgba(240,144,128,0.72);
+  --ek: rgba(224,146,168,0.66);
+  --ei: rgba(228,184,102,0.70);
+  --eu: rgba(240,144,128,0.84);
+  --nf: rgba(22,32,40,0.94);
+}
+
+/* ===== Light Theme ===== */
+[data-theme="light"] {
+  --bg: #f2f0eb;
+  --bg2: #e8e6de;
+  --sf: #faf8f3;
+  --sf2: #f0ece4;
+  --tx: #1a2420;
+  --tx2: #3d5248;
+  --tx3: #607068;
+  --bd: rgba(30,50,40,0.12);
+  --bd2: rgba(30,50,40,0.2);
+  --ac: #c06030;
+  --ac-bg: rgba(192,96,48,0.1);
+  --ac-bd: rgba(192,96,48,0.24);
+  --ac2: #268886;
+  --sq-a: #1a806e;
+  --sq-b: #8a6418;
+  --sq-c: #b05030;
+  --sq-d: #943030;
+  --sh: 0 8px 24px rgba(30,50,40,0.1);
+  --hov: rgba(30,50,40,0.04);
+  --dy-lunar: #0a6878;
+  --dy-hilaaly: #984068;
+  --dy-utheemu: #2860b0;
+  --dy-dhiyamigili: #a06018;
+  --dy-isdu: #187858;
+  --dy-huraagey: #a84030;
+  --dy-devadu: #5858b8;
+  --dy-unknown: #607068;
+  --nt: #1a2420;
+  --ep: rgba(30,50,40,0.50);
+  --es: rgba(10,104,120,0.72);
+  --esp: rgba(168,64,48,0.68);
+  --ek: rgba(152,64,104,0.62);
+  --ei: rgba(160,96,24,0.66);
+  --eu: rgba(168,64,48,0.78);
+  --nf: rgba(250,250,248,0.97);
+}

@@ -1,0 +1,132 @@
+/* ===== Reset & Base ===== */
+
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0 }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--tx);
+  -webkit-font-smoothing: antialiased;
+  transition: background var(--dur-slow), color var(--dur-slow);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background:
+    radial-gradient(1200px 480px at 8% -10%, rgba(70,191,189,.10), transparent 55%),
+    radial-gradient(900px 380px at 95% 0%, rgba(224,144,96,.08), transparent 60%),
+    linear-gradient(180deg, var(--bg2), var(--bg));
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .35;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%2390a098' stroke-opacity='.2' stroke-width='1'%3E%3Cpath d='M120 20 L140 60 L120 50 L100 60 Z'/%3E%3Cpath d='M120 50 Q140 80 120 100 Q100 80 120 50'/%3E%3Ccircle cx='120' cy='120' r='55' stroke-dasharray='4 6'/%3E%3Ccircle cx='120' cy='120' r='75'/%3E%3Cpath d='M60 120 Q90 95 120 120 Q150 95 180 120' /%3E%3Cpath d='M60 120 Q90 145 120 120 Q150 145 180 120' /%3E%3Cpath d='M120 45 L120 195' stroke-dasharray='2 8'/%3E%3Cpath d='M45 120 L195 120' stroke-dasharray='2 8'/%3E%3Cpath d='M72 72 Q120 100 168 72' /%3E%3Cpath d='M72 168 Q120 140 168 168' /%3E%3C/g%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+::selection { background: var(--ac-bg) }
+
+::-webkit-scrollbar { width: 5px }
+::-webkit-scrollbar-track { background: transparent }
+::-webkit-scrollbar-thumb { background: var(--bd2); border-radius: 99px }
+
+:where(button, input, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--ac);
+  outline-offset: 2px;
+}
+
+/* Skip link for accessibility */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: var(--space-4);
+  z-index: 100;
+  padding: var(--space-2) var(--space-4);
+  background: var(--ac);
+  color: var(--bg);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  text-decoration: none;
+  transition: top var(--dur-fast) var(--ease-out);
+}
+.skip-link:focus {
+  top: var(--space-2);
+}
+
+/* Density modes */
+[data-density="compact"] .pc { padding: 9px }
+[data-density="compact"] .st h2 { font-size: var(--text-lg) }
+[data-density="compact"] .rn { font-size: var(--text-sm) }
+[data-density="compact"] .rs { font-size: 9px }
+[data-density="presentation"] .pc { padding: 13px }
+[data-density="presentation"] .st h2 { font-size: 20px }
+[data-density="presentation"] .rn { font-size: var(--text-base) }
+[data-density="presentation"] .rs { font-size: var(--text-sm) }
+
+/* Dhivehi language support — Thaana script is RTL */
+body.lang-dv {
+  font-family: var(--thaana);
+}
+body.lang-dv .side,
+body.lang-dv .filter-panel,
+body.lang-dv .cmd-palette-input,
+body.lang-dv .cmd-palette-results,
+body.lang-dv .bsb,
+body.lang-dv .hover-card {
+  direction: rtl;
+  text-align: right;
+}
+/* Keep LTR for elements that must stay left-to-right */
+body.lang-dv .header-unified,
+body.lang-dv svg,
+body.lang-dv .minimap,
+body.lang-dv .tsel,
+body.lang-dv .chip,
+body.lang-dv .tb,
+body.lang-dv .hb,
+body.lang-dv .tree-options-popover,
+body.lang-dv kbd {
+  direction: ltr;
+}
+
+/* Loader */
+#ld {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  background: var(--bg);
+  transition: opacity var(--dur-slow);
+}
+#ld.dn { opacity: 0; pointer-events: none }
+.lr {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--bd2);
+  border-top-color: var(--ac);
+  border-radius: 50%;
+  animation: sp .7s linear infinite;
+}
+#ld p { font-size: var(--text-sm); color: var(--tx3) }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-06T17:10:43.660Z",
+  "generated_at": "2026-02-06T18:07:03.051Z",
   "description": "Offline local archive of all integrated genealogy data, source registry metadata, and source-linked claim indices.",
   "sources": [
     {
@@ -469,8 +469,352 @@
       "access_date": "2026-02-06",
       "quality": "B",
       "notes": "Contains the southern branch chain listing Princess Aishath Didi and Kondey Ali Manikfan as spouses with descendants."
+    },
+    {
+      "id": "SRC-WIKI-DHOVEMI",
+      "url": "https://en.wikipedia.org/wiki/Dhovemi",
+      "title": "Dhovemi of the Maldives",
+      "publisher": "Wikipedia",
+      "access_date": "2026-02-06",
+      "quality": "B",
+      "notes": "Used for Dhovemi historical-name variants and sobriquet mapping."
+    },
+    {
+      "id": "SRC-WIKI-IZZUDDIN-I",
+      "url": "https://en.wikipedia.org/wiki/Izzuddin_of_the_Maldives",
+      "title": "Izzuddin of the Maldives",
+      "publisher": "Wikipedia",
+      "access_date": "2026-02-06",
+      "quality": "B",
+      "notes": "Used for Dhon Bandaarain naming and regency-context details."
+    },
+    {
+      "id": "SRC-WIKI-MUHAMMAD-GHIYATH-AL-DIN",
+      "url": "https://en.wikipedia.org/wiki/Muhammed_Ghiya%27as_ud-din",
+      "title": "Muhammed Ghiya'as ud-din",
+      "publisher": "Wikipedia",
+      "access_date": "2026-02-06",
+      "quality": "B",
+      "notes": "Used for Haajee Bandaarain name-form and reign context."
+    },
+    {
+      "id": "SRC-HISTORY-MV-GHIYAS",
+      "url": "https://historymv.org/articles/55",
+      "title": "Shaheed Kulha Bandaarain: Sultan Muhammad Ghiyathuddin",
+      "publisher": "History Maldives",
+      "access_date": "2026-02-06",
+      "quality": "C",
+      "notes": "Secondary historical narrative used as supplemental naming context."
+    },
+    {
+      "id": "SRC-WIKI-MUHAMMAD-MUIZZUDDIN",
+      "url": "https://en.wikipedia.org/wiki/Muhammad_Mu%27iz_ud-din",
+      "title": "Muhammad Mu'iz ud-din",
+      "publisher": "Wikipedia",
+      "access_date": "2026-02-06",
+      "quality": "B",
+      "notes": "Used for Kalhu Bandaarain popular-name form and reign chronology."
+    },
+    {
+      "id": "SRC-SSRN-SUOOD-LEGAL",
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3800802",
+      "title": "Ancient and Islamic Foundations of the Law of the Maldives",
+      "publisher": "SSRN (A. Husnu Al Suood)",
+      "access_date": "2026-02-06",
+      "quality": "A",
+      "notes": "Primary legal-historical study used for Furadaana and office-role evolution (Kilege, Bandeyri, Hakuraa, Fandiyaaru, etc.)."
+    },
+    {
+      "id": "SRC-WIKI-CASTE-SYSTEM",
+      "url": "https://en.wikipedia.org/wiki/Caste_system_in_Maldives",
+      "title": "Caste system in Maldives",
+      "publisher": "Wikipedia",
+      "access_date": "2026-02-06",
+      "quality": "C",
+      "notes": "Supplementary source for traditional office-title lists and late-monarchy role descriptions."
+    },
+    {
+      "id": "SRC-MRF-TITLES",
+      "url": "https://maldivesroyalfamily.com/maldives_titles.shtml",
+      "title": "Maldivian Titles and Offices",
+      "publisher": "Maldives Royal Family",
+      "access_date": "2026-02-06",
+      "quality": "C",
+      "notes": "Specialist title glossary used as supplemental context; direct fetch blocked in this environment."
     }
   ],
+  "offices": {
+    "catalog": [
+      {
+        "id": "OFF-SOVEREIGN",
+        "name": "Sultan / Queen Regnant",
+        "kind": "crown",
+        "summary": "The ruling crown office of the Maldives during monarchical periods.",
+        "source_refs": [
+          "SRC-WIKI-HEADS-STATE",
+          "SRC-WIKI-MONARCHS"
+        ]
+      },
+      {
+        "id": "OFF-PRESIDENT",
+        "name": "President",
+        "kind": "executive",
+        "summary": "Head of state and government in the republican era.",
+        "source_refs": [
+          "SRC-PO-AMIN",
+          "SRC-PO-NASIR",
+          "SRC-PO-MAUMOON",
+          "SRC-PO-NASHEED",
+          "SRC-PO-WAHEED",
+          "SRC-PO-SOLIH",
+          "SRC-PO-MUIZZU"
+        ]
+      },
+      {
+        "id": "OFF-FURADHAANA",
+        "name": "Furadaana (Furadhaana)",
+        "kind": "institution",
+        "summary": "Royal ministerial council/cabinet around the sovereign, with office composition changing over time.",
+        "alt_names": [
+          "Furadaana",
+          "Furadhaana"
+        ],
+        "source_refs": [
+          "SRC-SSRN-SUOOD-LEGAL",
+          "SRC-WIKI-CASTE-SYSTEM",
+          "SRC-MRF-TITLES"
+        ]
+      },
+      {
+        "id": "OFF-KILEGE",
+        "name": "Kilege",
+        "kind": "ministerial",
+        "summary": "Senior office in the Furadaana, often described as head of ministers/chief ministerial figure.",
+        "source_refs": [
+          "SRC-SSRN-SUOOD-LEGAL",
+          "SRC-WIKI-CASTE-SYSTEM"
+        ]
+      },
+      {
+        "id": "OFF-BANDEYRI",
+        "name": "Bandeyri",
+        "kind": "ministerial",
+        "summary": "Court/palace portfolio tied to royal household and palace personnel, with broad state functions in later periods.",
+        "source_refs": [
+          "SRC-SSRN-SUOOD-LEGAL",
+          "SRC-WIKI-CASTE-SYSTEM",
+          "SRC-MRF-TITLES"
+        ]
+      },
+      {
+        "id": "OFF-VELAANAA",
+        "name": "Velaanaa",
+        "kind": "ministerial",
+        "summary": "Revenue-linked office associated with fines, duties, and other fiscal collections in early records.",
+        "source_refs": [
+          "SRC-SSRN-SUOOD-LEGAL"
+        ]
+      },
+      {
+        "id": "OFF-FAIYLIA",
+        "name": "Faiylia",
+        "kind": "ministerial",
+        "summary": "Office tied to royal stores and custody/receipt of royal goods.",
+        "source_refs": [
+          "SRC-SSRN-SUOOD-LEGAL"
+        ]
+      },
+      {
+        "id": "OFF-DHOSHIMEYNAA",
+        "name": "Dhoshimeynaa",
+        "kind": "ministerial",
+        "summary": "Military-linked office; described in different periods as army-general/chief defense portfolio.",
+        "source_refs": [
+          "SRC-SSRN-SUOOD-LEGAL",
+          "SRC-WIKI-CASTE-SYSTEM"
+        ]
+      },
+      {
+        "id": "OFF-HAKURAA",
+        "name": "Hakuraa",
+        "kind": "ministerial",
+        "summary": "Ministerial office associated with court audience/protocol and, in later descriptions, public works.",
+        "source_refs": [
+          "SRC-SSRN-SUOOD-LEGAL",
+          "SRC-WIKI-CASTE-SYSTEM"
+        ]
+      },
+      {
+        "id": "OFF-FANDIYAARU",
+        "name": "Fandiyaaru",
+        "kind": "judicial",
+        "summary": "Chief judge/Qadi office in the pre-modern state and monarchy-era judicial structure.",
+        "source_refs": [
+          "SRC-SSRN-SUOOD-LEGAL"
+        ]
+      },
+      {
+        "id": "OFF-HANDEYGIRI",
+        "name": "Handeygiri",
+        "kind": "ministerial",
+        "summary": "High office in later monarchical administration; role descriptions vary from religious portfolio to treasury-central authority.",
+        "source_refs": [
+          "SRC-SSRN-SUOOD-LEGAL",
+          "SRC-WIKI-CASTE-SYSTEM",
+          "SRC-MRF-TITLES"
+        ]
+      },
+      {
+        "id": "OFF-FAAMULADHEYRI",
+        "name": "Faamuladheyri",
+        "kind": "ministerial",
+        "summary": "Treasury-linked office in descriptions of traditional government portfolios.",
+        "source_refs": [
+          "SRC-SSRN-SUOOD-LEGAL",
+          "SRC-WIKI-CASTE-SYSTEM",
+          "SRC-MRF-TITLES"
+        ]
+      },
+      {
+        "id": "OFF-MAAFAIY",
+        "name": "Maafaiy",
+        "kind": "ministerial",
+        "summary": "Revenue office identified as receiver-general in historical descriptions.",
+        "source_refs": [
+          "SRC-SSRN-SUOOD-LEGAL",
+          "SRC-WIKI-CASTE-SYSTEM",
+          "SRC-MRF-TITLES"
+        ]
+      },
+      {
+        "id": "OFF-FAASHANAA",
+        "name": "Faashanaa",
+        "kind": "ministerial",
+        "summary": "Police/security portfolio in late monarchical office descriptions.",
+        "source_refs": [
+          "SRC-SSRN-SUOOD-LEGAL",
+          "SRC-WIKI-CASTE-SYSTEM",
+          "SRC-MRF-TITLES"
+        ]
+      },
+      {
+        "id": "OFF-NAIB",
+        "name": "Naib (Naibu / Al-Naib)",
+        "kind": "deputy",
+        "summary": "Deputy/viceroy-style court office title; appears in elite genealogical lines and 19th-century cabinet descriptions.",
+        "source_refs": [
+          "SRC-SSRN-SUOOD-LEGAL",
+          "SRC-MRF-TITLES"
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "id": "OT-14C",
+        "label": "14th century (Ibn Battuta era)",
+        "period": "c. 1340s",
+        "summary": "Court records point to a structured cabinet around the vizier and a distinct judicial office (Qadi/Fandiyaaru).",
+        "offices": [
+          "OFF-FURADHAANA",
+          "OFF-KILEGE",
+          "OFF-FANDIYAARU"
+        ],
+        "source_refs": [
+          "SRC-SSRN-SUOOD-LEGAL"
+        ]
+      },
+      {
+        "id": "OT-17C",
+        "label": "Early 17th century (Pyrard account)",
+        "period": "c. 1602-1607",
+        "summary": "Furadaana listed with Kilege, Velaanaa, Hakuraa, Fandiyaaru, Dhoshimeynaa, Faiylia, and Bandeyri among principal offices.",
+        "offices": [
+          "OFF-FURADHAANA",
+          "OFF-KILEGE",
+          "OFF-VELAANAA",
+          "OFF-HAKURAA",
+          "OFF-FANDIYAARU",
+          "OFF-DHOSHIMEYNAA",
+          "OFF-FAIYLIA",
+          "OFF-BANDEYRI"
+        ],
+        "source_refs": [
+          "SRC-SSRN-SUOOD-LEGAL"
+        ]
+      },
+      {
+        "id": "OT-1834",
+        "label": "1834 (Christopher account)",
+        "period": "1834",
+        "summary": "Cabinet descriptions include Kilege, Faiylia, Hakuraa, Bandeyri, Naibu, and Dhoshimeyna as senior posts, with Fandiyaaru still distinct.",
+        "offices": [
+          "OFF-FURADHAANA",
+          "OFF-KILEGE",
+          "OFF-FAIYLIA",
+          "OFF-HAKURAA",
+          "OFF-BANDEYRI",
+          "OFF-NAIB",
+          "OFF-DHOSHIMEYNAA",
+          "OFF-FANDIYAARU"
+        ],
+        "source_refs": [
+          "SRC-SSRN-SUOOD-LEGAL"
+        ]
+      },
+      {
+        "id": "OT-1879",
+        "label": "1879 (Bell account)",
+        "period": "1879",
+        "summary": "A compressed model is reported: three key ministers plus the chief judge; Handeygiri and Faashanaa appear among powerful offices.",
+        "offices": [
+          "OFF-FURADHAANA",
+          "OFF-HANDEYGIRI",
+          "OFF-FAASHANAA",
+          "OFF-FANDIYAARU"
+        ],
+        "source_refs": [
+          "SRC-SSRN-SUOOD-LEGAL"
+        ]
+      },
+      {
+        "id": "OT-20C",
+        "label": "20th century transition",
+        "period": "1932-1968",
+        "summary": "Constitutional and legal centralization reduced older court-office autonomy; monarchy ended in 1968 and republican executive offices became dominant.",
+        "offices": [
+          "OFF-FANDIYAARU",
+          "OFF-PRESIDENT"
+        ],
+        "source_refs": [
+          "SRC-SSRN-SUOOD-LEGAL",
+          "SRC-WIKI-HEADS-STATE"
+        ]
+      },
+      {
+        "id": "OT-REPUBLIC",
+        "label": "Republican era",
+        "period": "1968-present",
+        "summary": "Traditional office titles persist in social memory and elite naming, while formal state leadership is under the presidency and modern institutions.",
+        "offices": [
+          "OFF-PRESIDENT",
+          "OFF-FURADHAANA",
+          "OFF-BANDEYRI",
+          "OFF-HANDEYGIRI"
+        ],
+        "source_refs": [
+          "SRC-PO-AMIN",
+          "SRC-PO-NASIR",
+          "SRC-PO-MAUMOON",
+          "SRC-PO-NASHEED",
+          "SRC-PO-WAHEED",
+          "SRC-PO-SOLIH",
+          "SRC-PO-MUIZZU",
+          "SRC-WIKI-CASTE-SYSTEM",
+          "SRC-MRF-TITLES"
+        ]
+      }
+    ]
+  },
   "canonical": {
     "people_count": 187,
     "edge_count": 454,
@@ -481,7 +825,10 @@
         "dynasty": "Lunar",
         "regnal": "Maanaabarana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1117,
@@ -500,7 +847,31 @@
         "dynasty": "Lunar",
         "regnal": "Bavanaadheeththa",
         "aliases": [],
+        "known_as": [
+          {
+            "name": "Dhovemi Kalaminjaa",
+            "type": "historical-name",
+            "c": "c",
+            "note": "Used in Dhivehi historical naming forms.",
+            "source_refs": [
+              "SRC-WIKI-DHOVEMI",
+              "SRC-WIKI-HEADS-STATE"
+            ]
+          },
+          {
+            "name": "Dharumavantha Rasgefaanu",
+            "type": "sobriquet",
+            "c": "c",
+            "note": "Honorific epithet attached to Prince/Sultan Dhovemi in historical lists.",
+            "source_refs": [
+              "SRC-WIKI-DHOVEMI",
+              "SRC-WIKI-HEADS-STATE"
+            ]
+          }
+        ],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1141,
@@ -511,7 +882,10 @@
         "died_year": null,
         "birth_place": "",
         "death_place": "",
-        "source_refs": []
+        "source_refs": [
+          "SRC-WIKI-DHOVEMI",
+          "SRC-WIKI-HEADS-STATE"
+        ]
       },
       {
         "id": "P3",
@@ -519,7 +893,10 @@
         "dynasty": "Lunar",
         "regnal": "Bavana Abarana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1166,
@@ -538,7 +915,10 @@
         "dynasty": "Lunar",
         "regnal": "Dhammaru Naaja",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1184,
@@ -557,7 +937,10 @@
         "dynasty": "Lunar",
         "regnal": "Fennaadheeththa",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1193,
@@ -576,7 +959,10 @@
         "dynasty": "Lunar",
         "regnal": "Dhagathaa Abarana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1199,
@@ -595,7 +981,10 @@
         "dynasty": "Lunar",
         "regnal": "Dhagathaa Suvara",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1214,
@@ -614,7 +1003,10 @@
         "dynasty": "Lunar",
         "regnal": "Raa-Araa Desyara",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1233,
@@ -633,7 +1025,10 @@
         "dynasty": "Lunar",
         "regnal": "Raadha Suvara",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1258,
@@ -652,7 +1047,10 @@
         "dynasty": "Lunar",
         "regnal": "Loka Suvara",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1264,
@@ -671,7 +1069,10 @@
         "dynasty": "Lunar",
         "regnal": "Singaa Abarana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1266,
@@ -690,7 +1091,10 @@
         "dynasty": "Lunar",
         "regnal": "Madheenee Suvara",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1268,
@@ -709,7 +1113,10 @@
         "dynasty": "Lunar",
         "regnal": "Areedha Suvara",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1269,
@@ -728,7 +1135,10 @@
         "dynasty": "Lunar",
         "regnal": "Areedha Suvara",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1278,
@@ -747,7 +1157,10 @@
         "dynasty": "Lunar",
         "regnal": "Bavanaadheeththa",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1288,
@@ -766,7 +1179,10 @@
         "dynasty": "Lunar",
         "regnal": "Meesuvvara",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1293,
@@ -785,7 +1201,10 @@
         "dynasty": "Lunar",
         "regnal": "Sundhura Bavana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1302,
@@ -804,7 +1223,10 @@
         "dynasty": "Lunar",
         "regnal": "Loka Abarana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1306,
@@ -823,7 +1245,10 @@
         "dynasty": "Lunar",
         "regnal": "Loka Aadheeththa",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1341,
@@ -842,7 +1267,10 @@
         "dynasty": "Lunar",
         "regnal": "Raadha Abarana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1347,
@@ -869,7 +1297,10 @@
         "dynasty": "Lunar",
         "regnal": "Bavana Sooja",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1363,
@@ -888,7 +1319,10 @@
         "dynasty": "Lunar",
         "regnal": "Dhammaru Aadheeththa",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1374,
@@ -907,7 +1341,10 @@
         "dynasty": "Lunar",
         "regnal": "Suvama Abarana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1379,
@@ -926,7 +1363,10 @@
         "dynasty": "Lunar",
         "regnal": "Sundhura Abarana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1380,
@@ -945,7 +1385,10 @@
         "dynasty": "Lunar",
         "regnal": "Keerithi Maha Rehendi",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1385,
@@ -964,7 +1407,10 @@
         "dynasty": "Lunar",
         "regnal": "Suvama Abarana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1388,
@@ -983,7 +1429,10 @@
         "dynasty": "Lunar",
         "regnal": "Sundhura",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1388,
@@ -1002,7 +1451,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Bavana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1388,
@@ -1021,7 +1473,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Dhammaru Veeru",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1398,
@@ -1044,7 +1499,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Loka Veeru",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1398,
@@ -1063,7 +1521,10 @@
         "dynasty": "Unknown",
         "regnal": "Veeru Abarana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1409,
@@ -1082,7 +1543,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1411,
@@ -1101,7 +1565,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Bavana Sundhura",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1411,
@@ -1120,7 +1587,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Dhammaru Loaka",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1421,
@@ -1139,7 +1609,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Raadha Bavana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1421,
@@ -1158,7 +1631,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Loka Aananadha",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1421,
@@ -1177,7 +1653,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Bavana Sooja",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1443,
@@ -1196,7 +1675,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Raadha Veeru",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1443,
@@ -1219,7 +1701,10 @@
         "dynasty": "Unknown",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1467,
@@ -1238,7 +1723,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Bavana Abarana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1468,
@@ -1257,7 +1745,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Raadha Loka",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1480,
@@ -1280,7 +1771,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Loka Sundhura",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1480,
@@ -1299,7 +1793,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Raadha Aanandha",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1484,
@@ -1318,7 +1815,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Raadha Fanaveeru",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1491,
@@ -1337,7 +1837,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Bavana Furasuddha",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1492,
@@ -1356,7 +1859,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Dhammaru Bavana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1492,
@@ -1383,7 +1889,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Veeru Aanandha",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1492,
@@ -1402,7 +1911,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Audha Veeru",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1493,
@@ -1421,7 +1933,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Singa Veeru",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1510,
@@ -1440,7 +1955,10 @@
         "dynasty": "Unknown",
         "regnal": "Suddha Bavana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1511,
@@ -1459,7 +1977,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Aanandha",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1513,
@@ -1478,7 +1999,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Ram Mani Loka",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1529,
@@ -1497,7 +2021,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Singa Bavana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1549,
@@ -1516,7 +2043,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Dhirikusa Loka",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1550,
@@ -1543,7 +2073,10 @@
         "dynasty": "Unknown",
         "regnal": "Asaalees Loka",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1554,
@@ -1562,7 +2095,20 @@
         "dynasty": "Unknown",
         "regnal": "Audha Siyaaaka Katthiri",
         "aliases": [],
+        "known_as": [
+          {
+            "name": "Dhevvadhoo Rasgefaanu",
+            "type": "sobriquet",
+            "c": "c",
+            "note": "Listed as an alternate known-by name in head-of-state chronology.",
+            "source_refs": [
+              "SRC-WIKI-HEADS-STATE"
+            ]
+          }
+        ],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1557,
@@ -1573,7 +2119,9 @@
         "died_year": null,
         "birth_place": "",
         "death_place": "",
-        "source_refs": []
+        "source_refs": [
+          "SRC-WIKI-HEADS-STATE"
+        ]
       },
       {
         "id": "P66",
@@ -1581,7 +2129,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1583,
@@ -1600,7 +2151,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1609,
@@ -1619,7 +2173,10 @@
         "dynasty": "Utheemu",
         "regnal": "Kula Sundhura Katthiri Bavana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1632,
@@ -1638,7 +2195,10 @@
         "dynasty": "Utheemu",
         "regnal": "Kula Ran Meeba Katthiri",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1648,
@@ -1657,7 +2217,10 @@
         "dynasty": "Utheemu",
         "regnal": "Maniranna Loka",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1687,
@@ -1676,7 +2239,10 @@
         "dynasty": "Utheemu",
         "regnal": "Naakiree Sundhura",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1691,
@@ -1695,7 +2261,10 @@
         "dynasty": "Unknown",
         "regnal": "Mikaalha Madhaadheeththa",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1692,
@@ -1714,7 +2283,10 @@
         "dynasty": "Devadu",
         "regnal": "Kula Ran Mani",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1692,
@@ -1733,7 +2305,10 @@
         "dynasty": "Isdu",
         "regnal": "Kula Ran Muiy",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1701,
@@ -1752,7 +2327,20 @@
         "dynasty": "Isdu",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [
+          {
+            "name": "Addu Hassan Manikfan",
+            "type": "sobriquet",
+            "c": "u",
+            "note": "Attributed in secondary chronologies; kept as uncertain pending stronger archival corroboration.",
+            "source_refs": [
+              "SRC-WIKI-HEADS-STATE"
+            ]
+          }
+        ],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1701,
@@ -1763,7 +2351,9 @@
         "died_year": null,
         "birth_place": "",
         "death_place": "",
-        "source_refs": []
+        "source_refs": [
+          "SRC-WIKI-HEADS-STATE"
+        ]
       },
       {
         "id": "P76",
@@ -1771,7 +2361,10 @@
         "dynasty": "Isdu",
         "regnal": "Muthey Ran Mani Loka",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1701,
@@ -1790,7 +2383,10 @@
         "dynasty": "Dhiyamigili",
         "regnal": "Kula Sundhura Siyaaaka",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1704,
@@ -1809,7 +2405,10 @@
         "dynasty": "Dhiyamigili",
         "regnal": "Rannava Loka",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1720,
@@ -1828,7 +2427,10 @@
         "dynasty": "Dhiyamigili",
         "regnal": "Navaranna Keerithi",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1750,
@@ -1847,7 +2449,63 @@
         "dynasty": "Huraagey",
         "regnal": "Kula Ran Meeba Audha",
         "aliases": [],
+        "known_as": [
+          {
+            "name": "Dhon Bandaarain",
+            "type": "sobriquet",
+            "c": "c",
+            "note": "Commonly referenced historical name for Hassan Izzuddeen.",
+            "source_refs": [
+              "SRC-WIKI-IZZUDDIN-I",
+              "SRC-WIKI-HEADS-STATE"
+            ]
+          },
+          {
+            "name": "Muleegey Don Hassan Maniku",
+            "type": "house-name",
+            "c": "c",
+            "note": "House-linked historical rendering.",
+            "source_refs": [
+              "SRC-WIKI-HEADS-STATE"
+            ]
+          },
+          {
+            "name": "Don Bandaara",
+            "type": "variant",
+            "c": "c",
+            "note": "Variant transliteration tied to the same ruler identity.",
+            "source_refs": [
+              "SRC-WIKI-HEADS-STATE"
+            ]
+          }
+        ],
         "titles": [],
+        "offices_held": [
+          {
+            "office_id": "OFF-SOVEREIGN",
+            "label": "Sultan",
+            "start": 1759,
+            "end": 1766,
+            "c": "c",
+            "note": "Founder sovereign of the Huraagey line.",
+            "source_refs": [
+              "SRC-WIKI-HEADS-STATE",
+              "SRC-WIKI-IZZUDDIN-I"
+            ]
+          },
+          {
+            "office_id": "OFF-NAIB",
+            "label": "De facto regent",
+            "start": 1754,
+            "end": 1759,
+            "c": "i",
+            "note": "Described as de facto regent before accession.",
+            "source_refs": [
+              "SRC-WIKI-IZZUDDIN-I"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [
           [
             1759,
@@ -1858,7 +2516,10 @@
         "died_year": 1770,
         "birth_place": "Huraa line (likely Maldives/Goa-linked family)",
         "death_place": "Maldives",
-        "source_refs": []
+        "source_refs": [
+          "SRC-WIKI-IZZUDDIN-I",
+          "SRC-WIKI-HEADS-STATE"
+        ]
       },
       {
         "id": "P81",
@@ -1866,7 +2527,43 @@
         "dynasty": "Dhiyamigili",
         "regnal": "Kula Rannmani Keerithi",
         "aliases": [],
+        "known_as": [
+          {
+            "name": "Muhammadh Manikfaan",
+            "type": "historical-name",
+            "c": "c",
+            "note": "Name-form recorded in historical summaries.",
+            "source_refs": [
+              "SRC-WIKI-MUHAMMAD-GHIYATH-AL-DIN"
+            ]
+          },
+          {
+            "name": "Haajee Bandaarain",
+            "type": "sobriquet",
+            "c": "c",
+            "note": "Historical epithet linked to Sultan Muhammad Ghiyath al-Din.",
+            "source_refs": [
+              "SRC-WIKI-MUHAMMAD-GHIYATH-AL-DIN",
+              "SRC-HISTORY-MV-GHIYAS"
+            ]
+          }
+        ],
         "titles": [],
+        "offices_held": [
+          {
+            "office_id": "OFF-SOVEREIGN",
+            "label": "Sultan",
+            "start": 1766,
+            "end": 1774,
+            "c": "c",
+            "note": "Final Dhiyamigili sovereign in standard succession lists.",
+            "source_refs": [
+              "SRC-WIKI-MONARCHS",
+              "SRC-WIKI-MUHAMMAD-GHIYATH-AL-DIN"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [
           [
             1766,
@@ -1877,7 +2574,10 @@
         "died_year": 1780,
         "birth_place": "Maldives",
         "death_place": "Maldives",
-        "source_refs": []
+        "source_refs": [
+          "SRC-WIKI-MUHAMMAD-GHIYATH-AL-DIN",
+          "SRC-HISTORY-MV-GHIYAS"
+        ]
       },
       {
         "id": "P82",
@@ -1885,7 +2585,10 @@
         "dynasty": "Huraagey",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1774,
@@ -1904,7 +2607,34 @@
         "dynasty": "Huraagey",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [
+          {
+            "name": "Kalhu Bandaarain",
+            "type": "sobriquet",
+            "c": "c",
+            "note": "Popularly known-by name in royal chronologies.",
+            "source_refs": [
+              "SRC-WIKI-MUHAMMAD-MUIZZUDDIN",
+              "SRC-WIKI-HEADS-STATE"
+            ]
+          }
+        ],
         "titles": [],
+        "offices_held": [
+          {
+            "office_id": "OFF-SOVEREIGN",
+            "label": "Sultan",
+            "start": 1774,
+            "end": 1779,
+            "c": "c",
+            "note": "Early Huraagey reign after Dhiyamigili restoration shift.",
+            "source_refs": [
+              "SRC-WIKI-MONARCHS",
+              "SRC-WIKI-MUHAMMAD-MUIZZUDDIN"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [
           [
             1774,
@@ -1915,7 +2645,10 @@
         "died_year": null,
         "birth_place": "",
         "death_place": "",
-        "source_refs": []
+        "source_refs": [
+          "SRC-WIKI-MUHAMMAD-MUIZZUDDIN",
+          "SRC-WIKI-HEADS-STATE"
+        ]
       },
       {
         "id": "P84",
@@ -1923,7 +2656,10 @@
         "dynasty": "Huraagey",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1779,
@@ -1942,7 +2678,10 @@
         "dynasty": "Huraagey",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1799,
@@ -1961,7 +2700,10 @@
         "dynasty": "Huraagey",
         "regnal": "Kula Sudha Ira Siyaaaka",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1835,
@@ -1980,7 +2722,10 @@
         "dynasty": "Huraagey",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1882,
@@ -2003,7 +2748,10 @@
         "dynasty": "Huraagey",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1886,
@@ -2022,7 +2770,10 @@
         "dynasty": "Huraagey",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1892,
@@ -2041,7 +2792,10 @@
         "dynasty": "Huraagey",
         "regnal": "Kula Sundhura Katthiri",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1892,
@@ -2064,7 +2818,10 @@
         "dynasty": "Huraagey",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1892,
@@ -2083,7 +2840,10 @@
         "dynasty": "Huraagey",
         "regnal": "Kula Sudha Ira Siyaaaka",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1933,
@@ -2102,7 +2862,23 @@
         "dynasty": "Huraagey",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [
+          {
+            "office_id": "OFF-SOVEREIGN",
+            "label": "Sultan",
+            "start": 1954,
+            "end": 1968,
+            "c": "c",
+            "note": "Final ruling Sultan before abolition of the monarchy.",
+            "source_refs": [
+              "SRC-WIKI-MUHAMMAD-FAREED",
+              "SRC-WIKI-HEADS-STATE"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [
           [
             1954,
@@ -2113,7 +2889,9 @@
         "died_year": 1969,
         "birth_place": "Malé",
         "death_place": "Malé",
-        "source_refs": []
+        "source_refs": [
+          "SRC-WIKI-MUHAMMAD-FAREED"
+        ]
       },
       {
         "id": "P96",
@@ -2125,9 +2903,12 @@
           "Dona Inez",
           "Infanta Dona Inez de Malvidas"
         ],
+        "known_as": [],
         "titles": [
           "Infanta"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1585,
         "died_year": 1645,
@@ -2147,9 +2928,12 @@
         "aliases": [
           "Dom Luis de Souza"
         ],
+        "known_as": [],
         "titles": [
           "Dom"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1605,
         "died_year": 1665,
@@ -2168,9 +2952,12 @@
         "aliases": [
           "Huraa Dom Maraduru Fandiaiy Kaleygefan"
         ],
+        "known_as": [],
         "titles": [
           "Dom"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1630,
         "died_year": 1690,
@@ -2189,7 +2976,10 @@
         "aliases": [
           "Huraa Hussain Daharada Kaleygefan"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1650,
         "died_year": 1715,
@@ -2208,7 +2998,10 @@
         "aliases": [
           "Huraa Mohamed Faamuladeyri Thakurufan"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1688,
         "died_year": 1745,
@@ -2227,9 +3020,12 @@
         "aliases": [
           "Donna Francisca Vasconelles"
         ],
+        "known_as": [],
         "titles": [
           "Donna"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1565,
         "died_year": 1625,
@@ -2249,9 +3045,12 @@
           "Kalu Ali Thakurufan",
           "Kalhu Ali"
         ],
+        "known_as": [],
         "titles": [
           "Thakurufan"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1465,
         "died_year": 1535,
@@ -2268,7 +3067,10 @@
         "dynasty": "Utheemu",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1495,
         "died_year": 1570,
@@ -2288,9 +3090,12 @@
           "Kateeb Mohamed Thakurufan",
           "Bodu Thakurufan"
         ],
+        "known_as": [],
         "titles": [
           "Kateeb"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1520,
         "died_year": 1585,
@@ -2307,7 +3112,10 @@
         "dynasty": "Utheemu",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1525,
         "died_year": 1590,
@@ -2326,7 +3134,10 @@
         "aliases": [
           "Ibrahim Kalaafaanu"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1550,
         "died_year": 1620,
@@ -2346,7 +3157,10 @@
           "Golhaavahi Kambulo",
           "Kalavahi Kabulo"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1335,
         "died_year": 1405,
@@ -2365,7 +3179,10 @@
         "aliases": [
           "Hilaaly Kalo"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1330,
         "died_year": 1390,
@@ -2384,7 +3201,10 @@
         "aliases": [
           "Hulhuley Abbas"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1295,
         "died_year": 1360,
@@ -2403,9 +3223,25 @@
           "Ameen Didi",
           "Al Ameer Mohamed Amin"
         ],
+        "known_as": [],
         "titles": [
           "President"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-PRESIDENT",
+            "label": "President",
+            "start": 1953,
+            "end": 1953,
+            "c": "c",
+            "note": "First President of the Maldives.",
+            "source_refs": [
+              "SRC-PO-AMIN",
+              "SRC-WIKI-AMIN-DIDI"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [
           [
             1953,
@@ -2429,9 +3265,32 @@
         "aliases": [
           "Abdul Majeed Didi"
         ],
+        "known_as": [],
         "titles": [
           "Prince"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-SOVEREIGN",
+            "label": "Sultan (elected, non-reigning)",
+            "start": 1944,
+            "end": 1952,
+            "c": "i",
+            "note": "Recognized as Sultan-elect in exile context; did not take the throne in person.",
+            "source_refs": [
+              "SRC-WIKI-ABDUL-MAJEED",
+              "SRC-WIKI-MUHAMMAD-FAREED"
+            ]
+          }
+        ],
+        "royal_link": {
+          "status": "documented",
+          "summary": "Documented direct royal line link as father of Sultan Muhammad Fareed Didi.",
+          "source_refs": [
+            "SRC-WIKI-ABDUL-MAJEED",
+            "SRC-WIKI-MUHAMMAD-FAREED"
+          ]
+        },
         "reign": [],
         "born_year": 1873,
         "died_year": 1952,
@@ -2450,7 +3309,10 @@
         "aliases": [
           "Aishath Didi"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1888,
         "died_year": 1960,
@@ -2468,7 +3330,10 @@
         "aliases": [
           "Fathima Saeed"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1915,
         "died_year": 1980,
@@ -2486,7 +3351,10 @@
         "aliases": [
           "Annabeela Ameena Mohamed Amin"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1935,
         "died_year": 2010,
@@ -2505,9 +3373,43 @@
           "Al Ameer Ibrahim Nasir",
           "Ibrahim Nasir Rannabandeyri Kilegefan"
         ],
+        "known_as": [],
         "titles": [
           "President"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-PRESIDENT",
+            "label": "President",
+            "start": 1968,
+            "end": 1978,
+            "c": "c",
+            "note": "Second President of the Maldives.",
+            "source_refs": [
+              "SRC-PO-NASIR",
+              "SRC-WIKI-IBRAHIM-NASIR"
+            ]
+          },
+          {
+            "office_id": "OFF-BANDEYRI",
+            "label": "Rannabandeyri Kilegefan",
+            "c": "u",
+            "note": "Elite court-office title embedded in documented naming style.",
+            "source_refs": [
+              "SRC-PO-NASIR",
+              "SRC-WIKI-IBRAHIM-NASIR"
+            ]
+          }
+        ],
+        "royal_link": {
+          "status": "documented",
+          "summary": "Connected by documented lineage chain to Dhiyamigili Sultan Muhammad Ghiyathuddine (P81).",
+          "source_refs": [
+            "SRC-WIKI-IBRAHIM-NASIR",
+            "SRC-WIKI-ABDUL-GAYOOM-IBRAHIM",
+            "SRC-MRF-MIDU-ROYAL-CHAIN"
+          ]
+        },
         "reign": [
           [
             1968,
@@ -2529,9 +3431,12 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1895,
         "died_year": 1965,
@@ -2550,9 +3455,12 @@
           "Aishath Didi",
           "Aishath Moosa Didi"
         ],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1900,
         "died_year": 1975,
@@ -2570,9 +3478,12 @@
         "aliases": [
           "Mariyam Saeeda"
         ],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1930,
         "died_year": 2012,
@@ -2590,9 +3501,25 @@
         "aliases": [
           "Maumoon Abdul Gayyoom"
         ],
+        "known_as": [],
         "titles": [
           "President"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-PRESIDENT",
+            "label": "President",
+            "start": 1978,
+            "end": 2008,
+            "c": "c",
+            "note": "Long-serving republican-era president.",
+            "source_refs": [
+              "SRC-PO-MAUMOON",
+              "SRC-WIKI-MAUMOON"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [
           [
             1978,
@@ -2615,7 +3542,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1897,
         "died_year": 1982,
@@ -2634,9 +3564,24 @@
         "aliases": [
           "Abdulla Yameen"
         ],
+        "known_as": [],
         "titles": [
           "President"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-PRESIDENT",
+            "label": "President",
+            "start": 2013,
+            "end": 2018,
+            "c": "c",
+            "note": "Former President of the Maldives.",
+            "source_refs": [
+              "SRC-PO-YAMEEN"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [
           [
             2013,
@@ -2660,10 +3605,25 @@
         "aliases": [
           "Anni"
         ],
+        "known_as": [],
         "titles": [
           "President",
           "Author"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-PRESIDENT",
+            "label": "President",
+            "start": 2008,
+            "end": 2012,
+            "c": "c",
+            "note": "Former President of the Maldives.",
+            "source_refs": [
+              "SRC-PO-NASHEED"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [
           [
             2008,
@@ -2691,7 +3651,10 @@
         "aliases": [
           "Laila Nasheed"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1969,
         "died_year": null,
@@ -2709,7 +3672,10 @@
         "aliases": [
           "Ali Nasir Ibrahim"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1955,
         "died_year": null,
@@ -2725,7 +3691,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1990,
         "died_year": null,
@@ -2741,7 +3710,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1993,
         "died_year": null,
@@ -2757,7 +3729,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1938,
         "died_year": null,
@@ -2773,7 +3748,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1943,
         "died_year": null,
@@ -2791,9 +3769,12 @@
         "aliases": [
           "Don Goma"
         ],
+        "known_as": [],
         "titles": [
           "Princess"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1880,
         "died_year": 1955,
@@ -2812,9 +3793,22 @@
         "aliases": [
           "Ibrahim Faammuladeyri Kilegefaanu"
         ],
+        "known_as": [],
         "titles": [
           "Prince"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-FAAMULADHEYRI",
+            "label": "Faamuladheyri Kilegefaanu",
+            "c": "u",
+            "note": "Court-office style title in documented personal naming.",
+            "source_refs": [
+              "SRC-WIKI-PRINCE-IBRAHIM-FAAMULADHEYRI"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [],
         "born_year": 1764,
         "died_year": 1829,
@@ -2830,9 +3824,12 @@
         "dynasty": "Dhiyamigili-South",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1788,
         "died_year": 1855,
@@ -2850,9 +3847,23 @@
         "aliases": [
           "Al-Naib Muhammad Thakurufan"
         ],
+        "known_as": [],
         "titles": [
           "Al-Naib"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-NAIB",
+            "label": "Al-Naib",
+            "c": "u",
+            "note": "Deputy/viceroy-style office title retained in genealogical naming.",
+            "source_refs": [
+              "SRC-WIKI-ABDUL-GAYOOM-IBRAHIM",
+              "SRC-MRF-MIDU-ROYAL"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [],
         "born_year": 1835,
         "died_year": 1910,
@@ -2868,7 +3879,10 @@
         "dynasty": "Addu Line",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1865,
         "died_year": 1935,
@@ -2884,7 +3898,10 @@
         "dynasty": "Addu Line",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1895,
         "died_year": 1970,
@@ -2902,7 +3919,10 @@
         "aliases": [
           "Sitti"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1920,
         "died_year": 1990,
@@ -2921,9 +3941,22 @@
           "Ahmed Dhoshimeynaa",
           "Ahmed Dhoshimeyna Kilegefaanu"
         ],
+        "known_as": [],
         "titles": [
           "Kilegefaanu"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-DHOSHIMEYNAA",
+            "label": "Dhoshimeynaa Kilegefaanu",
+            "c": "u",
+            "note": "Military-office linked title present in documented naming for Amin Didi's father.",
+            "source_refs": [
+              "SRC-PO-AMIN"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [],
         "born_year": 1880,
         "died_year": 1950,
@@ -2939,9 +3972,12 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1875,
         "died_year": 1945,
@@ -2959,9 +3995,12 @@
         "aliases": [
           "Maryam Didi"
         ],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1848,
         "died_year": 1925,
@@ -2977,9 +4016,12 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1818,
         "died_year": 1890,
@@ -2997,10 +4039,13 @@
         "aliases": [
           "Karayye Hassan Didi"
         ],
+        "known_as": [],
         "titles": [
           "Al-Nabeel",
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1790,
         "died_year": 1860,
@@ -3016,7 +4061,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1930,
         "died_year": null,
@@ -3032,7 +4080,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1942,
         "died_year": null,
@@ -3048,7 +4099,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1950,
         "died_year": null,
@@ -3064,7 +4118,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1953,
         "died_year": null,
@@ -3082,7 +4139,10 @@
         "aliases": [
           "Ibrahim Nasir Jr."
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1958,
         "died_year": null,
@@ -3098,7 +4158,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1965,
         "died_year": null,
@@ -3114,7 +4177,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1968,
         "died_year": null,
@@ -3132,7 +4198,10 @@
         "aliases": [
           "Khadija Moosa"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1918,
         "died_year": 2008,
@@ -3148,7 +4217,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1950,
         "died_year": null,
@@ -3164,7 +4236,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1972,
         "died_year": null,
@@ -3180,7 +4255,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1975,
         "died_year": null,
@@ -3196,7 +4274,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1979,
         "died_year": null,
@@ -3212,7 +4293,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1982,
         "died_year": null,
@@ -3230,9 +4314,12 @@
         "aliases": [
           "Hussain Bodu Dhorhimeyna Kilegefaanu"
         ],
+        "known_as": [],
         "titles": [
           "Kilege"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1710,
         "died_year": 1785,
@@ -3251,7 +4338,10 @@
         "aliases": [
           "Bodu Dorhy Manippulu"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1832,
         "died_year": 1898,
@@ -3268,9 +4358,12 @@
         "dynasty": "Lunar",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [
           "Kilege"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1160,
         "died_year": 1225,
@@ -3286,9 +4379,12 @@
         "dynasty": "Lunar",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [
           "Kilege"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1210,
         "died_year": 1275,
@@ -3304,9 +4400,12 @@
         "dynasty": "Lunar",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [
           "Kilege"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1212,
         "died_year": 1278,
@@ -3324,9 +4423,12 @@
         "aliases": [
           "Husain Faamuladeyri Kilegefaanu"
         ],
+        "known_as": [],
         "titles": [
           "Kilege"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1545,
         "died_year": 1622,
@@ -3344,9 +4446,12 @@
         "aliases": [
           "Abu Naibu Hassan Dhorhimeyna Kilegefaanu"
         ],
+        "known_as": [],
         "titles": [
           "Kilege"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1572,
         "died_year": 1640,
@@ -3364,7 +4469,10 @@
         "aliases": [
           "Kadida Dio"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1575,
         "died_year": 1645,
@@ -3382,9 +4490,25 @@
         "aliases": [
           "Dr Mohamed Waheed Hassan Manik"
         ],
+        "known_as": [],
         "titles": [
           "President"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-PRESIDENT",
+            "label": "President",
+            "start": 2012,
+            "end": 2013,
+            "c": "c",
+            "note": "Former President of the Maldives.",
+            "source_refs": [
+              "SRC-PO-WAHEED",
+              "SRC-WIKI-WAHEED"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [
           [
             2012,
@@ -3406,7 +4530,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1958,
         "died_year": null,
@@ -3423,7 +4550,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1985,
         "died_year": null,
@@ -3439,7 +4569,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1988,
         "died_year": null,
@@ -3457,7 +4590,10 @@
         "aliases": [
           "Salim Waheed"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1991,
         "died_year": null,
@@ -3475,9 +4611,25 @@
         "aliases": [
           "Ibu"
         ],
+        "known_as": [],
         "titles": [
           "President"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-PRESIDENT",
+            "label": "President",
+            "start": 2018,
+            "end": 2023,
+            "c": "c",
+            "note": "Former President of the Maldives.",
+            "source_refs": [
+              "SRC-PO-SOLIH",
+              "SRC-WIKI-SOLIH"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [
           [
             2018,
@@ -3499,7 +4651,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1966,
         "died_year": null,
@@ -3517,7 +4672,10 @@
         "aliases": [
           "Sarah Solih"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1989,
         "died_year": null,
@@ -3535,7 +4693,10 @@
         "aliases": [
           "Yaman Solih"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1993,
         "died_year": null,
@@ -3551,7 +4712,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1938,
         "died_year": 2024,
@@ -3569,9 +4733,24 @@
         "aliases": [
           "Dr Mohamed Muizzu"
         ],
+        "known_as": [],
         "titles": [
           "President"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-PRESIDENT",
+            "label": "President",
+            "start": 2023,
+            "end": null,
+            "c": "c",
+            "note": "Incumbent as of February 6, 2026.",
+            "source_refs": [
+              "SRC-PO-MUIZZU"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [
           [
             2023,
@@ -3595,7 +4774,10 @@
         "aliases": [
           "Laisa Sajidha"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1981,
         "died_year": null,
@@ -3611,7 +4793,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1949,
         "died_year": null,
@@ -3629,7 +4814,10 @@
         "aliases": [
           "Husna Adam Ismail"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1954,
         "died_year": null,
@@ -3645,7 +4833,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1980,
         "died_year": null,
@@ -3663,7 +4854,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 2004,
         "died_year": null,
@@ -3679,7 +4873,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 2008,
         "died_year": null,
@@ -3695,7 +4892,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 2012,
         "died_year": null,
@@ -3714,9 +4914,12 @@
           "Dhoshi Didi",
           "Aishath Dhoshi Didi"
         ],
+        "known_as": [],
         "titles": [
           "Princess"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1794,
         "died_year": 1868,
@@ -3735,9 +4938,12 @@
         "aliases": [
           "Kondey Ali"
         ],
+        "known_as": [],
         "titles": [
           "Manikfan"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1788,
         "died_year": 1858,
@@ -3756,9 +4962,23 @@
         "aliases": [
           "El-Naib Mohamed Thakurufan"
         ],
+        "known_as": [],
         "titles": [
           "El-Naib"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-NAIB",
+            "label": "El-Naib",
+            "c": "u",
+            "note": "Deputy/viceroy-style title retained in genealogical naming.",
+            "source_refs": [
+              "SRC-MRF-MIDU-ROYAL-CHAIN",
+              "SRC-MRF-MIDU-ROYAL"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [],
         "born_year": 1796,
         "died_year": 1865,
@@ -3776,9 +4996,12 @@
         "aliases": [
           "Hassan Didi"
         ],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1822,
         "died_year": 1895,
@@ -3796,9 +5019,12 @@
         "aliases": [
           "Aminah Bodu Didi"
         ],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1728,
         "died_year": 1798,
@@ -3818,9 +5044,12 @@
           "Kakaagey Goma",
           "Dhon Goma Kakaagey"
         ],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1845,
         "died_year": 1910,
@@ -3840,9 +5069,12 @@
         "aliases": [
           "Maandoogey Don Didi"
         ],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1842,
         "died_year": 1915,
@@ -3861,9 +5093,12 @@
         "aliases": [
           "Khadeeja Didi"
         ],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1765,
         "died_year": 1835,
@@ -3882,9 +5117,12 @@
         "aliases": [
           "Zulekha Rani Kilegefan"
         ],
+        "known_as": [],
         "titles": [
           "Kilegefan"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1808,
         "died_year": 1885,
@@ -3903,9 +5141,23 @@
         "aliases": [
           "Handeygiri Didi"
         ],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-HANDEYGIRI",
+            "label": "Handeygiri title-line",
+            "c": "u",
+            "note": "Family designation tied to the Handeygiri office tradition.",
+            "source_refs": [
+              "SRC-MRF-HILAALY",
+              "SRC-MRF-TITLES"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [],
         "born_year": 1850,
         "died_year": 1918,
@@ -3924,9 +5176,12 @@
         "aliases": [
           "Hassan Farid Didi"
         ],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1904,
         "died_year": 1988,
@@ -3943,9 +5198,12 @@
         "dynasty": "Huraagey",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1906,
         "died_year": 1987,
@@ -3965,7 +5223,21 @@
           "Nisf Handeygirin",
           "Yusuf Handeegirin"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [
+          {
+            "office_id": "OFF-HANDEYGIRI",
+            "label": "Yusuf Handeygirin",
+            "c": "u",
+            "note": "Title-bearing elite associated with Handeygiri office lineage naming.",
+            "source_refs": [
+              "SRC-MRF-HILAALY",
+              "SRC-MRF-TITLES"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [],
         "born_year": 1328,
         "died_year": 1402,
@@ -3985,9 +5257,12 @@
           "Rekka",
           "Princess Rekka"
         ],
+        "known_as": [],
         "titles": [
           "Princess"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1450,
         "died_year": 1520,
@@ -4007,7 +5282,10 @@
           "Burekkaa",
           "Buraki"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1475,
         "died_year": 1535,
@@ -4026,7 +5304,10 @@
         "dynasty": "Hilaaly",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1445,
         "died_year": 1510,
@@ -4045,7 +5326,10 @@
         "aliases": [
           "Rekki"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1478,
         "died_year": 1540,
@@ -4063,7 +5347,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1941,
         "died_year": 2011,
@@ -4081,7 +5368,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1941,
         "died_year": null,
@@ -11005,7 +12295,10 @@
         "dynasty": "Lunar",
         "regnal": "Maanaabarana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1117,
@@ -11024,7 +12317,31 @@
         "dynasty": "Lunar",
         "regnal": "Bavanaadheeththa",
         "aliases": [],
+        "known_as": [
+          {
+            "name": "Dhovemi Kalaminjaa",
+            "type": "historical-name",
+            "c": "c",
+            "note": "Used in Dhivehi historical naming forms.",
+            "source_refs": [
+              "SRC-WIKI-DHOVEMI",
+              "SRC-WIKI-HEADS-STATE"
+            ]
+          },
+          {
+            "name": "Dharumavantha Rasgefaanu",
+            "type": "sobriquet",
+            "c": "c",
+            "note": "Honorific epithet attached to Prince/Sultan Dhovemi in historical lists.",
+            "source_refs": [
+              "SRC-WIKI-DHOVEMI",
+              "SRC-WIKI-HEADS-STATE"
+            ]
+          }
+        ],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1141,
@@ -11035,7 +12352,10 @@
         "died_year": null,
         "birth_place": "",
         "death_place": "",
-        "source_refs": []
+        "source_refs": [
+          "SRC-WIKI-DHOVEMI",
+          "SRC-WIKI-HEADS-STATE"
+        ]
       },
       {
         "id": "P3",
@@ -11043,7 +12363,10 @@
         "dynasty": "Lunar",
         "regnal": "Bavana Abarana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1166,
@@ -11062,7 +12385,10 @@
         "dynasty": "Lunar",
         "regnal": "Dhammaru Naaja",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1184,
@@ -11081,7 +12407,10 @@
         "dynasty": "Lunar",
         "regnal": "Fennaadheeththa",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1193,
@@ -11100,7 +12429,10 @@
         "dynasty": "Lunar",
         "regnal": "Dhagathaa Abarana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1199,
@@ -11119,7 +12451,10 @@
         "dynasty": "Lunar",
         "regnal": "Dhagathaa Suvara",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1214,
@@ -11138,7 +12473,10 @@
         "dynasty": "Lunar",
         "regnal": "Raa-Araa Desyara",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1233,
@@ -11157,7 +12495,10 @@
         "dynasty": "Lunar",
         "regnal": "Raadha Suvara",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1258,
@@ -11176,7 +12517,10 @@
         "dynasty": "Lunar",
         "regnal": "Loka Suvara",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1264,
@@ -11195,7 +12539,10 @@
         "dynasty": "Lunar",
         "regnal": "Singaa Abarana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1266,
@@ -11214,7 +12561,10 @@
         "dynasty": "Lunar",
         "regnal": "Madheenee Suvara",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1268,
@@ -11233,7 +12583,10 @@
         "dynasty": "Lunar",
         "regnal": "Areedha Suvara",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1269,
@@ -11252,7 +12605,10 @@
         "dynasty": "Lunar",
         "regnal": "Areedha Suvara",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1278,
@@ -11271,7 +12627,10 @@
         "dynasty": "Lunar",
         "regnal": "Bavanaadheeththa",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1288,
@@ -11290,7 +12649,10 @@
         "dynasty": "Lunar",
         "regnal": "Meesuvvara",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1293,
@@ -11309,7 +12671,10 @@
         "dynasty": "Lunar",
         "regnal": "Sundhura Bavana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1302,
@@ -11328,7 +12693,10 @@
         "dynasty": "Lunar",
         "regnal": "Loka Abarana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1306,
@@ -11347,7 +12715,10 @@
         "dynasty": "Lunar",
         "regnal": "Loka Aadheeththa",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1341,
@@ -11366,7 +12737,10 @@
         "dynasty": "Lunar",
         "regnal": "Raadha Abarana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1347,
@@ -11393,7 +12767,10 @@
         "dynasty": "Lunar",
         "regnal": "Bavana Sooja",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1363,
@@ -11412,7 +12789,10 @@
         "dynasty": "Lunar",
         "regnal": "Dhammaru Aadheeththa",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1374,
@@ -11431,7 +12811,10 @@
         "dynasty": "Lunar",
         "regnal": "Suvama Abarana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1379,
@@ -11450,7 +12833,10 @@
         "dynasty": "Lunar",
         "regnal": "Sundhura Abarana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1380,
@@ -11469,7 +12855,10 @@
         "dynasty": "Lunar",
         "regnal": "Keerithi Maha Rehendi",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1385,
@@ -11488,7 +12877,10 @@
         "dynasty": "Lunar",
         "regnal": "Suvama Abarana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1388,
@@ -11507,7 +12899,10 @@
         "dynasty": "Lunar",
         "regnal": "Sundhura",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1388,
@@ -11526,7 +12921,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Bavana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1388,
@@ -11545,7 +12943,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Dhammaru Veeru",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1398,
@@ -11568,7 +12969,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Loka Veeru",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1398,
@@ -11587,7 +12991,10 @@
         "dynasty": "Unknown",
         "regnal": "Veeru Abarana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1409,
@@ -11606,7 +13013,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1411,
@@ -11625,7 +13035,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Bavana Sundhura",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1411,
@@ -11644,7 +13057,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Dhammaru Loaka",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1421,
@@ -11663,7 +13079,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Raadha Bavana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1421,
@@ -11682,7 +13101,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Loka Aananadha",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1421,
@@ -11701,7 +13123,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Bavana Sooja",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1443,
@@ -11720,7 +13145,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Raadha Veeru",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1443,
@@ -11743,7 +13171,10 @@
         "dynasty": "Unknown",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1467,
@@ -11762,7 +13193,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Bavana Abarana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1468,
@@ -11781,7 +13215,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Raadha Loka",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1480,
@@ -11804,7 +13241,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Loka Sundhura",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1480,
@@ -11823,7 +13263,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Raadha Aanandha",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1484,
@@ -11842,7 +13285,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Raadha Fanaveeru",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1491,
@@ -11861,7 +13307,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Bavana Furasuddha",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1492,
@@ -11880,7 +13329,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Dhammaru Bavana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1492,
@@ -11907,7 +13359,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Veeru Aanandha",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1492,
@@ -11926,7 +13381,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Audha Veeru",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1493,
@@ -11945,7 +13403,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Singa Veeru",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1510,
@@ -11964,7 +13425,10 @@
         "dynasty": "Unknown",
         "regnal": "Suddha Bavana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1511,
@@ -11983,7 +13447,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Aanandha",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1513,
@@ -12002,7 +13469,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Ram Mani Loka",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1529,
@@ -12021,7 +13491,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Singa Bavana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1549,
@@ -12040,7 +13513,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Dhirikusa Loka",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1550,
@@ -12067,7 +13543,10 @@
         "dynasty": "Unknown",
         "regnal": "Asaalees Loka",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1554,
@@ -12086,7 +13565,20 @@
         "dynasty": "Unknown",
         "regnal": "Audha Siyaaaka Katthiri",
         "aliases": [],
+        "known_as": [
+          {
+            "name": "Dhevvadhoo Rasgefaanu",
+            "type": "sobriquet",
+            "c": "c",
+            "note": "Listed as an alternate known-by name in head-of-state chronology.",
+            "source_refs": [
+              "SRC-WIKI-HEADS-STATE"
+            ]
+          }
+        ],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1557,
@@ -12097,7 +13589,9 @@
         "died_year": null,
         "birth_place": "",
         "death_place": "",
-        "source_refs": []
+        "source_refs": [
+          "SRC-WIKI-HEADS-STATE"
+        ]
       },
       {
         "id": "P66",
@@ -12105,7 +13599,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1583,
@@ -12124,7 +13621,10 @@
         "dynasty": "Hilaaly",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1609,
@@ -12143,7 +13643,10 @@
         "dynasty": "Utheemu",
         "regnal": "Kula Sundhura Katthiri Bavana",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1632,
@@ -12162,7 +13665,10 @@
         "dynasty": "Utheemu",
         "regnal": "Kula Ran Meeba Katthiri",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1648,
@@ -12181,7 +13687,10 @@
         "dynasty": "Utheemu",
         "regnal": "Maniranna Loka",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1687,
@@ -12200,7 +13709,10 @@
         "dynasty": "Utheemu",
         "regnal": "Naakiree Sundhura",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1691,
@@ -12219,7 +13731,10 @@
         "dynasty": "Unknown",
         "regnal": "Mikaalha Madhaadheeththa",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1692,
@@ -12238,7 +13753,10 @@
         "dynasty": "Devadu",
         "regnal": "Kula Ran Mani",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1692,
@@ -12257,7 +13775,10 @@
         "dynasty": "Isdu",
         "regnal": "Kula Ran Muiy",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1701,
@@ -12276,7 +13797,20 @@
         "dynasty": "Isdu",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [
+          {
+            "name": "Addu Hassan Manikfan",
+            "type": "sobriquet",
+            "c": "u",
+            "note": "Attributed in secondary chronologies; kept as uncertain pending stronger archival corroboration.",
+            "source_refs": [
+              "SRC-WIKI-HEADS-STATE"
+            ]
+          }
+        ],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1701,
@@ -12287,7 +13821,9 @@
         "died_year": null,
         "birth_place": "",
         "death_place": "",
-        "source_refs": []
+        "source_refs": [
+          "SRC-WIKI-HEADS-STATE"
+        ]
       },
       {
         "id": "P76",
@@ -12295,7 +13831,10 @@
         "dynasty": "Isdu",
         "regnal": "Muthey Ran Mani Loka",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1701,
@@ -12314,7 +13853,10 @@
         "dynasty": "Dhiyamigili",
         "regnal": "Kula Sundhura Siyaaaka",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1704,
@@ -12333,7 +13875,10 @@
         "dynasty": "Dhiyamigili",
         "regnal": "Rannava Loka",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1720,
@@ -12352,7 +13897,10 @@
         "dynasty": "Dhiyamigili",
         "regnal": "Navaranna Keerithi",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1750,
@@ -12371,7 +13919,63 @@
         "dynasty": "Huraagey",
         "regnal": "Kula Ran Meeba Audha",
         "aliases": [],
+        "known_as": [
+          {
+            "name": "Dhon Bandaarain",
+            "type": "sobriquet",
+            "c": "c",
+            "note": "Commonly referenced historical name for Hassan Izzuddeen.",
+            "source_refs": [
+              "SRC-WIKI-IZZUDDIN-I",
+              "SRC-WIKI-HEADS-STATE"
+            ]
+          },
+          {
+            "name": "Muleegey Don Hassan Maniku",
+            "type": "house-name",
+            "c": "c",
+            "note": "House-linked historical rendering.",
+            "source_refs": [
+              "SRC-WIKI-HEADS-STATE"
+            ]
+          },
+          {
+            "name": "Don Bandaara",
+            "type": "variant",
+            "c": "c",
+            "note": "Variant transliteration tied to the same ruler identity.",
+            "source_refs": [
+              "SRC-WIKI-HEADS-STATE"
+            ]
+          }
+        ],
         "titles": [],
+        "offices_held": [
+          {
+            "office_id": "OFF-SOVEREIGN",
+            "label": "Sultan",
+            "start": 1759,
+            "end": 1766,
+            "c": "c",
+            "note": "Founder sovereign of the Huraagey line.",
+            "source_refs": [
+              "SRC-WIKI-HEADS-STATE",
+              "SRC-WIKI-IZZUDDIN-I"
+            ]
+          },
+          {
+            "office_id": "OFF-NAIB",
+            "label": "De facto regent",
+            "start": 1754,
+            "end": 1759,
+            "c": "i",
+            "note": "Described as de facto regent before accession.",
+            "source_refs": [
+              "SRC-WIKI-IZZUDDIN-I"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [
           [
             1759,
@@ -12382,7 +13986,10 @@
         "died_year": 1770,
         "birth_place": "Huraa line (likely Maldives/Goa-linked family)",
         "death_place": "Maldives",
-        "source_refs": []
+        "source_refs": [
+          "SRC-WIKI-IZZUDDIN-I",
+          "SRC-WIKI-HEADS-STATE"
+        ]
       },
       {
         "id": "P81",
@@ -12390,7 +13997,43 @@
         "dynasty": "Dhiyamigili",
         "regnal": "Kula Rannmani Keerithi",
         "aliases": [],
+        "known_as": [
+          {
+            "name": "Muhammadh Manikfaan",
+            "type": "historical-name",
+            "c": "c",
+            "note": "Name-form recorded in historical summaries.",
+            "source_refs": [
+              "SRC-WIKI-MUHAMMAD-GHIYATH-AL-DIN"
+            ]
+          },
+          {
+            "name": "Haajee Bandaarain",
+            "type": "sobriquet",
+            "c": "c",
+            "note": "Historical epithet linked to Sultan Muhammad Ghiyath al-Din.",
+            "source_refs": [
+              "SRC-WIKI-MUHAMMAD-GHIYATH-AL-DIN",
+              "SRC-HISTORY-MV-GHIYAS"
+            ]
+          }
+        ],
         "titles": [],
+        "offices_held": [
+          {
+            "office_id": "OFF-SOVEREIGN",
+            "label": "Sultan",
+            "start": 1766,
+            "end": 1774,
+            "c": "c",
+            "note": "Final Dhiyamigili sovereign in standard succession lists.",
+            "source_refs": [
+              "SRC-WIKI-MONARCHS",
+              "SRC-WIKI-MUHAMMAD-GHIYATH-AL-DIN"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [
           [
             1766,
@@ -12401,7 +14044,10 @@
         "died_year": 1780,
         "birth_place": "Maldives",
         "death_place": "Maldives",
-        "source_refs": []
+        "source_refs": [
+          "SRC-WIKI-MUHAMMAD-GHIYATH-AL-DIN",
+          "SRC-HISTORY-MV-GHIYAS"
+        ]
       },
       {
         "id": "P82",
@@ -12409,7 +14055,10 @@
         "dynasty": "Huraagey",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1774,
@@ -12428,7 +14077,34 @@
         "dynasty": "Huraagey",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [
+          {
+            "name": "Kalhu Bandaarain",
+            "type": "sobriquet",
+            "c": "c",
+            "note": "Popularly known-by name in royal chronologies.",
+            "source_refs": [
+              "SRC-WIKI-MUHAMMAD-MUIZZUDDIN",
+              "SRC-WIKI-HEADS-STATE"
+            ]
+          }
+        ],
         "titles": [],
+        "offices_held": [
+          {
+            "office_id": "OFF-SOVEREIGN",
+            "label": "Sultan",
+            "start": 1774,
+            "end": 1779,
+            "c": "c",
+            "note": "Early Huraagey reign after Dhiyamigili restoration shift.",
+            "source_refs": [
+              "SRC-WIKI-MONARCHS",
+              "SRC-WIKI-MUHAMMAD-MUIZZUDDIN"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [
           [
             1774,
@@ -12439,7 +14115,10 @@
         "died_year": null,
         "birth_place": "",
         "death_place": "",
-        "source_refs": []
+        "source_refs": [
+          "SRC-WIKI-MUHAMMAD-MUIZZUDDIN",
+          "SRC-WIKI-HEADS-STATE"
+        ]
       },
       {
         "id": "P84",
@@ -12447,7 +14126,10 @@
         "dynasty": "Huraagey",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1779,
@@ -12466,7 +14148,10 @@
         "dynasty": "Huraagey",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1799,
@@ -12485,7 +14170,10 @@
         "dynasty": "Huraagey",
         "regnal": "Kula Sudha Ira Siyaaaka",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1835,
@@ -12504,7 +14192,10 @@
         "dynasty": "Huraagey",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1882,
@@ -12527,7 +14218,10 @@
         "dynasty": "Huraagey",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1886,
@@ -12546,7 +14240,10 @@
         "dynasty": "Huraagey",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1892,
@@ -12565,7 +14262,10 @@
         "dynasty": "Huraagey",
         "regnal": "Kula Sundhura Katthiri",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1892,
@@ -12588,7 +14288,10 @@
         "dynasty": "Huraagey",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1892,
@@ -12607,7 +14310,10 @@
         "dynasty": "Huraagey",
         "regnal": "Kula Sudha Ira Siyaaaka",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [
           [
             1933,
@@ -12626,7 +14332,23 @@
         "dynasty": "Huraagey",
         "regnal": "Keerithi Maha Radun",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [
+          {
+            "office_id": "OFF-SOVEREIGN",
+            "label": "Sultan",
+            "start": 1954,
+            "end": 1968,
+            "c": "c",
+            "note": "Final ruling Sultan before abolition of the monarchy.",
+            "source_refs": [
+              "SRC-WIKI-MUHAMMAD-FAREED",
+              "SRC-WIKI-HEADS-STATE"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [
           [
             1954,
@@ -12637,7 +14359,9 @@
         "died_year": 1969,
         "birth_place": "Malé",
         "death_place": "Malé",
-        "source_refs": []
+        "source_refs": [
+          "SRC-WIKI-MUHAMMAD-FAREED"
+        ]
       },
       {
         "id": "P96",
@@ -12649,9 +14373,12 @@
           "Dona Inez",
           "Infanta Dona Inez de Malvidas"
         ],
+        "known_as": [],
         "titles": [
           "Infanta"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1585,
         "died_year": 1645,
@@ -12671,9 +14398,12 @@
         "aliases": [
           "Dom Luis de Souza"
         ],
+        "known_as": [],
         "titles": [
           "Dom"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1605,
         "died_year": 1665,
@@ -12692,9 +14422,12 @@
         "aliases": [
           "Huraa Dom Maraduru Fandiaiy Kaleygefan"
         ],
+        "known_as": [],
         "titles": [
           "Dom"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1630,
         "died_year": 1690,
@@ -12713,7 +14446,10 @@
         "aliases": [
           "Huraa Hussain Daharada Kaleygefan"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1650,
         "died_year": 1715,
@@ -12732,7 +14468,10 @@
         "aliases": [
           "Huraa Mohamed Faamuladeyri Thakurufan"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1688,
         "died_year": 1745,
@@ -12751,9 +14490,12 @@
         "aliases": [
           "Donna Francisca Vasconelles"
         ],
+        "known_as": [],
         "titles": [
           "Donna"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1565,
         "died_year": 1625,
@@ -12773,9 +14515,12 @@
           "Kalu Ali Thakurufan",
           "Kalhu Ali"
         ],
+        "known_as": [],
         "titles": [
           "Thakurufan"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1465,
         "died_year": 1535,
@@ -12792,7 +14537,10 @@
         "dynasty": "Utheemu",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1495,
         "died_year": 1570,
@@ -12812,9 +14560,12 @@
           "Kateeb Mohamed Thakurufan",
           "Bodu Thakurufan"
         ],
+        "known_as": [],
         "titles": [
           "Kateeb"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1520,
         "died_year": 1585,
@@ -12831,7 +14582,10 @@
         "dynasty": "Utheemu",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1525,
         "died_year": 1590,
@@ -12850,7 +14604,10 @@
         "aliases": [
           "Ibrahim Kalaafaanu"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1550,
         "died_year": 1620,
@@ -12870,7 +14627,10 @@
           "Golhaavahi Kambulo",
           "Kalavahi Kabulo"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1335,
         "died_year": 1405,
@@ -12889,7 +14649,10 @@
         "aliases": [
           "Hilaaly Kalo"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1330,
         "died_year": 1390,
@@ -12908,7 +14671,10 @@
         "aliases": [
           "Hulhuley Abbas"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1295,
         "died_year": 1360,
@@ -12927,9 +14693,25 @@
           "Ameen Didi",
           "Al Ameer Mohamed Amin"
         ],
+        "known_as": [],
         "titles": [
           "President"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-PRESIDENT",
+            "label": "President",
+            "start": 1953,
+            "end": 1953,
+            "c": "c",
+            "note": "First President of the Maldives.",
+            "source_refs": [
+              "SRC-PO-AMIN",
+              "SRC-WIKI-AMIN-DIDI"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [
           [
             1953,
@@ -12953,9 +14735,32 @@
         "aliases": [
           "Abdul Majeed Didi"
         ],
+        "known_as": [],
         "titles": [
           "Prince"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-SOVEREIGN",
+            "label": "Sultan (elected, non-reigning)",
+            "start": 1944,
+            "end": 1952,
+            "c": "i",
+            "note": "Recognized as Sultan-elect in exile context; did not take the throne in person.",
+            "source_refs": [
+              "SRC-WIKI-ABDUL-MAJEED",
+              "SRC-WIKI-MUHAMMAD-FAREED"
+            ]
+          }
+        ],
+        "royal_link": {
+          "status": "documented",
+          "summary": "Documented direct royal line link as father of Sultan Muhammad Fareed Didi.",
+          "source_refs": [
+            "SRC-WIKI-ABDUL-MAJEED",
+            "SRC-WIKI-MUHAMMAD-FAREED"
+          ]
+        },
         "reign": [],
         "born_year": 1873,
         "died_year": 1952,
@@ -12974,7 +14779,10 @@
         "aliases": [
           "Aishath Didi"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1888,
         "died_year": 1960,
@@ -12992,7 +14800,10 @@
         "aliases": [
           "Fathima Saeed"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1915,
         "died_year": 1980,
@@ -13010,7 +14821,10 @@
         "aliases": [
           "Annabeela Ameena Mohamed Amin"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1935,
         "died_year": 2010,
@@ -13029,9 +14843,43 @@
           "Al Ameer Ibrahim Nasir",
           "Ibrahim Nasir Rannabandeyri Kilegefan"
         ],
+        "known_as": [],
         "titles": [
           "President"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-PRESIDENT",
+            "label": "President",
+            "start": 1968,
+            "end": 1978,
+            "c": "c",
+            "note": "Second President of the Maldives.",
+            "source_refs": [
+              "SRC-PO-NASIR",
+              "SRC-WIKI-IBRAHIM-NASIR"
+            ]
+          },
+          {
+            "office_id": "OFF-BANDEYRI",
+            "label": "Rannabandeyri Kilegefan",
+            "c": "u",
+            "note": "Elite court-office title embedded in documented naming style.",
+            "source_refs": [
+              "SRC-PO-NASIR",
+              "SRC-WIKI-IBRAHIM-NASIR"
+            ]
+          }
+        ],
+        "royal_link": {
+          "status": "documented",
+          "summary": "Connected by documented lineage chain to Dhiyamigili Sultan Muhammad Ghiyathuddine (P81).",
+          "source_refs": [
+            "SRC-WIKI-IBRAHIM-NASIR",
+            "SRC-WIKI-ABDUL-GAYOOM-IBRAHIM",
+            "SRC-MRF-MIDU-ROYAL-CHAIN"
+          ]
+        },
         "reign": [
           [
             1968,
@@ -13053,9 +14901,12 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1895,
         "died_year": 1965,
@@ -13074,9 +14925,12 @@
           "Aishath Didi",
           "Aishath Moosa Didi"
         ],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1900,
         "died_year": 1975,
@@ -13094,9 +14948,12 @@
         "aliases": [
           "Mariyam Saeeda"
         ],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1930,
         "died_year": 2012,
@@ -13114,9 +14971,25 @@
         "aliases": [
           "Maumoon Abdul Gayyoom"
         ],
+        "known_as": [],
         "titles": [
           "President"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-PRESIDENT",
+            "label": "President",
+            "start": 1978,
+            "end": 2008,
+            "c": "c",
+            "note": "Long-serving republican-era president.",
+            "source_refs": [
+              "SRC-PO-MAUMOON",
+              "SRC-WIKI-MAUMOON"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [
           [
             1978,
@@ -13139,7 +15012,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1897,
         "died_year": 1982,
@@ -13158,9 +15034,24 @@
         "aliases": [
           "Abdulla Yameen"
         ],
+        "known_as": [],
         "titles": [
           "President"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-PRESIDENT",
+            "label": "President",
+            "start": 2013,
+            "end": 2018,
+            "c": "c",
+            "note": "Former President of the Maldives.",
+            "source_refs": [
+              "SRC-PO-YAMEEN"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [
           [
             2013,
@@ -13184,10 +15075,25 @@
         "aliases": [
           "Anni"
         ],
+        "known_as": [],
         "titles": [
           "President",
           "Author"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-PRESIDENT",
+            "label": "President",
+            "start": 2008,
+            "end": 2012,
+            "c": "c",
+            "note": "Former President of the Maldives.",
+            "source_refs": [
+              "SRC-PO-NASHEED"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [
           [
             2008,
@@ -13215,7 +15121,10 @@
         "aliases": [
           "Laila Nasheed"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1969,
         "died_year": null,
@@ -13233,7 +15142,10 @@
         "aliases": [
           "Ali Nasir Ibrahim"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1955,
         "died_year": null,
@@ -13249,7 +15161,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1990,
         "died_year": null,
@@ -13265,7 +15180,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1993,
         "died_year": null,
@@ -13281,7 +15199,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1938,
         "died_year": null,
@@ -13297,7 +15218,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1943,
         "died_year": null,
@@ -13315,9 +15239,12 @@
         "aliases": [
           "Don Goma"
         ],
+        "known_as": [],
         "titles": [
           "Princess"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1880,
         "died_year": 1955,
@@ -13336,9 +15263,22 @@
         "aliases": [
           "Ibrahim Faammuladeyri Kilegefaanu"
         ],
+        "known_as": [],
         "titles": [
           "Prince"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-FAAMULADHEYRI",
+            "label": "Faamuladheyri Kilegefaanu",
+            "c": "u",
+            "note": "Court-office style title in documented personal naming.",
+            "source_refs": [
+              "SRC-WIKI-PRINCE-IBRAHIM-FAAMULADHEYRI"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [],
         "born_year": 1764,
         "died_year": 1829,
@@ -13354,9 +15294,12 @@
         "dynasty": "Dhiyamigili-South",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1788,
         "died_year": 1855,
@@ -13374,9 +15317,23 @@
         "aliases": [
           "Al-Naib Muhammad Thakurufan"
         ],
+        "known_as": [],
         "titles": [
           "Al-Naib"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-NAIB",
+            "label": "Al-Naib",
+            "c": "u",
+            "note": "Deputy/viceroy-style office title retained in genealogical naming.",
+            "source_refs": [
+              "SRC-WIKI-ABDUL-GAYOOM-IBRAHIM",
+              "SRC-MRF-MIDU-ROYAL"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [],
         "born_year": 1835,
         "died_year": 1910,
@@ -13392,7 +15349,10 @@
         "dynasty": "Addu Line",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1865,
         "died_year": 1935,
@@ -13408,7 +15368,10 @@
         "dynasty": "Addu Line",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1895,
         "died_year": 1970,
@@ -13426,7 +15389,10 @@
         "aliases": [
           "Sitti"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1920,
         "died_year": 1990,
@@ -13445,9 +15411,22 @@
           "Ahmed Dhoshimeynaa",
           "Ahmed Dhoshimeyna Kilegefaanu"
         ],
+        "known_as": [],
         "titles": [
           "Kilegefaanu"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-DHOSHIMEYNAA",
+            "label": "Dhoshimeynaa Kilegefaanu",
+            "c": "u",
+            "note": "Military-office linked title present in documented naming for Amin Didi's father.",
+            "source_refs": [
+              "SRC-PO-AMIN"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [],
         "born_year": 1880,
         "died_year": 1950,
@@ -13463,9 +15442,12 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1875,
         "died_year": 1945,
@@ -13483,9 +15465,12 @@
         "aliases": [
           "Maryam Didi"
         ],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1848,
         "died_year": 1925,
@@ -13501,9 +15486,12 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1818,
         "died_year": 1890,
@@ -13521,10 +15509,13 @@
         "aliases": [
           "Karayye Hassan Didi"
         ],
+        "known_as": [],
         "titles": [
           "Al-Nabeel",
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1790,
         "died_year": 1860,
@@ -13540,7 +15531,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1930,
         "died_year": null,
@@ -13556,7 +15550,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1942,
         "died_year": null,
@@ -13572,7 +15569,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1950,
         "died_year": null,
@@ -13588,7 +15588,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1953,
         "died_year": null,
@@ -13606,7 +15609,10 @@
         "aliases": [
           "Ibrahim Nasir Jr."
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1958,
         "died_year": null,
@@ -13622,7 +15628,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1965,
         "died_year": null,
@@ -13638,7 +15647,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1968,
         "died_year": null,
@@ -13656,7 +15668,10 @@
         "aliases": [
           "Khadija Moosa"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1918,
         "died_year": 2008,
@@ -13672,7 +15687,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1950,
         "died_year": null,
@@ -13688,7 +15706,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1972,
         "died_year": null,
@@ -13704,7 +15725,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1975,
         "died_year": null,
@@ -13720,7 +15744,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1979,
         "died_year": null,
@@ -13736,7 +15763,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1982,
         "died_year": null,
@@ -13754,9 +15784,12 @@
         "aliases": [
           "Hussain Bodu Dhorhimeyna Kilegefaanu"
         ],
+        "known_as": [],
         "titles": [
           "Kilege"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1710,
         "died_year": 1785,
@@ -13775,7 +15808,10 @@
         "aliases": [
           "Bodu Dorhy Manippulu"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1832,
         "died_year": 1898,
@@ -13792,9 +15828,12 @@
         "dynasty": "Lunar",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [
           "Kilege"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1160,
         "died_year": 1225,
@@ -13810,9 +15849,12 @@
         "dynasty": "Lunar",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [
           "Kilege"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1210,
         "died_year": 1275,
@@ -13828,9 +15870,12 @@
         "dynasty": "Lunar",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [
           "Kilege"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1212,
         "died_year": 1278,
@@ -13848,9 +15893,12 @@
         "aliases": [
           "Husain Faamuladeyri Kilegefaanu"
         ],
+        "known_as": [],
         "titles": [
           "Kilege"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1545,
         "died_year": 1622,
@@ -13868,9 +15916,12 @@
         "aliases": [
           "Abu Naibu Hassan Dhorhimeyna Kilegefaanu"
         ],
+        "known_as": [],
         "titles": [
           "Kilege"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1572,
         "died_year": 1640,
@@ -13888,7 +15939,10 @@
         "aliases": [
           "Kadida Dio"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1575,
         "died_year": 1645,
@@ -13906,9 +15960,25 @@
         "aliases": [
           "Dr Mohamed Waheed Hassan Manik"
         ],
+        "known_as": [],
         "titles": [
           "President"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-PRESIDENT",
+            "label": "President",
+            "start": 2012,
+            "end": 2013,
+            "c": "c",
+            "note": "Former President of the Maldives.",
+            "source_refs": [
+              "SRC-PO-WAHEED",
+              "SRC-WIKI-WAHEED"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [
           [
             2012,
@@ -13930,7 +16000,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1958,
         "died_year": null,
@@ -13947,7 +16020,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1985,
         "died_year": null,
@@ -13963,7 +16039,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1988,
         "died_year": null,
@@ -13981,7 +16060,10 @@
         "aliases": [
           "Salim Waheed"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1991,
         "died_year": null,
@@ -13999,9 +16081,25 @@
         "aliases": [
           "Ibu"
         ],
+        "known_as": [],
         "titles": [
           "President"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-PRESIDENT",
+            "label": "President",
+            "start": 2018,
+            "end": 2023,
+            "c": "c",
+            "note": "Former President of the Maldives.",
+            "source_refs": [
+              "SRC-PO-SOLIH",
+              "SRC-WIKI-SOLIH"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [
           [
             2018,
@@ -14023,7 +16121,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1966,
         "died_year": null,
@@ -14041,7 +16142,10 @@
         "aliases": [
           "Sarah Solih"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1989,
         "died_year": null,
@@ -14059,7 +16163,10 @@
         "aliases": [
           "Yaman Solih"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1993,
         "died_year": null,
@@ -14075,7 +16182,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1938,
         "died_year": 2024,
@@ -14093,9 +16203,24 @@
         "aliases": [
           "Dr Mohamed Muizzu"
         ],
+        "known_as": [],
         "titles": [
           "President"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-PRESIDENT",
+            "label": "President",
+            "start": 2023,
+            "end": null,
+            "c": "c",
+            "note": "Incumbent as of February 6, 2026.",
+            "source_refs": [
+              "SRC-PO-MUIZZU"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [
           [
             2023,
@@ -14119,7 +16244,10 @@
         "aliases": [
           "Laisa Sajidha"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1981,
         "died_year": null,
@@ -14135,7 +16263,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1949,
         "died_year": null,
@@ -14153,7 +16284,10 @@
         "aliases": [
           "Husna Adam Ismail"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1954,
         "died_year": null,
@@ -14169,7 +16303,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1980,
         "died_year": null,
@@ -14187,7 +16324,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 2004,
         "died_year": null,
@@ -14203,7 +16343,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 2008,
         "died_year": null,
@@ -14219,7 +16362,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 2012,
         "died_year": null,
@@ -14238,9 +16384,12 @@
           "Dhoshi Didi",
           "Aishath Dhoshi Didi"
         ],
+        "known_as": [],
         "titles": [
           "Princess"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1794,
         "died_year": 1868,
@@ -14259,9 +16408,12 @@
         "aliases": [
           "Kondey Ali"
         ],
+        "known_as": [],
         "titles": [
           "Manikfan"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1788,
         "died_year": 1858,
@@ -14280,9 +16432,23 @@
         "aliases": [
           "El-Naib Mohamed Thakurufan"
         ],
+        "known_as": [],
         "titles": [
           "El-Naib"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-NAIB",
+            "label": "El-Naib",
+            "c": "u",
+            "note": "Deputy/viceroy-style title retained in genealogical naming.",
+            "source_refs": [
+              "SRC-MRF-MIDU-ROYAL-CHAIN",
+              "SRC-MRF-MIDU-ROYAL"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [],
         "born_year": 1796,
         "died_year": 1865,
@@ -14300,9 +16466,12 @@
         "aliases": [
           "Hassan Didi"
         ],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1822,
         "died_year": 1895,
@@ -14320,9 +16489,12 @@
         "aliases": [
           "Aminah Bodu Didi"
         ],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1728,
         "died_year": 1798,
@@ -14342,9 +16514,12 @@
           "Kakaagey Goma",
           "Dhon Goma Kakaagey"
         ],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1845,
         "died_year": 1910,
@@ -14364,9 +16539,12 @@
         "aliases": [
           "Maandoogey Don Didi"
         ],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1842,
         "died_year": 1915,
@@ -14385,9 +16563,12 @@
         "aliases": [
           "Khadeeja Didi"
         ],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1765,
         "died_year": 1835,
@@ -14406,9 +16587,12 @@
         "aliases": [
           "Zulekha Rani Kilegefan"
         ],
+        "known_as": [],
         "titles": [
           "Kilegefan"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1808,
         "died_year": 1885,
@@ -14427,9 +16611,23 @@
         "aliases": [
           "Handeygiri Didi"
         ],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [
+          {
+            "office_id": "OFF-HANDEYGIRI",
+            "label": "Handeygiri title-line",
+            "c": "u",
+            "note": "Family designation tied to the Handeygiri office tradition.",
+            "source_refs": [
+              "SRC-MRF-HILAALY",
+              "SRC-MRF-TITLES"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [],
         "born_year": 1850,
         "died_year": 1918,
@@ -14448,9 +16646,12 @@
         "aliases": [
           "Hassan Farid Didi"
         ],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1904,
         "died_year": 1988,
@@ -14467,9 +16668,12 @@
         "dynasty": "Huraagey",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [
           "Didi"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1906,
         "died_year": 1987,
@@ -14489,7 +16693,21 @@
           "Nisf Handeygirin",
           "Yusuf Handeegirin"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [
+          {
+            "office_id": "OFF-HANDEYGIRI",
+            "label": "Yusuf Handeygirin",
+            "c": "u",
+            "note": "Title-bearing elite associated with Handeygiri office lineage naming.",
+            "source_refs": [
+              "SRC-MRF-HILAALY",
+              "SRC-MRF-TITLES"
+            ]
+          }
+        ],
+        "royal_link": null,
         "reign": [],
         "born_year": 1328,
         "died_year": 1402,
@@ -14509,9 +16727,12 @@
           "Rekka",
           "Princess Rekka"
         ],
+        "known_as": [],
         "titles": [
           "Princess"
         ],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1450,
         "died_year": 1520,
@@ -14531,7 +16752,10 @@
           "Burekkaa",
           "Buraki"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1475,
         "died_year": 1535,
@@ -14550,7 +16774,10 @@
         "dynasty": "Hilaaly",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1445,
         "died_year": 1510,
@@ -14569,7 +16796,10 @@
         "aliases": [
           "Rekki"
         ],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1478,
         "died_year": 1540,
@@ -14587,7 +16817,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1941,
         "died_year": 2011,
@@ -14605,7 +16838,10 @@
         "dynasty": "Modern",
         "regnal": "",
         "aliases": [],
+        "known_as": [],
         "titles": [],
+        "offices_held": [],
+        "royal_link": null,
         "reign": [],
         "born_year": 1941,
         "died_year": null,
@@ -23773,6 +26009,20 @@
           "dynasty": "Huraagey"
         },
         {
+          "id": "P81",
+          "name": "Mohamed Ghiyathuddine",
+          "dynasty": "Dhiyamigili",
+          "claim": "office",
+          "value": "OFF-SOVEREIGN"
+        },
+        {
+          "id": "P83",
+          "name": "Mohamed Muizzuddine",
+          "dynasty": "Huraagey",
+          "claim": "office",
+          "value": "OFF-SOVEREIGN"
+        },
+        {
           "id": "P96",
           "name": "Donna Ines",
           "dynasty": "Hilaaly"
@@ -25605,9 +27855,23 @@
           "dynasty": "Hilaaly"
         },
         {
+          "id": "P189",
+          "name": "Handeygirigey Didi",
+          "dynasty": "Huraagey",
+          "claim": "office",
+          "value": "OFF-HANDEYGIRI"
+        },
+        {
           "id": "P192",
           "name": "Yusuf Handeygirin",
           "dynasty": "Hilaaly"
+        },
+        {
+          "id": "P192",
+          "name": "Yusuf Handeygirin",
+          "dynasty": "Hilaaly",
+          "claim": "office",
+          "value": "OFF-HANDEYGIRI"
         },
         {
           "id": "P193",
@@ -26119,6 +28383,13 @@
           "dynasty": "Modern"
         },
         {
+          "id": "P110",
+          "name": "Mohamed Amin Didi",
+          "dynasty": "Modern",
+          "claim": "office",
+          "value": "OFF-PRESIDENT"
+        },
+        {
           "id": "P112",
           "name": "Roanugey Aishath Didi",
           "dynasty": "Modern"
@@ -26127,6 +28398,13 @@
           "id": "P136",
           "name": "Ahmed Dhoshimeynaa Kilegefaanu",
           "dynasty": "Modern"
+        },
+        {
+          "id": "P136",
+          "name": "Ahmed Dhoshimeynaa Kilegefaanu",
+          "dynasty": "Modern",
+          "claim": "office",
+          "value": "OFF-DHOSHIMEYNAA"
         }
       ],
       "edges": [
@@ -26156,6 +28434,20 @@
           "id": "P115",
           "name": "Ibrahim Nasir",
           "dynasty": "Modern"
+        },
+        {
+          "id": "P115",
+          "name": "Ibrahim Nasir",
+          "dynasty": "Modern",
+          "claim": "office",
+          "value": "OFF-PRESIDENT"
+        },
+        {
+          "id": "P115",
+          "name": "Ibrahim Nasir",
+          "dynasty": "Modern",
+          "claim": "office",
+          "value": "OFF-BANDEYRI"
         },
         {
           "id": "P116",
@@ -26195,6 +28487,13 @@
           "id": "P122",
           "name": "Mohamed Nasheed",
           "dynasty": "Modern"
+        },
+        {
+          "id": "P122",
+          "name": "Mohamed Nasheed",
+          "dynasty": "Modern",
+          "claim": "office",
+          "value": "OFF-PRESIDENT"
         }
       ],
       "edges": []
@@ -26215,6 +28514,13 @@
           "id": "P121",
           "name": "Abdulla Yameen Abdul Gayoom",
           "dynasty": "Modern"
+        },
+        {
+          "id": "P121",
+          "name": "Abdulla Yameen Abdul Gayoom",
+          "dynasty": "Modern",
+          "claim": "office",
+          "value": "OFF-PRESIDENT"
         }
       ],
       "edges": [
@@ -26253,6 +28559,13 @@
           "id": "P110",
           "name": "Mohamed Amin Didi",
           "dynasty": "Modern"
+        },
+        {
+          "id": "P110",
+          "name": "Mohamed Amin Didi",
+          "dynasty": "Modern",
+          "claim": "office",
+          "value": "OFF-PRESIDENT"
         },
         {
           "id": "P113",
@@ -26301,6 +28614,27 @@
           "id": "P115",
           "name": "Ibrahim Nasir",
           "dynasty": "Modern"
+        },
+        {
+          "id": "P115",
+          "name": "Ibrahim Nasir",
+          "dynasty": "Modern",
+          "claim": "office",
+          "value": "OFF-PRESIDENT"
+        },
+        {
+          "id": "P115",
+          "name": "Ibrahim Nasir",
+          "dynasty": "Modern",
+          "claim": "office",
+          "value": "OFF-BANDEYRI"
+        },
+        {
+          "id": "P115",
+          "name": "Ibrahim Nasir",
+          "dynasty": "Modern",
+          "claim": "royal_link",
+          "value": "documented"
         },
         {
           "id": "P118",
@@ -26577,6 +28911,13 @@
           "dynasty": "Modern"
         },
         {
+          "id": "P119",
+          "name": "Maumoon Abdul Gayoom",
+          "dynasty": "Modern",
+          "claim": "office",
+          "value": "OFF-PRESIDENT"
+        },
+        {
           "id": "P120",
           "name": "Abdul Gayoom Ibrahim",
           "dynasty": "Modern"
@@ -26819,6 +29160,20 @@
           "id": "P111",
           "name": "Prince Abdul Majeed Didi",
           "dynasty": "Modern"
+        },
+        {
+          "id": "P111",
+          "name": "Prince Abdul Majeed Didi",
+          "dynasty": "Modern",
+          "claim": "office",
+          "value": "OFF-SOVEREIGN"
+        },
+        {
+          "id": "P111",
+          "name": "Prince Abdul Majeed Didi",
+          "dynasty": "Modern",
+          "claim": "royal_link",
+          "value": "documented"
         }
       ],
       "edges": [
@@ -26841,6 +29196,20 @@
           "dynasty": "Modern"
         },
         {
+          "id": "P111",
+          "name": "Prince Abdul Majeed Didi",
+          "dynasty": "Modern",
+          "claim": "office",
+          "value": "OFF-SOVEREIGN"
+        },
+        {
+          "id": "P111",
+          "name": "Prince Abdul Majeed Didi",
+          "dynasty": "Modern",
+          "claim": "royal_link",
+          "value": "documented"
+        },
+        {
           "id": "P129",
           "name": "Princess Veyogey Dhon Goma",
           "dynasty": "Huraagey"
@@ -26859,6 +29228,18 @@
           "id": "P191",
           "name": "Ibrahim Fareed Didi",
           "dynasty": "Huraagey"
+        },
+        {
+          "id": "P95",
+          "name": "Mohamed Farid",
+          "dynasty": "Huraagey"
+        },
+        {
+          "id": "P95",
+          "name": "Mohamed Farid",
+          "dynasty": "Huraagey",
+          "claim": "office",
+          "value": "OFF-SOVEREIGN"
         }
       ],
       "edges": [
@@ -26897,6 +29278,13 @@
           "id": "P119",
           "name": "Maumoon Abdul Gayoom",
           "dynasty": "Modern"
+        },
+        {
+          "id": "P119",
+          "name": "Maumoon Abdul Gayoom",
+          "dynasty": "Modern",
+          "claim": "office",
+          "value": "OFF-PRESIDENT"
         }
       ],
       "edges": []
@@ -26983,6 +29371,13 @@
           "dynasty": "Dhiyamigili"
         },
         {
+          "id": "P130",
+          "name": "Prince Ibrahim Faamuladheyri Kilegefaanu",
+          "dynasty": "Dhiyamigili",
+          "claim": "office",
+          "value": "OFF-FAAMULADHEYRI"
+        },
+        {
           "id": "P131",
           "name": "Mohamed Didi",
           "dynasty": "Dhiyamigili-South"
@@ -27044,9 +29439,23 @@
     "SRC-WIKI-ABDUL-GAYOOM-IBRAHIM": {
       "people": [
         {
+          "id": "P115",
+          "name": "Ibrahim Nasir",
+          "dynasty": "Modern",
+          "claim": "royal_link",
+          "value": "documented"
+        },
+        {
           "id": "P132",
           "name": "Al-Naib Muhammad Thakurufaanu of Addu",
           "dynasty": "Addu Line"
+        },
+        {
+          "id": "P132",
+          "name": "Al-Naib Muhammad Thakurufaanu of Addu",
+          "dynasty": "Addu Line",
+          "claim": "office",
+          "value": "OFF-NAIB"
         },
         {
           "id": "P133",
@@ -27124,6 +29533,13 @@
     "SRC-MRF-MIDU-ROYAL": {
       "people": [
         {
+          "id": "P132",
+          "name": "Al-Naib Muhammad Thakurufaanu of Addu",
+          "dynasty": "Addu Line",
+          "claim": "office",
+          "value": "OFF-NAIB"
+        },
+        {
           "id": "P180",
           "name": "Princess Aishath Didi",
           "dynasty": "Dhiyamigili-South"
@@ -27137,6 +29553,13 @@
           "id": "P182",
           "name": "El-Naib Ganduvaru Mohamed Thakurufan",
           "dynasty": "Addu Line"
+        },
+        {
+          "id": "P182",
+          "name": "El-Naib Ganduvaru Mohamed Thakurufan",
+          "dynasty": "Addu Line",
+          "claim": "office",
+          "value": "OFF-NAIB"
         },
         {
           "id": "P183",
@@ -27218,6 +29641,13 @@
           "dynasty": "Modern"
         },
         {
+          "id": "P162",
+          "name": "Mohamed Waheed Hassan",
+          "dynasty": "Modern",
+          "claim": "office",
+          "value": "OFF-PRESIDENT"
+        },
+        {
           "id": "P163",
           "name": "Ilham Hussain",
           "dynasty": "Modern"
@@ -27241,6 +29671,13 @@
           "id": "P162",
           "name": "Mohamed Waheed Hassan",
           "dynasty": "Modern"
+        },
+        {
+          "id": "P162",
+          "name": "Mohamed Waheed Hassan",
+          "dynasty": "Modern",
+          "claim": "office",
+          "value": "OFF-PRESIDENT"
         },
         {
           "id": "P163",
@@ -27335,6 +29772,13 @@
           "id": "P167",
           "name": "Ibrahim Mohamed Solih",
           "dynasty": "Modern"
+        },
+        {
+          "id": "P167",
+          "name": "Ibrahim Mohamed Solih",
+          "dynasty": "Modern",
+          "claim": "office",
+          "value": "OFF-PRESIDENT"
         }
       ],
       "edges": []
@@ -27345,6 +29789,13 @@
           "id": "P167",
           "name": "Ibrahim Mohamed Solih",
           "dynasty": "Modern"
+        },
+        {
+          "id": "P167",
+          "name": "Ibrahim Mohamed Solih",
+          "dynasty": "Modern",
+          "claim": "office",
+          "value": "OFF-PRESIDENT"
         },
         {
           "id": "P168",
@@ -27445,6 +29896,13 @@
           "id": "P172",
           "name": "Mohamed Muizzu",
           "dynasty": "Modern"
+        },
+        {
+          "id": "P172",
+          "name": "Mohamed Muizzu",
+          "dynasty": "Modern",
+          "claim": "office",
+          "value": "OFF-PRESIDENT"
         }
       ],
       "edges": []
@@ -27810,6 +30268,101 @@
           "id": "P194",
           "name": "Burecca",
           "dynasty": "Hilaaly"
+        },
+        {
+          "id": "P2",
+          "name": "Dhovemi",
+          "dynasty": "Lunar"
+        },
+        {
+          "id": "P2",
+          "name": "Dhovemi",
+          "dynasty": "Lunar",
+          "claim": "known_as",
+          "value": "Dhovemi Kalaminjaa"
+        },
+        {
+          "id": "P2",
+          "name": "Dhovemi",
+          "dynasty": "Lunar",
+          "claim": "known_as",
+          "value": "Dharumavantha Rasgefaanu"
+        },
+        {
+          "id": "P63",
+          "name": "Ali",
+          "dynasty": "Unknown"
+        },
+        {
+          "id": "P63",
+          "name": "Ali",
+          "dynasty": "Unknown",
+          "claim": "known_as",
+          "value": "Dhevvadhoo Rasgefaanu"
+        },
+        {
+          "id": "P75",
+          "name": "Hassan",
+          "dynasty": "Isdu"
+        },
+        {
+          "id": "P75",
+          "name": "Hassan",
+          "dynasty": "Isdu",
+          "claim": "known_as",
+          "value": "Addu Hassan Manikfan"
+        },
+        {
+          "id": "P80",
+          "name": "Hassan Izzuddine",
+          "dynasty": "Huraagey"
+        },
+        {
+          "id": "P80",
+          "name": "Hassan Izzuddine",
+          "dynasty": "Huraagey",
+          "claim": "known_as",
+          "value": "Dhon Bandaarain"
+        },
+        {
+          "id": "P80",
+          "name": "Hassan Izzuddine",
+          "dynasty": "Huraagey",
+          "claim": "known_as",
+          "value": "Muleegey Don Hassan Maniku"
+        },
+        {
+          "id": "P80",
+          "name": "Hassan Izzuddine",
+          "dynasty": "Huraagey",
+          "claim": "known_as",
+          "value": "Don Bandaara"
+        },
+        {
+          "id": "P80",
+          "name": "Hassan Izzuddine",
+          "dynasty": "Huraagey",
+          "claim": "office",
+          "value": "OFF-SOVEREIGN"
+        },
+        {
+          "id": "P83",
+          "name": "Mohamed Muizzuddine",
+          "dynasty": "Huraagey"
+        },
+        {
+          "id": "P83",
+          "name": "Mohamed Muizzuddine",
+          "dynasty": "Huraagey",
+          "claim": "known_as",
+          "value": "Kalhu Bandaarain"
+        },
+        {
+          "id": "P95",
+          "name": "Mohamed Farid",
+          "dynasty": "Huraagey",
+          "claim": "office",
+          "value": "OFF-SOVEREIGN"
         }
       ],
       "edges": [
@@ -27919,9 +30472,23 @@
     "SRC-MRF-MIDU-ROYAL-CHAIN": {
       "people": [
         {
+          "id": "P115",
+          "name": "Ibrahim Nasir",
+          "dynasty": "Modern",
+          "claim": "royal_link",
+          "value": "documented"
+        },
+        {
           "id": "P181",
           "name": "Kondey Ali Manikfan",
           "dynasty": "Isdu-Linked"
+        },
+        {
+          "id": "P182",
+          "name": "El-Naib Ganduvaru Mohamed Thakurufan",
+          "dynasty": "Addu Line",
+          "claim": "office",
+          "value": "OFF-NAIB"
         }
       ],
       "edges": [
@@ -27944,6 +30511,160 @@
           "confidence_grade": "B"
         }
       ]
+    },
+    "SRC-WIKI-DHOVEMI": {
+      "people": [
+        {
+          "id": "P2",
+          "name": "Dhovemi",
+          "dynasty": "Lunar"
+        },
+        {
+          "id": "P2",
+          "name": "Dhovemi",
+          "dynasty": "Lunar",
+          "claim": "known_as",
+          "value": "Dhovemi Kalaminjaa"
+        },
+        {
+          "id": "P2",
+          "name": "Dhovemi",
+          "dynasty": "Lunar",
+          "claim": "known_as",
+          "value": "Dharumavantha Rasgefaanu"
+        }
+      ],
+      "edges": []
+    },
+    "SRC-WIKI-IZZUDDIN-I": {
+      "people": [
+        {
+          "id": "P80",
+          "name": "Hassan Izzuddine",
+          "dynasty": "Huraagey"
+        },
+        {
+          "id": "P80",
+          "name": "Hassan Izzuddine",
+          "dynasty": "Huraagey",
+          "claim": "known_as",
+          "value": "Dhon Bandaarain"
+        },
+        {
+          "id": "P80",
+          "name": "Hassan Izzuddine",
+          "dynasty": "Huraagey",
+          "claim": "office",
+          "value": "OFF-SOVEREIGN"
+        },
+        {
+          "id": "P80",
+          "name": "Hassan Izzuddine",
+          "dynasty": "Huraagey",
+          "claim": "office",
+          "value": "OFF-NAIB"
+        }
+      ],
+      "edges": []
+    },
+    "SRC-WIKI-MUHAMMAD-GHIYATH-AL-DIN": {
+      "people": [
+        {
+          "id": "P81",
+          "name": "Mohamed Ghiyathuddine",
+          "dynasty": "Dhiyamigili"
+        },
+        {
+          "id": "P81",
+          "name": "Mohamed Ghiyathuddine",
+          "dynasty": "Dhiyamigili",
+          "claim": "known_as",
+          "value": "Muhammadh Manikfaan"
+        },
+        {
+          "id": "P81",
+          "name": "Mohamed Ghiyathuddine",
+          "dynasty": "Dhiyamigili",
+          "claim": "known_as",
+          "value": "Haajee Bandaarain"
+        },
+        {
+          "id": "P81",
+          "name": "Mohamed Ghiyathuddine",
+          "dynasty": "Dhiyamigili",
+          "claim": "office",
+          "value": "OFF-SOVEREIGN"
+        }
+      ],
+      "edges": []
+    },
+    "SRC-HISTORY-MV-GHIYAS": {
+      "people": [
+        {
+          "id": "P81",
+          "name": "Mohamed Ghiyathuddine",
+          "dynasty": "Dhiyamigili"
+        },
+        {
+          "id": "P81",
+          "name": "Mohamed Ghiyathuddine",
+          "dynasty": "Dhiyamigili",
+          "claim": "known_as",
+          "value": "Haajee Bandaarain"
+        }
+      ],
+      "edges": []
+    },
+    "SRC-WIKI-MUHAMMAD-MUIZZUDDIN": {
+      "people": [
+        {
+          "id": "P83",
+          "name": "Mohamed Muizzuddine",
+          "dynasty": "Huraagey"
+        },
+        {
+          "id": "P83",
+          "name": "Mohamed Muizzuddine",
+          "dynasty": "Huraagey",
+          "claim": "known_as",
+          "value": "Kalhu Bandaarain"
+        },
+        {
+          "id": "P83",
+          "name": "Mohamed Muizzuddine",
+          "dynasty": "Huraagey",
+          "claim": "office",
+          "value": "OFF-SOVEREIGN"
+        }
+      ],
+      "edges": []
+    },
+    "SRC-SSRN-SUOOD-LEGAL": {
+      "people": [],
+      "edges": []
+    },
+    "SRC-WIKI-CASTE-SYSTEM": {
+      "people": [],
+      "edges": []
+    },
+    "SRC-MRF-TITLES": {
+      "people": [
+        {
+          "id": "P189",
+          "name": "Handeygirigey Didi",
+          "dynasty": "Huraagey",
+          "claim": "office",
+          "value": "OFF-HANDEYGIRI"
+        },
+        {
+          "id": "P192",
+          "name": "Yusuf Handeygirin",
+          "dynasty": "Hilaaly",
+          "claim": "office",
+          "value": "OFF-HANDEYGIRI"
+        }
+      ],
+      "edges": []
     }
   }
 }

@@ -1,0 +1,88 @@
+/* ===== Graph / SVG Styles ===== */
+
+.elg text { pointer-events: none }
+
+/* Flow edges (ancestral path animation) */
+.flow-edge {
+  stroke-linecap: round;
+  stroke-dasharray: 10 8;
+  animation: flowedge 1.8s linear infinite;
+  filter: drop-shadow(0 0 3px rgba(53,165,163,.4));
+}
+
+/* Era overlay */
+.eov-bg { fill: var(--sf); stroke: var(--bd2); stroke-width: 1; opacity: .86 }
+.eov-axis { stroke: var(--bd2); stroke-width: 1 }
+.eov-ms { stroke: var(--bd2); stroke-width: 1; stroke-opacity: .55 }
+.eov-dot { stroke: var(--bg); stroke-width: .8 }
+.eov-label { font: 8px var(--mono); fill: var(--tx3) }
+.eov-year { font: 8.5px var(--mono); fill: var(--ac) }
+.eov-now { stroke: var(--ac); stroke-width: 1.4; stroke-opacity: .85 }
+
+/* Era annotations (tree view) */
+.era-label { font: 8.2px var(--mono); fill: var(--tx3) }
+.era-dot { stroke: var(--bg); stroke-width: .7 }
+.era-now-label { font: 8.5px var(--mono); fill: var(--ac) }
+
+/* Node selected glow */
+.node-selected rect {
+  filter: drop-shadow(0 0 6px var(--ac));
+  animation: selectedPulse 2s ease-in-out infinite;
+}
+
+/* Connected neighbor node glow (dimmer than selected) */
+.node-connected rect {
+  filter: drop-shadow(0 0 3px var(--ac));
+  animation: connectedNodePulse 2s ease-in-out infinite;
+}
+
+/* Connected edge glow (synchronized with node pulse) */
+.edge-highlight {
+  stroke-width: 3px !important;
+  filter: drop-shadow(0 0 6px var(--ac));
+  animation: edgeGlowPulse 2s ease-in-out infinite;
+}
+
+/* Minimap */
+.minimap {
+  position: absolute;
+  bottom: var(--space-3);
+  right: var(--space-3);
+  width: 160px;
+  height: 100px;
+  background: var(--sf);
+  border: 1px solid var(--bd2);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  z-index: 11;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: opacity var(--dur-fast);
+}
+.minimap:hover { opacity: 1 }
+.minimap svg { width: 100%; height: 100% }
+.minimap-viewport {
+  fill: none;
+  stroke: var(--ac);
+  stroke-width: 1.5;
+  stroke-opacity: 0.7;
+}
+.minimap-dot { stroke: none }
+.minimap[hidden] { display: none }
+
+/* Sovereign badge halo — readable above edges and shadows */
+.node-badge {
+  paint-order: stroke fill;
+  stroke: var(--bg);
+  stroke-width: 2.5px;
+  stroke-linejoin: round;
+}
+
+/* Tree section dividers */
+.tree-sections text { pointer-events: none; user-select: none }
+.tree-sections line { pointer-events: none }
+.tree-sections circle { pointer-events: none }
+
+/* Reign year sub-label */
+.node-reign-label { pointer-events: none; user-select: none; letter-spacing: 0.3px }

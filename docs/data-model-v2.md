@@ -10,6 +10,8 @@ Extend the graph data model to support evidence-backed research without breaking
 - `src/data/sovereigns.research.js`: staged research additions.
 - `src/data/sovereigns.merge.js`: runtime dataset resolver and merge entry point.
 - `src/data/sources.js`: source registry scaffold.
+- `src/data/profile.enrichments.js`: per-person enrichment overlays for existing IDs.
+- `src/data/offices.js`: office/title catalog and timeline snapshots.
 
 ## Runtime mode
 Mode is resolved from URL query param `mode`:
@@ -27,6 +29,9 @@ Optional v2 fields:
 - `aliases: string[]`
 - `regnal_names: string[]`
 - `titles: string[]`
+- `known_as: {name,type,c,note?,source_refs?}[]`
+- `offices_held: {office_id,label?,start?,end?,c,note?,source_refs?}[]`
+- `royal_link?: {status,summary,source_refs?}`
 - `dynasty_notes?: string`
 - `source_refs: string[]`
 - `person_confidence?: "A"|"B"|"C"|"D"`
@@ -57,6 +62,7 @@ Optional v2 fields:
 
 The archive serializes:
 - source registry metadata
+- office catalog + historical timeline
 - canonical dataset snapshot
 - research dataset snapshot
 - source-indexed claim map

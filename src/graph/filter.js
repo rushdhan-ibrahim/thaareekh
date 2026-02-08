@@ -1,4 +1,7 @@
 import { people, edges } from '../data/sovereigns.merge.js';
+import state from '../state.js';
+import { activeInYearById } from '../data/timeline.js';
+import { personName, t } from '../ui/i18n.js';
 
 export function activeE() {
   const s = new Set();
@@ -19,19 +22,25 @@ export function activeConfidence() {
 export function filt() {
   const ae = activeE();
   const ac = activeConfidence();
+  const y = state.eraEnabled ? Number(state.eraYear) : NaN;
   const dV = document.getElementById("df").value;
   const sqV = document.getElementById("sqf")?.value || "__all__";
+  const eraPersonOk = new Set(people
+    .filter(p => !state.eraEnabled || activeInYearById(p.id, y))
+    .map(p => p.id));
   const fe = edges.filter(e => {
     if (!ae.has(e.t)) return false;
     if (!ac.has(e.c)) return false;
     if (sqV !== "__all__" && (e.confidence_grade || "") !== sqV) return false;
+    if (!eraPersonOk.has(e.s) || !eraPersonOk.has(e.d)) return false;
     return true;
   });
+  const pPool = people.filter(p => eraPersonOk.has(p.id));
   const adj = new Map();
-  people.forEach(p => adj.set(p.id, new Set()));
+  pPool.forEach(p => adj.set(p.id, new Set()));
   fe.forEach(e => { adj.get(e.s)?.add(e.d); adj.get(e.d)?.add(e.s); });
   const seen = new Set(), comps = [];
-  people.forEach(p => {
+  pPool.forEach(p => {
     if (seen.has(p.id)) return;
     const q = [p.id], c = [];
     seen.add(p.id);
@@ -42,18 +51,52 @@ export function filt() {
     comps.push(c);
   });
   comps.sort((a, b) => b.length - a.length);
-  const tf = document.getElementById("tf"), pv = tf.value;
-  tf.innerHTML = '<option value="__all__">All trees</option>';
-  comps.forEach((c, i) => {
+
+  // Build richer tree metadata for the tree-options popover
+  const byId = new Map(pPool.map(p => [p.id, p]));
+  const treesMeta = comps.map((c, i) => {
+    // Find the "best" representative node (earliest sovereign, or largest degree, or first)
+    let rep = byId.get(c[0]);
+    let repYear = Infinity;
+    for (const id of c) {
+      const p = byId.get(id);
+      if (!p) continue;
+      const yr = p.re?.[0]?.[0] || p.yb || 9999;
+      if ((p.n || []).length > 0 && yr < repYear) { rep = p; repYear = yr; }
+    }
+    // If no sovereign found, use earliest-dated person
+    if (repYear === Infinity) {
+      for (const id of c) {
+        const p = byId.get(id);
+        if (!p) continue;
+        const yr = p.re?.[0]?.[0] || p.yb || 9999;
+        if (yr < repYear) { rep = p; repYear = yr; }
+      }
+    }
+    // Dominant dynasty
+    const dyCounts = {};
+    c.forEach(id => { const p = byId.get(id); if (p) { const dy = p.dy || 'Unknown'; dyCounts[dy] = (dyCounts[dy] || 0) + 1; } });
+    let dominantDy = 'Unknown', maxC = 0;
+    for (const [dy, cnt] of Object.entries(dyCounts)) { if (cnt > maxC) { maxC = cnt; dominantDy = dy; } }
+    return { index: i, ids: c, size: c.length, repId: rep?.id, repName: rep ? personName(rep) : '?', dynasty: dominantDy, year: repYear < 9999 ? repYear : null };
+  });
+  state._treesMeta = treesMeta;
+
+  const tf = document.getElementById("tf"), pv = tf.dataset.savedValue || tf.value;
+  tf.innerHTML = `<option value="__all__">${t('all_trees')}</option>`;
+  treesMeta.forEach((tm) => {
     const o = document.createElement("option");
-    o.value = i; o.textContent = "Tree " + (i + 1) + " (" + c.length + ")";
+    o.value = tm.index;
+    const label = tm.repName !== '?' ? `${tm.repName} (${tm.size})` : `Tree ${tm.index + 1} (${tm.size})`;
+    o.textContent = label;
     tf.appendChild(o);
   });
   if ([...tf.options].some(o => o.value === pv)) tf.value = pv;
+  if (tf.dataset.savedValue) delete tf.dataset.savedValue;
   const tV = tf.value, aC = new Set(), aD = new Set();
-  if (tV === "__all__") people.forEach(p => aC.add(p.id));
+  if (tV === "__all__") pPool.forEach(p => aC.add(p.id));
   else (comps[+tV] || []).forEach(id => aC.add(id));
-  people.forEach(p => { if (dV === "__all__" || (p.dy || "Unknown") === dV) aD.add(p.id); });
+  pPool.forEach(p => { if (dV === "__all__" || (p.dy || "Unknown") === dV) aD.add(p.id); });
   const al = new Set([...aC].filter(x => aD.has(x)));
-  return { nodes: people.filter(p => al.has(p.id)), links: fe.filter(e => al.has(e.s) && al.has(e.d)) };
+  return { nodes: pPool.filter(p => al.has(p.id)), links: fe.filter(e => al.has(e.s) && al.has(e.d)) };
 }

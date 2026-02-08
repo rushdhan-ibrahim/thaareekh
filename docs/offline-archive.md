@@ -7,6 +7,8 @@ This project stores the integrated genealogy knowledge locally in code and an ex
 - `src/data/sovereigns.core.js`
 - `src/data/sovereigns.promoted.js`
 - `src/data/sovereigns.research.js`
+- `src/data/profile.enrichments.js`
+- `src/data/offices.js`
 - `src/data/sources.js`
 
 ## Generated offline snapshot
@@ -15,6 +17,7 @@ This project stores the integrated genealogy knowledge locally in code and an ex
 This JSON contains:
 - canonical dataset snapshot
 - research dataset snapshot
+- office/title catalog + historical timeline
 - source registry metadata
 - claim indices grouped by source ID
 

@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { sources } from '../src/data/sources.js';
 import { getDataset } from '../src/data/sovereigns.merge.js';
+import { officeCatalog, officeTimeline } from '../src/data/offices.js';
 
 const outPath = path.resolve(process.cwd(), 'docs/offline-research-archive.json');
 
@@ -20,7 +21,10 @@ function compactPerson(p) {
     dynasty: p.dy || '',
     regnal: p.rg || '',
     aliases: p.aliases || [],
+    known_as: p.known_as || [],
     titles: p.titles || [],
+    offices_held: p.offices_held || [],
+    royal_link: p.royal_link || null,
     reign: p.re || [],
     born_year: p.yb ?? null,
     died_year: p.yd ?? null,
@@ -55,6 +59,22 @@ function indexClaimsBySource(people, edges) {
       if (!sourceSet.has(ref)) continue;
       out.get(ref).people.push({ id: p.id, name: p.nm, dynasty: p.dy || '' });
     }
+    for (const ka of p.known_as || []) {
+      for (const ref of ka.source_refs || []) {
+        if (!sourceSet.has(ref)) continue;
+        out.get(ref).people.push({ id: p.id, name: p.nm, dynasty: p.dy || '', claim: 'known_as', value: ka.name || '' });
+      }
+    }
+    for (const ofc of p.offices_held || []) {
+      for (const ref of ofc.source_refs || []) {
+        if (!sourceSet.has(ref)) continue;
+        out.get(ref).people.push({ id: p.id, name: p.nm, dynasty: p.dy || '', claim: 'office', value: ofc.office_id || ofc.label || '' });
+      }
+    }
+    for (const ref of p.royal_link?.source_refs || []) {
+      if (!sourceSet.has(ref)) continue;
+      out.get(ref).people.push({ id: p.id, name: p.nm, dynasty: p.dy || '', claim: 'royal_link', value: p.royal_link?.status || '' });
+    }
   }
   for (const e of edges) {
     for (const ref of e.evidence_refs || []) {
@@ -85,6 +105,10 @@ const payload = {
   generated_at: new Date().toISOString(),
   description: 'Offline local archive of all integrated genealogy data, source registry metadata, and source-linked claim indices.',
   sources,
+  offices: {
+    catalog: officeCatalog,
+    timeline: officeTimeline
+  },
   canonical: {
     people_count: canonical.people.length,
     edge_count: canonical.edges.length,

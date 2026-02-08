@@ -1,0 +1,192 @@
+/* ===== Search / Command Palette ===== */
+
+/* --- Inline search (legacy, kept for quick-search in header) --- */
+.swrap { position: relative; width: 240px; flex-shrink: 1; min-width: 0 }
+.swrap input {
+  width: 100%;
+  padding: 6px 34px 6px 28px;
+  background: var(--hov);
+  border: 1px solid var(--bd);
+  border-radius: var(--radius-sm);
+  color: var(--tx);
+  font: var(--text-base) var(--sans);
+  outline: 0;
+  transition: border var(--dur-fast);
+}
+.swrap input:focus { border-color: var(--ac) }
+.swrap input::placeholder { color: var(--tx3) }
+.swrap .si {
+  position: absolute;
+  left: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--tx3);
+  font-size: 12px;
+  pointer-events: none;
+}
+.swrap .sc {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid var(--bd);
+  background: var(--sf);
+  color: var(--tx3);
+  font-size: var(--text-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.swrap .sc:hover { color: var(--tx); border-color: var(--ac-bd) }
+
+/* --- Dropdown results --- */
+.dd {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--sf);
+  border: 1px solid var(--bd2);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--sh);
+  max-height: 250px;
+  overflow-y: auto;
+  display: none;
+  z-index: 30;
+}
+.dd.open { display: block }
+.ddi {
+  padding: var(--space-2) var(--space-3);
+  cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--bd);
+  transition: background var(--dur-fast);
+}
+.ddi:last-child { border: 0 }
+.ddi:hover { background: var(--hov) }
+.ddi.act { background: var(--ac-bg); border-color: var(--ac-bd) }
+.ddi b { font-weight: 500 }
+.ddi em {
+  font-style: normal;
+  font-size: var(--text-xs);
+  color: var(--tx3);
+  font-family: var(--mono);
+}
+.dde { padding: 12px; color: var(--tx3); font-size: 12px; text-align: center }
+
+/* --- Command Palette (modal overlay) --- */
+.cmd-palette {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 15vh;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(4px);
+}
+.cmd-palette.open { display: flex }
+
+.cmd-palette-box {
+  width: 100%;
+  max-width: 480px;
+  max-height: 60vh;
+  background: var(--sf);
+  border: 1px solid var(--bd2);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: cmdSlideIn var(--dur-normal) var(--ease-spring);
+}
+
+.cmd-palette-input {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--bd);
+  color: var(--tx);
+  font: var(--text-lg) var(--sans);
+  outline: 0;
+}
+.cmd-palette-input::placeholder { color: var(--tx3) }
+
+.cmd-palette-results {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-2) 0;
+}
+
+.cmd-result {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  cursor: pointer;
+  transition: background var(--dur-fast);
+}
+.cmd-result:hover,
+.cmd-result.active {
+  background: var(--ac-bg);
+}
+.cmd-result-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.cmd-result-info { flex: 1; min-width: 0 }
+.cmd-result-name {
+  font-size: var(--text-md);
+  font-weight: 500;
+  color: var(--tx);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cmd-result-meta {
+  font-size: var(--text-xs);
+  color: var(--tx3);
+  font-family: var(--mono);
+}
+.cmd-result-badge {
+  font-size: 9px;
+  padding: 1px 6px;
+  border-radius: 99px;
+  border: 1px solid var(--bd);
+  color: var(--tx3);
+  font-family: var(--mono);
+  flex-shrink: 0;
+}
+.cmd-palette-empty {
+  padding: var(--space-6);
+  text-align: center;
+  color: var(--tx3);
+  font-size: var(--text-base);
+}
+.cmd-palette-hint {
+  padding: var(--space-2) var(--space-4);
+  border-top: 1px solid var(--bd);
+  font-size: var(--text-xs);
+  color: var(--tx3);
+  font-family: var(--mono);
+  display: flex;
+  gap: var(--space-4);
+}
+.cmd-palette-hint kbd {
+  font-family: var(--mono);
+  padding: 0 3px;
+  border: 1px solid var(--bd);
+  border-radius: 3px;
+  background: var(--sf2);
+}

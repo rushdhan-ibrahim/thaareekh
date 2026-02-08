@@ -1,227 +1,251 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" data-density="comfortable">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"/>
 <title>Maldives Sovereigns · Family Graph 1117–1968</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+Thaana:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/graph.css">
+<link rel="stylesheet" href="css/search.css">
+<link rel="stylesheet" href="css/tooltip.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/onboarding.css">
 <script type="importmap">
 {
   "imports": {
-    "d3": "https://cdn.jsdelivr.net/npm/d3@7/+esm"
+    "d3": "https://cdn.jsdelivr.net/npm/d3@7/+esm",
+    "@floating-ui/dom": "https://cdn.jsdelivr.net/npm/@floating-ui/dom@1/+esm",
+    "gsap": "https://cdn.jsdelivr.net/npm/gsap@3/+esm"
   }
 }
 </script>
-<style>
-:root {
-  --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
-  --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif;
-  --mono: "SF Mono", ui-monospace, SFMono-Regular, "Cascadia Mono", Menlo, monospace;
-  --radius: 12px;
-  --radius-sm: 8px;
-}
-[data-theme="dark"] {
-  --bg:#1C1917;--bg2:#231F1B;--sf:#292524;--sf2:#353130;
-  --tx:#F5F0EB;--tx2:#A8A29E;--tx3:#78716C;
-  --bd:rgba(245,240,235,0.08);--bd2:rgba(245,240,235,0.14);
-  --ac:#D4956B;--ac-bg:rgba(212,149,107,0.12);--ac-bd:rgba(212,149,107,0.25);
-  --sh:0 4px 24px rgba(0,0,0,0.4);--hov:rgba(255,255,255,0.04);
-  --dy-lunar:#67C5D9;--dy-hilaaly:#B794D6;--dy-utheemu:#7BA8E0;
-  --dy-dhiyamigili:#D4A84B;--dy-isdu:#6BC9A0;--dy-huraagey:#D98090;
-  --dy-devadu:#A08CD6;--dy-unknown:#8A8580;
-  --nt:#F5F0EB;
-  --ep:rgba(245,240,235,0.35);--es:rgba(103,197,217,0.6);
-  --esp:rgba(217,128,144,0.6);--ek:rgba(183,148,214,0.55);
-  --ei:rgba(212,168,75,0.55);--eu:rgba(217,128,144,0.7);
-  --nf:rgba(41,37,36,0.92);
-}
-[data-theme="light"] {
-  --bg:#FAF7F2;--bg2:#F5F0E8;--sf:#FFFFFF;--sf2:#F0EBE3;
-  --tx:#1C1917;--tx2:#57534E;--tx3:#A8A29E;
-  --bd:rgba(28,25,23,0.07);--bd2:rgba(28,25,23,0.12);
-  --ac:#B5713E;--ac-bg:rgba(181,113,62,0.08);--ac-bd:rgba(181,113,62,0.2);
-  --sh:0 4px 24px rgba(0,0,0,0.06);--hov:rgba(0,0,0,0.03);
-  --dy-lunar:#0E7490;--dy-hilaaly:#7C3AED;--dy-utheemu:#2563EB;
-  --dy-dhiyamigili:#B45309;--dy-isdu:#047857;--dy-huraagey:#BE123C;
-  --dy-devadu:#6D28D9;--dy-unknown:#78716C;
-  --nt:#1C1917;
-  --ep:rgba(28,25,23,0.22);--es:rgba(14,116,144,0.5);
-  --esp:rgba(190,18,60,0.4);--ek:rgba(124,58,237,0.4);
-  --ei:rgba(180,83,9,0.45);--eu:rgba(190,18,60,0.55);
-  --nf:rgba(255,255,255,0.96);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;overflow:hidden;font-family:var(--sans);background:var(--bg);color:var(--tx);-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
-body{display:flex;flex-direction:column}
-::selection{background:var(--ac-bg)}
-::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:99px}
-
-header{flex-shrink:0;display:flex;align-items:center;gap:10px;padding:0 14px;height:50px;background:var(--sf);border-bottom:1px solid var(--bd);z-index:10}
-.brand{display:flex;align-items:baseline;gap:7px;flex-shrink:0}
-.brand h1{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:-.2px}
-.brand .yr{font-family:var(--mono);font-size:10px;color:var(--tx3)}
-.spacer{flex:1}
-.swrap{position:relative;width:240px;flex-shrink:1;min-width:0}
-.swrap input{width:100%;padding:6px 10px 6px 28px;background:var(--hov);border:1px solid var(--bd);border-radius:var(--radius-sm);color:var(--tx);font:13px var(--sans);outline:0;transition:border .15s}
-.swrap input:focus{border-color:var(--ac)}
-.swrap input::placeholder{color:var(--tx3)}
-.swrap .si{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--tx3);font-size:12px;pointer-events:none}
-.dd{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--sf);border:1px solid var(--bd2);border-radius:var(--radius-sm);box-shadow:var(--sh);max-height:250px;overflow-y:auto;display:none;z-index:30}
-.dd.open{display:block}
-.ddi{padding:8px 10px;cursor:pointer;font-size:12px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--bd);transition:background .1s}
-.ddi:last-child{border:0}.ddi:hover{background:var(--hov)}
-.ddi.act{background:var(--ac-bg);border-color:var(--ac-bd)}
-.ddi b{font-weight:500}.ddi em{font-style:normal;font-size:10px;color:var(--tx3);font-family:var(--mono)}
-.dde{padding:12px;color:var(--tx3);font-size:12px;text-align:center}
-.hb{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-sm);border:1px solid var(--bd);background:0;color:var(--tx2);cursor:pointer;font-size:14px;flex-shrink:0;transition:all .15s}
-.hb:hover{background:var(--hov);color:var(--tx)}
-.hsep{width:1px;height:20px;background:var(--bd2)}
-
-.toolbar{flex-shrink:0;display:flex;align-items:center;gap:5px;padding:5px 14px;background:var(--bg2);border-bottom:1px solid var(--bd);overflow-x:auto;-webkit-overflow-scrolling:touch}
-.toolbar::-webkit-scrollbar{height:0}
-.tsel{padding:4px 22px 4px 7px;border-radius:6px;border:1px solid var(--bd);background:var(--sf);color:var(--tx);font:11px var(--sans);outline:0;cursor:pointer;white-space:nowrap;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='8' height='5' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l3 3 3-3' stroke='%23A8A29E' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 6px center}
-.tsel option{background:var(--sf);color:var(--tx)}
-.chip{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:99px;border:1px solid var(--bd);background:0;font-size:10px;color:var(--tx3);cursor:pointer;white-space:nowrap;transition:all .15s;user-select:none}
-.chip:hover{background:var(--hov)}.chip.on{background:var(--ac-bg);color:var(--ac);border-color:var(--ac-bd)}
-.chip .cd{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.tsep{width:1px;height:18px;background:var(--bd2);flex-shrink:0}
-.tb{padding:3px 8px;border-radius:6px;border:1px solid var(--bd);background:0;color:var(--tx2);font:10px var(--sans);cursor:pointer;white-space:nowrap;transition:all .15s}
-.tb:hover{background:var(--hov);color:var(--tx)}
-.tb.on{background:var(--ac-bg);color:var(--ac);border-color:var(--ac-bd)}
-.tst{margin-left:auto;font:10px var(--mono);color:var(--tx3);white-space:nowrap;flex-shrink:0}
-
-main{flex:1;display:grid;min-height:0;overflow:hidden;grid-template-columns:1fr 370px}
-#ga{position:relative;overflow:hidden;background:var(--bg);cursor:grab;touch-action:none}
-#ga:active{cursor:grabbing}
-svg{display:block;width:100%;height:100%}
-
-.side{display:flex;flex-direction:column;border-left:1px solid var(--bd);background:var(--sf);overflow:hidden}
-.st{padding:14px 14px 0;flex-shrink:0}
-.st h2{font-family:var(--display);font-size:18px;font-weight:600;line-height:1.2;margin-bottom:6px}
-.st h2.emp{color:var(--tx3);font-weight:400;font-size:15px}
-.mr{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
-.bg{display:inline-flex;align-items:center;gap:3px;padding:2px 6px;border-radius:99px;background:var(--hov);border:1px solid var(--bd);font:10px var(--mono);color:var(--tx2);white-space:nowrap}
-.bg .bdd{width:5px;height:5px;border-radius:50%;flex-shrink:0}
-.sb{flex:1;overflow-y:auto;padding:0 14px 18px}
-.nt{font-size:13px;line-height:1.6;color:var(--tx2);margin-bottom:10px}
-.pc{border:1px solid var(--bd2);background:linear-gradient(180deg,var(--hov),transparent);border-radius:12px;padding:10px;margin-bottom:10px}
-.pch{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;margin-bottom:8px}
-.pcn{font-family:var(--display);font-size:16px;font-weight:600;line-height:1.2}
-.pcd{font-size:10px;color:var(--tx3);font-family:var(--mono)}
-.pcg{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
-.pcl{padding:6px;border:1px solid var(--bd);border-radius:8px;background:var(--sf2)}
-.pcl span{display:block;font-size:9px;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px}
-.pcl b{display:block;font-size:11px;color:var(--tx)}
-.pcs{margin-bottom:8px}
-.pnl{display:flex;flex-wrap:wrap;gap:4px}
-.pn{padding:2px 6px;border:1px solid var(--bd);border-radius:999px;font:10px var(--mono);color:var(--tx2);background:var(--hov)}
-.pfl{margin:4px 0 0 14px;color:var(--tx2);font-size:12px;line-height:1.45}
-.dv{height:1px;background:var(--bd);margin:10px 0}
-.sl{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--tx3);margin-bottom:5px}
-.rl{list-style:none;display:flex;flex-direction:column;gap:3px;margin-bottom:10px}
-.ri{display:flex;align-items:center;gap:6px;padding:6px 7px;border-radius:var(--radius-sm);border:1px solid var(--bd);transition:background .1s;cursor:default}
-.ri:hover{background:var(--hov)}
-.rlf{min-width:0;flex:1}
-.rn{font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.rn a{color:var(--ac);text-decoration:none}
-.rn a:hover{text-decoration:underline}
-.rs{font-size:10px;color:var(--tx3);font-family:var(--mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.rt{font-size:8px;padding:1px 4px;border-radius:99px;font-family:var(--mono)}
-.rt-i{background:rgba(212,168,75,.12);color:var(--dy-dhiyamigili);border:1px solid rgba(212,168,75,.2)}
-.rt-u{background:rgba(217,128,144,.12);color:var(--dy-huraagey);border:1px solid rgba(217,128,144,.2)}
-.gb{padding:3px 6px;border-radius:6px;border:1px solid var(--bd);background:0;color:var(--tx3);font:9px var(--sans);cursor:pointer;flex-shrink:0;transition:all .1s}
-.gb:hover{background:var(--ac-bg);color:var(--ac);border-color:var(--ac-bd)}
-.lg{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
-.li{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--tx3)}
-.ll{width:14px;height:2px;border-radius:1px}
-.ld{width:14px;height:0;border-top:2px dashed}
-.at{font-size:11px;line-height:1.5;color:var(--tx3)}
-
-.ov{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:19;opacity:0;pointer-events:none;transition:opacity .25s}
-.ov.op{opacity:1;pointer-events:auto}
-.bs{position:fixed;left:0;right:0;bottom:0;max-height:72vh;background:var(--sf);border-top:1px solid var(--bd2);border-radius:14px 14px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,.25);z-index:20;transform:translateY(100%);transition:transform .3s cubic-bezier(.32,.72,0,1);display:none;flex-direction:column;overflow:hidden}
-.bs.op{transform:translateY(0)}
-.bsh{display:flex;justify-content:center;padding:8px 0 4px}
-.bsh::after{content:'';width:32px;height:4px;border-radius:2px;background:var(--bd2)}
-.bshd{display:flex;align-items:flex-start;justify-content:space-between;padding:0 14px 6px}
-.bshd h2{font-family:var(--display);font-size:17px;font-weight:600;flex:1}
-.bsx{width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--bd);background:var(--hov);color:var(--tx3);cursor:pointer;font-size:15px;flex-shrink:0}
-.bsb{flex:1;overflow-y:auto;padding:0 14px 20px}
-
-.tt{position:fixed;z-index:15;pointer-events:none;background:var(--sf);border:1px solid var(--bd2);border-radius:var(--radius-sm);box-shadow:var(--sh);padding:7px 10px;max-width:240px;font-size:11px;line-height:1.45;opacity:0;transition:opacity .12s}
-.tt.sh{opacity:1}
-.tt b{font-weight:600}.tt .ts{color:var(--tx2);font-size:10px;margin-top:1px}
-
-#ld{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:var(--bg);transition:opacity .4s}
-#ld.dn{opacity:0;pointer-events:none}
-.lr{width:24px;height:24px;border:2px solid var(--bd2);border-top-color:var(--ac);border-radius:50%;animation:sp .7s linear infinite}
-@keyframes sp{to{transform:rotate(360deg)}}
-#ld p{font-size:11px;color:var(--tx3)}
-
-@media(max-width:1024px){main{grid-template-columns:1fr}.side{display:none}.bs{display:flex}}
-@media(max-width:640px){header{padding:0 10px;gap:6px}.brand h1{font-size:13px}.yr{display:none}.swrap{width:100%}.toolbar{padding:5px 10px}.tst{display:none}}
-</style>
 </head>
 <body>
+<a href="#sv" class="skip-link">Skip to graph</a>
 <div id="ld"><div class="lr"></div><p>Building graph…</p></div>
 <div class="tt" id="tt"></div>
-<header>
-<div class="brand"><h1>Maldives Sovereigns</h1><span class="yr">1117 – 1968</span></div>
-<div class="spacer"></div>
-<div class="swrap"><span class="si">⌕</span><input id="si" type="text" placeholder="Search name/alias/title/# · filters: dy:hilaaly c:u"/><div class="dd" id="dd"></div></div>
-<div class="hsep"></div>
-<button class="hb" id="bt" title="Toggle theme">☀</button>
+
+<!-- ARIA live region for selection announcements -->
+<div id="a11y-live" class="sr-only" aria-live="polite" aria-atomic="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap"></div>
+
+<!-- === Unified Header === -->
+<header class="header-unified">
+  <div class="header-left">
+    <div class="brand"><h1>Reef Chronicle</h1><span class="yr">1117 – 1968</span></div>
+    <div class="hsep"></div>
+    <button class="hb" id="hbk" title="Back (Alt/Option+Left)" aria-label="Back in history">←</button>
+    <button class="hb" id="hfw" title="Forward (Alt/Option+Right)" aria-label="Forward in history">→</button>
+    <div class="hsep"></div>
+    <button class="tb on" id="vmg" aria-pressed="true">Graph</button>
+    <button class="tb" id="vmt" aria-pressed="false">Tree</button>
+    <button class="tb" id="treeOptBtn" style="display:none" aria-haspopup="true" aria-expanded="false">Tree Options</button>
+    <div class="hsep"></div>
+    <button class="tb on" id="vms2" title="Toggle details sidebar (D)" aria-pressed="true">Details</button>
+    <div class="hsep"></div>
+    <button class="hb" id="resetView" title="Reset view (0)" aria-label="Reset view">&#8962;</button>
+  </div>
+  <button class="command-trigger" id="cmdTrigger">Search names, dynasties… <kbd>/</kbd></button>
+  <div class="header-right">
+    <button class="hb" id="fp" title="Toggle filters (F)" aria-label="Toggle filter panel">☰</button>
+    <div class="hsep"></div>
+    <select class="tsel" id="lng" title="Language">
+      <option value="en" selected>English</option>
+      <option value="dv">Dhivehi</option>
+    </select>
+    <select class="tsel" id="exf" title="Export selected subtree/citation bundle">
+      <option value="">Export</option>
+      <option value="png">PNG Snapshot</option>
+      <option value="pdf">PDF (Print)</option>
+      <option value="json">JSON Citation Bundle</option>
+    </select>
+    <button class="hb" id="bt" title="Toggle theme" aria-label="Toggle theme">☀</button>
+  </div>
 </header>
-<div class="toolbar">
-<select class="tsel" id="df"><option value="__all__">All dynasties</option></select>
-<select class="tsel" id="tf"><option value="__all__">All trees</option></select>
-<div class="tsep"></div>
-<button class="tb on" id="vmg">Graph</button>
-<button class="tb" id="vmt">Tree</button>
-<div class="tsep"></div>
-<button class="chip on" data-e="parent"><span class="cd" style="background:var(--ep)"></span>Parent</button>
-<button class="chip on" data-e="sibling"><span class="cd" style="background:var(--es)"></span>Sibling</button>
-<button class="chip on" data-e="spouse"><span class="cd" style="background:var(--esp)"></span>Spouse</button>
-<button class="chip on" data-e="kin"><span class="cd" style="background:var(--ek)"></span>Kin</button>
-<div class="tsep"></div>
-<button class="chip on" data-cf="c"><span class="cd" style="background:var(--ep)"></span>Confirmed</button>
-<button class="chip on" data-cf="i"><span class="cd" style="background:var(--ei)"></span>Inferred</button>
-<button class="chip on" data-cf="u"><span class="cd" style="background:var(--eu)"></span>Uncertain</button>
-<select class="tsel" id="sqf">
-<option value="__all__">All source grades</option>
-<option value="A">Grade A</option>
-<option value="B">Grade B</option>
-<option value="C">Grade C</option>
-<option value="D">Grade D</option>
-</select>
-<div class="tsep"></div>
-<button class="tb" id="bf">Fit</button>
-<button class="tb" id="br">Reset</button>
-<div class="tst" id="st"></div>
+
+<!-- Story rail (shown when active) -->
+<div class="storyrail" id="str" hidden>
+  <div class="strh">
+    <span class="strb">Story Trail</span>
+    <span id="strt"></span>
+    <span id="stry"></span>
+  </div>
+  <div id="strd"></div>
 </div>
+
+<!-- === Main Content === -->
 <main>
-<div id="ga"><svg id="sv"></svg></div>
+<div id="ga">
+  <svg id="sv" tabindex="0" aria-label="Genealogy graph canvas" aria-roledescription="genealogy visualization"></svg>
+
+  <!-- Floating breadcrumb -->
+  <div class="floating-crumbs" id="bc"></div>
+
+  <!-- Floating filter panel -->
+  <div class="filter-panel" id="filterPanel">
+    <div class="filter-panel-header">
+      <h3 id="fph">Filters</h3>
+      <button class="hb" id="fpClose" aria-label="Close filters">×</button>
+    </div>
+    <div class="filter-section">
+      <div class="filter-section-label" id="fsl_dt">Dynasty & Tree</div>
+      <div class="filter-row">
+        <select class="tsel" id="df"><option value="__all__">All dynasties</option></select>
+        <select class="tsel" id="tf"><option value="__all__">All trees</option></select>
+      </div>
+    </div>
+    <div class="filter-section">
+      <div class="filter-section-label" id="fsl_et">Edge Types</div>
+      <div class="filter-row">
+        <button class="chip on" data-e="parent"><span class="cd" style="background:var(--ep)"></span>Parent</button>
+        <button class="chip on" data-e="sibling"><span class="cd" style="background:var(--es)"></span>Sibling</button>
+        <button class="chip on" data-e="spouse"><span class="cd" style="background:var(--esp)"></span>Spouse</button>
+        <button class="chip on" data-e="kin"><span class="cd" style="background:var(--ek)"></span>Kin</button>
+      </div>
+    </div>
+    <div class="filter-section">
+      <div class="filter-section-label" id="fsl_cf">Confidence</div>
+      <div class="filter-row">
+        <button class="chip on" data-cf="c"><span class="cd" style="background:var(--ep)"></span>Confirmed</button>
+        <button class="chip on" data-cf="i"><span class="cd" style="background:var(--ei)"></span>Inferred</button>
+        <button class="chip on" data-cf="u"><span class="cd" style="background:var(--eu)"></span>Uncertain</button>
+      </div>
+    </div>
+    <div class="filter-section">
+      <div class="filter-section-label" id="fsl_so">Sources & Overlay</div>
+      <div class="filter-row">
+        <select class="tsel" id="sqf">
+          <option value="__all__">All source grades</option>
+          <option value="A">Grade A</option>
+          <option value="B">Grade B</option>
+          <option value="C">Grade C</option>
+          <option value="D">Grade D</option>
+        </select>
+        <select class="tsel" id="ovm" title="Edge color overlay mode">
+          <option value="relation">Relation Colors</option>
+          <option value="confidence">Confidence Overlay</option>
+          <option value="source">Source Grade Overlay</option>
+        </select>
+      </div>
+    </div>
+    <div class="filter-section">
+      <div class="filter-section-label" id="fsl_dp">Display</div>
+      <div class="filter-row">
+        <select class="tsel" id="dns" title="Visual density mode">
+          <option value="compact">Compact</option>
+          <option value="comfortable" selected>Comfortable</option>
+          <option value="presentation">Presentation</option>
+        </select>
+        <button class="tb" id="fm" title="Dim unrelated areas around the current selection" aria-pressed="false">Focus</button>
+        <button class="tb on" id="vms" title="Hide details sidebar" aria-pressed="true">Details</button>
+        <button class="tb" id="vmi" title="Open institutions and office timeline pane" aria-pressed="false">Institutions</button>
+      </div>
+    </div>
+    <div class="filter-section">
+      <div class="filter-section-label" id="fsl_er">Era</div>
+      <div class="filter-row">
+        <button class="tb" id="eta" title="Toggle year filter" aria-pressed="false">All Eras</button>
+        <input class="er" id="ey" type="range" value="0" min="0" max="0" step="1" disabled aria-label="Era year"/>
+        <button class="tb" id="epy" title="Play timeline" aria-pressed="false">▶</button>
+      </div>
+      <div class="tst" id="eyv"></div>
+    </div>
+    <div class="filter-section">
+      <div class="filter-section-label" id="fsl_st">Story Trails</div>
+      <div class="filter-row">
+        <select class="tsel" id="stl" title="Guided story trails"></select>
+        <button class="tb" id="stp" title="Previous trail step">◀</button>
+        <button class="tb" id="stn" title="Next trail step">▶</button>
+        <div class="tst" id="sti"></div>
+      </div>
+    </div>
+    <div class="filter-section">
+      <div class="filter-row">
+        <button class="tb" id="bf">Fit</button>
+        <button class="tb" id="br">Reset</button>
+      </div>
+    </div>
+    <div class="tst" id="st" aria-live="polite"></div>
+  </div>
+
+  <!-- Tree Options Popover -->
+  <div class="tree-options-popover" id="treeOptPanel">
+    <div class="top-header">
+      <span class="top-title" id="topTitle">Tree Options</span>
+      <label class="top-toggle">
+        <input type="checkbox" id="linkedOnly">
+        <span class="top-toggle-label" id="linkedLabel">Linked only</span>
+      </label>
+    </div>
+    <div class="top-list" id="topList"></div>
+  </div>
+
+  <!-- Minimap -->
+  <div class="minimap" id="minimap" hidden>
+    <svg id="minimapSvg"></svg>
+  </div>
+</div>
+
 <aside class="side">
-<div class="st"><h2 id="sT" class="emp">Select a sovereign</h2><div class="mr" id="sM"></div></div>
+<div class="st"><h2 id="sT" class="emp">Select a sovereign</h2><button class="side-close" id="sideClose" title="Close sidebar (Esc)" aria-label="Close sidebar">&times;</button><div class="mr" id="sM"></div></div>
 <div class="sb">
 <div id="sN" class="nt">Click any node to view details and connections.</div>
 <div class="dv"></div><div id="sR"></div><div class="dv"></div>
-<div class="sl">Legend</div>
+<div class="sl" id="lgH">Legend</div>
 <div class="lg">
-<div class="li"><div class="ll" style="background:var(--ep)"></div>Parent→Child</div>
-<div class="li"><div class="ll" style="background:var(--es)"></div>Sibling</div>
-<div class="li"><div class="ll" style="background:var(--esp)"></div>Spouse</div>
-<div class="li"><div class="ll" style="background:var(--ek)"></div>Kin</div>
-<div class="li"><div class="ld" style="border-color:var(--ei)"></div>Inferred</div>
-<div class="li"><div class="ld" style="border-color:var(--eu)"></div>Uncertain</div>
+<div class="li"><div class="ll" style="background:var(--ep)"></div><span id="lgPC">Parent→Child</span></div>
+<div class="li"><div class="ll" style="background:var(--es)"></div><span id="lgSb">Sibling</span></div>
+<div class="li"><div class="ll" style="background:var(--esp)"></div><span id="lgSp">Spouse</span></div>
+<div class="li"><div class="ll" style="background:var(--ek)"></div><span id="lgKn">Kin</span></div>
+<div class="li"><div class="ld" style="border-color:var(--ei)"></div><span id="lgIn">Inferred</span></div>
+<div class="li"><div class="ld" style="border-color:var(--eu)"></div><span id="lgUn">Uncertain</span></div>
 </div>
 <div class="dv"></div>
-<div class="sl">About</div>
-<div class="at">Nodes = individuals (multiple accessions merged). ♀ = female sovereigns. Inferred edges are deductions; uncertain edges mark ambiguous sources. Baseline provenance defaults to the kings-list source unless an edge/person has curated citations attached.</div>
+<div class="sl" id="abH">About</div>
+<div class="at" id="abT">Nodes = individuals (multiple accessions merged). ♀ = female sovereigns. Inferred edges are deductions; uncertain edges mark ambiguous sources. Baseline provenance defaults to the kings-list source unless an edge/person has curated citations attached.</div>
 </div>
 </aside>
 </main>
+
+<!-- Compare widget (hidden inline) -->
+<div class="cmp" id="cmp" style="display:none"></div>
+
+<!-- Quick command tokens (hidden, used by commandbar.js) -->
+<div class="qcmd" id="qcmd" style="display:none">
+  <button class="qcb" data-token="dy:huraagey">dy:huraagey</button>
+  <button class="qcb" data-token="dy:dhiyamigili">dy:dhiyamigili</button>
+  <button class="qcb" data-token="c:u">c:u</button>
+  <button class="qcb" data-token="o:fandiyaaru">o:fandiyaaru</button>
+  <button class="qcb" data-token="o:bandeyri">o:bandeyri</button>
+  <button class="qcb" data-token="t:president">t:president</button>
+</div>
+
+<!-- Hidden inline search (used by search.js - kept for compatibility) -->
+<div class="swrap" style="display:none"><span class="si">⌕</span><input id="si" type="text" placeholder="Search name/known-as/title/# · filters: dy:hilaaly c:u o:fandiyaaru" aria-label="Search people, names, titles, offices, and filters" aria-controls="dd" aria-autocomplete="list"/><button class="sc" id="sc" title="Clear search" aria-label="Clear search">×</button><div class="dd" id="dd" role="listbox"></div></div>
+
+<!-- Command Palette -->
+<div class="cmd-palette" id="cmdPalette">
+  <div class="cmd-palette-box">
+    <input class="cmd-palette-input" id="cmdInput" type="text" placeholder="Search names, dynasties, offices…" autocomplete="off" spellcheck="false"/>
+    <div class="cmd-palette-results" id="cmdResults"></div>
+    <div class="cmd-palette-hint">
+      <span><kbd>↑↓</kbd> navigate</span>
+      <span><kbd>↵</kbd> select</span>
+      <span><kbd>esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+<!-- Onboarding overlay -->
+<div class="onboarding-overlay" id="onboarding"></div>
+
 <div class="ov" id="ov"></div>
-<div class="bs" id="bs"><div class="bsh"></div><div class="bshd"><h2 id="bT"></h2><button class="bsx" id="bX">×</button></div><div class="bsb" id="bB"></div></div>
+<div class="bs" id="bs"><div class="bsh"></div><div class="bshd"><h2 id="bT"></h2><button class="bsx" id="bX" aria-label="Close panel">×</button></div><div class="bsb" id="bB"></div></div>
 <script type="module" src="src/main.js"></script>
 </body>
 </html>
