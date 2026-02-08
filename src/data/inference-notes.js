@@ -837,7 +837,7 @@ const INFERENCE_NOTES = new Map([
     dossier: "docs/research-program/inferences/kin-p129-p155-aunt-uncle-niece-nephew.md",
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P87 Ibrahim Nooredine (Keerithi Maha Radun) -> P129 Princess Veyogey Dhon Goma (CLM-0364, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P87 Ibrahim Nooredine as parent of P129 Princess Veyogey Dhon Goma.",
+      "Supporting edge: parent P87 Ibrahim Nooredine (Keerithi Maha Radun) -> P129 Princess Veyogey Dhon Goma (CLM-0364, SRC-MRF-PHOTO-6|SRC-MRF-KAKAAGE-ALBUM|SRC-MRF-KINGS, grade B); excerpt: MRF photo/family-album wording describes Don Goma as daughter of King Ibrahim Nooreddine.",
       "Supporting edge: sibling P155 Maandhoogey Bodu Dhorhy Manippulu <-> P87 Ibrahim Nooredine (Keerithi Maha Radun) [siblings (shared parent)] (CLM-0406, SRC-DERIVED-RULES, grade C); excerpt: inferred sibling relation between P155 Maandhoogey Bodu Dhorhy Manippulu and P87 Ibrahim Nooredine from shared-parent rule chain.",
       "Rule application (parent-sibling-aunt-uncle): sibling(P155 Maandhoogey Bodu Dhorhy Manippulu, P87 Ibrahim Nooredine) plus parent(P87 Ibrahim Nooredine, P129 Princess Veyogey Dhon Goma) yields inferred aunt/uncle-line kin between P129 Princess Veyogey Dhon Goma and P155 Maandhoogey Bodu Dhorhy Manippulu.",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured, and one support edge is itself inferred."
@@ -2973,19 +2973,20 @@ const INFERENCE_NOTES = new Map([
     ]
   }],
   [k("parent", "P87", "P129", ""), {
-    summary: "This edge models P87 as parent of P129 by combining documented P87->P95 grandparent framing with P129->P95 parent evidence; it remains inferred pending explicit P87->P129 wording.",
+    summary: "This edge models P87 as parent of P129 because MRF quote-level wording calls Princess Don Goma the daughter of King Ibrahim Nooreddine, but it remains inferred pending independent non-MRF corroboration.",
     dossier: "docs/research-program/inferences/parent-p87-p129.md",
     logic: [
-      "This pair is retained as inferred parent because the model has contextual and adjacency support but lacks a single direct sentence that states this exact pairwise relation class.",
+      "Quote-level wording in SRC-MRF-PHOTO-6 and SRC-MRF-KAKAAGE-ALBUM states that Princess Don Goma is daughter of King Ibrahim Nooreddine.",
       "Supporting claim CLM-0212: kin Ibrahim Nooredine (P87) -> Mohamed Farid (P95) [grandfather (via daughter)] (SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List dynastic context links P87 Ibrahim Nooredine and P95 Mohamed Farid in kin relation (grandfather (via daughter)).",
       "Supporting claim CLM-0262: parent Princess Veyogey Dhon Goma (P129) -> Mohamed Farid (P95) (SRC-WIKI-MUHAMMAD-FAREED, grade B); excerpt: Muhammad Fareed Didi family/genealogy content lists P129 Princess Veyogey Dhon Goma as parent of P95 Mohamed Farid.",
       "Supporting claim CLM-0260: parent Princess Veyogey Dhon Goma (P129) -> Hassan Fareed Didi (P190) (SRC-WIKI-HASSAN-FARID, grade B); excerpt: Hassan Farid Didi family/genealogy content lists P129 Princess Veyogey Dhon Goma as parent of P190 Hassan Fareed Didi.",
       "Supporting claim CLM-0261: parent Princess Veyogey Dhon Goma (P129) -> Ibrahim Fareed Didi (P191) (SRC-WIKI-IBRAHIM-FAREED, grade B); excerpt: Ibrahim Fareed Didi family/genealogy content lists P129 Princess Veyogey Dhon Goma as parent of P191 Ibrahim Fareed Didi.",
-      "Combined interpretation: these anchors keep the pair in-model as inferred parent, but not promoted to confirmed until explicit pairwise wording is found.",
-      "Current state decision: maintain `i` with active verification, because evidence is suggestive and structured but not yet direct for this exact pair statement."
+      "Identity mapping step: the Don Goma in MRF wording is aligned to canonical node P129 through matching child cluster anchors (P95/P190/P191).",
+      "Ambiguity control: nearby entry-95 shorthand (daughter of 86/88) in the same source family shows compressed notation risk and blocks direct promotion without an independent source.",
+      "Current state decision: maintain `i` with active verification; direct MRF wording exists but independence threshold for canonical promotion is not yet met."
     ],
     verification: [
-      "Promotion requirement: A/B source directly naming P87 as parent of P129.",
+      "Promotion requirement: at least one independent non-MRF A/B source directly naming P87 as parent of P129.",
       "Downgrade/removal trigger: Confirmed alternate parentage for P129 inconsistent with P87 parent role.",
       "Review cadence: Re-check after modern-late-royal corroboration batches."
     ]

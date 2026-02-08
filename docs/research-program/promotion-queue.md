@@ -207,19 +207,19 @@ Track candidate research claims ready for canonical promotion.
 
 ### 1. `parent|P87|P129|`
 1. Claim/edge: `parent|P87|P129|` (CLM-0364)
-2. Proposed change: Keep edge as inferred for now, but prioritize immediate promotion review because current excerpt wording is direct parent language.
-3. Evidence summary: Current ledger excerpt states direct parent wording from `SRC-MRF-KINGS` while model state remains inferred; this is a classification mismatch requiring quote-level confirmation and independent corroboration.
-4. Source IDs: SRC-MRF-KINGS (+ target corroboration source to be added from queue)
-5. Risk notes: High-visibility bridge into modern Didi descendants; misclassification would propagate to sibling and avuncular inference chains.
+2. Proposed change: Keep edge as inferred for now and prioritize promotion only after independent non-MRF corroboration.
+3. Evidence summary: Quote-level wording is now captured in `SRC-MRF-PHOTO-6` and `SRC-MRF-KAKAAGE-ALBUM` describing Don Goma as daughter of Ibrahim Nooreddine; model state remains inferred due source-family concentration.
+4. Source IDs: SRC-MRF-KINGS, SRC-MRF-PHOTO-6, SRC-MRF-KAKAAGE-ALBUM (+ target independent corroboration source to be added from queue)
+5. Risk notes: High-visibility bridge into modern Didi descendants; same-publisher corroboration alone is insufficient for canonical promotion.
 6. Reviewer: phase5-conflict-c
 7. Status: pending
 
 ### 2. `kin|P86|P95|ancestor?` and `kin|P88|P95|grandfather?`
 1. Claim/edge: `kin|P86|P95|ancestor?` (CLM-0209), `kin|P88|P95|grandfather?` (CLM-0215)
-2. Proposed change: Defer canonical promotion and explicitly treat both as contested placeholders pending stronger source wording.
-3. Evidence summary: Both claims remain question-mark labels from the same specialist source family, while stronger direct scaffold claims in the same corridor identify `P87 -> P95` as the explicit grandparent relation.
+2. Proposed change: Defer canonical promotion and keep both as contested placeholders despite quote-level extraction.
+3. Evidence summary: Entry-95 quote-level wording (`daughter of 86/88`) is now captured, but it preserves ambiguity while stronger scaffold claims in the same corridor identify `P87 -> P95` as the explicit grandparent relation.
 4. Source IDs: SRC-MRF-KINGS
-5. Risk notes: These labels can be true only at broader generational depth, but current phrasing is too ambiguous for canonical edge semantics.
+5. Risk notes: These labels can be true only at broader generational depth, and slash notation (`86/88`) is too ambiguous for canonical edge semantics.
 6. Reviewer: phase5-conflict-c
 7. Status: deferred
 

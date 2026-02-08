@@ -28,6 +28,24 @@ export const sources = [
     notes: 'Specialist genealogy compendium; some direct fetches blocked in environment.'
   },
   {
+    id: 'SRC-MRF-KAKAAGE-ALBUM',
+    url: 'https://maldivesroyalfamily.com/family_album_kakaage.shtml',
+    title: 'Kakaage Family Album Notes',
+    publisher: 'Maldives Royal Family',
+    access_date: '2026-02-08',
+    quality: 'B',
+    notes: 'Family-album narrative notes used for quote-level Don Goma parentage wording in the P87/P129 verification corridor.'
+  },
+  {
+    id: 'SRC-MRF-PHOTO-6',
+    url: 'https://maldivesroyalfamily.com/maldives_photo_6.shtml',
+    title: 'Historic Royal Photo Notes (Ibrahim Nooreddine line)',
+    publisher: 'Maldives Royal Family',
+    access_date: '2026-02-08',
+    quality: 'B',
+    notes: 'Historic photo-caption narrative used for quote-level Ibrahim Nooreddine -> Don Goma wording.'
+  },
+  {
     id: 'SRC-MRF-HILAALY',
     url: 'https://maldivesroyalfamily.com/maldives_hilaaly.shtml',
     title: 'Royal House of Hilaaly',
@@ -335,12 +353,12 @@ export const sources = [
   },
   {
     id: 'SRC-PO-MUIZZU',
-    url: 'https://presidency.gov.mv/President/156',
+    url: 'https://presidency.gov.mv/PO/President/',
     title: 'President Dr Mohamed Muizzu',
     publisher: "The President's Office (Maldives)",
-    access_date: '2026-02-06',
+    access_date: '2026-02-08',
     quality: 'A',
-    notes: 'Official presidential profile used for office identity baseline.'
+    notes: 'Official presidential profile used for office identity baseline, oath date, and education anchors.'
   },
   {
     id: 'SRC-WIKI-MUIZZU',

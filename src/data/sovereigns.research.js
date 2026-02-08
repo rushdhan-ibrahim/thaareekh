@@ -491,8 +491,11 @@ export const people = [
     yb: 1937,
     pb: 'Malé',
     pd: '',
-    facts: ['Long-serving President of the Maldives.', 'Secondary sources link his family to older elite lineages.'],
-    no: 'Modern political dynasty anchor; brother of Abdulla Yameen.',
+    facts: [
+      "Official President's Office profile states he assumed office on 11 November 1978 and served until 11 November 2008.",
+      'Secondary sources link his family to older elite lineages.'
+    ],
+    no: 'Modern political dynasty anchor; official-profile tenure is explicit and sibling link to Abdulla Yameen is documented.',
     aliases: ['Maumoon Abdul Gayyoom'],
     regnal_names: [],
     titles: ['President'],
@@ -549,8 +552,12 @@ export const people = [
     yb: 1967,
     pb: 'Malé',
     pd: '',
-    facts: ['First democratically elected President after 2008 multiparty transition.', 'Published and presented historical/genealogical writing on Maldivian polity (including works such as Dhe Radhun).'],
-    no: 'Modern reform-era political figure.',
+    facts: [
+      "Official President's Office profile records birth on 17 May 1967 in Malé.",
+      'Official profile lists schooling in Malé and Colombo and higher studies in Liverpool, Brighton, and Oxford.',
+      'Published and presented historical/genealogical writing on Maldivian polity (including works such as Dhe Radhun).'
+    ],
+    no: 'Modern reform-era political figure with official chronology and education anchors.',
     aliases: ['Anni'],
     regnal_names: [],
     titles: ['President', 'Author'],
@@ -1403,8 +1410,12 @@ export const people = [
     yb: 1962,
     pb: 'Hinnavaru, Lhaviyani Atoll',
     pd: '',
-    facts: ['Former President of the Maldives (2018-2023).', 'Biographical references list spouse and children.'],
-    no: 'Modern presidential family branch entry.',
+    facts: [
+      "Official President's Office profile records birth on 4 May 1962 in Hinnavaru, Lhaviyani Atoll.",
+      'Official profile states he took oath as the 7th President on 17 November 2018 for a five-year term.',
+      'Biographical references list spouse and children.'
+    ],
+    no: 'Modern presidential family branch entry with official-profile identity anchors.',
     aliases: ['Ibu'],
     regnal_names: [],
     titles: ['President'],
@@ -1499,8 +1510,12 @@ export const people = [
     yb: 1978,
     pb: 'Malé',
     pd: '',
-    facts: ['Serving President of the Maldives (in office as of 2026).', 'Biographical references list parents, spouse, and children.'],
-    no: 'Modern presidential family branch entry.',
+    facts: [
+      "Official President's Office profile identifies him as the 8th President sworn in on 17 November 2023.",
+      'Official profile records birth on 15 June 1978 in Malé and postgraduate civil-engineering study at the University of Leeds.',
+      'Biographical references list parents, spouse, and children.'
+    ],
+    no: 'Modern presidential family branch entry with official oath-date and education anchors.',
     aliases: ['Dr Mohamed Muizzu'],
     regnal_names: [],
     titles: ['President'],

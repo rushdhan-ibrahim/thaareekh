@@ -19,6 +19,32 @@ Expand and rebalance the source base so high-impact genealogical claims are less
 3. Phase 1 execution queue seeded in:
 - `docs/research-program/ledgers/source-expansion-queue.csv`.
 
+## Batch F (2026-02-08) launch update
+1. Added official-profile extraction lane for remaining modern presidency anchors:
+- `SRC-PO-MAUMOON`
+- `SRC-PO-NASHEED`
+- `SRC-PO-SOLIH`
+- `SRC-PO-MUIZZU`
+2. Added lexicon-hardening lane for title/office semantics:
+- `SRC-SSRN-SUOOD-LEGAL`
+- `SRC-MRF-TITLES`
+- `SRC-WIKI-HEADS-STATE`
+3. New queue and extract IDs:
+- `SRCQ-023`, `SRCQ-024`
+- `EXT-047` through `EXT-053`
+
+## Batch G (2026-02-08) targeted bridge hardening update
+1. Added quote-hardening lane for late-monarchy bridge contradictions:
+- `SRC-MRF-KINGS`
+- `SRC-MRF-PHOTO-6`
+- `SRC-MRF-KAKAAGE-ALBUM`
+2. New queue and extract IDs:
+- `SRCQ-025`
+- `EXT-054` through `EXT-056`
+3. Scope:
+- quote-level extraction for `CLM-0209`, `CLM-0215`, and `CLM-0364`
+- classification-consistency review with explicit note that independent non-MRF corroboration remains required for promotion.
+
 ## Priority lanes (execution order)
 1. `P0` Chronicle and inscription extraction:
 - Tarikh Islam Diba Mahall facsimile + annotations.

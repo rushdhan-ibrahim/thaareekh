@@ -120,3 +120,9 @@ Interpretation policy:
 1. Add line-level locators from `SRC-SARUNA-PYRARD-V2P2-1887` and `SRC-CORNELL-PYRARD-V1-1887` for office term definitions.
 2. Attach explicit title/style source refs to `P1-P29` dossiers during early-Lunar deep pass.
 3. Split mixed term rows where one token appears as both office and sobriquet in different periods.
+
+## 5) Concept Cross-links (Batch F)
+- `CONCEPT-009`: Sovereign style stack
+- `CONCEPT-010`: Fandiyaaru
+- `CONCEPT-011`: Bandaarain cluster
+- `CONCEPT-012`: Thakurufaanu honorific complex

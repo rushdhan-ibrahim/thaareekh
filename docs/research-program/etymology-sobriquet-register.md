@@ -103,3 +103,9 @@ Modeling rule for this bank:
 1. Add line-level citations for title and sobriquet definitions from `SRC-SARUNA-PYRARD-V2P2-1887` and `SRC-CORNELL-PYRARD-V1-1887`.
 2. Build a Dhivehi/Arabic/Portuguese lexical crosswalk appendix for the unresolved token bank.
 3. Re-grade `E3/E4` entries after philological-source ingestion and contradiction review.
+
+## 6) Concept Cross-links (Batch F)
+- `CONCEPT-011`: Bandaarain cluster
+- `CONCEPT-012`: Thakurufaanu honorific complex
+- `CONCEPT-013`: Dom-Donna-Infanta overlay
+- `CONCEPT-014`: Regnal epithet token bank

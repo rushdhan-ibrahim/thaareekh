@@ -19,7 +19,7 @@ Inference class: `rule-derived`
 
 ## 3) Logic chain (pair-specific)
 1. Support set for rule parent-sibling-aunt-uncle resolved as follows.
-2. Supporting edge: parent P87 Ibrahim Nooredine (Keerithi Maha Radun) -> P129 Princess Veyogey Dhon Goma (CLM-0364, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P87 Ibrahim Nooredine as parent of P129 Princess Veyogey Dhon Goma.
+2. Supporting edge: parent P87 Ibrahim Nooredine (Keerithi Maha Radun) -> P129 Princess Veyogey Dhon Goma (CLM-0364, SRC-MRF-PHOTO-6|SRC-MRF-KAKAAGE-ALBUM|SRC-MRF-KINGS, grade B); excerpt: MRF photo/family-album wording describes Don Goma as daughter of King Ibrahim Nooreddine.
 3. Supporting edge: sibling P155 Maandhoogey Bodu Dhorhy Manippulu <-> P87 Ibrahim Nooredine (Keerithi Maha Radun) [siblings (shared parent)] (CLM-0406, SRC-DERIVED-RULES, grade C); excerpt: inferred sibling relation between P155 Maandhoogey Bodu Dhorhy Manippulu and P87 Ibrahim Nooredine from shared-parent rule chain.
 4. Rule application (parent-sibling-aunt-uncle): sibling(P155 Maandhoogey Bodu Dhorhy Manippulu, P87 Ibrahim Nooredine) plus parent(P87 Ibrahim Nooredine, P129 Princess Veyogey Dhon Goma) yields inferred aunt/uncle-line kin between P129 Princess Veyogey Dhon Goma and P155 Maandhoogey Bodu Dhorhy Manippulu.
 5. Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured, and one support edge is itself inferred.
@@ -37,6 +37,8 @@ Inference class: `rule-derived`
 ## 6) Source basis
 - `SRC-DERIVED-RULES` (Derived family relation rules)
 - `SRC-MRF-KINGS` (Maldives Kings List)
+- `SRC-MRF-PHOTO-6` (Historic Royal Photo Notes)
+- `SRC-MRF-KAKAAGE-ALBUM` (Kakaage Family Album Notes)
 - Primary inferred claim row: CLM-0054
 - Inferred claim locator: Inference basis: parent-sibling-aunt-uncle (see docs/research-program/inferences/kin-p129-p155-aunt-uncle-niece-nephew.md).
 

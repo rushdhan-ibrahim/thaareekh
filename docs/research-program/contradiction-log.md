@@ -57,17 +57,17 @@ Use this log for explicit claim conflicts. Do not remove older entries; append u
 - `Sources`: CLM-0212, CLM-0262, CLM-0363, CLM-0365, CLM-0366, CLM-0450 vs CLM-0209, CLM-0215; SRC-MRF-KINGS, SRC-WIKI-MUHAMMAD-FAREED, SRC-DERIVED-RULES
 - `Current stance`: Keep direct scaffold claims active; defer ambiguous D-grade ancestor labels from canonical promotion.
 - `Adjudication rationale`: The corridor has a coherent and explicit direct backbone for immediate relations; ambiguous question-mark labels do not meet canonical specificity standards.
-- `Next verification action`: Capture quote-level excerpts for CLM-0209/0215 and add one independent corroboration source before revisiting.
+- `Next verification action`: Quote-level excerpts for CLM-0209/0215 are now captured; next step is independent non-MRF corroboration and clarification of the `86/88` slash notation before revisiting.
 - `Last reviewed`: 2026-02-08
 
 - `ID`: CLOG-2026-02-08-C2
 - `Topic`: Classification mismatch on `parent|P87|P129|`
 - `Entities`: P87, P129
-- `Claim A`: CLM-0364 excerpt currently states direct parent wording from `SRC-MRF-KINGS`.
+- `Claim A`: CLM-0364 now has quote-level direct parent wording in MRF photo/family-album material for Don Goma as daughter of Ibrahim Nooreddine.
 - `Claim B`: Edge remains marked inferred in dataset/ledger modeling.
-- `Sources`: CLM-0364, docs/research-program/inferences/parent-p87-p129.md, SRC-MRF-KINGS
-- `Current stance`: Treat as high-priority promotion candidate, but do not auto-promote until quote-level extraction and one independent corroboration check are complete.
-- `Adjudication rationale`: This edge sits on a high-impact monarchy-to-modern bridge; strict promotion standards require explicit quote-level capture and corroboration to avoid overfitting to one source stream.
-- `Next verification action`: Run targeted deep-source extraction pass for CLM-0364 and queue corroboration source assignment.
+- `Sources`: CLM-0364, docs/research-program/inferences/parent-p87-p129.md, SRC-MRF-KINGS, SRC-MRF-PHOTO-6, SRC-MRF-KAKAAGE-ALBUM
+- `Current stance`: Keep as high-priority promotion candidate, but retain inferred status until one independent non-MRF corroboration source is captured.
+- `Adjudication rationale`: Quote-level wording is now explicit but remains within one source family; promotion standards for this high-impact bridge require at least one external corroboration stream.
+- `Next verification action`: Assign an independent corroboration source for P87->P129 and rerun classification review.
 - `Last reviewed`: 2026-02-08
 <!-- CONTRADICTION-BATCH-C-END -->

@@ -246,10 +246,14 @@ export const profileEnrichments = [
         start: 1978,
         end: 2008,
         c: 'c',
-        note: 'Long-serving republican-era president.',
+        note: "Official profile states he assumed office on 11 November 1978 and served through 11 November 2008.",
         source_refs: ['SRC-PO-MAUMOON', 'SRC-WIKI-MAUMOON']
       }
-    ]
+    ],
+    extra_facts: [
+      "Official profile extract currently provides office chronology anchors; detailed biographical lines remain limited in accessible page rendering."
+    ],
+    source_refs: ['SRC-PO-MAUMOON']
   },
   {
     id: 'P121',
@@ -274,14 +278,16 @@ export const profileEnrichments = [
         start: 2008,
         end: 2012,
         c: 'c',
-        note: 'Former President of the Maldives.',
+        note: 'Official profile records oath-taking on 11 November 2008 and former-president status.',
         source_refs: ['SRC-PO-NASHEED']
       }
     ],
     extra_facts: [
+      "Official profile records birth on 17 May 1967 in Malé.",
+      'Official profile lists education in Malé and Colombo and further studies in Liverpool, Brighton, and Oxford.',
       'Published historical work on traditional Dhivehi polity (1800-1900) under the title "Dhe Radhun".'
     ],
-    source_refs: ['SRC-OPENLIB-NASHEED-1800-1900', 'SRC-WORLDCAT-NASHEED-1800-1900', 'SRC-EDITION-DHE-RADHUN', 'SRC-AONEWS-DHE-RADHUN']
+    source_refs: ['SRC-PO-NASHEED', 'SRC-OPENLIB-NASHEED-1800-1900', 'SRC-WORLDCAT-NASHEED-1800-1900', 'SRC-EDITION-DHE-RADHUN', 'SRC-AONEWS-DHE-RADHUN']
   },
   {
     id: 'P130',
@@ -342,10 +348,14 @@ export const profileEnrichments = [
         start: 2018,
         end: 2023,
         c: 'c',
-        note: 'Former President of the Maldives.',
+        note: 'Official profile states he took oath on 17 November 2018 as the 7th President for a five-year term.',
         source_refs: ['SRC-PO-SOLIH', 'SRC-WIKI-SOLIH']
       }
-    ]
+    ],
+    extra_facts: [
+      "Official profile records birth on 4 May 1962 in Hinnavaru, Lhaviyani Atoll."
+    ],
+    source_refs: ['SRC-PO-SOLIH']
   },
   {
     id: 'P172',
@@ -356,10 +366,15 @@ export const profileEnrichments = [
         start: 2023,
         end: null,
         c: 'c',
-        note: 'Incumbent as of February 6, 2026.',
+        note: 'Official profile identifies him as the 8th President sworn in on 17 November 2023 (incumbent as of 2026-02-08).',
         source_refs: ['SRC-PO-MUIZZU']
       }
-    ]
+    ],
+    extra_facts: [
+      "Official profile records birth on 15 June 1978 in Malé.",
+      'Official profile lists Masters and PhD-level civil-engineering study at the University of Leeds.'
+    ],
+    source_refs: ['SRC-PO-MUIZZU']
   },
   {
     id: 'P182',
