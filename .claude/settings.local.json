@@ -1,4 +1,7 @@
 {
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
   "permissions": {
     "allow": [
       "Bash(curl:*)",
@@ -16,7 +19,9 @@
       "Bash(node:*)",
       "Bash(git add:*)",
       "Bash(git commit -m \"$\\(cat <<''EOF''\nFix sidebar toggle resetting zoom/pan and auto-open on node click\n\nSidebar toggle now does a lightweight viewport update instead of a full\nrebuild — graph simulation gets a gentle center nudge, tree view stays\nuntouched. Node/edge clicks auto-open the sidebar when collapsed so\nhighlight dimming always has context.\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(git fetch:*)",
+      "Bash(echo:*)"
     ]
   }
 }
