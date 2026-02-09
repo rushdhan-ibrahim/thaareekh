@@ -1,4 +1,5 @@
 export function fR(r) {
+  if (!r) return '';
   return r.map(x => x[0] + "\u2013" + x[1]).join("; ");
 }
 

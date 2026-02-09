@@ -61,3 +61,4 @@
   color: var(--tx2);
   margin-top: var(--space-1);
 }
+.hover-card-bio { font-size: 0.75rem; font-style: italic; color: var(--tx3); margin-top: 4px; line-height: 1.3; }

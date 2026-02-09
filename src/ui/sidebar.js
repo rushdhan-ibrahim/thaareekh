@@ -26,7 +26,7 @@ export function rlH(title, items) {
     const srcMeta = it.srcCount
       ? ` \u00b7 ${it.srcCount} ${it.srcCount === 1 ? t('source_word') : t('sources_word')}${it.cg ? ` \u00b7 ${t('grade_word')} ${it.cg}` : ''}`
       : '';
-    return `<li class="ri"><div class="rlf"><div class="rn">${p.g === 'F' ? '\u2640 ' : ''}${esc(personName(p))} ${tag}</div><div class="rs">${esc(fR(p.re))} \u00b7 ${esc(p.dy || '?')} \u00b7 ${p.n.map(x => '#' + x).join(', ')}${srcMeta}</div></div><button class="gb" onclick="goF('${p.id}')">${esc(t('go'))}</button></li>`;
+    return `<li class="ri"><div class="rlf"><div class="rn">${p.g === 'F' ? '\u2640 ' : ''}${esc(personName(p))} ${tag}</div><div class="rs">${p.re ? esc(fR(p.re)) : ''} \u00b7 ${esc(p.dy || '?')}${p.n ? ` \u00b7 ${p.n.map(x => '#' + x).join(', ')}` : ''}${srcMeta}</div></div><button class="gb" onclick="goF('${p.id}')">${esc(t('go'))}</button></li>`;
   }).join('')}</ul>`;
 }
 
@@ -433,12 +433,13 @@ function profileCard(p) {
         <div class="pcl"><span>${esc(t('sources_word'))}</span><b>${srcCount}</b></div>
       </div>
       <div class="ptabs">
-        <button class="ptab on" data-tab="overview"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm1 12H7V7h2v5zm0-7H7V3h2v2z"/></svg> ${esc(t('profile'))}</button>
+        <button class="ptab${p.bio ? '' : ' on'}" data-tab="overview"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm1 12H7V7h2v5zm0-7H7V3h2v2z"/></svg> ${esc(t('profile'))}</button>
+        <button class="ptab${p.bio ? ' on' : ''}" data-tab="bio"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2 1h9l3 3v11a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm1 3h5v1H3V4zm0 3h8v1H3V7zm0 3h8v1H3v-1zm0 3h5v1H3v-1z"/></svg> ${esc(t('bio'))}</button>
         <button class="ptab" data-tab="offices"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2 2h12v2H2zm0 4h12v2H2zm0 4h12v2H2z"/></svg> ${esc(t('offices'))}</button>
         <button class="ptab" data-tab="evidence"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm-1 12H3V3h10v10z"/></svg> ${esc(t('evidence'))}</button>
         <button class="ptab" data-tab="map"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C5.2 0 3 2.2 3 5c0 4 5 11 5 11s5-7 5-11c0-2.8-2.2-5-5-5zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg> ${esc(t('map'))}</button>
       </div>
-      <div class="ptpanel on" data-panel="overview">
+      <div class="ptpanel${p.bio ? '' : ' on'}" data-panel="overview">
         <div class="pcs">
           <div class="sl">${esc(t('known_names'))}</div>
           <div class="pnl">${names.length ? names.map(n => `<button class="pn pn-b" data-q="${esc(n)}">${esc(n)}</button>`).join('') : `<span class="pn">${esc(t('unknown'))}</span>`}</div>
@@ -463,6 +464,12 @@ function profileCard(p) {
           </div>
         </div>
         ${factsPanelHtml(facts)}
+      </div>
+      <div class="ptpanel${p.bio ? ' on' : ''}" data-panel="bio">
+        ${p.bio
+          ? `<div class="bio-text">${p.bio.split('\n\n').map((para, i) => `<p${i === 0 ? ' class="bio-lead"' : ''}>${esc(para)}</p>`).join('')}</div>`
+          : `<p class="nt">${esc(t('no_bio'))}</p>`
+        }
       </div>
       <div class="ptpanel" data-panel="offices">
         ${officePanel(p)}
@@ -859,7 +866,8 @@ export function showD(id) {
   handlePersonViewed(id);
   const dyC = `var(--dy-${(p.dy || 'unknown').toLowerCase()})`;
   let m = `<span class="bg"><span class="bdd" style="background:${dyC}"></span>${esc(p.dy || t('unknown'))}</span>`;
-  m += `<span class="bg">${esc(fR(p.re))}</span><span class="bg">${p.n.map(x => '#' + x).join(', ')}</span>`;
+  if (p.re) m += `<span class="bg">${esc(fR(p.re))}</span>`;
+  if (p.n) m += `<span class="bg">${p.n.map(x => '#' + x).join(', ')}</span>`;
   if (p.g === 'F') m += '<span class="bg">\u2640</span>';
   if (p.regnal_names?.length) m += `<span class="bg">${esc(t('regnal'))} ${esc(p.regnal_names[0])}</span>`;
   const refs = collectSourceRefs(p);

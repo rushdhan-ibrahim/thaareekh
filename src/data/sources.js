@@ -872,6 +872,87 @@ export const sources = [
     access_date: '2026-02-09',
     quality: 'C',
     notes: 'Journalistic summary of Dom Manoel through Dom Philippe; cites RoyalArk and Pietro Della Valle.'
+  },
+  {
+    id: 'SRC-DSAL-MANIKU-2000',
+    url: 'https://dsal.uchicago.edu/dictionaries/maniku/',
+    title: 'A Concise Etymological Vocabulary of Dhivehi Language',
+    publisher: 'Hassan Ahmed Maniku / Royal Asiatic Society of Sri Lanka, 2000',
+    access_date: '2026-02-09',
+    quality: 'A',
+    notes: 'Full searchable dictionary; primary reference for resolving Dhivehi regnal epithet etymologies.'
+  },
+  {
+    id: 'SRC-FRITZ-DHIVEHI-2002',
+    url: '',
+    title: 'The Dhivehi Language: A Descriptive and Historical Grammar of Maldivian',
+    publisher: 'Sonja Fritz, Julius Groos Verlag, 2002 (2 vols)',
+    access_date: '2026-02-09',
+    quality: 'A',
+    notes: 'Comprehensive Dhivehi grammar providing phonological framework for validating etymology pathways.'
+  },
+  {
+    id: 'SRC-GEIGER-MALDIVIAN',
+    url: '',
+    title: 'Maldivian Linguistic Studies',
+    publisher: 'Wilhelm Geiger, early 20th century',
+    access_date: '2026-02-09',
+    quality: 'B',
+    notes: 'Pioneering linguistic study of the Maldivian language; documents Prakrit/Sanskrit substrate.'
+  },
+  {
+    id: 'SRC-THATMALDIVESBLOG-PHON',
+    url: 'https://thatmaldivesblog.wordpress.com/',
+    title: 'True Dhivehi: Adventures in Phonology',
+    publisher: 'thatmaldivesblog.wordpress.com, 2018',
+    access_date: '2026-02-09',
+    quality: 'C',
+    notes: 'Blog-format linguistic analysis of Dhivehi phonological features and historical sound changes.'
+  },
+  {
+    id: 'SRC-MARITIMEASIAHERITAGE-SANSKRIT',
+    url: 'https://maritimeasiaheritage.cseas.kyoto-u.ac.jp/',
+    title: 'Exploring Linguistic Connections: Sanskrit and Dhivehi',
+    publisher: 'Maritime Asia Heritage Survey / Kyoto University',
+    access_date: '2026-02-09',
+    quality: 'B',
+    notes: 'Research article exploring Sanskrit lexical and morphological influence on Dhivehi vocabulary.'
+  },
+  {
+    id: 'SRC-FTLK-KOIMALA-2024',
+    url: 'https://www.ft.lk/',
+    title: 'Maldives history: From Sri Lankan Prince to first King',
+    publisher: 'Daily FT (ft.lk), 2024',
+    access_date: '2026-02-09',
+    quality: 'C',
+    notes: 'News article summarizing Koimala tradition and early Maldivian dynasty origins.'
+  },
+  {
+    id: 'SRC-WIKI-THAKURUFAANU',
+    url: 'https://en.wikipedia.org/wiki/Muhammad_Thakurufaanu_al-Auzam',
+    title: 'Muhammad Thakurufaanu al-Auzam',
+    publisher: 'Wikipedia',
+    access_date: '2026-02-09',
+    quality: 'B',
+    notes: 'Secondary synthesis of Bodu Thakurufaanu family and liberation war. Cross-referenced with SRC-MRF-UTHEEM.'
+  },
+  {
+    id: 'SRC-ROMERO-FRIAS-1999',
+    url: 'https://maritimeasiaheritage.cseas.kyoto-u.ac.jp/wp-content/uploads/2022/03/Xavier-Romero-Frias-The-Maldive-Islanders-Book.pdf',
+    title: 'The Maldive Islanders: A Study of the Popular Culture of an Ancient Ocean Kingdom',
+    publisher: 'Xavier Romero-Frias, Barcelona 1999; repr. NIAS Press 2012',
+    access_date: '2026-02-09',
+    quality: 'B',
+    notes: '13-year ethnographic study documenting oral traditions and pre-Islamic culture. Complements SRC-ROMERO-FRIAS.'
+  },
+  {
+    id: 'SRC-MRF-MYTH',
+    url: '',
+    title: 'Myths and Realities of the Portuguese Period in the Maldives',
+    publisher: 'Mohamed Rasheed (MRF)',
+    access_date: '2026-02-09',
+    quality: 'C',
+    notes: 'Challenges the 20th-century "Portuguese rule" narrative; argues Andiri Andirin was Indian-Christian, not Portuguese.'
   }
 ];
 

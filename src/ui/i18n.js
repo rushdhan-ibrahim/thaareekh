@@ -34,6 +34,8 @@ const D = {
     export_pdf: 'PDF (Print)',
     export_json: 'JSON Citation Bundle',
     profile: 'Profile',
+    bio: 'Biography',
+    no_bio: 'No biography available yet.',
     offices: 'Offices',
     evidence: 'Evidence',
     map: 'Map',
@@ -300,6 +302,8 @@ const D = {
     export_json: 'JSON ބަންޑެލި',
     // --- ޕްރޮފައިލް ޓެބް ---
     profile: 'ޕްރޮފައިލް',
+    bio: 'ސީރަތު',
+    no_bio: 'ސީރަތެއް އަދި ލިޔެވިފައެއް ނެތް.',
     offices: 'މަޤާމު',
     evidence: 'ހެކި',
     map: 'ޗާޓު',

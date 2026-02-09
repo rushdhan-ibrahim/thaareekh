@@ -96,4 +96,36 @@ Use this log for explicit claim conflicts. Do not remove older entries; append u
 - `Adjudication rationale`: If RoyalArk is correct that P67 died unmarried without issue, any project edges showing P67 as a parent must be re-routed through P213 (Dona Ines). The current project edge P66→P67 (parent) remains valid regardless. The 5-year birth discrepancy (1588 vs 1593) and conflicting death accounts (1632 expedition vs before 1639 at Goa) require Portuguese archival verification.
 - `Next verification action`: Check project edges for any claims of P67 having children; verify whether the Huraagey bridge depends on P67's issue or on P213's issue. Consult Diogo do Couto and Goa Archives for P67 death circumstances.
 - `Last reviewed`: 2026-02-09
+- `ID`: CLOG-2026-02-09-D3
+- `Topic`: P27 (Dhaain) maternal parentage
+- `Entities`: P25, P26, P27
+- `Claim A`: Project data note for P27 states "Daughter of #26 (not of #25)", implying P25 (Raadhaafathi/Malika Fatima) is NOT the mother.
+- `Claim B`: RoyalArk states P27's mother IS Malika Fatima (= P25 Raadhaafathi), and that P26 came to power through his wife P25's abdication in his favor.
+- `Sources`: SRC-MRF-KINGS, SRC-ROYALARK-MALDIVES
+- `Current stance`: Flag for adjudication. The RoyalArk claim is genealogically coherent (P25 abdicated in favor of husband P26, their daughter P27 then succeeded).
+- `Adjudication rationale`: The project note may reflect a misreading or an alternative tradition. The RoyalArk reconstruction is internally consistent with the succession pattern. Requires cross-check with the Tarikh chronicle text.
+- `Next verification action`: Consult Tarikh Arabic text (SRC-TUFS-TARIKH-DIBA-MAHALL-FACSIMILE) for P27's parentage statement.
+- `Last reviewed`: 2026-02-09
+
+- `ID`: CLOG-2026-02-09-D4
+- `Topic`: P41 (Yusuf IV / Raadha Veeru) paternal parentage
+- `Entities`: P39, P40, P41
+- `Claim A`: Project data shows P40 as father of P41 (edge P40->P41, parent).
+- `Claim B`: RoyalArk states P41 is the son of P39 (Yusuf II), not P40 (Abu Bakar I). P41 married P39's divorced wife Amira Bulau Ma'ava Kilege as second spouse.
+- `Sources`: SRC-MRF-KINGS, SRC-ROYALARK-MALDIVES
+- `Current stance`: Flag as medium-priority. The discrepancy changes the dynastic line of descent.
+- `Adjudication rationale`: RoyalArk's reconstruction places P41 as son of P39, which aligns with the naming tradition (both Yusuf). The project's P40->P41 edge may be an inference error. Requires Tarikh text verification.
+- `Next verification action`: Consult Tarikh Arabic text for the explicit father statement for P41.
+- `Last reviewed`: 2026-02-09
+
+- `ID`: CLOG-2026-02-09-D5
+- `Topic`: P60 and P61 sibling relationship (full vs half-brothers)
+- `Entities`: P60, P61
+- `Claim A`: Project data implies P60 and P61 are full brothers (same dynasty, same parents implied by adjacency in the Hilaaly list).
+- `Claim B`: RoyalArk states P60 and P61 share the same mother (Golavehi Aisha Rani Kilege) but have different fathers, making them maternal half-brothers, not full brothers. P60's father was Prince Ahmad Manikufa'anu Kalaminja; P61's father was a different Hilaaly prince.
+- `Sources`: SRC-ROYALARK-M5, SRC-ROYALARK-M16, SRC-DESILVA-PORT-ENCOUNTERS
+- `Current stance`: Flag for adjudication. The half-brother vs full-brother distinction affects succession claims.
+- `Adjudication rationale`: The RoyalArk reconstruction provides named parents for both, supporting the half-brother claim. The project's sibling edge type should be reviewed.
+- `Next verification action`: Check the project edge between P60 and P61 for edge type; verify through Portuguese colonial records (de Silva).
+- `Last reviewed`: 2026-02-09
 <!-- CONTRADICTION-BATCH-D-END -->

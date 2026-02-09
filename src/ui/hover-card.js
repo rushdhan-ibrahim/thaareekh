@@ -43,6 +43,7 @@ export function showNodeHoverCard(ev, d) {
       <span>${(d.n || []).map(x => '#' + x).join(', ') || 'non-sovereign'}</span>
       <span>${conns} connection${conns !== 1 ? 's' : ''}</span>
     </div>
+    ${d.bio ? `<div class="hover-card-bio">${esc(d.bio.split('.')[0].slice(0, 120))}${d.bio.split('.')[0].length > 120 ? '\u2026' : '.'}</div>` : ''}
   `;
 
   // Position using manual offset from mouse (Floating UI imported dynamically if available)

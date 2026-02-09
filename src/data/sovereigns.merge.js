@@ -78,6 +78,7 @@ function enrichPerson(p) {
   const offices = mergeOfficeAssignments(p.offices_held, ex.offices_held);
   if (offices.length) merged.offices_held = offices;
   if (ex.royal_link) merged.royal_link = { ...ex.royal_link };
+  if (ex.bio) merged.bio = ex.bio;
   return merged;
 }
 
