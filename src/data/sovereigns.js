@@ -16,14 +16,14 @@ export const people = [
   {id:"P15",n:[15],nm:"Yoosuf",rg:"Bavanaadheeththa",dy:"Lunar",g:"M",re:[[1288,1294]],no:"Younger brother of #14."},
   {id:"P16",n:[16],nm:"Salis",rg:"Meesuvvara",dy:"Lunar",g:"M",re:[[1293,1302]],no:"Son of #15."},
   {id:"P17",n:[17],nm:"Davud",rg:"Sundhura Bavana",dy:"Lunar",g:"M",re:[[1302,1307]],no:"Son of #15."},
-  {id:"P18",n:[18],nm:"Omar Veeru",rg:"Loka Abarana",dy:"Lunar",g:"M",re:[[1306,1341]],no:"Half-brother (maternal) of #16; also called \u2018son of #16\u2019 (ambiguous)."},
+  {id:"P18",n:[18],nm:"Omar Veeru",rg:"Loka Abarana",dy:"Lunar",g:"M",re:[[1306,1341]],no:"Son of #16 (Salis). RoyalArk confirms parentage. Full Arabic title: Sultan Abul Fath Jalal ud-dunya wa ud-din Umar Vira."},
   {id:"P19",n:[19],nm:"Ahmed Shihabuddine",rg:"Loka Aadheeththa",dy:"Lunar",g:"M",re:[[1341,1347]],no:"Deposed by elder sister Khadijah. Son of #18."},
   {id:"P20",n:[20,22,24],nm:"Khadijah",rg:"Raadha Abarana",dy:"Lunar",g:"F",re:[[1347,1363],[1364,1374],[1376,1380]],yb:1325,yd:1380,pb:"Maldives (likely Malé)",pd:"Maldives",facts:["One of the most prominent women rulers of the Maldives.","Held the throne in three separate accessions."],no:"Three accessions. Daughter of #18. Assassinated husbands #21 and #23."},
   {id:"P21",n:[21],nm:"Mohamed el\u2011Jameel",rg:"Bavana Sooja",dy:"Lunar",g:"M",re:[[1363,1364]],no:"Assassinated by wife Khadijah (#20)."},
   {id:"P23",n:[23],nm:"Abdullah",rg:"Dhammaru Aadheeththa",dy:"Lunar",g:"M",re:[[1374,1376]],no:"Assassinated by wife Khadijah (#20)."},
   {id:"P25",n:[25],nm:"Raadhaafathi",rg:"Suvama Abarana",dy:"Lunar",g:"F",re:[[1379,1380]],yb:1350,yd:1385,pb:"Maldives",pd:"Maldives",facts:["Late-Lunar sovereign in the succession crisis period.","Half-sister of Khadijah, continuing the same royal house."],no:"Half-sister of Khadijah (#20); daughter of #18."},
   {id:"P26",n:[26],nm:"Mohamed of Maakurathu",rg:"Sundhura Abarana",dy:"Lunar",g:"M",re:[[1380,1385]],no:"Husband of #25."},
-  {id:"P27",n:[27],nm:"Dhaain",rg:"Keerithi Maha Rehendi",dy:"Lunar",g:"F",re:[[1385,1388]],yb:1368,yd:1395,pb:"Maldives",pd:"Maldives",facts:["Succeeded in a turbulent late-Lunar succession phase.","Deposed by her husband, marking instability before Hilaaly rise."],no:"Daughter of #26 (not of #25). Deposed by husband."},
+  {id:"P27",n:[27],nm:"Dhaain",rg:"Keerithi Maha Rehendi",dy:"Lunar",g:"F",re:[[1385,1388]],yb:1368,yd:1395,pb:"Maldives",pd:"Maldives",facts:["Succeeded in a turbulent late-Lunar succession phase.","Deposed by her husband, marking instability before Hilaaly rise."],no:"Daughter of #26 and #25 (Raadhaafathi). RoyalArk confirms mother is Malika Fatima (P25). Forced to abdicate by clerics who opposed female rule."},
   {id:"P28",n:[28],nm:"Abdullah",rg:"Suvama Abarana",dy:"Lunar",g:"M",re:[[1388,1388]],no:"Husband of #27."},
   {id:"P29",n:[29],nm:"Osman of Fehendu",rg:"Sundhura",dy:"Lunar",g:"M",re:[[1388,1388]],yb:1355,yd:1425,pb:"Fehendu (likely)",pd:"Maldives",facts:["Last Lunar-era ruler before Hilaaly consolidation.","Also known as a political operator serving as PM to earlier rulers."],no:"PM to #25 and #27."},
   {id:"P30",n:[30],nm:"Hassan",rg:"Bavana",dy:"Hilaaly",g:"M",re:[[1388,1398]],yb:1358,yd:1405,pb:"Maldives (likely Malé region)",pd:"Maldives",facts:["Founder of the Hilaaly dynasty.","Traditionally linked to the Golaavahi maternal line and Hilaaly paternal line."],no:"Hilaaly Dynasty founder."},
@@ -36,14 +36,14 @@ export const people = [
   {id:"P38",n:[38],nm:"Danna Mohamed",rg:"Raadha Bavana",dy:"Hilaaly",g:"M",re:[[1421,1421]],no:"Son of Yusuf Handeygirin (paternal uncle of #30 and #32)."},
   {id:"P39",n:[39],nm:"Yoosuf",rg:"Loka Aananadha",dy:"Hilaaly",g:"M",re:[[1421,1443]],no:"Son of #30."},
   {id:"P40",n:[40],nm:"Aboobakuru",rg:"Bavana Sooja",dy:"Hilaaly",g:"M",re:[[1443,1443]],no:"Son of #30, half-brother of #39."},
-  {id:"P41",n:[41,43],nm:"Hadi Hassan",rg:"Raadha Veeru",dy:"Hilaaly",g:"M",re:[[1443,1467],[1467,1468]],no:"Son of #40. Two accessions."},
+  {id:"P41",n:[41,43],nm:"Hadi Hassan",rg:"Raadha Veeru",dy:"Hilaaly",g:"M",re:[[1443,1467],[1467,1468]],no:"Son of #39 (Yoosuf II) per RoyalArk. Two accessions. Was Qazi before becoming sultan. Made two Hajj pilgrimages (1454, 1466)."},
   {id:"P42",n:[42],nm:"Sayyid Mohamed",rg:"Keerithi Maha Radun",dy:"Unknown",g:"M",re:[[1467,1467]],no:"An Arab. Deposed by #41."},
   {id:"P44",n:[44],nm:"Mohamed",rg:"Bavana Abarana",dy:"Hilaaly",g:"M",re:[[1468,1480]],no:"Son of #41."},
   {id:"P45",n:[45,48],nm:"Hassan",rg:"Raadha Loka",dy:"Hilaaly",g:"M",re:[[1480,1480],[1485,1491]],no:"Son of #44. Two accessions."},
   {id:"P46",n:[46],nm:"Omar",rg:"Loka Sundhura",dy:"Hilaaly",g:"M",re:[[1480,1484]],no:"Son of #39."},
   {id:"P47",n:[47],nm:"Hassan",rg:"Raadha Aanandha",dy:"Hilaaly",g:"M",re:[[1484,1485]],no:"Son of #46."},
   {id:"P49",n:[49],nm:"Sheikh Hassan",rg:"Raadha Fanaveeru",dy:"Hilaaly",g:"M",re:[[1491,1492]],no:"Son of Kamba Dio (daughter of #40)."},
-  {id:"P50",n:[50],nm:"Ibrahim",rg:"Bavana Furasuddha",dy:"Hilaaly",g:"M",re:[[1492,1492]],no:"Son of #46."},
+  {id:"P50",n:[50],nm:"Ibrahim",rg:"Bavana Furasuddha",dy:"Hilaaly",g:"M",re:[[1492,1492]],no:"Son of #47 (Hassan V), grandson of #46. Deposed after 8 months by P51."},
   {id:"P51",n:[51,54,58],nm:"Kalu Mohamed",rg:"Dhammaru Bavana",dy:"Hilaaly",g:"M",re:[[1492,1492],[1495,1510],[1513,1529]],no:"Son of #46. Three accessions."},
   {id:"P52",n:[52],nm:"Yoosuf",rg:"Veeru Aanandha",dy:"Hilaaly",g:"M",re:[[1492,1493]],no:"Son of #46."},
   {id:"P53",n:[53],nm:"Ali",rg:"Audha Veeru",dy:"Hilaaly",g:"M",re:[[1493,1495]],no:"Deposed by #51. Descendant of #32."},
@@ -56,7 +56,7 @@ export const people = [
   {id:"P62",n:[62],nm:"Aboobakuru",rg:"Asaalees Loka",dy:"Unknown",g:"M",re:[[1554,1557]],no:"PM to #61."},
   {id:"P63",n:[63],nm:"Ali",rg:"Audha Siyaaaka Katthiri",dy:"Unknown",g:"M",re:[[1557,1558]],no:"Killed in battle. Married Princess Aysha Rani Kilege, daughter of #51."},
   {id:"P66",n:[66],nm:"Joao\u2019",rg:"Keerithi Maha Radun",dy:"Hilaaly",g:"M",re:[[1583,1603]],yb:1558,yd:1605,pb:"Goa (likely)",pd:"Goa or Maldives (uncertain)",facts:["Son of Dom Manoel (Hassan IX).","Ancestor of the later Huraagey founder line through Donna Ines."],no:"Son of Manoel I."},
-  {id:"P67",n:[67],nm:"Philippe\u2019",rg:"Keerithi Maha Radun",dy:"Hilaaly",g:"M",re:[[1609,1632]],yb:1588,yd:1635,pb:"Goa (likely)",pd:"Goa or Maldives (uncertain)",facts:["Christian-period Hilaaly ruler in the Goa-linked branch.","Sibling line connects to Donna Ines in later Huraagey ancestry narratives."],no:"Son of #66."},
+  {id:"P67",n:[67],nm:"Philippe\u2019",rg:"Keerithi Maha Radun",dy:"Hilaaly",g:"M",re:[[1609,1632]],yb:1593,yd:1635,pb:"Goa",pd:"Goa",facts:["Christian-period Hilaaly ruler in the Goa-linked branch.","Unmarried, died without issue (s.p. unm.) per RoyalArk.","Knight of the Order of Christ (1618).","Huraagey lineage passes through sister Dona Ines (P213), not through P67."],no:"Son of #66. Died unmarried without children. Huraagey bridge goes through sister P213."},
   {id:"P68",n:[68],nm:"Mohamed Imaduddine",rg:"Kula Sundhura Katthiri Bavana",dy:"Utheemu",g:"M",re:[[1632,1648]],yb:1600,yd:1650,pb:"Utheemu (likely)",pd:"Maldives",facts:["First legally proclaimed Utheemu sovereign in many lists.","Represents consolidation after the Portuguese-interregnum struggles."],no:"Utheemu Dynasty."},
   {id:"P69",n:[69],nm:"Iskander Ibrahim",rg:"Kula Ran Meeba Katthiri",dy:"Utheemu",g:"M",re:[[1648,1687]],no:"Son of #68."},
   {id:"P70",n:[70],nm:"Kuda Mohamed",rg:"Maniranna Loka",dy:"Utheemu",g:"M",re:[[1687,1691]],no:"Child ruler. Son of #69."},
@@ -66,7 +66,7 @@ export const people = [
   {id:"P74",n:[74],nm:"Ali",rg:"Kula Ran Muiy",dy:"Isdu",g:"M",re:[[1701,1701]],yb:1668,yd:1703,pb:"Isdu (likely)",pd:"Maldives",facts:["Founder figure for the Isdu dynasty interval.","His line remained relevant through kin links after deposition."],no:"Isdu Dynasty."},
   {id:"P75",n:[75],nm:"Hassan",rg:"Keerithi Maha Radun",dy:"Isdu",g:"M",re:[[1701,1701]],no:"Son of #74. Deposed by cousin."},
   {id:"P76",n:[76],nm:"Ibrahim Mudzhiruddine",rg:"Muthey Ran Mani Loka",dy:"Isdu",g:"M",re:[[1701,1704]],yb:1670,yd:1710,pb:"Isdu line (likely)",pd:"Maldives",facts:["Final ruler of the Isdu dynasty segment before Dhiyamigili takeover."],no:"Deposed on Haj. Father was brother of #74."},
-  {id:"P77",n:[77],nm:"Mohamed Imaduddine",rg:"Kula Sundhura Siyaaaka",dy:"Dhiyamigili",g:"M",re:[[1704,1720]],yb:1675,yd:1722,pb:"Maldives",pd:"Maldives",facts:["Founder sovereign of the Dhiyamigili dynasty period.","Associated with the overthrow of Isdu rule in 1704."],no:"Dhiyamigili Dynasty."},
+  {id:"P77",n:[77],nm:"Mohamed Imaduddine",rg:"Kula Sundhura Siyaaaka",dy:"Dhiyamigili",g:"M",re:[[1704,1720]],yb:1661,yd:1721,pb:"Maldives",pd:"Maldives",facts:["Founder sovereign of the Dhiyamigili dynasty period.","Associated with the overthrow of Isdu rule in 1704."],no:"Dhiyamigili Dynasty."},
   {id:"P78",n:[78],nm:"Ibrahim Iskander",rg:"Rannava Loka",dy:"Dhiyamigili",g:"M",re:[[1720,1750]],no:"Son of #77."},
   {id:"P79",n:[79],nm:"Mohamed Imaduddine",rg:"Navaranna Keerithi",dy:"Dhiyamigili",g:"M",re:[[1750,1757]],yb:1718,yd:1760,pb:"Maldives",pd:"Maldives",facts:["Penultimate Dhiyamigili sovereign before the 1766 restoration shift."],no:"Son of #77."},
   {id:"P80",n:[80],nm:"Hassan Izzuddine",rg:"Kula Ran Meeba Audha",dy:"Huraagey",g:"M",re:[[1759,1766]],yb:1728,yd:1770,pb:"Huraa line (likely Maldives/Goa-linked family)",pd:"Maldives",facts:["Founder of the Huraagey dynasty (Donbandaarain).","Documented as descending from Joao (#66) through the Dom Luis branch."],no:"Huraagey Dynasty founder (Donbandaarain). Descended from Hilaaly King Joao (#66) through Dom Luis line."},
@@ -96,7 +96,17 @@ export const people = [
   {id:"P210",nm:"Dom Pedro de Malvidas",dy:"Hilaaly",g:"M",no:"Son of Dom Manoel (P61) and Dona Leonor de Ataide. Removed to Goa 1591; returned Cochin 1606; died after 1610."},
   {id:"P211",nm:"Dona Leonor de Malvidas",dy:"Hilaaly",g:"F",yb:1555,no:"Daughter of Dom Manoel (P61) and Dona Leonor de Ataide. Born before Jan 27, 1555 at Goa."},
   {id:"P212",nm:"Dona Catarina de Malvidas",dy:"Hilaaly",g:"F",no:"Daughter of Dom Manoel (P61) and Dona Leonor de Ataide."},
-  {id:"P213",nm:"Infanta Dona Ines de Malvidas",dy:"Hilaaly",g:"F",no:"Daughter of Dom Joao (P66) and Dona Francisca de Vasconcelos (P101). Married Captain Sebastiao Tavares de Souza at Goa 1610. Mother of Dom Luis de Souza (P97). Critical link in the Hilaaly-to-Huraagey bridge."}
+  {id:"P213",nm:"Infanta Dona Ines de Malvidas",dy:"Hilaaly",g:"F",no:"Daughter of Dom Joao (P66) and Dona Francisca de Vasconcelos (P101). Married Captain Sebastiao Tavares de Souza at Goa 1610. Mother of Dom Luis de Souza (P97). Critical link in the Hilaaly-to-Huraagey bridge."},
+  // Tarikh extraction: new persons from RoyalArk secondary source analysis
+  {id:"P216",nm:"Fahi Hiriya Maava Kilage",dy:"Lunar",g:"F",no:"Mother of four sultans: Dhinei (#5), Dhilhel (#6), Wadi (#7), Valla Dio (#8). Important early Lunar matriarch."},
+  {id:"P217",nm:"Dori Kuja",dy:"Hilaaly",g:"M",no:"Father of Hassan al-Hilali (#30) and Hussain (#32). Also known as Kuliveri Hilalu Kaivulanna Kaloge of Hulule, North Male Atoll. Son of Abbas al-Hilal from Malabar."},
+  {id:"P218",nm:"Golavehi Kabulo",dy:"Hilaaly",g:"F",no:"Spouse of Hassan al-Hilali (#30)."},
+  {id:"P219",nm:"Umar Ma'afai Kilege",dy:"Hilaaly",g:"M",no:"Son of Kalu Mohamed (#51). Father of Mohamed (#60). Intermediate link between P51 and P60."},
+  {id:"P220",nm:"Ahmad Manikufa'anu Kalaminja",dy:"Hilaaly",g:"M",no:"Son of Kalu Mohamed (#51). Father of Hassan IX / Dom Manoel (#61). Intermediate link between P51 and P61."},
+  {id:"P221",nm:"Golavehi Aisha Rani Kilege",dy:"Hilaaly",g:"F",no:"Mother of both Mohamed (#60) and Hassan IX / Dom Manoel (#61). Wife of both Umar Ma'afai Kilege (P219) and Ahmad Manikufa'anu (P220)."},
+  {id:"P222",nm:"Hassan Izz ud-din",dy:"Huraagey",g:"M",no:"Blind son of Mohamed Imaduddine (#86). Excluded from succession due to blindness. Father of Mohamed Mueenuddine (#88) and Mohamed Imaduddine VI (#92)."},
+  {id:"P223",nm:"Henevi Ma'ava'a Kilege",dy:"Lunar",g:"F",no:"Sister of Koimala (#1). Mother of Dhovemi (#2). Key matrilineal link between first two sovereigns."},
+  {id:"P224",nm:"Hirati Kabadi Kilage",dy:"Lunar",g:"F",no:"Mother of Aima (#10)."}
 ];
 
 export const edges = [
@@ -109,13 +119,13 @@ export const edges = [
   {t:"sibling",s:"P14",d:"P15",l:"brothers",c:"c"},{t:"parent",s:"P13",d:"P15",l:"",c:"i",evidence_refs:["SRC-MRF-KINGS"],claim_type:"inferred",confidence_grade:"C"},
   {t:"parent",s:"P15",d:"P16",l:"",c:"c"},{t:"parent",s:"P15",d:"P17",l:"",c:"c"},
   {t:"sibling",s:"P16",d:"P17",l:"brothers",c:"i",evidence_refs:["SRC-MRF-KINGS"],claim_type:"inferred",confidence_grade:"C"},
-  {t:"sibling",s:"P16",d:"P18",l:"half-brothers",c:"c"},{t:"parent",s:"P16",d:"P18",l:"ambiguous",c:"u",evidence_refs:["SRC-MRF-KINGS"],claim_type:"contested",confidence_grade:"D"},
+  {t:"parent",s:"P16",d:"P18",l:"",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES","SRC-MRF-KINGS"],claim_type:"direct",confidence_grade:"B"},
   {t:"parent",s:"P18",d:"P19",l:"",c:"c"},{t:"parent",s:"P18",d:"P20",l:"",c:"c"},
   {t:"parent",s:"P18",d:"P25",l:"",c:"c"},
   {t:"sibling",s:"P19",d:"P20",l:"siblings",c:"c"},{t:"sibling",s:"P20",d:"P25",l:"half-sisters",c:"c"},
   {t:"sibling",s:"P19",d:"P25",l:"half-siblings",c:"i",evidence_refs:["SRC-MRF-KINGS"],claim_type:"inferred",confidence_grade:"C"},
   {t:"spouse",s:"P20",d:"P21",l:"married",c:"c"},{t:"spouse",s:"P20",d:"P23",l:"married",c:"c"},
-  {t:"spouse",s:"P25",d:"P26",l:"married",c:"c"},{t:"parent",s:"P26",d:"P27",l:"",c:"c"},
+  {t:"spouse",s:"P25",d:"P26",l:"married",c:"c"},{t:"parent",s:"P26",d:"P27",l:"",c:"c"},{t:"parent",s:"P25",d:"P27",l:"",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},
   {t:"spouse",s:"P27",d:"P28",l:"married",c:"c"},
   {t:"sibling",s:"P11",d:"P12",l:"shared mother",c:"c"},
   {t:"parent",s:"P30",d:"P31",l:"",c:"c"},{t:"sibling",s:"P30",d:"P32",l:"twins",c:"c"},
@@ -126,9 +136,9 @@ export const edges = [
   {t:"kin",s:"P32",d:"P31",l:"uncle\u2192nephew",c:"i",evidence_refs:["SRC-MRF-HILAALY"],claim_type:"inferred",confidence_grade:"C"},
   {t:"parent",s:"P29",d:"P37",l:"",c:"c",evidence_refs:["SRC-MRF-HILAALY","SRC-WIKI-MONARCHS"],claim_type:"direct",confidence_grade:"B"},
   {t:"sibling",s:"P34",d:"P35",l:"brothers",c:"c"},
-  {t:"parent",s:"P40",d:"P41",l:"",c:"c"},{t:"parent",s:"P41",d:"P44",l:"",c:"c"},
+  {t:"parent",s:"P39",d:"P41",l:"",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},{t:"parent",s:"P41",d:"P44",l:"",c:"c"},
   {t:"parent",s:"P44",d:"P45",l:"",c:"c"},{t:"parent",s:"P39",d:"P46",l:"",c:"c"},
-  {t:"parent",s:"P46",d:"P47",l:"",c:"c"},{t:"parent",s:"P46",d:"P50",l:"",c:"c"},
+  {t:"parent",s:"P46",d:"P47",l:"",c:"c"},{t:"parent",s:"P47",d:"P50",l:"",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},
   {t:"parent",s:"P46",d:"P51",l:"",c:"c"},{t:"parent",s:"P46",d:"P52",l:"",c:"c"},
   {t:"sibling",s:"P51",d:"P52",l:"brothers",c:"c"},
   {t:"sibling",s:"P47",d:"P50",l:"brothers",c:"i",evidence_refs:["SRC-MRF-KINGS"],claim_type:"inferred",confidence_grade:"C"},
@@ -137,7 +147,7 @@ export const edges = [
   {t:"sibling",s:"P50",d:"P51",l:"brothers",c:"i",evidence_refs:["SRC-MRF-KINGS"],claim_type:"inferred",confidence_grade:"C"},
   {t:"sibling",s:"P50",d:"P52",l:"brothers",c:"i",evidence_refs:["SRC-MRF-KINGS"],claim_type:"inferred",confidence_grade:"C"},
   {t:"parent",s:"P52",d:"P55",l:"",c:"c"},{t:"parent",s:"P51",d:"P59",l:"",c:"c"},
-  {t:"sibling",s:"P60",d:"P61",l:"full brothers",c:"c",evidence_refs:["SRC-MRF-KINGS","SRC-WIKI-MONARCHS"],claim_type:"direct",confidence_grade:"B"},
+  {t:"sibling",s:"P60",d:"P61",l:"half-brothers (maternal, same mother Golavehi Aisha Rani Kilege)",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES","SRC-MRF-KINGS"],claim_type:"direct",confidence_grade:"B"},
   {t:"kin",s:"P40",d:"P49",l:"grandfather",c:"c"},{t:"kin",s:"P40",d:"P57",l:"grandfather",c:"c"},
   {t:"kin",s:"P32",d:"P53",l:"ancestor",c:"c"},
   {t:"kin",s:"P51",d:"P60",l:"grandfather",c:"c",evidence_refs:["SRC-MRF-KINGS"],claim_type:"direct",confidence_grade:"B"},
@@ -200,7 +210,40 @@ export const edges = [
   {t:"parent",s:"P66",d:"P213",l:"",c:"c",evidence_refs:["SRC-ROYALARK-M16","SRC-DESILVA-PORT-ENCOUNTERS"],claim_type:"direct",confidence_grade:"A"},
   {t:"spouse",s:"P101",d:"P66",l:"married at Cochin before Nov 1587",c:"c",evidence_refs:["SRC-ROYALARK-M16"],claim_type:"direct",confidence_grade:"A"},
   {t:"sibling",s:"P213",d:"P67",l:"siblings (same parents: Dom Joao + Dona Francisca)",c:"c",evidence_refs:["SRC-ROYALARK-M16"],claim_type:"direct",confidence_grade:"A"},
-  {t:"parent",s:"P213",d:"P97",l:"",c:"c",evidence_refs:["SRC-ROYALARK-M16","SRC-MRF-HURAA"],claim_type:"direct",confidence_grade:"A"}
+  {t:"parent",s:"P213",d:"P97",l:"",c:"c",evidence_refs:["SRC-ROYALARK-M16","SRC-MRF-HURAA"],claim_type:"direct",confidence_grade:"A"},
+  // Tarikh extraction: new edges from RoyalArk secondary source analysis
+  // Early Lunar matriarch — mother of P5, P6, P7, P8
+  {t:"parent",s:"P216",d:"P5",l:"",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},
+  {t:"parent",s:"P216",d:"P6",l:"",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},
+  {t:"parent",s:"P216",d:"P7",l:"",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},
+  {t:"parent",s:"P216",d:"P8",l:"",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},
+  // Hilaaly founder father — Dori Kuja parent of P30, P32
+  {t:"parent",s:"P217",d:"P30",l:"",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},
+  {t:"parent",s:"P217",d:"P32",l:"",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},
+  // Hilaaly founder spouse
+  {t:"spouse",s:"P30",d:"P218",l:"married",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},
+  // Intermediate P51→P219→P60 chain
+  {t:"parent",s:"P51",d:"P219",l:"",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},
+  {t:"parent",s:"P219",d:"P60",l:"",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},
+  // Intermediate P51→P220→P61 chain
+  {t:"parent",s:"P51",d:"P220",l:"",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},
+  {t:"parent",s:"P220",d:"P61",l:"",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},
+  // Shared mother of P60 and P61
+  {t:"parent",s:"P221",d:"P60",l:"",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},
+  {t:"parent",s:"P221",d:"P61",l:"",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},
+  {t:"spouse",s:"P219",d:"P221",l:"married",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},
+  {t:"spouse",s:"P220",d:"P221",l:"married (second husband)",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},
+  // Hassan Izz ud-din (blind son of P86, father of P88 and P92)
+  {t:"parent",s:"P86",d:"P222",l:"",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},
+  {t:"parent",s:"P222",d:"P88",l:"",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},
+  {t:"parent",s:"P222",d:"P92",l:"",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},
+  // Koimala's sister — mother of Dhovemi
+  {t:"sibling",s:"P1",d:"P223",l:"siblings",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},
+  {t:"parent",s:"P223",d:"P2",l:"",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},
+  // Hirati Kabadi Kilage — mother of P10
+  {t:"parent",s:"P224",d:"P10",l:"",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"},
+  // P39→P46 already exists; add spouse edges for notable identified spouses
+  {t:"sibling",s:"P51",d:"P47",l:"half-brothers",c:"c",evidence_refs:["SRC-ROYALARK-MALDIVES"],claim_type:"direct",confidence_grade:"B"}
 ];
 
 export const byId = new Map(people.map(p => [p.id, p]));

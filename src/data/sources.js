@@ -73,6 +73,15 @@ export const sources = [
     notes: 'Used for Utheemu-Hilaaly extended-family claims.'
   },
   {
+    id: 'SRC-ROYALARK-MALDIVES',
+    url: 'https://www.royalark.net/Maldive/maldive.htm',
+    title: 'RoyalArk Maldives — Complete Genealogical Database (segments 3-16)',
+    publisher: 'RoyalArk',
+    access_date: '2026-02-09',
+    quality: 'B',
+    notes: 'Comprehensive genealogical database covering all Maldivian dynasties. Segments 3-16 cover Theemuge through Huraagey periods. Synthesizes Tarikh, Raadhavalhi, and European sources. Key source for parentage, spouse, and death details.'
+  },
+  {
     id: 'SRC-ROYALARK-M5',
     url: 'https://www.royalark.net/Maldives/maldive5.htm',
     title: 'RoyalArk Maldives (segment 5)',

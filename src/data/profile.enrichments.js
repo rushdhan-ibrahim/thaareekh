@@ -619,6 +619,103 @@ export const profileEnrichments = [
       'The Huraagey dynasty he founded ruled the Maldives for approximately 200 years until the abolition of the monarchy in 1968.'
     ],
     source_refs: ['SRC-MRF-HURAA', 'SRC-WIKI-IZZUDDIN-I', 'SRC-ROYALARK-M5', 'SRC-WIKI-HEADS-STATE']
+  },
+  // Tarikh extraction enrichments
+  {
+    id: 'P18',
+    known_as: [
+      { name: 'Sultan Abul Fath Jalal ud-dunya wa ud-din Umar Vira', type: 'full-arabic-title', c: 'c', note: 'Complete Arabic titulature from RoyalArk.', source_refs: ['SRC-ROYALARK-MALDIVES'] },
+      { name: 'Svasti Sri Loka Abaruna Maha Radun', type: 'regnal-style', c: 'c', note: 'Full Sanskritic regnal style.', source_refs: ['SRC-ROYALARK-MALDIVES'] }
+    ],
+    extra_facts: [
+      'Son of Salis (P16), resolving the longstanding ambiguity about whether P18 was half-brother or son of P16.',
+      'Had four known children: Ahmad Shihab ud-din (P19), Khadijah (P20), Mariam (unmodeled), and Fatima/Raadhaafathi (P25).',
+      'Second wife was daughter of Vizier Jamil ud-din Assinjari.',
+      'Longest reign of the Lunar dynasty: 34 years (1307-1341).'
+    ],
+    source_refs: ['SRC-ROYALARK-MALDIVES', 'SRC-MRF-KINGS']
+  },
+  {
+    id: 'P30',
+    known_as: [
+      { name: 'Sultan Hassan al-Hilali Sri Dhiru Buwana Maha Radhun', type: 'full-title', c: 'c', note: 'Full Arabic and Sanskritic title.', source_refs: ['SRC-ROYALARK-MALDIVES'] }
+    ],
+    extra_facts: [
+      'Founder of the Hilaaly dynasty. Father was Dori Kuja (P217), also known as Kuliveri Hilalu Kaivulanna Kaloge of Hulule, North Male Atoll.',
+      'Grandfather Abbas al-Hilal was of Malabar (Indian) origin, giving the dynasty its name.',
+      'Twin brother of Hussain (P32). Married Golavehi Kabulo (P218).',
+      'Four sons became sultans: Ibrahim I (P31), Yusuf II (P39), Abu Bakar I (P40), and possibly Osman II.',
+      'Deposed Osman of Fehendu (P29) to establish the new dynasty.'
+    ],
+    source_refs: ['SRC-ROYALARK-MALDIVES']
+  },
+  {
+    id: 'P69',
+    known_as: [
+      { name: 'Sultan al-Ghazi Hajji Ibrahim I Iskandar al-Izz wan-Nasr', type: 'full-arabic-title', c: 'c', note: 'Complete Arabic titulature with al-Ghazi (warrior) and Hajji honorifics.', source_refs: ['SRC-ROYALARK-MALDIVES'] }
+    ],
+    extra_facts: [
+      'Born before May 7, 1631. Mother was Aisha Kabafa\'anu, first wife of P68.',
+      'Repelled Portuguese attack in 1650. Built the Male Friday Mosque (Hukuru Miskiy, 1656-1658). Erected the first minaret in the Maldives (1674).',
+      'Made Hajj pilgrimage in 1667.',
+      'Poisoned by his second wife Maryam Kabafa\'anu Rani Kilege on February 28, 1687.',
+      'Maryam then acted as regent for their son P70 (Kuda Mohamed), and both died in an explosion off Bandos Island in 1691.'
+    ],
+    source_refs: ['SRC-ROYALARK-MALDIVES']
+  },
+  {
+    id: 'P77',
+    known_as: [
+      { name: 'Sultan al-Mu\'azzam Muzaffar Muhammad Imad ud-din II al-Afham', type: 'full-arabic-title', c: 'c', note: 'Complete Arabic titulature.', source_refs: ['SRC-ROYALARK-MALDIVES'] },
+      { name: 'Dhiyamigili Bodu Bandaarain', type: 'dynastic-title', c: 'c', note: 'Dynastic epithet from Dhiyamigili island.', source_refs: ['SRC-ROYALARK-MALDIVES'] }
+    ],
+    extra_facts: [
+      'Born 1661 at Dhiyamigili, Kolumadulu Atoll (project had yb:1675).',
+      'Father was Ibrahim Dorimena Ma\'afai Kilege Thakurufa\'anu, a vizier. Mother was Amina Dio.',
+      'Grandfather was Muhammad Tohali Thakuru of Dhiyamigili.',
+      'Founder of the Dhiyamigili dynasty. Deposed the Isdu line in December 1704.',
+      'Four marriages. Children include Ibrahim Iskandar II (P78) and Mohamed Imaduddine III (P79).',
+      'Died October 22, 1721 at Dhiyamigili Palace, Male.'
+    ],
+    source_refs: ['SRC-ROYALARK-MALDIVES']
+  },
+  {
+    id: 'P72',
+    known_as: [
+      { name: 'Sultan Muhammad Shams ud-din Zarb fi\'l-Mahli', type: 'full-arabic-title', c: 'c', note: 'Complete Arabic title. Born in Hama, Syria.', source_refs: ['SRC-ROYALARK-MALDIVES'] }
+    ],
+    extra_facts: [
+      'Born in Hama, Syria. Father was Sayyid Abdur-Razzaq al-Hamawi; mother was Sayyida Khadija.',
+      'Educated at Al-Azhar University, Cairo.',
+      'Proclaimed sultan one day after P71\'s death (February 19, 1692). Died July 10, 1692 from dysentery.',
+      'Married the infamous Maryam Kabafa\'anu shortly before his death — the same woman who allegedly poisoned P69 and acted as regent for P70.'
+    ],
+    source_refs: ['SRC-ROYALARK-MALDIVES']
+  },
+  {
+    id: 'P84',
+    known_as: [
+      { name: 'Sultan Shah Haji al-Hassan Nur ud-din Iskander', type: 'full-arabic-title', c: 'c', note: 'Complete title with Shah and Hajji honorifics.', source_refs: ['SRC-ROYALARK-MALDIVES'] }
+    ],
+    extra_facts: [
+      'Birth name was Prince Ali. Born before July 13, 1763.',
+      'Mother was Amina Manikufa\'anu (Bodu Didi), wife of P80.',
+      'Three sons: Prince Husain Ali (died on Mecca pilgrimage), Prince Abdul-Hamid, and Sultan Muhammad Mu\'in ud-din I (P85).',
+      'Died June 2, 1799 at Jeddah from smallpox during Hajj pilgrimage — one of at least two Maldivian sultans who died abroad on pilgrimage.'
+    ],
+    source_refs: ['SRC-ROYALARK-MALDIVES']
+  },
+  {
+    id: 'P87',
+    known_as: [
+      { name: 'Sultan Ibrahim Nur ud-din II', type: 'full-arabic-title', c: 'c', note: 'Arabic laqab form.', source_refs: ['SRC-ROYALARK-MALDIVES'] }
+    ],
+    extra_facts: [
+      'Mother was Kudaeduruge Zulaikha Rani Kilege, a commoner elevated to noble rank by P86.',
+      'Five wives: Don Didi, Kakage Don Goma (mother of P91), Bodugaluge Don Didi (mother of P90), Ekgamuge Medu Didi, Henveyruge Don Didi.',
+      'Died November 29, 1892 at Male.'
+    ],
+    source_refs: ['SRC-ROYALARK-MALDIVES']
   }
 ];
 
