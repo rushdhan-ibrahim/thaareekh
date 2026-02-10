@@ -1,19 +1,19 @@
 # Inference Dossier
 
-Edge key: `kin|P114|P136|grandparent`  
-Last updated: `2026-02-08`  
+Edge key: `kin|P136|P114|grandparent`  
+Last updated: `2026-02-10`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
 - Relation type: kin
-- Source node: P114 Ameena Mohamed Amin
-- Target node: P136 Ahmed Dhoshimeynaa Kilegefaanu
+- Source node: P136 Ahmed Dhoshimeynaa Kilegefaanu
+- Target node: P114 Ameena Mohamed Amin
 - Label: grandparent
 - Current confidence marker (`c/i/u`): i
 - Current grade (`A/B/C/D`): C
 
 ## 2) Why this specific pair is modeled
-- Pair summary: P114 Ameena Mohamed Amin and P136 Ahmed Dhoshimeynaa Kilegefaanu are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
+- Pair summary: P136 Ahmed Dhoshimeynaa Kilegefaanu and P114 Ameena Mohamed Amin are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
 - Historical/dynastic context: Modern -> Modern
 - Rule basis status: resolved (2 supporting edges).
 
@@ -21,7 +21,7 @@ Inference class: `rule-derived`
 1. Support set for rule parent-of-parent-grandparent resolved as follows.
 2. Supporting edge: parent P136 Ahmed Dhoshimeynaa Kilegefaanu -> P110 Mohamed Amin Didi (CLM-0271, SRC-PO-AMIN, grade A); excerpt: Official former-president profile states Mohamed Amin was born as son of Ahmed Didi and Nayaage Aishath Didi. (pair: P136 Ahmed Dhoshimeynaa Kilege...
 3. Supporting edge: parent P110 Mohamed Amin Didi -> P114 Ameena Mohamed Amin (CLM-0232, SRC-WIKI-AMIN-DIDI, grade B); excerpt: Mohamed Amin Didi family/genealogy content lists P110 Mohamed Amin Didi as parent of P114 Ameena Mohamed Amin.
-4. Rule application (parent-of-parent-grandparent): with source -> P110 Mohamed Amin Didi and P110 Mohamed Amin Didi -> target parent links, P114 Ameena Mohamed Amin is modeled as inferred grandparent-line kin of P136 Ahmed Dhoshimeynaa Kilegefaanu.
+4. Rule application (parent-of-parent-grandparent): with source -> P110 Mohamed Amin Didi and P110 Mohamed Amin Didi -> target parent links, P136 Ahmed Dhoshimeynaa Kilegefaanu is modeled as inferred grandparent-line kin of P114 Ameena Mohamed Amin.
 5. Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -30,7 +30,7 @@ Inference class: `rule-derived`
 - Model-retention rationale: keep the edge inferred until pairwise direct wording is captured.
 
 ## 5) Verification checklist
-- Promotion requirement: explicit A/B source wording naming P114 Ameena Mohamed Amin and P136 Ahmed Dhoshimeynaa Kilegefaanu as kin (grandparent).
+- Promotion requirement: explicit A/B source wording naming P136 Ahmed Dhoshimeynaa Kilegefaanu and P114 Ameena Mohamed Amin as kin (grandparent).
 - Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.
 - Review cadence: recompute after any parent/sibling edge change in this local branch.
 

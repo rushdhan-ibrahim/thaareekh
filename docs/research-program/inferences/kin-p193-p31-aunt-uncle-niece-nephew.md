@@ -1,26 +1,26 @@
 # Inference Dossier
 
-Edge key: `kin|P193|P31|aunt/uncle↔niece/nephew`  
-Last updated: `2026-02-08`  
+Edge key: `kin|P31|P193|aunt/uncle↔niece/nephew`  
+Last updated: `2026-02-10`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
 - Relation type: kin
-- Source node: P193 Princess Recca
-- Target node: P31 Ibrahim (Dhammaru Veeru)
+- Source node: P31 Ibrahim (Dhammaru Veeru)
+- Target node: P193 Princess Recca
 - Label: aunt/uncle↔niece/nephew
 - Current confidence marker (`c/i/u`): i
 - Current grade (`A/B/C/D`): C
 
 ## 2) Why this specific pair is modeled
-- Pair summary: P193 Princess Recca and P31 Ibrahim (Dhammaru Veeru) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.
+- Pair summary: P31 Ibrahim (Dhammaru Veeru) and P193 Princess Recca are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.
 - Historical/dynastic context: Hilaaly -> Hilaaly
 - Rule basis status: resolved (1 supporting edge).
 
 ## 3) Logic chain (pair-specific)
 1. Support set for rule parent-sibling-aunt-uncle resolved as follows.
 2. Supporting edge: parent P40 Aboobakuru (Bavana Sooja) -> P193 Princess Recca (CLM-0337, SRC-MRF-KINGS, grade B); excerpt: Kings list and Hilaaly branch notes together support parent edge P40 to P193.
-3. Rule application (parent-sibling-aunt-uncle): sibling(P40 Aboobakuru (Bavana Sooja), P31 Ibrahim (Dhammaru Veeru)) plus parent(P40 Aboobakuru (Bavana Sooja), child) yields inferred aunt/uncle-line kin between P193 Princess Recca and P31 Ibrahim (Dhammaru Veeru).
+3. Rule application (parent-sibling-aunt-uncle): sibling(P40 Aboobakuru (Bavana Sooja), P31 Ibrahim (Dhammaru Veeru)) plus parent(P40 Aboobakuru (Bavana Sooja), child) yields inferred aunt/uncle-line kin between P31 Ibrahim (Dhammaru Veeru) and P193 Princess Recca.
 4. Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -29,7 +29,7 @@ Inference class: `rule-derived`
 - Model-retention rationale: keep the edge inferred until pairwise direct wording is captured.
 
 ## 5) Verification checklist
-- Promotion requirement: explicit A/B source wording naming P193 Princess Recca and P31 Ibrahim (Dhammaru Veeru) as kin (aunt/uncle↔niece/nephew).
+- Promotion requirement: explicit A/B source wording naming P31 Ibrahim (Dhammaru Veeru) and P193 Princess Recca as kin (aunt/uncle↔niece/nephew).
 - Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.
 - Review cadence: recompute after any parent/sibling edge change in this local branch.
 

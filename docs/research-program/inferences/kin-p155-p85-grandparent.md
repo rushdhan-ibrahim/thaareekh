@@ -1,19 +1,19 @@
 # Inference Dossier
 
-Edge key: `kin|P155|P85|grandparent`  
-Last updated: `2026-02-08`  
+Edge key: `kin|P85|P155|grandparent`  
+Last updated: `2026-02-10`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
 - Relation type: kin
-- Source node: P155 Maandhoogey Bodu Dhorhy Manippulu
-- Target node: P85 Mohamed Mueenuddine (Keerithi Maha Radun)
+- Source node: P85 Mohamed Mueenuddine (Keerithi Maha Radun)
+- Target node: P155 Maandhoogey Bodu Dhorhy Manippulu
 - Label: grandparent
 - Current confidence marker (`c/i/u`): i
 - Current grade (`A/B/C/D`): C
 
 ## 2) Why this specific pair is modeled
-- Pair summary: P155 Maandhoogey Bodu Dhorhy Manippulu and P85 Mohamed Mueenuddine (Keerithi Maha Radun) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
+- Pair summary: P85 Mohamed Mueenuddine (Keerithi Maha Radun) and P155 Maandhoogey Bodu Dhorhy Manippulu are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
 - Historical/dynastic context: Huraagey -> Huraagey
 - Rule basis status: resolved (2 supporting edges).
 
@@ -21,7 +21,7 @@ Inference class: `rule-derived`
 1. Support set for rule parent-of-parent-grandparent resolved as follows.
 2. Supporting edge: parent P85 Mohamed Mueenuddine (Keerithi Maha Radun) -> P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) (CLM-0361, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P85 Mohamed Mueenuddine as parent of P86 Mohamed Imaduddine.
 3. Supporting edge: parent P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) -> P155 Maandhoogey Bodu Dhorhy Manippulu (CLM-0362, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P86 Mohamed Imaduddine as parent of P155 Maandhoogey Bodu Dhorhy Manippulu.
-4. Rule application (parent-of-parent-grandparent): with source -> P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) and P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) -> target parent links, P155 Maandhoogey Bodu Dhorhy Manippulu is modeled as inferred grandparent-line kin of P85 Mohamed Mueenuddine (Keerithi Maha Radun).
+4. Rule application (parent-of-parent-grandparent): with source -> P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) and P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) -> target parent links, P85 Mohamed Mueenuddine (Keerithi Maha Radun) is modeled as inferred grandparent-line kin of P155 Maandhoogey Bodu Dhorhy Manippulu.
 5. Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -30,7 +30,7 @@ Inference class: `rule-derived`
 - Model-retention rationale: keep the edge inferred until pairwise direct wording is captured.
 
 ## 5) Verification checklist
-- Promotion requirement: explicit A/B source wording naming P155 Maandhoogey Bodu Dhorhy Manippulu and P85 Mohamed Mueenuddine (Keerithi Maha Radun) as kin (grandparent).
+- Promotion requirement: explicit A/B source wording naming P85 Mohamed Mueenuddine (Keerithi Maha Radun) and P155 Maandhoogey Bodu Dhorhy Manippulu as kin (grandparent).
 - Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.
 - Review cadence: recompute after any parent/sibling edge change in this local branch.
 

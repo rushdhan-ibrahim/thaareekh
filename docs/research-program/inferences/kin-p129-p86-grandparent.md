@@ -1,26 +1,26 @@
 # Inference Dossier
 
-Edge key: `kin|P129|P86|grandparent`  
-Last updated: `2026-02-08`  
+Edge key: `kin|P86|P129|grandparent`  
+Last updated: `2026-02-10`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
 - Relation type: kin
-- Source node: P129 Princess Veyogey Dhon Goma
-- Target node: P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka)
+- Source node: P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka)
+- Target node: P129 Princess Veyogey Dhon Goma
 - Label: grandparent
 - Current confidence marker (`c/i/u`): i
 - Current grade (`A/B/C/D`): C
 
 ## 2) Why this specific pair is modeled
-- Pair summary: P129 Princess Veyogey Dhon Goma and P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
+- Pair summary: P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) and P129 Princess Veyogey Dhon Goma are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
 - Historical/dynastic context: Huraagey -> Huraagey
 - Rule basis status: resolved (1 supporting edge).
 
 ## 3) Logic chain (pair-specific)
 1. Support set for rule parent-of-parent-grandparent resolved as follows.
 2. Supporting edge: parent P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) -> P87 Ibrahim Nooredine (Keerithi Maha Radun) (CLM-0363, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P86 Mohamed Imaduddine as parent of P87 Ibrahim Nooredine.
-3. Rule application (parent-of-parent-grandparent): with source -> P87 Ibrahim Nooredine (Keerithi Maha Radun) and P87 Ibrahim Nooredine (Keerithi Maha Radun) -> target parent links, P129 Princess Veyogey Dhon Goma is modeled as inferred grandparent-line kin of P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka).
+3. Rule application (parent-of-parent-grandparent): with source -> P87 Ibrahim Nooredine (Keerithi Maha Radun) and P87 Ibrahim Nooredine (Keerithi Maha Radun) -> target parent links, P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) is modeled as inferred grandparent-line kin of P129 Princess Veyogey Dhon Goma.
 4. Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -29,7 +29,7 @@ Inference class: `rule-derived`
 - Model-retention rationale: keep the edge inferred until pairwise direct wording is captured.
 
 ## 5) Verification checklist
-- Promotion requirement: explicit A/B source wording naming P129 Princess Veyogey Dhon Goma and P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) as kin (grandparent).
+- Promotion requirement: explicit A/B source wording naming P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) and P129 Princess Veyogey Dhon Goma as kin (grandparent).
 - Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.
 - Review cadence: recompute after any parent/sibling edge change in this local branch.
 

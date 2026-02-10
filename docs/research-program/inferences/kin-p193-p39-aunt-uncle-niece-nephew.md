@@ -1,19 +1,19 @@
 # Inference Dossier
 
-Edge key: `kin|P193|P39|aunt/uncle↔niece/nephew`  
-Last updated: `2026-02-08`  
+Edge key: `kin|P39|P193|aunt/uncle↔niece/nephew`  
+Last updated: `2026-02-10`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
 - Relation type: kin
-- Source node: P193 Princess Recca
-- Target node: P39 Yoosuf (Loka Aananadha)
+- Source node: P39 Yoosuf (Loka Aananadha)
+- Target node: P193 Princess Recca
 - Label: aunt/uncle↔niece/nephew
 - Current confidence marker (`c/i/u`): i
 - Current grade (`A/B/C/D`): C
 
 ## 2) Why this specific pair is modeled
-- Pair summary: P193 Princess Recca and P39 Yoosuf (Loka Aananadha) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.
+- Pair summary: P39 Yoosuf (Loka Aananadha) and P193 Princess Recca are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.
 - Historical/dynastic context: Hilaaly -> Hilaaly
 - Rule basis status: resolved (2 supporting edges).
 
@@ -21,7 +21,7 @@ Inference class: `rule-derived`
 1. Support set for rule parent-sibling-aunt-uncle resolved as follows.
 2. Supporting edge: parent P40 Aboobakuru (Bavana Sooja) -> P193 Princess Recca (CLM-0337, SRC-MRF-KINGS, grade B); excerpt: Kings list and Hilaaly branch notes together support parent edge P40 to P193.
 3. Supporting edge: sibling P39 Yoosuf (Loka Aananadha) <-> P40 Aboobakuru (Bavana Sooja) [half-brothers] (CLM-0432, SRC-MRF-KINGS, grade B); excerpt: Kings list marks P39 and P40 as half-brothers.
-4. Rule application (parent-sibling-aunt-uncle): sibling(P40 Aboobakuru (Bavana Sooja), P39 Yoosuf (Loka Aananadha)) plus parent(P40 Aboobakuru (Bavana Sooja), child) yields inferred aunt/uncle-line kin between P193 Princess Recca and P39 Yoosuf (Loka Aananadha).
+4. Rule application (parent-sibling-aunt-uncle): sibling(P40 Aboobakuru (Bavana Sooja), P39 Yoosuf (Loka Aananadha)) plus parent(P40 Aboobakuru (Bavana Sooja), child) yields inferred aunt/uncle-line kin between P39 Yoosuf (Loka Aananadha) and P193 Princess Recca.
 5. Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -30,7 +30,7 @@ Inference class: `rule-derived`
 - Model-retention rationale: keep the edge inferred until pairwise direct wording is captured.
 
 ## 5) Verification checklist
-- Promotion requirement: explicit A/B source wording naming P193 Princess Recca and P39 Yoosuf (Loka Aananadha) as kin (aunt/uncle↔niece/nephew).
+- Promotion requirement: explicit A/B source wording naming P39 Yoosuf (Loka Aananadha) and P193 Princess Recca as kin (aunt/uncle↔niece/nephew).
 - Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.
 - Review cadence: recompute after any parent/sibling edge change in this local branch.
 

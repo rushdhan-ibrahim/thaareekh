@@ -1,27 +1,27 @@
 # Inference Dossier
 
-Edge key: `kin|P131|P81|grandparent`  
-Last updated: `2026-02-08`  
+Edge key: `kin|P81|P131|grandparent`  
+Last updated: `2026-02-10`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
 - Relation type: kin
-- Source node: P131 Mohamed Didi
-- Target node: P81 Mohamed Ghiyathuddine (Kula Rannmani Keerithi)
+- Source node: P81 Mohamed Ghiyathuddine (Kula Rannmani Keerithi)
+- Target node: P131 Mohamed Didi
 - Label: grandparent
 - Current confidence marker (`c/i/u`): i
 - Current grade (`A/B/C/D`): C
 
 ## 2) Why this specific pair is modeled
-- Pair summary: P131 Mohamed Didi and P81 Mohamed Ghiyathuddine (Kula Rannmani Keerithi) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
-- Historical/dynastic context: Dhiyamigili-South -> Dhiyamigili
+- Pair summary: P81 Mohamed Ghiyathuddine (Kula Rannmani Keerithi) and P131 Mohamed Didi are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
+- Historical/dynastic context: Dhiyamigili -> Dhiyamigili-South
 - Rule basis status: resolved (2 supporting edges).
 
 ## 3) Logic chain (pair-specific)
 1. Support set for rule parent-of-parent-grandparent resolved as follows.
 2. Supporting edge: parent P81 Mohamed Ghiyathuddine (Kula Rannmani Keerithi) -> P130 Prince Ibrahim Faamuladheyri Kilegefaanu (CLM-0359, SRC-WIKI-PRINCE-IBRAHIM-FAAMULADHEYRI, grade B); excerpt: Prince Ibrahim, Faamuladheyri Kilegefaanu family/genealogy content lists P81 Mohamed Ghiyathuddine as parent of P130 Prince Ibrahim Faamuladheyri K...
 3. Supporting edge: parent P130 Prince Ibrahim Faamuladheyri Kilegefaanu -> P131 Mohamed Didi (CLM-0265, SRC-WIKI-PRINCE-IBRAHIM-FAAMULADHEYRI, grade B); excerpt: Prince Ibrahim, Faamuladheyri Kilegefaanu family/genealogy content lists P130 Prince Ibrahim Faamuladheyri Kilegefaanu as parent of P131 Mohamed Didi.
-4. Rule application (parent-of-parent-grandparent): with source -> P130 Prince Ibrahim Faamuladheyri Kilegefaanu and P130 Prince Ibrahim Faamuladheyri Kilegefaanu -> target parent links, P131 Mohamed Didi is modeled as inferred grandparent-line kin of P81 Mohamed Ghiyathuddine (Kula Rannmani Keerithi).
+4. Rule application (parent-of-parent-grandparent): with source -> P130 Prince Ibrahim Faamuladheyri Kilegefaanu and P130 Prince Ibrahim Faamuladheyri Kilegefaanu -> target parent links, P81 Mohamed Ghiyathuddine (Kula Rannmani Keerithi) is modeled as inferred grandparent-line kin of P131 Mohamed Didi.
 5. Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -30,7 +30,7 @@ Inference class: `rule-derived`
 - Model-retention rationale: keep the edge inferred until pairwise direct wording is captured.
 
 ## 5) Verification checklist
-- Promotion requirement: explicit A/B source wording naming P131 Mohamed Didi and P81 Mohamed Ghiyathuddine (Kula Rannmani Keerithi) as kin (grandparent).
+- Promotion requirement: explicit A/B source wording naming P81 Mohamed Ghiyathuddine (Kula Rannmani Keerithi) and P131 Mohamed Didi as kin (grandparent).
 - Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.
 - Review cadence: recompute after any parent/sibling edge change in this local branch.
 

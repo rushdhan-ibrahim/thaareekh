@@ -1,19 +1,19 @@
 # Inference Dossier
 
-Edge key: `kin|P115|P137|grandparent`  
-Last updated: `2026-02-08`  
+Edge key: `kin|P137|P115|grandparent`  
+Last updated: `2026-02-10`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
 - Relation type: kin
-- Source node: P115 Ibrahim Nasir
-- Target node: P137 Moosa Didi
+- Source node: P137 Moosa Didi
+- Target node: P115 Ibrahim Nasir
 - Label: grandparent
 - Current confidence marker (`c/i/u`): i
 - Current grade (`A/B/C/D`): C
 
 ## 2) Why this specific pair is modeled
-- Pair summary: P115 Ibrahim Nasir and P137 Moosa Didi are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
+- Pair summary: P137 Moosa Didi and P115 Ibrahim Nasir are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
 - Historical/dynastic context: Modern -> Modern
 - Rule basis status: resolved (2 supporting edges).
 
@@ -21,7 +21,7 @@ Inference class: `rule-derived`
 1. Support set for rule parent-of-parent-grandparent resolved as follows.
 2. Supporting edge: parent P137 Moosa Didi -> P117 Nayaage Aishath Didi (CLM-0272, SRC-WIKI-IBRAHIM-NASIR, grade B); excerpt: Ibrahim Nasir family/genealogy content lists P137 Moosa Didi as parent of P117 Nayaage Aishath Didi.
 3. Supporting edge: parent P117 Nayaage Aishath Didi -> P115 Ibrahim Nasir (CLM-0245, SRC-PO-NASIR, grade A); excerpt: Official former-president profile states Ibrahim Nasir was son of Ahmed Didi and Nayaage Aishath Didi. (pair: P117 Nayaage Aishath Didi -> P115 Ibr...
-4. Rule application (parent-of-parent-grandparent): with source -> P117 Nayaage Aishath Didi and P117 Nayaage Aishath Didi -> target parent links, P115 Ibrahim Nasir is modeled as inferred grandparent-line kin of P137 Moosa Didi.
+4. Rule application (parent-of-parent-grandparent): with source -> P117 Nayaage Aishath Didi and P117 Nayaage Aishath Didi -> target parent links, P137 Moosa Didi is modeled as inferred grandparent-line kin of P115 Ibrahim Nasir.
 5. Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -30,7 +30,7 @@ Inference class: `rule-derived`
 - Model-retention rationale: keep the edge inferred until pairwise direct wording is captured.
 
 ## 5) Verification checklist
-- Promotion requirement: explicit A/B source wording naming P115 Ibrahim Nasir and P137 Moosa Didi as kin (grandparent).
+- Promotion requirement: explicit A/B source wording naming P137 Moosa Didi and P115 Ibrahim Nasir as kin (grandparent).
 - Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.
 - Review cadence: recompute after any parent/sibling edge change in this local branch.
 

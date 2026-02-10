@@ -1,26 +1,26 @@
 # Inference Dossier
 
-Edge key: `sibling|P129|P90|siblings (shared parent)`  
-Last updated: `2026-02-08`  
+Edge key: `sibling|P90|P129|siblings (shared parent)`  
+Last updated: `2026-02-10`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
 - Relation type: sibling
-- Source node: P129 Princess Veyogey Dhon Goma
-- Target node: P90 Mohamed Imaduddine V (Keerithi Maha Radun)
+- Source node: P90 Mohamed Imaduddine V (Keerithi Maha Radun)
+- Target node: P129 Princess Veyogey Dhon Goma
 - Label: siblings (shared parent)
 - Current confidence marker (`c/i/u`): i
 - Current grade (`A/B/C/D`): C
 
 ## 2) Why this specific pair is modeled
-- Pair summary: P129 Princess Veyogey Dhon Goma and P90 Mohamed Imaduddine V (Keerithi Maha Radun) are modeled as inferred sibling (siblings (shared parent)) through rule `shared-parent-sibling`.
+- Pair summary: P90 Mohamed Imaduddine V (Keerithi Maha Radun) and P129 Princess Veyogey Dhon Goma are modeled as inferred sibling (siblings (shared parent)) through rule `shared-parent-sibling`.
 - Historical/dynastic context: Huraagey -> Huraagey
 - Rule basis status: resolved (1 supporting edge).
 
 ## 3) Logic chain (pair-specific)
 1. Support set for rule shared-parent-sibling resolved as follows.
 2. Supporting edge: parent P87 Ibrahim Nooredine (Keerithi Maha Radun) -> P90 Mohamed Imaduddine V (Keerithi Maha Radun) (CLM-0365, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P87 Ibrahim Nooredine as parent of P90 Mohamed Imaduddine V.
-3. Rule application (shared-parent-sibling): because both endpoints share parent P87 Ibrahim Nooredine (Keerithi Maha Radun), P129 Princess Veyogey Dhon Goma and P90 Mohamed Imaduddine V (Keerithi Maha Radun) are modeled as inferred sibling-line kin.
+3. Rule application (shared-parent-sibling): because both endpoints share parent P87 Ibrahim Nooredine (Keerithi Maha Radun), P90 Mohamed Imaduddine V (Keerithi Maha Radun) and P129 Princess Veyogey Dhon Goma are modeled as inferred sibling-line kin.
 4. Current modeling remains inferred because direct source text naming sibling (siblings (shared parent)) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -29,7 +29,7 @@ Inference class: `rule-derived`
 - Model-retention rationale: keep the edge inferred until pairwise direct wording is captured.
 
 ## 5) Verification checklist
-- Promotion requirement: explicit A/B source wording naming P129 Princess Veyogey Dhon Goma and P90 Mohamed Imaduddine V (Keerithi Maha Radun) as sibling (siblings (shared parent)).
+- Promotion requirement: explicit A/B source wording naming P90 Mohamed Imaduddine V (Keerithi Maha Radun) and P129 Princess Veyogey Dhon Goma as sibling (siblings (shared parent)).
 - Downgrade/removal trigger: source-backed changes to any support edge used by rule shared-parent-sibling.
 - Review cadence: recompute after any parent/sibling edge change in this local branch.
 

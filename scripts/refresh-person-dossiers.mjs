@@ -6,7 +6,8 @@ import { fileURLToPath } from 'node:url';
 import { getDataset } from '../src/data/sovereigns.merge.js';
 import { sourceById } from '../src/data/sources.js';
 
-const DATE = '2026-02-08';
+const inputDate = process.argv.slice(2).find(v => /^\d{4}-\d{2}-\d{2}$/.test(v));
+const DATE = inputDate || new Date().toISOString().slice(0, 10);
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const rootDir = join(__dirname, '..');
 const peopleDir = join(rootDir, 'docs', 'research-program', 'people');

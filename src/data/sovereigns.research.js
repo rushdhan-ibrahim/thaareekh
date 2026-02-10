@@ -3692,5 +3692,39 @@ export const edges = [
     evidence_refs: ['SRC-WIKI-ABBAS-IBRAHIM', 'SRC-EDITION-NASREENA-SISTER'],
     claim_type: 'direct',
     confidence_grade: 'B'
+  },
+  // Legacy dossier/ledger-only variants retained as explicit contested edges in research mode.
+  {
+    t: 'parent',
+    s: 'P40',
+    d: 'P41',
+    l: 'reported alternate parent claim',
+    c: 'u',
+    evidence_refs: ['SRC-MRF-KINGS'],
+    claim_type: 'contested',
+    confidence_grade: 'D',
+    event_context: 'research-parity:legacy-ledger-claim'
+  },
+  {
+    t: 'parent',
+    s: 'P46',
+    d: 'P50',
+    l: 'reported alternate parent claim',
+    c: 'u',
+    evidence_refs: ['SRC-MRF-KINGS'],
+    claim_type: 'contested',
+    confidence_grade: 'D',
+    event_context: 'research-parity:legacy-ledger-claim'
+  },
+  {
+    t: 'sibling',
+    s: 'P16',
+    d: 'P18',
+    l: 'half-brothers',
+    c: 'u',
+    evidence_refs: ['SRC-MRF-KINGS'],
+    claim_type: 'contested',
+    confidence_grade: 'D',
+    event_context: 'research-parity:legacy-ledger-claim'
   }
 ];

@@ -1,19 +1,19 @@
 # Inference Dossier
 
-Edge key: `kin|P126|P127|grandparent`  
-Last updated: `2026-02-08`  
+Edge key: `kin|P127|P126|grandparent`  
+Last updated: `2026-02-10`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
 - Relation type: kin
-- Source node: P126 Zaya Laila Nasheed
-- Target node: P127 Abdul Sattar Umar
+- Source node: P127 Abdul Sattar Umar
+- Target node: P126 Zaya Laila Nasheed
 - Label: grandparent
 - Current confidence marker (`c/i/u`): i
 - Current grade (`A/B/C/D`): C
 
 ## 2) Why this specific pair is modeled
-- Pair summary: P126 Zaya Laila Nasheed and P127 Abdul Sattar Umar are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
+- Pair summary: P127 Abdul Sattar Umar and P126 Zaya Laila Nasheed are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
 - Historical/dynastic context: Modern -> Modern
 - Rule basis status: resolved (2 supporting edges).
 
@@ -21,7 +21,7 @@ Inference class: `rule-derived`
 1. Support set for rule parent-of-parent-grandparent resolved as follows.
 2. Supporting edge: parent P127 Abdul Sattar Umar -> P122 Mohamed Nasheed (CLM-0258, SRC-ATOLL-NASHEED-PARENTS, grade B); excerpt: Atoll Times report names Mohamed Nasheed’s father as Abdul Sattar Umar. (pair: P127 Abdul Sattar Umar -> P122 Mohamed Nasheed).
 3. Supporting edge: parent P122 Mohamed Nasheed -> P126 Zaya Laila Nasheed (CLM-0255, SRC-WIKI-NASHEED, grade B); excerpt: Wikipedia raw infobox issue field lists Zaya Laila Nasheed as child of Mohamed Nasheed. (pair: P122 Mohamed Nasheed -> P126 Zaya Laila Nasheed).
-4. Rule application (parent-of-parent-grandparent): with source -> P122 Mohamed Nasheed and P122 Mohamed Nasheed -> target parent links, P126 Zaya Laila Nasheed is modeled as inferred grandparent-line kin of P127 Abdul Sattar Umar.
+4. Rule application (parent-of-parent-grandparent): with source -> P122 Mohamed Nasheed and P122 Mohamed Nasheed -> target parent links, P127 Abdul Sattar Umar is modeled as inferred grandparent-line kin of P126 Zaya Laila Nasheed.
 5. Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -30,7 +30,7 @@ Inference class: `rule-derived`
 - Model-retention rationale: keep the edge inferred until pairwise direct wording is captured.
 
 ## 5) Verification checklist
-- Promotion requirement: explicit A/B source wording naming P126 Zaya Laila Nasheed and P127 Abdul Sattar Umar as kin (grandparent).
+- Promotion requirement: explicit A/B source wording naming P127 Abdul Sattar Umar and P126 Zaya Laila Nasheed as kin (grandparent).
 - Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.
 - Review cadence: recompute after any parent/sibling edge change in this local branch.
 

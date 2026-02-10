@@ -1,26 +1,26 @@
 # Inference Dossier
 
-Edge key: `kin|P190|P87|grandparent`  
-Last updated: `2026-02-08`  
+Edge key: `kin|P87|P190|grandparent`  
+Last updated: `2026-02-10`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
 - Relation type: kin
-- Source node: P190 Hassan Fareed Didi
-- Target node: P87 Ibrahim Nooredine (Keerithi Maha Radun)
+- Source node: P87 Ibrahim Nooredine (Keerithi Maha Radun)
+- Target node: P190 Hassan Fareed Didi
 - Label: grandparent
 - Current confidence marker (`c/i/u`): i
 - Current grade (`A/B/C/D`): C
 
 ## 2) Why this specific pair is modeled
-- Pair summary: P190 Hassan Fareed Didi and P87 Ibrahim Nooredine (Keerithi Maha Radun) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
+- Pair summary: P87 Ibrahim Nooredine (Keerithi Maha Radun) and P190 Hassan Fareed Didi are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
 - Historical/dynastic context: Huraagey -> Huraagey
 - Rule basis status: resolved (1 supporting edge).
 
 ## 3) Logic chain (pair-specific)
 1. Support set for rule parent-of-parent-grandparent resolved as follows.
 2. Supporting edge: parent P129 Princess Veyogey Dhon Goma -> P190 Hassan Fareed Didi (CLM-0260, SRC-WIKI-HASSAN-FARID, grade B); excerpt: Hassan Farid Didi family/genealogy content lists P129 Princess Veyogey Dhon Goma as parent of P190 Hassan Fareed Didi.
-3. Rule application (parent-of-parent-grandparent): with source -> P129 Princess Veyogey Dhon Goma and P129 Princess Veyogey Dhon Goma -> target parent links, P190 Hassan Fareed Didi is modeled as inferred grandparent-line kin of P87 Ibrahim Nooredine (Keerithi Maha Radun).
+3. Rule application (parent-of-parent-grandparent): with source -> P129 Princess Veyogey Dhon Goma and P129 Princess Veyogey Dhon Goma -> target parent links, P87 Ibrahim Nooredine (Keerithi Maha Radun) is modeled as inferred grandparent-line kin of P190 Hassan Fareed Didi.
 4. Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -29,7 +29,7 @@ Inference class: `rule-derived`
 - Model-retention rationale: keep the edge inferred until pairwise direct wording is captured.
 
 ## 5) Verification checklist
-- Promotion requirement: explicit A/B source wording naming P190 Hassan Fareed Didi and P87 Ibrahim Nooredine (Keerithi Maha Radun) as kin (grandparent).
+- Promotion requirement: explicit A/B source wording naming P87 Ibrahim Nooredine (Keerithi Maha Radun) and P190 Hassan Fareed Didi as kin (grandparent).
 - Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.
 - Review cadence: recompute after any parent/sibling edge change in this local branch.
 

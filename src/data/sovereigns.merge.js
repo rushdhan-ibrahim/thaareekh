@@ -3,6 +3,7 @@ import { people as researchPeople, edges as researchEdges } from './sovereigns.r
 import { profileEnrichmentById } from './profile.enrichments.js';
 
 const VALID_MODES = new Set(['canonical', 'research']);
+const UNDIRECTED_EDGE_TYPES = new Set(['sibling', 'spouse', 'kin']);
 
 export function resolveDataMode() {
   if (typeof window === 'undefined') return 'canonical';
@@ -10,15 +11,78 @@ export function resolveDataMode() {
   return VALID_MODES.has(mode) ? mode : 'canonical';
 }
 
-function mergePeople(base, extra) {
-  const seen = new Set(base.map(p => p.id));
-  const out = base.slice();
-  extra.forEach(p => {
-    if (!seen.has(p.id)) {
-      seen.add(p.id);
-      out.push(p);
-    }
+function hasMeaningfulValue(v) {
+  if (v == null) return false;
+  if (typeof v === 'string') return v.trim() !== '';
+  if (Array.isArray(v)) return v.length > 0;
+  if (typeof v === 'object') return Object.keys(v).length > 0;
+  return true;
+}
+
+function mergeRoyalLink(base, extra) {
+  if (!base && !extra) return undefined;
+  const merged = { ...(base || {}) };
+  Object.entries(extra || {}).forEach(([k, v]) => {
+    if (hasMeaningfulValue(v)) merged[k] = v;
   });
+  return merged;
+}
+
+function mergePersonRecords(base, extra) {
+  if (!base) return { ...extra };
+  if (!extra) return { ...base };
+
+  const merged = { ...base };
+
+  Object.entries(extra).forEach(([k, v]) => {
+    if (k === 'aliases'
+      || k === 'regnal_names'
+      || k === 'titles'
+      || k === 'facts'
+      || k === 'source_refs'
+      || k === 'known_as'
+      || k === 'offices_held'
+      || k === 'royal_link') {
+      return;
+    }
+    if (hasMeaningfulValue(v)) merged[k] = v;
+  });
+
+  merged.aliases = uniqStrings([...(base.aliases || []), ...(extra.aliases || [])]);
+  merged.regnal_names = uniqStrings([...(base.regnal_names || []), ...(extra.regnal_names || [])]);
+  merged.titles = uniqStrings([...(base.titles || []), ...(extra.titles || [])]);
+  merged.facts = uniqStrings([...(base.facts || []), ...(extra.facts || [])]);
+  merged.source_refs = uniqStrings([...(base.source_refs || []), ...(extra.source_refs || [])]);
+
+  const knownAs = normalizeKnownAs([...(base.known_as || []), ...(extra.known_as || [])]);
+  if (knownAs.length) merged.known_as = knownAs;
+
+  const offices = mergeOfficeAssignments(base.offices_held, extra.offices_held);
+  if (offices.length) merged.offices_held = offices;
+
+  const royalLink = mergeRoyalLink(base.royal_link, extra.royal_link);
+  if (royalLink) merged.royal_link = royalLink;
+
+  return merged;
+}
+
+function mergePeople(base, extra) {
+  const out = [];
+  const byId = new Map();
+  const order = [];
+
+  base.forEach(p => {
+    byId.set(p.id, { ...p });
+    order.push(p.id);
+  });
+
+  extra.forEach(p => {
+    const existing = byId.get(p.id);
+    byId.set(p.id, mergePersonRecords(existing, p));
+    if (!existing) order.push(p.id);
+  });
+
+  order.forEach(id => out.push(byId.get(id)));
   return out;
 }
 
@@ -87,7 +151,12 @@ function applyPeopleEnrichments(list) {
 }
 
 function edgeKey(e) {
-  return [e.t, e.s, e.d, e.l || '', e.c, e.claim_type || '', e.confidence_grade || ''].join('|');
+  let s = e.s;
+  let d = e.d;
+  if (UNDIRECTED_EDGE_TYPES.has(e.t)) {
+    [s, d] = [s, d].sort();
+  }
+  return [e.t, s, d, e.l || '', e.c, e.claim_type || '', e.confidence_grade || ''].join('|');
 }
 
 function mergeEdges(base, extra) {

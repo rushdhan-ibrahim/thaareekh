@@ -1,54 +1,51 @@
 # Inference Dossier
 
 Edge key: `sibling|P19|P25|half-siblings`  
-Last updated: `2026-02-08`  
+Last updated: `2026-02-10`  
 Inference class: `curated`
 
 ## 1) Edge identity
 - Relation type: sibling
-- Source node: Ahmed Shihabuddine (P19)
-- Target node: Raadhaafathi (P25)
+- Source node: P19 Ahmed Shihabuddine (Loka Aadheeththa)
+- Target node: P25 Raadhaafathi (Suvama Abarana)
 - Label: half-siblings
 - Current confidence marker (`c/i/u`): i
 - Current grade (`A/B/C/D`): C
 
 ## 2) Why this specific pair is modeled
-- Pair summary: This edge preserves a half-sibling interpretation for P19 and P25 because both are linked to P18 and nearby sibling notes indicate mixed full/half sibling patterns in the same household cluster.
-- Historical/dynastic context: Lunar household branch around P18 with mixed sibling annotations.
-- Immediate claim anchors used for this pair review:
-- CLM-0316: parent Omar Veeru (P18) -> Ahmed Shihabuddine (P19) (SRC-MRF-KINGS, grade B)
-- CLM-0318: parent Omar Veeru (P18) -> Raadhaafathi (P25) (SRC-MRF-KINGS, grade B)
-- CLM-0427: sibling Khadijah (P20) -> Raadhaafathi (P25) [half-sisters] (SRC-MRF-KINGS, grade B)
+- Pair summary: P19 Ahmed Shihabuddine (Loka Aadheeththa) and P25 Raadhaafathi (Suvama Abarana) are modeled as `sibling` with label `half-siblings` to preserve a targeted continuity claim without over-promoting certainty.
+- Historical/dynastic context: Lunar -> Lunar
+- Immediate direct-claim anchors around these nodes:
+- CLM-0316: parent P18 Omar Veeru (Loka Abarana) -> P19 Ahmed Shihabuddine (Loka Aadheeththa) (SRC-MRF-KINGS, grade B)
+- CLM-0318: parent P18 Omar Veeru (Loka Abarana) -> P25 Raadhaafathi (Suvama Abarana) (SRC-MRF-KINGS, grade B)
+- CLM-0417: sibling P19 Ahmed Shihabuddine (Loka Aadheeththa) <-> P20 Khadijah (Raadha Abarana) [siblings] (SRC-MRF-KINGS, grade B)
+- CLM-0427: sibling P20 Khadijah (Raadha Abarana) <-> P25 Raadhaafathi (Suvama Abarana) [half-sisters] (SRC-MRF-KINGS, grade B)
+- CLM-0470: spouse P25 Raadhaafathi (Suvama Abarana) <-> P26 Mohamed of Maakurathu (Sundhura Abarana) [married] (SRC-MRF-KINGS, grade B)
+- CLM-0595: parent P25 Raadhaafathi (Suvama Abarana) -> P27 Dhaain (Keerithi Maha Rehendi) (SRC-ROYALARK-MALDIVES, grade B)
 
 ## 3) Logic chain (pair-specific)
-1. This pair is retained as inferred sibling (half-siblings) because the model has contextual and adjacency support but lacks a single direct sentence that states this exact pairwise relation class.
-2. Supporting claim CLM-0316: parent Omar Veeru (P18) -> Ahmed Shihabuddine (P19) (SRC-MRF-KINGS, grade B); excerpt: Kings list gives P19 as child of P18.
-3. Supporting claim CLM-0318: parent Omar Veeru (P18) -> Raadhaafathi (P25) (SRC-MRF-KINGS, grade B); excerpt: Kings list gives P25 as child of P18 in the same household branch.
-4. Supporting claim CLM-0427: sibling Khadijah (P20) -> Raadhaafathi (P25) [half-sisters] (SRC-MRF-KINGS, grade B); excerpt: Kings list marks P20 and P25 as half-sisters.
-5. Combined interpretation: these anchors keep the pair in-model as inferred sibling (half-siblings), but not promoted to confirmed until explicit pairwise wording is found.
-6. Current state decision: maintain `i` with active verification, because evidence is suggestive and structured but not yet direct for this exact pair statement.
+1. Shortest direct-claim support path (2 steps) linking this pair:
+2. - parent P19 Ahmed Shihabuddine (Loka Aadheeththa) -> P18 Omar Veeru (Loka Abarana) (CLM-0316, SRC-MRF-KINGS)
+3. - parent P18 Omar Veeru (Loka Abarana) -> P25 Raadhaafathi (Suvama Abarana) (CLM-0318, SRC-MRF-KINGS)
+4. This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.
+5. Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P19 Ahmed Shihabuddine (Loka Aadheeththa) and P25 Raadhaafathi (Suvama Abarana) is still absent.
 
 ## 4) Alternative interpretations
-- They may be full siblings if maternal evidence eventually aligns.
-- They may be broader household kin rather than strict sibling relation.
-- If direct text says full siblings or non-siblings, revise the label.
+- Possible competing interpretation: half-sibling or cousin if shared-parent evidence is partial rather than full.
+- Competing interpretation trigger: direct wording that uses non-sibling kin terminology for this pair.
+- Model-retention rationale: keep the edge as inferred until explicit pairwise wording is located.
 
 ## 5) Verification checklist
-- Promotion requirement: Direct A/B wording naming P19 and P25 as half-siblings (or explicit sibling class).
-- Downgrade/removal trigger: Evidence that one endpoint is not child of P18 or that sibling class is incompatible.
-- Review cadence: Re-check when Lunar family-structure citations are expanded with line-level extracts.
+- Promotion requirement: an A/B source statement explicitly naming P19 Ahmed Shihabuddine (Loka Aadheeththa) and P25 Raadhaafathi (Suvama Abarana) with relation class `sibling` (half-siblings).
+- Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.
+- Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster.
 
 ## 6) Source basis
-- `SRC-MRF-KINGS (Maldives Kings List)`
+- `SRC-MRF-KINGS` (Maldives Kings List)
 - Primary inferred claim row: CLM-0418
 - Inferred claim locator: Inference synthesis from SRC-MRF-KINGS entries #19/#20/#25
-- Supporting direct-claim locators reviewed:
-- CLM-0316: SRC-MRF-KINGS entries #18-#19 lineage note. URL anchor: https://r.jina.ai/http://maldivesroyalfamily.com/maldives_kings_list.full.shtml. Node pair: P18 Omar Veeru <-> P19 Ahmed Shihabuddine (parent), 2026-02-08 snapshot.
-- CLM-0318: SRC-MRF-KINGS entries #18 and #25 lineage note. URL anchor: https://r.jina.ai/http://maldivesroyalfamily.com/maldives_kings_list.full.shtml. Node pair: P18 Omar Veeru <-> P25 Raadhaafathi (parent), 2026-02-08 snapshot.
-- CLM-0427: SRC-MRF-KINGS entries #20 and #25 kin annotation. URL anchor: https://r.jina.ai/http://maldivesroyalfamily.com/maldives_kings_list.full.shtml. Node pair: P20 Khadijah <-> P25 Raadhaafathi (sibling (half-sisters)), 2026-…
 
 ## 7) Integration notes
-- `src/data/inference-notes.js` summary update needed: yes (keep wording aligned with this curated rationale).
-- Edge label/type update needed: no (pending direct pairwise wording).
-- Canonical promotion candidate: no (remains inferred).
-- Verification priority level: medium-high
+- `src/data/inference-notes.js` summary should be synced if relation wording changes after verification.
+- Canonical promotion candidate: no (remains inferred until explicit pairwise wording is captured).
+- Verification priority level: high (current grade C)

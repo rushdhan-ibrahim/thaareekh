@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `kin|P139|P183|cousins`  
-Last updated: `2026-02-08`  
+Last updated: `2026-02-10`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity

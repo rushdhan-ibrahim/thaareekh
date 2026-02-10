@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `kin|P31|P41|aunt/uncle↔niece/nephew`  
-Last updated: `2026-02-08`  
+Last updated: `2026-02-10`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
@@ -19,8 +19,8 @@ Inference class: `rule-derived`
 
 ## 3) Logic chain (pair-specific)
 1. Support set for rule parent-sibling-aunt-uncle resolved as follows.
-2. Supporting edge: parent P40 Aboobakuru (Bavana Sooja) -> P41 Hadi Hassan (Raadha Veeru) (CLM-0338, SRC-MRF-KINGS, grade B); excerpt: Kings list records parent edge P40 to P41.
-3. Rule application (parent-sibling-aunt-uncle): sibling(P40 Aboobakuru (Bavana Sooja), P31 Ibrahim (Dhammaru Veeru)) plus parent(P40 Aboobakuru (Bavana Sooja), child) yields inferred aunt/uncle-line kin between P31 Ibrahim (Dhammaru Veeru) and P41 Hadi Hassan (Raadha Veeru).
+2. Supporting edge: parent P39 Yoosuf (Loka Aananadha) -> P41 Hadi Hassan (Raadha Veeru) (CLM-0596, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Yoosuf as parent of Hadi Hassan.
+3. Rule application (parent-sibling-aunt-uncle): sibling(P39 Yoosuf (Loka Aananadha), P31 Ibrahim (Dhammaru Veeru)) plus parent(P39 Yoosuf (Loka Aananadha), child) yields inferred aunt/uncle-line kin between P31 Ibrahim (Dhammaru Veeru) and P41 Hadi Hassan (Raadha Veeru).
 4. Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -35,7 +35,7 @@ Inference class: `rule-derived`
 
 ## 6) Source basis
 - `SRC-DERIVED-RULES` (Derived family relation rules)
-- `SRC-MRF-KINGS` (Maldives Kings List)
+- `SRC-ROYALARK-MALDIVES` (RoyalArk Maldives — Complete Genealogical Database (segments 3-16))
 - Primary inferred claim row: CLM-0146
 - Inferred claim locator: Inference basis: parent-sibling-aunt-uncle (see docs/research-program/inferences/kin-p31-p41-aunt-uncle-niece-nephew.md).
 

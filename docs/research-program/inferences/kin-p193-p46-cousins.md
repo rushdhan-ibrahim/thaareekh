@@ -1,19 +1,19 @@
 # Inference Dossier
 
-Edge key: `kin|P193|P46|cousins`  
-Last updated: `2026-02-08`  
+Edge key: `kin|P46|P193|cousins`  
+Last updated: `2026-02-10`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
 - Relation type: kin
-- Source node: P193 Princess Recca
-- Target node: P46 Omar (Loka Sundhura)
+- Source node: P46 Omar (Loka Sundhura)
+- Target node: P193 Princess Recca
 - Label: cousins
 - Current confidence marker (`c/i/u`): i
 - Current grade (`A/B/C/D`): C
 
 ## 2) Why this specific pair is modeled
-- Pair summary: P193 Princess Recca and P46 Omar (Loka Sundhura) are modeled as inferred kin (cousins) through rule `children-of-siblings-cousin`.
+- Pair summary: P46 Omar (Loka Sundhura) and P193 Princess Recca are modeled as inferred kin (cousins) through rule `children-of-siblings-cousin`.
 - Historical/dynastic context: Hilaaly -> Hilaaly
 - Rule basis status: resolved (3 supporting edges).
 
@@ -22,7 +22,7 @@ Inference class: `rule-derived`
 2. Supporting edge: parent P39 Yoosuf (Loka Aananadha) -> P46 Omar (Loka Sundhura) (CLM-0336, SRC-MRF-KINGS, grade B); excerpt: Kings list records parent edge P39 to P46.
 3. Supporting edge: parent P40 Aboobakuru (Bavana Sooja) -> P193 Princess Recca (CLM-0337, SRC-MRF-KINGS, grade B); excerpt: Kings list and Hilaaly branch notes together support parent edge P40 to P193.
 4. Supporting edge: sibling P39 Yoosuf (Loka Aananadha) <-> P40 Aboobakuru (Bavana Sooja) [half-brothers] (CLM-0432, SRC-MRF-KINGS, grade B); excerpt: Kings list marks P39 and P40 as half-brothers.
-5. Rule application (children-of-siblings-cousin): children of sibling parents P39 Yoosuf (Loka Aananadha) and P40 Aboobakuru (Bavana Sooja) are modeled as inferred cousin-line kin (P193 Princess Recca <-> P46 Omar (Loka Sundhura)).
+5. Rule application (children-of-siblings-cousin): children of sibling parents P39 Yoosuf (Loka Aananadha) and P40 Aboobakuru (Bavana Sooja) are modeled as inferred cousin-line kin (P46 Omar (Loka Sundhura) <-> P193 Princess Recca).
 6. Current modeling remains inferred because direct source text naming kin (cousins) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -31,7 +31,7 @@ Inference class: `rule-derived`
 - Model-retention rationale: keep the edge inferred until pairwise direct wording is captured.
 
 ## 5) Verification checklist
-- Promotion requirement: explicit A/B source wording naming P193 Princess Recca and P46 Omar (Loka Sundhura) as kin (cousins).
+- Promotion requirement: explicit A/B source wording naming P46 Omar (Loka Sundhura) and P193 Princess Recca as kin (cousins).
 - Downgrade/removal trigger: source-backed changes to any support edge used by rule children-of-siblings-cousin.
 - Review cadence: recompute after any parent/sibling edge change in this local branch.
 

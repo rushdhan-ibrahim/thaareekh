@@ -1,56 +1,52 @@
 # Inference Dossier
 
 Edge key: `sibling|P31|P40|brothers`  
-Last updated: `2026-02-08`  
+Last updated: `2026-02-10`  
 Inference class: `curated`
 
 ## 1) Edge identity
 - Relation type: sibling
-- Source node: Ibrahim (P31)
-- Target node: Aboobakuru (P40)
+- Source node: P31 Ibrahim (Dhammaru Veeru)
+- Target node: P40 Aboobakuru (Bavana Sooja)
 - Label: brothers
 - Current confidence marker (`c/i/u`): i
 - Current grade (`A/B/C/D`): C
 
 ## 2) Why this specific pair is modeled
-- Pair summary: This edge keeps P31 and P40 as brothers because both are modeled as children of P30, while existing notes also allow a potential half-brother interpretation pending direct wording.
-- Historical/dynastic context: Hilaaly branch continuity from P30 into the P40 collateral line.
-- Immediate claim anchors used for this pair review:
-- CLM-0333: parent Hassan (P30) -> Ibrahim (P31) (SRC-MRF-KINGS, grade B)
-- CLM-0335: parent Hassan (P30) -> Aboobakuru (P40) (SRC-MRF-KINGS, grade B)
-- CLM-0432: sibling Yoosuf (P39) -> Aboobakuru (P40) [half-brothers] (SRC-MRF-KINGS, grade B)
+- Pair summary: P31 Ibrahim (Dhammaru Veeru) and P40 Aboobakuru (Bavana Sooja) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.
+- Historical/dynastic context: Hilaaly -> Hilaaly
+- Immediate direct-claim anchors around these nodes:
+- CLM-0160: kin P40 Aboobakuru (Bavana Sooja) <-> P49 Sheikh Hassan (Raadha Fanaveeru) [grandfather] (SRC-MRF-KINGS, grade B)
+- CLM-0161: kin P40 Aboobakuru (Bavana Sooja) <-> P57 Ali (Aanandha) [grandfather] (SRC-MRF-KINGS, grade B)
+- CLM-0333: parent P30 Hassan (Bavana) -> P31 Ibrahim (Dhammaru Veeru) (SRC-MRF-KINGS, grade B)
+- CLM-0335: parent P30 Hassan (Bavana) -> P40 Aboobakuru (Bavana Sooja) (SRC-MRF-KINGS, grade B)
+- CLM-0337: parent P40 Aboobakuru (Bavana Sooja) -> P193 Princess Recca (SRC-MRF-KINGS, grade B)
+- CLM-0432: sibling P39 Yoosuf (Loka Aananadha) <-> P40 Aboobakuru (Bavana Sooja) [half-brothers] (SRC-MRF-KINGS, grade B)
 
 ## 3) Logic chain (pair-specific)
-1. This pair is retained as inferred sibling (brothers) because the model has contextual and adjacency support but lacks a single direct sentence that states this exact pairwise relation class.
-2. Supporting claim CLM-0333: parent Hassan (P30) -> Ibrahim (P31) (SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P30 Hassan as parent of P31 Ibrahim.
-3. Supporting claim CLM-0335: parent Hassan (P30) -> Aboobakuru (P40) (SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P30 Hassan as parent of P40 Aboobakuru.
-4. Supporting claim CLM-0432: sibling Yoosuf (P39) -> Aboobakuru (P40) [half-brothers] (SRC-MRF-KINGS, grade B); excerpt: Kings list marks P39 and P40 as half-brothers.
-5. Combined interpretation: these anchors keep the pair in-model as inferred sibling (brothers), but not promoted to confirmed until explicit pairwise wording is found.
-6. Current state decision: maintain `i` with active verification, because evidence is suggestive and structured but not yet direct for this exact pair statement.
+1. Shortest direct-claim support path (2 steps) linking this pair:
+2. - parent P31 Ibrahim (Dhammaru Veeru) -> P30 Hassan (Bavana) (CLM-0333, SRC-MRF-KINGS)
+3. - parent P30 Hassan (Bavana) -> P40 Aboobakuru (Bavana Sooja) (CLM-0335, SRC-MRF-KINGS)
+4. This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.
+5. Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P31 Ibrahim (Dhammaru Veeru) and P40 Aboobakuru (Bavana Sooja) is still absent.
 
 ## 4) Alternative interpretations
-- Half-brother status is plausible and may be the correct specific label.
-- A collateral interpretation could apply if one parent assignment is revised.
-- If direct texts name a different relation class, this edge should be relabeled.
+- Possible competing interpretation: half-sibling or cousin if shared-parent evidence is partial rather than full.
+- Competing interpretation trigger: direct wording that uses non-sibling kin terminology for this pair.
+- Model-retention rationale: keep the edge as inferred until explicit pairwise wording is located.
 
 ## 5) Verification checklist
-- Promotion requirement: A/B source text explicitly naming P31 and P40 as brothers (or half-brothers).
-- Downgrade/removal trigger: Source-backed parent reassignment removing shared-parent support.
-- Review cadence: Re-check after each Hilaaly lineage corroboration batch.
+- Promotion requirement: an A/B source statement explicitly naming P31 Ibrahim (Dhammaru Veeru) and P40 Aboobakuru (Bavana Sooja) with relation class `sibling` (brothers).
+- Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.
+- Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster.
 
 ## 6) Source basis
-- `SRC-MRF-HILAALY (Royal House of Hilaaly)`
-- `SRC-WIKI-MONARCHS (List of Maldivian monarchs)`
-- `SRC-MRF-KINGS (Maldives Kings List)`
+- `SRC-MRF-HILAALY` (Royal House of Hilaaly)
+- `SRC-WIKI-MONARCHS` (List of Maldivian monarchs)
 - Primary inferred claim row: CLM-0430
 - Inferred claim locator: Inference synthesis from SRC-MRF-HILAALY with corroborative sequence context
-- Supporting direct-claim locators reviewed:
-- CLM-0333: SRC-MRF-KINGS r.jina mirror (https://r.jina.ai/http://maldivesroyalfamily.com/maldives_kings_list.full.shtml), dynasty/lineage entry context for P30 Hassan and P31 Ibrahim (parent) in 2026-02-08 snapshot.
-- CLM-0335: SRC-MRF-KINGS r.jina mirror (https://r.jina.ai/http://maldivesroyalfamily.com/maldives_kings_list.full.shtml), dynasty/lineage entry context for P30 Hassan and P40 Aboobakuru (parent) in 2026-02-08 snapshot.
-- CLM-0432: SRC-MRF-KINGS entries for P39-P40 kin annotation
 
 ## 7) Integration notes
-- `src/data/inference-notes.js` summary update needed: yes (keep wording aligned with this curated rationale).
-- Edge label/type update needed: no (pending direct pairwise wording).
-- Canonical promotion candidate: no (remains inferred).
-- Verification priority level: high (branch-sensitive Hilaaly relation)
+- `src/data/inference-notes.js` summary should be synced if relation wording changes after verification.
+- Canonical promotion candidate: no (remains inferred until explicit pairwise wording is captured).
+- Verification priority level: high (current grade C)

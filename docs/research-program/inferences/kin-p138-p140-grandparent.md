@@ -1,27 +1,27 @@
 # Inference Dossier
 
-Edge key: `kin|P138|P140|grandparent`  
-Last updated: `2026-02-08`  
+Edge key: `kin|P140|P138|grandparent`  
+Last updated: `2026-02-10`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
 - Relation type: kin
-- Source node: P138 Dhadimagu Ganduvaru Maryam Didi
-- Target node: P140 Al-Nabeel Karayye Hassan Didi
+- Source node: P140 Al-Nabeel Karayye Hassan Didi
+- Target node: P138 Dhadimagu Ganduvaru Maryam Didi
 - Label: grandparent
 - Current confidence marker (`c/i/u`): i
 - Current grade (`A/B/C/D`): C
 
 ## 2) Why this specific pair is modeled
-- Pair summary: P138 Dhadimagu Ganduvaru Maryam Didi and P140 Al-Nabeel Karayye Hassan Didi are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
-- Historical/dynastic context: Modern -> Dhiyamigili-South
+- Pair summary: P140 Al-Nabeel Karayye Hassan Didi and P138 Dhadimagu Ganduvaru Maryam Didi are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
+- Historical/dynastic context: Dhiyamigili-South -> Modern
 - Rule basis status: resolved (2 supporting edges).
 
 ## 3) Logic chain (pair-specific)
 1. Support set for rule parent-of-parent-grandparent resolved as follows.
 2. Supporting edge: parent P140 Al-Nabeel Karayye Hassan Didi -> P139 Hussain Didi (CLM-0275, SRC-WIKI-IBRAHIM-NASIR, grade B); excerpt: Ibrahim Nasir family/genealogy content lists P140 Al-Nabeel Karayye Hassan Didi as parent of P139 Hussain Didi.
 3. Supporting edge: parent P139 Hussain Didi -> P138 Dhadimagu Ganduvaru Maryam Didi (CLM-0274, SRC-WIKI-IBRAHIM-NASIR, grade B); excerpt: Ibrahim Nasir family/genealogy content lists P139 Hussain Didi as parent of P138 Dhadimagu Ganduvaru Maryam Didi.
-4. Rule application (parent-of-parent-grandparent): with source -> P139 Hussain Didi and P139 Hussain Didi -> target parent links, P138 Dhadimagu Ganduvaru Maryam Didi is modeled as inferred grandparent-line kin of P140 Al-Nabeel Karayye Hassan Didi.
+4. Rule application (parent-of-parent-grandparent): with source -> P139 Hussain Didi and P139 Hussain Didi -> target parent links, P140 Al-Nabeel Karayye Hassan Didi is modeled as inferred grandparent-line kin of P138 Dhadimagu Ganduvaru Maryam Didi.
 5. Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -30,7 +30,7 @@ Inference class: `rule-derived`
 - Model-retention rationale: keep the edge inferred until pairwise direct wording is captured.
 
 ## 5) Verification checklist
-- Promotion requirement: explicit A/B source wording naming P138 Dhadimagu Ganduvaru Maryam Didi and P140 Al-Nabeel Karayye Hassan Didi as kin (grandparent).
+- Promotion requirement: explicit A/B source wording naming P140 Al-Nabeel Karayye Hassan Didi and P138 Dhadimagu Ganduvaru Maryam Didi as kin (grandparent).
 - Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.
 - Review cadence: recompute after any parent/sibling edge change in this local branch.
 

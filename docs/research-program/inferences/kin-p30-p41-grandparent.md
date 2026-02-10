@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `kin|P30|P41|grandparent`  
-Last updated: `2026-02-08`  
+Last updated: `2026-02-10`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
@@ -19,9 +19,9 @@ Inference class: `rule-derived`
 
 ## 3) Logic chain (pair-specific)
 1. Support set for rule parent-of-parent-grandparent resolved as follows.
-2. Supporting edge: parent P30 Hassan (Bavana) -> P40 Aboobakuru (Bavana Sooja) (CLM-0335, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P30 Hassan as parent of P40 Aboobakuru.
-3. Supporting edge: parent P40 Aboobakuru (Bavana Sooja) -> P41 Hadi Hassan (Raadha Veeru) (CLM-0338, SRC-MRF-KINGS, grade B); excerpt: Kings list records parent edge P40 to P41.
-4. Rule application (parent-of-parent-grandparent): with source -> P40 Aboobakuru (Bavana Sooja) and P40 Aboobakuru (Bavana Sooja) -> target parent links, P30 Hassan (Bavana) is modeled as inferred grandparent-line kin of P41 Hadi Hassan (Raadha Veeru).
+2. Supporting edge: parent P30 Hassan (Bavana) -> P39 Yoosuf (Loka Aananadha) (CLM-0334, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P30 Hassan as parent of P39 Yoosuf.
+3. Supporting edge: parent P39 Yoosuf (Loka Aananadha) -> P41 Hadi Hassan (Raadha Veeru) (CLM-0596, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Yoosuf as parent of Hadi Hassan.
+4. Rule application (parent-of-parent-grandparent): with source -> P39 Yoosuf (Loka Aananadha) and P39 Yoosuf (Loka Aananadha) -> target parent links, P30 Hassan (Bavana) is modeled as inferred grandparent-line kin of P41 Hadi Hassan (Raadha Veeru).
 5. Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -37,6 +37,7 @@ Inference class: `rule-derived`
 ## 6) Source basis
 - `SRC-DERIVED-RULES` (Derived family relation rules)
 - `SRC-MRF-KINGS` (Maldives Kings List)
+- `SRC-ROYALARK-MALDIVES` (RoyalArk Maldives — Complete Genealogical Database (segments 3-16))
 - Primary inferred claim row: CLM-0143
 - Inferred claim locator: Inference basis: parent-of-parent-grandparent (see docs/research-program/inferences/kin-p30-p41-grandparent.md).
 

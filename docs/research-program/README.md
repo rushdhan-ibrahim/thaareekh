@@ -19,10 +19,14 @@ This folder is the working area for the deep research drive defined in `docs/dee
 - `source-coverage-audit-*.md`: source concentration and coverage-gap audits.
 
 ## Usage flow
-1. Update source records and citations first.
-2. Fill or revise person/concept/inference dossiers.
-3. Reflect claim-level updates in ledgers.
-4. Run QA and promotion checks before canonical promotion.
+1. Update graph/source records and citations first.
+2. Run `node scripts/reconcile-research-ledgers.mjs` to sync person/relationship/inference/concept ledgers with the current research graph.
+3. Regenerate pair dossiers and inference notes:
+   - `node scripts/refresh-curated-inference-dossiers.mjs`
+   - `node scripts/refresh-derived-inference-dossiers.mjs`
+   - `node scripts/sync-curated-inference-notes.mjs`
+4. Refresh person dossiers when needed: `node scripts/refresh-person-dossiers.mjs`.
+5. Run QA and promotion checks before canonical promotion.
 
 ## Ledger safety
 - `node scripts/research-baseline-report.mjs` updates only baseline metric markdown by default.
@@ -32,3 +36,7 @@ This folder is the working area for the deep research drive defined in `docs/dee
 - Every inferred edge in data must map to exactly one dossier in `inferences/`.
 - Every person in the graph must map to one dossier in `people/`.
 - Every edge claim in data must have a row in relationship evidence ledger.
+
+## Reconciliation safety
+- `scripts/reconcile-research-ledgers.mjs` archives stale relationship/inference ledger rows under `ledgers/archive/` before final write.
+- Archived inference markdown files from tracker drift are stored under `inferences/archive-YYYY-MM-DD/`.

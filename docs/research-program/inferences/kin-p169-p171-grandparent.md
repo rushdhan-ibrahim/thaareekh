@@ -1,19 +1,19 @@
 # Inference Dossier
 
-Edge key: `kin|P169|P171|grandparent`  
-Last updated: `2026-02-08`  
+Edge key: `kin|P171|P169|grandparent`  
+Last updated: `2026-02-10`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
 - Relation type: kin
-- Source node: P169 Sarah Ibrahim Solih
-- Target node: P171 Moomina Hassanfulhu
+- Source node: P171 Moomina Hassanfulhu
+- Target node: P169 Sarah Ibrahim Solih
 - Label: grandparent
 - Current confidence marker (`c/i/u`): i
 - Current grade (`A/B/C/D`): C
 
 ## 2) Why this specific pair is modeled
-- Pair summary: P169 Sarah Ibrahim Solih and P171 Moomina Hassanfulhu are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
+- Pair summary: P171 Moomina Hassanfulhu and P169 Sarah Ibrahim Solih are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
 - Historical/dynastic context: Modern -> Modern
 - Rule basis status: resolved (2 supporting edges).
 
@@ -21,7 +21,7 @@ Inference class: `rule-derived`
 1. Support set for rule parent-of-parent-grandparent resolved as follows.
 2. Supporting edge: parent P171 Moomina Hassanfulhu -> P167 Ibrahim Mohamed Solih (CLM-0307, SRC-EDITION-SOLIH-MOTHER, grade B); excerpt: Edition obituary report identifies Aishath Khadheeja as mother of former President Ibrahim Mohamed Solih. (pair: P171 Moomina Hassanfulhu -> P167 I...
 3. Supporting edge: parent P167 Ibrahim Mohamed Solih -> P169 Sarah Ibrahim Solih (CLM-0303, SRC-WIKI-SOLIH, grade B); excerpt: Wikipedia raw infobox issue field lists Sarah Ibrahim Solih as child of Ibrahim Mohamed Solih. (pair: P167 Ibrahim Mohamed Solih -> P169 Sarah Ibra...
-4. Rule application (parent-of-parent-grandparent): with source -> P167 Ibrahim Mohamed Solih and P167 Ibrahim Mohamed Solih -> target parent links, P169 Sarah Ibrahim Solih is modeled as inferred grandparent-line kin of P171 Moomina Hassanfulhu.
+4. Rule application (parent-of-parent-grandparent): with source -> P167 Ibrahim Mohamed Solih and P167 Ibrahim Mohamed Solih -> target parent links, P171 Moomina Hassanfulhu is modeled as inferred grandparent-line kin of P169 Sarah Ibrahim Solih.
 5. Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -30,7 +30,7 @@ Inference class: `rule-derived`
 - Model-retention rationale: keep the edge inferred until pairwise direct wording is captured.
 
 ## 5) Verification checklist
-- Promotion requirement: explicit A/B source wording naming P169 Sarah Ibrahim Solih and P171 Moomina Hassanfulhu as kin (grandparent).
+- Promotion requirement: explicit A/B source wording naming P171 Moomina Hassanfulhu and P169 Sarah Ibrahim Solih as kin (grandparent).
 - Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.
 - Review cadence: recompute after any parent/sibling edge change in this local branch.
 

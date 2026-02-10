@@ -1,19 +1,19 @@
 # Inference Dossier
 
-Edge key: `kin|P150|P199|aunt/uncle↔niece/nephew`  
-Last updated: `2026-02-08`  
+Edge key: `kin|P199|P150|aunt/uncle↔niece/nephew`  
+Last updated: `2026-02-10`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
 - Relation type: kin
-- Source node: P150 Dunya Maumoon
-- Target node: P199 Abbas Ibrahim
+- Source node: P199 Abbas Ibrahim
+- Target node: P150 Dunya Maumoon
 - Label: aunt/uncle↔niece/nephew
 - Current confidence marker (`c/i/u`): i
 - Current grade (`A/B/C/D`): C
 
 ## 2) Why this specific pair is modeled
-- Pair summary: P150 Dunya Maumoon and P199 Abbas Ibrahim are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.
+- Pair summary: P199 Abbas Ibrahim and P150 Dunya Maumoon are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.
 - Historical/dynastic context: Modern -> Modern
 - Rule basis status: resolved (2 supporting edges).
 
@@ -21,7 +21,7 @@ Inference class: `rule-derived`
 1. Support set for rule parent-sibling-aunt-uncle resolved as follows.
 2. Supporting edge: parent P149 Nasreena Ibrahim -> P150 Dunya Maumoon (CLM-0281, SRC-WIKI-MAUMOON, grade B); excerpt: Wikipedia raw infobox spouse and issue fields support Nasreena Ibrahim as spouse in the child list including Dunya Maumoon. (pair: P149 Nasreena Ib...
 3. Supporting edge: sibling P149 Nasreena Ibrahim <-> P199 Abbas Ibrahim [siblings] (CLM-0399, SRC-WIKI-ABBAS-IBRAHIM, grade B); excerpt: Abbas Ibrahim family/genealogy content links P149 Nasreena Ibrahim and P199 Abbas Ibrahim as siblings (siblings).
-4. Rule application (parent-sibling-aunt-uncle): sibling(P149 Nasreena Ibrahim, P199 Abbas Ibrahim) plus parent(P149 Nasreena Ibrahim, child) yields inferred aunt/uncle-line kin between P150 Dunya Maumoon and P199 Abbas Ibrahim.
+4. Rule application (parent-sibling-aunt-uncle): sibling(P149 Nasreena Ibrahim, P199 Abbas Ibrahim) plus parent(P149 Nasreena Ibrahim, child) yields inferred aunt/uncle-line kin between P199 Abbas Ibrahim and P150 Dunya Maumoon.
 5. Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -30,7 +30,7 @@ Inference class: `rule-derived`
 - Model-retention rationale: keep the edge inferred until pairwise direct wording is captured.
 
 ## 5) Verification checklist
-- Promotion requirement: explicit A/B source wording naming P150 Dunya Maumoon and P199 Abbas Ibrahim as kin (aunt/uncle↔niece/nephew).
+- Promotion requirement: explicit A/B source wording naming P199 Abbas Ibrahim and P150 Dunya Maumoon as kin (aunt/uncle↔niece/nephew).
 - Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.
 - Review cadence: recompute after any parent/sibling edge change in this local branch.
 

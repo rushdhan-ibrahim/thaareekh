@@ -1,19 +1,19 @@
 # Inference Dossier
 
-Edge key: `kin|P193|P30|grandparent`  
-Last updated: `2026-02-08`  
+Edge key: `kin|P30|P193|grandparent`  
+Last updated: `2026-02-10`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
 - Relation type: kin
-- Source node: P193 Princess Recca
-- Target node: P30 Hassan (Bavana)
+- Source node: P30 Hassan (Bavana)
+- Target node: P193 Princess Recca
 - Label: grandparent
 - Current confidence marker (`c/i/u`): i
 - Current grade (`A/B/C/D`): C
 
 ## 2) Why this specific pair is modeled
-- Pair summary: P193 Princess Recca and P30 Hassan (Bavana) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
+- Pair summary: P30 Hassan (Bavana) and P193 Princess Recca are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
 - Historical/dynastic context: Hilaaly -> Hilaaly
 - Rule basis status: resolved (2 supporting edges).
 
@@ -21,7 +21,7 @@ Inference class: `rule-derived`
 1. Support set for rule parent-of-parent-grandparent resolved as follows.
 2. Supporting edge: parent P30 Hassan (Bavana) -> P40 Aboobakuru (Bavana Sooja) (CLM-0335, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P30 Hassan as parent of P40 Aboobakuru.
 3. Supporting edge: parent P40 Aboobakuru (Bavana Sooja) -> P193 Princess Recca (CLM-0337, SRC-MRF-KINGS, grade B); excerpt: Kings list and Hilaaly branch notes together support parent edge P40 to P193.
-4. Rule application (parent-of-parent-grandparent): with source -> P40 Aboobakuru (Bavana Sooja) and P40 Aboobakuru (Bavana Sooja) -> target parent links, P193 Princess Recca is modeled as inferred grandparent-line kin of P30 Hassan (Bavana).
+4. Rule application (parent-of-parent-grandparent): with source -> P40 Aboobakuru (Bavana Sooja) and P40 Aboobakuru (Bavana Sooja) -> target parent links, P30 Hassan (Bavana) is modeled as inferred grandparent-line kin of P193 Princess Recca.
 5. Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -30,7 +30,7 @@ Inference class: `rule-derived`
 - Model-retention rationale: keep the edge inferred until pairwise direct wording is captured.
 
 ## 5) Verification checklist
-- Promotion requirement: explicit A/B source wording naming P193 Princess Recca and P30 Hassan (Bavana) as kin (grandparent).
+- Promotion requirement: explicit A/B source wording naming P30 Hassan (Bavana) and P193 Princess Recca as kin (grandparent).
 - Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.
 - Review cadence: recompute after any parent/sibling edge change in this local branch.
 

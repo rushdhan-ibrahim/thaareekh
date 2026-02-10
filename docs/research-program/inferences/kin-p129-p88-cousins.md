@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `kin|P129|P88|cousins`  
-Last updated: `2026-02-08`  
+Last updated: `2026-02-10`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
@@ -19,8 +19,8 @@ Inference class: `rule-derived`
 
 ## 3) Logic chain (pair-specific)
 1. Support set for rule children-of-siblings-cousin resolved as follows.
-2. Supporting edge: parent P155 Maandhoogey Bodu Dhorhy Manippulu -> P88 Mohamed Mueenuddine (Keerithi Maha Radun) (CLM-0288, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P155 Maandhoogey Bodu Dhorhy Manippulu as parent of P88 Mohamed Mueenuddine.
-3. Rule application (children-of-siblings-cousin): children of sibling parents P87 Ibrahim Nooredine (Keerithi Maha Radun) and P155 Maandhoogey Bodu Dhorhy Manippulu are modeled as inferred cousin-line kin (P129 Princess Veyogey Dhon Goma <-> P88 Mohamed Mueenuddine (Keerithi Maha Radun)).
+2. Supporting edge: parent P222 Hassan Izz ud-din -> P88 Mohamed Mueenuddine (Keerithi Maha Radun) (CLM-0591, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Hassan Izz ud-din as parent of Mohamed Mueenuddine.
+3. Rule application (children-of-siblings-cousin): children of sibling parents P87 Ibrahim Nooredine (Keerithi Maha Radun) and P222 Hassan Izz ud-din are modeled as inferred cousin-line kin (P129 Princess Veyogey Dhon Goma <-> P88 Mohamed Mueenuddine (Keerithi Maha Radun)).
 4. Current modeling remains inferred because direct source text naming kin (cousins) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -35,7 +35,7 @@ Inference class: `rule-derived`
 
 ## 6) Source basis
 - `SRC-DERIVED-RULES` (Derived family relation rules)
-- `SRC-MRF-KINGS` (Maldives Kings List)
+- `SRC-ROYALARK-MALDIVES` (RoyalArk Maldives — Complete Genealogical Database (segments 3-16))
 - Primary inferred claim row: CLM-0056
 - Inferred claim locator: Inference basis: children-of-siblings-cousin (see docs/research-program/inferences/kin-p129-p88-cousins.md).
 

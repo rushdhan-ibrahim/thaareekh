@@ -1,51 +1,51 @@
 # Inference Dossier
 
 Edge key: `sibling|P5|P7|brothers`  
-Last updated: `2026-02-08`  
+Last updated: `2026-02-10`  
 Inference class: `curated`
 
 ## 1) Edge identity
 - Relation type: sibling
-- Source node: Dhinei (P5)
-- Target node: Wadi (P7)
+- Source node: P5 Dhinei (Fennaadheeththa)
+- Target node: P7 Wadi (Dhagathaa Suvara)
 - Label: brothers
 - Current confidence marker (`c/i/u`): i
 - Current grade (`A/B/C/D`): C
 
 ## 2) Why this specific pair is modeled
-- Pair summary: This edge preserves brotherhood between P5 and P7 via transitive sibling support (P5<->P6 and P6<->P7) while awaiting direct pairwise wording for P5<->P7.
-- Historical/dynastic context: Early Lunar sequence where sibling chains are attested in consecutive entries.
-- Immediate claim anchors used for this pair review:
-- CLM-0436: sibling Dhinei (P5) -> Dhilhel (P6) [brothers] (SRC-MRF-KINGS, grade B)
-- CLM-0442: sibling Dhilhel (P6) -> Wadi (P7) [brothers] (SRC-MRF-KINGS, grade B)
+- Pair summary: P5 Dhinei (Fennaadheeththa) and P7 Wadi (Dhagathaa Suvara) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.
+- Historical/dynastic context: Lunar -> Lunar
+- Immediate direct-claim anchors around these nodes:
+- CLM-0352: parent P7 Wadi (Dhagathaa Suvara) -> P13 Audha (Areedha Suvara) (SRC-MRF-KINGS, grade B)
+- CLM-0436: sibling P5 Dhinei (Fennaadheeththa) <-> P6 Dhilhel (Dhagathaa Abarana) [brothers] (SRC-MRF-KINGS, grade B)
+- CLM-0442: sibling P6 Dhilhel (Dhagathaa Abarana) <-> P7 Wadi (Dhagathaa Suvara) [brothers] (SRC-MRF-KINGS, grade B)
+- CLM-0446: sibling P7 Wadi (Dhagathaa Suvara) <-> P8 Valla Dio (Raa-Araa Desyara) [brothers] (SRC-MRF-KINGS, grade B)
+- CLM-0581: parent P216 Fahi Hiriya Maava Kilage -> P5 Dhinei (Fennaadheeththa) (SRC-ROYALARK-MALDIVES, grade B)
+- CLM-0583: parent P216 Fahi Hiriya Maava Kilage -> P7 Wadi (Dhagathaa Suvara) (SRC-ROYALARK-MALDIVES, grade B)
 
 ## 3) Logic chain (pair-specific)
-1. This pair is retained as inferred sibling (brothers) because the model has contextual and adjacency support but lacks a single direct sentence that states this exact pairwise relation class.
-2. Supporting claim CLM-0436: sibling Dhinei (P5) -> Dhilhel (P6) [brothers] (SRC-MRF-KINGS, grade B); excerpt: Kings list explicitly notes P5 and P6 as brothers.
-3. Supporting claim CLM-0442: sibling Dhilhel (P6) -> Wadi (P7) [brothers] (SRC-MRF-KINGS, grade B); excerpt: Kings list explicitly notes P6 and P7 as brothers.
-4. Combined interpretation: these anchors keep the pair in-model as inferred sibling (brothers), but not promoted to confirmed until explicit pairwise wording is found.
-5. Current state decision: maintain `i` with active verification, because evidence is suggestive and structured but not yet direct for this exact pair statement.
+1. Shortest direct-claim support path (2 steps) linking this pair:
+2. - sibling P5 Dhinei (Fennaadheeththa) <-> P6 Dhilhel (Dhagathaa Abarana) [brothers] (CLM-0436, SRC-MRF-KINGS)
+3. - sibling P6 Dhilhel (Dhagathaa Abarana) <-> P7 Wadi (Dhagathaa Suvara) [brothers] (CLM-0442, SRC-MRF-KINGS)
+4. This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.
+5. Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P5 Dhinei (Fennaadheeththa) and P7 Wadi (Dhagathaa Suvara) is still absent.
 
 ## 4) Alternative interpretations
-- The pair may be broader sibling-household kin without direct full-brother certainty.
-- Sequence compression in early lists might collapse cousin/uncle ties into sibling language.
-- If direct wording contradicts, update to the explicit relation class.
+- Possible competing interpretation: half-sibling or cousin if shared-parent evidence is partial rather than full.
+- Competing interpretation trigger: direct wording that uses non-sibling kin terminology for this pair.
+- Model-retention rationale: keep the edge as inferred until explicit pairwise wording is located.
 
 ## 5) Verification checklist
-- Promotion requirement: A/B source line explicitly naming P5 and P7 as brothers.
-- Downgrade/removal trigger: Any direct claim that one endpoint is not in the same sibling set.
-- Review cadence: Re-check after primary early-Lunar manuscript corroboration.
+- Promotion requirement: an A/B source statement explicitly naming P5 Dhinei (Fennaadheeththa) and P7 Wadi (Dhagathaa Suvara) with relation class `sibling` (brothers).
+- Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.
+- Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster.
 
 ## 6) Source basis
-- `SRC-MRF-KINGS (Maldives Kings List)`
+- `SRC-MRF-KINGS` (Maldives Kings List)
 - Primary inferred claim row: CLM-0437
 - Inferred claim locator: Inference synthesis from SRC-MRF-KINGS sibling chain entries #5-#7
-- Supporting direct-claim locators reviewed:
-- CLM-0436: SRC-MRF-KINGS entries #5-#6 kin annotation. URL anchor: https://r.jina.ai/http://maldivesroyalfamily.com/maldives_kings_list.full.shtml. Node pair: P5 Dhinei <-> P6 Dhilhel (sibling (brothers)), 2026-02-08 snapshot.
-- CLM-0442: SRC-MRF-KINGS entries #6-#7 kin annotation. URL anchor: https://r.jina.ai/http://maldivesroyalfamily.com/maldives_kings_list.full.shtml. Node pair: P6 Dhilhel <-> P7 Wadi (sibling (brothers)), 2026-02-08 snapshot.
 
 ## 7) Integration notes
-- `src/data/inference-notes.js` summary update needed: yes (keep wording aligned with this curated rationale).
-- Edge label/type update needed: no (pending direct pairwise wording).
-- Canonical promotion candidate: no (remains inferred).
-- Verification priority level: medium
+- `src/data/inference-notes.js` summary should be synced if relation wording changes after verification.
+- Canonical promotion candidate: no (remains inferred until explicit pairwise wording is captured).
+- Verification priority level: high (current grade C)

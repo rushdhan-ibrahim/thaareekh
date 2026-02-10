@@ -1,27 +1,27 @@
 # Inference Dossier
 
-Edge key: `kin|P120|P134|grandparent`  
-Last updated: `2026-02-08`  
+Edge key: `kin|P134|P120|grandparent`  
+Last updated: `2026-02-10`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
 - Relation type: kin
-- Source node: P120 Abdul Gayoom Ibrahim
-- Target node: P134 Galolhu Seedhi
+- Source node: P134 Galolhu Seedhi
+- Target node: P120 Abdul Gayoom Ibrahim
 - Label: grandparent
 - Current confidence marker (`c/i/u`): i
 - Current grade (`A/B/C/D`): C
 
 ## 2) Why this specific pair is modeled
-- Pair summary: P120 Abdul Gayoom Ibrahim and P134 Galolhu Seedhi are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
-- Historical/dynastic context: Modern -> Addu Line
+- Pair summary: P134 Galolhu Seedhi and P120 Abdul Gayoom Ibrahim are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
+- Historical/dynastic context: Addu Line -> Modern
 - Rule basis status: resolved (2 supporting edges).
 
 ## 3) Logic chain (pair-specific)
 1. Support set for rule parent-of-parent-grandparent resolved as follows.
 2. Supporting edge: parent P134 Galolhu Seedhi -> P135 Galolhu Sitti (CLM-0269, SRC-WIKI-ABDUL-GAYOOM-IBRAHIM, grade B); excerpt: Abdul Gayoom Ibrahim family/genealogy content lists P134 Galolhu Seedhi as parent of P135 Galolhu Sitti.
 3. Supporting edge: parent P135 Galolhu Sitti -> P120 Abdul Gayoom Ibrahim (CLM-0270, SRC-WIKI-ABDUL-GAYOOM-IBRAHIM, grade B); excerpt: Abdul Gayoom Ibrahim family/genealogy content lists P135 Galolhu Sitti as parent of P120 Abdul Gayoom Ibrahim.
-4. Rule application (parent-of-parent-grandparent): with source -> P135 Galolhu Sitti and P135 Galolhu Sitti -> target parent links, P120 Abdul Gayoom Ibrahim is modeled as inferred grandparent-line kin of P134 Galolhu Seedhi.
+4. Rule application (parent-of-parent-grandparent): with source -> P135 Galolhu Sitti and P135 Galolhu Sitti -> target parent links, P134 Galolhu Seedhi is modeled as inferred grandparent-line kin of P120 Abdul Gayoom Ibrahim.
 5. Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -30,7 +30,7 @@ Inference class: `rule-derived`
 - Model-retention rationale: keep the edge inferred until pairwise direct wording is captured.
 
 ## 5) Verification checklist
-- Promotion requirement: explicit A/B source wording naming P120 Abdul Gayoom Ibrahim and P134 Galolhu Seedhi as kin (grandparent).
+- Promotion requirement: explicit A/B source wording naming P134 Galolhu Seedhi and P120 Abdul Gayoom Ibrahim as kin (grandparent).
 - Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.
 - Review cadence: recompute after any parent/sibling edge change in this local branch.
 

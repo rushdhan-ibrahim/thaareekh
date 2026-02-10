@@ -1,19 +1,19 @@
 # Inference Dossier
 
-Edge key: `kin|P194|P40|grandparent`  
-Last updated: `2026-02-08`  
+Edge key: `kin|P40|P194|grandparent`  
+Last updated: `2026-02-10`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
 - Relation type: kin
-- Source node: P194 Burecca
-- Target node: P40 Aboobakuru (Bavana Sooja)
+- Source node: P40 Aboobakuru (Bavana Sooja)
+- Target node: P194 Burecca
 - Label: grandparent
 - Current confidence marker (`c/i/u`): i
 - Current grade (`A/B/C/D`): C
 
 ## 2) Why this specific pair is modeled
-- Pair summary: P194 Burecca and P40 Aboobakuru (Bavana Sooja) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
+- Pair summary: P40 Aboobakuru (Bavana Sooja) and P194 Burecca are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
 - Historical/dynastic context: Hilaaly -> Hilaaly
 - Rule basis status: resolved (2 supporting edges).
 
@@ -21,7 +21,7 @@ Inference class: `rule-derived`
 1. Support set for rule parent-of-parent-grandparent resolved as follows.
 2. Supporting edge: parent P40 Aboobakuru (Bavana Sooja) -> P193 Princess Recca (CLM-0337, SRC-MRF-KINGS, grade B); excerpt: Kings list and Hilaaly branch notes together support parent edge P40 to P193.
 3. Supporting edge: parent P193 Princess Recca -> P194 Burecca (CLM-0327, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P193 Princess Recca as parent of P194 Burecca.
-4. Rule application (parent-of-parent-grandparent): with source -> P193 Princess Recca and P193 Princess Recca -> target parent links, P194 Burecca is modeled as inferred grandparent-line kin of P40 Aboobakuru (Bavana Sooja).
+4. Rule application (parent-of-parent-grandparent): with source -> P193 Princess Recca and P193 Princess Recca -> target parent links, P40 Aboobakuru (Bavana Sooja) is modeled as inferred grandparent-line kin of P194 Burecca.
 5. Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -30,7 +30,7 @@ Inference class: `rule-derived`
 - Model-retention rationale: keep the edge inferred until pairwise direct wording is captured.
 
 ## 5) Verification checklist
-- Promotion requirement: explicit A/B source wording naming P194 Burecca and P40 Aboobakuru (Bavana Sooja) as kin (grandparent).
+- Promotion requirement: explicit A/B source wording naming P40 Aboobakuru (Bavana Sooja) and P194 Burecca as kin (grandparent).
 - Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.
 - Review cadence: recompute after any parent/sibling edge change in this local branch.
 

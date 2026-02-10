@@ -1,26 +1,26 @@
 # Inference Dossier
 
-Edge key: `kin|P190|P91|aunt/uncle↔niece/nephew`  
-Last updated: `2026-02-08`  
+Edge key: `kin|P91|P190|aunt/uncle↔niece/nephew`  
+Last updated: `2026-02-10`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
 - Relation type: kin
-- Source node: P190 Hassan Fareed Didi
-- Target node: P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri)
+- Source node: P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri)
+- Target node: P190 Hassan Fareed Didi
 - Label: aunt/uncle↔niece/nephew
 - Current confidence marker (`c/i/u`): i
 - Current grade (`A/B/C/D`): C
 
 ## 2) Why this specific pair is modeled
-- Pair summary: P190 Hassan Fareed Didi and P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.
+- Pair summary: P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri) and P190 Hassan Fareed Didi are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.
 - Historical/dynastic context: Huraagey -> Huraagey
 - Rule basis status: resolved (1 supporting edge).
 
 ## 3) Logic chain (pair-specific)
 1. Support set for rule parent-sibling-aunt-uncle resolved as follows.
 2. Supporting edge: parent P129 Princess Veyogey Dhon Goma -> P190 Hassan Fareed Didi (CLM-0260, SRC-WIKI-HASSAN-FARID, grade B); excerpt: Hassan Farid Didi family/genealogy content lists P129 Princess Veyogey Dhon Goma as parent of P190 Hassan Fareed Didi.
-3. Rule application (parent-sibling-aunt-uncle): sibling(P129 Princess Veyogey Dhon Goma, P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri)) plus parent(P129 Princess Veyogey Dhon Goma, child) yields inferred aunt/uncle-line kin between P190 Hassan Fareed Didi and P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri).
+3. Rule application (parent-sibling-aunt-uncle): sibling(P129 Princess Veyogey Dhon Goma, P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri)) plus parent(P129 Princess Veyogey Dhon Goma, child) yields inferred aunt/uncle-line kin between P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri) and P190 Hassan Fareed Didi.
 4. Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -29,7 +29,7 @@ Inference class: `rule-derived`
 - Model-retention rationale: keep the edge inferred until pairwise direct wording is captured.
 
 ## 5) Verification checklist
-- Promotion requirement: explicit A/B source wording naming P190 Hassan Fareed Didi and P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri) as kin (aunt/uncle↔niece/nephew).
+- Promotion requirement: explicit A/B source wording naming P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri) and P190 Hassan Fareed Didi as kin (aunt/uncle↔niece/nephew).
 - Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.
 - Review cadence: recompute after any parent/sibling edge change in this local branch.
 

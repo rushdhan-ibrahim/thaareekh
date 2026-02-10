@@ -1,19 +1,19 @@
 # Inference Dossier
 
-Edge key: `kin|P130|P78|grandparent`  
-Last updated: `2026-02-08`  
+Edge key: `kin|P78|P130|grandparent`  
+Last updated: `2026-02-10`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
 - Relation type: kin
-- Source node: P130 Prince Ibrahim Faamuladheyri Kilegefaanu
-- Target node: P78 Ibrahim Iskander (Rannava Loka)
+- Source node: P78 Ibrahim Iskander (Rannava Loka)
+- Target node: P130 Prince Ibrahim Faamuladheyri Kilegefaanu
 - Label: grandparent
 - Current confidence marker (`c/i/u`): i
 - Current grade (`A/B/C/D`): C
 
 ## 2) Why this specific pair is modeled
-- Pair summary: P130 Prince Ibrahim Faamuladheyri Kilegefaanu and P78 Ibrahim Iskander (Rannava Loka) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
+- Pair summary: P78 Ibrahim Iskander (Rannava Loka) and P130 Prince Ibrahim Faamuladheyri Kilegefaanu are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.
 - Historical/dynastic context: Dhiyamigili -> Dhiyamigili
 - Rule basis status: resolved (2 supporting edges).
 
@@ -21,7 +21,7 @@ Inference class: `rule-derived`
 1. Support set for rule parent-of-parent-grandparent resolved as follows.
 2. Supporting edge: parent P78 Ibrahim Iskander (Rannava Loka) -> P81 Mohamed Ghiyathuddine (Kula Rannmani Keerithi) (CLM-0356, SRC-WIKI-MONARCHS, grade B); excerpt: List of Maldivian monarchs family/genealogy content lists P78 Ibrahim Iskander as parent of P81 Mohamed Ghiyathuddine.
 3. Supporting edge: parent P81 Mohamed Ghiyathuddine (Kula Rannmani Keerithi) -> P130 Prince Ibrahim Faamuladheyri Kilegefaanu (CLM-0359, SRC-WIKI-PRINCE-IBRAHIM-FAAMULADHEYRI, grade B); excerpt: Prince Ibrahim, Faamuladheyri Kilegefaanu family/genealogy content lists P81 Mohamed Ghiyathuddine as parent of P130 Prince Ibrahim Faamuladheyri K...
-4. Rule application (parent-of-parent-grandparent): with source -> P81 Mohamed Ghiyathuddine (Kula Rannmani Keerithi) and P81 Mohamed Ghiyathuddine (Kula Rannmani Keerithi) -> target parent links, P130 Prince Ibrahim Faamuladheyri Kilegefaanu is modeled as inferred grandparent-line kin of P78 Ibrahim Iskander (Rannava Loka).
+4. Rule application (parent-of-parent-grandparent): with source -> P81 Mohamed Ghiyathuddine (Kula Rannmani Keerithi) and P81 Mohamed Ghiyathuddine (Kula Rannmani Keerithi) -> target parent links, P78 Ibrahim Iskander (Rannava Loka) is modeled as inferred grandparent-line kin of P130 Prince Ibrahim Faamuladheyri Kilegefaanu.
 5. Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -30,7 +30,7 @@ Inference class: `rule-derived`
 - Model-retention rationale: keep the edge inferred until pairwise direct wording is captured.
 
 ## 5) Verification checklist
-- Promotion requirement: explicit A/B source wording naming P130 Prince Ibrahim Faamuladheyri Kilegefaanu and P78 Ibrahim Iskander (Rannava Loka) as kin (grandparent).
+- Promotion requirement: explicit A/B source wording naming P78 Ibrahim Iskander (Rannava Loka) and P130 Prince Ibrahim Faamuladheyri Kilegefaanu as kin (grandparent).
 - Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.
 - Review cadence: recompute after any parent/sibling edge change in this local branch.
 
