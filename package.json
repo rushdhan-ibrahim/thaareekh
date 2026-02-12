@@ -1,0 +1,40 @@
+{
+  "name": "maldives-genealogy-modernization",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/web"
+  ],
+  "scripts": {
+    "typecheck": "npm run --workspace=apps/web typecheck",
+    "build:web": "npm run --workspace=apps/web build",
+    "modernization:baseline": "node scripts/modernization/generate-baseline.mjs",
+    "modernization:parity": "node scripts/modernization/check-parity.mjs",
+    "modernization:export-datasets": "node scripts/modernization/export-datasets.mjs",
+    "modernization:export-raw-datasets": "node scripts/modernization/export-raw-datasets.mjs",
+    "modernization:rust-derive-parity": "node scripts/modernization/verify-rust-derive-parity.mjs",
+    "modernization:qa-ledgers-rust": "cargo run -q -p maldives-research-cli -- qa-ledgers docs/modernization/baselines/datasets/research.json docs/research-program/ledgers",
+    "modernization:qa-batch-content-rust": "cargo run -q -p maldives-research-cli -- qa-batch-content .",
+    "modernization:qa-batch-content-parity": "node scripts/modernization/verify-rust-qa-batch-content-parity.mjs",
+    "modernization:reconcile-rust": "cargo run -q -p maldives-research-cli -- reconcile-ledgers docs/modernization/baselines/datasets/research.json .",
+    "modernization:reconcile-parity": "node scripts/modernization/verify-rust-reconcile-parity.mjs",
+    "modernization:audit-evidence-rust": "node scripts/modernization/export-datasets.mjs && cargo run -q -p maldives-research-cli -- audit-evidence docs/modernization/baselines/datasets/research.json docs/modernization/baselines/datasets/sources.json --mode research --json",
+    "modernization:audit-evidence-parity": "node scripts/modernization/verify-rust-audit-evidence-parity.mjs",
+    "modernization:source-coverage-rust": "node scripts/modernization/export-datasets.mjs && cargo run -q -p maldives-research-cli -- source-coverage-audit docs/modernization/baselines/datasets/research.json docs/modernization/baselines/datasets/sources.json docs/research-program",
+    "modernization:source-coverage-parity": "node scripts/modernization/verify-rust-source-coverage-parity.mjs",
+    "modernization:refresh-rel-quality-rust": "cargo run -q -p maldives-research-cli -- refresh-relationship-ledger-quality .",
+    "modernization:refresh-rel-quality-parity": "node scripts/modernization/verify-rust-refresh-relationship-quality-parity.mjs",
+    "modernization:sync-inference-notes-rust": "cargo run -q -p maldives-research-cli -- sync-inference-notes .",
+    "modernization:sync-inference-notes-parity": "node scripts/modernization/verify-rust-sync-inference-notes-parity.mjs",
+    "modernization:refresh-person-dossiers-rust": "node scripts/modernization/export-datasets.mjs && cargo run -q -p maldives-research-cli -- refresh-person-dossiers docs/modernization/baselines/datasets/research.json docs/modernization/baselines/datasets/sources.json .",
+    "modernization:refresh-person-dossiers-parity": "node scripts/modernization/verify-rust-refresh-person-dossiers-parity.mjs",
+    "modernization:refresh-derived-dossiers-rust": "node scripts/modernization/export-datasets.mjs && cargo run -q -p maldives-research-cli -- refresh-derived-inference-dossiers docs/modernization/baselines/datasets/research.json docs/modernization/baselines/datasets/sources.json .",
+    "modernization:refresh-derived-dossiers-parity": "node scripts/modernization/verify-rust-refresh-derived-dossiers-parity.mjs",
+    "modernization:refresh-curated-dossiers-rust": "node scripts/modernization/export-datasets.mjs && cargo run -q -p maldives-research-cli -- refresh-curated-inference-dossiers docs/modernization/baselines/datasets/research.json docs/modernization/baselines/datasets/sources.json .",
+    "modernization:refresh-curated-dossiers-parity": "node scripts/modernization/verify-rust-refresh-curated-dossiers-parity.mjs",
+    "modernization:ts-search-engine-parity": "node --experimental-strip-types scripts/modernization/verify-ts-search-engine-parity.mjs",
+    "modernization:ts-pathfinder-parity": "node --experimental-strip-types scripts/modernization/verify-ts-pathfinder-parity.mjs",
+    "modernization:ts-relationships-parity": "node --experimental-strip-types scripts/modernization/verify-ts-relationships-parity.mjs",
+    "modernization:verify": "node scripts/modernization/export-datasets.mjs && node scripts/modernization/export-raw-datasets.mjs && node scripts/modernization/check-parity.mjs && node scripts/modernization/verify-rust-derive-parity.mjs && cargo run -q -p maldives-research-cli -- qa-ledgers docs/modernization/baselines/datasets/research.json docs/research-program/ledgers && node scripts/modernization/verify-rust-qa-batch-content-parity.mjs && node scripts/modernization/verify-rust-reconcile-parity.mjs && node scripts/modernization/verify-rust-audit-evidence-parity.mjs && node scripts/modernization/verify-rust-source-coverage-parity.mjs && node scripts/modernization/verify-rust-refresh-relationship-quality-parity.mjs && node scripts/modernization/verify-rust-sync-inference-notes-parity.mjs && node scripts/modernization/verify-rust-refresh-person-dossiers-parity.mjs && node scripts/modernization/verify-rust-refresh-derived-dossiers-parity.mjs && node scripts/modernization/verify-rust-refresh-curated-dossiers-parity.mjs && node --experimental-strip-types scripts/modernization/verify-ts-search-engine-parity.mjs && node --experimental-strip-types scripts/modernization/verify-ts-pathfinder-parity.mjs && node --experimental-strip-types scripts/modernization/verify-ts-relationships-parity.mjs"
+  }
+}

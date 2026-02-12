@@ -1,0 +1,84 @@
+name: modernization-parity
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  parity-and-quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Export merged datasets
+        run: node scripts/modernization/export-datasets.mjs
+
+      - name: Export pre-derived raw datasets
+        run: node scripts/modernization/export-raw-datasets.mjs
+
+      - name: Check modernization parity baseline
+        run: node scripts/modernization/check-parity.mjs --baseline docs/modernization/baselines/baseline-latest.json
+
+      - name: Verify Rust derive parity
+        run: node scripts/modernization/verify-rust-derive-parity.mjs
+
+      - name: Rust format check
+        run: cargo fmt --check
+
+      - name: Rust tests
+        run: cargo test --workspace
+
+      - name: Node QA smoke
+        run: node scripts/qa-smoke.mjs
+
+      - name: Node QA research ledgers
+        run: node scripts/qa-research-ledgers.mjs
+
+      - name: Rust QA research ledgers
+        run: cargo run -q -p maldives-research-cli -- qa-ledgers docs/modernization/baselines/datasets/research.json docs/research-program/ledgers
+
+      - name: Verify QA batch-content parity
+        run: node scripts/modernization/verify-rust-qa-batch-content-parity.mjs
+
+      - name: Verify reconcile parity
+        run: node scripts/modernization/verify-rust-reconcile-parity.mjs
+
+      - name: Verify audit-evidence parity
+        run: node scripts/modernization/verify-rust-audit-evidence-parity.mjs
+
+      - name: Verify source-coverage parity
+        run: node scripts/modernization/verify-rust-source-coverage-parity.mjs
+
+      - name: Verify relationship-ledger-quality parity
+        run: node scripts/modernization/verify-rust-refresh-relationship-quality-parity.mjs
+
+      - name: Verify sync-inference-notes parity
+        run: node scripts/modernization/verify-rust-sync-inference-notes-parity.mjs
+
+      - name: Verify refresh-person-dossiers parity
+        run: node scripts/modernization/verify-rust-refresh-person-dossiers-parity.mjs
+
+      - name: Verify refresh-derived-dossiers parity
+        run: node scripts/modernization/verify-rust-refresh-derived-dossiers-parity.mjs
+
+      - name: Verify refresh-curated-dossiers parity
+        run: node scripts/modernization/verify-rust-refresh-curated-dossiers-parity.mjs
+
+      - name: Verify TypeScript search-engine parity
+        run: node --experimental-strip-types scripts/modernization/verify-ts-search-engine-parity.mjs
+
+      - name: Verify TypeScript pathfinder parity
+        run: node --experimental-strip-types scripts/modernization/verify-ts-pathfinder-parity.mjs
+
+      - name: Verify TypeScript relationships parity
+        run: node --experimental-strip-types scripts/modernization/verify-ts-relationships-parity.mjs

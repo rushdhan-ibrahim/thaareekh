@@ -1,0 +1,15 @@
+[package]
+name = "maldives-research-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[dependencies]
+maldives-domain = { path = "../domain" }
+maldives-engine = { path = "../engine" }
+serde_json.workspace = true
+serde.workspace = true
+regex = "1.11"
+url = "2.5"
+indexmap = "2.7"

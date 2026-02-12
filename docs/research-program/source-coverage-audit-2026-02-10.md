@@ -10,8 +10,8 @@ Mode: research
 | Edges | 627 |
 | Registered sources | 106 |
 | Edges with no evidence refs | 0 |
-| Single-source edges | 535 |
-| Multi-source edges | 92 |
+| Single-source edges | 531 |
+| Multi-source edges | 96 |
 | Single-source weak-quality edges (C/D/?) | 317 |
 
 ## Source quality distribution (registry)
@@ -26,9 +26,9 @@ Mode: research
 ## Edge evidence usage by source quality
 | Quality | Claim references | Share |
 |---|---|---|
-| A | 11 | 1.5% |
-| B | 396 | 54.2% |
-| C | 324 | 44.3% |
+| A | 19 | 2.6% |
+| B | 396 | 53.6% |
+| C | 324 | 43.8% |
 | D | 0 | 0.0% |
 | ? | 0 | 0.0% |
 
