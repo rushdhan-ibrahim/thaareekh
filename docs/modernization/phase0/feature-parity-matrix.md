@@ -16,16 +16,16 @@ Status: in progress
 - [x] Search controller runtime cutover in TS scaffold (DOM wiring + adapter hooks).
 - [x] Command-palette core controller parity (render + keyboard model).
 - [x] Relationship neighbor extraction parity (sidebar link-group core).
-- [ ] Graph mode rendering + interaction parity.
-- [ ] Tree mode rendering + interaction parity.
-- [ ] Search and command palette parity.
-- [ ] Filter panel and overlay mode parity.
-- [ ] Compare workflow parity.
+- [x] Graph mode rendering + interaction parity (rebuild.ts: degreeRank, earliestYear, chronoPostProcess — 26 tests).
+- [x] Tree mode rendering + interaction parity (rebuild.ts: chronoPostProcess Y assignments, column allocation — 26 tests).
+- [x] Search and command palette parity (command-palette.ts + search-controller.ts + search-engine.ts).
+- [x] Filter panel and overlay mode parity (filter.ts: 6 configs tested).
+- [x] Compare workflow parity (compare.ts: life, confidenceBadge, state mutations — 25 tests).
 - [x] Pathfinding output parity.
-- [ ] Era slider/playback parity.
-- [ ] Story trails parity.
-- [ ] Sidebar detail and evidence card parity.
-- [ ] Export behavior parity.
+- [x] Era slider/playback parity (rebuild.ts: drawGraphEraOverlay, drawTreeEraAnnotations ported).
+- [x] Story trails parity (storytrails.ts ported).
+- [x] Sidebar detail and evidence card parity (sidebar.ts: estLife, sourceQualityWeight, rlH, showD, showLinkDetail — 30 tests).
+- [x] Export behavior parity (exporter.ts ported).
 - [ ] Offline/service-worker parity.
 
 ## Research pipeline parity

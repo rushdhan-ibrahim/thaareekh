@@ -55,6 +55,15 @@ Date: 2026-02-10
 - Optimized Rust CSV parsing path (`crates/research-cli/src/csv_utils.rs`) by removing `Vec<char>` materialization and switching to streaming parse iteration.
 - Captured first benchmark snapshot (`benchmark-2026-02-13.json`) and published measured baseline against modernization performance targets.
 - Started dependency-free UI trace lane implementation with draft CDP runner (`scripts/modernization/ui-browser-benchmarks.mjs`); paused before integration due environment constraints documented in `ui-trace-progress-2026-02-13.md`.
+- Added TypeScript type foundation: expanded `state.ts` (InferenceBasis, PersonNode simulation fields, _badgeData), expanded `legacy-modules.d.ts` (office timeline, sourceById, geo functions, inference-notes functions, era milestones, timeline extent).
+- Added TypeScript i18n module (`apps/web/src/ui/i18n.ts`) — full 530-key en+dv dictionary, `t()`, `personName()`, `relationLabel()`, `refreshChromeLabels()`, `setLanguage()`, NAME_DV map. Parity harness: 260 en keys, 237 dv keys, 210 people.
+- Added TypeScript utils: `css.ts` (cs/eC/nC), `format.ts` (fR/esc), `dynasties.ts` (dyS).
+- Added TypeScript graph algorithms: `filter.ts` (filterCore with dependency injection, 6 config parity), `highlight.ts` (hiN/hiE/clH, ancestralEdgeKeys, linkKey, 7 tests).
+- Added TypeScript light UI helpers: `hover-card.ts`, `theme.ts`, `commandbar.ts`, `timeline-viz.ts`, `modal.ts`, `onboarding.ts`.
+- Added TypeScript state & navigation modules: `viewstate.ts` (8 tests), `history.ts` (15 tests), `navigation.ts`, `keyboard-nav.ts` (11 tests), `storytrails.ts`, `minimap.ts` (19 tests).
+- Added TypeScript complex components: `compare.ts` (25 tests), `exporter.ts`, `tree-options.ts` (7 tests).
+- Added TypeScript heavy pair: `sidebar.ts` (1215 lines, full port of sidebar.js — dependency injection via SidebarDeps, estLife/sourceQualityWeight pure helpers, 30 tests), `rebuild.ts` (1489 lines, full port of rebuild.js — dependency injection via RebuildDeps, degreeRank/earliestYear/chronoPostProcess pure helpers, 26 tests).
+- Registered all 16 TS parity harnesses in package.json verify chain (38 total parity checks now green).
 
 ## Pending for full Phase 0 completion
 - Complete feature-by-feature behavior specification with exact acceptance tests.

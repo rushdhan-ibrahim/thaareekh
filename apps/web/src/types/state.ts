@@ -43,7 +43,32 @@ export interface PersonNode {
     type?: string;
     via?: string;
     path_summary?: string;
+    status?: string;
+    summary?: string;
+    source_refs?: string[];
   };
+  no?: string;
+  x?: number;
+  y?: number;
+  _hw?: number;
+  _hh?: number;
+  fx?: number | null;
+  fy?: number | null;
+  __dragMoved?: boolean;
+  __dragStartX?: number;
+  __dragStartY?: number;
+  __dragEndedAt?: number;
+}
+
+export interface InferenceBasis {
+  shared_parent?: string;
+  parent_edges?: Array<{ s?: string; d?: string; t?: string }>;
+  via_parent?: string;
+  via_parent_sibling?: string;
+  supporting_edges?: Array<{ s?: string; d?: string; t?: string }>;
+  via_parent_siblings?: string[];
+  child_parent_edges?: Array<{ s?: string; d?: string; t?: string }>;
+  parent_sibling_edge?: { s?: string; d?: string; t?: string };
 }
 
 export interface EdgeRecord {
@@ -58,6 +83,7 @@ export interface EdgeRecord {
   event_context?: string;
   inference_rule?: string;
   inference_bases?: string[];
+  inference_basis?: InferenceBasis;
   dossier_path?: string;
 }
 
@@ -107,4 +133,5 @@ export interface AppState {
   onboardingComplete: boolean;
   minimapVisible: boolean;
   _treesMeta: TreeMeta[];
+  _badgeData: Array<{ id: string; n: string | number; dy: string | undefined; ox: number; oy: number }>;
 }

@@ -61,8 +61,16 @@ declare module '*offices.js' {
     alt_names?: string[];
     source_refs?: string[];
   }
+  export interface OfficeTimelinePeriod {
+    label: string;
+    period?: string;
+    summary?: string;
+    offices?: string[];
+    source_refs?: string[];
+  }
   export const officeCatalog: OfficeCatalogEntry[];
   export const officeById: Map<string, OfficeCatalogEntry>;
+  export const officeTimeline: OfficeTimelinePeriod[];
 }
 
 declare module '*sources.js' {
@@ -76,6 +84,7 @@ declare module '*sources.js' {
     notes?: string;
   }
   export const sources: SourceEntry[];
+  export const sourceById: Map<string, SourceEntry>;
 }
 
 declare module '*era-events.js' {
@@ -83,9 +92,16 @@ declare module '*era-events.js' {
     year: number;
     dynasty: string;
     label: string;
-    short: string;
+    short?: string;
+  }
+  export interface EraMilestone {
+    year: number;
+    label: string;
+    short?: string;
+    kind?: string;
   }
   export const dynastyTransitions: DynastyTransition[];
+  export const eraMilestones: EraMilestone[];
 }
 
 declare module '*timeline.js' {
@@ -95,6 +111,7 @@ declare module '*timeline.js' {
   };
   export function spanForId(id: string): { start: number | null; end: number | null } | null;
   export function activeInYearById(id: string, year: number): boolean;
+  export function timelineExtent(): { min: number; max: number };
 }
 
 declare module '*storytrails.js' {
@@ -123,19 +140,23 @@ declare module '*geo.js' {
     y: number;
     aliases: string[];
   }
-  export function resolvePlace(text: string): PlaceAnchor | null;
+  export function resolvePlace(text: string | undefined | null): PlaceAnchor | null;
   export function resolveLocationArray(locations: string[]): PlaceAnchor[];
+  export function extractPlaceMentions(text: string): PlaceAnchor[];
+  export function placeLabelForLang(anchor: PlaceAnchor, lang: string): string;
 }
 
 declare module '*inference-notes.js' {
   export function inferenceEdgeKey(edge: { t?: string; s?: string; d?: string; l?: string }): string;
-  export function getInferenceNote(key: string): {
-    summary: string;
+  export function getInferenceNote(edge: Record<string, unknown>): {
+    summary?: string;
     dossier?: string;
-    logic?: Array<{ step: string; text: string }>;
+    logic?: string[];
+    verification?: string[];
     bases?: string[];
-    checklist?: Array<{ item: string; status: string }>;
   } | null;
+  export function getInferenceDossierPath(edge: Record<string, unknown>): string | null;
+  export function isDerivedInferenceEdge(edge: Record<string, unknown>): boolean;
 }
 
 declare module '*profile.enrichments.js' {
