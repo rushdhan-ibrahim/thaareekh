@@ -193,12 +193,12 @@ function applyRuntimeLocaleText(documentRef: Document, t: (key: string) => strin
   }
 }
 
-function goToPersonFactory(documentRef: Document, t: (key: string) => string): (personId: string) => void {
+function goToPersonFactory(_documentRef: Document, _t: (key: string) => string): (personId: string) => void {
   return (personId: string) => {
-    const selected = documentRef.getElementById('search-selected');
-    if (!(selected instanceof HTMLElement)) return;
-    selected.dataset.personId = personId;
-    selected.textContent = `${t('selected_prefix')}: ${personId}`;
+    const goF = (window as any).goF;
+    if (typeof goF === 'function') {
+      goF(personId);
+    }
   };
 }
 

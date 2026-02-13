@@ -22,11 +22,11 @@ function baseOpacity(el: Element): number {
 function edgeDimOpacity(el: Element, focusMode: boolean): number {
   const base = baseOpacity(el);
   if (focusMode) return Math.max(0.06, base * 0.32);
-  return Math.max(0.22, base * 0.62);
+  return Math.max(0.35, base * 0.75);
 }
 
 function nodeDimOpacity(focusMode: boolean): number {
-  return focusMode ? 0.14 : 0.62;
+  return focusMode ? 0.14 : 0.82;
 }
 
 function nodeBaseOpacity(el: Element | null): number {
@@ -127,7 +127,7 @@ export function hiE(link: LinkDatum, state: AppState): void {
   clearFlow(state);
 
   const { s: sid, t: tid } = linkIds(link);
-  const nd = state.focusMode ? 0.18 : 0.66;
+  const nd = state.focusMode ? 0.18 : 0.82;
 
   gN?.select?.('rect')?.attr?.('opacity', function (this: Element, d: { id: string }) {
     if (d.id === sid || d.id === tid) return 1;

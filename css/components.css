@@ -577,10 +577,10 @@
 }
 
 /* --- Biography prose --- */
-.bio-text { font-size: 0.95rem; line-height: 1.75; color: var(--tx1, var(--tx)); }
-.bio-text p { margin: 0 0 0.9em; text-align: justify; }
+.bio-text { font-size: 0.9rem; line-height: 1.7; color: var(--tx1, var(--tx)); }
+.bio-text p { margin: 0 0 0.8em; }
 .bio-text p:last-child { margin-bottom: 0; }
-.bio-lead { font-size: 1.02rem; color: var(--tx1, var(--tx)); }
+.bio-lead { font-size: 0.92rem; color: var(--tx1, var(--tx)); }
 body.lang-dv .bio-text { direction: rtl; text-align: right; font-family: 'Noto Sans Thaana', sans-serif; }
 
 /* --- Map panel --- */
