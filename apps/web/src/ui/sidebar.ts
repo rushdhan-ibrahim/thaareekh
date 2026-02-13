@@ -96,6 +96,7 @@ let _recordPerson: (id: string) => void = () => {};
 let _recordEdge: (link: LinkDatum) => void = () => {};
 let _compareSummaryHtml: () => string = () => '';
 let _handlePersonViewed: (id: string) => void = () => {};
+let _currentPersonId: string | null = null;
 let _oS: (prefer?: string) => void = () => {};
 let _resolvePlace: (text: string | undefined | null) => PlaceAnchor | null = () => null;
 let _extractPlaceMentions: (text: string) => PlaceAnchor[] = () => [];
@@ -896,22 +897,37 @@ function shouldUseBottomSheet(): boolean {
   return window.innerWidth <= 1024 || document.body.classList.contains('sidebar-collapsed');
 }
 
+const _fadePending = new WeakMap<HTMLElement, number>();
+
 function crossFadeContent(el: HTMLElement | null, newHtml: string, callback?: () => void): void {
   if (!el) return;
+
+  // Cancel any in-flight fade on this element
+  const prev = _fadePending.get(el);
+  if (prev) {
+    clearTimeout(prev);
+    _fadePending.delete(el);
+  }
+
   const reduceMotion = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-  if (reduceMotion) {
+  if (reduceMotion || prev) {
+    // Skip animation if reduced-motion OR if we interrupted a pending fade
+    el.style.transition = '';
+    el.style.opacity = '1';
     el.innerHTML = newHtml;
     if (callback) callback();
     return;
   }
   el.style.transition = 'opacity 120ms ease-out';
   el.style.opacity = '0';
-  setTimeout(() => {
+  const tid = window.setTimeout(() => {
+    _fadePending.delete(el);
     el.innerHTML = newHtml;
     if (callback) callback();
     el.style.opacity = '1';
     setTimeout(() => { el.style.transition = ''; }, 140);
   }, 130);
+  _fadePending.set(el, tid);
 }
 
 function officeSourceRows(refs: string[]): Array<{ id: string; title: string; quality: string }> {
@@ -1025,6 +1041,7 @@ export function rlH(title: string, items: RelNeighbor[]): string {
 }
 
 export function showLinkDetail(link: LinkDatum): void {
+  _currentPersonId = null;
   if (!link) return;
   const sid = typeof link.source === 'object' ? link.source.id : link.source;
   const tid = typeof link.target === 'object' ? link.target.id : link.target;
@@ -1074,6 +1091,8 @@ export function showLinkDetail(link: LinkDatum): void {
 export function showD(id: string): void {
   const p = _byId.get(id);
   if (!p) return;
+  const samePerson = _currentPersonId === id;
+  _currentPersonId = id;
   _handlePersonViewed(id);
   const dyC = `var(--dy-${(p.dy || 'unknown').toLowerCase()})`;
   let m = `<span class="bg"><span class="bdd" style="background:${dyC}"></span>${_esc(p.dy || _t('unknown'))}</span>`;
@@ -1093,10 +1112,18 @@ export function showD(id: string): void {
   sT?.classList.remove('emp');
   const sM = document.getElementById('sM');
   if (sM) sM.innerHTML = m;
-  crossFadeContent(document.getElementById('sN'), `${card}${cmp}${evi}`, () => {
-    bindProfileTabs(document.getElementById('sN'));
-  });
-  crossFadeContent(document.getElementById('sR'), rels || `<div class="nt" style="color:var(--tx3)">${_esc(_t('no_connections'))}</div>`);
+  if (samePerson) {
+    // Same person: skip cross-fade, just replace content in place
+    const sN = document.getElementById('sN');
+    if (sN) { sN.innerHTML = `${card}${cmp}${evi}`; bindProfileTabs(sN); }
+    const sR = document.getElementById('sR');
+    if (sR) sR.innerHTML = rels || `<div class="nt" style="color:var(--tx3)">${_esc(_t('no_connections'))}</div>`;
+  } else {
+    crossFadeContent(document.getElementById('sN'), `${card}${cmp}${evi}`, () => {
+      bindProfileTabs(document.getElementById('sN'));
+    });
+    crossFadeContent(document.getElementById('sR'), rels || `<div class="nt" style="color:var(--tx3)">${_esc(_t('no_connections'))}</div>`);
+  }
   _recordPerson(id);
   window.dispatchEvent(new CustomEvent('selection-changed', { detail: { type: 'person', id } }));
   if (shouldUseBottomSheet()) {
@@ -1112,6 +1139,7 @@ export function showD(id: string): void {
 }
 
 export function showInstitutionsPane(): void {
+  _currentPersonId = null;
   document.getElementById('vmi')?.classList.add('on');
   document.getElementById('vmi')?.setAttribute('aria-pressed', 'true');
   const sT = document.getElementById('sT');

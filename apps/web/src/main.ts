@@ -624,7 +624,7 @@ function setSidebarOpen(open: boolean, opts: { rebuildNow?: boolean } = {}): voi
       const yForce = sim.force('y');
       if (xForce) xForce.x(state.W / 2);
       if (yForce) yForce.y(state.H / 2);
-      sim.alpha(0.15).restart();
+      sim.alpha(0.03).restart();
     }
     updateTranslateExtent();
   });
