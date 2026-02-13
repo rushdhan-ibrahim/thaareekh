@@ -77,8 +77,8 @@ For phase-vs-plan reconciliation, see `docs/modernization/phase0/progress-reconc
 3. Complete command-palette runtime parity and unify shortcut behavior with graph/tree interaction focus states.
 4. Continue feature matrix UX section top-down (filters, sidebar evidence cards, compare flow).
 5. Add browser-trace lanes for first paint, interaction delay, and pan/zoom smoothness.
-6. Add explicit cold-start benchmark lane for Rust/Node command startup cost.
-7. Add CI-safe benchmark budget checks for stabilized lanes.
+6. Add CI-safe benchmark budget checks for stabilized warm-lane metrics.
+7. Optimize Rust cold-start startup path for short-lived CLI invocation.
 8. Extend parity harnesses for any future research-driver additions before cutover.
 
 ## Non-negotiable constraints during migration

@@ -49,6 +49,7 @@ Date: 2026-02-10
 - Added benchmark automation runner (`scripts/modernization/run-benchmarks.mjs`) and root script (`modernization:benchmark`) with snapshot exports under `docs/modernization/baselines/benchmarks/`.
 - Hardened benchmark fairness by running Rust QA lane via release CLI binary (`target/release/maldives-research-cli`) rather than repeated `cargo run` invocations.
 - Added warmup + sampled benchmark methodology (5 measured samples/lane) for stable Node-vs-Rust QA wall-clock comparison.
+- Added explicit cold-start benchmark lane for Node-vs-Rust first-run process startup comparison.
 - Captured first benchmark snapshot (`benchmark-2026-02-13.json`) and published measured baseline against modernization performance targets.
 
 ## Pending for full Phase 0 completion

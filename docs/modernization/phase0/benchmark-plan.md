@@ -25,24 +25,31 @@ Status: active
 - Meet or exceed all performance targets in `docs/modernization-plan-typescript-rust-2026-02-10.md`.
 
 ## Latest snapshot (2026-02-13)
-- Search query latency p95: `1.514ms` (within `<=100ms` target).
-- Relationship path latency p95: `0.125ms` (within `<=100ms` target).
+- Search query latency p95: `1.316ms` (within `<=100ms` target).
+- Relationship path latency p95: `0.119ms` (within `<=100ms` target).
 - Dataset materialization:
-  - canonical mean: `0.871ms`, p95: `1.157ms`;
-  - research mean: `1.250ms`, p95: `1.846ms`.
+  - canonical mean: `0.883ms`, p95: `1.171ms`;
+  - research mean: `1.133ms`, p95: `1.391ms`.
 - Research QA suite wall clock:
-  - Node suite mean: `200.681ms`
-  - Rust suite mean (release binary): `39.699ms`
-  - Rust vs Node speedup: `5.055x` (exceeds target).
-  - Rust build-once time (not included in suite mean): `238.981ms`.
+  - Warm lane (steady state):
+    - Node suite mean: `211.786ms`
+    - Rust suite mean (release binary): `36.581ms`
+    - Rust vs Node speedup: `5.789x` (exceeds target).
+  - Cold-start lane (first command execution):
+    - Node suite total: `228.101ms`
+    - Rust suite total: `720.679ms`
+    - Rust vs Node speedup: `0.317x` (startup cost remains higher in Rust path).
+  - Rust build-once time: `232.479ms`.
 
 ## Tooling implementation
 - Node benchmarking script for engine/pipeline lanes: `scripts/modernization/run-benchmarks.mjs`.
 - Rust lane execution uses release CLI binary (`cargo build --release`) for fair runtime comparison.
-- Pipeline lane uses warmup + 5 measured samples per command to avoid cold-start outlier skew.
+- Pipeline lane includes both:
+  - cold-start single-run measurements;
+  - warm steady-state metrics (warmup + 5 measured samples per command).
 - Browser trace tooling remains pending for UI boot/pan/zoom/filter lanes.
 
 ## Follow-up actions
 1. Add browser trace capture lane for UI boot, first input latency, and pan/zoom frame pacing.
-2. Add explicit cold-start lane (first-run process launch) alongside warm-lane metrics for operational transparency.
-3. Add CI-safe performance budget checker and fail thresholds for measured lanes.
+2. Add CI-safe performance budget checker and fail thresholds for measured warm-lane metrics.
+3. Optimize Rust cold-start path (binary startup + command dispatch) for short-lived single-command execution.

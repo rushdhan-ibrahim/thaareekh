@@ -163,6 +163,11 @@ async function main() {
   run('node', ['scripts/modernization/export-datasets.mjs'], projectRoot);
   run('node', ['scripts/modernization/export-ui-reference.mjs'], projectRoot);
 
+  const nodeQaLedgerColdMs = timedCommand('node', ['scripts/qa-research-ledgers.mjs'], projectRoot);
+  const nodeQaBatchContentColdMs = timedCommand('node', ['scripts/qa-batch-content.mjs'], projectRoot);
+  const nodeQaSmokeColdMs = timedCommand('node', ['scripts/qa-smoke.mjs'], projectRoot);
+  const nodeQaColdSuiteMs = nodeQaLedgerColdMs + nodeQaBatchContentColdMs + nodeQaSmokeColdMs;
+
   const nodeQaLedgerStats = timedCommandSamples(
     'node',
     ['scripts/qa-research-ledgers.mjs'],
@@ -185,6 +190,27 @@ async function main() {
   if (!existsSync(rustCliBinary)) {
     throw new Error(`Rust CLI binary not found after build: ${rustCliBinary}`);
   }
+
+  const rustQaLedgerColdMs = timedCommand(
+    rustCliBinary,
+    [
+      'qa-ledgers',
+      'docs/modernization/baselines/datasets/research.json',
+      'docs/research-program/ledgers'
+    ],
+    projectRoot
+  );
+  const rustQaBatchContentColdMs = timedCommand(rustCliBinary, ['qa-batch-content', '.'], projectRoot);
+  const rustQaSmokeColdMs = timedCommand(
+    rustCliBinary,
+    [
+      'qa-smoke',
+      'docs/modernization/baselines/datasets/canonical.json',
+      'docs/modernization/baselines/datasets/ui-reference.json'
+    ],
+    projectRoot
+  );
+  const rustQaColdSuiteMs = rustQaLedgerColdMs + rustQaBatchContentColdMs + rustQaSmokeColdMs;
 
   const rustQaLedgerStats = timedCommandSamples(
     rustCliBinary,
@@ -246,6 +272,22 @@ async function main() {
         note: 'Measured via repeated getDataset(mode) materialization.'
       },
       research_pipeline_wall_clock_ms: {
+        cold_start: {
+          node: {
+            qa_ledgers: toMs(nodeQaLedgerColdMs),
+            qa_batch_content: toMs(nodeQaBatchContentColdMs),
+            qa_smoke: toMs(nodeQaSmokeColdMs),
+            suite_total: toMs(nodeQaColdSuiteMs)
+          },
+          rust: {
+            build_once: toMs(rustBuildMs),
+            qa_ledgers: toMs(rustQaLedgerColdMs),
+            qa_batch_content: toMs(rustQaBatchContentColdMs),
+            qa_smoke: toMs(rustQaSmokeColdMs),
+            suite_total: toMs(rustQaColdSuiteMs)
+          },
+          rust_speedup_vs_node: toMs(nodeQaColdSuiteMs / Math.max(rustQaColdSuiteMs, 0.001))
+        },
         node: {
           qa_ledgers: roundStats(nodeQaLedgerStats),
           qa_batch_content: roundStats(nodeQaBatchContentStats),
@@ -260,7 +302,7 @@ async function main() {
           suite_total_mean: toMs(rustQaSuiteMeanMs)
         },
         rust_speedup_vs_node: toMs(nodeQaSuiteMeanMs / Math.max(rustQaSuiteMeanMs, 0.001)),
-        note: 'Suite lane uses warmup + 5 measured samples per command for stable wall-clock comparisons.'
+        note: 'Warm lane uses warmup + 5 measured samples per command for stable wall-clock comparisons.'
       }
     }
   };

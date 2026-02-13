@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-13T06:06:43.031Z",
+  "generated_at": "2026-02-13T06:08:24.155Z",
   "machine": {
     "node": "v23.6.0",
     "platform": "darwin",
@@ -12,89 +12,105 @@
   "lanes": {
     "search_query_latency_ms": {
       "samples": 480,
-      "mean": 0.776,
-      "p95": 1.514,
-      "min": 0.254,
-      "max": 3.019,
+      "mean": 0.708,
+      "p95": 1.316,
+      "min": 0.248,
+      "max": 2.819,
       "note": "Measured via TypeScript search engine rankSearch over representative mixed queries."
     },
     "path_query_latency_ms": {
       "samples": 200,
-      "mean": 0.045,
-      "p95": 0.125,
+      "mean": 0.046,
+      "p95": 0.119,
       "min": 0,
-      "max": 0.28,
+      "max": 0.317,
       "note": "Measured via TypeScript pathfinder over representative pair samples."
     },
     "dataset_merge_derived_latency_ms": {
       "canonical": {
         "samples": 40,
-        "mean": 0.871,
-        "p95": 1.157,
-        "min": 0.684,
-        "max": 1.572
+        "mean": 0.883,
+        "p95": 1.171,
+        "min": 0.675,
+        "max": 1.397
       },
       "research": {
         "samples": 40,
-        "mean": 1.25,
-        "p95": 1.846,
-        "min": 0.987,
-        "max": 3.901
+        "mean": 1.133,
+        "p95": 1.391,
+        "min": 0.959,
+        "max": 1.464
       },
       "note": "Measured via repeated getDataset(mode) materialization."
     },
     "research_pipeline_wall_clock_ms": {
+      "cold_start": {
+        "node": {
+          "qa_ledgers": 64.772,
+          "qa_batch_content": 124.838,
+          "qa_smoke": 38.491,
+          "suite_total": 228.101
+        },
+        "rust": {
+          "build_once": 232.479,
+          "qa_ledgers": 682.19,
+          "qa_batch_content": 33.28,
+          "qa_smoke": 5.209,
+          "suite_total": 720.679
+        },
+        "rust_speedup_vs_node": 0.317
+      },
       "node": {
         "qa_ledgers": {
           "samples": 5,
-          "mean": 63.393,
-          "p95": 65.992,
-          "min": 60.297,
-          "max": 65.992
+          "mean": 64.742,
+          "p95": 72.001,
+          "min": 60.757,
+          "max": 72.001
         },
         "qa_batch_content": {
           "samples": 5,
-          "mean": 98.581,
-          "p95": 100.063,
-          "min": 96.709,
-          "max": 100.063
+          "mean": 108.343,
+          "p95": 136.892,
+          "min": 99.714,
+          "max": 136.892
         },
         "qa_smoke": {
           "samples": 5,
-          "mean": 38.707,
-          "p95": 40.338,
-          "min": 36.474,
-          "max": 40.338
+          "mean": 38.701,
+          "p95": 39.172,
+          "min": 38.055,
+          "max": 39.172
         },
-        "suite_total_mean": 200.681
+        "suite_total_mean": 211.786
       },
       "rust": {
-        "build_once": 238.981,
+        "build_once": 232.479,
         "qa_ledgers": {
           "samples": 5,
-          "mean": 11.218,
-          "p95": 13.793,
-          "min": 8.62,
-          "max": 13.793
+          "mean": 8.01,
+          "p95": 8.614,
+          "min": 7.442,
+          "max": 8.614
         },
         "qa_batch_content": {
           "samples": 5,
-          "mean": 24.405,
-          "p95": 28.411,
-          "min": 23.142,
-          "max": 28.411
+          "mean": 24.552,
+          "p95": 27.722,
+          "min": 23.552,
+          "max": 27.722
         },
         "qa_smoke": {
           "samples": 5,
-          "mean": 4.076,
-          "p95": 4.265,
-          "min": 3.957,
-          "max": 4.265
+          "mean": 4.019,
+          "p95": 4.209,
+          "min": 3.864,
+          "max": 4.209
         },
-        "suite_total_mean": 39.699
+        "suite_total_mean": 36.581
       },
-      "rust_speedup_vs_node": 5.055,
-      "note": "Suite lane uses warmup + 5 measured samples per command for stable wall-clock comparisons."
+      "rust_speedup_vs_node": 5.789,
+      "note": "Warm lane uses warmup + 5 measured samples per command for stable wall-clock comparisons."
     }
   }
 }

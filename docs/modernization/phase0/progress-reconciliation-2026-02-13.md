@@ -64,9 +64,10 @@ This checkpoint compares current implementation state against the plan in `docs/
   - parity and quality CI gates;
   - compaction-safe continuation docs and migration ledgering;
   - first benchmark baseline snapshot for engine/pipeline lanes;
-  - stabilized warm-lane pipeline benchmark methodology with Rust speedup evidence.
+  - cold-start + warm-lane pipeline benchmark methodology with Rust speedup evidence for steady-state workloads.
 - Remaining:
   - browser-trace benchmark lanes for UI performance budgets;
+  - Rust cold-start optimization for short-lived CLI invocations;
   - performance budget enforcement in CI.
 
 ### Phase 6: Cutover and stabilization
@@ -84,4 +85,5 @@ This checkpoint compares current implementation state against the plan in `docs/
 1. Continue Phase 3 UI cutover (search runtime complete, then command palette and filter/sidebar flows).
 2. Add browser-trace benchmark lanes and publish first UI responsiveness baseline.
 3. Add benchmark budget checks in CI (after UI lanes are measurable and stable).
-4. Start Phase 2 WASM boundary to move compute off main thread.
+4. Optimize Rust CLI cold-start path for single-command workflows.
+5. Start Phase 2 WASM boundary to move compute off main thread.
