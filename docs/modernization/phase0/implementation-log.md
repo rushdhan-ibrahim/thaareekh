@@ -41,6 +41,10 @@ Date: 2026-02-10
 - Ported `phase1-locator-batch-a`, `phase1-locator-batch-b`, `phase1-locator-batch-c`, `phase1-locator-batch-d`, and `phase1-locator-batch-e` into Rust CLI with parity harness (`verify-rust-phase1-locator-batches-parity.mjs`).
 - Ported `phase5-conflict-batch-c`, `phase5-promotion-batch-a`, and `phase5-promotion-batch-b` into Rust CLI with parity harness (`verify-rust-phase5-batches-parity.mjs`).
 - Ported `phase1-batch-a`, `phase1-batch-b`, `phase1-batch-c`, `phase1-batch-d`, and `phase1-batch-sweep` into Rust CLI with full tree parity harness (`verify-rust-phase1-batch-drivers-parity.mjs`).
+- Added modernization phase reconciliation checkpoint (`progress-reconciliation-2026-02-13.md`) mapping current execution against the full TS+Rust migration plan.
+- Wired TypeScript search controller into runtime scaffold (`apps/web/src/main.ts` + `apps/web/src/ui/search-runtime.ts`) with `reasonLabel` and locale adapter layer integration.
+- Added TypeScript command-palette module (`apps/web/src/ui/command-palette.ts`) and shared runtime wiring via `search-runtime.ts`.
+- Added command-palette parity harness (`scripts/modernization/verify-ts-command-palette-parity.mjs`) and CI/package integration.
 
 ## Pending for full Phase 0 completion
 - Complete feature-by-feature behavior specification with exact acceptance tests.

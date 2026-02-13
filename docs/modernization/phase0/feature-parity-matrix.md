@@ -13,6 +13,8 @@ Status: in progress
 ## UX and interaction parity
 - [x] Search scoring engine parity (rank + filter semantics).
 - [x] Search dropdown controller core parity (render + keyboard model).
+- [x] Search controller runtime cutover in TS scaffold (DOM wiring + adapter hooks).
+- [x] Command-palette core controller parity (render + keyboard model).
 - [x] Relationship neighbor extraction parity (sidebar link-group core).
 - [ ] Graph mode rendering + interaction parity.
 - [ ] Tree mode rendering + interaction parity.

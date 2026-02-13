@@ -110,6 +110,9 @@ jobs:
       - name: Verify TypeScript search-engine parity
         run: node --experimental-strip-types scripts/modernization/verify-ts-search-engine-parity.mjs
 
+      - name: Verify TypeScript command-palette parity
+        run: node --experimental-strip-types scripts/modernization/verify-ts-command-palette-parity.mjs
+
       - name: Verify TypeScript search-controller parity
         run: node --experimental-strip-types scripts/modernization/verify-ts-search-controller-parity.mjs
 

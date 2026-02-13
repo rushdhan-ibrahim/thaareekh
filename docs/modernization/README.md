@@ -61,6 +61,7 @@ This folder tracks implementation of the TypeScript + Rust rewrite.
 - `npm run modernization:phase5-promotion-batch-b-rust`
 - `npm run modernization:phase5-batches-parity`
 - `npm run modernization:ts-search-engine-parity`
+- `npm run modernization:ts-command-palette-parity`
 - `npm run modernization:ts-search-controller-parity`
 - `npm run modernization:ts-pathfinder-parity`
 - `npm run modernization:ts-relationships-parity`

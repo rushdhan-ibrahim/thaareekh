@@ -11,20 +11,21 @@
       }
       body {
         margin: 0;
-        background: linear-gradient(160deg, #f7f9fb 0%, #edf4f6 100%);
+        background: radial-gradient(circle at 20% 15%, #f3f8ff 0%, #edf4f6 40%, #e6eff2 100%);
         color: #1a2a33;
       }
       main {
-        max-width: 920px;
-        margin: 48px auto;
-        padding: 24px;
-        background: rgba(255, 255, 255, 0.9);
-        border: 1px solid #d4e1e6;
-        border-radius: 16px;
+        max-width: 960px;
+        margin: 48px auto 72px;
+        padding: 24px 22px;
+        background: rgba(255, 255, 255, 0.94);
+        border: 1px solid #d2dfe5;
+        border-radius: 18px;
+        box-shadow: 0 20px 52px rgba(16, 39, 48, 0.09);
       }
       h1 {
         margin: 0 0 8px;
-        font-size: 2rem;
+        font-size: 1.8rem;
       }
       p {
         margin: 0;
@@ -34,6 +35,238 @@
         background: #eaf2f5;
         padding: 2px 6px;
         border-radius: 6px;
+      }
+      .mx-shell {
+        display: grid;
+        gap: 16px;
+      }
+      .mx-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: start;
+      }
+      .mx-head p {
+        max-width: 720px;
+      }
+      .mx-locale {
+        display: grid;
+        gap: 6px;
+        font-size: 0.88rem;
+        color: #38515d;
+      }
+      .mx-locale select {
+        min-width: 120px;
+        border-radius: 9px;
+        border: 1px solid #bdd0d7;
+        background: #f8fbfc;
+        color: #243840;
+        padding: 6px 9px;
+      }
+      .mx-trigger {
+        justify-self: start;
+        border: 1px solid #c8d8df;
+        background: #f8fbfd;
+        color: #26414c;
+        border-radius: 10px;
+        padding: 8px 12px;
+        font-size: 0.88rem;
+        cursor: pointer;
+      }
+      .mx-trigger:hover {
+        background: #eef5f8;
+      }
+      .mx-trigger kbd {
+        margin-left: 8px;
+        padding: 2px 6px;
+        border-radius: 6px;
+        border: 1px solid #b7cad2;
+        background: #fff;
+      }
+      .swrap {
+        position: relative;
+      }
+      .si {
+        position: absolute;
+        left: 12px;
+        top: 10px;
+        color: #5f7380;
+      }
+      #si {
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid #c5d7de;
+        border-radius: 12px;
+        padding: 10px 38px 10px 34px;
+        font-size: 0.98rem;
+        color: #1a2a33;
+        background: #fefefe;
+      }
+      #si:focus {
+        outline: none;
+        border-color: #6f95a3;
+        box-shadow: 0 0 0 3px rgba(111, 149, 163, 0.16);
+      }
+      .sc {
+        position: absolute;
+        right: 8px;
+        top: 7px;
+        width: 28px;
+        height: 28px;
+        border: 0;
+        border-radius: 8px;
+        background: transparent;
+        color: #4f6672;
+        cursor: pointer;
+      }
+      .sc:hover {
+        background: #eef4f7;
+      }
+      .dd {
+        display: none;
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin-top: 6px;
+        background: #fff;
+        border: 1px solid #ccdce3;
+        border-radius: 12px;
+        box-shadow: 0 12px 32px rgba(16, 39, 48, 0.14);
+        overflow: hidden;
+        z-index: 5;
+      }
+      .dd.open {
+        display: block;
+      }
+      .ddi,
+      .dde {
+        padding: 10px 12px;
+      }
+      .ddi {
+        cursor: pointer;
+        border-bottom: 1px solid #eef4f6;
+      }
+      .ddi:last-child {
+        border-bottom: 0;
+      }
+      .ddi.act {
+        background: #ecf5f8;
+      }
+      .ddi b {
+        display: block;
+        font-size: 0.95rem;
+        color: #1a2b34;
+      }
+      .ddi em {
+        display: block;
+        margin-top: 3px;
+        font-style: normal;
+        font-size: 0.82rem;
+        color: #58717d;
+      }
+      .dde {
+        color: #5b717d;
+        font-size: 0.9rem;
+      }
+      .mx-selected {
+        color: #314954;
+        font-size: 0.92rem;
+      }
+      .mx-note {
+        font-size: 0.86rem;
+        color: #4d6471;
+      }
+      .cmd-palette {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: start;
+        justify-content: center;
+        padding-top: 11vh;
+        background: rgba(10, 24, 30, 0.42);
+        z-index: 20;
+      }
+      .cmd-palette.open {
+        display: flex;
+      }
+      .cmd-palette-box {
+        width: min(760px, calc(100vw - 24px));
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid #c4d5dd;
+        background: #fff;
+        box-shadow: 0 26px 62px rgba(8, 22, 28, 0.25);
+      }
+      .cmd-palette-input {
+        width: 100%;
+        box-sizing: border-box;
+        border: 0;
+        border-bottom: 1px solid #e3edf1;
+        padding: 12px 14px;
+        font-size: 0.98rem;
+        color: #19303a;
+      }
+      .cmd-palette-input:focus {
+        outline: none;
+      }
+      .cmd-palette-results {
+        max-height: min(58vh, 460px);
+        overflow: auto;
+      }
+      .cmd-palette-empty {
+        padding: 16px 14px;
+        color: #5d7480;
+      }
+      .cmd-result {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-bottom: 1px solid #edf4f6;
+        cursor: pointer;
+      }
+      .cmd-result:last-child {
+        border-bottom: 0;
+      }
+      .cmd-result.active {
+        background: #ebf4f8;
+      }
+      .cmd-result-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: 1px solid rgba(16, 39, 48, 0.25);
+      }
+      .cmd-result-name {
+        font-size: 0.95rem;
+        color: #132c36;
+      }
+      .cmd-result-meta {
+        font-size: 0.8rem;
+        color: #5a6f7a;
+      }
+      .cmd-result-badge {
+        font-size: 0.75rem;
+        color: #3f5a66;
+        border: 1px solid #c8d8df;
+        border-radius: 999px;
+        padding: 2px 8px;
+        white-space: nowrap;
+      }
+      .cmd-palette-hint {
+        display: flex;
+        gap: 16px;
+        padding: 8px 14px 10px;
+        border-top: 1px solid #e6eff2;
+        font-size: 0.76rem;
+        color: #5b707b;
+      }
+      .cmd-palette-hint kbd {
+        border: 1px solid #bed0d8;
+        border-radius: 5px;
+        padding: 1px 4px;
+        background: #fff;
       }
     </style>
   </head>

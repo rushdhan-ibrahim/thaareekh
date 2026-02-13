@@ -1,9 +1,10 @@
 # Phase 0 Continuation Handoff
 
-Date: 2026-02-12
+Date: 2026-02-13
 Status: active
 
 This document is the compact resumption point for modernization work after context compaction.
+For phase-vs-plan reconciliation, see `docs/modernization/phase0/progress-reconciliation-2026-02-13.md`.
 
 ## Current verified state
 - Full modernization verification is passing locally via `npm run modernization:verify`.
@@ -64,11 +65,12 @@ This document is the compact resumption point for modernization work after conte
   - TS target: `apps/web/src/graph/relationships.ts`.
   - Parity harness: `scripts/modernization/verify-ts-relationships-parity.mjs`.
 - Full DOM wiring cutover for search controller is still pending.
+- Search runtime cutover is now wired in scaffold runtime (`apps/web/src/main.ts`, `apps/web/src/ui/search-runtime.ts`), including locale and reason-label adapter hooks.
 
 ## Next prioritized backlog (in order)
 1. Complete search UI controller DOM wiring cutover to TypeScript runtime module.
-2. Add TS adapter layer for `reasonLabel` and locale hooks in app runtime wiring.
-3. Migrate command-palette interaction module and dedupe with shared search engine.
+2. Validate and extend locale/runtime adapter coverage beyond search (command palette + sidebar labels).
+3. Complete command-palette runtime parity and unify shortcut behavior with graph/tree interaction focus states.
 4. Continue feature matrix UX section top-down (filters, sidebar evidence cards, compare flow).
 5. Add benchmark automation for search, pathfinding, and first-paint responsiveness.
 6. Extend parity harnesses for any future research-driver additions before cutover.
