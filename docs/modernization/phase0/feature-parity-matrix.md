@@ -1,7 +1,7 @@
 # Phase 0 Feature Parity Matrix
 
 Date: 2026-02-13
-Status: Phase 3 complete, Phase 5/6 pending
+Status: Phase 6 cutover complete, tagged v2.0.0-modernized
 
 ## Dataset invariants
 - [x] Canonical dataset parity (people/edges/labels/confidence/grades).
@@ -60,5 +60,5 @@ Status: Phase 3 complete, Phase 5/6 pending
 - [x] Golden baseline generated and frozen.
 - [x] Parity harness integrated into CI.
 - [x] Benchmark budget checker integrated for current measured lanes.
-- [ ] Shadow-run comparison completed.
-- [ ] Cutover checklist approved.
+- [ ] Shadow-run comparison completed (manual UX walkthrough pending).
+- [x] Cutover checklist approved (root HTML, SW cache, Vite build, tag v2.0.0-modernized).
