@@ -27,7 +27,20 @@ const TRANSLATIONS: Record<Locale, Record<string, string>> = {
     no_matches: 'No matches',
     command_empty_hint: 'Start typing to search names, dynasties, and titles.',
     search_placeholder: 'Search name/known-as/title/# · filters: dy:hilaaly c:u o:fandiyaaru',
+    search_aria: 'Search people',
+    clear_search_aria: 'Clear search',
+    command_input_placeholder: 'Search people, dynasties, offices, titles, and aliases',
+    runtime_title: 'Modernization Runtime: Search Cutover',
+    runtime_intro:
+      'TypeScript search and command-palette controllers are wired to shared runtime adapters, with locale/reason-label hooks and research-dataset-backed ranking.',
+    locale_label: 'Locale',
+    trigger_open_palette: 'Open command palette',
+    hint_navigate: 'navigate',
+    hint_select: 'select',
+    hint_close: 'close',
     selected_prefix: 'Focused person',
+    selected_none: 'none',
+    migration_guardrail: 'Migration guardrail: no functionality or knowledge loss',
     reason_filter: 'Filter match',
     reason_number: 'Ordinal/number match',
     reason_name: 'Name match',
@@ -44,7 +57,20 @@ const TRANSLATIONS: Record<Locale, Record<string, string>> = {
     no_matches: 'މެޗެސް ނުވޭ',
     command_empty_hint: 'ނަން، ދިނަސްޓީ އަދި ލަޤަބު ހޯދުމަށް ލިޔުން ފަށާށެވެ.',
     search_placeholder: 'ނަން/ކިޔާނަން/ލަޤަބު/# ހޯދާ · dy:hilaaly c:u o:fandiyaaru',
+    search_aria: 'ފަރާތްތައް ހޯދާ',
+    clear_search_aria: 'ސާރޗް ސާފުކުރޭ',
+    command_input_placeholder: 'ފަރާތް، ދިނަސްޓީ، އޮފީސް، ލަޤަބު، އެލިއަސް ހޯދާ',
+    runtime_title: 'މޮޑަނައިޒޭޝަން ރަންޓައިމް: ސާރޗް ކަޓްއޯވަރ',
+    runtime_intro:
+      'TypeScript ސާރޗް އަދި ކޮމާންޑް-ޕެލެޓް ކޮންޓްރޯލަރތައް ޝެއާޑް ރަންޓައިމް އެޑަޕްޓަރުތަކާ ވައިރު ކުރެވިފައިވާއިރު locale/reason-label ހޫކްތަކާ ރިސާޗް-ޑޭޓާސެޓް ބޭސް ރޭންކިންގް އެކު ހިމެނޭ.',
+    locale_label: 'ބަސް',
+    trigger_open_palette: 'ކޮމާންޑް ޕެލެޓް ހުޅުވާ',
+    hint_navigate: 'ހިނގާ',
+    hint_select: 'ހޮވާ',
+    hint_close: 'ބަންދު',
     selected_prefix: 'ފޯކަސްވާ ފަރާތް',
+    selected_none: 'ނެތް',
+    migration_guardrail: 'މައިގްރޭޝަން ގާޑްރޭލް: ފަންކްޝަނަލިޓީ ނުވަތަ މައުލޫމާތު ގެއްލުމެއް ނެތް',
     reason_filter: 'ފިލްޓަރ މެޗް',
     reason_number: 'އޯޑިނަލް/ނަންބަރ މެޗް',
     reason_name: 'ނަން މެޗް',
@@ -122,10 +148,56 @@ function dynastyColor(dynasty: string | undefined): string {
   return `var(--dy-${key})`;
 }
 
+function applyRuntimeLocaleText(documentRef: Document, t: (key: string) => string): void {
+  const textBindings: Array<[string, string]> = [
+    ['mx-title', 'runtime_title'],
+    ['mx-intro', 'runtime_intro'],
+    ['mx-locale-label', 'locale_label'],
+    ['mx-trigger-label', 'trigger_open_palette'],
+    ['mx-hint-navigate', 'hint_navigate'],
+    ['mx-hint-select', 'hint_select'],
+    ['mx-hint-close', 'hint_close']
+  ];
+  for (const [id, key] of textBindings) {
+    const node = documentRef.getElementById(id);
+    if (!(node instanceof HTMLElement)) continue;
+    node.textContent = t(key);
+  }
+
+  const searchInput = documentRef.getElementById('si');
+  if (searchInput instanceof HTMLInputElement) {
+    searchInput.placeholder = t('search_placeholder');
+    searchInput.setAttribute('aria-label', t('search_aria'));
+  }
+
+  const clearButton = documentRef.getElementById('sc');
+  if (clearButton instanceof HTMLButtonElement) {
+    clearButton.setAttribute('aria-label', t('clear_search_aria'));
+  }
+
+  const commandInput = documentRef.getElementById('cmdInput');
+  if (commandInput instanceof HTMLInputElement) {
+    commandInput.placeholder = t('command_input_placeholder');
+  }
+
+  const selected = documentRef.getElementById('search-selected');
+  if (selected instanceof HTMLElement) {
+    const personId = selected.dataset.personId ?? '';
+    const focusValue = personId || t('selected_none');
+    selected.textContent = `${t('selected_prefix')}: ${focusValue}`;
+  }
+
+  const note = documentRef.getElementById('mx-note');
+  if (note instanceof HTMLElement) {
+    note.textContent = t('migration_guardrail');
+  }
+}
+
 function goToPersonFactory(documentRef: Document, t: (key: string) => string): (personId: string) => void {
   return (personId: string) => {
     const selected = documentRef.getElementById('search-selected');
     if (!(selected instanceof HTMLElement)) return;
+    selected.dataset.personId = personId;
     selected.textContent = `${t('selected_prefix')}: ${personId}`;
   };
 }
@@ -138,11 +210,11 @@ export function initSearchRuntime(documentRef: Document): { setLocale: (locale: 
   const engine = createSearchEngine(dataset.people ?? [], dataset.edges ?? [], officeById);
   const reasonLabelAdapter = createReasonLabelAdapter(locale.t);
   const goToPerson = goToPersonFactory(documentRef, locale.t);
+  documentRef.documentElement.lang = locale.getLocale();
+
+  applyRuntimeLocaleText(documentRef, locale.t);
 
   const input = documentRef.getElementById('si');
-  if (input instanceof HTMLInputElement) {
-    input.placeholder = locale.t('search_placeholder');
-  }
 
   const clearButton = documentRef.getElementById('sc');
   if (clearButton instanceof HTMLButtonElement && input instanceof HTMLInputElement) {
@@ -176,13 +248,8 @@ export function initSearchRuntime(documentRef: Document): { setLocale: (locale: 
   return {
     setLocale: (nextLocale: Locale) => {
       locale.setLocale(nextLocale);
-      if (input instanceof HTMLInputElement) {
-        input.placeholder = locale.t('search_placeholder');
-      }
-      const selected = documentRef.getElementById('search-selected');
-      if (selected instanceof HTMLElement && selected.textContent?.endsWith(': none')) {
-        selected.textContent = `${locale.t('selected_prefix')}: none`;
-      }
+      documentRef.documentElement.lang = locale.getLocale();
+      applyRuntimeLocaleText(documentRef, locale.t);
     }
   };
 }

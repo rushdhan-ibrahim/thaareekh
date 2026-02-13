@@ -1,7 +1,7 @@
 # TypeScript + Rust Modernization Plan
 
 Date: 2026-02-10  
-Status: in progress (Phase 0/1/4 parity foundation complete; Phase 3 active; Phase 2/6 pending)
+Status: in progress (Phase 0/1/4 parity foundation complete with benchmark automation active; Phase 3 active; Phase 2/6 pending)
 
 ## 1. Objective
 Perform a full rewrite of the project using a TypeScript + Rust architecture with zero loss of knowledge/functionality, major performance gains, and substantially better long-term maintainability.

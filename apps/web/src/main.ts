@@ -10,20 +10,20 @@ mount.innerHTML = `
   <section class="mx-shell">
     <header class="mx-head">
       <div>
-        <h1>Modernization Runtime: Search Cutover</h1>
-        <p>
+        <h1 id="mx-title">Modernization Runtime: Search Cutover</h1>
+        <p id="mx-intro">
           TypeScript search and command-palette controllers are wired to shared runtime adapters, with locale/reason-label hooks and research-dataset-backed ranking.
         </p>
       </div>
       <label class="mx-locale">
-        Locale
+        <span id="mx-locale-label">Locale</span>
         <select id="mx-locale-select">
           <option value="en" selected>English</option>
           <option value="dv">Dhivehi</option>
         </select>
       </label>
     </header>
-    <button id="cmdTrigger" class="mx-trigger" type="button">Open command palette <kbd>/</kbd></button>
+    <button id="cmdTrigger" class="mx-trigger" type="button"><span id="mx-trigger-label">Open command palette</span> <kbd>/</kbd></button>
     <div class="swrap">
       <span class="si">⌕</span>
       <input id="si" type="text" aria-label="Search people" aria-controls="dd" aria-autocomplete="list" />
@@ -35,14 +35,14 @@ mount.innerHTML = `
         <input id="cmdInput" class="cmd-palette-input" type="text" autocomplete="off" spellcheck="false" />
         <div id="cmdResults" class="cmd-palette-results"></div>
         <div class="cmd-palette-hint">
-          <span><kbd>↑↓</kbd> navigate</span>
-          <span><kbd>↵</kbd> select</span>
-          <span><kbd>esc</kbd> close</span>
+          <span><kbd>↑↓</kbd> <span id="mx-hint-navigate">navigate</span></span>
+          <span><kbd>↵</kbd> <span id="mx-hint-select">select</span></span>
+          <span><kbd>esc</kbd> <span id="mx-hint-close">close</span></span>
         </div>
       </div>
     </div>
-    <p id="search-selected" class="mx-selected">Focused person: none</p>
-    <p class="mx-note">
+    <p id="search-selected" class="mx-selected" data-person-id="">Focused person: none</p>
+    <p id="mx-note" class="mx-note">
       Migration guardrail: <code>no functionality or knowledge loss</code>
     </p>
   </section>

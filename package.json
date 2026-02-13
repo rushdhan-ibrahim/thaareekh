@@ -57,6 +57,7 @@
     "modernization:phase5-promotion-batch-a-rust": "cargo run -q -p maldives-research-cli -- phase5-promotion-batch-a .",
     "modernization:phase5-promotion-batch-b-rust": "cargo run -q -p maldives-research-cli -- phase5-promotion-batch-b .",
     "modernization:phase5-batches-parity": "node scripts/modernization/verify-rust-phase5-batches-parity.mjs",
+    "modernization:benchmark": "node --experimental-strip-types scripts/modernization/run-benchmarks.mjs",
     "modernization:ts-search-engine-parity": "node --experimental-strip-types scripts/modernization/verify-ts-search-engine-parity.mjs",
     "modernization:ts-command-palette-parity": "node --experimental-strip-types scripts/modernization/verify-ts-command-palette-parity.mjs",
     "modernization:ts-search-controller-parity": "node --experimental-strip-types scripts/modernization/verify-ts-search-controller-parity.mjs",

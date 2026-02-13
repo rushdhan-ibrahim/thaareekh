@@ -45,7 +45,12 @@ Date: 2026-02-10
 - Wired TypeScript search controller into runtime scaffold (`apps/web/src/main.ts` + `apps/web/src/ui/search-runtime.ts`) with `reasonLabel` and locale adapter layer integration.
 - Added TypeScript command-palette module (`apps/web/src/ui/command-palette.ts`) and shared runtime wiring via `search-runtime.ts`.
 - Added command-palette parity harness (`scripts/modernization/verify-ts-command-palette-parity.mjs`) and CI/package integration.
+- Extended TypeScript runtime locale adapter coverage to static shell labels, command-palette hints/placeholders, and localized ARIA text (`apps/web/src/main.ts`, `apps/web/src/ui/search-runtime.ts`).
+- Added benchmark automation runner (`scripts/modernization/run-benchmarks.mjs`) and root script (`modernization:benchmark`) with snapshot exports under `docs/modernization/baselines/benchmarks/`.
+- Hardened benchmark fairness by running Rust QA lane via release CLI binary (`target/release/maldives-research-cli`) rather than repeated `cargo run` invocations.
+- Added warmup + sampled benchmark methodology (5 measured samples/lane) for stable Node-vs-Rust QA wall-clock comparison.
+- Captured first benchmark snapshot (`benchmark-2026-02-13.json`) and published measured baseline against modernization performance targets.
 
 ## Pending for full Phase 0 completion
 - Complete feature-by-feature behavior specification with exact acceptance tests.
-- Add performance benchmark automation and baseline snapshots.
+- Add browser trace lanes for UI boot/pan/zoom/filter latency and integrate budget checker into CI.

@@ -11,6 +11,8 @@ For phase-vs-plan reconciliation, see `docs/modernization/phase0/progress-reconc
 - Rust parity is complete for all currently migrated research pipeline jobs listed in `package.json`.
 - CI workflow includes parity steps for all migrated Rust jobs in `.github/workflows/modernization-parity.yml`.
 - CI workflow now includes mandatory `npm ci`, `npm run typecheck`, and `npm run build:web` gates.
+- Benchmark automation is wired via `npm run modernization:benchmark` with snapshots written to `docs/modernization/baselines/benchmarks/`.
+- Latest benchmark snapshot date: 2026-02-13 (`benchmark-latest.json`).
 
 ## Rust parity ports completed
 - Dataset derive parity (`verify-rust-derive-parity.mjs`).
@@ -45,6 +47,7 @@ For phase-vs-plan reconciliation, see `docs/modernization/phase0/progress-reconc
 - `npm run typecheck`
 - `npm run build:web`
 - `npm run modernization:verify`
+- `npm run modernization:benchmark`
 
 ## Frontend TypeScript migration status
 - Scaffold exists in `apps/web` (Vite + strict TypeScript).
@@ -66,14 +69,17 @@ For phase-vs-plan reconciliation, see `docs/modernization/phase0/progress-reconc
   - Parity harness: `scripts/modernization/verify-ts-relationships-parity.mjs`.
 - Full DOM wiring cutover for search controller is still pending.
 - Search runtime cutover is now wired in scaffold runtime (`apps/web/src/main.ts`, `apps/web/src/ui/search-runtime.ts`), including locale and reason-label adapter hooks.
+- Runtime locale coverage now includes shell labels, command-palette hint text, and ARIA placeholders/labels via centralized TS adapter hooks.
 
 ## Next prioritized backlog (in order)
 1. Complete search UI controller DOM wiring cutover to TypeScript runtime module.
 2. Validate and extend locale/runtime adapter coverage beyond search (command palette + sidebar labels).
 3. Complete command-palette runtime parity and unify shortcut behavior with graph/tree interaction focus states.
 4. Continue feature matrix UX section top-down (filters, sidebar evidence cards, compare flow).
-5. Add benchmark automation for search, pathfinding, and first-paint responsiveness.
-6. Extend parity harnesses for any future research-driver additions before cutover.
+5. Add browser-trace lanes for first paint, interaction delay, and pan/zoom smoothness.
+6. Add explicit cold-start benchmark lane for Rust/Node command startup cost.
+7. Add CI-safe benchmark budget checks for stabilized lanes.
+8. Extend parity harnesses for any future research-driver additions before cutover.
 
 ## Non-negotiable constraints during migration
 - No functionality loss.

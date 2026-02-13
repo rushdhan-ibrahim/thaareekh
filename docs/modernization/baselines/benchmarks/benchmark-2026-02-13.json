@@ -1,0 +1,100 @@
+{
+  "generated_at": "2026-02-13T06:06:43.031Z",
+  "machine": {
+    "node": "v23.6.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "targets": {
+    "search_p95_ms": 100,
+    "path_p95_ms": 100
+  },
+  "lanes": {
+    "search_query_latency_ms": {
+      "samples": 480,
+      "mean": 0.776,
+      "p95": 1.514,
+      "min": 0.254,
+      "max": 3.019,
+      "note": "Measured via TypeScript search engine rankSearch over representative mixed queries."
+    },
+    "path_query_latency_ms": {
+      "samples": 200,
+      "mean": 0.045,
+      "p95": 0.125,
+      "min": 0,
+      "max": 0.28,
+      "note": "Measured via TypeScript pathfinder over representative pair samples."
+    },
+    "dataset_merge_derived_latency_ms": {
+      "canonical": {
+        "samples": 40,
+        "mean": 0.871,
+        "p95": 1.157,
+        "min": 0.684,
+        "max": 1.572
+      },
+      "research": {
+        "samples": 40,
+        "mean": 1.25,
+        "p95": 1.846,
+        "min": 0.987,
+        "max": 3.901
+      },
+      "note": "Measured via repeated getDataset(mode) materialization."
+    },
+    "research_pipeline_wall_clock_ms": {
+      "node": {
+        "qa_ledgers": {
+          "samples": 5,
+          "mean": 63.393,
+          "p95": 65.992,
+          "min": 60.297,
+          "max": 65.992
+        },
+        "qa_batch_content": {
+          "samples": 5,
+          "mean": 98.581,
+          "p95": 100.063,
+          "min": 96.709,
+          "max": 100.063
+        },
+        "qa_smoke": {
+          "samples": 5,
+          "mean": 38.707,
+          "p95": 40.338,
+          "min": 36.474,
+          "max": 40.338
+        },
+        "suite_total_mean": 200.681
+      },
+      "rust": {
+        "build_once": 238.981,
+        "qa_ledgers": {
+          "samples": 5,
+          "mean": 11.218,
+          "p95": 13.793,
+          "min": 8.62,
+          "max": 13.793
+        },
+        "qa_batch_content": {
+          "samples": 5,
+          "mean": 24.405,
+          "p95": 28.411,
+          "min": 23.142,
+          "max": 28.411
+        },
+        "qa_smoke": {
+          "samples": 5,
+          "mean": 4.076,
+          "p95": 4.265,
+          "min": 3.957,
+          "max": 4.265
+        },
+        "suite_total_mean": 39.699
+      },
+      "rust_speedup_vs_node": 5.055,
+      "note": "Suite lane uses warmup + 5 measured samples per command for stable wall-clock comparisons."
+    }
+  }
+}

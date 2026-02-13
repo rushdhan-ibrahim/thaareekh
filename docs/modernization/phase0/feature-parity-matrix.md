@@ -48,9 +48,10 @@ Status: in progress
 ## Performance targets
 - [ ] Initial interactivity improvement >= 40%.
 - [ ] Main-thread long task reduction >= 70%.
-- [ ] Search/filter/path p95 <= 100ms.
-- [ ] Dataset merge/inference speedup >= 3x.
-- [ ] Research QA pipeline runtime reduction >= 50%.
+- [x] Search/path p95 <= 100ms (snapshot `benchmark-2026-02-13.json`).
+- [ ] Filter toggling/rebuild p95 <= 100ms (lane pending).
+- [ ] Dataset merge/inference speedup >= 3x (Rust baseline lane pending).
+- [x] Research QA pipeline runtime reduction >= 50% (current Rust vs Node speedup: `5.055x`).
 
 ## Sign-off gates
 - [x] Golden baseline generated and frozen.
