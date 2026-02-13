@@ -26,8 +26,9 @@ Status: Phase 3 complete, Phase 5/6 pending
 - [x] Story trails parity (storytrails.ts ported).
 - [x] Sidebar detail and evidence card parity (sidebar.ts: estLife, sourceQualityWeight, rlH, showD, showLinkDetail — 30 tests).
 - [x] Export behavior parity (exporter.ts ported).
-- [x] Offline/service-worker parity (sw.js registration wired in main.ts; cache versioning unchanged).
+- [x] Offline/service-worker parity (sw.js CACHE_NAME v9; Vite bundle assets cached).
 - [x] Main orchestration parity (main.ts: 985 lines, all 20+ modules wired, 38 parity checks green).
+- [x] Vite production build parity (55 modules bundled, CDN externals preserved via importmap).
 
 ## Research pipeline parity
 - [x] QA smoke parity.

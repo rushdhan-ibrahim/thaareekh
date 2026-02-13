@@ -74,14 +74,19 @@ Total: ~9,300 lines of TypeScript across 24 modules, 16 parity harnesses, 38 tot
 - i18n, filter, highlight, viewstate, history, keyboard-nav, minimap
 - compare, tree-options, sidebar, rebuild
 
+## Phase 6 cutover status
+- Root `index.html` updated: loads `apps/web/dist/assets/main.js` (Vite bundle) + `apps/web/dist/assets/index.css`.
+- CDN externals: d3@7, @floating-ui/dom@1, gsap@3 resolved by importmap at runtime.
+- `sw.js` CACHE_NAME bumped to `v9` with modernized asset list.
+- `apps/web/dist/` tracked in git for static deployment (removed from `.gitignore`).
+- Build: `npm run build:web` — typecheck + Vite build (55 modules, ~400ms).
+
 ## Next prioritized backlog (in order)
-1. **Phase 5**: Integrate CDP-based UI benchmark runner into `modernization:benchmark` (paused due to environment constraints).
-2. **Phase 5**: Add browser trace lanes for FMP, TTI, pan/zoom fps, filter toggle latency.
-3. **Phase 6**: Shadow-run comparison — run legacy and modernized apps side by side.
-4. **Phase 6**: Update root `index.html` to load from `apps/web/dist/`.
-5. **Phase 6**: Bump `sw.js` CACHE_NAME for modernized build.
-6. **Phase 6**: Tag `v2.0.0-modernized`, keep legacy `src/` for 1 release cycle.
-7. Optimize Rust cold-start startup path for short-lived CLI invocation.
+1. **Phase 6**: Shadow-run comparison — run legacy (`src/main.js`) and modernized (`apps/web/dist/assets/main.js`) side by side; manual UX walkthrough.
+2. **Phase 6**: Tag `v2.0.0-modernized`, keep legacy `src/` for 1 release cycle.
+3. **Phase 5**: Integrate CDP-based UI benchmark runner into `modernization:benchmark` (paused due to environment constraints).
+4. **Phase 5**: Add browser trace lanes for FMP, TTI, pan/zoom fps, filter toggle latency.
+5. Optimize Rust cold-start startup path for short-lived CLI invocation.
 
 ## Non-negotiable constraints during migration
 - No functionality loss.

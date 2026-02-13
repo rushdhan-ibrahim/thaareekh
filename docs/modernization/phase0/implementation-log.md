@@ -66,6 +66,13 @@ Date: 2026-02-10
 - Registered all 16 TS parity harnesses in package.json verify chain (38 total parity checks now green).
 - Full main.ts rewrite (985 lines): wires all 20+ TS modules together with dependency injection, replaces scaffold stub. Imports all data modules, creates AppState, bound helpers (goF, hiN, hiE, clH, etc.), filter wrapper with eraPersonOk computation, era controls, filter panel, sidebar/selection management, view mode toggles, density/overlay/focus controls, story trail sync, global event listeners (zoom-changed, lang-changed, selection-changed, resize, request-sidebar-open, parallax pattern), service worker registration, dynasty dropdown population, saved view state restoration.
 
+- Phase 6 cutover: replaced root `index.html` to load Vite-built bundle from `apps/web/dist/assets/main.js` (bundled TS + data modules, 1,054 kB / 164 kB gzip) and `apps/web/dist/assets/index.css` (bundled 9 CSS files, 38 kB / 8 kB gzip). CDN externals (d3, gsap, @floating-ui/dom) resolved by importmap at runtime.
+- Phase 6 cutover: updated `apps/web/index.html` with full legacy HTML structure for Vite dev mode; CSS paths resolve to `../../css/`, script entry is `/src/main.ts`.
+- Phase 6 cutover: updated `apps/web/vite.config.ts` with `base: './'` for relative paths, `build.rollupOptions.external` for CDN libs, `server.fs.allow` for root access, stable output filenames (no content hashes).
+- Phase 6 cutover: bumped `sw.js` CACHE_NAME from `v8` to `v9`, replaced 40+ legacy JS module entries with 2 Vite bundle entries (`main.js` + `index.css`), added `@floating-ui/dom` and `gsap` to EXTERNAL_ASSETS.
+- Phase 6 cutover: updated `.gitignore` to track `apps/web/dist/` build artifacts (required for static site deployment).
+- Build verification: 55 modules transformed, Vite build completes in ~400ms, typecheck clean, 38 parity checks green.
+
 ## Pending for full Phase 0 completion
 - Complete feature-by-feature behavior specification with exact acceptance tests.
 - Add browser trace lanes for UI boot/pan/zoom/filter latency and integrate budget checker into CI.

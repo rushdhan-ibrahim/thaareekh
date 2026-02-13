@@ -1,64 +1,18 @@
-const CACHE_NAME = 'maldives-genealogy-v8';
+const CACHE_NAME = 'maldives-genealogy-v9';
 
 const CORE_ASSETS = [
   './',
   './index.html',
-  './css/tokens.css',
-  './css/base.css',
-  './css/layout.css',
-  './css/components.css',
-  './css/graph.css',
-  './css/search.css',
-  './css/tooltip.css',
-  './css/animations.css',
-  './css/onboarding.css',
-  './docs/offline-research-archive.json',
-  './src/main.js',
-  './src/state.js',
-  './src/utils/css.js',
-  './src/utils/dynasties.js',
-  './src/utils/format.js',
-  './src/graph/filter.js',
-  './src/graph/highlight.js',
-  './src/graph/pathfinder.js',
-  './src/graph/rebuild.js',
-  './src/graph/relationships.js',
-  './src/ui/commandbar.js',
-  './src/ui/command-palette.js',
-  './src/ui/compare.js',
-  './src/ui/history.js',
-  './src/ui/hover-card.js',
-  './src/ui/i18n.js',
-  './src/ui/keyboard-nav.js',
-  './src/ui/minimap.js',
-  './src/ui/modal.js',
-  './src/ui/navigation.js',
-  './src/ui/exporter.js',
-  './src/ui/onboarding.js',
-  './src/ui/search.js',
-  './src/ui/search-engine.js',
-  './src/ui/sidebar.js',
-  './src/ui/storytrails.js',
-  './src/ui/theme.js',
-  './src/ui/timeline-viz.js',
-  './src/ui/viewstate.js',
-  './src/data/era-events.js',
-  './src/data/geo.js',
-  './src/data/offices.js',
-  './src/data/profile.enrichments.js',
-  './src/data/sources.js',
-  './src/data/storytrails.js',
-  './src/data/timeline.js',
-  './src/data/sovereigns.js',
-  './src/data/sovereigns.core.js',
-  './src/data/sovereigns.merge.js',
-  './src/data/sovereigns.promoted.js',
-  './src/data/sovereigns.research.js'
+  './apps/web/dist/assets/main.js',
+  './apps/web/dist/assets/index.css',
+  './docs/offline-research-archive.json'
 ];
 
 const EXTERNAL_ASSETS = [
   'https://cdn.jsdelivr.net/npm/d3@7/+esm',
-  'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=JetBrains+Mono:wght@400;600&family=Source+Sans+3:wght@400;500;600;700&display=swap'
+  'https://cdn.jsdelivr.net/npm/@floating-ui/dom@1/+esm',
+  'https://cdn.jsdelivr.net/npm/gsap@3/+esm',
+  'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+Thaana:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap'
 ];
 
 function cacheableResponse(response) {

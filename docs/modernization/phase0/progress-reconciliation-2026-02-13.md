@@ -68,11 +68,16 @@ This checkpoint compares current implementation state against the plan in `docs/
   - budget threshold extension for future UI trace lanes.
 
 ### Phase 6: Cutover and stabilization
-- Status: not started.
+- Status: **in progress** — core cutover complete, shadow run pending.
+- Completed:
+  - root `index.html` updated to load Vite-built bundle (`apps/web/dist/assets/main.js` + `index.css`);
+  - `apps/web/index.html` created with full legacy HTML structure for Vite dev mode;
+  - `vite.config.ts` configured: CDN externals, relative base, stable filenames, fs.allow for root;
+  - `sw.js` CACHE_NAME bumped to `v9` with modernized asset list;
+  - `.gitignore` updated to track `apps/web/dist/` for static deployment;
+  - Vite build verified: 55 modules, typecheck clean, 38 parity checks green.
 - Remaining:
   - dual-stack shadow run (manual UX walkthrough: graph mode, tree mode, all sidebar tabs);
-  - update root `index.html` to load from `apps/web/dist/`;
-  - bump `sw.js` CACHE_NAME;
   - tag `v2.0.0-modernized`, keep legacy `src/` for 1 release cycle;
   - final parity reconciliation and cutover checklist sign-off.
 
@@ -82,7 +87,7 @@ This checkpoint compares current implementation state against the plan in `docs/
 - Hard requirement 3 (maintainability/documentation): **strongly improved** — full TypeScript strict mode, dependency injection, CI gates, research pipeline in Rust.
 
 ## Immediate next execution sequence
-1. Complete Phase 5 browser-trace benchmark integration (paused due to env constraints).
-2. Phase 6 shadow-run: manual UX walkthrough comparing legacy vs modernized.
-3. Phase 6 cutover: update root HTML, bump SW cache, tag release.
+1. Phase 6 shadow-run: manual UX walkthrough comparing legacy (`src/main.js`) vs modernized (`apps/web/dist/assets/main.js`).
+2. Phase 6 release: tag `v2.0.0-modernized`, keep legacy `src/` for 1 release cycle.
+3. Complete Phase 5 browser-trace benchmark integration (paused due to env constraints).
 4. Optimize Rust CLI cold-start path for short-lived invocations.

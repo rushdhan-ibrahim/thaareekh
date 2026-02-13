@@ -1,6 +1,6 @@
 node_modules/
 apps/web/node_modules/
-apps/web/dist/
+# apps/web/dist/ — tracked for static deployment (build output checked in)
 apps/web/src/**/*.js
 apps/web/src/**/*.js.map
 apps/web/tsconfig.tsbuildinfo

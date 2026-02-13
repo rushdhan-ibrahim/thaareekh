@@ -7,15 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+Thaana:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/tokens.css">
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/layout.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/graph.css">
-<link rel="stylesheet" href="css/search.css">
-<link rel="stylesheet" href="css/tooltip.css">
-<link rel="stylesheet" href="css/animations.css">
-<link rel="stylesheet" href="css/onboarding.css">
+<link rel="stylesheet" href="apps/web/dist/assets/index.css">
 <script type="importmap">
 {
   "imports": {
@@ -253,7 +245,7 @@
   <button class="qcb" data-token="t:president">t:president</button>
 </div>
 
-<!-- Hidden inline search (used by search.js - kept for compatibility) -->
+<!-- Hidden inline search (kept for compatibility) -->
 <div class="swrap" style="display:none"><span class="si">⌕</span><input id="si" type="text" placeholder="Search name/known-as/title/# · filters: dy:hilaaly c:u o:fandiyaaru" aria-label="Search people, names, titles, offices, and filters" aria-controls="dd" aria-autocomplete="list"/><button class="sc" id="sc" title="Clear search" aria-label="Clear search">×</button><div class="dd" id="dd" role="listbox"></div></div>
 
 <!-- Command Palette -->
@@ -274,6 +266,6 @@
 
 <div class="ov" id="ov"></div>
 <div class="bs" id="bs"><div class="bsh"></div><div class="bshd"><h2 id="bT"></h2><button class="bsx" id="bX" aria-label="Close panel">×</button></div><div class="bsb" id="bB"></div></div>
-<script type="module" src="src/main.js"></script>
+<script type="module" src="apps/web/dist/assets/main.js"></script>
 </body>
 </html>
