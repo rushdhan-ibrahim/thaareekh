@@ -1,0 +1,227 @@
+{
+  "person_ids": [
+    "P31",
+    "P32",
+    "P33",
+    "P34",
+    "P35",
+    "P36",
+    "P37",
+    "P38",
+    "P39",
+    "P40"
+  ],
+  "primary_targets": [
+    "SRC-TUFS-TARIKH-DIBA-MAHALL-FACSIMILE",
+    "SRC-TUFS-TARIKH-DIBA-MAHALL-ANNOT",
+    "SRC-SARUNA-RAADHAVALHI-1985",
+    "SRC-SARUNA-PYRARD-V2P2-1887",
+    "SRC-MRF-HILAALY",
+    "SRC-MRF-KINGS",
+    "SRC-CORNELL-PYRARD-V1-1887",
+    "SRC-HEIDELBERG-BELL-1883"
+  ],
+  "inference_target_keys": [
+    "kin|P108|P39|grandparent",
+    "kin|P108|P40|grandparent",
+    "kin|P109|P30|grandparent",
+    "kin|P112|P114|grandparent",
+    "kin|P114|P136|grandparent",
+    "kin|P115|P137|grandparent",
+    "kin|P116|P124|grandparent",
+    "kin|P116|P143|grandparent",
+    "kin|P116|P144|grandparent",
+    "kin|P116|P145|grandparent",
+    "kin|P116|P146|grandparent",
+    "kin|P116|P147|grandparent"
+  ],
+  "relationship_updates": {
+    "CLM-0017": {
+      "claim_excerpt": "Derived grandparent relation between P108 and P39 follows an explicit two-step parent chain encoded in edge inference metadata.",
+      "citation_locator": "Inference basis: parent-of-parent-grandparent rule from edge metadata",
+      "notes": "Derived inference dossier drafted in batch D."
+    },
+    "CLM-0018": {
+      "claim_excerpt": "Derived grandparent relation between P108 and P40 follows an explicit two-step parent chain encoded in edge inference metadata.",
+      "citation_locator": "Inference basis: parent-of-parent-grandparent rule from edge metadata",
+      "notes": "Derived inference dossier drafted in batch D."
+    },
+    "CLM-0019": {
+      "claim_excerpt": "Derived grandparent relation between P109 and P30 follows an explicit two-step parent chain encoded in edge inference metadata.",
+      "citation_locator": "Inference basis: parent-of-parent-grandparent rule from edge metadata",
+      "notes": "Derived inference dossier drafted in batch D."
+    },
+    "CLM-0022": {
+      "claim_excerpt": "Derived grandparent relation between P112 and P114 follows an explicit two-step parent chain encoded in edge inference metadata.",
+      "citation_locator": "Inference basis: parent-of-parent-grandparent rule from edge metadata",
+      "notes": "Derived inference dossier drafted in batch D."
+    },
+    "CLM-0023": {
+      "claim_excerpt": "Derived grandparent relation between P114 and P136 follows an explicit two-step parent chain encoded in edge inference metadata.",
+      "citation_locator": "Inference basis: parent-of-parent-grandparent rule from edge metadata",
+      "notes": "Derived inference dossier drafted in batch D."
+    },
+    "CLM-0024": {
+      "claim_excerpt": "Derived grandparent relation between P115 and P137 follows an explicit two-step parent chain encoded in edge inference metadata.",
+      "citation_locator": "Inference basis: parent-of-parent-grandparent rule from edge metadata",
+      "notes": "Derived inference dossier drafted in batch D."
+    },
+    "CLM-0025": {
+      "claim_excerpt": "Derived grandparent relation between P116 and P124 follows an explicit two-step parent chain encoded in edge inference metadata.",
+      "citation_locator": "Inference basis: parent-of-parent-grandparent rule from edge metadata",
+      "notes": "Derived inference dossier drafted in batch D."
+    },
+    "CLM-0026": {
+      "claim_excerpt": "Derived grandparent relation between P116 and P143 follows an explicit two-step parent chain encoded in edge inference metadata.",
+      "citation_locator": "Inference basis: parent-of-parent-grandparent rule from edge metadata",
+      "notes": "Derived inference dossier drafted in batch D."
+    },
+    "CLM-0027": {
+      "claim_excerpt": "Derived grandparent relation between P116 and P144 follows an explicit two-step parent chain encoded in edge inference metadata.",
+      "citation_locator": "Inference basis: parent-of-parent-grandparent rule from edge metadata",
+      "notes": "Derived inference dossier drafted in batch D."
+    },
+    "CLM-0028": {
+      "claim_excerpt": "Derived grandparent relation between P116 and P145 follows an explicit two-step parent chain encoded in edge inference metadata.",
+      "citation_locator": "Inference basis: parent-of-parent-grandparent rule from edge metadata",
+      "notes": "Derived inference dossier drafted in batch D."
+    },
+    "CLM-0029": {
+      "claim_excerpt": "Derived grandparent relation between P116 and P146 follows an explicit two-step parent chain encoded in edge inference metadata.",
+      "citation_locator": "Inference basis: parent-of-parent-grandparent rule from edge metadata",
+      "notes": "Derived inference dossier drafted in batch D."
+    },
+    "CLM-0030": {
+      "claim_excerpt": "Derived grandparent relation between P116 and P147 follows an explicit two-step parent chain encoded in edge inference metadata.",
+      "citation_locator": "Inference basis: parent-of-parent-grandparent rule from edge metadata",
+      "notes": "Derived inference dossier drafted in batch D."
+    },
+    "CLM-0129": {
+      "claim_excerpt": "Hilaaly branch source context records P192 and P32 with an uncle-nephew relation.",
+      "citation_locator": "SRC-MRF-HILAALY founder-branch collateral annotations",
+      "notes": "Direct collateral claim in the P31-P40 cluster."
+    },
+    "CLM-0145": {
+      "claim_excerpt": "Hilaaly source context gives P31 and P32 as uncle-nephew relation in succession cluster notes.",
+      "citation_locator": "SRC-MRF-HILAALY relation annotation for P31-P32 pair",
+      "notes": "Curated inferred relation linked to founder branch context."
+    },
+    "CLM-0148": {
+      "claim_excerpt": "Sequence notes connect P32 to P33 as succession-transition context.",
+      "citation_locator": "SRC-WIKI-MONARCHS with SRC-MRF-KINGS cross-check around P32-P33 transition",
+      "notes": "Transition-context relation pending stronger chronicle corroboration."
+    },
+    "CLM-0151": {
+      "claim_excerpt": "Kings list branch notes characterize P32 as ancestor-level relation to P53.",
+      "citation_locator": "SRC-MRF-KINGS transition-era branch annotation",
+      "notes": "Ancestor framing retained as broad kin context."
+    },
+    "CLM-0152": {
+      "claim_excerpt": "Sequence notes connect P33 to P34 as succession-transition context.",
+      "citation_locator": "SRC-WIKI-MONARCHS with SRC-MRF-KINGS cross-check around P33-P34 transition",
+      "notes": "Transition-context relation pending stronger chronicle corroboration."
+    },
+    "CLM-0160": {
+      "claim_excerpt": "Kings list branch notes identify P40 as grandfather of P49.",
+      "citation_locator": "SRC-MRF-KINGS branch annotation around P40 and P49",
+      "notes": "Direct grandparent wording in Hilaaly branch chain."
+    },
+    "CLM-0161": {
+      "claim_excerpt": "Kings list branch notes identify P40 as grandfather of P57.",
+      "citation_locator": "SRC-MRF-KINGS branch annotation around P40 and P57",
+      "notes": "Direct grandparent wording in Hilaaly branch chain."
+    },
+    "CLM-0326": {
+      "claim_excerpt": "Hilaaly branch source gives parent edge P192 to P38.",
+      "citation_locator": "SRC-MRF-HILAALY founder-era parentage annotation; compare SRC-MRF-KINGS",
+      "notes": "Direct parent edge in collateral founder branch."
+    },
+    "CLM-0336": {
+      "claim_excerpt": "Kings list records parent edge P39 to P46.",
+      "citation_locator": "SRC-MRF-KINGS entries for P39 and P46 parentage linkage",
+      "notes": "Direct parent edge supporting downstream inferred cousin links."
+    },
+    "CLM-0337": {
+      "claim_excerpt": "Kings list and Hilaaly branch notes together support parent edge P40 to P193.",
+      "citation_locator": "SRC-MRF-KINGS with SRC-MRF-HILAALY cross-reference for P40-P193 branch",
+      "notes": "Bridge-sensitive parent claim with dual-source support."
+    },
+    "CLM-0338": {
+      "claim_excerpt": "Kings list records parent edge P40 to P41.",
+      "citation_locator": "SRC-MRF-KINGS entries for P40 and P41 parentage linkage",
+      "notes": "Direct parent edge for central Hilaaly descendant branch."
+    },
+    "CLM-0429": {
+      "claim_excerpt": "P31 and P39 sibling relation is inferred from shared-parent structure in founder-branch sources.",
+      "citation_locator": "Inference synthesis from SRC-MRF-HILAALY with corroborative sequence context",
+      "notes": "Sibling inference remains C until explicit pairwise statement is extracted."
+    },
+    "CLM-0430": {
+      "claim_excerpt": "P31 and P40 sibling relation is inferred from shared-parent structure in founder-branch sources.",
+      "citation_locator": "Inference synthesis from SRC-MRF-HILAALY with corroborative sequence context",
+      "notes": "Sibling inference remains C until explicit pairwise statement is extracted."
+    },
+    "CLM-0431": {
+      "claim_excerpt": "Kings list marks P34 and P35 as brothers.",
+      "citation_locator": "SRC-MRF-KINGS entries for P34-P35 kin annotation",
+      "notes": "Direct sibling claim in immediate post-founder sequence."
+    },
+    "CLM-0432": {
+      "claim_excerpt": "Kings list marks P39 and P40 as half-brothers.",
+      "citation_locator": "SRC-MRF-KINGS entries for P39-P40 kin annotation",
+      "notes": "Direct sibling claim with half-sibling qualifier."
+    }
+  },
+  "queue_updates": {
+    "SRCQ-013": {
+      "status": "in_progress",
+      "owner": "phase1-batch-d",
+      "notes": "Discovery sprint started for primary Lunar corroboration set; see EXT-013."
+    },
+    "SRCQ-014": {
+      "status": "in_progress",
+      "owner": "phase1-batch-d",
+      "notes": "Discovery sprint started for Hilaaly bridge corroboration sources; see EXT-014."
+    },
+    "SRCQ-015": {
+      "status": "in_progress",
+      "owner": "phase1-batch-d",
+      "notes": "Discovery sprint started for Dhiyamigili and southern-branch corroboration sources; see EXT-015."
+    }
+  },
+  "source_extract_entries": [
+    {
+      "extract_id": "EXT-013",
+      "source_id": "(new-primary-lunar)",
+      "date": "2026-02-08",
+      "extract_status": "in_progress",
+      "target_scope": "Lunar dynasty corroboration source discovery",
+      "claim_or_context_note": "Discovery pass started to identify manuscript and inscriptional sources that can independently corroborate P1-P29 chains.",
+      "locator": "phase1 batch D discovery log for SRCQ-013",
+      "researcher": "phase1-batch-d",
+      "notes": "Prioritize sources capable of A/B grade evidence and precise locator extraction."
+    },
+    {
+      "extract_id": "EXT-014",
+      "source_id": "(new-primary-hilaaly)",
+      "date": "2026-02-08",
+      "extract_status": "in_progress",
+      "target_scope": "Hilaaly bridge corroboration source discovery",
+      "claim_or_context_note": "Discovery pass started to identify independent chronicles and scholarship for P30-P40 bridge-critical links.",
+      "locator": "phase1 batch D discovery log for SRCQ-014",
+      "researcher": "phase1-batch-d",
+      "notes": "Targets direct parent/sibling statements and contradiction adjudication material."
+    },
+    {
+      "extract_id": "EXT-015",
+      "source_id": "(new-primary-dhiyamigili-south)",
+      "date": "2026-02-08",
+      "extract_status": "in_progress",
+      "target_scope": "Dhiyamigili and southern branch corroboration source discovery",
+      "claim_or_context_note": "Discovery pass started for branch-focused records and local-history publications to resolve contested continuity claims.",
+      "locator": "phase1 batch D discovery log for SRCQ-015",
+      "researcher": "phase1-batch-d",
+      "notes": "Use to reduce dependence on single-source continuity narratives before promotion decisions."
+    }
+  ]
+}

@@ -12,6 +12,7 @@ Status: in progress
 
 ## UX and interaction parity
 - [x] Search scoring engine parity (rank + filter semantics).
+- [x] Search dropdown controller core parity (render + keyboard model).
 - [x] Relationship neighbor extraction parity (sidebar link-group core).
 - [ ] Graph mode rendering + interaction parity.
 - [ ] Tree mode rendering + interaction parity.
@@ -26,6 +27,8 @@ Status: in progress
 - [ ] Offline/service-worker parity.
 
 ## Research pipeline parity
+- [x] QA smoke parity.
+- [x] Research baseline-report parity.
 - [x] Ledger reconciliation output parity.
 - [x] QA ledger checks parity.
 - [x] Batch-content QA parity.
@@ -34,6 +37,11 @@ Status: in progress
 - [x] Relationship-ledger quality refresh parity.
 - [x] Inference-notes sync parity.
 - [x] Dossier refresh jobs parity.
+- [x] Concept-entry refresh parity.
+- [x] Offline archive build parity.
+- [x] Phase 1 batch driver parity.
+- [x] Phase 1 locator batch parity.
+- [x] Phase 5 conflict/promotion batch parity.
 
 ## Performance targets
 - [ ] Initial interactivity improvement >= 40%.

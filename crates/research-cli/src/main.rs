@@ -1,11 +1,29 @@
 mod audit_evidence;
+mod build_offline_archive;
 mod csv_utils;
+mod phase1_batch_a;
+mod phase1_batch_b;
+mod phase1_batch_c;
+mod phase1_batch_common;
+mod phase1_batch_d;
+mod phase1_batch_sweep;
+mod phase1_locator_batch_a;
+mod phase1_locator_batch_b;
+mod phase1_locator_batch_c;
+mod phase1_locator_batch_d;
+mod phase1_locator_batch_e;
+mod phase5_conflict_batch_c;
+mod phase5_promotion_batch_a;
+mod phase5_promotion_batch_b;
 mod qa_batch_content;
+mod qa_smoke;
 mod reconcile_ledgers;
+mod refresh_concept_entries;
 mod refresh_curated_inference_dossiers;
 mod refresh_derived_inference_dossiers;
 mod refresh_person_dossiers;
 mod refresh_relationship_ledger_quality;
+mod research_baseline_report;
 mod source_coverage_audit;
 mod source_models;
 mod sync_inference_notes;
@@ -20,7 +38,7 @@ use std::{env, fs, path::PathBuf, process};
 
 fn usage() {
     eprintln!(
-        "Usage:\n  maldives-research-cli summarize <dataset.json>\n  maldives-research-cli parity <baseline.json> <mode> <dataset.json>\n  maldives-research-cli derive <dataset.json> <output.json>\n  maldives-research-cli qa-ledgers <dataset.json> <ledger-dir>\n  maldives-research-cli qa-batch-content <root-dir>\n  maldives-research-cli reconcile-ledgers <dataset.json> <root-dir> [date]\n  maldives-research-cli audit-evidence <dataset.json> <sources.json> [--mode <mode>] [--limit <n>] [--inter-dynasty-only] [--json]\n  maldives-research-cli source-coverage-audit <dataset.json> <sources.json> <research-dir> [date]\n  maldives-research-cli refresh-relationship-ledger-quality <root-dir> [date]\n  maldives-research-cli sync-inference-notes <root-dir> [date]\n  maldives-research-cli refresh-person-dossiers <dataset.json> <sources.json> <root-dir> [date]\n  maldives-research-cli refresh-derived-inference-dossiers <dataset.json> <sources.json> <root-dir> [date]\n  maldives-research-cli refresh-curated-inference-dossiers <dataset.json> <sources.json> <root-dir> [date]"
+        "Usage:\n  maldives-research-cli summarize <dataset.json>\n  maldives-research-cli parity <baseline.json> <mode> <dataset.json>\n  maldives-research-cli derive <dataset.json> <output.json>\n  maldives-research-cli qa-ledgers <dataset.json> <ledger-dir>\n  maldives-research-cli qa-smoke <dataset.json> <ui-reference.json>\n  maldives-research-cli research-baseline-report <dataset.json> <sources.json> <ui-reference.json> <root-dir> [date] [--write-ledgers]\n  maldives-research-cli qa-batch-content <root-dir>\n  maldives-research-cli reconcile-ledgers <dataset.json> <root-dir> [date]\n  maldives-research-cli audit-evidence <dataset.json> <sources.json> [--mode <mode>] [--limit <n>] [--inter-dynasty-only] [--json]\n  maldives-research-cli source-coverage-audit <dataset.json> <sources.json> <research-dir> [date]\n  maldives-research-cli refresh-relationship-ledger-quality <root-dir> [date]\n  maldives-research-cli sync-inference-notes <root-dir> [date]\n  maldives-research-cli refresh-person-dossiers <dataset.json> <sources.json> <root-dir> [date]\n  maldives-research-cli refresh-derived-inference-dossiers <dataset.json> <sources.json> <root-dir> [date]\n  maldives-research-cli refresh-curated-inference-dossiers <dataset.json> <sources.json> <root-dir> [date]\n  maldives-research-cli refresh-concept-entries <sources.json> <root-dir> [date]\n  maldives-research-cli build-offline-archive <canonical.json> <research.json> <sources.json> <ui-reference.json> <output.json>\n  maldives-research-cli phase1-batch-a <dataset.json> <sources.json> <root-dir> [date]\n  maldives-research-cli phase1-batch-b <dataset.json> <sources.json> <root-dir> [date]\n  maldives-research-cli phase1-batch-c <dataset.json> <sources.json> <root-dir> [date]\n  maldives-research-cli phase1-batch-d <dataset.json> <sources.json> <root-dir> [date]\n  maldives-research-cli phase1-batch-sweep <dataset.json> <sources.json> <root-dir> [date]\n  maldives-research-cli phase1-locator-batch-a <dataset.json> <sources.json> <root-dir> [date]\n  maldives-research-cli phase1-locator-batch-b <dataset.json> <root-dir> [date]\n  maldives-research-cli phase1-locator-batch-c <dataset.json> <root-dir> [date]\n  maldives-research-cli phase1-locator-batch-d <dataset.json> <sources.json> <root-dir> [date]\n  maldives-research-cli phase1-locator-batch-e <dataset.json> <sources.json> <root-dir> [date]\n  maldives-research-cli phase5-conflict-batch-c <root-dir> [date]\n  maldives-research-cli phase5-promotion-batch-a <root-dir> [date]\n  maldives-research-cli phase5-promotion-batch-b <root-dir> [date]"
     );
 }
 
@@ -188,6 +206,210 @@ fn cmd_qa_batch_content(root_dir: &str) -> Result<(), String> {
     Ok(())
 }
 
+fn cmd_qa_smoke(dataset_path: &str, ui_reference_path: &str) -> Result<(), String> {
+    let dataset = read_dataset(dataset_path)?;
+    let payload = qa_smoke::run(&dataset, ui_reference_path)?;
+    print!("{payload}");
+    Ok(())
+}
+
+fn cmd_research_baseline_report(
+    dataset_path: &str,
+    sources_path: &str,
+    ui_reference_path: &str,
+    root_dir: &str,
+    date_opt: Option<&str>,
+    write_ledgers_flag: bool,
+) -> Result<(), String> {
+    let dataset = read_dataset(dataset_path)?;
+    let sources = read_sources(sources_path)?;
+    let payload = research_baseline_report::run(
+        &dataset,
+        &sources,
+        ui_reference_path,
+        root_dir,
+        date_opt,
+        write_ledgers_flag,
+    )?;
+    print!("{payload}");
+    Ok(())
+}
+
+fn cmd_refresh_concept_entries(
+    sources_path: &str,
+    root_dir: &str,
+    date_opt: Option<&str>,
+) -> Result<(), String> {
+    let sources = read_sources(sources_path)?;
+    let summary = refresh_concept_entries::run(&sources, root_dir, date_opt)?;
+    print!("{summary}");
+    Ok(())
+}
+
+fn cmd_build_offline_archive(
+    canonical_path: &str,
+    research_path: &str,
+    sources_path: &str,
+    ui_reference_path: &str,
+    output_path: &str,
+) -> Result<(), String> {
+    let canonical = read_dataset(canonical_path)?;
+    let research = read_dataset(research_path)?;
+    let summary = build_offline_archive::run(
+        &canonical,
+        &research,
+        sources_path,
+        ui_reference_path,
+        output_path,
+    )?;
+    print!("{summary}");
+    Ok(())
+}
+
+fn cmd_phase1_batch_a(
+    dataset_path: &str,
+    sources_path: &str,
+    root_dir: &str,
+    date_opt: Option<&str>,
+) -> Result<(), String> {
+    let dataset = read_dataset(dataset_path)?;
+    let sources = read_sources(sources_path)?;
+    let summary = phase1_batch_a::run(&dataset, &sources, root_dir, date_opt)?;
+    print!("{summary}");
+    Ok(())
+}
+
+fn cmd_phase1_batch_b(
+    dataset_path: &str,
+    sources_path: &str,
+    root_dir: &str,
+    date_opt: Option<&str>,
+) -> Result<(), String> {
+    let dataset = read_dataset(dataset_path)?;
+    let sources = read_sources(sources_path)?;
+    let summary = phase1_batch_b::run(&dataset, &sources, root_dir, date_opt)?;
+    print!("{summary}");
+    Ok(())
+}
+
+fn cmd_phase1_batch_c(
+    dataset_path: &str,
+    sources_path: &str,
+    root_dir: &str,
+    date_opt: Option<&str>,
+) -> Result<(), String> {
+    let dataset = read_dataset(dataset_path)?;
+    let sources = read_sources(sources_path)?;
+    let summary = phase1_batch_c::run(&dataset, &sources, root_dir, date_opt)?;
+    print!("{summary}");
+    Ok(())
+}
+
+fn cmd_phase1_batch_d(
+    dataset_path: &str,
+    sources_path: &str,
+    root_dir: &str,
+    date_opt: Option<&str>,
+) -> Result<(), String> {
+    let dataset = read_dataset(dataset_path)?;
+    let sources = read_sources(sources_path)?;
+    let summary = phase1_batch_d::run(&dataset, &sources, root_dir, date_opt)?;
+    print!("{summary}");
+    Ok(())
+}
+
+fn cmd_phase1_batch_sweep(
+    dataset_path: &str,
+    sources_path: &str,
+    root_dir: &str,
+    date_opt: Option<&str>,
+) -> Result<(), String> {
+    let dataset = read_dataset(dataset_path)?;
+    let sources = read_sources(sources_path)?;
+    let summary = phase1_batch_sweep::run(&dataset, &sources, root_dir, date_opt)?;
+    print!("{summary}");
+    Ok(())
+}
+
+fn cmd_phase5_conflict_batch_c(root_dir: &str, date_opt: Option<&str>) -> Result<(), String> {
+    let summary = phase5_conflict_batch_c::run(root_dir, date_opt)?;
+    print!("{summary}");
+    Ok(())
+}
+
+fn cmd_phase5_promotion_batch_a(root_dir: &str, date_opt: Option<&str>) -> Result<(), String> {
+    let summary = phase5_promotion_batch_a::run(root_dir, date_opt)?;
+    print!("{summary}");
+    Ok(())
+}
+
+fn cmd_phase5_promotion_batch_b(root_dir: &str, date_opt: Option<&str>) -> Result<(), String> {
+    let summary = phase5_promotion_batch_b::run(root_dir, date_opt)?;
+    print!("{summary}");
+    Ok(())
+}
+
+fn cmd_phase1_locator_batch_a(
+    dataset_path: &str,
+    sources_path: &str,
+    root_dir: &str,
+    date_opt: Option<&str>,
+) -> Result<(), String> {
+    let dataset = read_dataset(dataset_path)?;
+    let sources = read_sources(sources_path)?;
+    let summary = phase1_locator_batch_a::run(&dataset, &sources, root_dir, date_opt)?;
+    print!("{summary}");
+    Ok(())
+}
+
+fn cmd_phase1_locator_batch_b(
+    dataset_path: &str,
+    root_dir: &str,
+    date_opt: Option<&str>,
+) -> Result<(), String> {
+    let dataset = read_dataset(dataset_path)?;
+    let summary = phase1_locator_batch_b::run(&dataset, root_dir, date_opt)?;
+    print!("{summary}");
+    Ok(())
+}
+
+fn cmd_phase1_locator_batch_c(
+    dataset_path: &str,
+    root_dir: &str,
+    date_opt: Option<&str>,
+) -> Result<(), String> {
+    let dataset = read_dataset(dataset_path)?;
+    let summary = phase1_locator_batch_c::run(&dataset, root_dir, date_opt)?;
+    print!("{summary}");
+    Ok(())
+}
+
+fn cmd_phase1_locator_batch_d(
+    dataset_path: &str,
+    sources_path: &str,
+    root_dir: &str,
+    date_opt: Option<&str>,
+) -> Result<(), String> {
+    let dataset = read_dataset(dataset_path)?;
+    let sources = read_sources(sources_path)?;
+    let summary = phase1_locator_batch_d::run(&dataset, &sources, root_dir, date_opt)?;
+    print!("{summary}");
+    Ok(())
+}
+
+fn cmd_phase1_locator_batch_e(
+    dataset_path: &str,
+    sources_path: &str,
+    root_dir: &str,
+    date_opt: Option<&str>,
+) -> Result<(), String> {
+    let dataset = read_dataset(dataset_path)?;
+    let sources = read_sources(sources_path)?;
+    let summary = phase1_locator_batch_e::run(&dataset, &sources, root_dir, date_opt)?;
+    print!("{summary}");
+    Ok(())
+}
+
 fn cmd_reconcile_ledgers(
     dataset_path: &str,
     root_dir: &str,
@@ -325,6 +547,43 @@ fn main() {
                 process::exit(2);
             }
             cmd_qa_ledgers(&args[2], &args[3])
+        }
+        "qa-smoke" => {
+            if args.len() != 4 {
+                usage();
+                process::exit(2);
+            }
+            cmd_qa_smoke(&args[2], &args[3])
+        }
+        "research-baseline-report" => {
+            if args.len() < 6 {
+                usage();
+                process::exit(2);
+            }
+
+            let mut date_opt: Option<&str> = None;
+            let mut write_ledgers_flag = false;
+            for extra in args.iter().skip(6) {
+                if extra == "--write-ledgers" {
+                    write_ledgers_flag = true;
+                    continue;
+                }
+                if !extra.starts_with("--") && date_opt.is_none() {
+                    date_opt = Some(extra.as_str());
+                    continue;
+                }
+                eprintln!("unknown research-baseline-report arg: {extra}");
+                process::exit(2);
+            }
+
+            cmd_research_baseline_report(
+                &args[2],
+                &args[3],
+                &args[4],
+                &args[5],
+                date_opt,
+                write_ledgers_flag,
+            )
         }
         "qa-batch-content" => {
             if args.len() != 3 {
@@ -467,6 +726,151 @@ fn main() {
                 process::exit(2);
             }
             cmd_refresh_curated_inference_dossiers(
+                &args[2],
+                &args[3],
+                &args[4],
+                args.get(5).map(String::as_str),
+            )
+        }
+        "refresh-concept-entries" => {
+            if args.len() != 4 && args.len() != 5 {
+                usage();
+                process::exit(2);
+            }
+            cmd_refresh_concept_entries(&args[2], &args[3], args.get(4).map(String::as_str))
+        }
+        "build-offline-archive" => {
+            if args.len() != 7 {
+                usage();
+                process::exit(2);
+            }
+            cmd_build_offline_archive(&args[2], &args[3], &args[4], &args[5], &args[6])
+        }
+        "phase1-batch-a" => {
+            if args.len() != 5 && args.len() != 6 {
+                usage();
+                process::exit(2);
+            }
+            cmd_phase1_batch_a(
+                &args[2],
+                &args[3],
+                &args[4],
+                args.get(5).map(String::as_str),
+            )
+        }
+        "phase1-batch-b" => {
+            if args.len() != 5 && args.len() != 6 {
+                usage();
+                process::exit(2);
+            }
+            cmd_phase1_batch_b(
+                &args[2],
+                &args[3],
+                &args[4],
+                args.get(5).map(String::as_str),
+            )
+        }
+        "phase1-batch-c" => {
+            if args.len() != 5 && args.len() != 6 {
+                usage();
+                process::exit(2);
+            }
+            cmd_phase1_batch_c(
+                &args[2],
+                &args[3],
+                &args[4],
+                args.get(5).map(String::as_str),
+            )
+        }
+        "phase1-batch-d" => {
+            if args.len() != 5 && args.len() != 6 {
+                usage();
+                process::exit(2);
+            }
+            cmd_phase1_batch_d(
+                &args[2],
+                &args[3],
+                &args[4],
+                args.get(5).map(String::as_str),
+            )
+        }
+        "phase1-batch-sweep" => {
+            if args.len() != 5 && args.len() != 6 {
+                usage();
+                process::exit(2);
+            }
+            cmd_phase1_batch_sweep(
+                &args[2],
+                &args[3],
+                &args[4],
+                args.get(5).map(String::as_str),
+            )
+        }
+        "phase5-conflict-batch-c" => {
+            if args.len() != 3 && args.len() != 4 {
+                usage();
+                process::exit(2);
+            }
+            cmd_phase5_conflict_batch_c(&args[2], args.get(3).map(String::as_str))
+        }
+        "phase5-promotion-batch-a" => {
+            if args.len() != 3 && args.len() != 4 {
+                usage();
+                process::exit(2);
+            }
+            cmd_phase5_promotion_batch_a(&args[2], args.get(3).map(String::as_str))
+        }
+        "phase5-promotion-batch-b" => {
+            if args.len() != 3 && args.len() != 4 {
+                usage();
+                process::exit(2);
+            }
+            cmd_phase5_promotion_batch_b(&args[2], args.get(3).map(String::as_str))
+        }
+        "phase1-locator-batch-a" => {
+            if args.len() != 5 && args.len() != 6 {
+                usage();
+                process::exit(2);
+            }
+            cmd_phase1_locator_batch_a(
+                &args[2],
+                &args[3],
+                &args[4],
+                args.get(5).map(String::as_str),
+            )
+        }
+        "phase1-locator-batch-b" => {
+            if args.len() != 4 && args.len() != 5 {
+                usage();
+                process::exit(2);
+            }
+            cmd_phase1_locator_batch_b(&args[2], &args[3], args.get(4).map(String::as_str))
+        }
+        "phase1-locator-batch-c" => {
+            if args.len() != 4 && args.len() != 5 {
+                usage();
+                process::exit(2);
+            }
+            cmd_phase1_locator_batch_c(&args[2], &args[3], args.get(4).map(String::as_str))
+        }
+        "phase1-locator-batch-d" => {
+            if args.len() != 5 && args.len() != 6 {
+                usage();
+                process::exit(2);
+            }
+            cmd_phase1_locator_batch_d(
+                &args[2],
+                &args[3],
+                &args[4],
+                args.get(5).map(String::as_str),
+            )
+        }
+        "phase1-locator-batch-e" => {
+            if args.len() != 5 && args.len() != 6 {
+                usage();
+                process::exit(2);
+            }
+            cmd_phase1_locator_batch_e(
                 &args[2],
                 &args[3],
                 &args[4],

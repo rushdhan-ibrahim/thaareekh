@@ -1,0 +1,383 @@
+{
+  "person_ids": [
+    "P11",
+    "P12",
+    "P13",
+    "P14",
+    "P15",
+    "P16",
+    "P17",
+    "P18",
+    "P19",
+    "P20"
+  ],
+  "primary_targets": [
+    "SRC-TUFS-TARIKH-DIBA-MAHALL-FACSIMILE",
+    "SRC-SARUNA-LOAMAAFANU-1982",
+    "SRC-SARUNA-RAADHAVALHI-1985",
+    "SRC-SARUNA-PYRARD-V2P2-1887",
+    "SRC-CORNELL-PYRARD-V1-1887"
+  ],
+  "inference_target_keys": [
+    "sibling|P16|P17|brothers",
+    "sibling|P19|P25|half-siblings",
+    "sibling|P6|P8|brothers",
+    "sibling|P31|P39|brothers",
+    "sibling|P31|P40|brothers",
+    "kin|P31|P32|uncle→nephew",
+    "sibling|P47|P50|brothers",
+    "sibling|P47|P51|brothers",
+    "sibling|P47|P52|brothers",
+    "sibling|P50|P51|brothers",
+    "sibling|P50|P52|brothers",
+    "sibling|P78|P79|brothers"
+  ],
+  "relationship_updates": {
+    "CLM-0263": {
+      "claim_excerpt": "Kings list gives P14 as son of P13 in the early Lunar succession sequence.",
+      "citation_locator": "SRC-MRF-KINGS entries #13-#14 lineage note",
+      "notes": "Direct edge pending chronicle corroboration."
+    },
+    "CLM-0264": {
+      "claim_excerpt": "P13 to P15 parent edge is inferred from explicit P13->P14 plus brother relation P14-P15.",
+      "citation_locator": "Inference synthesis from SRC-MRF-KINGS entries #13-#15",
+      "notes": "Pair-specific inference dossier exists for this edge."
+    },
+    "CLM-0285": {
+      "claim_excerpt": "Kings list states P16 as son of P15.",
+      "citation_locator": "SRC-MRF-KINGS entries #15-#16 parentage note",
+      "notes": "Direct edge; corroboration target in P0 chronicle extraction."
+    },
+    "CLM-0286": {
+      "claim_excerpt": "Kings list states P17 as son of P15.",
+      "citation_locator": "SRC-MRF-KINGS entries #15-#17 parentage note",
+      "notes": "Direct edge; corroboration target in P0 chronicle extraction."
+    },
+    "CLM-0294": {
+      "claim_excerpt": "Kings list contains ambiguous wording around P18 as 'son of P16' versus maternal half-brother framing.",
+      "citation_locator": "SRC-MRF-KINGS entries #16-#18 contested parentage wording",
+      "notes": "Kept as contested (u/D) until stronger corroboration resolves direction."
+    },
+    "CLM-0316": {
+      "claim_excerpt": "Kings list gives P19 as child of P18.",
+      "citation_locator": "SRC-MRF-KINGS entries #18-#19 lineage note",
+      "notes": "Direct edge; supports Khadijah-era sibling cluster mapping."
+    },
+    "CLM-0317": {
+      "claim_excerpt": "Kings list gives P20 (Khadijah) as child of P18.",
+      "citation_locator": "SRC-MRF-KINGS entries #18-#20 lineage note",
+      "notes": "Direct edge; used in multi-accession monarch cluster."
+    },
+    "CLM-0318": {
+      "claim_excerpt": "Kings list gives P25 as child of P18 in the same household branch.",
+      "citation_locator": "SRC-MRF-KINGS entries #18 and #25 lineage note",
+      "notes": "Supports sibling/half-sibling subgraph for P19/P20/P25."
+    },
+    "CLM-0374": {
+      "claim_excerpt": "Kings list marks P11 and P12 as sharing the same mother.",
+      "citation_locator": "SRC-MRF-KINGS entries #11-#12 maternal note",
+      "notes": "Direct sibling edge with maternal qualifier."
+    },
+    "CLM-0386": {
+      "claim_excerpt": "Kings list marks P14 and P15 as brothers.",
+      "citation_locator": "SRC-MRF-KINGS entries #14-#15 kin annotation",
+      "notes": "Used as support for inferred parent P13->P15."
+    },
+    "CLM-0407": {
+      "claim_excerpt": "P16 to P17 sibling edge is inferred from shared parent P15.",
+      "citation_locator": "Inference synthesis from SRC-MRF-KINGS parent edges P15->P16 and P15->P17",
+      "notes": "Pair-specific inference dossier created in batch B."
+    },
+    "CLM-0408": {
+      "claim_excerpt": "Kings list marks P16 and P18 as half-brothers (maternal).",
+      "citation_locator": "SRC-MRF-KINGS entries #16-#18 kin annotation",
+      "notes": "Direct sibling edge retained with maternal qualifier."
+    },
+    "CLM-0417": {
+      "claim_excerpt": "Kings list marks P19 and P20 as siblings.",
+      "citation_locator": "SRC-MRF-KINGS entries #19-#20 kin annotation",
+      "notes": "Direct sibling edge in Khadijah branch cluster."
+    },
+    "CLM-0418": {
+      "claim_excerpt": "P19 to P25 half-sibling edge is inferred from shared father P18 and differentiated maternal lines in cluster notes.",
+      "citation_locator": "Inference synthesis from SRC-MRF-KINGS entries #19/#20/#25",
+      "notes": "Pair-specific inference dossier created in batch B."
+    },
+    "CLM-0427": {
+      "claim_excerpt": "Kings list marks P20 and P25 as half-sisters.",
+      "citation_locator": "SRC-MRF-KINGS entries #20 and #25 kin annotation",
+      "notes": "Direct half-sibling edge in Lunar late cluster."
+    },
+    "CLM-0468": {
+      "claim_excerpt": "Kings list records P20 marriage to P21.",
+      "citation_locator": "SRC-MRF-KINGS entry #20 spouse note (first consort)",
+      "notes": "Spousal edge supports accession-cycle context."
+    },
+    "CLM-0469": {
+      "claim_excerpt": "Kings list records P20 marriage to P23.",
+      "citation_locator": "SRC-MRF-KINGS entry #20 spouse note (second consort)",
+      "notes": "Spousal edge supports accession-cycle context."
+    }
+  },
+  "queue_updates": {
+    "SRCQ-006": {
+      "status": "in_progress",
+      "owner": "phase1-batch-b",
+      "notes": "Extract office and protocol terminology with chapter/page locators; see EXT-006."
+    },
+    "SRCQ-007": {
+      "status": "in_progress",
+      "owner": "phase1-batch-b",
+      "notes": "Pair with volume II claims before promoting; see EXT-007."
+    },
+    "SRCQ-008": {
+      "status": "in_progress",
+      "owner": "phase1-batch-b",
+      "notes": "Treat as corroborative; not sole genealogical authority; see EXT-008."
+    },
+    "SRCQ-009": {
+      "status": "in_progress",
+      "owner": "phase1-batch-b",
+      "notes": "Use for interpretation layer and contradiction adjudication notes; see EXT-009."
+    }
+  },
+  "source_extract_entries": [
+    {
+      "extract_id": "EXT-006",
+      "source_id": "SRC-SARUNA-PYRARD-V2P2-1887",
+      "date": "2026-02-08",
+      "extract_status": "in_progress",
+      "target_scope": "Court offices and governance terminology",
+      "claim_or_context_note": "Travel narrative extraction started for office/title semantics and protocol vocabulary.",
+      "locator": "saruna item 47e32876-8c1b-4f3d-91e8-75c6779d7eca metadata page",
+      "researcher": "phase1-batch-b",
+      "notes": "Feeds concept lexicon and office-role corroboration."
+    },
+    {
+      "extract_id": "EXT-007",
+      "source_id": "SRC-CORNELL-PYRARD-V1-1887",
+      "date": "2026-02-08",
+      "extract_status": "in_progress",
+      "target_scope": "Early-modern institutional context",
+      "claim_or_context_note": "Volume I extraction started for governance and social-order terminology index mapping.",
+      "locator": "cornell catalog sea103a metadata page",
+      "researcher": "phase1-batch-b",
+      "notes": "To be paired with EXT-006 before promotion decisions."
+    },
+    {
+      "extract_id": "EXT-008",
+      "source_id": "SRC-HEIDELBERG-BELL-1883",
+      "date": "2026-02-08",
+      "extract_status": "in_progress",
+      "target_scope": "Toponym/chronology corroboration",
+      "claim_or_context_note": "Bell facsimile queued for corroborative chronology checks and title-style usage.",
+      "locator": "heidelberg diglit bell1883 entry page",
+      "researcher": "phase1-batch-b",
+      "notes": "Corroborative layer only; not sole genealogical basis."
+    },
+    {
+      "extract_id": "EXT-009",
+      "source_id": "SRC-STANDREWS-PEACOCK-2020",
+      "date": "2026-02-08",
+      "extract_status": "in_progress",
+      "target_scope": "Chronicle historiography and factional context",
+      "claim_or_context_note": "Scholarly interpretation extraction started for contradiction adjudication context.",
+      "locator": "st-andrews research portal publication record",
+      "researcher": "phase1-batch-b",
+      "notes": "Interpretive support for evidence narrative and conflict log."
+    }
+  ],
+  "curated_notes": {
+    "sibling|P16|P17|brothers": {
+      "summary": "P16 Salis (Meesuvvara) and P17 Davud (Sundhura Bavana) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/sibling-p16-p17-brothers.md",
+      "logic": [
+        "Shortest direct-claim support path (2 steps) linking this pair:",
+        "parent P16 Salis (Meesuvvara) -> P15 Yoosuf (Bavanaadheeththa) (CLM-0285, SRC-MRF-KINGS)",
+        "parent P15 Yoosuf (Bavanaadheeththa) -> P17 Davud (Sundhura Bavana) (CLM-0286, SRC-MRF-KINGS)",
+        "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P16 Salis (Meesuvvara) and P17 Davud (Sundhura Bavana) is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P16 Salis (Meesuvvara) and P17 Davud (Sundhura Bavana) with relation class `sibling` (brothers).",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    },
+    "sibling|P19|P25|half-siblings": {
+      "summary": "P19 Ahmed Shihabuddine (Loka Aadheeththa) and P25 Raadhaafathi (Suvama Abarana) are modeled as `sibling` with label `half-siblings` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/sibling-p19-p25-half-siblings.md",
+      "logic": [
+        "Shortest direct-claim support path (2 steps) linking this pair:",
+        "parent P19 Ahmed Shihabuddine (Loka Aadheeththa) -> P18 Omar Veeru (Loka Abarana) (CLM-0316, SRC-MRF-KINGS)",
+        "parent P18 Omar Veeru (Loka Abarana) -> P25 Raadhaafathi (Suvama Abarana) (CLM-0318, SRC-MRF-KINGS)",
+        "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P19 Ahmed Shihabuddine (Loka Aadheeththa) and P25 Raadhaafathi (Suvama Abarana) is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P19 Ahmed Shihabuddine (Loka Aadheeththa) and P25 Raadhaafathi (Suvama Abarana) with relation class `sibling` (half-siblings).",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    },
+    "sibling|P6|P8|brothers": {
+      "summary": "P6 Dhilhel (Dhagathaa Abarana) and P8 Valla Dio (Raa-Araa Desyara) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/sibling-p6-p8-brothers.md",
+      "logic": [
+        "Shortest direct-claim support path (2 steps) linking this pair:",
+        "sibling P6 Dhilhel (Dhagathaa Abarana) <-> P7 Wadi (Dhagathaa Suvara) [brothers] (CLM-0442, SRC-MRF-KINGS)",
+        "sibling P7 Wadi (Dhagathaa Suvara) <-> P8 Valla Dio (Raa-Araa Desyara) [brothers] (CLM-0446, SRC-MRF-KINGS)",
+        "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P6 Dhilhel (Dhagathaa Abarana) and P8 Valla Dio (Raa-Araa Desyara) is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P6 Dhilhel (Dhagathaa Abarana) and P8 Valla Dio (Raa-Araa Desyara) with relation class `sibling` (brothers).",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    },
+    "sibling|P31|P39|brothers": {
+      "summary": "P31 Ibrahim (Dhammaru Veeru) and P39 Yoosuf (Loka Aananadha) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/sibling-p31-p39-brothers.md",
+      "logic": [
+        "Shortest direct-claim support path (2 steps) linking this pair:",
+        "parent P31 Ibrahim (Dhammaru Veeru) -> P30 Hassan (Bavana) (CLM-0333, SRC-MRF-KINGS)",
+        "parent P30 Hassan (Bavana) -> P39 Yoosuf (Loka Aananadha) (CLM-0334, SRC-MRF-KINGS)",
+        "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P31 Ibrahim (Dhammaru Veeru) and P39 Yoosuf (Loka Aananadha) is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P31 Ibrahim (Dhammaru Veeru) and P39 Yoosuf (Loka Aananadha) with relation class `sibling` (brothers).",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    },
+    "sibling|P31|P40|brothers": {
+      "summary": "P31 Ibrahim (Dhammaru Veeru) and P40 Aboobakuru (Bavana Sooja) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/sibling-p31-p40-brothers.md",
+      "logic": [
+        "Shortest direct-claim support path (2 steps) linking this pair:",
+        "parent P31 Ibrahim (Dhammaru Veeru) -> P30 Hassan (Bavana) (CLM-0333, SRC-MRF-KINGS)",
+        "parent P30 Hassan (Bavana) -> P40 Aboobakuru (Bavana Sooja) (CLM-0335, SRC-MRF-KINGS)",
+        "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P31 Ibrahim (Dhammaru Veeru) and P40 Aboobakuru (Bavana Sooja) is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P31 Ibrahim (Dhammaru Veeru) and P40 Aboobakuru (Bavana Sooja) with relation class `sibling` (brothers).",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    },
+    "kin|P31|P32|uncle→nephew": {
+      "summary": "P32 Hussain (Loka Veeru) and P31 Ibrahim (Dhammaru Veeru) are modeled as `kin` with label `uncle→nephew` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/kin-p31-p32-uncle-nephew.md",
+      "logic": [
+        "Shortest direct-claim support path (2 steps) linking this pair:",
+        "sibling P32 Hussain (Loka Veeru) <-> P30 Hassan (Bavana) [twins] (CLM-0428, SRC-MRF-KINGS)",
+        "parent P30 Hassan (Bavana) -> P31 Ibrahim (Dhammaru Veeru) (CLM-0333, SRC-MRF-KINGS)",
+        "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `kin` for P32 Hussain (Loka Veeru) and P31 Ibrahim (Dhammaru Veeru) is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P32 Hussain (Loka Veeru) and P31 Ibrahim (Dhammaru Veeru) with relation class `kin` (uncle→nephew).",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    },
+    "sibling|P47|P50|brothers": {
+      "summary": "P47 Hassan (Raadha Aanandha) and P50 Ibrahim (Bavana Furasuddha) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/sibling-p47-p50-brothers.md",
+      "logic": [
+        "Shortest direct-claim support path (1 step) linking this pair:",
+        "parent P47 Hassan (Raadha Aanandha) -> P50 Ibrahim (Bavana Furasuddha) (CLM-0601, SRC-ROYALARK-MALDIVES)",
+        "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P47 Hassan (Raadha Aanandha) and P50 Ibrahim (Bavana Furasuddha) is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P47 Hassan (Raadha Aanandha) and P50 Ibrahim (Bavana Furasuddha) with relation class `sibling` (brothers).",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    },
+    "sibling|P47|P51|brothers": {
+      "summary": "P47 Hassan (Raadha Aanandha) and P51 Kalu Mohamed (Dhammaru Bavana) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/sibling-p47-p51-brothers.md",
+      "logic": [
+        "Shortest direct-claim support path (1 step) linking this pair:",
+        "sibling P47 Hassan (Raadha Aanandha) <-> P51 Kalu Mohamed (Dhammaru Bavana) [half-brothers] (CLM-0639, SRC-ROYALARK-MALDIVES)",
+        "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P47 Hassan (Raadha Aanandha) and P51 Kalu Mohamed (Dhammaru Bavana) is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P47 Hassan (Raadha Aanandha) and P51 Kalu Mohamed (Dhammaru Bavana) with relation class `sibling` (brothers).",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    },
+    "sibling|P47|P52|brothers": {
+      "summary": "P47 Hassan (Raadha Aanandha) and P52 Yoosuf (Veeru Aanandha) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/sibling-p47-p52-brothers.md",
+      "logic": [
+        "Shortest direct-claim support path (2 steps) linking this pair:",
+        "parent P47 Hassan (Raadha Aanandha) -> P46 Omar (Loka Sundhura) (CLM-0341, SRC-MRF-KINGS)",
+        "parent P46 Omar (Loka Sundhura) -> P52 Yoosuf (Veeru Aanandha) (CLM-0344, SRC-MRF-KINGS)",
+        "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P47 Hassan (Raadha Aanandha) and P52 Yoosuf (Veeru Aanandha) is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P47 Hassan (Raadha Aanandha) and P52 Yoosuf (Veeru Aanandha) with relation class `sibling` (brothers).",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    },
+    "sibling|P50|P51|brothers": {
+      "summary": "P50 Ibrahim (Bavana Furasuddha) and P51 Kalu Mohamed (Dhammaru Bavana) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/sibling-p50-p51-brothers.md",
+      "logic": [
+        "Shortest direct-claim support path (2 steps) linking this pair:",
+        "parent P50 Ibrahim (Bavana Furasuddha) -> P47 Hassan (Raadha Aanandha) (CLM-0601, SRC-ROYALARK-MALDIVES)",
+        "sibling P47 Hassan (Raadha Aanandha) <-> P51 Kalu Mohamed (Dhammaru Bavana) [half-brothers] (CLM-0639, SRC-ROYALARK-MALDIVES)",
+        "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P50 Ibrahim (Bavana Furasuddha) and P51 Kalu Mohamed (Dhammaru Bavana) is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P50 Ibrahim (Bavana Furasuddha) and P51 Kalu Mohamed (Dhammaru Bavana) with relation class `sibling` (brothers).",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    },
+    "sibling|P50|P52|brothers": {
+      "summary": "P50 Ibrahim (Bavana Furasuddha) and P52 Yoosuf (Veeru Aanandha) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/sibling-p50-p52-brothers.md",
+      "logic": [
+        "Shortest direct-claim support path (3 steps) linking this pair:",
+        "parent P50 Ibrahim (Bavana Furasuddha) -> P47 Hassan (Raadha Aanandha) (CLM-0601, SRC-ROYALARK-MALDIVES)",
+        "parent P47 Hassan (Raadha Aanandha) -> P46 Omar (Loka Sundhura) (CLM-0341, SRC-MRF-KINGS)",
+        "parent P46 Omar (Loka Sundhura) -> P52 Yoosuf (Veeru Aanandha) (CLM-0344, SRC-MRF-KINGS)",
+        "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P50 Ibrahim (Bavana Furasuddha) and P52 Yoosuf (Veeru Aanandha) is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P50 Ibrahim (Bavana Furasuddha) and P52 Yoosuf (Veeru Aanandha) with relation class `sibling` (brothers).",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    },
+    "sibling|P78|P79|brothers": {
+      "summary": "P78 Ibrahim Iskander (Rannava Loka) and P79 Mohamed Imaduddine (Navaranna Keerithi) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/sibling-p78-p79-brothers.md",
+      "logic": [
+        "Shortest direct-claim support path (2 steps) linking this pair:",
+        "parent P78 Ibrahim Iskander (Rannava Loka) -> P77 Mohamed Imaduddine (Kula Sundhura Siyaaaka) (CLM-0354, SRC-WIKI-MONARCHS)",
+        "parent P77 Mohamed Imaduddine (Kula Sundhura Siyaaaka) -> P79 Mohamed Imaduddine (Navaranna Keerithi) (CLM-0355, SRC-WIKI-MONARCHS)",
+        "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P78 Ibrahim Iskander (Rannava Loka) and P79 Mohamed Imaduddine (Navaranna Keerithi) is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P78 Ibrahim Iskander (Rannava Loka) and P79 Mohamed Imaduddine (Navaranna Keerithi) with relation class `sibling` (brothers).",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    }
+  }
+}

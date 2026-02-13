@@ -1,0 +1,173 @@
+{
+  "person_ids": [
+    "P21",
+    "P23",
+    "P25",
+    "P26",
+    "P27",
+    "P28",
+    "P29",
+    "P30"
+  ],
+  "primary_targets": [
+    "SRC-TUFS-TARIKH-DIBA-MAHALL-FACSIMILE",
+    "SRC-SARUNA-LOAMAAFANU-1982",
+    "SRC-SARUNA-RAADHAVALHI-1985",
+    "SRC-SARUNA-PYRARD-V2P2-1887",
+    "SRC-CORNELL-PYRARD-V1-1887",
+    "SRC-HEIDELBERG-BELL-1883"
+  ],
+  "inference_target_keys": [
+    "kin|P100|P83|grandparent",
+    "kin|P100|P84|grandparent",
+    "kin|P100|P98|grandparent",
+    "kin|P101|P97|grandparent",
+    "kin|P102|P104|grandparent",
+    "kin|P103|P106|grandparent",
+    "kin|P105|P106|aunt/uncle↔niece/nephew",
+    "kin|P107|P31|grandparent",
+    "kin|P107|P39|grandparent",
+    "kin|P107|P40|grandparent",
+    "kin|P108|P31|grandparent",
+    "kin|P108|P38|aunt/uncle↔niece/nephew"
+  ],
+  "relationship_updates": {
+    "CLM-0019": {
+      "claim_excerpt": "Derived grandparent relation for P109 and P30 follows explicit parent chain P109->P108->P30.",
+      "citation_locator": "Inference basis: parent-of-parent-grandparent rule with supporting parent edges",
+      "notes": "Derived inference dossier initiated in batch C."
+    },
+    "CLM-0104": {
+      "claim_excerpt": "Derived aunt/uncle relation links P16 and P25 through parent P18 and sibling relation P16-P18.",
+      "citation_locator": "Inference basis: parent-sibling-aunt-uncle rule",
+      "notes": "Derived relation; confirm with direct kinship wording where available."
+    },
+    "CLM-0128": {
+      "claim_excerpt": "Hilaaly source context records P192 and P30 in an uncle-nephew framing.",
+      "citation_locator": "SRC-MRF-HILAALY branch annotations near founder cluster",
+      "notes": "Direct collateral link in Hilaaly founder context."
+    },
+    "CLM-0130": {
+      "claim_excerpt": "Derived grandparent relation between P193 and P30 follows P193<-P40<-P30 lineage direction in model.",
+      "citation_locator": "Inference basis: parent-of-parent-grandparent rule",
+      "notes": "Requires direct confirmation before promotion beyond inferred state."
+    },
+    "CLM-0142": {
+      "claim_excerpt": "Hilaaly lineage narrative states P30 and P38 as cousins via fathers who were brothers.",
+      "citation_locator": "SRC-MRF-HILAALY cousin annotation for founder-era branch",
+      "notes": "Direct kin statement; candidate for stronger corroboration."
+    },
+    "CLM-0143": {
+      "claim_excerpt": "Derived grandparent relation P30->P41 follows explicit parent chain through P40.",
+      "citation_locator": "Inference basis: parent-of-parent-grandparent via P40",
+      "notes": "Derived and reversible if parent chain changes."
+    },
+    "CLM-0144": {
+      "claim_excerpt": "Derived grandparent relation P30->P46 follows explicit parent chain through P39.",
+      "citation_locator": "Inference basis: parent-of-parent-grandparent via P39",
+      "notes": "Derived and reversible if parent chain changes."
+    },
+    "CLM-0229": {
+      "claim_excerpt": "Hilaaly lineage source gives P107 as one parent of founder node P30.",
+      "citation_locator": "SRC-MRF-HILAALY founder parentage annotation",
+      "notes": "Direct parent edge; corroborate with independent source set."
+    },
+    "CLM-0230": {
+      "claim_excerpt": "Hilaaly lineage source gives P108 as one parent of founder node P30.",
+      "citation_locator": "SRC-MRF-HILAALY founder parentage annotation",
+      "notes": "Direct parent edge; corroborate with independent source set."
+    },
+    "CLM-0331": {
+      "claim_excerpt": "Kings list presents P27 as child of P26 in late Lunar succession branch.",
+      "citation_locator": "SRC-MRF-KINGS entries #26-#27 parentage note",
+      "notes": "Direct edge in transition-to-Hilaaly period."
+    },
+    "CLM-0332": {
+      "claim_excerpt": "Hilaaly source context links P29 as parent of P37 in pre-Hilaaly bridge narrative.",
+      "citation_locator": "SRC-MRF-HILAALY pre-founder branch annotations",
+      "notes": "Bridge-sensitive claim; prioritize corroboration."
+    },
+    "CLM-0333": {
+      "claim_excerpt": "Kings list records P31 as child of P30 (Hilaaly founder line).",
+      "citation_locator": "SRC-MRF-KINGS entries #30-#31 parentage note",
+      "notes": "Core founder-line parent edge."
+    },
+    "CLM-0334": {
+      "claim_excerpt": "Kings list records P39 as child of P30 in same founder branch.",
+      "citation_locator": "SRC-MRF-KINGS entries #30 and #39 parentage note",
+      "notes": "Supports downstream derived grandparent relations."
+    },
+    "CLM-0335": {
+      "claim_excerpt": "Kings list records P40 as child of P30 in founder branch.",
+      "citation_locator": "SRC-MRF-KINGS entries #30 and #40 parentage note",
+      "notes": "Supports downstream derived grandparent relations."
+    },
+    "CLM-0428": {
+      "claim_excerpt": "Kings list marks P30 and P32 as twins.",
+      "citation_locator": "SRC-MRF-KINGS entry #30 kin annotation",
+      "notes": "Direct sibling relation with twin qualifier."
+    },
+    "CLM-0470": {
+      "claim_excerpt": "Kings list records marriage relation between P25 and P26.",
+      "citation_locator": "SRC-MRF-KINGS entries #25-#26 spouse note",
+      "notes": "Direct spouse edge in late Lunar cluster."
+    },
+    "CLM-0471": {
+      "claim_excerpt": "Kings list records marriage relation between P27 and P28.",
+      "citation_locator": "SRC-MRF-KINGS entries #27-#28 spouse note",
+      "notes": "Direct spouse edge in succession-transition cluster."
+    }
+  },
+  "queue_updates": {
+    "SRCQ-010": {
+      "status": "in_progress",
+      "owner": "phase1-batch-c",
+      "notes": "Methodology extraction in progress; archive provenance controls; see EXT-010."
+    },
+    "SRCQ-011": {
+      "status": "in_progress",
+      "owner": "phase1-batch-c",
+      "notes": "Methodology extraction in progress; records lifecycle rules; see EXT-011."
+    },
+    "SRCQ-012": {
+      "status": "in_progress",
+      "owner": "phase1-batch-c",
+      "notes": "Context extraction in progress; state chronicle framing for explainer; see EXT-012."
+    }
+  },
+  "source_extract_entries": [
+    {
+      "extract_id": "EXT-010",
+      "source_id": "SRC-ARCHIVES-LAW-16-2011",
+      "date": "2026-02-08",
+      "extract_status": "in_progress",
+      "target_scope": "Archival provenance governance",
+      "claim_or_context_note": "Law text extraction started for evidence governance, retention, and authenticity standards.",
+      "locator": "archives.gov.mv archives_law.pdf",
+      "researcher": "phase1-batch-c",
+      "notes": "Methodology source for citation and archival trust policy."
+    },
+    {
+      "extract_id": "EXT-011",
+      "source_id": "SRC-ARCHIVES-RECORDS-DISPOSAL",
+      "date": "2026-02-08",
+      "extract_status": "in_progress",
+      "target_scope": "Records lifecycle and disposal controls",
+      "claim_or_context_note": "Regulation extraction started for disposition and retention handling rules.",
+      "locator": "archives.gov.mv disposal_of_records.pdf",
+      "researcher": "phase1-batch-c",
+      "notes": "Methodology source; not used as person-claim evidence."
+    },
+    {
+      "extract_id": "EXT-012",
+      "source_id": "SRC-PO-TARIKH-LAUNCH-2021",
+      "date": "2026-02-08",
+      "extract_status": "in_progress",
+      "target_scope": "Chronicle significance narrative",
+      "claim_or_context_note": "Official statement extraction started for user-facing explainer context on Tarikh importance.",
+      "locator": "presidency press article 24486",
+      "researcher": "phase1-batch-c",
+      "notes": "Contextual support for explainability layer."
+    }
+  ]
+}

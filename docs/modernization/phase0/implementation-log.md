@@ -29,6 +29,18 @@ Date: 2026-02-10
 - Added initial frontend TypeScript parity module for search scoring (`apps/web/src/search/search-engine.ts`) with Node parity harness (`verify-ts-search-engine-parity.mjs`).
 - Added TypeScript parity module for relationship pathfinding (`apps/web/src/graph/pathfinder.ts`) with direct legacy-vs-TS parity harness (`verify-ts-pathfinder-parity.mjs`).
 - Added TypeScript parity module for relationship-neighbor extraction (`apps/web/src/graph/relationships.ts`) with deterministic parity harness (`verify-ts-relationships-parity.mjs`).
+- Added TypeScript search-controller parity module (`apps/web/src/ui/search-controller.ts`) with helper-level parity harness (`verify-ts-search-controller-parity.mjs`).
+- Hardened TypeScript source-of-truth by stopping JS emission into `apps/web/src` and removing generated `.js` mirror files.
+- Added explicit CI gates for Node install, TypeScript typecheck, and web build in modernization workflow.
+- Added research-script migration tracker to enforce full Node->Rust operations migration scope (`research-script-migration-matrix.md`).
+- Ported `qa-smoke` checks into Rust CLI (`qa-smoke`) with Node-vs-Rust parity harness (`verify-rust-qa-smoke-parity.mjs`).
+- Added UI reference fixture export for Rust QA parity (`export-ui-reference.mjs`).
+- Ported `research-baseline-report` into Rust CLI with Node-vs-Rust parity harness (`verify-rust-research-baseline-report-parity.mjs`).
+- Ported `refresh-concept-entries` into Rust CLI with Node-vs-Rust parity harness (`verify-rust-refresh-concept-entries-parity.mjs`).
+- Ported `build-offline-archive` into Rust CLI with Node-vs-Rust parity harness (`verify-rust-build-offline-archive-parity.mjs`).
+- Ported `phase1-locator-batch-a`, `phase1-locator-batch-b`, `phase1-locator-batch-c`, `phase1-locator-batch-d`, and `phase1-locator-batch-e` into Rust CLI with parity harness (`verify-rust-phase1-locator-batches-parity.mjs`).
+- Ported `phase5-conflict-batch-c`, `phase5-promotion-batch-a`, and `phase5-promotion-batch-b` into Rust CLI with parity harness (`verify-rust-phase5-batches-parity.mjs`).
+- Ported `phase1-batch-a`, `phase1-batch-b`, `phase1-batch-c`, `phase1-batch-d`, and `phase1-batch-sweep` into Rust CLI with full tree parity harness (`verify-rust-phase1-batch-drivers-parity.mjs`).
 
 ## Pending for full Phase 0 completion
 - Complete feature-by-feature behavior specification with exact acceptance tests.

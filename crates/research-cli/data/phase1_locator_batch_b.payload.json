@@ -1,0 +1,280 @@
+{
+  "claim_updates": {
+    "CLM-0238": {
+      "claim_excerpt": "Wikipedia raw infobox issue field lists Ali Nasir as child of Ibrahim Nasir.",
+      "citation_locator": "SRC-WIKI-IBRAHIM-NASIR raw page (w/index.php?title=Ibrahim_Nasir&action=raw), infobox issue line 78 snapshot.",
+      "notes": "Locator extraction completed from raw infobox issue field."
+    },
+    "CLM-0239": {
+      "claim_excerpt": "Wikipedia raw infobox issue field lists Ahmed Nasir as child of Ibrahim Nasir.",
+      "citation_locator": "SRC-WIKI-IBRAHIM-NASIR raw page (w/index.php?title=Ibrahim_Nasir&action=raw), infobox issue line 78 snapshot.",
+      "notes": "Locator extraction completed from raw infobox issue field."
+    },
+    "CLM-0240": {
+      "claim_excerpt": "Wikipedia raw infobox issue field lists Mohamed Nasir as child of Ibrahim Nasir.",
+      "citation_locator": "SRC-WIKI-IBRAHIM-NASIR raw page (w/index.php?title=Ibrahim_Nasir&action=raw), infobox issue line 78 snapshot.",
+      "notes": "Locator extraction completed from raw infobox issue field."
+    },
+    "CLM-0241": {
+      "claim_excerpt": "Wikipedia raw infobox issue field lists Ibrahim Nasir (junior) as child of Ibrahim Nasir.",
+      "citation_locator": "SRC-WIKI-IBRAHIM-NASIR raw page (w/index.php?title=Ibrahim_Nasir&action=raw), infobox issue line 78 snapshot.",
+      "notes": "Locator extraction completed from raw infobox issue field."
+    },
+    "CLM-0242": {
+      "claim_excerpt": "Wikipedia raw infobox issue field lists Ismail Nasir as child of Ibrahim Nasir.",
+      "citation_locator": "SRC-WIKI-IBRAHIM-NASIR raw page (w/index.php?title=Ibrahim_Nasir&action=raw), infobox issue line 78 snapshot.",
+      "notes": "Locator extraction completed from raw infobox issue field."
+    },
+    "CLM-0243": {
+      "claim_excerpt": "Wikipedia raw infobox issue field lists Aishath Nasir as child of Ibrahim Nasir.",
+      "citation_locator": "SRC-WIKI-IBRAHIM-NASIR raw page (w/index.php?title=Ibrahim_Nasir&action=raw), infobox issue line 78 snapshot.",
+      "notes": "Locator extraction completed from raw infobox issue field."
+    },
+    "CLM-0246": {
+      "claim_excerpt": "Wikipedia raw infobox spouse and issue fields place Mariyam Saeeda Didi as spouse in the child-bearing set that includes Ali Nasir.",
+      "citation_locator": "SRC-WIKI-IBRAHIM-NASIR raw page, infobox spouse line 76 with issue grouping at line 78 (2026-02-08 snapshot).",
+      "notes": "Locator extraction completed from spouse+issue infobox grouping."
+    },
+    "CLM-0247": {
+      "claim_excerpt": "Wikipedia raw infobox spouse and issue fields place Mariyam Saeeda Didi as spouse in the child-bearing set that includes Ibrahim Nasir (junior).",
+      "citation_locator": "SRC-WIKI-IBRAHIM-NASIR raw page, infobox spouse line 76 with issue grouping at line 78 (2026-02-08 snapshot).",
+      "notes": "Locator extraction completed from spouse+issue infobox grouping."
+    },
+    "CLM-0276": {
+      "claim_excerpt": "Wikipedia raw infobox issue field explicitly groups Ahmed Nasir under the “With Aisha Zubair” subsection.",
+      "citation_locator": "SRC-WIKI-IBRAHIM-NASIR raw page, infobox issue line 78 “With Aisha Zubair” subgroup (2026-02-08 snapshot).",
+      "notes": "Locator extraction completed from spouse-specific issue subgroup."
+    },
+    "CLM-0277": {
+      "claim_excerpt": "Wikipedia raw infobox issue field explicitly groups Mohamed Nasir under the “With Aisha Zubair” subsection.",
+      "citation_locator": "SRC-WIKI-IBRAHIM-NASIR raw page, infobox issue line 78 “With Aisha Zubair” subgroup (2026-02-08 snapshot).",
+      "notes": "Locator extraction completed from spouse-specific issue subgroup."
+    },
+    "CLM-0278": {
+      "claim_excerpt": "Wikipedia raw infobox issue field explicitly groups Ismail Nasir under the “With Naseema Mohamed” subsection.",
+      "citation_locator": "SRC-WIKI-IBRAHIM-NASIR raw page, infobox issue line 78 “With Naseema Mohamed” subgroup (2026-02-08 snapshot).",
+      "notes": "Locator extraction completed from spouse-specific issue subgroup."
+    },
+    "CLM-0279": {
+      "claim_excerpt": "Wikipedia raw infobox issue field explicitly groups Aishath Nasir under the “With Naseema Mohamed” subsection.",
+      "citation_locator": "SRC-WIKI-IBRAHIM-NASIR raw page, infobox issue line 78 “With Naseema Mohamed” subgroup (2026-02-08 snapshot).",
+      "notes": "Locator extraction completed from spouse-specific issue subgroup."
+    },
+    "CLM-0453": {
+      "claim_excerpt": "Wikipedia raw infobox spouse field lists Mariyam Saeeda Didi as spouse of Ibrahim Nasir.",
+      "citation_locator": "SRC-WIKI-IBRAHIM-NASIR raw page, infobox spouse line 76 (2026-02-08 snapshot).",
+      "notes": "Locator extraction completed from raw infobox spouse field."
+    },
+    "CLM-0454": {
+      "claim_excerpt": "Wikipedia raw infobox spouse field lists Aisha Zubair as spouse of Ibrahim Nasir.",
+      "citation_locator": "SRC-WIKI-IBRAHIM-NASIR raw page, infobox spouse line 76 (2026-02-08 snapshot).",
+      "notes": "Locator extraction completed from raw infobox spouse field."
+    },
+    "CLM-0455": {
+      "claim_excerpt": "Wikipedia raw infobox spouse field lists Naseema Mohamed as spouse of Ibrahim Nasir.",
+      "citation_locator": "SRC-WIKI-IBRAHIM-NASIR raw page, infobox spouse line 76 (2026-02-08 snapshot).",
+      "notes": "Locator extraction completed from raw infobox spouse field."
+    },
+    "CLM-0248": {
+      "claim_excerpt": "Wikipedia raw infobox issue field lists Dunya Maumoon as child of Maumoon Abdul Gayoom.",
+      "citation_locator": "SRC-WIKI-MAUMOON raw page (w/index.php?title=Maumoon_Abdul_Gayoom&action=raw), issue line 35 snapshot.",
+      "notes": "Locator extraction completed from raw infobox issue field."
+    },
+    "CLM-0249": {
+      "claim_excerpt": "Wikipedia raw infobox issue field lists Yumna Maumoon as child of Maumoon Abdul Gayoom.",
+      "citation_locator": "SRC-WIKI-MAUMOON raw page, issue line 35 snapshot.",
+      "notes": "Locator extraction completed from raw infobox issue field."
+    },
+    "CLM-0250": {
+      "claim_excerpt": "Wikipedia raw infobox issue field lists Faris Maumoon as child of Maumoon Abdul Gayoom.",
+      "citation_locator": "SRC-WIKI-MAUMOON raw page, issue line 35 snapshot.",
+      "notes": "Locator extraction completed from raw infobox issue field."
+    },
+    "CLM-0251": {
+      "claim_excerpt": "Wikipedia raw infobox issue field lists Ghassan Maumoon as child of Maumoon Abdul Gayoom.",
+      "citation_locator": "SRC-WIKI-MAUMOON raw page, issue line 35 snapshot.",
+      "notes": "Locator extraction completed from raw infobox issue field."
+    },
+    "CLM-0252": {
+      "claim_excerpt": "Wikipedia raw infobox father field names Abdul Gayoom Ibrahim as father of Maumoon Abdul Gayoom.",
+      "citation_locator": "SRC-WIKI-MAUMOON raw page, father line 37 snapshot.",
+      "notes": "Locator extraction completed from raw infobox father field."
+    },
+    "CLM-0280": {
+      "claim_excerpt": "Wikipedia raw infobox mother field names Khadheeja Ibrahim Didi as mother of Maumoon Abdul Gayoom.",
+      "citation_locator": "SRC-WIKI-MAUMOON raw page, mother line 38 snapshot.",
+      "notes": "Locator extraction completed from raw infobox mother field."
+    },
+    "CLM-0281": {
+      "claim_excerpt": "Wikipedia raw infobox spouse and issue fields support Nasreena Ibrahim as spouse in the child list including Dunya Maumoon.",
+      "citation_locator": "SRC-WIKI-MAUMOON raw page, spouse line 33 and issue line 35 snapshot.",
+      "notes": "Locator extraction completed from spouse+issue infobox fields."
+    },
+    "CLM-0282": {
+      "claim_excerpt": "Wikipedia raw infobox spouse and issue fields support Nasreena Ibrahim as spouse in the child list including Yumna Maumoon.",
+      "citation_locator": "SRC-WIKI-MAUMOON raw page, spouse line 33 and issue line 35 snapshot.",
+      "notes": "Locator extraction completed from spouse+issue infobox fields."
+    },
+    "CLM-0283": {
+      "claim_excerpt": "Wikipedia raw infobox spouse and issue fields support Nasreena Ibrahim as spouse in the child list including Faris Maumoon.",
+      "citation_locator": "SRC-WIKI-MAUMOON raw page, spouse line 33 and issue line 35 snapshot.",
+      "notes": "Locator extraction completed from spouse+issue infobox fields."
+    },
+    "CLM-0284": {
+      "claim_excerpt": "Wikipedia raw infobox spouse and issue fields support Nasreena Ibrahim as spouse in the child list including Ghassan Maumoon.",
+      "citation_locator": "SRC-WIKI-MAUMOON raw page, spouse line 33 and issue line 35 snapshot.",
+      "notes": "Locator extraction completed from spouse+issue infobox fields."
+    },
+    "CLM-0254": {
+      "claim_excerpt": "Wikipedia raw infobox issue field lists Meera Laila Nasheed as child of Mohamed Nasheed.",
+      "citation_locator": "SRC-WIKI-NASHEED raw page (w/index.php?title=Mohamed_Nasheed&action=raw), issue line 35 snapshot.",
+      "notes": "Locator extraction completed from raw infobox issue field."
+    },
+    "CLM-0255": {
+      "claim_excerpt": "Wikipedia raw infobox issue field lists Zaya Laila Nasheed as child of Mohamed Nasheed.",
+      "citation_locator": "SRC-WIKI-NASHEED raw page, issue line 35 snapshot.",
+      "notes": "Locator extraction completed from raw infobox issue field."
+    },
+    "CLM-0256": {
+      "claim_excerpt": "Wikipedia raw infobox spouse and issue fields support Laila Ali Abdulla as spouse in the child list including Meera Laila Nasheed.",
+      "citation_locator": "SRC-WIKI-NASHEED raw page, spouse line 32 and issue line 35 snapshot.",
+      "notes": "Locator extraction completed from spouse+issue infobox fields."
+    },
+    "CLM-0257": {
+      "claim_excerpt": "Wikipedia raw infobox spouse and issue fields support Laila Ali Abdulla as spouse in the child list including Zaya Laila Nasheed.",
+      "citation_locator": "SRC-WIKI-NASHEED raw page, spouse line 32 and issue line 35 snapshot.",
+      "notes": "Locator extraction completed from spouse+issue infobox fields."
+    },
+    "CLM-0308": {
+      "claim_excerpt": "Wikipedia raw infobox issue field lists Yasmin Muizzu as child of Mohamed Muizzu.",
+      "citation_locator": "SRC-WIKI-MUIZZU raw page (w/index.php?title=Mohamed_Muizzu&action=raw), issue line 38 snapshot.",
+      "notes": "Locator extraction completed from raw infobox issue field."
+    },
+    "CLM-0309": {
+      "claim_excerpt": "Wikipedia raw infobox issue field lists Umair Muizzu as child of Mohamed Muizzu.",
+      "citation_locator": "SRC-WIKI-MUIZZU raw page, issue line 38 snapshot.",
+      "notes": "Locator extraction completed from raw infobox issue field."
+    },
+    "CLM-0310": {
+      "claim_excerpt": "Wikipedia raw infobox issue field lists Zaid Muizzu as child of Mohamed Muizzu.",
+      "citation_locator": "SRC-WIKI-MUIZZU raw page, issue line 38 snapshot.",
+      "notes": "Locator extraction completed from raw infobox issue field."
+    },
+    "CLM-0311": {
+      "claim_excerpt": "Wikipedia raw infobox spouse and issue fields support Sajidha Mohamed as spouse in the child list including Yasmin Muizzu.",
+      "citation_locator": "SRC-WIKI-MUIZZU raw page, spouse line 35 and issue line 38 snapshot.",
+      "notes": "Locator extraction completed from spouse+issue infobox fields."
+    },
+    "CLM-0312": {
+      "claim_excerpt": "Wikipedia raw infobox spouse and issue fields support Sajidha Mohamed as spouse in the child list including Umair Muizzu.",
+      "citation_locator": "SRC-WIKI-MUIZZU raw page, spouse line 35 and issue line 38 snapshot.",
+      "notes": "Locator extraction completed from spouse+issue infobox fields."
+    },
+    "CLM-0313": {
+      "claim_excerpt": "Wikipedia raw infobox spouse and issue fields support Sajidha Mohamed as spouse in the child list including Zaid Muizzu.",
+      "citation_locator": "SRC-WIKI-MUIZZU raw page, spouse line 35 and issue line 38 snapshot.",
+      "notes": "Locator extraction completed from spouse+issue infobox fields."
+    },
+    "CLM-0303": {
+      "claim_excerpt": "Wikipedia raw infobox issue field lists Sarah Ibrahim Solih as child of Ibrahim Mohamed Solih.",
+      "citation_locator": "SRC-WIKI-SOLIH raw page (w/index.php?title=Ibrahim_Mohamed_Solih&action=raw), issue line 37 snapshot.",
+      "notes": "Locator extraction completed from raw infobox issue field."
+    },
+    "CLM-0305": {
+      "claim_excerpt": "Wikipedia raw infobox spouse and issue fields support Fazna Ahmed as spouse in the child list including Sarah Ibrahim Solih.",
+      "citation_locator": "SRC-WIKI-SOLIH raw page, spouse line 35 and issue line 37 snapshot.",
+      "notes": "Locator extraction completed from spouse+issue infobox fields."
+    }
+  },
+  "extract_entries": [
+    {
+      "extract_id": "EXT-026",
+      "source_id": "SRC-WIKI-IBRAHIM-NASIR",
+      "date": "2026-02-08",
+      "extract_status": "in_progress",
+      "target_scope": "Raw infobox spouse and issue extraction",
+      "claim_or_context_note": "Extracted spouse and issue template structure for Ibrahim Nasir page to map parent/spouse claims.",
+      "locator": "Wikipedia raw lines 76 and 78 snapshot",
+      "researcher": "phase1-locator-b",
+      "notes": "Supports CLM-0238..0243, CLM-0246..0247, CLM-0276..0279, CLM-0453..0455."
+    },
+    {
+      "extract_id": "EXT-022",
+      "source_id": "SRC-WIKI-SOLIH",
+      "date": "2026-02-08",
+      "extract_status": "in_progress",
+      "target_scope": "Raw infobox plus lead family extraction",
+      "claim_or_context_note": "Expanded extraction to include spouse and issue template fields (Sarah/Yaman) with cousin statement.",
+      "locator": "Wikipedia raw lines 35,37 plus lead line 34 snapshot",
+      "researcher": "phase1-locator-b",
+      "notes": "Supports CLM-0049, CLM-0303..0306, CLM-0460."
+    },
+    {
+      "extract_id": "EXT-023",
+      "source_id": "SRC-WIKI-MUIZZU",
+      "date": "2026-02-08",
+      "extract_status": "in_progress",
+      "target_scope": "Raw infobox parent/spouse/issue extraction",
+      "claim_or_context_note": "Expanded extraction to include issue names and spouse linkage for parent claims.",
+      "locator": "Wikipedia raw lines 35 and 38 plus parent lines 40-41 snapshot",
+      "researcher": "phase1-locator-b",
+      "notes": "Supports CLM-0308..0315 and CLM-0461."
+    },
+    {
+      "extract_id": "EXT-024",
+      "source_id": "SRC-WIKI-NASHEED",
+      "date": "2026-02-08",
+      "extract_status": "in_progress",
+      "target_scope": "Raw infobox spouse/issue extraction",
+      "claim_or_context_note": "Expanded extraction to include child names Meera and Zaya in issue field.",
+      "locator": "Wikipedia raw lines 32 and 35 snapshot",
+      "researcher": "phase1-locator-b",
+      "notes": "Supports CLM-0254..0257 and CLM-0457."
+    },
+    {
+      "extract_id": "EXT-025",
+      "source_id": "SRC-WIKI-MAUMOON",
+      "date": "2026-02-08",
+      "extract_status": "in_progress",
+      "target_scope": "Raw infobox parent/spouse/issue extraction",
+      "claim_or_context_note": "Expanded extraction to include father, mother, spouse, and issue fields for family mapping.",
+      "locator": "Wikipedia raw lines 33,35,37,38 snapshot",
+      "researcher": "phase1-locator-b",
+      "notes": "Supports CLM-0248..0252, CLM-0280..0284, CLM-0456."
+    }
+  ],
+  "queue_entries": [
+    {
+      "queue_id": "SRCQ-017",
+      "priority": "P1",
+      "track": "Modern family corroboration",
+      "dynasty_or_topic": "Modern nodes P115-P173 cluster",
+      "target_claim_scope": "Spouse, parent, and cousin statements with explicit lead/personal-life locators",
+      "candidate_source_id": "SRC-WIKI-WAHEED|SRC-WIKI-SOLIH|SRC-WIKI-MUIZZU|SRC-WIKI-NASHEED|SRC-WIKI-MAUMOON",
+      "source_url": "",
+      "publisher": "Wikipedia",
+      "source_type": "secondary synthesis",
+      "expected_grade": "B",
+      "status": "in_progress",
+      "last_updated": "2026-02-08",
+      "owner": "phase1-locator-b",
+      "notes": "Batch B expanded to raw infobox extraction for spouse/issue/parent fields (EXT-022..025)."
+    },
+    {
+      "queue_id": "SRCQ-019",
+      "priority": "P1",
+      "track": "Modern family corroboration",
+      "dynasty_or_topic": "Ibrahim Nasir lineage cluster",
+      "target_claim_scope": "Spouse and issue template mapping for P115 branch claims",
+      "candidate_source_id": "SRC-WIKI-IBRAHIM-NASIR",
+      "source_url": "",
+      "publisher": "Wikipedia",
+      "source_type": "secondary synthesis",
+      "expected_grade": "B",
+      "status": "in_progress",
+      "last_updated": "2026-02-08",
+      "owner": "phase1-locator-b",
+      "notes": "Raw infobox extraction completed for spouse/issue subgroup claims; see EXT-026."
+    }
+  ]
+}

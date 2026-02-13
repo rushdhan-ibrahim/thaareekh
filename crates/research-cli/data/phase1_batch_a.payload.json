@@ -1,0 +1,347 @@
+{
+  "person_ids": [
+    "P1",
+    "P2",
+    "P3",
+    "P4",
+    "P5",
+    "P6",
+    "P7",
+    "P8",
+    "P9",
+    "P10"
+  ],
+  "primary_targets": [
+    "SRC-TUFS-TARIKH-DIBA-MAHALL-FACSIMILE",
+    "SRC-SARUNA-LOAMAAFANU-1982",
+    "SRC-SARUNA-RAADHAVALHI-1985"
+  ],
+  "inference_target_keys": [
+    "kin|P104|P68|reported shared Utheemu lineage branch",
+    "kin|P130|P132|possible southern-branch continuity (Addu/Fuvahmulah)",
+    "kin|P132|P182|reported Addu/Meedhoo branch continuity",
+    "kin|P110|P115|reported kin relation in elite Didi line",
+    "kin|P111|P115|reported extended Didi lineage",
+    "kin|P122|P168|reported first-cousin relation",
+    "kin|P87|P92|uncle/nephew",
+    "parent|P87|P129|",
+    "parent|P80|P84|",
+    "parent|P13|P15|",
+    "sibling|P5|P7|brothers",
+    "sibling|P5|P8|brothers"
+  ],
+  "relationship_updates": {
+    "CLM-0001": {
+      "claim_excerpt": "Kings list marks P2 as nephew of Koimala P1 via Koimala's sister.",
+      "citation_locator": "SRC-MRF-KINGS early sequence entries #1-#3 relationship notes",
+      "notes": "Phase 1 extraction pending direct quote capture."
+    },
+    "CLM-0141": {
+      "claim_excerpt": "Kings list identifies P2 and P3 as cousin relation in succession chain.",
+      "citation_locator": "SRC-MRF-KINGS early sequence entries #2-#3 relation annotation",
+      "notes": "Cross-check against Tarikh and Raadhavalhi sources required."
+    },
+    "CLM-0290": {
+      "claim_excerpt": "Kings list gives P4 as son of Rekeihiriya Maava Kilege.",
+      "citation_locator": "SRC-MRF-KINGS entry #4 parentage annotation",
+      "notes": "Parent node P156 naming normalization still pending."
+    },
+    "CLM-0291": {
+      "claim_excerpt": "Kings list gives P9 as son of Hiriya Maava Kilege.",
+      "citation_locator": "SRC-MRF-KINGS entry #9 parentage annotation",
+      "notes": "Parent node P157 title parsing pending."
+    },
+    "CLM-0292": {
+      "claim_excerpt": "Kings list gives P10 as son of Volumidi Bodu Kilege.",
+      "citation_locator": "SRC-MRF-KINGS entry #10 parentage annotation",
+      "notes": "Parent node P158 title parsing pending."
+    },
+    "CLM-0352": {
+      "claim_excerpt": "Kings list sequence indicates P7 as father of P13.",
+      "citation_locator": "SRC-MRF-KINGS entries #7 and #13 lineage note",
+      "notes": "Should be corroborated with chronicle-based primary source."
+    },
+    "CLM-0436": {
+      "claim_excerpt": "Kings list explicitly notes P5 and P6 as brothers.",
+      "citation_locator": "SRC-MRF-KINGS entries #5-#6 kin annotation",
+      "notes": "Candidate for A/B corroboration upgrade after chronicle extraction."
+    },
+    "CLM-0437": {
+      "claim_excerpt": "P5 to P7 sibling edge is inferred from adjacent explicit brother links P5-P6 and P6-P7.",
+      "citation_locator": "Inference synthesis from SRC-MRF-KINGS sibling chain entries #5-#7",
+      "notes": "Pair-specific inference dossier created."
+    },
+    "CLM-0438": {
+      "claim_excerpt": "P5 to P8 sibling edge is inferred from sequenced brother chain P5-P6-P7-P8.",
+      "citation_locator": "Inference synthesis from SRC-MRF-KINGS sibling chain entries #5-#8",
+      "notes": "Pair-specific inference dossier created."
+    },
+    "CLM-0442": {
+      "claim_excerpt": "Kings list explicitly notes P6 and P7 as brothers.",
+      "citation_locator": "SRC-MRF-KINGS entries #6-#7 kin annotation",
+      "notes": "Candidate for corroboration with chronicle extracts."
+    },
+    "CLM-0443": {
+      "claim_excerpt": "P6 to P8 sibling edge is inferred from explicit P6-P7 and P7-P8 brother relations.",
+      "citation_locator": "Inference synthesis from SRC-MRF-KINGS sibling chain entries #6-#8",
+      "notes": "Inference remains C until pairwise explicit wording is found."
+    },
+    "CLM-0446": {
+      "claim_excerpt": "Kings list explicitly notes P7 and P8 as brothers.",
+      "citation_locator": "SRC-MRF-KINGS entries #7-#8 kin annotation",
+      "notes": "Supports transitive sibling inference completion across early Lunar cluster."
+    }
+  },
+  "curated_notes": {
+    "kin|P104|P68|reported shared Utheemu lineage branch": {
+      "summary": "P104 Mohamed Thakurufaanu al-Auzam and P68 Mohamed Imaduddine (Kula Sundhura Katthiri Bavana) are modeled as `kin` with label `reported shared Utheemu lineage branch` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/kin-p104-p68-reported-shared-utheemu-lineage-branch.md",
+      "logic": [
+        "No short direct-claim path (<=4 steps) was found in the current direct-edge set for this exact node pair.",
+        "Inference currently rests on curated branch-context interpretation plus source-level continuity wording, not a direct named relation statement.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `kin` for P104 Mohamed Thakurufaanu al-Auzam and P68 Mohamed Imaduddine (Kula Sundhura Katthiri Bavana) is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P104 Mohamed Thakurufaanu al-Auzam and P68 Mohamed Imaduddine (Kula Sundhura Katthiri Bavana) with relation class `kin` (reported shared Utheemu lineage branch).",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    },
+    "kin|P130|P132|possible southern-branch continuity (Addu/Fuvahmulah)": {
+      "summary": "P130 Prince Ibrahim Faamuladheyri Kilegefaanu and P132 Al-Naib Muhammad Thakurufaanu of Addu are modeled as `kin` with label `possible southern-branch continuity (Addu/Fuvahmulah)` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/kin-p130-p132-possible-southern-branch-continuity-addu-fuvahmulah.md",
+      "logic": [
+        "No short direct-claim path (<=4 steps) was found in the current direct-edge set for this exact node pair.",
+        "Inference currently rests on curated branch-context interpretation plus source-level continuity wording, not a direct named relation statement.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `kin` for P130 Prince Ibrahim Faamuladheyri Kilegefaanu and P132 Al-Naib Muhammad Thakurufaanu of Addu is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P130 Prince Ibrahim Faamuladheyri Kilegefaanu and P132 Al-Naib Muhammad Thakurufaanu of Addu with relation class `kin` (possible southern-branch continuity (Addu/Fuvahmulah)).",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    },
+    "kin|P132|P182|reported Addu/Meedhoo branch continuity": {
+      "summary": "P182 El-Naib Ganduvaru Mohamed Thakurufan and P132 Al-Naib Muhammad Thakurufaanu of Addu are modeled as `kin` with label `reported Addu/Meedhoo branch continuity` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/kin-p132-p182-reported-addu-meedhoo-branch-continuity.md",
+      "logic": [
+        "No short direct-claim path (<=4 steps) was found in the current direct-edge set for this exact node pair.",
+        "Inference currently rests on curated branch-context interpretation plus source-level continuity wording, not a direct named relation statement.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `kin` for P182 El-Naib Ganduvaru Mohamed Thakurufan and P132 Al-Naib Muhammad Thakurufaanu of Addu is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P182 El-Naib Ganduvaru Mohamed Thakurufan and P132 Al-Naib Muhammad Thakurufaanu of Addu with relation class `kin` (reported Addu/Meedhoo branch continuity).",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    },
+    "kin|P110|P115|reported kin relation in elite Didi line": {
+      "summary": "P110 Mohamed Amin Didi and P115 Ibrahim Nasir are modeled as `kin` with label `reported kin relation in elite Didi line` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/kin-p110-p115-reported-kin-relation-in-elite-didi-line.md",
+      "logic": [
+        "No short direct-claim path (<=4 steps) was found in the current direct-edge set for this exact node pair.",
+        "Inference currently rests on curated branch-context interpretation plus source-level continuity wording, not a direct named relation statement.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `kin` for P110 Mohamed Amin Didi and P115 Ibrahim Nasir is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P110 Mohamed Amin Didi and P115 Ibrahim Nasir with relation class `kin` (reported kin relation in elite Didi line).",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    },
+    "kin|P111|P115|reported extended Didi lineage": {
+      "summary": "P111 Prince Abdul Majeed Didi and P115 Ibrahim Nasir are modeled as `kin` with label `reported extended Didi lineage` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/kin-p111-p115-reported-extended-didi-lineage.md",
+      "logic": [
+        "No short direct-claim path (<=4 steps) was found in the current direct-edge set for this exact node pair.",
+        "Inference currently rests on curated branch-context interpretation plus source-level continuity wording, not a direct named relation statement.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `kin` for P111 Prince Abdul Majeed Didi and P115 Ibrahim Nasir is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P111 Prince Abdul Majeed Didi and P115 Ibrahim Nasir with relation class `kin` (reported extended Didi lineage).",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    },
+    "kin|P122|P168|reported first-cousin relation": {
+      "summary": "P122 Mohamed Nasheed and P168 Fazna Ahmed are modeled as `kin` with label `reported first-cousin relation` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/kin-p122-p168-reported-first-cousin-relation.md",
+      "logic": [
+        "No short direct-claim path (<=4 steps) was found in the current direct-edge set for this exact node pair.",
+        "Inference currently rests on curated branch-context interpretation plus source-level continuity wording, not a direct named relation statement.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `kin` for P122 Mohamed Nasheed and P168 Fazna Ahmed is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P122 Mohamed Nasheed and P168 Fazna Ahmed with relation class `kin` (reported first-cousin relation).",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    },
+    "kin|P87|P92|uncle/nephew": {
+      "summary": "P87 Ibrahim Nooredine (Keerithi Maha Radun) and P92 Mohamed Imaduddine VI (Keerithi Maha Radun) are modeled as `kin` with label `uncle/nephew` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/kin-p87-p92-uncle-nephew.md",
+      "logic": [
+        "Shortest direct-claim support path (2 steps) linking this pair:",
+        "parent P87 Ibrahim Nooredine (Keerithi Maha Radun) -> P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) (CLM-0363, SRC-MRF-KINGS)",
+        "kin P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) <-> P92 Mohamed Imaduddine VI (Keerithi Maha Radun) [grandfather] (CLM-0208, SRC-MRF-KINGS)",
+        "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `kin` for P87 Ibrahim Nooredine (Keerithi Maha Radun) and P92 Mohamed Imaduddine VI (Keerithi Maha Radun) is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P87 Ibrahim Nooredine (Keerithi Maha Radun) and P92 Mohamed Imaduddine VI (Keerithi Maha Radun) with relation class `kin` (uncle/nephew).",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    },
+    "parent|P87|P129|": {
+      "summary": "P87 Ibrahim Nooredine (Keerithi Maha Radun) and P129 Princess Veyogey Dhon Goma are modeled as `parent` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/parent-p87-p129.md",
+      "logic": [
+        "Shortest direct-claim support path (2 steps) linking this pair:",
+        "kin P87 Ibrahim Nooredine (Keerithi Maha Radun) <-> P95 Mohamed Farid (Keerithi Maha Radun) [grandfather (via daughter)] (CLM-0212, SRC-MRF-KINGS)",
+        "parent P95 Mohamed Farid (Keerithi Maha Radun) -> P129 Princess Veyogey Dhon Goma (CLM-0262, SRC-WIKI-MUHAMMAD-FAREED)",
+        "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `parent` for P87 Ibrahim Nooredine (Keerithi Maha Radun) and P129 Princess Veyogey Dhon Goma is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P87 Ibrahim Nooredine (Keerithi Maha Radun) and P129 Princess Veyogey Dhon Goma with relation class `parent`.",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    },
+    "parent|P80|P84|": {
+      "summary": "P80 Hassan Izzuddine (Kula Ran Meeba Audha) and P84 Hassan Nooredine (Keerithi Maha Radun) are modeled as `parent` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/parent-p80-p84.md",
+      "logic": [
+        "Shortest direct-claim support path (2 steps) linking this pair:",
+        "parent P80 Hassan Izzuddine (Kula Ran Meeba Audha) -> P83 Mohamed Muizzuddine (Keerithi Maha Radun) (CLM-0357, SRC-WIKI-MONARCHS)",
+        "sibling P83 Mohamed Muizzuddine (Keerithi Maha Radun) <-> P84 Hassan Nooredine (Keerithi Maha Radun) [brothers] (CLM-0448, SRC-WIKI-MONARCHS)",
+        "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `parent` for P80 Hassan Izzuddine (Kula Ran Meeba Audha) and P84 Hassan Nooredine (Keerithi Maha Radun) is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P80 Hassan Izzuddine (Kula Ran Meeba Audha) and P84 Hassan Nooredine (Keerithi Maha Radun) with relation class `parent`.",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    },
+    "parent|P13|P15|": {
+      "summary": "P13 Audha (Areedha Suvara) and P15 Yoosuf (Bavanaadheeththa) are modeled as `parent` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/parent-p13-p15.md",
+      "logic": [
+        "Shortest direct-claim support path (2 steps) linking this pair:",
+        "parent P13 Audha (Areedha Suvara) -> P14 Hali (Areedha Suvara) (CLM-0263, SRC-MRF-KINGS)",
+        "sibling P14 Hali (Areedha Suvara) <-> P15 Yoosuf (Bavanaadheeththa) [brothers] (CLM-0386, SRC-MRF-KINGS)",
+        "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `parent` for P13 Audha (Areedha Suvara) and P15 Yoosuf (Bavanaadheeththa) is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P13 Audha (Areedha Suvara) and P15 Yoosuf (Bavanaadheeththa) with relation class `parent`.",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    },
+    "sibling|P5|P7|brothers": {
+      "summary": "P5 Dhinei (Fennaadheeththa) and P7 Wadi (Dhagathaa Suvara) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/sibling-p5-p7-brothers.md",
+      "logic": [
+        "Shortest direct-claim support path (2 steps) linking this pair:",
+        "sibling P5 Dhinei (Fennaadheeththa) <-> P6 Dhilhel (Dhagathaa Abarana) [brothers] (CLM-0436, SRC-MRF-KINGS)",
+        "sibling P6 Dhilhel (Dhagathaa Abarana) <-> P7 Wadi (Dhagathaa Suvara) [brothers] (CLM-0442, SRC-MRF-KINGS)",
+        "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P5 Dhinei (Fennaadheeththa) and P7 Wadi (Dhagathaa Suvara) is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P5 Dhinei (Fennaadheeththa) and P7 Wadi (Dhagathaa Suvara) with relation class `sibling` (brothers).",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    },
+    "sibling|P5|P8|brothers": {
+      "summary": "P5 Dhinei (Fennaadheeththa) and P8 Valla Dio (Raa-Araa Desyara) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.",
+      "dossier": "docs/research-program/inferences/sibling-p5-p8-brothers.md",
+      "logic": [
+        "Shortest direct-claim support path (2 steps) linking this pair:",
+        "parent P5 Dhinei (Fennaadheeththa) -> P216 Fahi Hiriya Maava Kilage (CLM-0581, SRC-ROYALARK-MALDIVES)",
+        "parent P216 Fahi Hiriya Maava Kilage -> P8 Valla Dio (Raa-Araa Desyara) (CLM-0584, SRC-ROYALARK-MALDIVES)",
+        "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
+        "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P5 Dhinei (Fennaadheeththa) and P8 Valla Dio (Raa-Araa Desyara) is still absent."
+      ],
+      "verification": [
+        "Promotion requirement: an A/B source statement explicitly naming P5 Dhinei (Fennaadheeththa) and P8 Valla Dio (Raa-Araa Desyara) with relation class `sibling` (brothers).",
+        "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+        "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+      ]
+    }
+  },
+  "source_extract_log": {
+    "header": [
+      "extract_id",
+      "source_id",
+      "date",
+      "extract_status",
+      "target_scope",
+      "claim_or_context_note",
+      "locator",
+      "researcher",
+      "notes"
+    ],
+    "rows": [
+      [
+        "EXT-001",
+        "SRC-TUFS-TARIKH-DIBA-MAHALL-FACSIMILE",
+        "2026-02-08",
+        "in_progress",
+        "Early dynastic succession narratives",
+        "Source identified as core Arabic chronicle facsimile with continuations; extraction of named kinship lines pending.",
+        "tufs.repo record 7457 metadata page",
+        "phase1-batch-a",
+        "Priority P0 source for Lunar/Hilaaly/Utheemu corroboration."
+      ],
+      [
+        "EXT-002",
+        "SRC-TUFS-TARIKH-DIBA-MAHALL-ANNOT",
+        "2026-02-08",
+        "in_progress",
+        "Name variants and annotation support",
+        "Annotation volume identified; use for variant names and index-guided locator mapping.",
+        "tufs.repo record 7433 metadata page",
+        "phase1-batch-a",
+        "Supports conflict resolution and normalization."
+      ],
+      [
+        "EXT-003",
+        "SRC-SARUNA-LOAMAAFANU-1982",
+        "2026-02-08",
+        "in_progress",
+        "Inscription-backed early ruler anchors",
+        "Loamaafaanu publication queued for extraction of inscriptional names and chronology anchors.",
+        "saruna item 3c1c8b78-4aea-480e-95fd-484f3134a881",
+        "phase1-batch-a",
+        "Priority P0 source for early chain hardening."
+      ],
+      [
+        "EXT-004",
+        "SRC-SARUNA-LOAMAAFANU-2003",
+        "2026-02-08",
+        "pending",
+        "Secondary interpretation cross-check",
+        "Article queued as contextual support after primary inscription extraction.",
+        "saruna item 4826d37f-f293-4576-b4df-a5220d9e2f3f",
+        "phase1-batch-a",
+        "Use with primary source corroboration only."
+      ],
+      [
+        "EXT-005",
+        "SRC-SARUNA-RAADHAVALHI-1985",
+        "2026-02-08",
+        "in_progress",
+        "Raadhavalhi manuscript tradition",
+        "Source queued to map ruler-order framing and lineage terminology into claim ledger.",
+        "saruna item 41a49f76-3727-45ef-8156-7a3119262adf",
+        "phase1-batch-a",
+        "Priority P0 source for early sequence corroboration."
+      ]
+    ]
+  }
+}
