@@ -57,5 +57,6 @@ Status: in progress
 ## Sign-off gates
 - [x] Golden baseline generated and frozen.
 - [x] Parity harness integrated into CI.
+- [x] Benchmark budget checker integrated for current measured lanes.
 - [ ] Shadow-run comparison completed.
 - [ ] Cutover checklist approved.

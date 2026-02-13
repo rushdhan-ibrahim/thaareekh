@@ -121,3 +121,9 @@ jobs:
 
       - name: Verify TypeScript relationships parity
         run: node --experimental-strip-types scripts/modernization/verify-ts-relationships-parity.mjs
+
+      - name: Run modernization benchmark snapshot
+        run: npm run modernization:benchmark
+
+      - name: Verify modernization benchmark budgets
+        run: npm run modernization:benchmark-check

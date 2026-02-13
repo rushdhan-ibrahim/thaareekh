@@ -51,5 +51,5 @@ Status: active
 
 ## Follow-up actions
 1. Add browser trace capture lane for UI boot, first input latency, and pan/zoom frame pacing.
-2. Add CI-safe performance budget checker and fail thresholds for measured warm-lane metrics.
+2. Extend benchmark budget checks to include UI trace lanes once those lanes are available.
 3. Optimize Rust cold-start path (binary startup + command dispatch) for short-lived single-command execution.

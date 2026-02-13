@@ -66,6 +66,7 @@ This folder tracks implementation of the TypeScript + Rust rewrite.
 - `npm run modernization:ts-pathfinder-parity`
 - `npm run modernization:ts-relationships-parity`
 - `npm run modernization:benchmark`
+- `npm run modernization:benchmark-check`
 - `npm run modernization:verify`
 
 ## Rules

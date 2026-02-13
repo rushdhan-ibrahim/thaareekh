@@ -50,6 +50,8 @@ Date: 2026-02-10
 - Hardened benchmark fairness by running Rust QA lane via release CLI binary (`target/release/maldives-research-cli`) rather than repeated `cargo run` invocations.
 - Added warmup + sampled benchmark methodology (5 measured samples/lane) for stable Node-vs-Rust QA wall-clock comparison.
 - Added explicit cold-start benchmark lane for Node-vs-Rust first-run process startup comparison.
+- Added benchmark budget verifier (`scripts/modernization/verify-benchmark-budgets.mjs`) and package script (`modernization:benchmark-check`).
+- Added CI benchmark budget enforcement steps in `.github/workflows/modernization-parity.yml`.
 - Captured first benchmark snapshot (`benchmark-2026-02-13.json`) and published measured baseline against modernization performance targets.
 
 ## Pending for full Phase 0 completion
