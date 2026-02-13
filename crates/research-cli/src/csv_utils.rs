@@ -9,23 +9,20 @@ pub fn parse_csv(text: &str) -> Vec<Vec<String>> {
     let mut row = Vec::new();
     let mut field = String::new();
     let mut in_quotes = false;
-    let chars = text.chars().collect::<Vec<_>>();
-    let mut i = 0usize;
+    let mut chars = text.chars().peekable();
 
-    while i < chars.len() {
-        let ch = chars[i];
+    while let Some(ch) = chars.next() {
         if in_quotes {
             if ch == '"' {
-                if i + 1 < chars.len() && chars[i + 1] == '"' {
+                if chars.peek() == Some(&'"') {
                     field.push('"');
-                    i += 1;
+                    chars.next();
                 } else {
                     in_quotes = false;
                 }
             } else {
                 field.push(ch);
             }
-            i += 1;
             continue;
         }
 
@@ -44,7 +41,6 @@ pub fn parse_csv(text: &str) -> Vec<Vec<String>> {
             '\r' => {}
             _ => field.push(ch),
         }
-        i += 1;
     }
 
     if !field.is_empty() || !row.is_empty() {

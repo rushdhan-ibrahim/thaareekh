@@ -65,7 +65,8 @@ This checkpoint compares current implementation state against the plan in `docs/
   - compaction-safe continuation docs and migration ledgering;
   - first benchmark baseline snapshot for engine/pipeline lanes;
   - cold-start + warm-lane pipeline benchmark methodology with Rust speedup evidence for steady-state workloads;
-  - benchmark budget checker automation and CI enforcement for current measured lanes.
+  - benchmark budget checker automation and CI enforcement for current measured lanes;
+  - initial Rust cold-start optimization pass on shared CSV parser hot path.
 - Remaining:
   - browser-trace benchmark lanes for UI performance budgets;
   - Rust cold-start optimization for short-lived CLI invocations;

@@ -25,21 +25,21 @@ Status: active
 - Meet or exceed all performance targets in `docs/modernization-plan-typescript-rust-2026-02-10.md`.
 
 ## Latest snapshot (2026-02-13)
-- Search query latency p95: `1.316ms` (within `<=100ms` target).
-- Relationship path latency p95: `0.119ms` (within `<=100ms` target).
+- Search query latency p95: `1.341ms` (within `<=100ms` target).
+- Relationship path latency p95: `0.116ms` (within `<=100ms` target).
 - Dataset materialization:
-  - canonical mean: `0.883ms`, p95: `1.171ms`;
-  - research mean: `1.133ms`, p95: `1.391ms`.
+  - canonical mean: `0.982ms`, p95: `1.482ms`;
+  - research mean: `1.333ms`, p95: `2.586ms`.
 - Research QA suite wall clock:
   - Warm lane (steady state):
-    - Node suite mean: `211.786ms`
-    - Rust suite mean (release binary): `36.581ms`
-    - Rust vs Node speedup: `5.789x` (exceeds target).
+    - Node suite mean: `215.664ms`
+    - Rust suite mean (release binary): `35.263ms`
+    - Rust vs Node speedup: `6.116x` (exceeds target).
   - Cold-start lane (first command execution):
-    - Node suite total: `228.101ms`
-    - Rust suite total: `720.679ms`
-    - Rust vs Node speedup: `0.317x` (startup cost remains higher in Rust path).
-  - Rust build-once time: `232.479ms`.
+    - Node suite total: `311.254ms`
+    - Rust suite total: `610.407ms`
+    - Rust vs Node speedup: `0.510x` (startup cost remains higher in Rust path).
+  - Rust build-once time: `8988.442ms`.
 
 ## Tooling implementation
 - Node benchmarking script for engine/pipeline lanes: `scripts/modernization/run-benchmarks.mjs`.

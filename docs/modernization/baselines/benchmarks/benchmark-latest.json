@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-13T06:08:24.155Z",
+  "generated_at": "2026-02-13T06:12:08.426Z",
   "machine": {
     "node": "v23.6.0",
     "platform": "darwin",
@@ -12,104 +12,104 @@
   "lanes": {
     "search_query_latency_ms": {
       "samples": 480,
-      "mean": 0.708,
-      "p95": 1.316,
-      "min": 0.248,
-      "max": 2.819,
+      "mean": 0.728,
+      "p95": 1.341,
+      "min": 0.244,
+      "max": 3.172,
       "note": "Measured via TypeScript search engine rankSearch over representative mixed queries."
     },
     "path_query_latency_ms": {
       "samples": 200,
-      "mean": 0.046,
-      "p95": 0.119,
-      "min": 0,
-      "max": 0.317,
+      "mean": 0.047,
+      "p95": 0.116,
+      "min": 0.001,
+      "max": 0.31,
       "note": "Measured via TypeScript pathfinder over representative pair samples."
     },
     "dataset_merge_derived_latency_ms": {
       "canonical": {
         "samples": 40,
-        "mean": 0.883,
-        "p95": 1.171,
-        "min": 0.675,
-        "max": 1.397
+        "mean": 0.982,
+        "p95": 1.482,
+        "min": 0.724,
+        "max": 1.859
       },
       "research": {
         "samples": 40,
-        "mean": 1.133,
-        "p95": 1.391,
-        "min": 0.959,
-        "max": 1.464
+        "mean": 1.333,
+        "p95": 2.586,
+        "min": 1.001,
+        "max": 2.749
       },
       "note": "Measured via repeated getDataset(mode) materialization."
     },
     "research_pipeline_wall_clock_ms": {
       "cold_start": {
         "node": {
-          "qa_ledgers": 64.772,
-          "qa_batch_content": 124.838,
-          "qa_smoke": 38.491,
-          "suite_total": 228.101
+          "qa_ledgers": 102.822,
+          "qa_batch_content": 166.074,
+          "qa_smoke": 42.358,
+          "suite_total": 311.254
         },
         "rust": {
-          "build_once": 232.479,
-          "qa_ledgers": 682.19,
-          "qa_batch_content": 33.28,
-          "qa_smoke": 5.209,
-          "suite_total": 720.679
+          "build_once": 8988.442,
+          "qa_ledgers": 535.099,
+          "qa_batch_content": 70.787,
+          "qa_smoke": 4.521,
+          "suite_total": 610.407
         },
-        "rust_speedup_vs_node": 0.317
+        "rust_speedup_vs_node": 0.51
       },
       "node": {
         "qa_ledgers": {
           "samples": 5,
-          "mean": 64.742,
-          "p95": 72.001,
-          "min": 60.757,
-          "max": 72.001
+          "mean": 63.163,
+          "p95": 70.759,
+          "min": 60.696,
+          "max": 70.759
         },
         "qa_batch_content": {
           "samples": 5,
-          "mean": 108.343,
-          "p95": 136.892,
-          "min": 99.714,
-          "max": 136.892
+          "mean": 104.672,
+          "p95": 119.503,
+          "min": 94.766,
+          "max": 119.503
         },
         "qa_smoke": {
           "samples": 5,
-          "mean": 38.701,
-          "p95": 39.172,
-          "min": 38.055,
-          "max": 39.172
+          "mean": 47.828,
+          "p95": 52.456,
+          "min": 41.174,
+          "max": 52.456
         },
-        "suite_total_mean": 211.786
+        "suite_total_mean": 215.664
       },
       "rust": {
-        "build_once": 232.479,
+        "build_once": 8988.442,
         "qa_ledgers": {
           "samples": 5,
-          "mean": 8.01,
-          "p95": 8.614,
-          "min": 7.442,
-          "max": 8.614
+          "mean": 7.558,
+          "p95": 7.773,
+          "min": 7.312,
+          "max": 7.773
         },
         "qa_batch_content": {
           "samples": 5,
-          "mean": 24.552,
-          "p95": 27.722,
-          "min": 23.552,
-          "max": 27.722
+          "mean": 23.766,
+          "p95": 24.239,
+          "min": 23.221,
+          "max": 24.239
         },
         "qa_smoke": {
           "samples": 5,
-          "mean": 4.019,
-          "p95": 4.209,
-          "min": 3.864,
-          "max": 4.209
+          "mean": 3.939,
+          "p95": 4.057,
+          "min": 3.83,
+          "max": 4.057
         },
-        "suite_total_mean": 36.581
+        "suite_total_mean": 35.263
       },
-      "rust_speedup_vs_node": 5.789,
+      "rust_speedup_vs_node": 6.116,
       "note": "Warm lane uses warmup + 5 measured samples per command for stable wall-clock comparisons."
     }
   }
