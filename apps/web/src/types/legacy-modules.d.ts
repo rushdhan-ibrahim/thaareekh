@@ -3,6 +3,42 @@
  * Wildcard patterns allow TS to resolve imports from src/data/*.js.
  */
 
+// ---------------------------------------------------------------------------
+// CDN-loaded libraries (importmap)
+// ---------------------------------------------------------------------------
+
+declare module 'd3' {
+  interface ZoomTransform {
+    x: number;
+    y: number;
+    k: number;
+    translate(x: number, y: number): ZoomTransform;
+    scale(k: number): ZoomTransform;
+  }
+  export const zoomIdentity: ZoomTransform;
+  export function select(el: Element | string): D3Sel;
+  export interface D3Sel {
+    selectAll(sel: string): D3Sel;
+    select(sel: string): D3Sel;
+    remove(): D3Sel;
+    append(tag: string): D3Sel;
+    attr(name: string, value?: unknown): D3Sel;
+    data(data: unknown[]): D3Sel;
+    enter(): D3Sel;
+    transition(): D3Sel;
+    duration(ms: number): D3Sel;
+    call(fn: unknown, ...args: unknown[]): D3Sel;
+  }
+}
+
+declare module 'gsap' {
+  const gsap: {
+    to(target: unknown, vars: Record<string, unknown>): unknown;
+  };
+  export default gsap;
+  export { gsap };
+}
+
 declare module '*sovereigns.merge.js' {
   export function resolveDataMode(): 'canonical' | 'research';
   export function getDataset(mode?: 'canonical' | 'research'): {
