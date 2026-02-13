@@ -64,6 +64,7 @@ Date: 2026-02-10
 - Added TypeScript complex components: `compare.ts` (25 tests), `exporter.ts`, `tree-options.ts` (7 tests).
 - Added TypeScript heavy pair: `sidebar.ts` (1215 lines, full port of sidebar.js — dependency injection via SidebarDeps, estLife/sourceQualityWeight pure helpers, 30 tests), `rebuild.ts` (1489 lines, full port of rebuild.js — dependency injection via RebuildDeps, degreeRank/earliestYear/chronoPostProcess pure helpers, 26 tests).
 - Registered all 16 TS parity harnesses in package.json verify chain (38 total parity checks now green).
+- Full main.ts rewrite (985 lines): wires all 20+ TS modules together with dependency injection, replaces scaffold stub. Imports all data modules, creates AppState, bound helpers (goF, hiN, hiE, clH, etc.), filter wrapper with eraPersonOk computation, era controls, filter panel, sidebar/selection management, view mode toggles, density/overlay/focus controls, story trail sync, global event listeners (zoom-changed, lang-changed, selection-changed, resize, request-sidebar-open, parallax pattern), service worker registration, dynasty dropdown population, saved view state restoration.
 
 ## Pending for full Phase 0 completion
 - Complete feature-by-feature behavior specification with exact acceptance tests.
