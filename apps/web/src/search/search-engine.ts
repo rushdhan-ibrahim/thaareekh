@@ -21,6 +21,7 @@ export interface SearchPersonOffice {
 export interface SearchPerson {
   id: string;
   nm: string;
+  g?: string;
   rg?: string;
   dy?: string;
   n?: Array<string | number>;

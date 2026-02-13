@@ -10,6 +10,7 @@
     "useDefineForClassFields": true,
     "verbatimModuleSyntax": true,
     "skipLibCheck": true,
+    "noEmit": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "types": []

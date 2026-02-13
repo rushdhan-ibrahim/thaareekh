@@ -14,6 +14,7 @@ For phase-vs-plan reconciliation, see `docs/modernization/phase0/progress-reconc
 - Benchmark automation is wired via `npm run modernization:benchmark` with snapshots written to `docs/modernization/baselines/benchmarks/`.
 - Benchmark budget checker is wired via `npm run modernization:benchmark-check` and enforced in modernization CI workflow.
 - Latest benchmark snapshot date: 2026-02-13 (`benchmark-latest.json`).
+- UI trace lane attempt checkpoint is documented in `docs/modernization/phase0/ui-trace-progress-2026-02-13.md`.
 
 ## Rust parity ports completed
 - Dataset derive parity (`verify-rust-derive-parity.mjs`).
@@ -79,9 +80,10 @@ For phase-vs-plan reconciliation, see `docs/modernization/phase0/progress-reconc
 3. Complete command-palette runtime parity and unify shortcut behavior with graph/tree interaction focus states.
 4. Continue feature matrix UX section top-down (filters, sidebar evidence cards, compare flow).
 5. Add browser-trace lanes for first paint, interaction delay, and pan/zoom smoothness.
-6. Optimize Rust cold-start startup path for short-lived CLI invocation.
-7. Extend benchmark budget checks to include UI trace lanes once available.
-8. Extend parity harnesses for any future research-driver additions before cutover.
+6. Integrate draft CDP-based UI benchmark runner (`scripts/modernization/ui-browser-benchmarks.mjs`) into `modernization:benchmark`.
+7. Optimize Rust cold-start startup path for short-lived CLI invocation.
+8. Extend benchmark budget checks to include UI trace lanes once available.
+9. Extend parity harnesses for any future research-driver additions before cutover.
 
 ## Non-negotiable constraints during migration
 - No functionality loss.

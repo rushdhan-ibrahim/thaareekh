@@ -1,6 +1,9 @@
 node_modules/
 apps/web/node_modules/
 apps/web/dist/
+apps/web/src/**/*.js
+apps/web/src/**/*.js.map
+apps/web/tsconfig.tsbuildinfo
 
 # Rust
 /target/

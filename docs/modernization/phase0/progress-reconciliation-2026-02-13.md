@@ -17,6 +17,7 @@ This checkpoint compares current implementation state against the plan in `docs/
   - benchmark automation lane (`modernization:benchmark`) with snapshot artifacts under `baselines/benchmarks/`.
 - Remaining:
   - browser-trace benchmark lanes (UI boot, pan/zoom, filter latency) and target wiring;
+  - integrate and validate draft CDP UI benchmark runner (`scripts/modernization/ui-browser-benchmarks.mjs`);
   - shadow-run checklist completion.
 
 ### Phase 1: Rust domain + engine core
@@ -69,6 +70,7 @@ This checkpoint compares current implementation state against the plan in `docs/
   - initial Rust cold-start optimization pass on shared CSV parser hot path.
 - Remaining:
   - browser-trace benchmark lanes for UI performance budgets;
+  - finalize and integrate paused UI-trace work item (`ui-trace-progress-2026-02-13.md`);
   - Rust cold-start optimization for short-lived CLI invocations;
   - budget threshold extension for future UI trace lanes.
 
