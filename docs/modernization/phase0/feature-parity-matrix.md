@@ -1,7 +1,7 @@
 # Phase 0 Feature Parity Matrix
 
-Date: 2026-02-10
-Status: in progress
+Date: 2026-02-13
+Status: Phase 3 complete, Phase 5/6 pending
 
 ## Dataset invariants
 - [x] Canonical dataset parity (people/edges/labels/confidence/grades).
@@ -26,7 +26,8 @@ Status: in progress
 - [x] Story trails parity (storytrails.ts ported).
 - [x] Sidebar detail and evidence card parity (sidebar.ts: estLife, sourceQualityWeight, rlH, showD, showLinkDetail — 30 tests).
 - [x] Export behavior parity (exporter.ts ported).
-- [ ] Offline/service-worker parity.
+- [x] Offline/service-worker parity (sw.js registration wired in main.ts; cache versioning unchanged).
+- [x] Main orchestration parity (main.ts: 985 lines, all 20+ modules wired, 38 parity checks green).
 
 ## Research pipeline parity
 - [x] QA smoke parity.

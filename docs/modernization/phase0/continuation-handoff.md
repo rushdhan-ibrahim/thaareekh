@@ -52,38 +52,36 @@ For phase-vs-plan reconciliation, see `docs/modernization/phase0/progress-reconc
 - `npm run modernization:benchmark`
 - `npm run modernization:benchmark-check`
 
-## Frontend TypeScript migration status
-- Scaffold exists in `apps/web` (Vite + strict TypeScript).
-- Search scoring engine parity module is migrated:
-  - Legacy source: `src/ui/search-engine.js` (core ranking logic).
-  - TS target: `apps/web/src/search/search-engine.ts`.
-  - Parity harness: `scripts/modernization/verify-ts-search-engine-parity.mjs`.
-- Search controller core parity module is migrated:
-  - Legacy source: `src/ui/search.js`.
-  - TS target: `apps/web/src/ui/search-controller.ts`.
-  - Parity harness: `scripts/modernization/verify-ts-search-controller-parity.mjs`.
-- Relationship pathfinding parity module is migrated:
-  - Legacy source: `src/graph/pathfinder.js`.
-  - TS target: `apps/web/src/graph/pathfinder.ts`.
-  - Parity harness: `scripts/modernization/verify-ts-pathfinder-parity.mjs`.
-- Relationship-neighbor extraction parity module is migrated:
-  - Legacy source: `src/graph/relationships.js`.
-  - TS target: `apps/web/src/graph/relationships.ts`.
-  - Parity harness: `scripts/modernization/verify-ts-relationships-parity.mjs`.
-- Full DOM wiring cutover for search controller is still pending.
-- Search runtime cutover is now wired in scaffold runtime (`apps/web/src/main.ts`, `apps/web/src/ui/search-runtime.ts`), including locale and reason-label adapter hooks.
-- Runtime locale coverage now includes shell labels, command-palette hint text, and ARIA placeholders/labels via centralized TS adapter hooks.
+## Frontend TypeScript migration status — PHASE 3 COMPLETE
+
+All 20+ legacy JS modules have been ported to TypeScript with dependency injection.
+Total: ~9,300 lines of TypeScript across 24 modules, 16 parity harnesses, 38 total parity checks.
+
+### Modules ported (in dependency order)
+1. **Types**: `state.ts`, `legacy-modules.d.ts` — domain types, ambient module declarations
+2. **Utils**: `css.ts` (cs/eC/nC), `format.ts` (fR/esc), `dynasties.ts` (buildDynastySet)
+3. **i18n**: `i18n.ts` — 530 keys en+dv, t(), personName(), relationLabel(), refreshChromeLabels()
+4. **Graph core**: `filter.ts` (filterCore), `highlight.ts` (hiN/hiE/clH), `relationships.ts` (gNb/parOf/chOf), `pathfinder.ts` (BFS path finding)
+5. **Search**: `search-engine.ts`, `search-controller.ts`, `command-palette.ts`, `search-runtime.ts`
+6. **Light UI**: `hover-card.ts`, `theme.ts`, `commandbar.ts`, `timeline-viz.ts`, `modal.ts`, `onboarding.ts`
+7. **State/nav**: `viewstate.ts`, `history.ts`, `navigation.ts`, `keyboard-nav.ts`, `storytrails.ts`, `minimap.ts`
+8. **Complex**: `compare.ts`, `exporter.ts`, `tree-options.ts`
+9. **Heavy pair**: `sidebar.ts` (1215 lines), `rebuild.ts` (1489 lines)
+10. **Orchestration**: `main.ts` (985 lines) — wires all modules
+
+### Parity harnesses (16 total)
+- search-engine, command-palette, search-controller, pathfinder, relationships
+- i18n, filter, highlight, viewstate, history, keyboard-nav, minimap
+- compare, tree-options, sidebar, rebuild
 
 ## Next prioritized backlog (in order)
-1. Complete search UI controller DOM wiring cutover to TypeScript runtime module.
-2. Validate and extend locale/runtime adapter coverage beyond search (command palette + sidebar labels).
-3. Complete command-palette runtime parity and unify shortcut behavior with graph/tree interaction focus states.
-4. Continue feature matrix UX section top-down (filters, sidebar evidence cards, compare flow).
-5. Add browser-trace lanes for first paint, interaction delay, and pan/zoom smoothness.
-6. Integrate draft CDP-based UI benchmark runner (`scripts/modernization/ui-browser-benchmarks.mjs`) into `modernization:benchmark`.
+1. **Phase 5**: Integrate CDP-based UI benchmark runner into `modernization:benchmark` (paused due to environment constraints).
+2. **Phase 5**: Add browser trace lanes for FMP, TTI, pan/zoom fps, filter toggle latency.
+3. **Phase 6**: Shadow-run comparison — run legacy and modernized apps side by side.
+4. **Phase 6**: Update root `index.html` to load from `apps/web/dist/`.
+5. **Phase 6**: Bump `sw.js` CACHE_NAME for modernized build.
+6. **Phase 6**: Tag `v2.0.0-modernized`, keep legacy `src/` for 1 release cycle.
 7. Optimize Rust cold-start startup path for short-lived CLI invocation.
-8. Extend benchmark budget checks to include UI trace lanes once available.
-9. Extend parity harnesses for any future research-driver additions before cutover.
 
 ## Non-negotiable constraints during migration
 - No functionality loss.
