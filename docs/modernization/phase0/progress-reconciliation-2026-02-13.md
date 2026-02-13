@@ -68,26 +68,26 @@ This checkpoint compares current implementation state against the plan in `docs/
   - budget threshold extension for future UI trace lanes.
 
 ### Phase 6: Cutover and stabilization
-- Status: **in progress** — core cutover complete, shadow run pending.
+- Status: **complete** — cutover done, shadow run passed, tagged v2.0.0-modernized.
 - Completed:
   - root `index.html` updated to load Vite-built bundle (`apps/web/dist/assets/main.js` + `index.css`);
   - `apps/web/index.html` created with full legacy HTML structure for Vite dev mode;
   - `vite.config.ts` configured: CDN externals, relative base, stable filenames, fs.allow for root;
   - `sw.js` CACHE_NAME bumped to `v9` with modernized asset list;
   - `.gitignore` updated to track `apps/web/dist/` for static deployment;
-  - Vite build verified: 55 modules, typecheck clean, 38 parity checks green.
+  - Vite build verified: 55 modules, typecheck clean, 38 parity checks green;
+  - Shadow-run UX walkthrough completed: all features verified (graph/tree/sidebar/search/filters/compare/era/story trails/minimap/theme/language);
+  - Recursion bug found and fixed: `_sidebarRefreshing` guard prevents showD ↔ compare onChange infinite loop;
+  - Tag `v2.0.0-modernized` applied; legacy `src/` retained for 1 release cycle.
 - Remaining:
-  - dual-stack shadow run (manual UX walkthrough: graph mode, tree mode, all sidebar tabs);
-  - tag `v2.0.0-modernized`, keep legacy `src/` for 1 release cycle;
-  - final parity reconciliation and cutover checklist sign-off.
+  - none (Phase 6 complete).
 
 ## Plan alignment summary
-- Hard requirement 1 (no loss of functionality/knowledge/research): **met** — 38 parity checks green, all features ported.
+- Hard requirement 1 (no loss of functionality/knowledge/research): **met** — 38 parity checks green, all features ported, shadow-run verified.
 - Hard requirement 2 (major speed/smoothness gains): partially addressed; search/path p95 <= 100ms verified, browser trace lanes still pending for FMP/TTI/pan-zoom.
 - Hard requirement 3 (maintainability/documentation): **strongly improved** — full TypeScript strict mode, dependency injection, CI gates, research pipeline in Rust.
 
 ## Immediate next execution sequence
-1. Phase 6 shadow-run: manual UX walkthrough comparing legacy (`src/main.js`) vs modernized (`apps/web/dist/assets/main.js`).
-2. Phase 6 release: tag `v2.0.0-modernized`, keep legacy `src/` for 1 release cycle.
-3. Complete Phase 5 browser-trace benchmark integration (paused due to env constraints).
-4. Optimize Rust CLI cold-start path for short-lived invocations.
+1. Complete Phase 5 browser-trace benchmark integration (paused due to env constraints).
+2. Optimize Rust CLI cold-start path for short-lived invocations.
+3. Source registry parity and contradiction log integrity (feature-parity-matrix remaining items).

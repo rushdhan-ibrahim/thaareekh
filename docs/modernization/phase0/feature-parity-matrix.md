@@ -60,5 +60,5 @@ Status: Phase 6 cutover complete, tagged v2.0.0-modernized
 - [x] Golden baseline generated and frozen.
 - [x] Parity harness integrated into CI.
 - [x] Benchmark budget checker integrated for current measured lanes.
-- [ ] Shadow-run comparison completed (manual UX walkthrough pending).
+- [x] Shadow-run comparison completed (manual UX walkthrough: all features verified, 1 recursion bug found and fixed).
 - [x] Cutover checklist approved (root HTML, SW cache, Vite build, tag v2.0.0-modernized).

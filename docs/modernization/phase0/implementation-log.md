@@ -72,6 +72,8 @@ Date: 2026-02-10
 - Phase 6 cutover: bumped `sw.js` CACHE_NAME from `v8` to `v9`, replaced 40+ legacy JS module entries with 2 Vite bundle entries (`main.js` + `index.css`), added `@floating-ui/dom` and `gsap` to EXTERNAL_ASSETS.
 - Phase 6 cutover: updated `.gitignore` to track `apps/web/dist/` build artifacts (required for static site deployment).
 - Build verification: 55 modules transformed, Vite build completes in ~400ms, typecheck clean, 38 parity checks green.
+- Phase 6 shadow-run: full UX walkthrough completed — graph mode, tree mode, tree options, command palette search, filter panel (all 7 sections), sidebar (all 5 tabs: Profile/Biography/Offices/Evidence/Map), era slider, story trails, compare mode, minimap, theme toggle, language switch (EN↔DV), navigation history breadcrumbs, reset view. All features verified functional.
+- Bug fix: found and fixed infinite recursion (`Maximum call stack size exceeded`) in `main.ts` — `showD()` ↔ compare `onChange` ↔ `showD()` cycle when compare was armed during navigation. Added `_sidebarRefreshing` guard flag to break re-entrant calls from compare onChange and lang-changed handlers.
 
 ## Pending for full Phase 0 completion
 - Complete feature-by-feature behavior specification with exact acceptance tests.

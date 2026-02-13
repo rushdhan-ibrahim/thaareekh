@@ -281,6 +281,20 @@ initRebuild({
 });
 
 // Compare
+let _sidebarRefreshing = false;
+function refreshSidebar(): void {
+  if (_sidebarRefreshing) return;
+  _sidebarRefreshing = true;
+  try {
+    withHistoryMuted(() => {
+      if (state.selId) showD(state.selId);
+      else if (state.selEdge) showLinkDetail(state.selEdge);
+    });
+  } finally {
+    _sidebarRefreshing = false;
+  }
+}
+
 initCompare(
   {
     byId: typedById,
@@ -289,12 +303,7 @@ initCompare(
     t,
     findRelationshipPath: pathfinder.findRelationshipPath as any
   },
-  () => {
-    withHistoryMuted(() => {
-      if (state.selId) showD(state.selId);
-      else if (state.selEdge) showLinkDetail(state.selEdge);
-    });
-  }
+  () => refreshSidebar()
 );
 
 // Exporter
@@ -947,13 +956,19 @@ window.addEventListener('lang-changed', () => {
   renderSidebarToggleUi();
   renderEraUi();
   refreshTreeOptionLabels();
-  withHistoryMuted(() => {
-    const vmi = document.getElementById('vmi');
-    if (vmi?.classList.contains('on')) { showInstitutionsPane(); return; }
-    if (state.selId) { showD(state.selId); return; }
-    if (state.selEdge) { showLinkDetail(state.selEdge); return; }
-    showEmptySidebar();
-  });
+  if (_sidebarRefreshing) return;
+  _sidebarRefreshing = true;
+  try {
+    withHistoryMuted(() => {
+      const vmi = document.getElementById('vmi');
+      if (vmi?.classList.contains('on')) { showInstitutionsPane(); return; }
+      if (state.selId) { showD(state.selId); return; }
+      if (state.selEdge) { showLinkDetail(state.selEdge); return; }
+      showEmptySidebar();
+    });
+  } finally {
+    _sidebarRefreshing = false;
+  }
 });
 
 window.addEventListener('resize', () => {
