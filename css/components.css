@@ -167,11 +167,13 @@ body.focus-mode .edge-dimmed { stroke-opacity: 0.06 !important }
   gap: var(--space-2);
   margin-bottom: var(--space-2);
 }
+/* I: stat boxes with subtle dynasty accent at bottom */
 .pcl {
   padding: var(--space-2);
   border: 1px solid var(--bd);
   border-radius: 8px;
   background: var(--sf2);
+  border-bottom: 2px solid color-mix(in srgb, var(--dy-color, var(--ac)) 35%, transparent);
 }
 .pcl span {
   display: block;
@@ -247,16 +249,23 @@ body.focus-mode .edge-dimmed { stroke-opacity: 0.06 !important }
 /* --- Relation list items --- */
 .rli { display: flex; align-items: center; gap: var(--space-2); margin-bottom: 4px }
 .rl { list-style: none; display: flex; flex-direction: column; gap: 3px; margin-bottom: var(--space-3) }
+/* C: colored left border by edge type for instant scannability */
 .ri {
   display: flex;
   align-items: center;
   gap: var(--space-2);
   padding: var(--space-2) 7px;
+  padding-left: 10px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--bd);
+  border-left: 3px solid var(--bd2);
   transition: background var(--dur-fast);
   cursor: default;
 }
+.ri[data-rel="parent"] { border-left-color: var(--ep) }
+.ri[data-rel="sibling"] { border-left-color: var(--es) }
+.ri[data-rel="spouse"] { border-left-color: var(--esp) }
+.ri[data-rel="kin"] { border-left-color: var(--ek) }
 .ri:hover { background: var(--hov) }
 .rlf { min-width: 0; flex: 1 }
 .rn {
@@ -295,6 +304,15 @@ body.focus-mode .edge-dimmed { stroke-opacity: 0.06 !important }
   margin-bottom: 5px;
 }
 .nt { font-size: var(--text-base); line-height: 1.6; color: var(--tx2); margin-bottom: var(--space-3) }
+/* D: empty state styling — visually distinct from data content */
+.nt-empty {
+  font-style: italic;
+  color: var(--tx3);
+  opacity: 0.75;
+  font-size: var(--text-sm);
+  padding-left: var(--space-2);
+  border-left: 2px solid var(--bd);
+}
 
 /* --- Tags / confidence badges --- */
 .rt {
@@ -586,7 +604,8 @@ body.focus-mode .edge-dimmed { stroke-opacity: 0.06 !important }
 .bio-text { font-size: 0.9rem; line-height: 1.7; color: var(--tx1, var(--tx)); }
 .bio-text p { margin: 0 0 0.8em; }
 .bio-text p:last-child { margin-bottom: 0; }
-.bio-lead { font-size: 0.92rem; color: var(--tx1, var(--tx)); }
+/* F: biography lead — slightly larger & bolder for clear entry point */
+.bio-lead { font-size: 0.95rem; color: var(--tx); font-weight: 450; line-height: 1.65; }
 body.lang-dv .bio-text { direction: rtl; text-align: right; font-family: 'Noto Sans Thaana', sans-serif; }
 
 /* --- Map panel --- */

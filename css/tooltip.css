@@ -44,10 +44,13 @@
   font-weight: 600;
   margin-bottom: 2px;
 }
+/* B: dynasty accent bar — slightly thicker with subtle glow */
 .hover-card-bar {
-  height: 3px;
+  height: 4px;
   border-radius: 2px;
   margin-bottom: var(--space-2);
+  box-shadow: 0 1px 6px currentColor;
+  opacity: 0.85;
 }
 .hover-card-reign {
   font-size: var(--text-xs);
