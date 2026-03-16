@@ -90,8 +90,8 @@
   align-items: flex-start;
   justify-content: center;
   padding-top: 15vh;
-  background: rgba(0,0,0,0.45);
-  backdrop-filter: blur(4px);
+  background: rgba(17,26,31,0.65);
+  backdrop-filter: blur(6px);
 }
 .cmd-palette.open { display: flex }
 
@@ -183,6 +183,18 @@
   display: flex;
   gap: var(--space-4);
 }
+/* --- Command palette office result dot --- */
+.cmd-result-ofc-dot {
+  font-size: 10px;
+  text-align: center;
+  background: var(--bg3);
+  border-radius: 2px;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  flex-shrink: 0;
+}
+
 .cmd-palette-hint kbd {
   font-family: var(--mono);
   padding: 0 3px;

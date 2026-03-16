@@ -36,7 +36,8 @@ body::before {
 
 ::-webkit-scrollbar { width: 5px }
 ::-webkit-scrollbar-track { background: transparent }
-::-webkit-scrollbar-thumb { background: var(--bd2); border-radius: 99px }
+::-webkit-scrollbar-thumb { background: var(--bd2); border-radius: 99px; transition: background 0.2s }
+::-webkit-scrollbar-thumb:hover { background: rgba(78,201,176,0.25) }
 
 :where(button, input, select, [tabindex]):focus-visible {
   outline: 2px solid var(--ac);

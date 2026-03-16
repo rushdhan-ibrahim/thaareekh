@@ -31,12 +31,12 @@
   padding: var(--space-3);
   max-width: 300px;
   opacity: 0;
-  transform: translateY(4px);
+  transform: translateY(4px) scale(0.98);
   transition: opacity var(--dur-fast), transform var(--dur-fast) var(--ease-out);
 }
 .hover-card.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 .hover-card-name {
   font-family: var(--display);
