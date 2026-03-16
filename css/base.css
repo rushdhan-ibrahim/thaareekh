@@ -18,7 +18,7 @@ body {
   position: relative;
   background:
     radial-gradient(1200px 480px at 8% -10%, rgba(70,191,189,.10), transparent 55%),
-    radial-gradient(900px 380px at 95% 0%, rgba(224,144,96,.08), transparent 60%),
+    radial-gradient(900px 380px at 95% 0%, rgba(78,201,176,.08), transparent 60%),
     linear-gradient(180deg, var(--bg2), var(--bg));
 }
 
