@@ -868,8 +868,9 @@ showEmptySidebar();
 // Initial stats & render
 document.getElementById("st").textContent = people.length + " \u00b7 " + edges.length + (mode === "research" ? " \u00b7 research" : "");
 rebuild();
-// Fit to content once the initial render has settled, then update pan limits
-setTimeout(() => { fitToContent(); setTimeout(updateTranslateExtent, 500); }, 1200);
+// Fit to content on fresh load (no saved zoom), then update pan limits
+const hasSavedZoom = savedView?.zoom && Number.isFinite(savedView.zoom.k) && savedView.zoom.k !== 1;
+setTimeout(() => { if (!hasSavedZoom) fitToContent(); setTimeout(updateTranslateExtent, 500); }, 1200);
 restoreSelection(savedView);
 initViewStatePersistence(getCompareState);
 initKeyboardNav(fitToContent);
