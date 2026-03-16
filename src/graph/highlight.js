@@ -12,24 +12,8 @@ function linkKey(l) {
   return `${s}|${t}|${l?._e?.t || "kin"}`;
 }
 
-function baseOpacity(el) {
-  const base = Number(el.getAttribute('data-bo'));
-  return Number.isFinite(base) ? base : 0.8;
-}
-
-function edgeDimOpacity(el) {
-  const base = baseOpacity(el);
-  if (state.focusMode) return Math.max(0.06, base * 0.32);
-  return Math.max(0.22, base * 0.62);
-}
-
-function nodeDimOpacity() {
-  return state.focusMode ? 0.14 : 0.62;
-}
-
-function nodeBaseOpacity(el) {
-  const low = el?.parentNode?.getAttribute?.('data-pr') === '0';
-  return low ? 0.24 : 1;
+function syncFocusModeClass() {
+  document.body.classList.toggle("focus-mode", !!state.focusMode);
 }
 
 function clearFlow() {
@@ -37,14 +21,7 @@ function clearFlow() {
 }
 
 function ancestralEdgeKeys(id, maxDepth = 14) {
-  const parentByChild = new Map();
-  state.links.forEach(l => {
-    if (l?._e?.t !== "parent") return;
-    const { s, t } = linkIds(l);
-    const arr = parentByChild.get(t) || [];
-    arr.push(s);
-    parentByChild.set(t, arr);
-  });
+  const parentByChild = state._parentByChild || new Map();
   const out = new Set();
   const q = [{ id, d: 0 }];
   const seen = new Set([id]);
@@ -72,28 +49,23 @@ function applyAncestralFlow(id) {
 
 export function hiN(id) {
   state.selEdge = null;
+  const neighbors = state._adj?.get(id);
   const cn = new Set([id]);
-  state.links.forEach(l => {
+  if (neighbors) neighbors.forEach(n => cn.add(n));
+  else state.links.forEach(l => {
     const { s, t } = linkIds(l);
     if (s === id) cn.add(t);
     if (t === id) cn.add(s);
   });
-  const nd = nodeDimOpacity();
+  syncFocusModeClass();
   state.gN.classed("node-selected", d => d.id === id);
   state.gN.classed("node-connected", d => d.id !== id && cn.has(d.id));
-  state.gN.select("rect").attr("opacity", function (d) {
-    if (cn.has(d.id)) return 1;
-    return Math.min(nd, nodeBaseOpacity(this));
-  });
-  state.gN.select("text").attr("opacity", function (d) {
-    if (cn.has(d.id)) return 1;
-    return Math.min(nd, nodeBaseOpacity(this));
-  });
-  state.gL.attr("stroke-opacity", function (d) {
+  state.gN.classed("node-dimmed", d => !cn.has(d.id));
+  state.gL.classed("edge-dimmed", d => {
     const { s, t } = linkIds(d);
-    return (s === id || t === id) ? 1 : edgeDimOpacity(this);
+    return s !== id && t !== id;
   });
-  state.gL.classed("edge-highlight", function(d) {
+  state.gL.classed("edge-highlight", d => {
     const { s, t } = linkIds(d);
     return s === id || t === id;
   });
@@ -103,40 +75,23 @@ export function hiN(id) {
 export function hiE(link) {
   state.selId = null;
   state.selEdge = link;
+  syncFocusModeClass();
   state.gN?.classed("node-selected", false);
   state.gN?.classed("node-connected", false);
   state.gL?.classed("edge-highlight", false);
   clearFlow();
   const { s: sid, t: tid } = linkIds(link);
-  const nd = state.focusMode ? 0.18 : 0.66;
-  state.gN.select("rect").attr("opacity", function (d) {
-    if (d.id === sid || d.id === tid) return 1;
-    return Math.min(nd, nodeBaseOpacity(this));
-  });
-  state.gN.select("text").attr("opacity", function (d) {
-    if (d.id === sid || d.id === tid) return 1;
-    return Math.min(nd, nodeBaseOpacity(this));
-  });
-  state.gL.attr("stroke-opacity", function (d) {
-    if (d === link) return 1;
-    return edgeDimOpacity(this);
-  });
+  state.gN.classed("node-dimmed", d => d.id !== sid && d.id !== tid);
+  state.gL.classed("edge-dimmed", d => d !== link);
 }
 
 export function clH() {
   state.selEdge = null;
   state.gN?.classed("node-selected", false);
   state.gN?.classed("node-connected", false);
+  state.gN?.classed("node-dimmed", false);
   state.gL?.classed("edge-highlight", false);
+  state.gL?.classed("edge-dimmed", false);
   clearFlow();
-  state.gN?.select("rect").attr("opacity", function () {
-    return nodeBaseOpacity(this);
-  });
-  state.gN?.select("text").attr("opacity", function () {
-    return nodeBaseOpacity(this);
-  });
-  state.gL?.attr("stroke-opacity", function () {
-    const base = Number(this.getAttribute('data-bo'));
-    return Number.isFinite(base) ? base : 0.8;
-  });
+  document.body.classList.remove("focus-mode");
 }

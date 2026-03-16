@@ -1,4 +1,5 @@
 import { byId } from '../data/sovereigns.merge.js';
+import { officeById } from '../data/offices.js';
 import { fR } from '../utils/format.js';
 import { personName, relationLabel, t } from './i18n.js';
 
@@ -13,6 +14,7 @@ const hist = {
 function keyOf(entry) {
   if (!entry) return '';
   if (entry.type === 'person') return `p|${entry.id}`;
+  if (entry.type === 'office') return `o|${entry.officeId}`;
   return `e|${entry.s}|${entry.d}|${entry.rel || ''}|${entry.label || ''}`;
 }
 
@@ -143,6 +145,19 @@ export function recordEdge(link) {
     rel,
     label,
     short: `${endpointName(s)} \u2192 ${endpointName(d)}`,
+    meta
+  });
+}
+
+export function recordOffice(officeId) {
+  const o = officeById.get(officeId);
+  if (!o) return;
+  const meta = o.kind || t('office_generic');
+  push({
+    type: 'office',
+    officeId,
+    label: o.name,
+    short: o.name,
     meta
   });
 }

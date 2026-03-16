@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import state from '../state.js';
-import { filt } from './filter.js';
+import { filt, computeEraPersonOk } from './filter.js';
 import { hiN, hiE, clH } from './highlight.js';
 import { showD, showLinkDetail } from '../ui/sidebar.js';
 import { cs, eC, nC } from '../utils/css.js';
@@ -9,9 +9,37 @@ import { timelineExtent } from '../data/timeline.js';
 import { dynastyTransitions, eraMilestones } from '../data/era-events.js';
 import { personName, relationLabel, t } from '../ui/i18n.js';
 import { showNodeHoverCard, moveHoverCard, hideHoverCard } from '../ui/hover-card.js';
+import { computeTreePlacement } from './tree-placement-core.js';
 
 const TIME_EXTENT = timelineExtent();
 const PROGRESSIVE_THRESHOLD = 140;
+let treePlacementCache = null;
+let graphRenderRefs = null;
+let graphTickRaf = 0;
+let graphLastSyncTs = 0;
+let graphStableTicks = 0;
+let treePlacementWorker = null;
+let treePlacementWorkerReady = false;
+let treePlacementWorkerFailed = false;
+const treePlacementWorkerPending = new Set();
+const treePlacementWorkerCache = new Map();
+const TREE_PLACEMENT_WORKER_CACHE_MAX = 4;
+
+// Cache for text BBox measurements to avoid forced reflows on re-renders
+const _bboxCache = new Map();
+function cachedBBox(textEl, label, fontSize) {
+  const key = `${label}|${fontSize}`;
+  let cached = _bboxCache.get(key);
+  if (cached) return cached;
+  const bb = textEl.getBBox();
+  cached = { x: bb.x, y: bb.y, width: bb.width, height: bb.height };
+  _bboxCache.set(key, cached);
+  return cached;
+}
+// Clear cache on language change (labels change)
+if (typeof window !== 'undefined') {
+  window.addEventListener('lang-changed', () => _bboxCache.clear());
+}
 
 function degreeRank(nodes, links) {
   const degree = new Map(nodes.map(n => [n.id, 0]));
@@ -207,6 +235,7 @@ function drawGraphEraOverlay() {
     .slice()
     .sort((a, b) => a.year - b.year);
 
+  state.svgEl.selectAll("g.era-ov").remove();
   const g = state.svgEl.append("g")
     .attr("class", "era-ov")
     .attr("transform", `translate(${x},${y})`)
@@ -342,13 +371,20 @@ function drawTreeEraAnnotations(g, yScale, minYear, maxYear, xExtent) {
       color: cs("--bd2")
     }));
   const rows = deconflictY([...transitions, ...milestones].sort((a, b) => a.y - b.y), 20);
-  if (!rows.length && !(state.eraEnabled && Number.isFinite(state.eraYear))) return;
+  const hasNow = state.eraEnabled
+    && Number.isFinite(state.eraYear)
+    && state.eraYear >= minYear
+    && state.eraYear <= maxYear;
+  const layer = g.selectAll("g.era-ann")
+    .data(rows.length || hasNow ? [0] : [])
+    .join("g")
+    .attr("class", "era-ann")
+    .attr("pointer-events", "none");
+  if (layer.empty()) return;
 
-  const layer = g.append("g").attr("class", "era-ann").attr("pointer-events", "none");
   layer.selectAll("line.era-guide")
-    .data(rows)
-    .enter()
-    .append("line")
+    .data(rows, d => `${d.kind}|${d.year}|${d.label || d.short || ""}`)
+    .join("line")
     .attr("class", "era-guide")
     .attr("x1", 20)
     .attr("x2", xExtent)
@@ -359,9 +395,8 @@ function drawTreeEraAnnotations(g, yScale, minYear, maxYear, xExtent) {
     .attr("stroke-dasharray", d => d.kind === "transition" ? "2,4" : "1,7");
 
   layer.selectAll("circle.era-dot")
-    .data(rows.filter(r => r.kind === "transition"))
-    .enter()
-    .append("circle")
+    .data(rows.filter(r => r.kind === "transition"), d => `${d.year}|${d.label || d.short || ""}`)
+    .join("circle")
     .attr("class", "era-dot")
     .attr("cx", 24)
     .attr("cy", d => d.y)
@@ -369,32 +404,33 @@ function drawTreeEraAnnotations(g, yScale, minYear, maxYear, xExtent) {
     .attr("fill", d => d.color);
 
   layer.selectAll("text.era-label")
-    .data(rows)
-    .enter()
-    .append("text")
+    .data(rows, d => `${d.kind}|${d.year}|${d.label || d.short || ""}`)
+    .join("text")
     .attr("class", "era-label")
     .attr("x", 30)
     .attr("y", d => d.y - 4)
     .attr("fill", d => d.kind === "transition" ? d.color : cs("--tx3"))
     .text(d => `${d.year} \u00b7 ${trimLabel(d.short || d.label, 34)}`);
 
-  if (state.eraEnabled && Number.isFinite(state.eraYear) && state.eraYear >= minYear && state.eraYear <= maxYear) {
-    const yNow = yScale(state.eraYear);
-    layer.append("line")
-      .attr("class", "era-now")
-      .attr("x1", 20)
-      .attr("x2", xExtent)
-      .attr("y1", yNow)
-      .attr("y2", yNow)
-      .attr("stroke", cs("--ac"))
-      .attr("stroke-width", 1.35)
-      .attr("stroke-opacity", 0.74);
-    layer.append("text")
-      .attr("class", "era-now-label")
-      .attr("x", 30)
-      .attr("y", yNow - 6)
-      .text(`${t('filter_year')}: ${state.eraYear}`);
-  }
+  layer.selectAll("line.era-now")
+    .data(hasNow ? [yScale(state.eraYear)] : [])
+    .join("line")
+    .attr("class", "era-now")
+    .attr("x1", 20)
+    .attr("x2", xExtent)
+    .attr("y1", d => d)
+    .attr("y2", d => d)
+    .attr("stroke", cs("--ac"))
+    .attr("stroke-width", 1.35)
+    .attr("stroke-opacity", 0.74);
+
+  layer.selectAll("text.era-now-label")
+    .data(hasNow ? [yScale(state.eraYear)] : [])
+    .join("text")
+    .attr("class", "era-now-label")
+    .attr("x", 30)
+    .attr("y", d => d - 6)
+    .text(`${t('filter_year')}: ${state.eraYear}`);
 }
 
 function sourceGradeColor(g) {
@@ -467,6 +503,201 @@ function sameLink(a, b) {
   return (a?._e?.t || "kin") === (b?._e?.t || "kin");
 }
 
+function edgeSelectionKey(link) {
+  const { s, t } = linkIds(link);
+  const a = s < t ? s : t;
+  const b = s < t ? t : s;
+  return `${a}|${b}|${link?._e?.t || "kin"}`;
+}
+
+function ensureLayer(parent, className) {
+  return parent.selectAll(`g.${className}`).data([className]).join("g").attr("class", className);
+}
+
+function treePlacementCacheKey(nodes, links, dens, lang) {
+  const nodeIds = nodes.map(n => n.id).sort().join(",");
+  const nodeLabelShape = nodes
+    .map(n => `${n.id}:${personName(n).length}:${n.g === "F" ? 1 : 0}`)
+    .sort()
+    .join(",");
+  const edgeKeys = links
+    .map(l => {
+      const { s, t } = linkIds(l);
+      return `${s}|${t}|${l._e.t}|${l._e.c}|${l._e.confidence_grade || ""}`;
+    })
+    .sort()
+    .join(",");
+  return [
+    lang,
+    dens.treeSiblingX,
+    dens.treeDepthY,
+    dens.treeSectionGap,
+    dens.maxLabelChars,
+    nodeIds,
+    nodeLabelShape,
+    edgeKeys
+  ].join("::");
+}
+
+function toTreePlacementValue(output) {
+  return {
+    pos: new Map(output.pos),
+    depthMap: new Map(output.depthMap),
+    sections: output.sections,
+    yOffset: output.yOffset,
+    treeMinYear: output.treeMinYear,
+    treePxPerYear: output.treePxPerYear,
+    treeBaseY: output.treeBaseY,
+    treeMaxColX: output.treeMaxColX
+  };
+}
+
+function toTreePlacementInput(nodes, links, dens) {
+  return {
+    nodes: nodes.map(n => ({
+      id: n.id,
+      label: personName(n),
+      g: n.g,
+      dy: n.dy,
+      n: n.n || [],
+      re: n.re || [],
+      yb: n.yb,
+      yd: n.yd
+    })),
+    links: links.map(l => {
+      const { s, t } = linkIds(l);
+      return {
+        s,
+        d: t,
+        t: l._e.t,
+        c: l._e.c,
+        confidence_grade: l._e.confidence_grade,
+        l: l._e.l
+      };
+    }),
+    dens: {
+      padMale: dens.padMale,
+      padFemale: dens.padFemale,
+      treeDepthY: dens.treeDepthY,
+      treeSiblingX: dens.treeSiblingX,
+      treeSectionGap: dens.treeSectionGap,
+      treeCharW: dens.treeCharW,
+      maxLabelChars: dens.maxLabelChars
+    },
+    labels: {
+      earlySovereigns: t('early_sovereigns') || 'Early Sovereigns',
+      unconnected: t('unconnected') || 'Unconnected'
+    }
+  };
+}
+
+function trimTreeWorkerCache() {
+  while (treePlacementWorkerCache.size > TREE_PLACEMENT_WORKER_CACHE_MAX) {
+    const firstKey = treePlacementWorkerCache.keys().next().value;
+    if (!firstKey) break;
+    treePlacementWorkerCache.delete(firstKey);
+  }
+}
+
+function treePlacementWorkerEnabled() {
+  if (typeof window === 'undefined' || typeof Worker === 'undefined') return false;
+  const policy = String(window.__treePlacementWorkerPolicy || '').toLowerCase();
+  if (policy === 'off' || policy === 'false' || policy === 'disabled') return false;
+  if (policy === 'on' || policy === 'true' || policy === 'enabled') return true;
+  return !window.__disableTreePlacementWorker;
+}
+
+function ensureTreePlacementWorker() {
+  if (treePlacementWorkerFailed || !treePlacementWorkerEnabled()) return null;
+  if (treePlacementWorker) return treePlacementWorker;
+  try {
+    const worker = new Worker(new URL('./tree-placement-worker.js', import.meta.url), { type: 'module' });
+    worker.addEventListener('message', event => {
+      const msg = event.data;
+      if (!msg || !msg.key) return;
+      treePlacementWorkerPending.delete(msg.key);
+      if (msg.type === 'tree-placement-result') {
+        treePlacementWorkerCache.set(msg.key, toTreePlacementValue(msg.result));
+        trimTreeWorkerCache();
+        treePlacementWorkerReady = true;
+      }
+    });
+    worker.addEventListener('error', () => {
+      treePlacementWorkerFailed = true;
+      treePlacementWorkerReady = false;
+      treePlacementWorkerPending.clear();
+      treePlacementWorkerCache.clear();
+      treePlacementWorker = null;
+    });
+    treePlacementWorker = worker;
+  } catch {
+    treePlacementWorkerFailed = true;
+    treePlacementWorker = null;
+  }
+  return treePlacementWorker;
+}
+
+function queueTreePlacementWorker(key, input) {
+  if (treePlacementCache?.key === key) return;
+  if (treePlacementWorkerCache.has(key) || treePlacementWorkerPending.has(key)) return;
+  const worker = ensureTreePlacementWorker();
+  if (!worker) return;
+  treePlacementWorkerPending.add(key);
+  worker.postMessage({
+    type: 'tree-placement-request',
+    key,
+    payload: input
+  });
+}
+
+function syncGraphDom() {
+  if (!graphRenderRefs) return;
+  const refs = graphRenderRefs;
+  refs.gL.attr("x1", d => d.source.x).attr("y1", d => d.source.y).attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+  refs.gN.attr("transform", d => `translate(${d.x},${d.y})`);
+  refs.edgeLabelSel
+    .attr("x", d => (d.source.x + d.target.x) / 2)
+    .attr("y", d => (d.source.y + d.target.y) / 2);
+  if (refs.gBadges) {
+    refs.gBadges
+      .attr("x", d => (refs.nodeMap.get(d.id)?.x || 0) + d.ox)
+      .attr("y", d => (refs.nodeMap.get(d.id)?.y || 0) + d.oy);
+  }
+}
+
+function scheduleGraphDomSync(minIntervalMs = 14) {
+  if (graphTickRaf) return;
+  graphTickRaf = requestAnimationFrame(ts => {
+    graphTickRaf = 0;
+    if (minIntervalMs > 0 && ts - graphLastSyncTs < minIntervalMs) return;
+    graphLastSyncTs = ts;
+    syncGraphDom();
+  });
+}
+
+function maybeStopStableGraphSimulation(sim) {
+  const alpha = sim.alpha?.() ?? 0;
+  if (alpha > 0.045) {
+    graphStableTicks = 0;
+    return;
+  }
+  let maxVelocity = 0;
+  for (const n of state.nodes) {
+    const vx = Math.abs(n.vx || 0);
+    const vy = Math.abs(n.vy || 0);
+    if (vx > maxVelocity) maxVelocity = vx;
+    if (vy > maxVelocity) maxVelocity = vy;
+  }
+  if (maxVelocity < 0.03) graphStableTicks += 1;
+  else graphStableTicks = 0;
+  if (graphStableTicks < 10) return;
+  graphStableTicks = 0;
+  sim.alphaTarget?.(0);
+  sim.stop?.();
+  syncGraphDom();
+  document.getElementById("ld")?.classList.add("dn");
+}
+
 function restoreSelectionHighlight() {
   if (state.selId) {
     const exists = state.nodes.some(n => n.id === state.selId);
@@ -474,7 +705,9 @@ function restoreSelectionHighlight() {
     else state.selId = null;
   }
   if (!state.selId && state.selEdge) {
-    const match = state.links.find(l => sameLink(l, state.selEdge));
+    const edgeIdx = state._edgeBySelectionKey;
+    const match = edgeIdx?.get?.(edgeSelectionKey(state.selEdge))
+      || state.links.find(l => sameLink(l, state.selEdge));
     if (match) {
       state.selEdge = match;
       hiE(match);
@@ -487,7 +720,8 @@ function restoreSelectionHighlight() {
 
 function bindLinkInteractions(sel, tooltip) {
   if (!sel) return;
-  const nm = id => personName(state.nodes.find(n => n.id === id) || id);
+  const nodeById = state._nodeById || new Map(state.nodes.map(n => [n.id, n]));
+  const nm = id => personName(nodeById.get(id) || id);
   sel
     .attr("tabindex", 0)
     .attr("role", "button")
@@ -528,10 +762,126 @@ function bindLinkInteractions(sel, tooltip) {
     });
 }
 
+/**
+ * Lightweight era-only update: toggles visibility on existing node/edge DOM elements
+ * based on the current era year. Returns true if the visible set changed (meaning
+ * a full rebuild is needed), false if only display toggling was sufficient.
+ */
+export function updateEraVisibility() {
+  if (!state.gN || !state.gL) return true; // no DOM yet, need full rebuild
+  const eraOk = computeEraPersonOk();
+  // Check if the visible set changed
+  const prevIds = new Set(state.nodes.map(n => n.id));
+  let changed = false;
+  for (const id of eraOk) {
+    if (!prevIds.has(id)) { changed = true; break; }
+  }
+  if (!changed) {
+    for (const id of prevIds) {
+      if (!eraOk.has(id)) { changed = true; break; }
+    }
+  }
+  if (changed) return true; // different people visible, need full rebuild
+
+  // Same set — just update era overlay/status text
+  const mode = state.viewMode === "tree" ? t('tree') : t('graph');
+  const stat = [state.nodes.length, state.links.length, mode];
+  if (state.eraEnabled && Number.isFinite(state.eraYear)) stat.push(`${t('year_word')}: ${state.eraYear}`);
+  if (state.focusMode) stat.push(t('focus'));
+  document.getElementById("st").textContent = stat.join(" \u00b7 ");
+  return false;
+}
+
 export function rebuild() {
+  // Save previous node positions for warm-start
+  const prevPositions = new Map();
+  if (state.nodes) {
+    state.nodes.forEach(n => {
+      if (Number.isFinite(n.x) && Number.isFinite(n.y)) {
+        prevPositions.set(n.id, { x: n.x, y: n.y, vx: n.vx || 0, vy: n.vy || 0 });
+      }
+    });
+  }
+
+  const prevNodeById = new Map((state.nodes || []).map(n => [n.id, n]));
+  const prevLinkByKey = new Map();
+  (state.links || []).forEach(l => {
+    const sid = typeof l.source === "object" ? l.source.id : l.source;
+    const tid = typeof l.target === "object" ? l.target.id : l.target;
+    const key = `${sid}|${tid}|${l._e?.t || "kin"}|${l._e?.c || ""}|${l._e?.confidence_grade || ""}|${l._e?.l || ""}`;
+    prevLinkByKey.set(key, l);
+  });
+
   const data = filt();
-  state.nodes = data.nodes.map(p => ({ ...p }));
-  state.links = data.links.map(e => ({ source: e.s, target: e.d, _e: e }));
+  state.nodes = data.nodes.map(p => {
+    const prev = prevNodeById.get(p.id);
+    if (!prev) return { ...p };
+    Object.assign(prev, p);
+    return prev;
+  });
+  state.links = data.links.map(e => {
+    const key = `${e.s}|${e.d}|${e.t}|${e.c}|${e.confidence_grade || ""}|${e.l || ""}`;
+    const prev = prevLinkByKey.get(key);
+    if (prev) {
+      prev.source = e.s;
+      prev.target = e.d;
+      prev._e = e;
+      return prev;
+    }
+    return { source: e.s, target: e.d, _e: e };
+  });
+
+  // Restore positions for surviving nodes (warm-start)
+  let survivorCount = 0;
+  if (prevPositions.size > 0) {
+    state.nodes.forEach(n => {
+      const prev = prevPositions.get(n.id);
+      if (prev) {
+        n.x = prev.x; n.y = prev.y;
+        n.vx = prev.vx; n.vy = prev.vy;
+        survivorCount++;
+      }
+    });
+  }
+  state._warmStart = prevPositions.size > 0 && survivorCount > state.nodes.length * 0.5;
+
+  state._nodeById = new Map(state.nodes.map(n => [n.id, n]));
+
+  // Build cached adjacency map for O(1) neighbor lookup (used by highlight.js)
+  const makeAdjMap = () => new Map(state.nodes.map(n => [n.id, new Set()]));
+  const adj = makeAdjMap();
+  const adjByType = new Map();
+  const edgeBySelection = new Map();
+  state.links.forEach(l => {
+    const sid = typeof l.source === "object" ? l.source.id : l.source;
+    const tid = typeof l.target === "object" ? l.target.id : l.target;
+    adj.get(sid)?.add(tid);
+    adj.get(tid)?.add(sid);
+    const relType = l._e?.t || "kin";
+    let typed = adjByType.get(relType);
+    if (!typed) {
+      typed = makeAdjMap();
+      adjByType.set(relType, typed);
+    }
+    typed.get(sid)?.add(tid);
+    typed.get(tid)?.add(sid);
+    edgeBySelection.set(edgeSelectionKey(l), l);
+  });
+  state._adj = adj;
+  state._adjByType = adjByType;
+  state._edgeBySelectionKey = edgeBySelection;
+
+  // Build cached parentByChild map for ancestral flow (used by highlight.js)
+  const pbc = new Map();
+  state.links.forEach(l => {
+    if (l._e.t !== "parent") return;
+    const sid = typeof l.source === "object" ? l.source.id : l.source;
+    const tid = typeof l.target === "object" ? l.target.id : l.target;
+    const arr = pbc.get(tid) || [];
+    arr.push(sid);
+    pbc.set(tid, arr);
+  });
+  state._parentByChild = pbc;
   const mode = state.viewMode === "tree" ? t('tree') : t('graph');
   const stat = [state.nodes.length, state.links.length, mode];
   if (state.eraEnabled && Number.isFinite(state.eraYear)) stat.push(`${t('year_word')}: ${state.eraYear}`);
@@ -543,24 +893,31 @@ export function rebuild() {
   const area = document.getElementById("ga");
   state.W = area.clientWidth;
   state.H = area.clientHeight;
-  d3.select("#sv").selectAll("*").remove();
   state.svgEl = d3.select("#sv");
-  const g = state.svgEl.append("g").attr("class", "gg");
-  state.svgEl.call(state.zoomBehavior);
-  if (state.viewMode === "tree") {
-    // Tree view does its own zoom-to-fit; start from identity
-    state.svgEl.call(state.zoomBehavior.transform, d3.zoomIdentity);
-  } else if (state.tr !== d3.zoomIdentity) {
-    state.svgEl.call(state.zoomBehavior.transform, state.tr);
+
+  // Persistent scaffolding: create defs, gg, and zoom binding only once
+  if (!state._svgScaffold) {
+    state.svgEl.selectAll("*").remove();
+    const defs = state.svgEl.append("defs").attr("class", "persistent-defs");
+    // Node drop shadow filter (static)
+    const dropFilter = defs.append("filter").attr("id", "nodeShadow").attr("x", "-20%").attr("y", "-20%").attr("width", "140%").attr("height", "140%");
+    dropFilter.append("feDropShadow").attr("dx", 0).attr("dy", 2).attr("stdDeviation", 3).attr("flood-color", "rgba(0,0,0,0.25)").attr("flood-opacity", 0.4);
+    // Default arrow marker (fallback)
+    defs.append("marker").attr("id", "ar-default").attr("viewBox", "0 0 10 10").attr("refX", 10).attr("refY", 5)
+      .attr("markerWidth", 5).attr("markerHeight", 5).attr("orient", "auto-start-reverse")
+      .append("path").attr("d", "M0 0L10 5L0 10z").attr("fill", cs("--ep"));
+    const ggGroup = state.svgEl.append("g").attr("class", "gg");
+    state.svgEl.call(state.zoomBehavior);
+    state._svgScaffold = { defs, ggGroup };
   }
 
-  const defs = state.svgEl.append("defs");
-  // Default arrow marker (fallback)
-  defs.append("marker").attr("id", "ar-default").attr("viewBox", "0 0 10 10").attr("refX", 10).attr("refY", 5)
-    .attr("markerWidth", 5).attr("markerHeight", 5).attr("orient", "auto-start-reverse")
-    .append("path").attr("d", "M0 0L10 5L0 10z").attr("fill", cs("--ep"));
-  // Dynasty-colored arrowhead markers
+  // Update dynasty markers (only add new ones)
+  const defs = state._svgScaffold.defs;
   const seenDy = new Set();
+  defs.selectAll("marker[id^='ar-']").each(function () {
+    const id = d3.select(this).attr("id");
+    if (id && id !== "ar-default") seenDy.add(id.replace("ar-", ""));
+  });
   state.nodes.forEach(n => {
     const dy = (n.dy || 'unknown').toLowerCase();
     if (seenDy.has(dy)) return;
@@ -569,16 +926,55 @@ export function rebuild() {
       .attr("markerWidth", 5).attr("markerHeight", 5).attr("orient", "auto-start-reverse")
       .append("path").attr("d", "M0 0L10 5L0 10z").attr("fill", dynastyColor(dy));
   });
-  // Node drop shadow filter
-  const dropFilter = defs.append("filter").attr("id", "nodeShadow").attr("x", "-20%").attr("y", "-20%").attr("width", "140%").attr("height", "140%");
-  dropFilter.append("feDropShadow").attr("dx", 0).attr("dy", 2).attr("stdDeviation", 3).attr("flood-color", "rgba(0,0,0,0.25)").attr("flood-opacity", 0.4);
 
-  if (state.sim) { state.sim.stop(); state.sim = null; }
+  // Persistent mode roots: graph and tree are updated incrementally via keyed joins
+  const g = state._svgScaffold.ggGroup;
+  const graphRoot = ensureLayer(g, "mode-graph");
+  const treeRoot = ensureLayer(g, "mode-tree");
+
+  if (state.viewMode !== "tree") {
+    const prewarmDens = densityProfile();
+    const prewarmKey = treePlacementCacheKey(state.nodes, state.links, prewarmDens, state.lang);
+    if (treePlacementCache?.key !== prewarmKey && !treePlacementWorkerCache.has(prewarmKey)) {
+      queueTreePlacementWorker(prewarmKey, toTreePlacementInput(state.nodes, state.links, prewarmDens));
+    }
+  }
+
+  if (state.viewMode === "tree") {
+    graphRoot.style("display", "none");
+    treeRoot.style("display", null);
+    state.svgEl.call(state.zoomBehavior.transform, d3.zoomIdentity);
+  } else if (state.tr !== d3.zoomIdentity) {
+    treeRoot.style("display", "none");
+    graphRoot.style("display", null);
+    state.svgEl.call(state.zoomBehavior.transform, state.tr);
+  } else {
+    treeRoot.style("display", "none");
+    graphRoot.style("display", null);
+  }
+
+  if (state.viewMode === "tree" && state.sim) {
+    state.sim.stop();
+    state.sim = null;
+  }
+  if (state.viewMode !== "graph") {
+    graphRenderRefs = null;
+    graphStableTicks = 0;
+    if (graphTickRaf) {
+      cancelAnimationFrame(graphTickRaf);
+      graphTickRaf = 0;
+    }
+  }
   state.gLH = null;
   state.gBadges = null;
-  if (state.viewMode === "tree") renderTree(g);
-  else renderGraph(g);
-  if (state.viewMode === "graph") drawGraphEraOverlay();
+  if (state.viewMode === "tree") {
+    renderTree(treeRoot);
+    state.svgEl.selectAll("g.era-ov").remove();
+  } else {
+    renderGraph(graphRoot);
+    // Defer era overlay to avoid blocking initial render
+    setTimeout(() => drawGraphEraOverlay(), 0);
+  }
 
   const tooltip = document.getElementById("tt");
   bindLinkInteractions(state.gLH, tooltip);
@@ -627,11 +1023,26 @@ export function rebuild() {
 
 function drawNodes(g, withDrag = false) {
   const dens = densityProfile();
-  state.gN = g.append("g").selectAll("g").data(state.nodes, d => d.id).enter().append("g").attr("cursor", "pointer")
+  const nodeSel = g.selectAll("g.node")
+    .data(state.nodes, d => d.id)
+    .join(
+      enter => {
+        const gn = enter.append("g").attr("class", "node");
+        gn.append("rect").attr("class", "node-body");
+        gn.append("rect").attr("class", "node-accent").attr("width", 3);
+        gn.append("text").attr("class", "node-name");
+        return gn;
+      },
+      update => update,
+      exit => exit.remove()
+    )
+    .attr("cursor", "pointer")
     .attr("data-pr", "1")
     .attr("tabindex", 0)
     .attr("role", "button")
     .attr("aria-label", d => `${t('open_profile_for')} ${personName(d)}`);
+  state.gN = nodeSel;
+
   if (withDrag) {
     state.gN.call(d3.drag()
       .on("start", (e, d) => {
@@ -655,29 +1066,33 @@ function drawNodes(g, withDrag = false) {
         d.fx = null;
         d.fy = null;
       }));
+  } else {
+    state.gN.on(".drag", null);
   }
-  state.gN.append("rect").attr("rx", d => d.g === "F" ? 12 : 4).attr("ry", d => d.g === "F" ? 12 : 4)
+  state.gN.select("rect.node-body")
+    .attr("rx", d => d.g === "F" ? 12 : 4).attr("ry", d => d.g === "F" ? 12 : 4)
     .attr("fill", cs("--nf")).attr("stroke", d => nC(d.dy)).attr("stroke-width", d => d.g === "F" ? 2.2 : 1.5)
     .attr("filter", "url(#nodeShadow)");
-  // Dynasty color accent strip on left edge
-  state.gN.append("rect").attr("class", "node-accent")
+  state.gN.select("rect.node-accent")
     .attr("rx", d => d.g === "F" ? 12 : 4).attr("ry", d => d.g === "F" ? 12 : 4)
     .attr("fill", d => nC(d.dy)).attr("opacity", 0.85)
     .attr("width", 3);
-  state.gN.append("text").attr("text-anchor", "middle").attr("dy", ".35em").attr("font-size", dens.text)
+  state.gN.select("text.node-name")
+    .attr("text-anchor", "middle").attr("dy", ".35em").attr("font-size", dens.text)
     .attr("font-family", "var(--sans)").attr("fill", cs("--nt")).attr("font-weight", 500)
     .text(d => (d.g === "F" ? "\u2640 " : "") + trimLabel(personName(d), dens.maxLabelChars));
-  // Size rects and compute node half-dimensions; collect badge data for separate layer
+
   state._badgeData = [];
   state.gN.each(function (d) {
-    const t = d3.select(this).select("text"), bb = t.node().getBBox(), p = d.g === "F" ? dens.padFemale : dens.padMale;
+    const textEl = d3.select(this).select("text.node-name");
+    const label = (d.g === "F" ? "\u2640 " : "") + trimLabel(personName(d), dens.maxLabelChars);
+    const bb = cachedBBox(textEl.node(), label, dens.text);
+    const p = d.g === "F" ? dens.padFemale : dens.padMale;
     const w = bb.width + p * 2;
     const h = bb.height + 10;
-    d3.select(this).select("rect").attr("x", bb.x - p).attr("y", bb.y - 5).attr("width", w).attr("height", h);
-    // Position accent strip
+    d3.select(this).select("rect.node-body").attr("x", bb.x - p).attr("y", bb.y - 5).attr("width", w).attr("height", h);
     d3.select(this).select(".node-accent").attr("x", bb.x - p).attr("y", bb.y - 5).attr("height", h);
     d._hw = w / 2; d._hh = h / 2;
-    // Collect sovereign badge offset data
     if ((d.n || []).length > 0) {
       state._badgeData.push({
         id: d.id, n: d.n[0], dy: d.dy,
@@ -691,6 +1106,7 @@ function drawNodes(g, withDrag = false) {
 function renderGraph(g) {
   const dens = densityProfile();
   const base = 0.82;
+  const nodeById = new Map(state.nodes.map(n => [n.id, n]));
   const progressive = graphProgressiveReveal(state.nodes, state.links);
   const showEdge = d => {
     if (!progressive) return true;
@@ -702,40 +1118,51 @@ function renderGraph(g) {
     if (!progressive) return o;
     return showEdge(d) ? o : Math.min(0.07, o * 0.14);
   };
-  state.gL = g.append("g").selectAll("line").data(state.links).enter().append("line")
+  const linkLayer = ensureLayer(g, "graph-links");
+  const labelLayer = g.selectAll("g.graph-edge-labels").data([0]).join("g").attr("class", "elg graph-edge-labels");
+  const nodeLayer = ensureLayer(g, "graph-nodes");
+  const badgeLayer = g.selectAll("g.graph-badges").data([0]).join("g").attr("class", "badge-layer graph-badges");
+
+  state.gL = linkLayer.selectAll("line.graph-link")
+    .data(state.links, d => linkKey(d))
+    .join("line")
+    .attr("class", "graph-link")
     .attr("stroke", d => edgeStrokeColor(d._e))
     .attr("stroke-width", d => edgeWidth(d._e, 2.2, 1.5))
     .attr("stroke-dasharray", d => edgeDashArray(d._e))
     .attr("stroke-opacity", d => edgeBaseOpacity(d))
     .attr("data-bo", d => edgeBaseOpacity(d))
+    .attr("pointer-events", "stroke")
+    .attr("stroke-linecap", "round")
+    .style("cursor", "pointer")
+    .style("display", d => showEdge(d) ? null : "none")
     .attr("marker-end", d => {
       if (d._e.t !== "parent" || d._e.c !== "c") return "";
       const sid = typeof d.source === "object" ? d.source.id : d.source;
-      const sn = state.nodes.find(n => n.id === sid);
+      const sn = nodeById.get(sid);
       const dy = (sn?.dy || 'default').toLowerCase();
       return `url(#ar-${dy})`;
     });
 
-  state.gLH = g.append("g").attr("class", "elh").selectAll("line").data(state.links).enter().append("line")
-    .attr("stroke", "transparent")
-    .attr("stroke-width", 13)
-    .attr("pointer-events", "stroke")
-    .style("display", d => showEdge(d) ? null : "none")
-    .style("cursor", "pointer");
+  // Hit-area interactions bound directly on gL (no duplicate gLH layer)
+  state.gLH = state.gL;
 
   const lE = state.links.filter(d => d._e.l && (d._e.t !== "parent" || d._e.c !== "c"));
-  g.append("g").attr("class", "elg").selectAll("text").data(lE).enter().append("text")
+  const edgeLabelSel = labelLayer.selectAll("text")
+    .data(lE, d => linkKey(d))
+    .join("text")
     .attr("text-anchor", "middle").attr("dy", -3).attr("font-size", 7.5)
     .attr("font-family", "var(--mono)").attr("fill", d => edgeStrokeColor(d._e)).attr("opacity", d => showEdge(d) ? .62 : 0)
-    .text(d => d._e.l).each(function (d) { d._lbl = this; });
+    .text(d => d._e.l);
 
-  drawNodes(g, true);
+  drawNodes(nodeLayer, true);
 
-  // Render sovereign badges in a separate top-level layer (always on top of all nodes)
   const badgeData = state._badgeData || [];
   if (badgeData.length) {
-    state.gBadges = g.append("g").attr("class", "badge-layer")
-      .selectAll("text").data(badgeData).enter().append("text")
+    state.gBadges = badgeLayer
+      .selectAll("text")
+      .data(badgeData, d => `${d.id}|${d.n}`)
+      .join("text")
       .attr("class", "node-badge")
       .attr("text-anchor", "end")
       .attr("font-size", 8.5)
@@ -744,65 +1171,107 @@ function renderGraph(g) {
       .attr("opacity", 0.8)
       .text(d => "#" + d.n);
   } else {
+    badgeLayer.selectAll("*").remove();
     state.gBadges = null;
   }
 
   if (progressive) {
     state.gN.attr("data-pr", d => progressive.reveal.has(d.id) ? "1" : "0");
-    state.gN.select("rect").attr("opacity", function () {
+    state.gN.select("rect.node-body").attr("opacity", function () {
       return this.parentNode?.getAttribute("data-pr") === "1" ? 1 : 0.23;
     });
-    state.gN.select("text").attr("opacity", function () {
+    state.gN.select("text.node-name").attr("opacity", function () {
       return this.parentNode?.getAttribute("data-pr") === "1" ? 1 : 0.24;
     });
     const st = document.getElementById("st");
     if (st) st.textContent += ` \u00b7 reveal ${progressive.reveal.size}/${progressive.total}`;
   } else {
     state.gN.attr("data-pr", "1");
+    state.gN.select("rect.node-body").attr("opacity", 1);
+    state.gN.select("text.node-name").attr("opacity", 1);
   }
 
-  const nodeMap = new Map(state.nodes.map(n => [n.id, n]));
-  state.sim = d3.forceSimulation(state.nodes)
-    .force("link", d3.forceLink(state.links).id(d => d.id).distance(dens.forceDistance).strength(.3))
-    .force("charge", d3.forceManyBody().strength(dens.forceCharge))
-    .force("center", d3.forceCenter(state.W / 2, state.H / 2))
-    .force("collide", d3.forceCollide(d => (d._hw || dens.forceCollide) + 6).strength(0.85).iterations(3))
-    .force("x", d3.forceX(state.W / 2).strength(dens.forceStrength))
-    .force("y", d3.forceY(state.H / 2).strength(dens.forceStrength))
-    .alphaDecay(0.025)
-    .on("tick", () => {
-      state.gL.attr("x1", d => d.source.x).attr("y1", d => d.source.y).attr("x2", d => d.target.x).attr("y2", d => d.target.y);
-      state.gLH.attr("x1", d => d.source.x).attr("y1", d => d.source.y).attr("x2", d => d.target.x).attr("y2", d => d.target.y);
-      state.gN.attr("transform", d => `translate(${d.x},${d.y})`);
-      d3.selectAll(".elg text").each(function (d) { d3.select(this).attr("x", (d.source.x + d.target.x) / 2).attr("y", (d.source.y + d.target.y) / 2); });
-      // Position badges alongside their parent nodes
-      if (state.gBadges) {
-        state.gBadges
-          .attr("x", d => (nodeMap.get(d.id)?.x || 0) + d.ox)
-          .attr("y", d => (nodeMap.get(d.id)?.y || 0) + d.oy);
-      }
-    })
-    .on("end", () => document.getElementById("ld").classList.add("dn"));
+  const nodeMap = nodeById;
+  const simAlpha = state._warmStart ? 0.3 : 1;
+  graphRenderRefs = {
+    gL: state.gL,
+    gN: state.gN,
+    edgeLabelSel,
+    gBadges: state.gBadges,
+    nodeMap
+  };
+
+  let sim = state.sim;
+  if (!sim) {
+    sim = d3.forceSimulation(state.nodes)
+      .on("tick", () => {
+        scheduleGraphDomSync(14);
+        maybeStopStableGraphSimulation(sim);
+      })
+      .on("end", () => document.getElementById("ld").classList.add("dn"));
+    state.sim = sim;
+  }
+
+  sim.nodes(state.nodes);
+  const linkForce = sim.force("link");
+  if (linkForce) {
+    linkForce
+      .id(d => d.id)
+      .links(state.links)
+      .distance(dens.forceDistance)
+      .strength(0.3);
+  } else {
+    sim.force("link", d3.forceLink(state.links).id(d => d.id).distance(dens.forceDistance).strength(0.3));
+  }
+  sim.force("charge", d3.forceManyBody().strength(dens.forceCharge));
+  sim.force("center", d3.forceCenter(state.W / 2, state.H / 2));
+  sim.force("collide", d3.forceCollide(d => (d._hw || dens.forceCollide) + 6).strength(0.85).iterations(1));
+  sim.force("x", d3.forceX(state.W / 2).strength(dens.forceStrength));
+  sim.force("y", d3.forceY(state.H / 2).strength(dens.forceStrength));
+  graphStableTicks = 0;
+  sim
+    .alpha(simAlpha)
+    .alphaDecay(0.05)
+    .restart();
+  syncGraphDom();
 }
 
 function drawTreeSectionDividers(g, sections, xExtent) {
-  const layer = g.append("g").attr("class", "tree-sections").attr("pointer-events", "none");
-  sections.forEach(sec => {
-    const color = sec.dynasty ? dynastyColor(sec.dynasty) : cs("--bd2");
-    layer.append("line")
-      .attr("x1", 30).attr("x2", Math.max(xExtent, 400))
-      .attr("y1", sec.y - 12).attr("y2", sec.y - 12)
-      .attr("stroke", color).attr("stroke-opacity", 0.35)
-      .attr("stroke-dasharray", "4,6");
-    layer.append("circle")
-      .attr("cx", 22).attr("cy", sec.y - 12).attr("r", 3)
-      .attr("fill", color).attr("opacity", 0.6);
-    layer.append("text")
-      .attr("x", 34).attr("y", sec.y - 18)
-      .attr("font-family", "var(--display, var(--sans))")
-      .attr("font-size", 10).attr("fill", color).attr("opacity", 0.7)
-      .text(`${sec.label}${sec.count > 1 ? ` (${sec.count})` : ""}`);
-  });
+  const layer = g.selectAll("g.tree-sections")
+    .data(sections.length ? [0] : [])
+    .join("g")
+    .attr("class", "tree-sections")
+    .attr("pointer-events", "none");
+  if (layer.empty()) return;
+
+  layer.selectAll("line.tree-sec-line")
+    .data(sections, d => `${d.label}|${d.y}|${d.dynasty || ""}`)
+    .join("line")
+    .attr("class", "tree-sec-line")
+    .attr("x1", 30).attr("x2", Math.max(xExtent, 400))
+    .attr("y1", d => d.y - 12).attr("y2", d => d.y - 12)
+    .attr("stroke", d => d.dynasty ? dynastyColor(d.dynasty) : cs("--bd2"))
+    .attr("stroke-opacity", 0.35)
+    .attr("stroke-dasharray", "4,6");
+
+  layer.selectAll("circle.tree-sec-dot")
+    .data(sections, d => `${d.label}|${d.y}|${d.dynasty || ""}`)
+    .join("circle")
+    .attr("class", "tree-sec-dot")
+    .attr("cx", 22).attr("cy", d => d.y - 12).attr("r", 3)
+    .attr("fill", d => d.dynasty ? dynastyColor(d.dynasty) : cs("--bd2"))
+    .attr("opacity", 0.6);
+
+  layer.selectAll("text.tree-sec-label")
+    .data(sections, d => `${d.label}|${d.y}|${d.dynasty || ""}`)
+    .join("text")
+    .attr("class", "tree-sec-label")
+    .attr("x", 34).attr("y", d => d.y - 18)
+    .attr("font-family", "var(--display, var(--sans))")
+    .attr("font-size", 10)
+    .attr("fill", d => d.dynasty ? dynastyColor(d.dynasty) : cs("--bd2"))
+    .attr("opacity", 0.7)
+    .text(d => `${d.label}${d.count > 1 ? ` (${d.count})` : ""}`);
 }
 
 function estimateNodeWidth(d, dens) {
@@ -937,391 +1406,44 @@ function renderTree(g) {
     if (better) parentByChild.set(d, { p: s, e: l._e });
   });
 
-  const children = new Map(state.nodes.map(n => [n.id, []]));
-  parentByChild.forEach((v, c) => children.get(v.p)?.push(c));
-  children.forEach(arr => arr.sort((a, b) => sy(a) - sy(b)));
-
-  const roots = state.nodes.filter(n => !parentByChild.has(n.id)).sort((a, b) => sy(a.id) - sy(b.id));
-
-  // --- NEW: Build d3.hierarchy per root, separate isolated/leaf nodes ---
-  const isolatedNodes = [];
-  const treeRoots = [];
-  roots.forEach(r => {
-    const childList = children.get(r.id) || [];
-    if (childList.length === 0) {
-      // Single-node tree (no descendants) → isolated section
-      isolatedNodes.push(r);
-    } else {
-      const h = d3.hierarchy(r, d => (children.get(d.id) || []).map(id => byId.get(id)).filter(Boolean));
-      // Determine dominant dynasty
-      const dyCounts = {};
-      h.each(node => {
-        const dy = node.data.dy || "unknown";
-        dyCounts[dy] = (dyCounts[dy] || 0) + 1;
-      });
-      let dominantDy = "unknown", maxCount = 0;
-      for (const [dy, cnt] of Object.entries(dyCounts)) {
-        if (cnt > maxCount) { maxCount = cnt; dominantDy = dy; }
-      }
-      // Earliest year across all nodes in this tree
-      // Check: reign start, birth year, death year (minus ~50 as estimate)
-      let earliestYear = 9999;
-      h.each(node => {
-        const d = node.data;
-        const reignStart = d.re?.[0]?.[0];
-        if (reignStart && reignStart < earliestYear) earliestYear = reignStart;
-        if (d.yb && d.yb < earliestYear) earliestYear = d.yb;
-        if (d.yd && (d.yd - 50) < earliestYear) earliestYear = d.yd - 50;
-      });
-      treeRoots.push({ hierarchy: h, size: h.descendants().length, dominantDy, rootName: personName(r), earliestYear });
-    }
-  });
-  // For trees with no dates at all, infer from connected nodes outside the tree
-  // (e.g. a spouse in another tree may have dates)
-  const undatedTrees = treeRoots.filter(tr => tr.earliestYear >= 9000);
-  if (undatedTrees.length) {
-    // Build a set of all node IDs in each undated tree for exclusion
-    const nodeYearCache = new Map();
-    state.nodes.forEach(n => {
-      const y = n.re?.[0]?.[0] || n.yb || (n.yd ? n.yd - 50 : null);
-      if (y) nodeYearCache.set(n.id, y);
-    });
-    undatedTrees.forEach(tr => {
-      const treeIds = new Set();
-      tr.hierarchy.each(node => treeIds.add(node.data.id));
-      // Check edges connecting tree members to external dated nodes
-      let bestYear = 9999;
-      state.links.forEach(l => {
-        const sid = typeof l.source === "object" ? l.source.id : l.source;
-        const tid = typeof l.target === "object" ? l.target.id : l.target;
-        if (treeIds.has(sid) && !treeIds.has(tid) && nodeYearCache.has(tid)) {
-          bestYear = Math.min(bestYear, nodeYearCache.get(tid));
-        }
-        if (treeIds.has(tid) && !treeIds.has(sid) && nodeYearCache.has(sid)) {
-          bestYear = Math.min(bestYear, nodeYearCache.get(sid));
-        }
-      });
-      if (bestYear < 9000) tr.earliestYear = bestYear;
-    });
-    // Final fallback: use median of all dated trees
-    const datedYears = treeRoots.filter(tr => tr.earliestYear < 9000).map(tr => tr.earliestYear).sort((a, b) => a - b);
-    const median = datedYears.length ? datedYears[Math.floor(datedYears.length / 2)] : 1400;
-    treeRoots.forEach(tr => {
-      if (tr.earliestYear >= 9000) tr.earliestYear = median;
-    });
-  }
-
-  // Sort: earliest reign year first (chronological), then largest first as tiebreaker
-  treeRoots.sort((a, b) => a.earliestYear - b.earliestYear || b.size - a.size);
-
-  // Split isolated nodes: only actual sovereigns (with ordinal number) go to "Early Sovereigns" at top
-  // Everyone else (wives, modern figures without tree links) goes to "Unconnected" at bottom
-  const earlySovereignIsolated = isolatedNodes.filter(n => (n.n || []).length > 0 && sy(n.id) < 9999).sort((a, b) => sy(a.id) - sy(b.id));
-  const undatedIsolated = isolatedNodes.filter(n => !((n.n || []).length > 0 && sy(n.id) < 9999));
-
-  // All trees participate in the chronological column layout regardless of size
-  const placedTrees = treeRoots;
-
-  // --- Layout ---
-  const treeLayout = d3.tree()
-    .nodeSize([dens.treeSiblingX, dens.treeDepthY])
-    .separation((a, b) => {
-      const wA = estimateNodeWidth(a.data, dens);
-      const wB = estimateNodeWidth(b.data, dens);
-      return Math.max(1, (wA / 2 + wB / 2 + 24) / dens.treeSiblingX);
-    });
-
-  const pos = new Map(); // id → { x, y, depth }
-  const depthMap = new Map(); // id → depth (for edge thickness)
-  const sections = [];
+  let pos = new Map();
+  let depthMap = new Map();
+  let sections = [];
   let yOffset = 60;
-
-  // 1. Early sovereigns — placed chronologically after trees establish the year→Y scale
-  //    (deferred to section 3 below)
-
-  // 2. Unified chronological tree placement (major + minor together)
-  // ---------------------------------------------------------------
-  // Year→Y mapping (hoisted so unconnected section can reuse)
-  let treeMinYear = 1100, treePxPerYear = 3, treeBaseY = yOffset;
-  let treeMaxColX = 80; // rightmost column start X
-
-  if (placedTrees.length) {
-    // Phase 1: Run d3.tree() layout, compute X dimensions and year ranges
-    const treeDims = placedTrees.map(tr => {
-      treeLayout(tr.hierarchy);
-      const desc = tr.hierarchy.descendants();
-      const minNodeX = d3.min(desc, d => d.x) ?? 0;
-      const maxNodeX = d3.max(desc, d => d.x) ?? 0;
-      let latestYear = tr.earliestYear;
-      tr.hierarchy.each(node => {
-        const d = node.data;
-        if (d.re?.[0]?.[1] && d.re[0][1] > latestYear) latestYear = d.re[0][1];
-        if (d.re?.[0]?.[0] && d.re[0][0] > latestYear) latestYear = d.re[0][0];
-        if (d.yd && d.yd > latestYear) latestYear = d.yd;
-        if (d.yb && (d.yb + 50) > latestYear) latestYear = d.yb + 50;
-      });
-      return {
-        tr, desc, minNodeX, maxNodeX,
-        width: (maxNodeX - minNodeX) + dens.treeSiblingX,
-        earliestYear: tr.earliestYear,
-        latestYear,
-        isMajor: tr.size >= 5
-      };
-    });
-    treeDims.sort((a, b) => a.earliestYear - b.earliestYear || b.tr.size - a.tr.size);
-
-    // Phase 2: Year → Y scale (include early sovereigns in range)
-    const earlySovYears = earlySovereignIsolated.map(n => sy(n.id)).filter(y => y < 9999);
-    const minYear = Math.min(d3.min(treeDims, d => d.earliestYear) ?? 1100, d3.min(earlySovYears) ?? Infinity);
-    const maxYear = Math.max(d3.max(treeDims, d => d.latestYear) ?? 1968, d3.max(earlySovYears) ?? -Infinity);
-    const yearRange = (maxYear - minYear) || 1;
-    // Pixels per year: calibrated so the tallest single tree roughly spans
-    // its historical reign duration. Clamped for readability.
-    const tallestStructH = d3.max(treeDims, d => d3.max(d.desc, n => n.y) ?? 0) ?? 300;
-    const tallestSpan = d3.max(treeDims, d => d.latestYear - d.earliestYear) || 100;
-    const pxPerYear = Math.max(3, Math.min(6, tallestStructH / tallestSpan * 1.2));
-    treeMinYear = minYear;
-    treePxPerYear = pxPerYear;
-    treeBaseY = yOffset;
-
-    // Phase 2b: Chronological Y post-processing — replace depth-based Y with date-aware Y
-    const minGap = dens.treeDepthY * 0.55; // comfortable parent-child minimum gap
-    treeDims.forEach(td => {
-      chronoPostProcess(td.tr.hierarchy, pxPerYear, td.earliestYear, dens.treeDepthY, minGap);
-      // Recompute height after chrono adjustment
-      td.height = d3.max(td.desc, d => d.chronoY) ?? 0;
-    });
-
-    // Phase 3: Greedy column assignment (interval coloring)
-    // Each column tracks its next-available-Y and max width.
-    // Trees are placed at max(idealY, column.nextY).
-    const MAX_COLS = 3;
-    const columns = []; // { nextY, maxWidth }
-
-    treeDims.forEach(td => {
-      const idealY = yOffset + (td.earliestYear - minYear) * pxPerYear;
-
-      // Try each existing column — prefer one where we can place at idealY
-      let bestCol = -1;
-      let bestGap = Infinity;
-      for (let c = 0; c < columns.length; c++) {
-        if (columns[c].nextY <= idealY) {
-          // This column has room at idealY — pick closest match
-          const gap = idealY - columns[c].nextY;
-          if (gap < bestGap) { bestGap = gap; bestCol = c; }
-        }
-      }
-
-      if (bestCol === -1) {
-        if (columns.length < MAX_COLS) {
-          // Create a new column — it can place at idealY
-          bestCol = columns.length;
-          columns.push({ nextY: yOffset, maxWidth: 0 });
-        } else {
-          // Cap reached — find column with smallest push-down
-          let minNext = Infinity;
-          for (let c = 0; c < columns.length; c++) {
-            if (columns[c].nextY < minNext) { minNext = columns[c].nextY; bestCol = c; }
-          }
-        }
-      }
-
-      const treeY = Math.max(idealY, columns[bestCol].nextY);
-      td.assignedCol = bestCol;
-      td.assignedY = treeY;
-      columns[bestCol].nextY = treeY + td.height + dens.treeSectionGap;
-      columns[bestCol].maxWidth = Math.max(columns[bestCol].maxWidth, td.width);
-    });
-
-    // Phase 4: Compute actual column widths (account for node render widths)
-    // Each tree's true extent includes the rendered width of edge nodes, not
-    // just center-to-center span. Compute per-column max extent accurately.
-    treeDims.forEach(td => {
-      let trueWidth = 0;
-      td.desc.forEach(d => {
-        const nodeW = estimateNodeWidth(d.data, dens);
-        const rightExtent = (d.x - td.minNodeX) + nodeW / 2;
-        trueWidth = Math.max(trueWidth, rightExtent);
-      });
-      td.trueWidth = trueWidth;
-    });
-    // Recompute column maxWidth using true extent
-    const colTrueWidth = new Array(columns.length).fill(0);
-    treeDims.forEach(td => {
-      colTrueWidth[td.assignedCol] = Math.max(colTrueWidth[td.assignedCol], td.trueWidth);
-    });
-
-    const colGap = 60;
-    const colX = [];
-    // If early sovereigns exist, offset tree columns to the right to avoid overlap
-    const earlySovColWidth = earlySovereignIsolated.length
-      ? d3.max(earlySovereignIsolated, n => estimateNodeWidth(n, dens)) + 40
-      : 0;
-    let cx = 80 + earlySovColWidth;
-    for (let c = 0; c < columns.length; c++) {
-      colX.push(cx);
-      cx += colTrueWidth[c] + colGap;
+  let treeMinYear = 1100;
+  let treePxPerYear = 3;
+  let treeBaseY = yOffset;
+  let treeMaxColX = 80;
+  const placementKey = treePlacementCacheKey(state.nodes, state.links, dens, state.lang);
+  const workerPlacement = treePlacementWorkerCache.get(placementKey) || null;
+  const cachedPlacement = treePlacementCache?.key === placementKey
+    ? treePlacementCache.value
+    : workerPlacement;
+  if (cachedPlacement) {
+    pos = cachedPlacement.pos;
+    depthMap = cachedPlacement.depthMap;
+    sections = cachedPlacement.sections;
+    yOffset = cachedPlacement.yOffset;
+    treeMinYear = cachedPlacement.treeMinYear;
+    treePxPerYear = cachedPlacement.treePxPerYear;
+    treeBaseY = cachedPlacement.treeBaseY;
+    treeMaxColX = cachedPlacement.treeMaxColX;
+    if (treePlacementCache?.key !== placementKey) {
+      treePlacementCache = { key: placementKey, value: cachedPlacement };
     }
-
-    treeMaxColX = cx; // track rightmost extent for unconnected column
-
-    // Phase 5: Position every tree
-    treeDims.forEach(td => {
-      const baseX = colX[td.assignedCol];
-      const baseY = td.assignedY;
-      td.desc.forEach(d => {
-        const px = d.x - td.minNodeX + baseX;
-        const py = (d.chronoY ?? d.y) + baseY;
-        pos.set(d.data.id, { x: px, y: py, depth: d.depth });
-        depthMap.set(d.data.id, d.depth);
-      });
-      sections.push({
-        y: baseY,
-        dynasty: td.tr.dominantDy,
-        label: td.tr.rootName || td.tr.dominantDy,
-        count: td.tr.size
-      });
-    });
-
-    yOffset = Math.max(...columns.map(c => c.nextY));
-  }
-
-  // 3. Early sovereigns — chronological Y placement using same scale as trees
-  if (earlySovereignIsolated.length) {
-    const earlyColX = 80; // left-most column, before tree columns
-    const minGapSov = 34;
-    let prevSovY = -Infinity;
-    sections.push({ y: treeBaseY, dynasty: "lunar", label: t('early_sovereigns') || "Early Sovereigns", count: earlySovereignIsolated.length });
-    earlySovereignIsolated.forEach(n => {
-      const yr = sy(n.id);
-      const idealY = yr < 9999 ? treeBaseY + (yr - treeMinYear) * treePxPerYear : treeBaseY;
-      const nodeY = Math.max(idealY, prevSovY + minGapSov);
-      const w = estimateNodeWidth(n, dens);
-      pos.set(n.id, { x: earlyColX + w / 2, y: nodeY, depth: 0 });
-      depthMap.set(n.id, 0);
-      prevSovY = nodeY;
-    });
-  }
-
-  // 4. Attach isolated nodes next to their closest positioned relation
-  //    Checks ALL edge types: spouse, parent, kin, sibling.
-  //    Uses collision detection to avoid overlapping existing nodes.
-  const attachedIds = new Set();
-  const prio = { spouse: 4, parent: 3, sibling: 2, kin: 1 };
-
-  // Check if position (cx, cy) with given width collides with any existing node
-  function hasCollision(cx, cy, halfW, excludeId) {
-    const margin = 8;
-    for (const [id, p] of pos) {
-      if (id === excludeId) continue;
-      const nd = byId.get(id);
-      if (!nd) continue;
-      const nw = estimateNodeWidth(nd, dens) / 2;
-      // Horizontal overlap check
-      if (Math.abs(cx - p.x) < (halfW + nw + margin) && Math.abs(cy - p.y) < 28) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  function attachPass(candidates) {
-    let attached = 0;
-    candidates.forEach(n => {
-      if (pos.has(n.id)) return;
-      let bestPartner = null;
-      let bestType = null;
-      for (const l of state.links) {
-        const sid = typeof l.source === "object" ? l.source.id : l.source;
-        const tid = typeof l.target === "object" ? l.target.id : l.target;
-        const partnerId = sid === n.id ? tid : tid === n.id ? sid : null;
-        if (!partnerId || !pos.has(partnerId)) continue;
-        const thisPrio = prio[l._e.t] || 0;
-        if (!bestPartner || thisPrio > (prio[bestType] || 0)) {
-          bestPartner = partnerId;
-          bestType = l._e.t;
-        }
-      }
-      if (bestPartner && byId.get(bestPartner)) {
-        const sp = pos.get(bestPartner);
-        const pw = estimateNodeWidth(byId.get(bestPartner), dens);
-        const nw = estimateNodeWidth(n, dens);
-        const halfW = nw / 2;
-
-        // Try positions: right of partner, then below, then left
-        const candidates = [
-          { x: sp.x + pw / 2 + halfW + 16, y: sp.y },       // right
-          { x: sp.x, y: sp.y + 34 },                          // below
-          { x: sp.x - pw / 2 - halfW - 16, y: sp.y },        // left
-          { x: sp.x + pw / 2 + halfW + 16, y: sp.y + 34 },   // right-below
-          { x: sp.x - pw / 2 - halfW - 16, y: sp.y + 34 },   // left-below
-        ];
-
-        let placed = false;
-        for (const c of candidates) {
-          if (!hasCollision(c.x, c.y, halfW, n.id)) {
-            pos.set(n.id, { x: c.x, y: c.y, depth: sp.depth });
-            depthMap.set(n.id, 0);
-            attachedIds.add(n.id);
-            attached++;
-            placed = true;
-            break;
-          }
-        }
-        // Fallback: place below partner with enough vertical offset
-        if (!placed) {
-          let fy = sp.y + 34;
-          while (hasCollision(sp.x, fy, halfW, n.id) && fy < sp.y + 200) fy += 34;
-          pos.set(n.id, { x: sp.x, y: fy, depth: sp.depth });
-          depthMap.set(n.id, 0);
-          attachedIds.add(n.id);
-          attached++;
-        }
-      }
-    });
-    return attached;
-  }
-
-  // Run up to 3 passes to handle chains of unpositioned nodes
-  for (let pass = 0; pass < 3; pass++) {
-    const remaining = undatedIsolated.filter(n => !pos.has(n.id));
-    if (!remaining.length || !attachPass(remaining)) break;
-  }
-
-  // 5. Remaining unconnected — placed at chronological Y positions
-  const remainingIsolated = undatedIsolated.filter(n => !attachedIds.has(n.id));
-  if (remainingIsolated.length) {
-    // Compute each node's best year
-    const nodeYear = n => n.re?.[0]?.[0] || n.yb || (n.yd ? n.yd - 50 : null);
-    remainingIsolated.sort((a, b) => (nodeYear(a) ?? 9999) - (nodeYear(b) ?? 9999));
-
-    // Place in a column to the right of all tree columns
-    const unconnectedX = treeMaxColX + 40;
-    let prevY = -Infinity;
-    const minGap = 34; // minimum vertical gap between unconnected nodes
-    let rowX = unconnectedX;
-    const rowMaxWidth = Math.max(800, state.W - 100);
-    sections.push({ y: treeBaseY, dynasty: null, label: t('unconnected') || "Unconnected", count: remainingIsolated.length });
-
-    remainingIsolated.forEach(n => {
-      const yr = nodeYear(n);
-      // Ideal Y from chronology (same scale as trees)
-      let idealY = yr ? treeBaseY + (yr - treeMinYear) * treePxPerYear : yOffset;
-      // Ensure no overlap with previous node
-      const nodeY = Math.max(idealY, prevY + minGap);
-      const w = estimateNodeWidth(n, dens);
-      // Wrap to next sub-column if X too wide
-      if (rowX + w > rowMaxWidth && rowX > unconnectedX) {
-        rowX = unconnectedX;
-      }
-      pos.set(n.id, { x: rowX + w / 2, y: nodeY, depth: 0 });
-      depthMap.set(n.id, 0);
-      prevY = nodeY;
-      rowX += w + 16;
-      // Reset row for next node (each gets its own Y)
-      rowX = unconnectedX;
-    });
-    yOffset = Math.max(yOffset, prevY + 50);
+  } else {
+    const input = toTreePlacementInput(state.nodes, state.links, dens);
+    queueTreePlacementWorker(placementKey, input);
+    const computed = toTreePlacementValue(computeTreePlacement(input));
+    pos = computed.pos;
+    depthMap = computed.depthMap;
+    sections = computed.sections;
+    yOffset = computed.yOffset;
+    treeMinYear = computed.treeMinYear;
+    treePxPerYear = computed.treePxPerYear;
+    treeBaseY = computed.treeBaseY;
+    treeMaxColX = computed.treeMaxColX;
+    treePlacementCache = { key: placementKey, value: computed };
   }
 
   // Apply positions
@@ -1390,12 +1512,17 @@ function renderTree(g) {
 
   // Compute xExtent for section dividers
   const xExtent = d3.max(state.nodes, n => n.x) ?? state.W;
+  const sectionLayer = ensureLayer(g, "tree-sections-root");
+  drawTreeSectionDividers(sectionLayer, sections, xExtent);
 
-  // Draw section dividers (replaces era annotations)
-  drawTreeSectionDividers(g, sections, xExtent);
-
-  // Draw edges
-  state.gL = g.append("g").selectAll("path").data(drawLinks).enter().append("path")
+  const linkLayer = ensureLayer(g, "tree-links");
+  const nodeLayer = ensureLayer(g, "tree-nodes");
+  const badgeLayer = g.selectAll("g.tree-badges").data([0]).join("g").attr("class", "badge-layer tree-badges");
+  const treeLinkKey = d => `${linkKey(d)}|${d._e.c || ""}|${d._e.l || ""}|${d._e.confidence_grade || ""}`;
+  state.gL = linkLayer.selectAll("path.tree-link")
+    .data(drawLinks, treeLinkKey)
+    .join("path")
+    .attr("class", "tree-link")
     .attr("fill", "none")
     .attr("stroke", d => edgeStrokeColor(d._e))
     .attr("stroke-width", d => treeEdgeWidth(d))
@@ -1403,23 +1530,19 @@ function renderTree(g) {
     .attr("stroke-dasharray", d => edgeDashArray(d._e, d._e.t === "parent" && extraSet.has(d)))
     .attr("stroke-opacity", d => baseOpacity(d))
     .attr("data-bo", d => baseOpacity(d))
+    .attr("pointer-events", "stroke")
+    .style("cursor", "pointer")
     .attr("d", d => linkPath(d));
 
-  state.gLH = g.append("g").attr("class", "elh").selectAll("path").data(drawLinks).enter().append("path")
-    .attr("d", d => linkPath(d))
-    .attr("fill", "none")
-    .attr("stroke", "transparent")
-    .attr("stroke-width", 14)
-    .attr("pointer-events", "stroke")
-    .style("cursor", "pointer");
+  state.gLH = state.gL;
 
-  // Draw nodes (with reign labels)
-  drawNodes(g, false);
-  // Add reign year sub-labels
-  state.gN.each(function (d) {
-    const span = reignSpan(d);
-    if (!span) return;
-    d3.select(this).append("text")
+  drawNodes(nodeLayer, false);
+  state.gN.selectAll("text.node-reign-label")
+    .data(d => {
+      const span = reignSpan(d);
+      return span ? [span] : [];
+    })
+    .join("text")
       .attr("class", "node-reign-label")
       .attr("text-anchor", "middle")
       .attr("dy", "1.8em")
@@ -1427,28 +1550,26 @@ function renderTree(g) {
       .attr("font-family", "var(--mono)")
       .attr("fill", cs("--tx3"))
       .attr("opacity", 0.7)
-      .text(span);
-  });
-  // Adjust node rect sizing to account for reign label extra height
+      .text(d => d);
   state.gN.each(function (d) {
     const hasReign = !!reignSpan(d);
-    if (!hasReign) return;
-    const rect = d3.select(this).select("rect");
-    const curH = parseFloat(rect.attr("height"));
-    const extra = dens.text - 1;
-    rect.attr("height", curH + extra);
-    // Also adjust accent strip height
+    const rect = d3.select(this).select("rect.node-body");
+    const baseHeight = parseFloat(rect.attr("height"));
+    if (!Number.isFinite(baseHeight)) return;
+    const extra = hasReign ? dens.text - 1 : 0;
+    rect.attr("height", baseHeight + extra);
     const accent = d3.select(this).select(".node-accent");
-    if (!accent.empty()) accent.attr("height", curH + extra);
-    d._hh = (curH + extra) / 2;
+    if (!accent.empty()) accent.attr("height", baseHeight + extra);
+    d._hh = (baseHeight + extra) / 2;
   });
   state.gN.attr("transform", d => `translate(${d.x},${d.y})`);
 
-  // Render sovereign badges in a separate top-level layer (always on top of all nodes)
   const badgeData = state._badgeData || [];
   if (badgeData.length) {
-    state.gBadges = g.append("g").attr("class", "badge-layer")
-      .selectAll("text").data(badgeData).enter().append("text")
+    state.gBadges = badgeLayer
+      .selectAll("text")
+      .data(badgeData, d => `${d.id}|${d.n}`)
+      .join("text")
       .attr("class", "node-badge")
       .attr("text-anchor", "end")
       .attr("font-size", 8.5)
@@ -1460,6 +1581,7 @@ function renderTree(g) {
       .attr("x", d => (byId.get(d.id)?.x || 0) + d.ox)
       .attr("y", d => (byId.get(d.id)?.y || 0) + d.oy);
   } else {
+    badgeLayer.selectAll("*").remove();
     state.gBadges = null;
   }
 

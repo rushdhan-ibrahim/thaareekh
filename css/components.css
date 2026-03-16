@@ -1,3 +1,18 @@
+/* ===== Performance: CSS-class-based dimming ===== */
+/* Applied by highlight.js for batch opacity control */
+.node-dimmed > rect,
+.node-dimmed > text { opacity: 0.62 }
+.node-dimmed[data-pr="0"] > rect,
+.node-dimmed[data-pr="0"] > text { opacity: 0.24 }
+.edge-dimmed { stroke-opacity: 0.22 !important }
+
+/* Focus-mode variants */
+body.focus-mode .node-dimmed > rect,
+body.focus-mode .node-dimmed > text { opacity: 0.14 }
+body.focus-mode .node-dimmed[data-pr="0"] > rect,
+body.focus-mode .node-dimmed[data-pr="0"] > text { opacity: 0.14 }
+body.focus-mode .edge-dimmed { stroke-opacity: 0.06 !important }
+
 /* ===== UI Components ===== */
 
 /* --- Toolbar controls (inside filter panel) --- */
@@ -145,16 +160,7 @@
   color: var(--tx3);
   font-family: var(--mono);
 }
-.pc-reign-pill {
-  display: inline-block;
-  padding: 2px 10px;
-  border-radius: 999px;
-  background: var(--ac-bg);
-  border: 1px solid var(--ac-bd);
-  font: var(--text-sm)/1.4 var(--mono);
-  color: var(--ac);
-  letter-spacing: .3px;
-}
+/* .pc-reign-pill removed — reign now in subtitle */
 .pcg {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -666,4 +672,169 @@ body.lang-dv .bio-text { direction: rtl; text-align: right; font-family: 'Noto S
 }
 @media(max-width: 860px) {
   .qcmd { display: none }
+}
+
+/* ===== Office Cards ===== */
+.ofc-list { display: flex; flex-direction: column; gap: var(--space-2) }
+.ofc {
+  position: relative;
+  border: 1px solid var(--bd);
+  border-radius: 10px;
+  padding: 10px 12px 10px 14px;
+  background: var(--sf2);
+  border-left: 3px solid var(--ofc-border, var(--bd));
+}
+.ofc-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.ofc-icon {
+  font-size: var(--text-base);
+  line-height: 1;
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+.ofc-name {
+  font-weight: 600;
+  font-size: var(--text-sm);
+  color: var(--tx);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ofc-period {
+  font: var(--text-xs) var(--mono);
+  color: var(--tx3);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.ofc-meta {
+  font-size: var(--text-xs);
+  color: var(--tx3);
+  font-family: var(--mono);
+  margin-bottom: 4px;
+}
+.ofc-summary {
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  color: var(--tx2);
+  margin-bottom: 4px;
+}
+.ofc-note {
+  font-size: var(--text-xs);
+  color: var(--tx2);
+  font-style: italic;
+  margin-bottom: 4px;
+}
+.ofc-srcs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+/* --- Clickable office names --- */
+.ofc-link { cursor: pointer; text-decoration: underline dotted; }
+.ofc-link:hover { color: var(--ac); }
+
+/* --- Function evolution rows --- */
+.ofc-func-list { display: flex; flex-direction: column; gap: var(--space-2); }
+.ofc-func-row { padding: 6px 10px; border-left: 3px solid var(--bd2); background: var(--bg2); border-radius: 4px; }
+.ofc-func-period { font-size: var(--text-sm); font-weight: 600; color: var(--tx2); margin-bottom: 2px; }
+.ofc-func-desc { font-size: var(--text-sm); color: var(--tx); line-height: 1.5; }
+
+/* ===== Era Strip & Cards ===== */
+.era-strip {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: var(--space-2);
+  padding: 6px 0;
+  overflow-x: auto;
+}
+.era-strip::-webkit-scrollbar { height: 0 }
+.era-marker {
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--bd);
+  background: var(--sf);
+  font: var(--text-2xs) var(--mono);
+  color: var(--tx3);
+  white-space: nowrap;
+  cursor: default;
+  flex-shrink: 0;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+.era-marker.era-active {
+  background: var(--ac-bg);
+  border-color: var(--ac-bd);
+  color: var(--ac);
+  font-weight: 600;
+}
+.era-card {
+  border: 1px solid var(--bd);
+  border-radius: 8px;
+  margin-bottom: var(--space-2);
+  background: var(--sf2);
+  overflow: hidden;
+}
+.era-card-head {
+  padding: 8px 10px;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--tx);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.era-card-open .era-card-head {
+  border-bottom: 1px solid var(--bd);
+  cursor: default;
+}
+.era-card-body {
+  padding: 8px 10px 10px;
+}
+.era-offices {
+  margin-top: 6px;
+}
+.era-offices .pnl {
+  margin-top: 4px;
+}
+
+/* ===== Evidence Bar ===== */
+.evi-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--bd);
+  margin-bottom: 6px;
+}
+.evi-seg { min-width: 2px }
+.evi-c { background: var(--ep, #35a5a3) }
+.evi-i { background: var(--ei, #d4a84b) }
+.evi-u { background: var(--eu, #d98090) }
+.evi-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: var(--text-xs);
+  color: var(--tx3);
+  margin-bottom: var(--space-2);
+}
+
+/* ===== 3-tab sizing ===== */
+.ptabs { flex-wrap: nowrap }
+.ptab { flex: 1; justify-content: center; min-width: 0; text-align: center }
+
+@media(max-width: 768px) {
+  .ofc { padding: 8px 10px 8px 12px }
+  .ofc-summary { font-size: var(--text-base); line-height: 1.6 }
+  .era-card-head { font-size: var(--text-base) }
+  .era-card-body { padding: 10px }
 }

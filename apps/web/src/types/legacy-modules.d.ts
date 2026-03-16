@@ -53,6 +53,10 @@ declare module '*sovereigns.merge.js' {
 }
 
 declare module '*offices.js' {
+  export interface OfficeFunctionEntry {
+    period_id: string;
+    description: string;
+  }
   export interface OfficeCatalogEntry {
     id: string;
     name: string;
@@ -60,8 +64,10 @@ declare module '*offices.js' {
     summary?: string;
     alt_names?: string[];
     source_refs?: string[];
+    functions?: OfficeFunctionEntry[];
   }
   export interface OfficeTimelinePeriod {
+    id?: string;
     label: string;
     period?: string;
     summary?: string;
@@ -71,6 +77,15 @@ declare module '*offices.js' {
   export const officeCatalog: OfficeCatalogEntry[];
   export const officeById: Map<string, OfficeCatalogEntry>;
   export const officeTimeline: OfficeTimelinePeriod[];
+  export function officeFunctionForPeriod(officeId: string, periodId: string): string;
+  export function officeFunctionForYear(officeId: string, year: number | null): string;
+  export function buildOfficeHolders(ppl: Array<Record<string, unknown>>): Map<string, Array<{
+    personId: string;
+    label: string;
+    start: number | null;
+    end: number | null;
+    c: string;
+  }>>;
 }
 
 declare module '*sources.js' {
@@ -157,6 +172,41 @@ declare module '*inference-notes.js' {
   } | null;
   export function getInferenceDossierPath(edge: Record<string, unknown>): string | null;
   export function isDerivedInferenceEdge(edge: Record<string, unknown>): boolean;
+}
+
+declare module '*relationship-verification.js' {
+  export function relationshipEdgeKey(edge: { t?: string; s?: string; d?: string; l?: string }): string;
+  export function getRelationshipVerification(edge: Record<string, unknown>): {
+    claim_id?: string;
+    relation_type?: string;
+    source_id?: string;
+    target_id?: string;
+    label?: string;
+    confidence?: string;
+    claim_type?: string;
+    confidence_grade?: string;
+    primary_source_id?: string;
+    review_status?: string;
+    canonical_decision?: string;
+    reviewer?: string;
+    last_reviewed?: string;
+    access_date?: string;
+    notes?: string;
+    claim_excerpt_short?: string;
+    citation_locator_short?: string;
+    inference_class?: string;
+    inference_rule?: string;
+    dossier_status?: string;
+    dossier_file?: string;
+    tracker_last_updated?: string;
+    tracker_notes?: string;
+  } | null;
+  export function getRelationshipVerificationByEdgeKey(edgeKey: string): Record<string, unknown> | null;
+  export function getRelationshipVerificationDocs(): {
+    relationship_ledger_path?: string;
+    inference_tracker_path?: string;
+    confidence_explainer_path?: string;
+  };
 }
 
 declare module '*profile.enrichments.js' {

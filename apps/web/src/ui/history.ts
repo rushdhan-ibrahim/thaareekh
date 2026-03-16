@@ -7,8 +7,9 @@ const MAX_ENTRIES = 80;
 // ---------------------------------------------------------------------------
 
 interface HistoryEntry {
-  type: 'person' | 'edge';
+  type: 'person' | 'edge' | 'office';
   id?: string;
+  officeId?: string;
   s?: string;
   d?: string;
   rel?: string;
@@ -26,6 +27,7 @@ interface HistoryState {
 
 // Module-level references to injected dependencies
 let _byId: Map<string, PersonNode> = new Map();
+let _officeById: Map<string, { id: string; name: string; kind?: string }> = new Map();
 let _fR: (re: Array<[number, number?]>) => string = () => '';
 let _personName: (p: PersonNode | string, byId?: Map<string, PersonNode>) => string = (p) => typeof p === 'string' ? p : p.nm;
 let _relationLabel: (t: string) => string = (t) => t;
@@ -38,6 +40,7 @@ let _t: (key: string) => string = (k) => k;
 export function keyOf(entry: HistoryEntry | null): string {
   if (!entry) return '';
   if (entry.type === 'person') return `p|${entry.id}`;
+  if (entry.type === 'office') return `o|${entry.officeId}`;
   return `e|${entry.s}|${entry.d}|${entry.rel || ''}|${entry.label || ''}`;
 }
 
@@ -195,8 +198,22 @@ export function recordEdge(link: {
   });
 }
 
+export function recordOffice(officeId: string): void {
+  const o = _officeById.get(officeId);
+  if (!o) return;
+  const meta = o.kind || _t('office_generic');
+  push({
+    type: 'office',
+    officeId,
+    label: o.name,
+    short: o.name,
+    meta
+  });
+}
+
 export interface HistoryDeps {
   byId: Map<string, PersonNode>;
+  officeById: Map<string, { id: string; name: string; kind?: string }>;
   fR: (re: Array<[number, number?]>) => string;
   personName: (p: PersonNode | string, byId?: Map<string, PersonNode>) => string;
   relationLabel: (t: string) => string;
@@ -208,6 +225,7 @@ export function initHistory(
   deps: HistoryDeps
 ): void {
   _byId = deps.byId;
+  _officeById = deps.officeById;
   _fR = deps.fR;
   _personName = deps.personName;
   _relationLabel = deps.relationLabel;

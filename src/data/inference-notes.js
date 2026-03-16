@@ -22,7 +22,7 @@ function k(t, s, d, l = '') {
   return keyParts(t, s, d, l);
 }
 
-// Auto-synced from inference dossiers on 2026-02-10.
+// Auto-synced from inference dossiers on 2026-02-21.
 const INFERENCE_NOTES = new Map([
   [k("kin", "P100", "P83", "grandparent"), {
     summary: "P100 Mohamed Faamuladeyri Thakurufan and P83 Mohamed Muizzuddine (Keerithi Maha Radun) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
@@ -51,22 +51,6 @@ const INFERENCE_NOTES = new Map([
     ],
     verification: [
       "Promotion requirement: explicit A/B source wording naming P100 Mohamed Faamuladeyri Thakurufan and P84 Hassan Nooredine (Keerithi Maha Radun) as kin (grandparent).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P101", "P97", "grandparent"), {
-    summary: "P101 Donna Francisca Vasconcellos and P97 Dom Luis de Sousa are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
-    dossier: "docs/research-program/inferences/kin-p101-p97-grandparent.md",
-    logic: [
-      "Support set for rule parent-of-parent-grandparent resolved as follows.",
-      "Supporting edge: parent P101 Donna Francisca Vasconcellos -> P96 Donna Ines (CLM-0225, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P101 Donna Francisca Vasconcellos as parent of P96 Donna Ines.",
-      "Supporting edge: parent P96 Donna Ines -> P97 Dom Luis de Sousa (CLM-0368, SRC-MRF-KINGS, grade A); excerpt: Maldives Kings List family/genealogy content lists P96 Donna Ines as parent of P97 Dom Luis de Sousa.",
-      "Rule application (parent-of-parent-grandparent): with source -> P96 Donna Ines and P96 Donna Ines -> target parent links, P101 Donna Francisca Vasconcellos is modeled as inferred grandparent-line kin of P97 Dom Luis de Sousa.",
-      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P101 Donna Francisca Vasconcellos and P97 Dom Luis de Sousa as kin (grandparent).",
       "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
@@ -117,22 +101,6 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
     ]
   }],
-  [k("kin", "P105", "P106", "aunt/uncle↔niece/nephew"), {
-    summary: "P105 Hassan Thakurufan and P106 Ibrahim Kalaafaan are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p105-p106-aunt-uncle-niece-nephew.md",
-    logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P104 Mohamed Thakurufaanu al-Auzam -> P106 Ibrahim Kalaafaan (CLM-0228, SRC-MRF-UTHEEM, grade B); excerpt: Utheem Dynasty family/genealogy content lists P104 Mohamed Thakurufaanu al-Auzam as parent of P106 Ibrahim Kalaafaan.",
-      "Supporting edge: sibling P104 Mohamed Thakurufaanu al-Auzam <-> P105 Hassan Thakurufan [brothers] (CLM-0372, SRC-MRF-UTHEEM, grade B); excerpt: Utheem Dynasty family/genealogy content links P104 Mohamed Thakurufaanu al-Auzam and P105 Hassan Thakurufan as siblings (brothers).",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P104 Mohamed Thakurufaanu al-Auzam, P105 Hassan Thakurufan) plus parent(P104 Mohamed Thakurufaanu al-Auzam, child) yields inferred aunt/uncle-line kin between P105 Hassan Thakurufan and P106 Ibrahim Kalaafaan.",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P105 Hassan Thakurufan and P106 Ibrahim Kalaafaan as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
   [k("kin", "P107", "P31", "grandparent"), {
     summary: "P107 Golaavahi Kambulo and P31 Ibrahim (Dhammaru Veeru) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
     dossier: "docs/research-program/inferences/kin-p107-p31-grandparent.md",
@@ -177,86 +145,6 @@ const INFERENCE_NOTES = new Map([
     ],
     verification: [
       "Promotion requirement: explicit A/B source wording naming P107 Golaavahi Kambulo and P40 Aboobakuru (Bavana Sooja) as kin (grandparent).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P108", "P31", "grandparent"), {
-    summary: "P108 Kulhiveri Hilaal Kaiulhanna Kaloge and P31 Ibrahim (Dhammaru Veeru) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
-    dossier: "docs/research-program/inferences/kin-p108-p31-grandparent.md",
-    logic: [
-      "Support set for rule parent-of-parent-grandparent resolved as follows.",
-      "Supporting edge: parent P108 Kulhiveri Hilaal Kaiulhanna Kaloge -> P30 Hassan (Bavana) (CLM-0230, SRC-MRF-HILAALY, grade B); excerpt: Royal House of Hilaaly family/genealogy content lists P108 Kulhiveri Hilaal Kaiulhanna Kaloge as parent of P30 Hassan.",
-      "Supporting edge: parent P30 Hassan (Bavana) -> P31 Ibrahim (Dhammaru Veeru) (CLM-0333, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P30 Hassan as parent of P31 Ibrahim.",
-      "Rule application (parent-of-parent-grandparent): with source -> P30 Hassan (Bavana) and P30 Hassan (Bavana) -> target parent links, P108 Kulhiveri Hilaal Kaiulhanna Kaloge is modeled as inferred grandparent-line kin of P31 Ibrahim (Dhammaru Veeru).",
-      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P108 Kulhiveri Hilaal Kaiulhanna Kaloge and P31 Ibrahim (Dhammaru Veeru) as kin (grandparent).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P108", "P38", "aunt/uncle↔niece/nephew"), {
-    summary: "P108 Kulhiveri Hilaal Kaiulhanna Kaloge and P38 Danna Mohamed (Raadha Bavana) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p108-p38-aunt-uncle-niece-nephew.md",
-    logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P192 Yusuf Handeygirin -> P38 Danna Mohamed (Raadha Bavana) (CLM-0326, SRC-MRF-HILAALY, grade B); excerpt: Hilaaly branch source gives parent edge P192 to P38.",
-      "Supporting edge: sibling P108 Kulhiveri Hilaal Kaiulhanna Kaloge <-> P192 Yusuf Handeygirin [brothers] (CLM-0373, SRC-MRF-HILAALY, grade B); excerpt: Royal House of Hilaaly family/genealogy content links P108 Kulhiveri Hilaal Kaiulhanna Kaloge and P192 Yusuf Handeygirin as siblings (brothers).",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P192 Yusuf Handeygirin, P108 Kulhiveri Hilaal Kaiulhanna Kaloge) plus parent(P192 Yusuf Handeygirin, child) yields inferred aunt/uncle-line kin between P108 Kulhiveri Hilaal Kaiulhanna Kaloge and P38 Danna Mohamed (Raadha Bavana).",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P108 Kulhiveri Hilaal Kaiulhanna Kaloge and P38 Danna Mohamed (Raadha Bavana) as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P108", "P39", "grandparent"), {
-    summary: "P108 Kulhiveri Hilaal Kaiulhanna Kaloge and P39 Yoosuf (Loka Aananadha) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
-    dossier: "docs/research-program/inferences/kin-p108-p39-grandparent.md",
-    logic: [
-      "Support set for rule parent-of-parent-grandparent resolved as follows.",
-      "Supporting edge: parent P108 Kulhiveri Hilaal Kaiulhanna Kaloge -> P30 Hassan (Bavana) (CLM-0230, SRC-MRF-HILAALY, grade B); excerpt: Royal House of Hilaaly family/genealogy content lists P108 Kulhiveri Hilaal Kaiulhanna Kaloge as parent of P30 Hassan.",
-      "Supporting edge: parent P30 Hassan (Bavana) -> P39 Yoosuf (Loka Aananadha) (CLM-0334, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P30 Hassan as parent of P39 Yoosuf.",
-      "Rule application (parent-of-parent-grandparent): with source -> P30 Hassan (Bavana) and P30 Hassan (Bavana) -> target parent links, P108 Kulhiveri Hilaal Kaiulhanna Kaloge is modeled as inferred grandparent-line kin of P39 Yoosuf (Loka Aananadha).",
-      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P108 Kulhiveri Hilaal Kaiulhanna Kaloge and P39 Yoosuf (Loka Aananadha) as kin (grandparent).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P108", "P40", "grandparent"), {
-    summary: "P108 Kulhiveri Hilaal Kaiulhanna Kaloge and P40 Aboobakuru (Bavana Sooja) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
-    dossier: "docs/research-program/inferences/kin-p108-p40-grandparent.md",
-    logic: [
-      "Support set for rule parent-of-parent-grandparent resolved as follows.",
-      "Supporting edge: parent P108 Kulhiveri Hilaal Kaiulhanna Kaloge -> P30 Hassan (Bavana) (CLM-0230, SRC-MRF-HILAALY, grade B); excerpt: Royal House of Hilaaly family/genealogy content lists P108 Kulhiveri Hilaal Kaiulhanna Kaloge as parent of P30 Hassan.",
-      "Supporting edge: parent P30 Hassan (Bavana) -> P40 Aboobakuru (Bavana Sooja) (CLM-0335, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P30 Hassan as parent of P40 Aboobakuru.",
-      "Rule application (parent-of-parent-grandparent): with source -> P30 Hassan (Bavana) and P30 Hassan (Bavana) -> target parent links, P108 Kulhiveri Hilaal Kaiulhanna Kaloge is modeled as inferred grandparent-line kin of P40 Aboobakuru (Bavana Sooja).",
-      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P108 Kulhiveri Hilaal Kaiulhanna Kaloge and P40 Aboobakuru (Bavana Sooja) as kin (grandparent).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P109", "P30", "grandparent"), {
-    summary: "P109 Muslim Abbas of Hilaal and P30 Hassan (Bavana) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
-    dossier: "docs/research-program/inferences/kin-p109-p30-grandparent.md",
-    logic: [
-      "Support set for rule parent-of-parent-grandparent resolved as follows.",
-      "Supporting edge: parent P109 Muslim Abbas of Hilaal -> P108 Kulhiveri Hilaal Kaiulhanna Kaloge (CLM-0231, SRC-MRF-HILAALY, grade B); excerpt: Royal House of Hilaaly family/genealogy content lists P109 Muslim Abbas of Hilaal as parent of P108 Kulhiveri Hilaal Kaiulhanna Kaloge.",
-      "Supporting edge: parent P108 Kulhiveri Hilaal Kaiulhanna Kaloge -> P30 Hassan (Bavana) (CLM-0230, SRC-MRF-HILAALY, grade B); excerpt: Royal House of Hilaaly family/genealogy content lists P108 Kulhiveri Hilaal Kaiulhanna Kaloge as parent of P30 Hassan.",
-      "Rule application (parent-of-parent-grandparent): with source -> P108 Kulhiveri Hilaal Kaiulhanna Kaloge and P108 Kulhiveri Hilaal Kaiulhanna Kaloge -> target parent links, P109 Muslim Abbas of Hilaal is modeled as inferred grandparent-line kin of P30 Hassan (Bavana).",
-      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P109 Muslim Abbas of Hilaal and P30 Hassan (Bavana) as kin (grandparent).",
       "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
@@ -703,66 +591,6 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
-  [k("kin", "P129", "P88", "cousins"), {
-    summary: "P129 Princess Veyogey Dhon Goma and P88 Mohamed Mueenuddine (Keerithi Maha Radun) are modeled as inferred kin (cousins) through rule `children-of-siblings-cousin`.",
-    dossier: "docs/research-program/inferences/kin-p129-p88-cousins.md",
-    logic: [
-      "Support set for rule children-of-siblings-cousin resolved as follows.",
-      "Supporting edge: parent P222 Hassan Izz ud-din -> P88 Mohamed Mueenuddine (Keerithi Maha Radun) (CLM-0591, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Hassan Izz ud-din as parent of Mohamed Mueenuddine.",
-      "Rule application (children-of-siblings-cousin): children of sibling parents P87 Ibrahim Nooredine (Keerithi Maha Radun) and P222 Hassan Izz ud-din are modeled as inferred cousin-line kin (P129 Princess Veyogey Dhon Goma <-> P88 Mohamed Mueenuddine (Keerithi Maha Radun)).",
-      "Current modeling remains inferred because direct source text naming kin (cousins) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P129 Princess Veyogey Dhon Goma and P88 Mohamed Mueenuddine (Keerithi Maha Radun) as kin (cousins).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule children-of-siblings-cousin.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P129", "P92", "cousins"), {
-    summary: "P129 Princess Veyogey Dhon Goma and P92 Mohamed Imaduddine VI (Keerithi Maha Radun) are modeled as inferred kin (cousins) through rule `children-of-siblings-cousin`.",
-    dossier: "docs/research-program/inferences/kin-p129-p92-cousins.md",
-    logic: [
-      "Support set for rule children-of-siblings-cousin resolved as follows.",
-      "Supporting edge: parent P222 Hassan Izz ud-din -> P92 Mohamed Imaduddine VI (Keerithi Maha Radun) (CLM-0592, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Hassan Izz ud-din as parent of Mohamed Imaduddine VI.",
-      "Rule application (children-of-siblings-cousin): children of sibling parents P87 Ibrahim Nooredine (Keerithi Maha Radun) and P222 Hassan Izz ud-din are modeled as inferred cousin-line kin (P129 Princess Veyogey Dhon Goma <-> P92 Mohamed Imaduddine VI (Keerithi Maha Radun)).",
-      "Current modeling remains inferred because direct source text naming kin (cousins) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P129 Princess Veyogey Dhon Goma and P92 Mohamed Imaduddine VI (Keerithi Maha Radun) as kin (cousins).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule children-of-siblings-cousin.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P13", "P16", "grandparent"), {
-    summary: "P13 Audha (Areedha Suvara) and P16 Salis (Meesuvvara) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
-    dossier: "docs/research-program/inferences/kin-p13-p16-grandparent.md",
-    logic: [
-      "Support set for rule parent-of-parent-grandparent resolved as follows.",
-      "Supporting edge: parent P15 Yoosuf (Bavanaadheeththa) -> P16 Salis (Meesuvvara) (CLM-0285, SRC-MRF-KINGS, grade B); excerpt: Kings list states P16 as son of P15.",
-      "Rule application (parent-of-parent-grandparent): with source -> P15 Yoosuf (Bavanaadheeththa) and P15 Yoosuf (Bavanaadheeththa) -> target parent links, P13 Audha (Areedha Suvara) is modeled as inferred grandparent-line kin of P16 Salis (Meesuvvara).",
-      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P13 Audha (Areedha Suvara) and P16 Salis (Meesuvvara) as kin (grandparent).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P13", "P17", "grandparent"), {
-    summary: "P13 Audha (Areedha Suvara) and P17 Davud (Sundhura Bavana) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
-    dossier: "docs/research-program/inferences/kin-p13-p17-grandparent.md",
-    logic: [
-      "Support set for rule parent-of-parent-grandparent resolved as follows.",
-      "Supporting edge: parent P15 Yoosuf (Bavanaadheeththa) -> P17 Davud (Sundhura Bavana) (CLM-0286, SRC-MRF-KINGS, grade B); excerpt: Kings list states P17 as son of P15.",
-      "Rule application (parent-of-parent-grandparent): with source -> P15 Yoosuf (Bavanaadheeththa) and P15 Yoosuf (Bavanaadheeththa) -> target parent links, P13 Audha (Areedha Suvara) is modeled as inferred grandparent-line kin of P17 Davud (Sundhura Bavana).",
-      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P13 Audha (Areedha Suvara) and P17 Davud (Sundhura Bavana) as kin (grandparent).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
   [k("kin", "P130", "P132", "possible southern-branch continuity (Addu/Fuvahmulah)"), {
     summary: "P130 Prince Ibrahim Faamuladheyri Kilegefaanu and P132 Al-Naib Muhammad Thakurufaanu of Addu are modeled as `kin` with label `possible southern-branch continuity (Addu/Fuvahmulah)` to preserve a targeted continuity claim without over-promoting certainty.",
     dossier: "docs/research-program/inferences/kin-p130-p132-possible-southern-branch-continuity-addu-fuvahmulah.md",
@@ -983,35 +811,33 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
-  [k("kin", "P14", "P16", "aunt/uncle↔niece/nephew"), {
-    summary: "P14 Hali (Areedha Suvara) and P16 Salis (Meesuvvara) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p14-p16-aunt-uncle-niece-nephew.md",
+  [k("kin", "P13", "P16", "grandparent"), {
+    summary: "P13 Audha (Areedha Suvara) and P16 Salis (Meesuvvara) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
+    dossier: "docs/research-program/inferences/kin-p13-p16-grandparent.md",
     logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
+      "Support set for rule parent-of-parent-grandparent resolved as follows.",
       "Supporting edge: parent P15 Yoosuf (Bavanaadheeththa) -> P16 Salis (Meesuvvara) (CLM-0285, SRC-MRF-KINGS, grade B); excerpt: Kings list states P16 as son of P15.",
-      "Supporting edge: sibling P14 Hali (Areedha Suvara) <-> P15 Yoosuf (Bavanaadheeththa) [brothers] (CLM-0386, SRC-MRF-KINGS, grade B); excerpt: Kings list marks P14 and P15 as brothers.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P15 Yoosuf (Bavanaadheeththa), P14 Hali (Areedha Suvara)) plus parent(P15 Yoosuf (Bavanaadheeththa), child) yields inferred aunt/uncle-line kin between P14 Hali (Areedha Suvara) and P16 Salis (Meesuvvara).",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
+      "Rule application (parent-of-parent-grandparent): with source -> P15 Yoosuf (Bavanaadheeththa) and P15 Yoosuf (Bavanaadheeththa) -> target parent links, P13 Audha (Areedha Suvara) is modeled as inferred grandparent-line kin of P16 Salis (Meesuvvara).",
+      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
     ],
     verification: [
-      "Promotion requirement: explicit A/B source wording naming P14 Hali (Areedha Suvara) and P16 Salis (Meesuvvara) as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
+      "Promotion requirement: explicit A/B source wording naming P13 Audha (Areedha Suvara) and P16 Salis (Meesuvvara) as kin (grandparent).",
+      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
-  [k("kin", "P14", "P17", "aunt/uncle↔niece/nephew"), {
-    summary: "P14 Hali (Areedha Suvara) and P17 Davud (Sundhura Bavana) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p14-p17-aunt-uncle-niece-nephew.md",
+  [k("kin", "P13", "P17", "grandparent"), {
+    summary: "P13 Audha (Areedha Suvara) and P17 Davud (Sundhura Bavana) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
+    dossier: "docs/research-program/inferences/kin-p13-p17-grandparent.md",
     logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
+      "Support set for rule parent-of-parent-grandparent resolved as follows.",
       "Supporting edge: parent P15 Yoosuf (Bavanaadheeththa) -> P17 Davud (Sundhura Bavana) (CLM-0286, SRC-MRF-KINGS, grade B); excerpt: Kings list states P17 as son of P15.",
-      "Supporting edge: sibling P14 Hali (Areedha Suvara) <-> P15 Yoosuf (Bavanaadheeththa) [brothers] (CLM-0386, SRC-MRF-KINGS, grade B); excerpt: Kings list marks P14 and P15 as brothers.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P15 Yoosuf (Bavanaadheeththa), P14 Hali (Areedha Suvara)) plus parent(P15 Yoosuf (Bavanaadheeththa), child) yields inferred aunt/uncle-line kin between P14 Hali (Areedha Suvara) and P17 Davud (Sundhura Bavana).",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
+      "Rule application (parent-of-parent-grandparent): with source -> P15 Yoosuf (Bavanaadheeththa) and P15 Yoosuf (Bavanaadheeththa) -> target parent links, P13 Audha (Areedha Suvara) is modeled as inferred grandparent-line kin of P17 Davud (Sundhura Bavana).",
+      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
     ],
     verification: [
-      "Promotion requirement: explicit A/B source wording naming P14 Hali (Areedha Suvara) and P17 Davud (Sundhura Bavana) as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
+      "Promotion requirement: explicit A/B source wording naming P13 Audha (Areedha Suvara) and P17 Davud (Sundhura Bavana) as kin (grandparent).",
+      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
@@ -1110,79 +936,35 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
-  [k("kin", "P15", "P18", "grandparent"), {
-    summary: "P15 Yoosuf (Bavanaadheeththa) and P18 Omar Veeru (Loka Abarana) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
-    dossier: "docs/research-program/inferences/kin-p15-p18-grandparent.md",
+  [k("kin", "P14", "P16", "aunt/uncle↔niece/nephew"), {
+    summary: "P14 Hali (Areedha Suvara) and P16 Salis (Meesuvvara) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
+    dossier: "docs/research-program/inferences/kin-p14-p16-aunt-uncle-niece-nephew.md",
     logic: [
-      "Support set for rule parent-of-parent-grandparent resolved as follows.",
+      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
       "Supporting edge: parent P15 Yoosuf (Bavanaadheeththa) -> P16 Salis (Meesuvvara) (CLM-0285, SRC-MRF-KINGS, grade B); excerpt: Kings list states P16 as son of P15.",
-      "Supporting edge: parent P16 Salis (Meesuvvara) -> P18 Omar Veeru (Loka Abarana) (CLM-0571, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Salis as parent of Omar Veeru.",
-      "Rule application (parent-of-parent-grandparent): with source -> P16 Salis (Meesuvvara) and P16 Salis (Meesuvvara) -> target parent links, P15 Yoosuf (Bavanaadheeththa) is modeled as inferred grandparent-line kin of P18 Omar Veeru (Loka Abarana).",
-      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P15 Yoosuf (Bavanaadheeththa) and P18 Omar Veeru (Loka Abarana) as kin (grandparent).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P155", "P129", "aunt/uncle↔niece/nephew"), {
-    summary: "P155 Maandhoogey Bodu Dhorhy Manippulu and P129 Princess Veyogey Dhon Goma are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p129-p155-aunt-uncle-niece-nephew.md",
-    logic: [
-      "Supporting edge: unresolved from inference basis metadata for rule parent-sibling-aunt-uncle.",
-      "This dossier should be re-generated after edge-basis reconciliation.",
+      "Supporting edge: sibling P14 Hali (Areedha Suvara) <-> P15 Yoosuf (Bavanaadheeththa) [brothers] (CLM-0386, SRC-MRF-KINGS, grade B); excerpt: Kings list marks P14 and P15 as brothers.",
+      "Rule application (parent-sibling-aunt-uncle): sibling(P15 Yoosuf (Bavanaadheeththa), P14 Hali (Areedha Suvara)) plus parent(P15 Yoosuf (Bavanaadheeththa), child) yields inferred aunt/uncle-line kin between P14 Hali (Areedha Suvara) and P16 Salis (Meesuvvara).",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
     verification: [
-      "Promotion requirement: explicit A/B source wording naming P155 Maandhoogey Bodu Dhorhy Manippulu and P129 Princess Veyogey Dhon Goma as kin (aunt/uncle↔niece/nephew).",
+      "Promotion requirement: explicit A/B source wording naming P14 Hali (Areedha Suvara) and P16 Salis (Meesuvvara) as kin (aunt/uncle↔niece/nephew).",
       "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
-  [k("kin", "P155", "P90", "aunt/uncle↔niece/nephew"), {
-    summary: "P155 Maandhoogey Bodu Dhorhy Manippulu and P90 Mohamed Imaduddine V (Keerithi Maha Radun) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p155-p90-aunt-uncle-niece-nephew.md",
+  [k("kin", "P14", "P17", "aunt/uncle↔niece/nephew"), {
+    summary: "P14 Hali (Areedha Suvara) and P17 Davud (Sundhura Bavana) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
+    dossier: "docs/research-program/inferences/kin-p14-p17-aunt-uncle-niece-nephew.md",
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P87 Ibrahim Nooredine (Keerithi Maha Radun) -> P90 Mohamed Imaduddine V (Keerithi Maha Radun) (CLM-0365, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P87 Ibrahim Nooredine as parent of P90 Mohamed Imaduddine V.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P87 Ibrahim Nooredine (Keerithi Maha Radun), P155 Maandhoogey Bodu Dhorhy Manippulu) plus parent(P87 Ibrahim Nooredine (Keerithi Maha Radun), child) yields inferred aunt/uncle-line kin between P155 Maandhoogey Bodu Dhorhy Manippulu and P90 Mohamed Imaduddine V (Keerithi Maha Radun).",
+      "Supporting edge: parent P15 Yoosuf (Bavanaadheeththa) -> P17 Davud (Sundhura Bavana) (CLM-0286, SRC-MRF-KINGS, grade B); excerpt: Kings list states P17 as son of P15.",
+      "Supporting edge: sibling P14 Hali (Areedha Suvara) <-> P15 Yoosuf (Bavanaadheeththa) [brothers] (CLM-0386, SRC-MRF-KINGS, grade B); excerpt: Kings list marks P14 and P15 as brothers.",
+      "Rule application (parent-sibling-aunt-uncle): sibling(P15 Yoosuf (Bavanaadheeththa), P14 Hali (Areedha Suvara)) plus parent(P15 Yoosuf (Bavanaadheeththa), child) yields inferred aunt/uncle-line kin between P14 Hali (Areedha Suvara) and P17 Davud (Sundhura Bavana).",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
     verification: [
-      "Promotion requirement: explicit A/B source wording naming P155 Maandhoogey Bodu Dhorhy Manippulu and P90 Mohamed Imaduddine V (Keerithi Maha Radun) as kin (aunt/uncle↔niece/nephew).",
+      "Promotion requirement: explicit A/B source wording naming P14 Hali (Areedha Suvara) and P17 Davud (Sundhura Bavana) as kin (aunt/uncle↔niece/nephew).",
       "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P155", "P91", "aunt/uncle↔niece/nephew"), {
-    summary: "P155 Maandhoogey Bodu Dhorhy Manippulu and P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p155-p91-aunt-uncle-niece-nephew.md",
-    logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P87 Ibrahim Nooredine (Keerithi Maha Radun) -> P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri) (CLM-0366, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P87 Ibrahim Nooredine as parent of P91 Mohamed Shamsuddine III.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P87 Ibrahim Nooredine (Keerithi Maha Radun), P155 Maandhoogey Bodu Dhorhy Manippulu) plus parent(P87 Ibrahim Nooredine (Keerithi Maha Radun), child) yields inferred aunt/uncle-line kin between P155 Maandhoogey Bodu Dhorhy Manippulu and P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri).",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P155 Maandhoogey Bodu Dhorhy Manippulu and P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri) as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P155", "P94", "grandparent"), {
-    summary: "P155 Maandhoogey Bodu Dhorhy Manippulu and P94 Hassan Nooredine II (Kula Sudha Ira Siyaaaka) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
-    dossier: "docs/research-program/inferences/kin-p155-p94-grandparent.md",
-    logic: [
-      "Support set for rule parent-of-parent-grandparent resolved as follows.",
-      "Supporting edge: parent P155 Maandhoogey Bodu Dhorhy Manippulu -> P88 Mohamed Mueenuddine (Keerithi Maha Radun) (CLM-0288, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P155 Maandhoogey Bodu Dhorhy Manippulu as parent of P88 Mohamed Mueenuddine.",
-      "Supporting edge: parent P88 Mohamed Mueenuddine (Keerithi Maha Radun) -> P94 Hassan Nooredine II (Kula Sudha Ira Siyaaaka) (CLM-0367, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P88 Mohamed Mueenuddine as parent of P94 Hassan Nooredine II.",
-      "Rule application (parent-of-parent-grandparent): with source -> P88 Mohamed Mueenuddine (Keerithi Maha Radun) and P88 Mohamed Mueenuddine (Keerithi Maha Radun) -> target parent links, P155 Maandhoogey Bodu Dhorhy Manippulu is modeled as inferred grandparent-line kin of P94 Hassan Nooredine II (Kula Sudha Ira Siyaaaka).",
-      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P155 Maandhoogey Bodu Dhorhy Manippulu and P94 Hassan Nooredine II (Kula Sudha Ira Siyaaaka) as kin (grandparent).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
@@ -1202,13 +984,29 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
+  [k("kin", "P15", "P18", "grandparent"), {
+    summary: "P15 Yoosuf (Bavanaadheeththa) and P18 Omar Veeru (Loka Abarana) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
+    dossier: "docs/research-program/inferences/kin-p15-p18-grandparent.md",
+    logic: [
+      "Support set for rule parent-of-parent-grandparent resolved as follows.",
+      "Supporting edge: parent P15 Yoosuf (Bavanaadheeththa) -> P16 Salis (Meesuvvara) (CLM-0285, SRC-MRF-KINGS, grade B); excerpt: Kings list states P16 as son of P15.",
+      "Supporting edge: parent P16 Salis (Meesuvvara) -> P18 Omar Veeru (Loka Abarana) (CLM-0571, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Salis as parent of Omar Veeru.",
+      "Rule application (parent-of-parent-grandparent): with source -> P16 Salis (Meesuvvara) and P16 Salis (Meesuvvara) -> target parent links, P15 Yoosuf (Bavanaadheeththa) is modeled as inferred grandparent-line kin of P18 Omar Veeru (Loka Abarana).",
+      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
+    ],
+    verification: [
+      "Promotion requirement: explicit A/B source wording naming P15 Yoosuf (Bavanaadheeththa) and P18 Omar Veeru (Loka Abarana) as kin (grandparent).",
+      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
+      "Review cadence: recompute after any parent/sibling edge change in this local branch."
+    ]
+  }],
   [k("kin", "P16", "P19", "grandparent"), {
     summary: "P16 Salis (Meesuvvara) and P19 Ahmed Shihabuddine (Loka Aadheeththa) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
     dossier: "docs/research-program/inferences/kin-p16-p19-grandparent.md",
     logic: [
       "Support set for rule parent-of-parent-grandparent resolved as follows.",
       "Supporting edge: parent P16 Salis (Meesuvvara) -> P18 Omar Veeru (Loka Abarana) (CLM-0571, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Salis as parent of Omar Veeru.",
-      "Supporting edge: parent P18 Omar Veeru (Loka Abarana) -> P19 Ahmed Shihabuddine (Loka Aadheeththa) (CLM-0316, SRC-MRF-KINGS, grade B); excerpt: Kings list gives P19 as child of P18.",
+      "Supporting edge: parent P18 Omar Veeru (Loka Abarana) -> P19 Ahmed Shihabuddine (Loka Aadheeththa) (CLM-0316, SRC-IBN-BATTUTA-RIHLA, grade A); excerpt: Ibn Battuta identifies Sultan Ahmad Shihab al-Din as son of Sultan Omar and brother of Khadijah, corroborating the P18->P19 parent edge.",
       "Rule application (parent-of-parent-grandparent): with source -> P18 Omar Veeru (Loka Abarana) and P18 Omar Veeru (Loka Abarana) -> target parent links, P16 Salis (Meesuvvara) is modeled as inferred grandparent-line kin of P19 Ahmed Shihabuddine (Loka Aadheeththa).",
       "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
     ],
@@ -1224,7 +1022,7 @@ const INFERENCE_NOTES = new Map([
     logic: [
       "Support set for rule parent-of-parent-grandparent resolved as follows.",
       "Supporting edge: parent P16 Salis (Meesuvvara) -> P18 Omar Veeru (Loka Abarana) (CLM-0571, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Salis as parent of Omar Veeru.",
-      "Supporting edge: parent P18 Omar Veeru (Loka Abarana) -> P20 Khadijah (Raadha Abarana) (CLM-0317, SRC-MRF-KINGS, grade B); excerpt: Kings list gives P20 (Khadijah) as child of P18.",
+      "Supporting edge: parent P18 Omar Veeru (Loka Abarana) -> P20 Khadijah (Raadha Abarana) (CLM-0317, SRC-IBN-BATTUTA-RIHLA, grade A); excerpt: Ibn Battuta identifies Khadijah as daughter of Sultan Omar, corroborating the P18->P20 parent edge.",
       "Rule application (parent-of-parent-grandparent): with source -> P18 Omar Veeru (Loka Abarana) and P18 Omar Veeru (Loka Abarana) -> target parent links, P16 Salis (Meesuvvara) is modeled as inferred grandparent-line kin of P20 Khadijah (Raadha Abarana).",
       "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
     ],
@@ -1247,21 +1045,6 @@ const INFERENCE_NOTES = new Map([
     verification: [
       "Promotion requirement: explicit A/B source wording naming P16 Salis (Meesuvvara) and P25 Raadhaafathi (Suvama Abarana) as kin (grandparent).",
       "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P17", "P18", "aunt/uncle↔niece/nephew"), {
-    summary: "P17 Davud (Sundhura Bavana) and P18 Omar Veeru (Loka Abarana) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p17-p18-aunt-uncle-niece-nephew.md",
-    logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P16 Salis (Meesuvvara) -> P18 Omar Veeru (Loka Abarana) (CLM-0571, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Salis as parent of Omar Veeru.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P16 Salis (Meesuvvara), P17 Davud (Sundhura Bavana)) plus parent(P16 Salis (Meesuvvara), child) yields inferred aunt/uncle-line kin between P17 Davud (Sundhura Bavana) and P18 Omar Veeru (Loka Abarana).",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P17 Davud (Sundhura Bavana) and P18 Omar Veeru (Loka Abarana) as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
@@ -1441,19 +1224,18 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
-  [k("kin", "P18", "P27", "grandparent"), {
-    summary: "P18 Omar Veeru (Loka Abarana) and P27 Dhaain (Keerithi Maha Rehendi) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
-    dossier: "docs/research-program/inferences/kin-p18-p27-grandparent.md",
+  [k("kin", "P17", "P18", "aunt/uncle↔niece/nephew"), {
+    summary: "P17 Davud (Sundhura Bavana) and P18 Omar Veeru (Loka Abarana) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
+    dossier: "docs/research-program/inferences/kin-p17-p18-aunt-uncle-niece-nephew.md",
     logic: [
-      "Support set for rule parent-of-parent-grandparent resolved as follows.",
-      "Supporting edge: parent P18 Omar Veeru (Loka Abarana) -> P25 Raadhaafathi (Suvama Abarana) (CLM-0318, SRC-MRF-KINGS, grade B); excerpt: Kings list gives P25 as child of P18 in the same household branch.",
-      "Supporting edge: parent P25 Raadhaafathi (Suvama Abarana) -> P27 Dhaain (Keerithi Maha Rehendi) (CLM-0595, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Raadhaafathi as parent of Dhaain.",
-      "Rule application (parent-of-parent-grandparent): with source -> P25 Raadhaafathi (Suvama Abarana) and P25 Raadhaafathi (Suvama Abarana) -> target parent links, P18 Omar Veeru (Loka Abarana) is modeled as inferred grandparent-line kin of P27 Dhaain (Keerithi Maha Rehendi).",
-      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
+      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
+      "Supporting edge: parent P16 Salis (Meesuvvara) -> P18 Omar Veeru (Loka Abarana) (CLM-0571, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Salis as parent of Omar Veeru.",
+      "Rule application (parent-sibling-aunt-uncle): sibling(P16 Salis (Meesuvvara), P17 Davud (Sundhura Bavana)) plus parent(P16 Salis (Meesuvvara), child) yields inferred aunt/uncle-line kin between P17 Davud (Sundhura Bavana) and P18 Omar Veeru (Loka Abarana).",
+      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
     verification: [
-      "Promotion requirement: explicit A/B source wording naming P18 Omar Veeru (Loka Abarana) and P27 Dhaain (Keerithi Maha Rehendi) as kin (grandparent).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
+      "Promotion requirement: explicit A/B source wording naming P17 Davud (Sundhura Bavana) and P18 Omar Veeru (Loka Abarana) as kin (aunt/uncle↔niece/nephew).",
+      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
@@ -1550,18 +1332,19 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
-  [k("kin", "P19", "P27", "aunt/uncle↔niece/nephew"), {
-    summary: "P19 Ahmed Shihabuddine (Loka Aadheeththa) and P27 Dhaain (Keerithi Maha Rehendi) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p19-p27-aunt-uncle-niece-nephew.md",
+  [k("kin", "P18", "P27", "grandparent"), {
+    summary: "P18 Omar Veeru (Loka Abarana) and P27 Dhaain (Keerithi Maha Rehendi) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
+    dossier: "docs/research-program/inferences/kin-p18-p27-grandparent.md",
     logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P25 Raadhaafathi (Suvama Abarana) -> P27 Dhaain (Keerithi Maha Rehendi) (CLM-0595, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Raadhaafathi as parent of Dhaain.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P25 Raadhaafathi (Suvama Abarana), P19 Ahmed Shihabuddine (Loka Aadheeththa)) plus parent(P25 Raadhaafathi (Suvama Abarana), child) yields inferred aunt/uncle-line kin between P19 Ahmed Shihabuddine (Loka Aadheeththa) and P27 Dhaain (Keerithi Maha Rehendi).",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
+      "Support set for rule parent-of-parent-grandparent resolved as follows.",
+      "Supporting edge: parent P18 Omar Veeru (Loka Abarana) -> P25 Raadhaafathi (Suvama Abarana) (CLM-0318, SRC-MRF-KINGS, grade B); excerpt: Kings list gives P25 as child of P18 in the same household branch.",
+      "Supporting edge: parent P25 Raadhaafathi (Suvama Abarana) -> P27 Dhaain (Keerithi Maha Rehendi) (CLM-0595, SRC-ROYALARK-MALDIVES, grade B); excerpt: RoyalArk Maldives lineage reconstruction treats Dhaain (P27) as daughter of Raadhaafathi/Malika Fatima (P25), alongside parent linkage through P26.",
+      "Rule application (parent-of-parent-grandparent): with source -> P25 Raadhaafathi (Suvama Abarana) and P25 Raadhaafathi (Suvama Abarana) -> target parent links, P18 Omar Veeru (Loka Abarana) is modeled as inferred grandparent-line kin of P27 Dhaain (Keerithi Maha Rehendi).",
+      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
     ],
     verification: [
-      "Promotion requirement: explicit A/B source wording naming P19 Ahmed Shihabuddine (Loka Aadheeththa) and P27 Dhaain (Keerithi Maha Rehendi) as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
+      "Promotion requirement: explicit A/B source wording naming P18 Omar Veeru (Loka Abarana) and P27 Dhaain (Keerithi Maha Rehendi) as kin (grandparent).",
+      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
@@ -1708,18 +1491,17 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
-  [k("kin", "P20", "P27", "aunt/uncle↔niece/nephew"), {
-    summary: "P20 Khadijah (Raadha Abarana) and P27 Dhaain (Keerithi Maha Rehendi) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p20-p27-aunt-uncle-niece-nephew.md",
+  [k("kin", "P19", "P27", "aunt/uncle↔niece/nephew"), {
+    summary: "P19 Ahmed Shihabuddine (Loka Aadheeththa) and P27 Dhaain (Keerithi Maha Rehendi) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
+    dossier: "docs/research-program/inferences/kin-p19-p27-aunt-uncle-niece-nephew.md",
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P25 Raadhaafathi (Suvama Abarana) -> P27 Dhaain (Keerithi Maha Rehendi) (CLM-0595, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Raadhaafathi as parent of Dhaain.",
-      "Supporting edge: sibling P20 Khadijah (Raadha Abarana) <-> P25 Raadhaafathi (Suvama Abarana) [half-sisters] (CLM-0427, SRC-MRF-KINGS, grade B); excerpt: Kings list marks P20 and P25 as half-sisters.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P25 Raadhaafathi (Suvama Abarana), P20 Khadijah (Raadha Abarana)) plus parent(P25 Raadhaafathi (Suvama Abarana), child) yields inferred aunt/uncle-line kin between P20 Khadijah (Raadha Abarana) and P27 Dhaain (Keerithi Maha Rehendi).",
+      "Supporting edge: parent P25 Raadhaafathi (Suvama Abarana) -> P27 Dhaain (Keerithi Maha Rehendi) (CLM-0595, SRC-ROYALARK-MALDIVES, grade B); excerpt: RoyalArk Maldives lineage reconstruction treats Dhaain (P27) as daughter of Raadhaafathi/Malika Fatima (P25), alongside parent linkage through P26.",
+      "Rule application (parent-sibling-aunt-uncle): sibling(P25 Raadhaafathi (Suvama Abarana), P19 Ahmed Shihabuddine (Loka Aadheeththa)) plus parent(P25 Raadhaafathi (Suvama Abarana), child) yields inferred aunt/uncle-line kin between P19 Ahmed Shihabuddine (Loka Aadheeththa) and P27 Dhaain (Keerithi Maha Rehendi).",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
     verification: [
-      "Promotion requirement: explicit A/B source wording naming P20 Khadijah (Raadha Abarana) and P27 Dhaain (Keerithi Maha Rehendi) as kin (aunt/uncle↔niece/nephew).",
+      "Promotion requirement: explicit A/B source wording naming P19 Ahmed Shihabuddine (Loka Aadheeththa) and P27 Dhaain (Keerithi Maha Rehendi) as kin (aunt/uncle↔niece/nephew).",
       "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
@@ -1791,8 +1573,8 @@ const INFERENCE_NOTES = new Map([
     dossier: "docs/research-program/inferences/kin-p202-p57-aunt-uncle-niece-nephew.md",
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P207 Recca -> P57 Ali (Aanandha) (CLM-0579, SRC-MRF-HILAALY, grade B); excerpt: Direct parent relation recorded between Recca as parent of Ali.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P207 Recca, P202 Kamba Dio) plus parent(P207 Recca, child) yields inferred aunt/uncle-line kin between P202 Kamba Dio and P57 Ali (Aanandha).",
+      "Supporting edge: parent P193 Princess Recca -> P57 Ali (Aanandha) (CLM-0329, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P193 Princess Recca as parent of P57 Ali.",
+      "Rule application (parent-sibling-aunt-uncle): sibling(P193 Princess Recca, P202 Kamba Dio) plus parent(P193 Princess Recca, child) yields inferred aunt/uncle-line kin between P202 Kamba Dio and P57 Ali (Aanandha).",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
     verification: [
@@ -1801,48 +1583,20 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
-  [k("kin", "P207", "P194", "aunt/uncle↔niece/nephew"), {
-    summary: "P207 Recca and P194 Burecca are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p194-p207-aunt-uncle-niece-nephew.md",
+  [k("kin", "P208", "P50", "cousins"), {
+    summary: "P208 Princess Aysha Rani Kilege and P50 Ibrahim (Bavana Furasuddha) are modeled as inferred kin (cousins) through rule `children-of-siblings-cousin`.",
+    dossier: "docs/research-program/inferences/kin-p208-p50-cousins.md",
     logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P193 Princess Recca -> P194 Burecca (CLM-0327, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P193 Princess Recca as parent of P194 Burecca.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P193 Princess Recca, P207 Recca) plus parent(P193 Princess Recca, child) yields inferred aunt/uncle-line kin between P207 Recca and P194 Burecca.",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
+      "Support set for rule children-of-siblings-cousin resolved as follows.",
+      "Supporting edge: parent P51 Kalu Mohamed (Dhammaru Bavana) -> P208 Princess Aysha Rani Kilege (CLM-0602, SRC-MRF-KINGS, grade B); excerpt: Direct parent relation recorded in the supporting source lane.",
+      "Supporting edge: parent P47 Hassan (Raadha Aanandha) -> P50 Ibrahim (Bavana Furasuddha) (CLM-0601, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded in the supporting source lane.",
+      "Supporting edge: sibling P51 Kalu Mohamed (Dhammaru Bavana) <-> P47 Hassan (Raadha Aanandha) [half-brothers] (CLM-0639, SRC-ROYALARK-MALDIVES, grade B); excerpt: Sibling relation for the two parents recorded in the supporting source lane.",
+      "Rule application (children-of-siblings-cousin): children of sibling parents P51 Kalu Mohamed (Dhammaru Bavana) and P47 Hassan (Raadha Aanandha) are modeled as inferred cousin-line kin (P208 Princess Aysha Rani Kilege <-> P50 Ibrahim (Bavana Furasuddha)).",
+      "Current modeling remains inferred because direct source text naming kin (cousins) for this exact pair is not yet captured."
     ],
     verification: [
-      "Promotion requirement: explicit A/B source wording naming P207 Recca and P194 Burecca as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P207", "P196", "aunt/uncle↔niece/nephew"), {
-    summary: "P207 Recca and P196 Reccy are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p196-p207-aunt-uncle-niece-nephew.md",
-    logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P193 Princess Recca -> P196 Reccy (CLM-0328, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P193 Princess Recca as parent of P196 Reccy.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P193 Princess Recca, P207 Recca) plus parent(P193 Princess Recca, child) yields inferred aunt/uncle-line kin between P207 Recca and P196 Reccy.",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P207 Recca and P196 Reccy as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P207", "P49", "aunt/uncle↔niece/nephew"), {
-    summary: "P207 Recca and P49 Sheikh Hassan (Raadha Fanaveeru) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p207-p49-aunt-uncle-niece-nephew.md",
-    logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P202 Kamba Dio -> P49 Sheikh Hassan (Raadha Fanaveeru) (CLM-0572, SRC-MRF-HILAALY, grade B); excerpt: Direct parent relation recorded between Kamba Dio as parent of Sheikh Hassan.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P202 Kamba Dio, P207 Recca) plus parent(P202 Kamba Dio, child) yields inferred aunt/uncle-line kin between P207 Recca and P49 Sheikh Hassan (Raadha Fanaveeru).",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P207 Recca and P49 Sheikh Hassan (Raadha Fanaveeru) as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
+      "Promotion requirement: explicit A/B source wording naming P208 Princess Aysha Rani Kilege and P50 Ibrahim (Bavana Furasuddha) as kin (cousins).",
+      "Downgrade/removal trigger: source-backed changes to any support edge used by rule children-of-siblings-cousin.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
@@ -1898,7 +1652,7 @@ const INFERENCE_NOTES = new Map([
     dossier: "docs/research-program/inferences/kin-p209-p213-aunt-uncle-niece-nephew.md",
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P213 Infanta Dona Ines de Malvidas (CLM-0609, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Joao’ as parent of Infanta Dona Ines de Malvidas.",
+      "Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P213 Infanta Dona Ines de Malvidas (CLM-0609, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry under Dom Joao lists Infanta Dona Ines de Malvidas as daughter of Dom Joao and Dona Francisca de Vasconcelos.",
       "Supporting edge: sibling P209 Dom Francisco de Malvidas <-> P66 Joao’ (Keerithi Maha Radun) [brothers (same parents: Dom Manoel + Dona Leonor)] (CLM-0625, SRC-ROYALARK-M16, grade A); excerpt: Direct sibling (brothers (same parents: Dom Manoel + Dona Leonor)) relation recorded between Dom Francisco de Malvidas and Joao’.",
       "Rule application (parent-sibling-aunt-uncle): sibling(P66 Joao’ (Keerithi Maha Radun), P209 Dom Francisco de Malvidas) plus parent(P66 Joao’ (Keerithi Maha Radun), child) yields inferred aunt/uncle-line kin between P209 Dom Francisco de Malvidas and P213 Infanta Dona Ines de Malvidas.",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
@@ -1925,18 +1679,18 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
-  [k("kin", "P209", "P96", "aunt/uncle↔niece/nephew"), {
-    summary: "P209 Dom Francisco de Malvidas and P96 Donna Ines are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p209-p96-aunt-uncle-niece-nephew.md",
+  [k("kin", "P20", "P27", "aunt/uncle↔niece/nephew"), {
+    summary: "P20 Khadijah (Raadha Abarana) and P27 Dhaain (Keerithi Maha Rehendi) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
+    dossier: "docs/research-program/inferences/kin-p20-p27-aunt-uncle-niece-nephew.md",
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P96 Donna Ines (CLM-0349, SRC-MRF-KINGS, grade A); excerpt: Maldives Kings List family/genealogy content lists P66 Joao’ as parent of P96 Donna Ines.",
-      "Supporting edge: sibling P209 Dom Francisco de Malvidas <-> P66 Joao’ (Keerithi Maha Radun) [brothers (same parents: Dom Manoel + Dona Leonor)] (CLM-0625, SRC-ROYALARK-M16, grade A); excerpt: Direct sibling (brothers (same parents: Dom Manoel + Dona Leonor)) relation recorded between Dom Francisco de Malvidas and Joao’.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P66 Joao’ (Keerithi Maha Radun), P209 Dom Francisco de Malvidas) plus parent(P66 Joao’ (Keerithi Maha Radun), child) yields inferred aunt/uncle-line kin between P209 Dom Francisco de Malvidas and P96 Donna Ines.",
+      "Supporting edge: parent P25 Raadhaafathi (Suvama Abarana) -> P27 Dhaain (Keerithi Maha Rehendi) (CLM-0595, SRC-ROYALARK-MALDIVES, grade B); excerpt: RoyalArk Maldives lineage reconstruction treats Dhaain (P27) as daughter of Raadhaafathi/Malika Fatima (P25), alongside parent linkage through P26.",
+      "Supporting edge: sibling P20 Khadijah (Raadha Abarana) <-> P25 Raadhaafathi (Suvama Abarana) [half-sisters] (CLM-0427, SRC-MRF-KINGS, grade B); excerpt: Kings list marks P20 and P25 as half-sisters.",
+      "Rule application (parent-sibling-aunt-uncle): sibling(P25 Raadhaafathi (Suvama Abarana), P20 Khadijah (Raadha Abarana)) plus parent(P25 Raadhaafathi (Suvama Abarana), child) yields inferred aunt/uncle-line kin between P20 Khadijah (Raadha Abarana) and P27 Dhaain (Keerithi Maha Rehendi).",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
     verification: [
-      "Promotion requirement: explicit A/B source wording naming P209 Dom Francisco de Malvidas and P96 Donna Ines as kin (aunt/uncle↔niece/nephew).",
+      "Promotion requirement: explicit A/B source wording naming P20 Khadijah (Raadha Abarana) and P27 Dhaain (Keerithi Maha Rehendi) as kin (aunt/uncle↔niece/nephew).",
       "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
@@ -1946,8 +1700,8 @@ const INFERENCE_NOTES = new Map([
     dossier: "docs/research-program/inferences/kin-p210-p213-aunt-uncle-niece-nephew.md",
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P213 Infanta Dona Ines de Malvidas (CLM-0609, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Joao’ as parent of Infanta Dona Ines de Malvidas.",
-      "Supporting edge: sibling P210 Dom Pedro de Malvidas <-> P66 Joao’ (Keerithi Maha Radun) [brothers (same parents: Dom Manoel + Dona Leonor)] (CLM-0628, SRC-ROYALARK-M16, grade A); excerpt: Direct sibling (brothers (same parents: Dom Manoel + Dona Leonor)) relation recorded between Dom Pedro de Malvidas and Joao’.",
+      "Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P213 Infanta Dona Ines de Malvidas (CLM-0609, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry under Dom Joao lists Infanta Dona Ines de Malvidas as daughter of Dom Joao and Dona Francisca de Vasconcelos.",
+      "Supporting edge: sibling P210 Dom Pedro de Malvidas <-> P66 Joao’ (Keerithi Maha Radun) [brothers (same parents: Dom Manoel + Dona Leonor)] (CLM-0628, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry lists Dom Joao and Dom Pedro as sons in the same Dom Manoel and Dona Leonor de Ataide sibling set.",
       "Rule application (parent-sibling-aunt-uncle): sibling(P66 Joao’ (Keerithi Maha Radun), P210 Dom Pedro de Malvidas) plus parent(P66 Joao’ (Keerithi Maha Radun), child) yields inferred aunt/uncle-line kin between P210 Dom Pedro de Malvidas and P213 Infanta Dona Ines de Malvidas.",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
@@ -1963,7 +1717,7 @@ const INFERENCE_NOTES = new Map([
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
       "Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P67 Philippe’ (Keerithi Maha Radun) (CLM-0348, SRC-MRF-KINGS, grade A); excerpt: Maldives Kings List family/genealogy content lists P66 Joao’ as parent of P67 Philippe’.",
-      "Supporting edge: sibling P210 Dom Pedro de Malvidas <-> P66 Joao’ (Keerithi Maha Radun) [brothers (same parents: Dom Manoel + Dona Leonor)] (CLM-0628, SRC-ROYALARK-M16, grade A); excerpt: Direct sibling (brothers (same parents: Dom Manoel + Dona Leonor)) relation recorded between Dom Pedro de Malvidas and Joao’.",
+      "Supporting edge: sibling P210 Dom Pedro de Malvidas <-> P66 Joao’ (Keerithi Maha Radun) [brothers (same parents: Dom Manoel + Dona Leonor)] (CLM-0628, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry lists Dom Joao and Dom Pedro as sons in the same Dom Manoel and Dona Leonor de Ataide sibling set.",
       "Rule application (parent-sibling-aunt-uncle): sibling(P66 Joao’ (Keerithi Maha Radun), P210 Dom Pedro de Malvidas) plus parent(P66 Joao’ (Keerithi Maha Radun), child) yields inferred aunt/uncle-line kin between P210 Dom Pedro de Malvidas and P67 Philippe’ (Keerithi Maha Radun).",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
@@ -1973,29 +1727,13 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
-  [k("kin", "P210", "P96", "aunt/uncle↔niece/nephew"), {
-    summary: "P210 Dom Pedro de Malvidas and P96 Donna Ines are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p210-p96-aunt-uncle-niece-nephew.md",
-    logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P96 Donna Ines (CLM-0349, SRC-MRF-KINGS, grade A); excerpt: Maldives Kings List family/genealogy content lists P66 Joao’ as parent of P96 Donna Ines.",
-      "Supporting edge: sibling P210 Dom Pedro de Malvidas <-> P66 Joao’ (Keerithi Maha Radun) [brothers (same parents: Dom Manoel + Dona Leonor)] (CLM-0628, SRC-ROYALARK-M16, grade A); excerpt: Direct sibling (brothers (same parents: Dom Manoel + Dona Leonor)) relation recorded between Dom Pedro de Malvidas and Joao’.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P66 Joao’ (Keerithi Maha Radun), P210 Dom Pedro de Malvidas) plus parent(P66 Joao’ (Keerithi Maha Radun), child) yields inferred aunt/uncle-line kin between P210 Dom Pedro de Malvidas and P96 Donna Ines.",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P210 Dom Pedro de Malvidas and P96 Donna Ines as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
   [k("kin", "P211", "P213", "aunt/uncle↔niece/nephew"), {
     summary: "P211 Dona Leonor de Malvidas and P213 Infanta Dona Ines de Malvidas are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
     dossier: "docs/research-program/inferences/kin-p211-p213-aunt-uncle-niece-nephew.md",
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P213 Infanta Dona Ines de Malvidas (CLM-0609, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Joao’ as parent of Infanta Dona Ines de Malvidas.",
-      "Supporting edge: sibling P211 Dona Leonor de Malvidas <-> P66 Joao’ (Keerithi Maha Radun) [siblings (same parents: Dom Manoel + Dona Leonor)] (CLM-0630, SRC-ROYALARK-M16, grade B); excerpt: Direct sibling (siblings (same parents: Dom Manoel + Dona Leonor)) relation recorded between Dona Leonor de Malvidas and Joao’.",
+      "Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P213 Infanta Dona Ines de Malvidas (CLM-0609, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry under Dom Joao lists Infanta Dona Ines de Malvidas as daughter of Dom Joao and Dona Francisca de Vasconcelos.",
+      "Supporting edge: sibling P211 Dona Leonor de Malvidas <-> P66 Joao’ (Keerithi Maha Radun) [siblings (same parents: Dom Manoel + Dona Leonor)] (CLM-0630, SRC-ROYALARK-M16, grade B); excerpt: RoyalArk lineage entry lists Dona Leonor de Malvidas and Dom Joao under the same parents (Dom Manoel and Dona Leonor de Ataide).",
       "Rule application (parent-sibling-aunt-uncle): sibling(P66 Joao’ (Keerithi Maha Radun), P211 Dona Leonor de Malvidas) plus parent(P66 Joao’ (Keerithi Maha Radun), child) yields inferred aunt/uncle-line kin between P211 Dona Leonor de Malvidas and P213 Infanta Dona Ines de Malvidas.",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
@@ -2011,7 +1749,7 @@ const INFERENCE_NOTES = new Map([
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
       "Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P67 Philippe’ (Keerithi Maha Radun) (CLM-0348, SRC-MRF-KINGS, grade A); excerpt: Maldives Kings List family/genealogy content lists P66 Joao’ as parent of P67 Philippe’.",
-      "Supporting edge: sibling P211 Dona Leonor de Malvidas <-> P66 Joao’ (Keerithi Maha Radun) [siblings (same parents: Dom Manoel + Dona Leonor)] (CLM-0630, SRC-ROYALARK-M16, grade B); excerpt: Direct sibling (siblings (same parents: Dom Manoel + Dona Leonor)) relation recorded between Dona Leonor de Malvidas and Joao’.",
+      "Supporting edge: sibling P211 Dona Leonor de Malvidas <-> P66 Joao’ (Keerithi Maha Radun) [siblings (same parents: Dom Manoel + Dona Leonor)] (CLM-0630, SRC-ROYALARK-M16, grade B); excerpt: RoyalArk lineage entry lists Dona Leonor de Malvidas and Dom Joao under the same parents (Dom Manoel and Dona Leonor de Ataide).",
       "Rule application (parent-sibling-aunt-uncle): sibling(P66 Joao’ (Keerithi Maha Radun), P211 Dona Leonor de Malvidas) plus parent(P66 Joao’ (Keerithi Maha Radun), child) yields inferred aunt/uncle-line kin between P211 Dona Leonor de Malvidas and P67 Philippe’ (Keerithi Maha Radun).",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
@@ -2021,29 +1759,13 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
-  [k("kin", "P211", "P96", "aunt/uncle↔niece/nephew"), {
-    summary: "P211 Dona Leonor de Malvidas and P96 Donna Ines are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p211-p96-aunt-uncle-niece-nephew.md",
-    logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P96 Donna Ines (CLM-0349, SRC-MRF-KINGS, grade A); excerpt: Maldives Kings List family/genealogy content lists P66 Joao’ as parent of P96 Donna Ines.",
-      "Supporting edge: sibling P211 Dona Leonor de Malvidas <-> P66 Joao’ (Keerithi Maha Radun) [siblings (same parents: Dom Manoel + Dona Leonor)] (CLM-0630, SRC-ROYALARK-M16, grade B); excerpt: Direct sibling (siblings (same parents: Dom Manoel + Dona Leonor)) relation recorded between Dona Leonor de Malvidas and Joao’.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P66 Joao’ (Keerithi Maha Radun), P211 Dona Leonor de Malvidas) plus parent(P66 Joao’ (Keerithi Maha Radun), child) yields inferred aunt/uncle-line kin between P211 Dona Leonor de Malvidas and P96 Donna Ines.",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P211 Dona Leonor de Malvidas and P96 Donna Ines as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
   [k("kin", "P212", "P213", "aunt/uncle↔niece/nephew"), {
     summary: "P212 Dona Catarina de Malvidas and P213 Infanta Dona Ines de Malvidas are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
     dossier: "docs/research-program/inferences/kin-p212-p213-aunt-uncle-niece-nephew.md",
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P213 Infanta Dona Ines de Malvidas (CLM-0609, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Joao’ as parent of Infanta Dona Ines de Malvidas.",
-      "Supporting edge: sibling P212 Dona Catarina de Malvidas <-> P66 Joao’ (Keerithi Maha Radun) [siblings (same parents: Dom Manoel + Dona Leonor)] (CLM-0631, SRC-ROYALARK-M16, grade B); excerpt: Direct sibling (siblings (same parents: Dom Manoel + Dona Leonor)) relation recorded between Dona Catarina de Malvidas and Joao’.",
+      "Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P213 Infanta Dona Ines de Malvidas (CLM-0609, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry under Dom Joao lists Infanta Dona Ines de Malvidas as daughter of Dom Joao and Dona Francisca de Vasconcelos.",
+      "Supporting edge: sibling P212 Dona Catarina de Malvidas <-> P66 Joao’ (Keerithi Maha Radun) [siblings (same parents: Dom Manoel + Dona Leonor)] (CLM-0631, SRC-ROYALARK-M16, grade B); excerpt: RoyalArk lineage entry lists Dona Catarina de Malvidas and Dom Joao under the same parents (Dom Manoel and Dona Leonor de Ataide).",
       "Rule application (parent-sibling-aunt-uncle): sibling(P66 Joao’ (Keerithi Maha Radun), P212 Dona Catarina de Malvidas) plus parent(P66 Joao’ (Keerithi Maha Radun), child) yields inferred aunt/uncle-line kin between P212 Dona Catarina de Malvidas and P213 Infanta Dona Ines de Malvidas.",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
@@ -2059,28 +1781,12 @@ const INFERENCE_NOTES = new Map([
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
       "Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P67 Philippe’ (Keerithi Maha Radun) (CLM-0348, SRC-MRF-KINGS, grade A); excerpt: Maldives Kings List family/genealogy content lists P66 Joao’ as parent of P67 Philippe’.",
-      "Supporting edge: sibling P212 Dona Catarina de Malvidas <-> P66 Joao’ (Keerithi Maha Radun) [siblings (same parents: Dom Manoel + Dona Leonor)] (CLM-0631, SRC-ROYALARK-M16, grade B); excerpt: Direct sibling (siblings (same parents: Dom Manoel + Dona Leonor)) relation recorded between Dona Catarina de Malvidas and Joao’.",
+      "Supporting edge: sibling P212 Dona Catarina de Malvidas <-> P66 Joao’ (Keerithi Maha Radun) [siblings (same parents: Dom Manoel + Dona Leonor)] (CLM-0631, SRC-ROYALARK-M16, grade B); excerpt: RoyalArk lineage entry lists Dona Catarina de Malvidas and Dom Joao under the same parents (Dom Manoel and Dona Leonor de Ataide).",
       "Rule application (parent-sibling-aunt-uncle): sibling(P66 Joao’ (Keerithi Maha Radun), P212 Dona Catarina de Malvidas) plus parent(P66 Joao’ (Keerithi Maha Radun), child) yields inferred aunt/uncle-line kin between P212 Dona Catarina de Malvidas and P67 Philippe’ (Keerithi Maha Radun).",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
     verification: [
       "Promotion requirement: explicit A/B source wording naming P212 Dona Catarina de Malvidas and P67 Philippe’ (Keerithi Maha Radun) as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P212", "P96", "aunt/uncle↔niece/nephew"), {
-    summary: "P212 Dona Catarina de Malvidas and P96 Donna Ines are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p212-p96-aunt-uncle-niece-nephew.md",
-    logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P96 Donna Ines (CLM-0349, SRC-MRF-KINGS, grade A); excerpt: Maldives Kings List family/genealogy content lists P66 Joao’ as parent of P96 Donna Ines.",
-      "Supporting edge: sibling P212 Dona Catarina de Malvidas <-> P66 Joao’ (Keerithi Maha Radun) [siblings (same parents: Dom Manoel + Dona Leonor)] (CLM-0631, SRC-ROYALARK-M16, grade B); excerpt: Direct sibling (siblings (same parents: Dom Manoel + Dona Leonor)) relation recorded between Dona Catarina de Malvidas and Joao’.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P66 Joao’ (Keerithi Maha Radun), P212 Dona Catarina de Malvidas) plus parent(P66 Joao’ (Keerithi Maha Radun), child) yields inferred aunt/uncle-line kin between P212 Dona Catarina de Malvidas and P96 Donna Ines.",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P212 Dona Catarina de Malvidas and P96 Donna Ines as kin (aunt/uncle↔niece/nephew).",
       "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
@@ -2165,6 +1871,71 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
+  [k("kin", "P218", "P31", "grandparent"), {
+    summary: "P218 Golavehi Kabulo and P31 Ibrahim (Dhammaru Veeru) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
+    dossier: "docs/research-program/inferences/kin-p218-p31-grandparent.md",
+    logic: [
+      "Support set for rule parent-of-parent-grandparent resolved as follows.",
+      "Supporting edge: parent P218 Golavehi Kabulo -> P30 Hassan (Bavana) (CLM-0654, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Golavehi Kabulo as parent of Hassan.",
+      "Supporting edge: parent P30 Hassan (Bavana) -> P31 Ibrahim (Dhammaru Veeru) (CLM-0333, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P30 Hassan as parent of P31 Ibrahim.",
+      "Rule application (parent-of-parent-grandparent): with source -> P30 Hassan (Bavana) and P30 Hassan (Bavana) -> target parent links, P218 Golavehi Kabulo is modeled as inferred grandparent-line kin of P31 Ibrahim (Dhammaru Veeru).",
+      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
+    ],
+    verification: [
+      "Promotion requirement: explicit A/B source wording naming P218 Golavehi Kabulo and P31 Ibrahim (Dhammaru Veeru) as kin (grandparent).",
+      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
+      "Review cadence: recompute after any parent/sibling edge change in this local branch."
+    ]
+  }],
+  [k("kin", "P218", "P39", "grandparent"), {
+    summary: "P218 Golavehi Kabulo and P39 Yoosuf (Loka Aananadha) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
+    dossier: "docs/research-program/inferences/kin-p218-p39-grandparent.md",
+    logic: [
+      "Support set for rule parent-of-parent-grandparent resolved as follows.",
+      "Supporting edge: parent P218 Golavehi Kabulo -> P30 Hassan (Bavana) (CLM-0654, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Golavehi Kabulo as parent of Hassan.",
+      "Supporting edge: parent P30 Hassan (Bavana) -> P39 Yoosuf (Loka Aananadha) (CLM-0334, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P30 Hassan as parent of P39 Yoosuf.",
+      "Rule application (parent-of-parent-grandparent): with source -> P30 Hassan (Bavana) and P30 Hassan (Bavana) -> target parent links, P218 Golavehi Kabulo is modeled as inferred grandparent-line kin of P39 Yoosuf (Loka Aananadha).",
+      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
+    ],
+    verification: [
+      "Promotion requirement: explicit A/B source wording naming P218 Golavehi Kabulo and P39 Yoosuf (Loka Aananadha) as kin (grandparent).",
+      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
+      "Review cadence: recompute after any parent/sibling edge change in this local branch."
+    ]
+  }],
+  [k("kin", "P218", "P40", "grandparent"), {
+    summary: "P218 Golavehi Kabulo and P40 Aboobakuru (Bavana Sooja) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
+    dossier: "docs/research-program/inferences/kin-p218-p40-grandparent.md",
+    logic: [
+      "Support set for rule parent-of-parent-grandparent resolved as follows.",
+      "Supporting edge: parent P218 Golavehi Kabulo -> P30 Hassan (Bavana) (CLM-0654, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Golavehi Kabulo as parent of Hassan.",
+      "Supporting edge: parent P30 Hassan (Bavana) -> P40 Aboobakuru (Bavana Sooja) (CLM-0335, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P30 Hassan as parent of P40 Aboobakuru.",
+      "Rule application (parent-of-parent-grandparent): with source -> P30 Hassan (Bavana) and P30 Hassan (Bavana) -> target parent links, P218 Golavehi Kabulo is modeled as inferred grandparent-line kin of P40 Aboobakuru (Bavana Sooja).",
+      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
+    ],
+    verification: [
+      "Promotion requirement: explicit A/B source wording naming P218 Golavehi Kabulo and P40 Aboobakuru (Bavana Sooja) as kin (grandparent).",
+      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
+      "Review cadence: recompute after any parent/sibling edge change in this local branch."
+    ]
+  }],
+  [k("kin", "P219", "P50", "cousins"), {
+    summary: "P219 Umar Ma'afai Kilege and P50 Ibrahim (Bavana Furasuddha) are modeled as inferred kin (cousins) through rule `children-of-siblings-cousin`.",
+    dossier: "docs/research-program/inferences/kin-p219-p50-cousins.md",
+    logic: [
+      "Support set for rule children-of-siblings-cousin resolved as follows.",
+      "Supporting edge: parent P51 Kalu Mohamed (Dhammaru Bavana) -> P219 Umar Ma'afai Kilege (CLM-0603, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded in the supporting source lane.",
+      "Supporting edge: parent P47 Hassan (Raadha Aanandha) -> P50 Ibrahim (Bavana Furasuddha) (CLM-0601, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded in the supporting source lane.",
+      "Supporting edge: sibling P51 Kalu Mohamed (Dhammaru Bavana) <-> P47 Hassan (Raadha Aanandha) [half-brothers] (CLM-0639, SRC-ROYALARK-MALDIVES, grade B); excerpt: Sibling relation for the two parents recorded in the supporting source lane.",
+      "Rule application (children-of-siblings-cousin): children of sibling parents P51 Kalu Mohamed (Dhammaru Bavana) and P47 Hassan (Raadha Aanandha) are modeled as inferred cousin-line kin (P219 Umar Ma'afai Kilege <-> P50 Ibrahim (Bavana Furasuddha)).",
+      "Current modeling remains inferred because direct source text naming kin (cousins) for this exact pair is not yet captured."
+    ],
+    verification: [
+      "Promotion requirement: explicit A/B source wording naming P219 Umar Ma'afai Kilege and P50 Ibrahim (Bavana Furasuddha) as kin (cousins).",
+      "Downgrade/removal trigger: source-backed changes to any support edge used by rule children-of-siblings-cousin.",
+      "Review cadence: recompute after any parent/sibling edge change in this local branch."
+    ]
+  }],
   [k("kin", "P219", "P55", "cousins"), {
     summary: "P219 Umar Ma'afai Kilege and P55 Hassan (Singa Veeru) are modeled as inferred kin (cousins) through rule `children-of-siblings-cousin`.",
     dossier: "docs/research-program/inferences/kin-p219-p55-cousins.md",
@@ -2203,7 +1974,7 @@ const INFERENCE_NOTES = new Map([
     logic: [
       "Support set for rule parent-of-parent-grandparent resolved as follows.",
       "Supporting edge: parent P220 Ahmad Manikufa'anu Kalaminja -> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) (CLM-0588, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Ahmad Manikufa'anu Kalaminja as parent of Hassan IX / Dom Manoel.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P209 Dom Francisco de Malvidas (CLM-0605, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dom Francisco de Malvidas.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P209 Dom Francisco de Malvidas (CLM-0605, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry under Dom Manoel lists Dom Francisco de Malvidas among the children of Dom Manoel and Dona Leonor de Ataide.",
       "Rule application (parent-of-parent-grandparent): with source -> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) and P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> target parent links, P220 Ahmad Manikufa'anu Kalaminja is modeled as inferred grandparent-line kin of P209 Dom Francisco de Malvidas.",
       "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
     ],
@@ -2219,7 +1990,7 @@ const INFERENCE_NOTES = new Map([
     logic: [
       "Support set for rule parent-of-parent-grandparent resolved as follows.",
       "Supporting edge: parent P220 Ahmad Manikufa'anu Kalaminja -> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) (CLM-0588, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Ahmad Manikufa'anu Kalaminja as parent of Hassan IX / Dom Manoel.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P210 Dom Pedro de Malvidas (CLM-0606, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dom Pedro de Malvidas.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P210 Dom Pedro de Malvidas (CLM-0606, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry under Dom Manoel lists Dom Pedro de Malvidas among the children of Dom Manoel and Dona Leonor de Ataide.",
       "Rule application (parent-of-parent-grandparent): with source -> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) and P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> target parent links, P220 Ahmad Manikufa'anu Kalaminja is modeled as inferred grandparent-line kin of P210 Dom Pedro de Malvidas.",
       "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
     ],
@@ -2235,7 +2006,7 @@ const INFERENCE_NOTES = new Map([
     logic: [
       "Support set for rule parent-of-parent-grandparent resolved as follows.",
       "Supporting edge: parent P220 Ahmad Manikufa'anu Kalaminja -> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) (CLM-0588, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Ahmad Manikufa'anu Kalaminja as parent of Hassan IX / Dom Manoel.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P211 Dona Leonor de Malvidas (CLM-0607, SRC-ROYALARK-M16, grade B); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dona Leonor de Malvidas.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P211 Dona Leonor de Malvidas (CLM-0607, SRC-ROYALARK-M16, grade B); excerpt: RoyalArk lineage entry under Dom Manoel lists Dona Leonor de Malvidas as a daughter in the same Dom Manoel and Dona Leonor de Ataide branch.",
       "Rule application (parent-of-parent-grandparent): with source -> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) and P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> target parent links, P220 Ahmad Manikufa'anu Kalaminja is modeled as inferred grandparent-line kin of P211 Dona Leonor de Malvidas.",
       "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
     ],
@@ -2251,13 +2022,30 @@ const INFERENCE_NOTES = new Map([
     logic: [
       "Support set for rule parent-of-parent-grandparent resolved as follows.",
       "Supporting edge: parent P220 Ahmad Manikufa'anu Kalaminja -> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) (CLM-0588, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Ahmad Manikufa'anu Kalaminja as parent of Hassan IX / Dom Manoel.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P212 Dona Catarina de Malvidas (CLM-0608, SRC-ROYALARK-M16, grade B); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dona Catarina de Malvidas.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P212 Dona Catarina de Malvidas (CLM-0608, SRC-ROYALARK-M16, grade B); excerpt: RoyalArk lineage entry under Dom Manoel lists Dona Catarina de Malvidas as a daughter in the same Dom Manoel and Dona Leonor de Ataide branch.",
       "Rule application (parent-of-parent-grandparent): with source -> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) and P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> target parent links, P220 Ahmad Manikufa'anu Kalaminja is modeled as inferred grandparent-line kin of P212 Dona Catarina de Malvidas.",
       "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
     ],
     verification: [
       "Promotion requirement: explicit A/B source wording naming P220 Ahmad Manikufa'anu Kalaminja and P212 Dona Catarina de Malvidas as kin (grandparent).",
       "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
+      "Review cadence: recompute after any parent/sibling edge change in this local branch."
+    ]
+  }],
+  [k("kin", "P220", "P50", "cousins"), {
+    summary: "P220 Ahmad Manikufa'anu Kalaminja and P50 Ibrahim (Bavana Furasuddha) are modeled as inferred kin (cousins) through rule `children-of-siblings-cousin`.",
+    dossier: "docs/research-program/inferences/kin-p220-p50-cousins.md",
+    logic: [
+      "Support set for rule children-of-siblings-cousin resolved as follows.",
+      "Supporting edge: parent P51 Kalu Mohamed (Dhammaru Bavana) -> P220 Ahmad Manikufa'anu Kalaminja (CLM-0604, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded in the supporting source lane.",
+      "Supporting edge: parent P47 Hassan (Raadha Aanandha) -> P50 Ibrahim (Bavana Furasuddha) (CLM-0601, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded in the supporting source lane.",
+      "Supporting edge: sibling P51 Kalu Mohamed (Dhammaru Bavana) <-> P47 Hassan (Raadha Aanandha) [half-brothers] (CLM-0639, SRC-ROYALARK-MALDIVES, grade B); excerpt: Sibling relation for the two parents recorded in the supporting source lane.",
+      "Rule application (children-of-siblings-cousin): children of sibling parents P51 Kalu Mohamed (Dhammaru Bavana) and P47 Hassan (Raadha Aanandha) are modeled as inferred cousin-line kin (P220 Ahmad Manikufa'anu Kalaminja <-> P50 Ibrahim (Bavana Furasuddha)).",
+      "Current modeling remains inferred because direct source text naming kin (cousins) for this exact pair is not yet captured."
+    ],
+    verification: [
+      "Promotion requirement: explicit A/B source wording naming P220 Ahmad Manikufa'anu Kalaminja and P50 Ibrahim (Bavana Furasuddha) as kin (cousins).",
+      "Downgrade/removal trigger: source-backed changes to any support edge used by rule children-of-siblings-cousin.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
@@ -2315,7 +2103,7 @@ const INFERENCE_NOTES = new Map([
     logic: [
       "Support set for rule parent-of-parent-grandparent resolved as follows.",
       "Supporting edge: parent P221 Golavehi Aisha Rani Kilege -> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) (CLM-0590, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Golavehi Aisha Rani Kilege as parent of Hassan IX / Dom Manoel.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P209 Dom Francisco de Malvidas (CLM-0605, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dom Francisco de Malvidas.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P209 Dom Francisco de Malvidas (CLM-0605, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry under Dom Manoel lists Dom Francisco de Malvidas among the children of Dom Manoel and Dona Leonor de Ataide.",
       "Rule application (parent-of-parent-grandparent): with source -> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) and P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> target parent links, P221 Golavehi Aisha Rani Kilege is modeled as inferred grandparent-line kin of P209 Dom Francisco de Malvidas.",
       "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
     ],
@@ -2331,7 +2119,7 @@ const INFERENCE_NOTES = new Map([
     logic: [
       "Support set for rule parent-of-parent-grandparent resolved as follows.",
       "Supporting edge: parent P221 Golavehi Aisha Rani Kilege -> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) (CLM-0590, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Golavehi Aisha Rani Kilege as parent of Hassan IX / Dom Manoel.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P210 Dom Pedro de Malvidas (CLM-0606, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dom Pedro de Malvidas.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P210 Dom Pedro de Malvidas (CLM-0606, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry under Dom Manoel lists Dom Pedro de Malvidas among the children of Dom Manoel and Dona Leonor de Ataide.",
       "Rule application (parent-of-parent-grandparent): with source -> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) and P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> target parent links, P221 Golavehi Aisha Rani Kilege is modeled as inferred grandparent-line kin of P210 Dom Pedro de Malvidas.",
       "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
     ],
@@ -2347,7 +2135,7 @@ const INFERENCE_NOTES = new Map([
     logic: [
       "Support set for rule parent-of-parent-grandparent resolved as follows.",
       "Supporting edge: parent P221 Golavehi Aisha Rani Kilege -> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) (CLM-0590, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Golavehi Aisha Rani Kilege as parent of Hassan IX / Dom Manoel.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P211 Dona Leonor de Malvidas (CLM-0607, SRC-ROYALARK-M16, grade B); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dona Leonor de Malvidas.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P211 Dona Leonor de Malvidas (CLM-0607, SRC-ROYALARK-M16, grade B); excerpt: RoyalArk lineage entry under Dom Manoel lists Dona Leonor de Malvidas as a daughter in the same Dom Manoel and Dona Leonor de Ataide branch.",
       "Rule application (parent-of-parent-grandparent): with source -> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) and P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> target parent links, P221 Golavehi Aisha Rani Kilege is modeled as inferred grandparent-line kin of P211 Dona Leonor de Malvidas.",
       "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
     ],
@@ -2363,7 +2151,7 @@ const INFERENCE_NOTES = new Map([
     logic: [
       "Support set for rule parent-of-parent-grandparent resolved as follows.",
       "Supporting edge: parent P221 Golavehi Aisha Rani Kilege -> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) (CLM-0590, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Golavehi Aisha Rani Kilege as parent of Hassan IX / Dom Manoel.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P212 Dona Catarina de Malvidas (CLM-0608, SRC-ROYALARK-M16, grade B); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dona Catarina de Malvidas.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P212 Dona Catarina de Malvidas (CLM-0608, SRC-ROYALARK-M16, grade B); excerpt: RoyalArk lineage entry under Dom Manoel lists Dona Catarina de Malvidas as a daughter in the same Dom Manoel and Dona Leonor de Ataide branch.",
       "Rule application (parent-of-parent-grandparent): with source -> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) and P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> target parent links, P221 Golavehi Aisha Rani Kilege is modeled as inferred grandparent-line kin of P212 Dona Catarina de Malvidas.",
       "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
     ],
@@ -2386,20 +2174,6 @@ const INFERENCE_NOTES = new Map([
     verification: [
       "Promotion requirement: explicit A/B source wording naming P221 Golavehi Aisha Rani Kilege and P66 Joao’ (Keerithi Maha Radun) as kin (grandparent).",
       "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P222", "P129", "aunt/uncle↔niece/nephew"), {
-    summary: "P222 Hassan Izz ud-din and P129 Princess Veyogey Dhon Goma are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p129-p222-aunt-uncle-niece-nephew.md",
-    logic: [
-      "Supporting edge: unresolved from inference basis metadata for rule parent-sibling-aunt-uncle.",
-      "This dossier should be re-generated after edge-basis reconciliation.",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P222 Hassan Izz ud-din and P129 Princess Veyogey Dhon Goma as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
@@ -2481,29 +2255,13 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
-  [k("kin", "P30", "P207", "grandparent"), {
-    summary: "P30 Hassan (Bavana) and P207 Recca are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
-    dossier: "docs/research-program/inferences/kin-p207-p30-grandparent.md",
-    logic: [
-      "Support set for rule parent-of-parent-grandparent resolved as follows.",
-      "Supporting edge: parent P30 Hassan (Bavana) -> P40 Aboobakuru (Bavana Sooja) (CLM-0335, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P30 Hassan as parent of P40 Aboobakuru.",
-      "Supporting edge: parent P40 Aboobakuru (Bavana Sooja) -> P207 Recca (CLM-0598, SRC-MRF-HILAALY, grade B); excerpt: Direct parent relation recorded between Aboobakuru as parent of Recca.",
-      "Rule application (parent-of-parent-grandparent): with source -> P40 Aboobakuru (Bavana Sooja) and P40 Aboobakuru (Bavana Sooja) -> target parent links, P30 Hassan (Bavana) is modeled as inferred grandparent-line kin of P207 Recca.",
-      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P30 Hassan (Bavana) and P207 Recca as kin (grandparent).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
   [k("kin", "P30", "P41", "grandparent"), {
     summary: "P30 Hassan (Bavana) and P41 Hadi Hassan (Raadha Veeru) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
     dossier: "docs/research-program/inferences/kin-p30-p41-grandparent.md",
     logic: [
       "Support set for rule parent-of-parent-grandparent resolved as follows.",
       "Supporting edge: parent P30 Hassan (Bavana) -> P39 Yoosuf (Loka Aananadha) (CLM-0334, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P30 Hassan as parent of P39 Yoosuf.",
-      "Supporting edge: parent P39 Yoosuf (Loka Aananadha) -> P41 Hadi Hassan (Raadha Veeru) (CLM-0596, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Yoosuf as parent of Hadi Hassan.",
+      "Supporting edge: parent P39 Yoosuf (Loka Aananadha) -> P41 Hadi Hassan (Raadha Veeru) (CLM-0596, SRC-ROYALARK-MALDIVES, grade B); excerpt: RoyalArk Maldives lineage reconstruction gives Yoosuf (P39) as father of Hadi Hassan (P41), which aligns with current canonical parent selection.",
       "Rule application (parent-of-parent-grandparent): with source -> P39 Yoosuf (Loka Aananadha) and P39 Yoosuf (Loka Aananadha) -> target parent links, P30 Hassan (Bavana) is modeled as inferred grandparent-line kin of P41 Hadi Hassan (Raadha Veeru).",
       "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
     ],
@@ -2559,27 +2317,12 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
-  [k("kin", "P31", "P207", "aunt/uncle↔niece/nephew"), {
-    summary: "P31 Ibrahim (Dhammaru Veeru) and P207 Recca are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p207-p31-aunt-uncle-niece-nephew.md",
-    logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P40 Aboobakuru (Bavana Sooja) -> P207 Recca (CLM-0598, SRC-MRF-HILAALY, grade B); excerpt: Direct parent relation recorded between Aboobakuru as parent of Recca.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P40 Aboobakuru (Bavana Sooja), P31 Ibrahim (Dhammaru Veeru)) plus parent(P40 Aboobakuru (Bavana Sooja), child) yields inferred aunt/uncle-line kin between P31 Ibrahim (Dhammaru Veeru) and P207 Recca.",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P31 Ibrahim (Dhammaru Veeru) and P207 Recca as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
   [k("kin", "P31", "P41", "aunt/uncle↔niece/nephew"), {
     summary: "P31 Ibrahim (Dhammaru Veeru) and P41 Hadi Hassan (Raadha Veeru) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
     dossier: "docs/research-program/inferences/kin-p31-p41-aunt-uncle-niece-nephew.md",
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P39 Yoosuf (Loka Aananadha) -> P41 Hadi Hassan (Raadha Veeru) (CLM-0596, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Yoosuf as parent of Hadi Hassan.",
+      "Supporting edge: parent P39 Yoosuf (Loka Aananadha) -> P41 Hadi Hassan (Raadha Veeru) (CLM-0596, SRC-ROYALARK-MALDIVES, grade B); excerpt: RoyalArk Maldives lineage reconstruction gives Yoosuf (P39) as father of Hadi Hassan (P41), which aligns with current canonical parent selection.",
       "Rule application (parent-sibling-aunt-uncle): sibling(P39 Yoosuf (Loka Aananadha), P31 Ibrahim (Dhammaru Veeru)) plus parent(P39 Yoosuf (Loka Aananadha), child) yields inferred aunt/uncle-line kin between P31 Ibrahim (Dhammaru Veeru) and P41 Hadi Hassan (Raadha Veeru).",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
@@ -2684,28 +2427,12 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
-  [k("kin", "P39", "P207", "aunt/uncle↔niece/nephew"), {
-    summary: "P39 Yoosuf (Loka Aananadha) and P207 Recca are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p207-p39-aunt-uncle-niece-nephew.md",
-    logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P40 Aboobakuru (Bavana Sooja) -> P207 Recca (CLM-0598, SRC-MRF-HILAALY, grade B); excerpt: Direct parent relation recorded between Aboobakuru as parent of Recca.",
-      "Supporting edge: sibling P39 Yoosuf (Loka Aananadha) <-> P40 Aboobakuru (Bavana Sooja) [half-brothers] (CLM-0432, SRC-MRF-KINGS, grade B); excerpt: Kings list marks P39 and P40 as half-brothers.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P40 Aboobakuru (Bavana Sooja), P39 Yoosuf (Loka Aananadha)) plus parent(P40 Aboobakuru (Bavana Sooja), child) yields inferred aunt/uncle-line kin between P39 Yoosuf (Loka Aananadha) and P207 Recca.",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P39 Yoosuf (Loka Aananadha) and P207 Recca as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
   [k("kin", "P39", "P44", "grandparent"), {
     summary: "P39 Yoosuf (Loka Aananadha) and P44 Mohamed (Bavana Abarana) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
     dossier: "docs/research-program/inferences/kin-p39-p44-grandparent.md",
     logic: [
       "Support set for rule parent-of-parent-grandparent resolved as follows.",
-      "Supporting edge: parent P39 Yoosuf (Loka Aananadha) -> P41 Hadi Hassan (Raadha Veeru) (CLM-0596, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Yoosuf as parent of Hadi Hassan.",
+      "Supporting edge: parent P39 Yoosuf (Loka Aananadha) -> P41 Hadi Hassan (Raadha Veeru) (CLM-0596, SRC-ROYALARK-MALDIVES, grade B); excerpt: RoyalArk Maldives lineage reconstruction gives Yoosuf (P39) as father of Hadi Hassan (P41), which aligns with current canonical parent selection.",
       "Supporting edge: parent P41 Hadi Hassan (Raadha Veeru) -> P44 Mohamed (Bavana Abarana) (CLM-0339, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P41 Hadi Hassan as parent of P44 Mohamed.",
       "Rule application (parent-of-parent-grandparent): with source -> P41 Hadi Hassan (Raadha Veeru) and P41 Hadi Hassan (Raadha Veeru) -> target parent links, P39 Yoosuf (Loka Aananadha) is modeled as inferred grandparent-line kin of P44 Mohamed (Bavana Abarana).",
       "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
@@ -2817,7 +2544,7 @@ const INFERENCE_NOTES = new Map([
     dossier: "docs/research-program/inferences/kin-p193-p41-cousins.md",
     logic: [
       "Support set for rule children-of-siblings-cousin resolved as follows.",
-      "Supporting edge: parent P39 Yoosuf (Loka Aananadha) -> P41 Hadi Hassan (Raadha Veeru) (CLM-0596, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Yoosuf as parent of Hadi Hassan.",
+      "Supporting edge: parent P39 Yoosuf (Loka Aananadha) -> P41 Hadi Hassan (Raadha Veeru) (CLM-0596, SRC-ROYALARK-MALDIVES, grade B); excerpt: RoyalArk Maldives lineage reconstruction gives Yoosuf (P39) as father of Hadi Hassan (P41), which aligns with current canonical parent selection.",
       "Supporting edge: parent P40 Aboobakuru (Bavana Sooja) -> P193 Princess Recca (CLM-0337, SRC-MRF-KINGS, grade B); excerpt: Kings list and Hilaaly branch notes together support parent edge P40 to P193.",
       "Supporting edge: sibling P39 Yoosuf (Loka Aananadha) <-> P40 Aboobakuru (Bavana Sooja) [half-brothers] (CLM-0432, SRC-MRF-KINGS, grade B); excerpt: Kings list marks P39 and P40 as half-brothers.",
       "Rule application (children-of-siblings-cousin): children of sibling parents P39 Yoosuf (Loka Aananadha) and P40 Aboobakuru (Bavana Sooja) are modeled as inferred cousin-line kin (P41 Hadi Hassan (Raadha Veeru) <-> P193 Princess Recca).",
@@ -2834,7 +2561,7 @@ const INFERENCE_NOTES = new Map([
     dossier: "docs/research-program/inferences/kin-p202-p41-cousins.md",
     logic: [
       "Support set for rule children-of-siblings-cousin resolved as follows.",
-      "Supporting edge: parent P39 Yoosuf (Loka Aananadha) -> P41 Hadi Hassan (Raadha Veeru) (CLM-0596, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Yoosuf as parent of Hadi Hassan.",
+      "Supporting edge: parent P39 Yoosuf (Loka Aananadha) -> P41 Hadi Hassan (Raadha Veeru) (CLM-0596, SRC-ROYALARK-MALDIVES, grade B); excerpt: RoyalArk Maldives lineage reconstruction gives Yoosuf (P39) as father of Hadi Hassan (P41), which aligns with current canonical parent selection.",
       "Supporting edge: parent P40 Aboobakuru (Bavana Sooja) -> P202 Kamba Dio (CLM-0597, SRC-MRF-HILAALY, grade B); excerpt: Direct parent relation recorded between Aboobakuru as parent of Kamba Dio.",
       "Supporting edge: sibling P39 Yoosuf (Loka Aananadha) <-> P40 Aboobakuru (Bavana Sooja) [half-brothers] (CLM-0432, SRC-MRF-KINGS, grade B); excerpt: Kings list marks P39 and P40 as half-brothers.",
       "Rule application (children-of-siblings-cousin): children of sibling parents P39 Yoosuf (Loka Aananadha) and P40 Aboobakuru (Bavana Sooja) are modeled as inferred cousin-line kin (P41 Hadi Hassan (Raadha Veeru) <-> P202 Kamba Dio).",
@@ -2842,23 +2569,6 @@ const INFERENCE_NOTES = new Map([
     ],
     verification: [
       "Promotion requirement: explicit A/B source wording naming P41 Hadi Hassan (Raadha Veeru) and P202 Kamba Dio as kin (cousins).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule children-of-siblings-cousin.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P41", "P207", "cousins"), {
-    summary: "P41 Hadi Hassan (Raadha Veeru) and P207 Recca are modeled as inferred kin (cousins) through rule `children-of-siblings-cousin`.",
-    dossier: "docs/research-program/inferences/kin-p207-p41-cousins.md",
-    logic: [
-      "Support set for rule children-of-siblings-cousin resolved as follows.",
-      "Supporting edge: parent P39 Yoosuf (Loka Aananadha) -> P41 Hadi Hassan (Raadha Veeru) (CLM-0596, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Yoosuf as parent of Hadi Hassan.",
-      "Supporting edge: parent P40 Aboobakuru (Bavana Sooja) -> P207 Recca (CLM-0598, SRC-MRF-HILAALY, grade B); excerpt: Direct parent relation recorded between Aboobakuru as parent of Recca.",
-      "Supporting edge: sibling P39 Yoosuf (Loka Aananadha) <-> P40 Aboobakuru (Bavana Sooja) [half-brothers] (CLM-0432, SRC-MRF-KINGS, grade B); excerpt: Kings list marks P39 and P40 as half-brothers.",
-      "Rule application (children-of-siblings-cousin): children of sibling parents P39 Yoosuf (Loka Aananadha) and P40 Aboobakuru (Bavana Sooja) are modeled as inferred cousin-line kin (P41 Hadi Hassan (Raadha Veeru) <-> P207 Recca).",
-      "Current modeling remains inferred because direct source text naming kin (cousins) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P41 Hadi Hassan (Raadha Veeru) and P207 Recca as kin (cousins).",
       "Downgrade/removal trigger: source-backed changes to any support edge used by rule children-of-siblings-cousin.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
@@ -3002,23 +2712,6 @@ const INFERENCE_NOTES = new Map([
     ],
     verification: [
       "Promotion requirement: explicit A/B source wording naming P46 Omar (Loka Sundhura) and P202 Kamba Dio as kin (cousins).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule children-of-siblings-cousin.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P46", "P207", "cousins"), {
-    summary: "P46 Omar (Loka Sundhura) and P207 Recca are modeled as inferred kin (cousins) through rule `children-of-siblings-cousin`.",
-    dossier: "docs/research-program/inferences/kin-p207-p46-cousins.md",
-    logic: [
-      "Support set for rule children-of-siblings-cousin resolved as follows.",
-      "Supporting edge: parent P39 Yoosuf (Loka Aananadha) -> P46 Omar (Loka Sundhura) (CLM-0336, SRC-MRF-KINGS, grade B); excerpt: Kings list records parent edge P39 to P46.",
-      "Supporting edge: parent P40 Aboobakuru (Bavana Sooja) -> P207 Recca (CLM-0598, SRC-MRF-HILAALY, grade B); excerpt: Direct parent relation recorded between Aboobakuru as parent of Recca.",
-      "Supporting edge: sibling P39 Yoosuf (Loka Aananadha) <-> P40 Aboobakuru (Bavana Sooja) [half-brothers] (CLM-0432, SRC-MRF-KINGS, grade B); excerpt: Kings list marks P39 and P40 as half-brothers.",
-      "Rule application (children-of-siblings-cousin): children of sibling parents P39 Yoosuf (Loka Aananadha) and P40 Aboobakuru (Bavana Sooja) are modeled as inferred cousin-line kin (P46 Omar (Loka Sundhura) <-> P207 Recca).",
-      "Current modeling remains inferred because direct source text naming kin (cousins) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P46 Omar (Loka Sundhura) and P207 Recca as kin (cousins).",
       "Downgrade/removal trigger: source-backed changes to any support edge used by rule children-of-siblings-cousin.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
@@ -3235,103 +2928,13 @@ const INFERENCE_NOTES = new Map([
     logic: [
       "Support set for rule children-of-siblings-cousin resolved as follows.",
       "Supporting edge: parent P202 Kamba Dio -> P49 Sheikh Hassan (Raadha Fanaveeru) (CLM-0572, SRC-MRF-HILAALY, grade B); excerpt: Direct parent relation recorded between Kamba Dio as parent of Sheikh Hassan.",
-      "Supporting edge: parent P207 Recca -> P57 Ali (Aanandha) (CLM-0579, SRC-MRF-HILAALY, grade B); excerpt: Direct parent relation recorded between Recca as parent of Ali.",
-      "Rule application (children-of-siblings-cousin): children of sibling parents P202 Kamba Dio and P207 Recca are modeled as inferred cousin-line kin (P49 Sheikh Hassan (Raadha Fanaveeru) <-> P57 Ali (Aanandha)).",
+      "Supporting edge: parent P193 Princess Recca -> P57 Ali (Aanandha) (CLM-0329, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P193 Princess Recca as parent of P57 Ali.",
+      "Rule application (children-of-siblings-cousin): children of sibling parents P202 Kamba Dio and P193 Princess Recca are modeled as inferred cousin-line kin (P49 Sheikh Hassan (Raadha Fanaveeru) <-> P57 Ali (Aanandha)).",
       "Current modeling remains inferred because direct source text naming kin (cousins) for this exact pair is not yet captured."
     ],
     verification: [
       "Promotion requirement: explicit A/B source wording naming P49 Sheikh Hassan (Raadha Fanaveeru) and P57 Ali (Aanandha) as kin (cousins).",
       "Downgrade/removal trigger: source-backed changes to any support edge used by rule children-of-siblings-cousin.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P5", "P13", "aunt/uncle↔niece/nephew"), {
-    summary: "P5 Dhinei (Fennaadheeththa) and P13 Audha (Areedha Suvara) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p13-p5-aunt-uncle-niece-nephew.md",
-    logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P7 Wadi (Dhagathaa Suvara) -> P13 Audha (Areedha Suvara) (CLM-0352, SRC-MRF-KINGS, grade B); excerpt: Kings list sequence indicates P7 as father of P13.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P7 Wadi (Dhagathaa Suvara), P5 Dhinei (Fennaadheeththa)) plus parent(P7 Wadi (Dhagathaa Suvara), child) yields inferred aunt/uncle-line kin between P5 Dhinei (Fennaadheeththa) and P13 Audha (Areedha Suvara).",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P5 Dhinei (Fennaadheeththa) and P13 Audha (Areedha Suvara) as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P50", "P208", "aunt/uncle↔niece/nephew"), {
-    summary: "P50 Ibrahim (Bavana Furasuddha) and P208 Princess Aysha Rani Kilege are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p208-p50-aunt-uncle-niece-nephew.md",
-    logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P51 Kalu Mohamed (Dhammaru Bavana) -> P208 Princess Aysha Rani Kilege (CLM-0602, SRC-MRF-KINGS, grade B); excerpt: Direct parent relation recorded between Kalu Mohamed as parent of Princess Aysha Rani Kilege.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P51 Kalu Mohamed (Dhammaru Bavana), P50 Ibrahim (Bavana Furasuddha)) plus parent(P51 Kalu Mohamed (Dhammaru Bavana), child) yields inferred aunt/uncle-line kin between P50 Ibrahim (Bavana Furasuddha) and P208 Princess Aysha Rani Kilege.",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P50 Ibrahim (Bavana Furasuddha) and P208 Princess Aysha Rani Kilege as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P50", "P219", "aunt/uncle↔niece/nephew"), {
-    summary: "P50 Ibrahim (Bavana Furasuddha) and P219 Umar Ma'afai Kilege are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p219-p50-aunt-uncle-niece-nephew.md",
-    logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P51 Kalu Mohamed (Dhammaru Bavana) -> P219 Umar Ma'afai Kilege (CLM-0603, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Kalu Mohamed as parent of Umar Ma'afai Kilege.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P51 Kalu Mohamed (Dhammaru Bavana), P50 Ibrahim (Bavana Furasuddha)) plus parent(P51 Kalu Mohamed (Dhammaru Bavana), child) yields inferred aunt/uncle-line kin between P50 Ibrahim (Bavana Furasuddha) and P219 Umar Ma'afai Kilege.",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P50 Ibrahim (Bavana Furasuddha) and P219 Umar Ma'afai Kilege as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P50", "P220", "aunt/uncle↔niece/nephew"), {
-    summary: "P50 Ibrahim (Bavana Furasuddha) and P220 Ahmad Manikufa'anu Kalaminja are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p220-p50-aunt-uncle-niece-nephew.md",
-    logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P51 Kalu Mohamed (Dhammaru Bavana) -> P220 Ahmad Manikufa'anu Kalaminja (CLM-0604, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Kalu Mohamed as parent of Ahmad Manikufa'anu Kalaminja.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P51 Kalu Mohamed (Dhammaru Bavana), P50 Ibrahim (Bavana Furasuddha)) plus parent(P51 Kalu Mohamed (Dhammaru Bavana), child) yields inferred aunt/uncle-line kin between P50 Ibrahim (Bavana Furasuddha) and P220 Ahmad Manikufa'anu Kalaminja.",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P50 Ibrahim (Bavana Furasuddha) and P220 Ahmad Manikufa'anu Kalaminja as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P50", "P55", "aunt/uncle↔niece/nephew"), {
-    summary: "P50 Ibrahim (Bavana Furasuddha) and P55 Hassan (Singa Veeru) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p50-p55-aunt-uncle-niece-nephew.md",
-    logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P52 Yoosuf (Veeru Aanandha) -> P55 Hassan (Singa Veeru) (CLM-0346, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P52 Yoosuf as parent of P55 Hassan.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P52 Yoosuf (Veeru Aanandha), P50 Ibrahim (Bavana Furasuddha)) plus parent(P52 Yoosuf (Veeru Aanandha), child) yields inferred aunt/uncle-line kin between P50 Ibrahim (Bavana Furasuddha) and P55 Hassan (Singa Veeru).",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P50 Ibrahim (Bavana Furasuddha) and P55 Hassan (Singa Veeru) as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P50", "P59", "aunt/uncle↔niece/nephew"), {
-    summary: "P50 Ibrahim (Bavana Furasuddha) and P59 Hassan of Shiraz (Ram Mani Loka) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p50-p59-aunt-uncle-niece-nephew.md",
-    logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P51 Kalu Mohamed (Dhammaru Bavana) -> P59 Hassan of Shiraz (Ram Mani Loka) (CLM-0345, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P51 Kalu Mohamed as parent of P59 Hassan of Shiraz.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P51 Kalu Mohamed (Dhammaru Bavana), P50 Ibrahim (Bavana Furasuddha)) plus parent(P51 Kalu Mohamed (Dhammaru Bavana), child) yields inferred aunt/uncle-line kin between P50 Ibrahim (Bavana Furasuddha) and P59 Hassan of Shiraz (Ram Mani Loka).",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P50 Ibrahim (Bavana Furasuddha) and P59 Hassan of Shiraz (Ram Mani Loka) as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
@@ -3446,6 +3049,40 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
+  [k("kin", "P55", "P50", "cousins"), {
+    summary: "P55 Hassan (Singa Veeru) and P50 Ibrahim (Bavana Furasuddha) are modeled as inferred kin (cousins) through rule `children-of-siblings-cousin`.",
+    dossier: "docs/research-program/inferences/kin-p50-p55-cousins.md",
+    logic: [
+      "Support set for rule children-of-siblings-cousin resolved as follows.",
+      "Supporting edge: parent P52 Yoosuf (Veeru Aanandha) -> P55 Hassan (Singa Veeru) (CLM-0346, SRC-MRF-KINGS, grade B); excerpt: Direct parent relation recorded in the supporting source lane.",
+      "Supporting edge: parent P47 Hassan (Raadha Aanandha) -> P50 Ibrahim (Bavana Furasuddha) (CLM-0601, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded in the supporting source lane.",
+      "Supporting edge: sibling P47 Hassan (Raadha Aanandha) <-> P52 Yoosuf (Veeru Aanandha) [brothers] (CLM-0435, SRC-MRF-KINGS, grade C inferred); excerpt: Sibling relation for the two parents recorded in the supporting source lane.",
+      "Rule application (children-of-siblings-cousin): children of sibling parents P52 Yoosuf (Veeru Aanandha) and P47 Hassan (Raadha Aanandha) are modeled as inferred cousin-line kin (P55 Hassan (Singa Veeru) <-> P50 Ibrahim (Bavana Furasuddha)).",
+      "Current modeling remains inferred because direct source text naming kin (cousins) for this exact pair is not yet captured."
+    ],
+    verification: [
+      "Promotion requirement: explicit A/B source wording naming P55 Hassan (Singa Veeru) and P50 Ibrahim (Bavana Furasuddha) as kin (cousins).",
+      "Downgrade/removal trigger: source-backed changes to any support edge used by rule children-of-siblings-cousin.",
+      "Review cadence: recompute after any parent/sibling edge change in this local branch."
+    ]
+  }],
+  [k("kin", "P59", "P50", "cousins"), {
+    summary: "P59 Hassan of Shiraz (Ram Mani Loka) and P50 Ibrahim (Bavana Furasuddha) are modeled as inferred kin (cousins) through rule `children-of-siblings-cousin`.",
+    dossier: "docs/research-program/inferences/kin-p50-p59-cousins.md",
+    logic: [
+      "Support set for rule children-of-siblings-cousin resolved as follows.",
+      "Supporting edge: parent P51 Kalu Mohamed (Dhammaru Bavana) -> P59 Hassan of Shiraz (Ram Mani Loka) (CLM-0345, SRC-MRF-KINGS, grade B); excerpt: Direct parent relation recorded in the supporting source lane.",
+      "Supporting edge: parent P47 Hassan (Raadha Aanandha) -> P50 Ibrahim (Bavana Furasuddha) (CLM-0601, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded in the supporting source lane.",
+      "Supporting edge: sibling P51 Kalu Mohamed (Dhammaru Bavana) <-> P47 Hassan (Raadha Aanandha) [half-brothers] (CLM-0639, SRC-ROYALARK-MALDIVES, grade B); excerpt: Sibling relation for the two parents recorded in the supporting source lane.",
+      "Rule application (children-of-siblings-cousin): children of sibling parents P51 Kalu Mohamed (Dhammaru Bavana) and P47 Hassan (Raadha Aanandha) are modeled as inferred cousin-line kin (P59 Hassan of Shiraz (Ram Mani Loka) <-> P50 Ibrahim (Bavana Furasuddha)).",
+      "Current modeling remains inferred because direct source text naming kin (cousins) for this exact pair is not yet captured."
+    ],
+    verification: [
+      "Promotion requirement: explicit A/B source wording naming P59 Hassan of Shiraz (Ram Mani Loka) and P50 Ibrahim (Bavana Furasuddha) as kin (cousins).",
+      "Downgrade/removal trigger: source-backed changes to any support edge used by rule children-of-siblings-cousin.",
+      "Review cadence: recompute after any parent/sibling edge change in this local branch."
+    ]
+  }],
   [k("kin", "P59", "P55", "cousins"), {
     summary: "P59 Hassan of Shiraz (Ram Mani Loka) and P55 Hassan (Singa Veeru) are modeled as inferred kin (cousins) through rule `children-of-siblings-cousin`.",
     dossier: "docs/research-program/inferences/kin-p55-p59-cousins.md",
@@ -3493,18 +3130,17 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
-  [k("kin", "P6", "P13", "aunt/uncle↔niece/nephew"), {
-    summary: "P6 Dhilhel (Dhagathaa Abarana) and P13 Audha (Areedha Suvara) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p13-p6-aunt-uncle-niece-nephew.md",
+  [k("kin", "P5", "P13", "aunt/uncle↔niece/nephew"), {
+    summary: "P5 Dhinei (Fennaadheeththa) and P13 Audha (Areedha Suvara) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
+    dossier: "docs/research-program/inferences/kin-p13-p5-aunt-uncle-niece-nephew.md",
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
       "Supporting edge: parent P7 Wadi (Dhagathaa Suvara) -> P13 Audha (Areedha Suvara) (CLM-0352, SRC-MRF-KINGS, grade B); excerpt: Kings list sequence indicates P7 as father of P13.",
-      "Supporting edge: sibling P6 Dhilhel (Dhagathaa Abarana) <-> P7 Wadi (Dhagathaa Suvara) [brothers] (CLM-0442, SRC-MRF-KINGS, grade B); excerpt: Kings list explicitly notes P6 and P7 as brothers.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P7 Wadi (Dhagathaa Suvara), P6 Dhilhel (Dhagathaa Abarana)) plus parent(P7 Wadi (Dhagathaa Suvara), child) yields inferred aunt/uncle-line kin between P6 Dhilhel (Dhagathaa Abarana) and P13 Audha (Areedha Suvara).",
+      "Rule application (parent-sibling-aunt-uncle): sibling(P7 Wadi (Dhagathaa Suvara), P5 Dhinei (Fennaadheeththa)) plus parent(P7 Wadi (Dhagathaa Suvara), child) yields inferred aunt/uncle-line kin between P5 Dhinei (Fennaadheeththa) and P13 Audha (Areedha Suvara).",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
     verification: [
-      "Promotion requirement: explicit A/B source wording naming P6 Dhilhel (Dhagathaa Abarana) and P13 Audha (Areedha Suvara) as kin (aunt/uncle↔niece/nephew).",
+      "Promotion requirement: explicit A/B source wording naming P5 Dhinei (Fennaadheeththa) and P13 Audha (Areedha Suvara) as kin (aunt/uncle↔niece/nephew).",
       "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
@@ -3514,8 +3150,8 @@ const INFERENCE_NOTES = new Map([
     dossier: "docs/research-program/inferences/kin-p209-p60-aunt-uncle-niece-nephew.md",
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P209 Dom Francisco de Malvidas (CLM-0605, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dom Francisco de Malvidas.",
-      "Supporting edge: sibling P60 Mohamed (Singa Bavana) <-> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) [half-brothers (maternal, same mother Golavehi Aisha Rani Kilege)] (CLM-0640, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct sibling (half-brothers (maternal, same mother Golavehi Aisha Rani Kilege)) relation recorded between Mohamed and Hassan IX / Dom Manoel.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P209 Dom Francisco de Malvidas (CLM-0605, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry under Dom Manoel lists Dom Francisco de Malvidas among the children of Dom Manoel and Dona Leonor de Ataide.",
+      "Supporting edge: sibling P60 Mohamed (Singa Bavana) <-> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) [half-brothers (maternal, same mother Golavehi Aisha Rani Kilege)] (CLM-0640, SRC-ROYALARK-MALDIVES, grade B); excerpt: RoyalArk and Kings-list lineage context support P60 and P61 as maternal half-brothers via shared mother Golavehi Aisha Rani Kilege and different fa...",
       "Rule application (parent-sibling-aunt-uncle): sibling(P61 Hassan IX / Dom Manoel (Dhirikusa Loka), P60 Mohamed (Singa Bavana)) plus parent(P61 Hassan IX / Dom Manoel (Dhirikusa Loka), child) yields inferred aunt/uncle-line kin between P60 Mohamed (Singa Bavana) and P209 Dom Francisco de Malvidas.",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
@@ -3530,8 +3166,8 @@ const INFERENCE_NOTES = new Map([
     dossier: "docs/research-program/inferences/kin-p210-p60-aunt-uncle-niece-nephew.md",
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P210 Dom Pedro de Malvidas (CLM-0606, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dom Pedro de Malvidas.",
-      "Supporting edge: sibling P60 Mohamed (Singa Bavana) <-> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) [half-brothers (maternal, same mother Golavehi Aisha Rani Kilege)] (CLM-0640, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct sibling (half-brothers (maternal, same mother Golavehi Aisha Rani Kilege)) relation recorded between Mohamed and Hassan IX / Dom Manoel.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P210 Dom Pedro de Malvidas (CLM-0606, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry under Dom Manoel lists Dom Pedro de Malvidas among the children of Dom Manoel and Dona Leonor de Ataide.",
+      "Supporting edge: sibling P60 Mohamed (Singa Bavana) <-> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) [half-brothers (maternal, same mother Golavehi Aisha Rani Kilege)] (CLM-0640, SRC-ROYALARK-MALDIVES, grade B); excerpt: RoyalArk and Kings-list lineage context support P60 and P61 as maternal half-brothers via shared mother Golavehi Aisha Rani Kilege and different fa...",
       "Rule application (parent-sibling-aunt-uncle): sibling(P61 Hassan IX / Dom Manoel (Dhirikusa Loka), P60 Mohamed (Singa Bavana)) plus parent(P61 Hassan IX / Dom Manoel (Dhirikusa Loka), child) yields inferred aunt/uncle-line kin between P60 Mohamed (Singa Bavana) and P210 Dom Pedro de Malvidas.",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
@@ -3546,8 +3182,8 @@ const INFERENCE_NOTES = new Map([
     dossier: "docs/research-program/inferences/kin-p211-p60-aunt-uncle-niece-nephew.md",
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P211 Dona Leonor de Malvidas (CLM-0607, SRC-ROYALARK-M16, grade B); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dona Leonor de Malvidas.",
-      "Supporting edge: sibling P60 Mohamed (Singa Bavana) <-> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) [half-brothers (maternal, same mother Golavehi Aisha Rani Kilege)] (CLM-0640, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct sibling (half-brothers (maternal, same mother Golavehi Aisha Rani Kilege)) relation recorded between Mohamed and Hassan IX / Dom Manoel.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P211 Dona Leonor de Malvidas (CLM-0607, SRC-ROYALARK-M16, grade B); excerpt: RoyalArk lineage entry under Dom Manoel lists Dona Leonor de Malvidas as a daughter in the same Dom Manoel and Dona Leonor de Ataide branch.",
+      "Supporting edge: sibling P60 Mohamed (Singa Bavana) <-> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) [half-brothers (maternal, same mother Golavehi Aisha Rani Kilege)] (CLM-0640, SRC-ROYALARK-MALDIVES, grade B); excerpt: RoyalArk and Kings-list lineage context support P60 and P61 as maternal half-brothers via shared mother Golavehi Aisha Rani Kilege and different fa...",
       "Rule application (parent-sibling-aunt-uncle): sibling(P61 Hassan IX / Dom Manoel (Dhirikusa Loka), P60 Mohamed (Singa Bavana)) plus parent(P61 Hassan IX / Dom Manoel (Dhirikusa Loka), child) yields inferred aunt/uncle-line kin between P60 Mohamed (Singa Bavana) and P211 Dona Leonor de Malvidas.",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
@@ -3562,8 +3198,8 @@ const INFERENCE_NOTES = new Map([
     dossier: "docs/research-program/inferences/kin-p212-p60-aunt-uncle-niece-nephew.md",
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P212 Dona Catarina de Malvidas (CLM-0608, SRC-ROYALARK-M16, grade B); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dona Catarina de Malvidas.",
-      "Supporting edge: sibling P60 Mohamed (Singa Bavana) <-> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) [half-brothers (maternal, same mother Golavehi Aisha Rani Kilege)] (CLM-0640, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct sibling (half-brothers (maternal, same mother Golavehi Aisha Rani Kilege)) relation recorded between Mohamed and Hassan IX / Dom Manoel.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P212 Dona Catarina de Malvidas (CLM-0608, SRC-ROYALARK-M16, grade B); excerpt: RoyalArk lineage entry under Dom Manoel lists Dona Catarina de Malvidas as a daughter in the same Dom Manoel and Dona Leonor de Ataide branch.",
+      "Supporting edge: sibling P60 Mohamed (Singa Bavana) <-> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) [half-brothers (maternal, same mother Golavehi Aisha Rani Kilege)] (CLM-0640, SRC-ROYALARK-MALDIVES, grade B); excerpt: RoyalArk and Kings-list lineage context support P60 and P61 as maternal half-brothers via shared mother Golavehi Aisha Rani Kilege and different fa...",
       "Rule application (parent-sibling-aunt-uncle): sibling(P61 Hassan IX / Dom Manoel (Dhirikusa Loka), P60 Mohamed (Singa Bavana)) plus parent(P61 Hassan IX / Dom Manoel (Dhirikusa Loka), child) yields inferred aunt/uncle-line kin between P60 Mohamed (Singa Bavana) and P212 Dona Catarina de Malvidas.",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
@@ -3579,7 +3215,7 @@ const INFERENCE_NOTES = new Map([
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
       "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P66 Joao’ (Keerithi Maha Radun) (CLM-0347, SRC-MRF-KINGS, grade A); excerpt: Maldives Kings List family/genealogy content lists P61 Hassan IX / Dom Manoel as parent of P66 Joao’.",
-      "Supporting edge: sibling P60 Mohamed (Singa Bavana) <-> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) [half-brothers (maternal, same mother Golavehi Aisha Rani Kilege)] (CLM-0640, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct sibling (half-brothers (maternal, same mother Golavehi Aisha Rani Kilege)) relation recorded between Mohamed and Hassan IX / Dom Manoel.",
+      "Supporting edge: sibling P60 Mohamed (Singa Bavana) <-> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) [half-brothers (maternal, same mother Golavehi Aisha Rani Kilege)] (CLM-0640, SRC-ROYALARK-MALDIVES, grade B); excerpt: RoyalArk and Kings-list lineage context support P60 and P61 as maternal half-brothers via shared mother Golavehi Aisha Rani Kilege and different fa...",
       "Rule application (parent-sibling-aunt-uncle): sibling(P61 Hassan IX / Dom Manoel (Dhirikusa Loka), P60 Mohamed (Singa Bavana)) plus parent(P61 Hassan IX / Dom Manoel (Dhirikusa Loka), child) yields inferred aunt/uncle-line kin between P60 Mohamed (Singa Bavana) and P66 Joao’ (Keerithi Maha Radun).",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
@@ -3595,7 +3231,7 @@ const INFERENCE_NOTES = new Map([
     logic: [
       "Support set for rule parent-of-parent-grandparent resolved as follows.",
       "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P66 Joao’ (Keerithi Maha Radun) (CLM-0347, SRC-MRF-KINGS, grade A); excerpt: Maldives Kings List family/genealogy content lists P61 Hassan IX / Dom Manoel as parent of P66 Joao’.",
-      "Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P213 Infanta Dona Ines de Malvidas (CLM-0609, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Joao’ as parent of Infanta Dona Ines de Malvidas.",
+      "Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P213 Infanta Dona Ines de Malvidas (CLM-0609, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry under Dom Joao lists Infanta Dona Ines de Malvidas as daughter of Dom Joao and Dona Francisca de Vasconcelos.",
       "Rule application (parent-of-parent-grandparent): with source -> P66 Joao’ (Keerithi Maha Radun) and P66 Joao’ (Keerithi Maha Radun) -> target parent links, P61 Hassan IX / Dom Manoel (Dhirikusa Loka) is modeled as inferred grandparent-line kin of P213 Infanta Dona Ines de Malvidas.",
       "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
     ],
@@ -3621,28 +3257,12 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
-  [k("kin", "P61", "P96", "grandparent"), {
-    summary: "P61 Hassan IX / Dom Manoel (Dhirikusa Loka) and P96 Donna Ines are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
-    dossier: "docs/research-program/inferences/kin-p61-p96-grandparent.md",
-    logic: [
-      "Support set for rule parent-of-parent-grandparent resolved as follows.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P66 Joao’ (Keerithi Maha Radun) (CLM-0347, SRC-MRF-KINGS, grade A); excerpt: Maldives Kings List family/genealogy content lists P61 Hassan IX / Dom Manoel as parent of P66 Joao’.",
-      "Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P96 Donna Ines (CLM-0349, SRC-MRF-KINGS, grade A); excerpt: Maldives Kings List family/genealogy content lists P66 Joao’ as parent of P96 Donna Ines.",
-      "Rule application (parent-of-parent-grandparent): with source -> P66 Joao’ (Keerithi Maha Radun) and P66 Joao’ (Keerithi Maha Radun) -> target parent links, P61 Hassan IX / Dom Manoel (Dhirikusa Loka) is modeled as inferred grandparent-line kin of P96 Donna Ines.",
-      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P61 Hassan IX / Dom Manoel (Dhirikusa Loka) and P96 Donna Ines as kin (grandparent).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
   [k("kin", "P66", "P97", "grandparent"), {
     summary: "P66 Joao’ (Keerithi Maha Radun) and P97 Dom Luis de Sousa are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
     dossier: "docs/research-program/inferences/kin-p66-p97-grandparent.md",
     logic: [
       "Support set for rule parent-of-parent-grandparent resolved as follows.",
-      "Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P213 Infanta Dona Ines de Malvidas (CLM-0609, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Joao’ as parent of Infanta Dona Ines de Malvidas.",
+      "Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P213 Infanta Dona Ines de Malvidas (CLM-0609, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry under Dom Joao lists Infanta Dona Ines de Malvidas as daughter of Dom Joao and Dona Francisca de Vasconcelos.",
       "Supporting edge: parent P213 Infanta Dona Ines de Malvidas -> P97 Dom Luis de Sousa (CLM-0580, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Infanta Dona Ines de Malvidas as parent of Dom Luis de Sousa.",
       "Rule application (parent-of-parent-grandparent): with source -> P213 Infanta Dona Ines de Malvidas and P213 Infanta Dona Ines de Malvidas -> target parent links, P66 Joao’ (Keerithi Maha Radun) is modeled as inferred grandparent-line kin of P97 Dom Luis de Sousa.",
       "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
@@ -3659,7 +3279,7 @@ const INFERENCE_NOTES = new Map([
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
       "Supporting edge: parent P213 Infanta Dona Ines de Malvidas -> P97 Dom Luis de Sousa (CLM-0580, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Infanta Dona Ines de Malvidas as parent of Dom Luis de Sousa.",
-      "Supporting edge: sibling P213 Infanta Dona Ines de Malvidas <-> P67 Philippe’ (Keerithi Maha Radun) [siblings (same parents: Dom Joao + Dona Francisca)] (CLM-0632, SRC-ROYALARK-M16, grade A); excerpt: Direct sibling (siblings (same parents: Dom Joao + Dona Francisca)) relation recorded between Infanta Dona Ines de Malvidas and Philippe’.",
+      "Supporting edge: sibling P213 Infanta Dona Ines de Malvidas <-> P67 Philippe’ (Keerithi Maha Radun) [siblings (same parents: Dom Joao + Dona Francisca)] (CLM-0632, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry for Dom Joao and Dona Francisca lists both Dom Felipe (P67) and Infanta Dona Ines (P213), supporting a direct sibling relation.",
       "Rule application (parent-sibling-aunt-uncle): sibling(P213 Infanta Dona Ines de Malvidas, P67 Philippe’ (Keerithi Maha Radun)) plus parent(P213 Infanta Dona Ines de Malvidas, child) yields inferred aunt/uncle-line kin between P67 Philippe’ (Keerithi Maha Radun) and P97 Dom Luis de Sousa.",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
@@ -3685,34 +3305,19 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
-  [k("kin", "P7", "P14", "grandparent"), {
-    summary: "P7 Wadi (Dhagathaa Suvara) and P14 Hali (Areedha Suvara) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
-    dossier: "docs/research-program/inferences/kin-p14-p7-grandparent.md",
+  [k("kin", "P6", "P13", "aunt/uncle↔niece/nephew"), {
+    summary: "P6 Dhilhel (Dhagathaa Abarana) and P13 Audha (Areedha Suvara) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
+    dossier: "docs/research-program/inferences/kin-p13-p6-aunt-uncle-niece-nephew.md",
     logic: [
-      "Support set for rule parent-of-parent-grandparent resolved as follows.",
+      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
       "Supporting edge: parent P7 Wadi (Dhagathaa Suvara) -> P13 Audha (Areedha Suvara) (CLM-0352, SRC-MRF-KINGS, grade B); excerpt: Kings list sequence indicates P7 as father of P13.",
-      "Supporting edge: parent P13 Audha (Areedha Suvara) -> P14 Hali (Areedha Suvara) (CLM-0263, SRC-MRF-KINGS, grade B); excerpt: Kings list gives P14 as son of P13 in the early Lunar succession sequence.",
-      "Rule application (parent-of-parent-grandparent): with source -> P13 Audha (Areedha Suvara) and P13 Audha (Areedha Suvara) -> target parent links, P7 Wadi (Dhagathaa Suvara) is modeled as inferred grandparent-line kin of P14 Hali (Areedha Suvara).",
-      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
+      "Supporting edge: sibling P6 Dhilhel (Dhagathaa Abarana) <-> P7 Wadi (Dhagathaa Suvara) [brothers] (CLM-0442, SRC-MRF-KINGS, grade B); excerpt: Kings list explicitly notes P6 and P7 as brothers.",
+      "Rule application (parent-sibling-aunt-uncle): sibling(P7 Wadi (Dhagathaa Suvara), P6 Dhilhel (Dhagathaa Abarana)) plus parent(P7 Wadi (Dhagathaa Suvara), child) yields inferred aunt/uncle-line kin between P6 Dhilhel (Dhagathaa Abarana) and P13 Audha (Areedha Suvara).",
+      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
     verification: [
-      "Promotion requirement: explicit A/B source wording naming P7 Wadi (Dhagathaa Suvara) and P14 Hali (Areedha Suvara) as kin (grandparent).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P7", "P15", "grandparent"), {
-    summary: "P7 Wadi (Dhagathaa Suvara) and P15 Yoosuf (Bavanaadheeththa) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
-    dossier: "docs/research-program/inferences/kin-p15-p7-grandparent.md",
-    logic: [
-      "Support set for rule parent-of-parent-grandparent resolved as follows.",
-      "Supporting edge: parent P7 Wadi (Dhagathaa Suvara) -> P13 Audha (Areedha Suvara) (CLM-0352, SRC-MRF-KINGS, grade B); excerpt: Kings list sequence indicates P7 as father of P13.",
-      "Rule application (parent-of-parent-grandparent): with source -> P13 Audha (Areedha Suvara) and P13 Audha (Areedha Suvara) -> target parent links, P7 Wadi (Dhagathaa Suvara) is modeled as inferred grandparent-line kin of P15 Yoosuf (Bavanaadheeththa).",
-      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P7 Wadi (Dhagathaa Suvara) and P15 Yoosuf (Bavanaadheeththa) as kin (grandparent).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
+      "Promotion requirement: explicit A/B source wording naming P6 Dhilhel (Dhagathaa Abarana) and P13 Audha (Areedha Suvara) as kin (aunt/uncle↔niece/nephew).",
+      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
@@ -3754,6 +3359,7 @@ const INFERENCE_NOTES = new Map([
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
       "Supporting edge: parent P78 Ibrahim Iskander (Rannava Loka) -> P81 Mohamed Ghiyathuddine (Kula Rannmani Keerithi) (CLM-0356, SRC-WIKI-MONARCHS, grade B); excerpt: List of Maldivian monarchs family/genealogy content lists P78 Ibrahim Iskander as parent of P81 Mohamed Ghiyathuddine.",
+      "Supporting edge: sibling P78 Ibrahim Iskander (Rannava Loka) <-> P79 Mohamed Imaduddine (Navaranna Keerithi) [brothers] (CLM-0447, SRC-WIKI-MONARCHS, grade B); excerpt: List of Maldivian monarchs family/genealogy content links P78 Ibrahim Iskander and P79 Mohamed Imaduddine as siblings (brothers).",
       "Rule application (parent-sibling-aunt-uncle): sibling(P78 Ibrahim Iskander (Rannava Loka), P79 Mohamed Imaduddine (Navaranna Keerithi)) plus parent(P78 Ibrahim Iskander (Rannava Loka), child) yields inferred aunt/uncle-line kin between P79 Mohamed Imaduddine (Navaranna Keerithi) and P81 Mohamed Ghiyathuddine (Kula Rannmani Keerithi).",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
@@ -3763,19 +3369,34 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
-  [k("kin", "P8", "P13", "aunt/uncle↔niece/nephew"), {
-    summary: "P8 Valla Dio (Raa-Araa Desyara) and P13 Audha (Areedha Suvara) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p13-p8-aunt-uncle-niece-nephew.md",
+  [k("kin", "P7", "P14", "grandparent"), {
+    summary: "P7 Wadi (Dhagathaa Suvara) and P14 Hali (Areedha Suvara) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
+    dossier: "docs/research-program/inferences/kin-p14-p7-grandparent.md",
     logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
+      "Support set for rule parent-of-parent-grandparent resolved as follows.",
       "Supporting edge: parent P7 Wadi (Dhagathaa Suvara) -> P13 Audha (Areedha Suvara) (CLM-0352, SRC-MRF-KINGS, grade B); excerpt: Kings list sequence indicates P7 as father of P13.",
-      "Supporting edge: sibling P7 Wadi (Dhagathaa Suvara) <-> P8 Valla Dio (Raa-Araa Desyara) [brothers] (CLM-0446, SRC-MRF-KINGS, grade B); excerpt: Kings list explicitly notes P7 and P8 as brothers.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P7 Wadi (Dhagathaa Suvara), P8 Valla Dio (Raa-Araa Desyara)) plus parent(P7 Wadi (Dhagathaa Suvara), child) yields inferred aunt/uncle-line kin between P8 Valla Dio (Raa-Araa Desyara) and P13 Audha (Areedha Suvara).",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
+      "Supporting edge: parent P13 Audha (Areedha Suvara) -> P14 Hali (Areedha Suvara) (CLM-0263, SRC-MRF-KINGS, grade B); excerpt: Kings list gives P14 as son of P13 in the early Lunar succession sequence.",
+      "Rule application (parent-of-parent-grandparent): with source -> P13 Audha (Areedha Suvara) and P13 Audha (Areedha Suvara) -> target parent links, P7 Wadi (Dhagathaa Suvara) is modeled as inferred grandparent-line kin of P14 Hali (Areedha Suvara).",
+      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
     ],
     verification: [
-      "Promotion requirement: explicit A/B source wording naming P8 Valla Dio (Raa-Araa Desyara) and P13 Audha (Areedha Suvara) as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
+      "Promotion requirement: explicit A/B source wording naming P7 Wadi (Dhagathaa Suvara) and P14 Hali (Areedha Suvara) as kin (grandparent).",
+      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
+      "Review cadence: recompute after any parent/sibling edge change in this local branch."
+    ]
+  }],
+  [k("kin", "P7", "P15", "grandparent"), {
+    summary: "P7 Wadi (Dhagathaa Suvara) and P15 Yoosuf (Bavanaadheeththa) are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
+    dossier: "docs/research-program/inferences/kin-p15-p7-grandparent.md",
+    logic: [
+      "Support set for rule parent-of-parent-grandparent resolved as follows.",
+      "Supporting edge: parent P7 Wadi (Dhagathaa Suvara) -> P13 Audha (Areedha Suvara) (CLM-0352, SRC-MRF-KINGS, grade B); excerpt: Kings list sequence indicates P7 as father of P13.",
+      "Rule application (parent-of-parent-grandparent): with source -> P13 Audha (Areedha Suvara) and P13 Audha (Areedha Suvara) -> target parent links, P7 Wadi (Dhagathaa Suvara) is modeled as inferred grandparent-line kin of P15 Yoosuf (Bavanaadheeththa).",
+      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
+    ],
+    verification: [
+      "Promotion requirement: explicit A/B source wording naming P7 Wadi (Dhagathaa Suvara) and P15 Yoosuf (Bavanaadheeththa) as kin (grandparent).",
+      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
@@ -3874,22 +3495,6 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
-  [k("kin", "P85", "P155", "grandparent"), {
-    summary: "P85 Mohamed Mueenuddine (Keerithi Maha Radun) and P155 Maandhoogey Bodu Dhorhy Manippulu are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
-    dossier: "docs/research-program/inferences/kin-p155-p85-grandparent.md",
-    logic: [
-      "Support set for rule parent-of-parent-grandparent resolved as follows.",
-      "Supporting edge: parent P85 Mohamed Mueenuddine (Keerithi Maha Radun) -> P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) (CLM-0361, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P85 Mohamed Mueenuddine as parent of P86 Mohamed Imaduddine.",
-      "Supporting edge: parent P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) -> P155 Maandhoogey Bodu Dhorhy Manippulu (CLM-0362, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P86 Mohamed Imaduddine as parent of P155 Maandhoogey Bodu Dhorhy Manippulu.",
-      "Rule application (parent-of-parent-grandparent): with source -> P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) and P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) -> target parent links, P85 Mohamed Mueenuddine (Keerithi Maha Radun) is modeled as inferred grandparent-line kin of P155 Maandhoogey Bodu Dhorhy Manippulu.",
-      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P85 Mohamed Mueenuddine (Keerithi Maha Radun) and P155 Maandhoogey Bodu Dhorhy Manippulu as kin (grandparent).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
   [k("kin", "P85", "P222", "grandparent"), {
     summary: "P85 Mohamed Mueenuddine (Keerithi Maha Radun) and P222 Hassan Izz ud-din are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
     dossier: "docs/research-program/inferences/kin-p222-p85-grandparent.md",
@@ -3918,21 +3523,6 @@ const INFERENCE_NOTES = new Map([
     ],
     verification: [
       "Promotion requirement: explicit A/B source wording naming P85 Mohamed Mueenuddine (Keerithi Maha Radun) and P87 Ibrahim Nooredine (Keerithi Maha Radun) as kin (grandparent).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P86", "P129", "grandparent"), {
-    summary: "P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) and P129 Princess Veyogey Dhon Goma are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
-    dossier: "docs/research-program/inferences/kin-p129-p86-grandparent.md",
-    logic: [
-      "Support set for rule parent-of-parent-grandparent resolved as follows.",
-      "Supporting edge: parent P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) -> P87 Ibrahim Nooredine (Keerithi Maha Radun) (CLM-0363, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P86 Mohamed Imaduddine as parent of P87 Ibrahim Nooredine.",
-      "Rule application (parent-of-parent-grandparent): with source -> P87 Ibrahim Nooredine (Keerithi Maha Radun) and P87 Ibrahim Nooredine (Keerithi Maha Radun) -> target parent links, P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) is modeled as inferred grandparent-line kin of P129 Princess Veyogey Dhon Goma.",
-      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) and P129 Princess Veyogey Dhon Goma as kin (grandparent).",
       "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
@@ -3969,36 +3559,6 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
-  [k("kin", "P87", "P190", "grandparent"), {
-    summary: "P87 Ibrahim Nooredine (Keerithi Maha Radun) and P190 Hassan Fareed Didi are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
-    dossier: "docs/research-program/inferences/kin-p190-p87-grandparent.md",
-    logic: [
-      "Support set for rule parent-of-parent-grandparent resolved as follows.",
-      "Supporting edge: parent P129 Princess Veyogey Dhon Goma -> P190 Hassan Fareed Didi (CLM-0260, SRC-WIKI-HASSAN-FARID, grade B); excerpt: Hassan Farid Didi family/genealogy content lists P129 Princess Veyogey Dhon Goma as parent of P190 Hassan Fareed Didi.",
-      "Rule application (parent-of-parent-grandparent): with source -> P129 Princess Veyogey Dhon Goma and P129 Princess Veyogey Dhon Goma -> target parent links, P87 Ibrahim Nooredine (Keerithi Maha Radun) is modeled as inferred grandparent-line kin of P190 Hassan Fareed Didi.",
-      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P87 Ibrahim Nooredine (Keerithi Maha Radun) and P190 Hassan Fareed Didi as kin (grandparent).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P87", "P191", "grandparent"), {
-    summary: "P87 Ibrahim Nooredine (Keerithi Maha Radun) and P191 Ibrahim Fareed Didi are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
-    dossier: "docs/research-program/inferences/kin-p191-p87-grandparent.md",
-    logic: [
-      "Support set for rule parent-of-parent-grandparent resolved as follows.",
-      "Supporting edge: parent P129 Princess Veyogey Dhon Goma -> P191 Ibrahim Fareed Didi (CLM-0261, SRC-WIKI-IBRAHIM-FAREED, grade B); excerpt: Ibrahim Fareed Didi family/genealogy content lists P129 Princess Veyogey Dhon Goma as parent of P191 Ibrahim Fareed Didi.",
-      "Rule application (parent-of-parent-grandparent): with source -> P129 Princess Veyogey Dhon Goma and P129 Princess Veyogey Dhon Goma -> target parent links, P87 Ibrahim Nooredine (Keerithi Maha Radun) is modeled as inferred grandparent-line kin of P191 Ibrahim Fareed Didi.",
-      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P87 Ibrahim Nooredine (Keerithi Maha Radun) and P191 Ibrahim Fareed Didi as kin (grandparent).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
   [k("kin", "P87", "P92", "uncle/nephew"), {
     summary: "P87 Ibrahim Nooredine (Keerithi Maha Radun) and P92 Mohamed Imaduddine VI (Keerithi Maha Radun) are modeled as `kin` with label `uncle/nephew` to preserve a targeted continuity claim without over-promoting certainty.",
     dossier: "docs/research-program/inferences/kin-p87-p92-uncle-nephew.md",
@@ -4015,32 +3575,18 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
     ]
   }],
-  [k("kin", "P90", "P190", "aunt/uncle↔niece/nephew"), {
-    summary: "P90 Mohamed Imaduddine V (Keerithi Maha Radun) and P190 Hassan Fareed Didi are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p190-p90-aunt-uncle-niece-nephew.md",
+  [k("kin", "P8", "P13", "aunt/uncle↔niece/nephew"), {
+    summary: "P8 Valla Dio (Raa-Araa Desyara) and P13 Audha (Areedha Suvara) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
+    dossier: "docs/research-program/inferences/kin-p13-p8-aunt-uncle-niece-nephew.md",
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P129 Princess Veyogey Dhon Goma -> P190 Hassan Fareed Didi (CLM-0260, SRC-WIKI-HASSAN-FARID, grade B); excerpt: Hassan Farid Didi family/genealogy content lists P129 Princess Veyogey Dhon Goma as parent of P190 Hassan Fareed Didi.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P129 Princess Veyogey Dhon Goma, P90 Mohamed Imaduddine V (Keerithi Maha Radun)) plus parent(P129 Princess Veyogey Dhon Goma, child) yields inferred aunt/uncle-line kin between P90 Mohamed Imaduddine V (Keerithi Maha Radun) and P190 Hassan Fareed Didi.",
+      "Supporting edge: parent P7 Wadi (Dhagathaa Suvara) -> P13 Audha (Areedha Suvara) (CLM-0352, SRC-MRF-KINGS, grade B); excerpt: Kings list sequence indicates P7 as father of P13.",
+      "Supporting edge: sibling P7 Wadi (Dhagathaa Suvara) <-> P8 Valla Dio (Raa-Araa Desyara) [brothers] (CLM-0446, SRC-MRF-KINGS, grade B); excerpt: Kings list explicitly notes P7 and P8 as brothers.",
+      "Rule application (parent-sibling-aunt-uncle): sibling(P7 Wadi (Dhagathaa Suvara), P8 Valla Dio (Raa-Araa Desyara)) plus parent(P7 Wadi (Dhagathaa Suvara), child) yields inferred aunt/uncle-line kin between P8 Valla Dio (Raa-Araa Desyara) and P13 Audha (Areedha Suvara).",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
     verification: [
-      "Promotion requirement: explicit A/B source wording naming P90 Mohamed Imaduddine V (Keerithi Maha Radun) and P190 Hassan Fareed Didi as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P90", "P191", "aunt/uncle↔niece/nephew"), {
-    summary: "P90 Mohamed Imaduddine V (Keerithi Maha Radun) and P191 Ibrahim Fareed Didi are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p191-p90-aunt-uncle-niece-nephew.md",
-    logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P129 Princess Veyogey Dhon Goma -> P191 Ibrahim Fareed Didi (CLM-0261, SRC-WIKI-IBRAHIM-FAREED, grade B); excerpt: Ibrahim Fareed Didi family/genealogy content lists P129 Princess Veyogey Dhon Goma as parent of P191 Ibrahim Fareed Didi.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P129 Princess Veyogey Dhon Goma, P90 Mohamed Imaduddine V (Keerithi Maha Radun)) plus parent(P129 Princess Veyogey Dhon Goma, child) yields inferred aunt/uncle-line kin between P90 Mohamed Imaduddine V (Keerithi Maha Radun) and P191 Ibrahim Fareed Didi.",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P90 Mohamed Imaduddine V (Keerithi Maha Radun) and P191 Ibrahim Fareed Didi as kin (aunt/uncle↔niece/nephew).",
+      "Promotion requirement: explicit A/B source wording naming P8 Valla Dio (Raa-Araa Desyara) and P13 Audha (Areedha Suvara) as kin (aunt/uncle↔niece/nephew).",
       "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
@@ -4077,27 +3623,13 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
-  [k("kin", "P90", "P95", "aunt/uncle↔niece/nephew"), {
-    summary: "P90 Mohamed Imaduddine V (Keerithi Maha Radun) and P95 Mohamed Farid (Keerithi Maha Radun) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
-    dossier: "docs/research-program/inferences/kin-p90-p95-aunt-uncle-niece-nephew.md",
-    logic: [
-      "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
-      "Supporting edge: parent P129 Princess Veyogey Dhon Goma -> P95 Mohamed Farid (Keerithi Maha Radun) (CLM-0262, SRC-WIKI-MUHAMMAD-FAREED, grade B); excerpt: Muhammad Fareed Didi family/genealogy content lists P129 Princess Veyogey Dhon Goma as parent of P95 Mohamed Farid.",
-      "Rule application (parent-sibling-aunt-uncle): sibling(P129 Princess Veyogey Dhon Goma, P90 Mohamed Imaduddine V (Keerithi Maha Radun)) plus parent(P129 Princess Veyogey Dhon Goma, child) yields inferred aunt/uncle-line kin between P90 Mohamed Imaduddine V (Keerithi Maha Radun) and P95 Mohamed Farid (Keerithi Maha Radun).",
-      "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P90 Mohamed Imaduddine V (Keerithi Maha Radun) and P95 Mohamed Farid (Keerithi Maha Radun) as kin (aunt/uncle↔niece/nephew).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
   [k("kin", "P91", "P190", "aunt/uncle↔niece/nephew"), {
     summary: "P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri) and P190 Hassan Fareed Didi are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.",
     dossier: "docs/research-program/inferences/kin-p190-p91-aunt-uncle-niece-nephew.md",
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
       "Supporting edge: parent P129 Princess Veyogey Dhon Goma -> P190 Hassan Fareed Didi (CLM-0260, SRC-WIKI-HASSAN-FARID, grade B); excerpt: Hassan Farid Didi family/genealogy content lists P129 Princess Veyogey Dhon Goma as parent of P190 Hassan Fareed Didi.",
+      "Supporting edge: sibling P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri) <-> P129 Princess Veyogey Dhon Goma [half-siblings (shared mother P185)] (CLM-0649, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct sibling (half-siblings (shared mother P185)) relation recorded between Mohamed Shamsuddine III and Princess Veyogey Dhon Goma.",
       "Rule application (parent-sibling-aunt-uncle): sibling(P129 Princess Veyogey Dhon Goma, P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri)) plus parent(P129 Princess Veyogey Dhon Goma, child) yields inferred aunt/uncle-line kin between P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri) and P190 Hassan Fareed Didi.",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
@@ -4113,6 +3645,7 @@ const INFERENCE_NOTES = new Map([
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
       "Supporting edge: parent P129 Princess Veyogey Dhon Goma -> P191 Ibrahim Fareed Didi (CLM-0261, SRC-WIKI-IBRAHIM-FAREED, grade B); excerpt: Ibrahim Fareed Didi family/genealogy content lists P129 Princess Veyogey Dhon Goma as parent of P191 Ibrahim Fareed Didi.",
+      "Supporting edge: sibling P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri) <-> P129 Princess Veyogey Dhon Goma [half-siblings (shared mother P185)] (CLM-0649, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct sibling (half-siblings (shared mother P185)) relation recorded between Mohamed Shamsuddine III and Princess Veyogey Dhon Goma.",
       "Rule application (parent-sibling-aunt-uncle): sibling(P129 Princess Veyogey Dhon Goma, P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri)) plus parent(P129 Princess Veyogey Dhon Goma, child) yields inferred aunt/uncle-line kin between P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri) and P191 Ibrahim Fareed Didi.",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
@@ -4160,6 +3693,7 @@ const INFERENCE_NOTES = new Map([
     logic: [
       "Support set for rule parent-sibling-aunt-uncle resolved as follows.",
       "Supporting edge: parent P129 Princess Veyogey Dhon Goma -> P95 Mohamed Farid (Keerithi Maha Radun) (CLM-0262, SRC-WIKI-MUHAMMAD-FAREED, grade B); excerpt: Muhammad Fareed Didi family/genealogy content lists P129 Princess Veyogey Dhon Goma as parent of P95 Mohamed Farid.",
+      "Supporting edge: sibling P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri) <-> P129 Princess Veyogey Dhon Goma [half-siblings (shared mother P185)] (CLM-0649, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct sibling (half-siblings (shared mother P185)) relation recorded between Mohamed Shamsuddine III and Princess Veyogey Dhon Goma.",
       "Rule application (parent-sibling-aunt-uncle): sibling(P129 Princess Veyogey Dhon Goma, P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri)) plus parent(P129 Princess Veyogey Dhon Goma, child) yields inferred aunt/uncle-line kin between P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri) and P95 Mohamed Farid (Keerithi Maha Radun).",
       "Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured."
     ],
@@ -4182,22 +3716,6 @@ const INFERENCE_NOTES = new Map([
     verification: [
       "Promotion requirement: explicit A/B source wording naming P92 Mohamed Imaduddine VI (Keerithi Maha Radun) and P94 Hassan Nooredine II (Kula Sudha Ira Siyaaaka) as kin (aunt/uncle↔niece/nephew).",
       "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-sibling-aunt-uncle.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("kin", "P96", "P98", "grandparent"), {
-    summary: "P96 Donna Ines and P98 Dom Maraduru Fandiaiy Thakurufan are modeled as inferred kin (grandparent) through rule `parent-of-parent-grandparent`.",
-    dossier: "docs/research-program/inferences/kin-p96-p98-grandparent.md",
-    logic: [
-      "Support set for rule parent-of-parent-grandparent resolved as follows.",
-      "Supporting edge: parent P96 Donna Ines -> P97 Dom Luis de Sousa (CLM-0368, SRC-MRF-KINGS, grade A); excerpt: Maldives Kings List family/genealogy content lists P96 Donna Ines as parent of P97 Dom Luis de Sousa.",
-      "Supporting edge: parent P97 Dom Luis de Sousa -> P98 Dom Maraduru Fandiaiy Thakurufan (CLM-0369, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P97 Dom Luis de Sousa as parent of P98 Dom Maraduru Fandiaiy Thakurufan.",
-      "Rule application (parent-of-parent-grandparent): with source -> P97 Dom Luis de Sousa and P97 Dom Luis de Sousa -> target parent links, P96 Donna Ines is modeled as inferred grandparent-line kin of P98 Dom Maraduru Fandiaiy Thakurufan.",
-      "Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P96 Donna Ines and P98 Dom Maraduru Fandiaiy Thakurufan as kin (grandparent).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule parent-of-parent-grandparent.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
@@ -4277,22 +3795,6 @@ const INFERENCE_NOTES = new Map([
     ],
     verification: [
       "Promotion requirement: an A/B source statement explicitly naming P80 Hassan Izzuddine (Kula Ran Meeba Audha) and P84 Hassan Nooredine (Keerithi Maha Radun) with relation class `parent`.",
-      "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
-      "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
-    ]
-  }],
-  [k("parent", "P87", "P129", ""), {
-    summary: "P87 Ibrahim Nooredine (Keerithi Maha Radun) and P129 Princess Veyogey Dhon Goma are modeled as `parent` to preserve a targeted continuity claim without over-promoting certainty.",
-    dossier: "docs/research-program/inferences/parent-p87-p129.md",
-    logic: [
-      "Shortest direct-claim support path (2 steps) linking this pair:",
-      "kin P87 Ibrahim Nooredine (Keerithi Maha Radun) <-> P95 Mohamed Farid (Keerithi Maha Radun) [grandfather (via daughter)] (CLM-0212, SRC-MRF-KINGS)",
-      "parent P95 Mohamed Farid (Keerithi Maha Radun) -> P129 Princess Veyogey Dhon Goma (CLM-0262, SRC-WIKI-MUHAMMAD-FAREED)",
-      "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
-      "Current modeling choice remains `inferred` because explicit source wording that names `parent` for P87 Ibrahim Nooredine (Keerithi Maha Radun) and P129 Princess Veyogey Dhon Goma is still absent."
-    ],
-    verification: [
-      "Promotion requirement: an A/B source statement explicitly naming P87 Ibrahim Nooredine (Keerithi Maha Radun) and P129 Princess Veyogey Dhon Goma with relation class `parent`.",
       "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
       "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
     ]
@@ -4697,22 +4199,6 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
-  [k("sibling", "P16", "P17", "brothers"), {
-    summary: "P16 Salis (Meesuvvara) and P17 Davud (Sundhura Bavana) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.",
-    dossier: "docs/research-program/inferences/sibling-p16-p17-brothers.md",
-    logic: [
-      "Shortest direct-claim support path (2 steps) linking this pair:",
-      "parent P16 Salis (Meesuvvara) -> P15 Yoosuf (Bavanaadheeththa) (CLM-0285, SRC-MRF-KINGS)",
-      "parent P15 Yoosuf (Bavanaadheeththa) -> P17 Davud (Sundhura Bavana) (CLM-0286, SRC-MRF-KINGS)",
-      "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
-      "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P16 Salis (Meesuvvara) and P17 Davud (Sundhura Bavana) is still absent."
-    ],
-    verification: [
-      "Promotion requirement: an A/B source statement explicitly naming P16 Salis (Meesuvvara) and P17 Davud (Sundhura Bavana) with relation class `sibling` (brothers).",
-      "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
-      "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
-    ]
-  }],
   [k("sibling", "P164", "P165", "siblings (shared parent)"), {
     summary: "P164 Widhadh Waheed and P165 Fidha Waheed are modeled as inferred sibling (siblings (shared parent)) through rule `shared-parent-sibling`.",
     dossier: "docs/research-program/inferences/sibling-p164-p165-siblings-shared-parent.md",
@@ -4777,6 +4263,22 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
+  [k("sibling", "P16", "P17", "brothers"), {
+    summary: "P16 Salis (Meesuvvara) and P17 Davud (Sundhura Bavana) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.",
+    dossier: "docs/research-program/inferences/sibling-p16-p17-brothers.md",
+    logic: [
+      "Shortest direct-claim support path (2 steps) linking this pair:",
+      "parent P16 Salis (Meesuvvara) -> P15 Yoosuf (Bavanaadheeththa) (CLM-0285, SRC-MRF-KINGS)",
+      "parent P15 Yoosuf (Bavanaadheeththa) -> P17 Davud (Sundhura Bavana) (CLM-0286, SRC-MRF-KINGS)",
+      "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
+      "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P16 Salis (Meesuvvara) and P17 Davud (Sundhura Bavana) is still absent."
+    ],
+    verification: [
+      "Promotion requirement: an A/B source statement explicitly naming P16 Salis (Meesuvvara) and P17 Davud (Sundhura Bavana) with relation class `sibling` (brothers).",
+      "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+      "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+    ]
+  }],
   [k("sibling", "P177", "P178", "siblings (shared parent)"), {
     summary: "P177 Yasmin Muizzu and P178 Umair Muizzu are modeled as inferred sibling (siblings (shared parent)) through rule `shared-parent-sibling`.",
     dossier: "docs/research-program/inferences/sibling-p177-p178-siblings-shared-parent.md",
@@ -4823,22 +4325,6 @@ const INFERENCE_NOTES = new Map([
       "Promotion requirement: explicit A/B source wording naming P178 Umair Muizzu and P179 Zaid Muizzu as sibling (siblings (shared parent)).",
       "Downgrade/removal trigger: source-backed changes to any support edge used by rule shared-parent-sibling.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("sibling", "P19", "P25", "half-siblings"), {
-    summary: "P19 Ahmed Shihabuddine (Loka Aadheeththa) and P25 Raadhaafathi (Suvama Abarana) are modeled as `sibling` with label `half-siblings` to preserve a targeted continuity claim without over-promoting certainty.",
-    dossier: "docs/research-program/inferences/sibling-p19-p25-half-siblings.md",
-    logic: [
-      "Shortest direct-claim support path (2 steps) linking this pair:",
-      "parent P19 Ahmed Shihabuddine (Loka Aadheeththa) -> P18 Omar Veeru (Loka Abarana) (CLM-0316, SRC-MRF-KINGS)",
-      "parent P18 Omar Veeru (Loka Abarana) -> P25 Raadhaafathi (Suvama Abarana) (CLM-0318, SRC-MRF-KINGS)",
-      "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
-      "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P19 Ahmed Shihabuddine (Loka Aadheeththa) and P25 Raadhaafathi (Suvama Abarana) is still absent."
-    ],
-    verification: [
-      "Promotion requirement: an A/B source statement explicitly naming P19 Ahmed Shihabuddine (Loka Aadheeththa) and P25 Raadhaafathi (Suvama Abarana) with relation class `sibling` (half-siblings).",
-      "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
-      "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
     ]
   }],
   [k("sibling", "P190", "P191", "siblings (shared parent)"), {
@@ -4889,6 +4375,22 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
+  [k("sibling", "P19", "P25", "half-siblings"), {
+    summary: "P19 Ahmed Shihabuddine (Loka Aadheeththa) and P25 Raadhaafathi (Suvama Abarana) are modeled as `sibling` with label `half-siblings` to preserve a targeted continuity claim without over-promoting certainty.",
+    dossier: "docs/research-program/inferences/sibling-p19-p25-half-siblings.md",
+    logic: [
+      "Shortest direct-claim support path (2 steps) linking this pair:",
+      "parent P19 Ahmed Shihabuddine (Loka Aadheeththa) -> P18 Omar Veeru (Loka Abarana) (CLM-0316, SRC-IBN-BATTUTA-RIHLA)",
+      "parent P18 Omar Veeru (Loka Abarana) -> P25 Raadhaafathi (Suvama Abarana) (CLM-0318, SRC-MRF-KINGS)",
+      "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
+      "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P19 Ahmed Shihabuddine (Loka Aadheeththa) and P25 Raadhaafathi (Suvama Abarana) is still absent."
+    ],
+    verification: [
+      "Promotion requirement: an A/B source statement explicitly naming P19 Ahmed Shihabuddine (Loka Aadheeththa) and P25 Raadhaafathi (Suvama Abarana) with relation class `sibling` (half-siblings).",
+      "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+      "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+    ]
+  }],
   [k("sibling", "P202", "P193", "siblings (shared parent)"), {
     summary: "P202 Kamba Dio and P193 Princess Recca are modeled as inferred sibling (siblings (shared parent)) through rule `shared-parent-sibling`.",
     dossier: "docs/research-program/inferences/sibling-p193-p202-siblings-shared-parent.md",
@@ -4901,38 +4403,6 @@ const INFERENCE_NOTES = new Map([
     ],
     verification: [
       "Promotion requirement: explicit A/B source wording naming P202 Kamba Dio and P193 Princess Recca as sibling (siblings (shared parent)).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule shared-parent-sibling.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("sibling", "P202", "P207", "siblings (shared parent)"), {
-    summary: "P202 Kamba Dio and P207 Recca are modeled as inferred sibling (siblings (shared parent)) through rule `shared-parent-sibling`.",
-    dossier: "docs/research-program/inferences/sibling-p202-p207-siblings-shared-parent.md",
-    logic: [
-      "Support set for rule shared-parent-sibling resolved as follows.",
-      "Supporting edge: parent P40 Aboobakuru (Bavana Sooja) -> P202 Kamba Dio (CLM-0597, SRC-MRF-HILAALY, grade B); excerpt: Direct parent relation recorded between Aboobakuru as parent of Kamba Dio.",
-      "Supporting edge: parent P40 Aboobakuru (Bavana Sooja) -> P207 Recca (CLM-0598, SRC-MRF-HILAALY, grade B); excerpt: Direct parent relation recorded between Aboobakuru as parent of Recca.",
-      "Rule application (shared-parent-sibling): because both endpoints share parent P40 Aboobakuru (Bavana Sooja), P202 Kamba Dio and P207 Recca are modeled as inferred sibling-line kin.",
-      "Current modeling remains inferred because direct source text naming sibling (siblings (shared parent)) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P202 Kamba Dio and P207 Recca as sibling (siblings (shared parent)).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule shared-parent-sibling.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("sibling", "P207", "P193", "siblings (shared parent)"), {
-    summary: "P207 Recca and P193 Princess Recca are modeled as inferred sibling (siblings (shared parent)) through rule `shared-parent-sibling`.",
-    dossier: "docs/research-program/inferences/sibling-p193-p207-siblings-shared-parent.md",
-    logic: [
-      "Support set for rule shared-parent-sibling resolved as follows.",
-      "Supporting edge: parent P40 Aboobakuru (Bavana Sooja) -> P207 Recca (CLM-0598, SRC-MRF-HILAALY, grade B); excerpt: Direct parent relation recorded between Aboobakuru as parent of Recca.",
-      "Supporting edge: parent P40 Aboobakuru (Bavana Sooja) -> P193 Princess Recca (CLM-0337, SRC-MRF-KINGS, grade B); excerpt: Kings list and Hilaaly branch notes together support parent edge P40 to P193.",
-      "Rule application (shared-parent-sibling): because both endpoints share parent P40 Aboobakuru (Bavana Sooja), P207 Recca and P193 Princess Recca are modeled as inferred sibling-line kin.",
-      "Current modeling remains inferred because direct source text naming sibling (siblings (shared parent)) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P207 Recca and P193 Princess Recca as sibling (siblings (shared parent)).",
       "Downgrade/removal trigger: source-backed changes to any support edge used by rule shared-parent-sibling.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
@@ -4974,8 +4444,8 @@ const INFERENCE_NOTES = new Map([
     dossier: "docs/research-program/inferences/sibling-p209-p210-siblings-shared-parent.md",
     logic: [
       "Support set for rule shared-parent-sibling resolved as follows.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P209 Dom Francisco de Malvidas (CLM-0605, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dom Francisco de Malvidas.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P210 Dom Pedro de Malvidas (CLM-0606, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dom Pedro de Malvidas.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P209 Dom Francisco de Malvidas (CLM-0605, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry under Dom Manoel lists Dom Francisco de Malvidas among the children of Dom Manoel and Dona Leonor de Ataide.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P210 Dom Pedro de Malvidas (CLM-0606, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry under Dom Manoel lists Dom Pedro de Malvidas among the children of Dom Manoel and Dona Leonor de Ataide.",
       "Rule application (shared-parent-sibling): because both endpoints share parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka), P209 Dom Francisco de Malvidas and P210 Dom Pedro de Malvidas are modeled as inferred sibling-line kin.",
       "Current modeling remains inferred because direct source text naming sibling (siblings (shared parent)) for this exact pair is not yet captured."
     ],
@@ -4990,8 +4460,8 @@ const INFERENCE_NOTES = new Map([
     dossier: "docs/research-program/inferences/sibling-p209-p211-siblings-shared-parent.md",
     logic: [
       "Support set for rule shared-parent-sibling resolved as follows.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P209 Dom Francisco de Malvidas (CLM-0605, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dom Francisco de Malvidas.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P211 Dona Leonor de Malvidas (CLM-0607, SRC-ROYALARK-M16, grade B); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dona Leonor de Malvidas.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P209 Dom Francisco de Malvidas (CLM-0605, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry under Dom Manoel lists Dom Francisco de Malvidas among the children of Dom Manoel and Dona Leonor de Ataide.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P211 Dona Leonor de Malvidas (CLM-0607, SRC-ROYALARK-M16, grade B); excerpt: RoyalArk lineage entry under Dom Manoel lists Dona Leonor de Malvidas as a daughter in the same Dom Manoel and Dona Leonor de Ataide branch.",
       "Rule application (shared-parent-sibling): because both endpoints share parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka), P209 Dom Francisco de Malvidas and P211 Dona Leonor de Malvidas are modeled as inferred sibling-line kin.",
       "Current modeling remains inferred because direct source text naming sibling (siblings (shared parent)) for this exact pair is not yet captured."
     ],
@@ -5006,8 +4476,8 @@ const INFERENCE_NOTES = new Map([
     dossier: "docs/research-program/inferences/sibling-p209-p212-siblings-shared-parent.md",
     logic: [
       "Support set for rule shared-parent-sibling resolved as follows.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P209 Dom Francisco de Malvidas (CLM-0605, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dom Francisco de Malvidas.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P212 Dona Catarina de Malvidas (CLM-0608, SRC-ROYALARK-M16, grade B); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dona Catarina de Malvidas.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P209 Dom Francisco de Malvidas (CLM-0605, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry under Dom Manoel lists Dom Francisco de Malvidas among the children of Dom Manoel and Dona Leonor de Ataide.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P212 Dona Catarina de Malvidas (CLM-0608, SRC-ROYALARK-M16, grade B); excerpt: RoyalArk lineage entry under Dom Manoel lists Dona Catarina de Malvidas as a daughter in the same Dom Manoel and Dona Leonor de Ataide branch.",
       "Rule application (shared-parent-sibling): because both endpoints share parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka), P209 Dom Francisco de Malvidas and P212 Dona Catarina de Malvidas are modeled as inferred sibling-line kin.",
       "Current modeling remains inferred because direct source text naming sibling (siblings (shared parent)) for this exact pair is not yet captured."
     ],
@@ -5022,8 +4492,8 @@ const INFERENCE_NOTES = new Map([
     dossier: "docs/research-program/inferences/sibling-p210-p211-siblings-shared-parent.md",
     logic: [
       "Support set for rule shared-parent-sibling resolved as follows.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P210 Dom Pedro de Malvidas (CLM-0606, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dom Pedro de Malvidas.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P211 Dona Leonor de Malvidas (CLM-0607, SRC-ROYALARK-M16, grade B); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dona Leonor de Malvidas.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P210 Dom Pedro de Malvidas (CLM-0606, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry under Dom Manoel lists Dom Pedro de Malvidas among the children of Dom Manoel and Dona Leonor de Ataide.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P211 Dona Leonor de Malvidas (CLM-0607, SRC-ROYALARK-M16, grade B); excerpt: RoyalArk lineage entry under Dom Manoel lists Dona Leonor de Malvidas as a daughter in the same Dom Manoel and Dona Leonor de Ataide branch.",
       "Rule application (shared-parent-sibling): because both endpoints share parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka), P210 Dom Pedro de Malvidas and P211 Dona Leonor de Malvidas are modeled as inferred sibling-line kin.",
       "Current modeling remains inferred because direct source text naming sibling (siblings (shared parent)) for this exact pair is not yet captured."
     ],
@@ -5038,8 +4508,8 @@ const INFERENCE_NOTES = new Map([
     dossier: "docs/research-program/inferences/sibling-p210-p212-siblings-shared-parent.md",
     logic: [
       "Support set for rule shared-parent-sibling resolved as follows.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P210 Dom Pedro de Malvidas (CLM-0606, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dom Pedro de Malvidas.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P212 Dona Catarina de Malvidas (CLM-0608, SRC-ROYALARK-M16, grade B); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dona Catarina de Malvidas.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P210 Dom Pedro de Malvidas (CLM-0606, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry under Dom Manoel lists Dom Pedro de Malvidas among the children of Dom Manoel and Dona Leonor de Ataide.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P212 Dona Catarina de Malvidas (CLM-0608, SRC-ROYALARK-M16, grade B); excerpt: RoyalArk lineage entry under Dom Manoel lists Dona Catarina de Malvidas as a daughter in the same Dom Manoel and Dona Leonor de Ataide branch.",
       "Rule application (shared-parent-sibling): because both endpoints share parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka), P210 Dom Pedro de Malvidas and P212 Dona Catarina de Malvidas are modeled as inferred sibling-line kin.",
       "Current modeling remains inferred because direct source text naming sibling (siblings (shared parent)) for this exact pair is not yet captured."
     ],
@@ -5054,29 +4524,13 @@ const INFERENCE_NOTES = new Map([
     dossier: "docs/research-program/inferences/sibling-p211-p212-siblings-shared-parent.md",
     logic: [
       "Support set for rule shared-parent-sibling resolved as follows.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P211 Dona Leonor de Malvidas (CLM-0607, SRC-ROYALARK-M16, grade B); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dona Leonor de Malvidas.",
-      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P212 Dona Catarina de Malvidas (CLM-0608, SRC-ROYALARK-M16, grade B); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dona Catarina de Malvidas.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P211 Dona Leonor de Malvidas (CLM-0607, SRC-ROYALARK-M16, grade B); excerpt: RoyalArk lineage entry under Dom Manoel lists Dona Leonor de Malvidas as a daughter in the same Dom Manoel and Dona Leonor de Ataide branch.",
+      "Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P212 Dona Catarina de Malvidas (CLM-0608, SRC-ROYALARK-M16, grade B); excerpt: RoyalArk lineage entry under Dom Manoel lists Dona Catarina de Malvidas as a daughter in the same Dom Manoel and Dona Leonor de Ataide branch.",
       "Rule application (shared-parent-sibling): because both endpoints share parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka), P211 Dona Leonor de Malvidas and P212 Dona Catarina de Malvidas are modeled as inferred sibling-line kin.",
       "Current modeling remains inferred because direct source text naming sibling (siblings (shared parent)) for this exact pair is not yet captured."
     ],
     verification: [
       "Promotion requirement: explicit A/B source wording naming P211 Dona Leonor de Malvidas and P212 Dona Catarina de Malvidas as sibling (siblings (shared parent)).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule shared-parent-sibling.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("sibling", "P213", "P96", "siblings (shared parent)"), {
-    summary: "P213 Infanta Dona Ines de Malvidas and P96 Donna Ines are modeled as inferred sibling (siblings (shared parent)) through rule `shared-parent-sibling`.",
-    dossier: "docs/research-program/inferences/sibling-p213-p96-siblings-shared-parent.md",
-    logic: [
-      "Support set for rule shared-parent-sibling resolved as follows.",
-      "Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P213 Infanta Dona Ines de Malvidas (CLM-0609, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Joao’ as parent of Infanta Dona Ines de Malvidas.",
-      "Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P96 Donna Ines (CLM-0349, SRC-MRF-KINGS, grade A); excerpt: Maldives Kings List family/genealogy content lists P66 Joao’ as parent of P96 Donna Ines.",
-      "Rule application (shared-parent-sibling): because both endpoints share parent P66 Joao’ (Keerithi Maha Radun), P213 Infanta Dona Ines de Malvidas and P96 Donna Ines are modeled as inferred sibling-line kin.",
-      "Current modeling remains inferred because direct source text naming sibling (siblings (shared parent)) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P213 Infanta Dona Ines de Malvidas and P96 Donna Ines as sibling (siblings (shared parent)).",
       "Downgrade/removal trigger: source-backed changes to any support edge used by rule shared-parent-sibling.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
@@ -5093,22 +4547,6 @@ const INFERENCE_NOTES = new Map([
     ],
     verification: [
       "Promotion requirement: explicit A/B source wording naming P219 Umar Ma'afai Kilege and P220 Ahmad Manikufa'anu Kalaminja as sibling (siblings (shared parent)).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule shared-parent-sibling.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("sibling", "P222", "P155", "siblings (shared parent)"), {
-    summary: "P222 Hassan Izz ud-din and P155 Maandhoogey Bodu Dhorhy Manippulu are modeled as inferred sibling (siblings (shared parent)) through rule `shared-parent-sibling`.",
-    dossier: "docs/research-program/inferences/sibling-p155-p222-siblings-shared-parent.md",
-    logic: [
-      "Support set for rule shared-parent-sibling resolved as follows.",
-      "Supporting edge: parent P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) -> P222 Hassan Izz ud-din (CLM-0610, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Mohamed Imaduddine as parent of Hassan Izz ud-din.",
-      "Supporting edge: parent P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) -> P155 Maandhoogey Bodu Dhorhy Manippulu (CLM-0362, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P86 Mohamed Imaduddine as parent of P155 Maandhoogey Bodu Dhorhy Manippulu.",
-      "Rule application (shared-parent-sibling): because both endpoints share parent P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka), P222 Hassan Izz ud-din and P155 Maandhoogey Bodu Dhorhy Manippulu are modeled as inferred sibling-line kin.",
-      "Current modeling remains inferred because direct source text naming sibling (siblings (shared parent)) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P222 Hassan Izz ud-din and P155 Maandhoogey Bodu Dhorhy Manippulu as sibling (siblings (shared parent)).",
       "Downgrade/removal trigger: source-backed changes to any support edge used by rule shared-parent-sibling.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
@@ -5150,7 +4588,7 @@ const INFERENCE_NOTES = new Map([
     dossier: "docs/research-program/inferences/sibling-p41-p46-siblings-shared-parent.md",
     logic: [
       "Support set for rule shared-parent-sibling resolved as follows.",
-      "Supporting edge: parent P39 Yoosuf (Loka Aananadha) -> P41 Hadi Hassan (Raadha Veeru) (CLM-0596, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Yoosuf as parent of Hadi Hassan.",
+      "Supporting edge: parent P39 Yoosuf (Loka Aananadha) -> P41 Hadi Hassan (Raadha Veeru) (CLM-0596, SRC-ROYALARK-MALDIVES, grade B); excerpt: RoyalArk Maldives lineage reconstruction gives Yoosuf (P39) as father of Hadi Hassan (P41), which aligns with current canonical parent selection.",
       "Supporting edge: parent P39 Yoosuf (Loka Aananadha) -> P46 Omar (Loka Sundhura) (CLM-0336, SRC-MRF-KINGS, grade B); excerpt: Kings list records parent edge P39 to P46.",
       "Rule application (shared-parent-sibling): because both endpoints share parent P39 Yoosuf (Loka Aananadha), P41 Hadi Hassan (Raadha Veeru) and P46 Omar (Loka Sundhura) are modeled as inferred sibling-line kin.",
       "Current modeling remains inferred because direct source text naming sibling (siblings (shared parent)) for this exact pair is not yet captured."
@@ -5159,21 +4597,6 @@ const INFERENCE_NOTES = new Map([
       "Promotion requirement: explicit A/B source wording naming P41 Hadi Hassan (Raadha Veeru) and P46 Omar (Loka Sundhura) as sibling (siblings (shared parent)).",
       "Downgrade/removal trigger: source-backed changes to any support edge used by rule shared-parent-sibling.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("sibling", "P47", "P50", "brothers"), {
-    summary: "P47 Hassan (Raadha Aanandha) and P50 Ibrahim (Bavana Furasuddha) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.",
-    dossier: "docs/research-program/inferences/sibling-p47-p50-brothers.md",
-    logic: [
-      "Shortest direct-claim support path (1 step) linking this pair:",
-      "parent P47 Hassan (Raadha Aanandha) -> P50 Ibrahim (Bavana Furasuddha) (CLM-0601, SRC-ROYALARK-MALDIVES)",
-      "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
-      "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P47 Hassan (Raadha Aanandha) and P50 Ibrahim (Bavana Furasuddha) is still absent."
-    ],
-    verification: [
-      "Promotion requirement: an A/B source statement explicitly naming P47 Hassan (Raadha Aanandha) and P50 Ibrahim (Bavana Furasuddha) with relation class `sibling` (brothers).",
-      "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
-      "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
     ]
   }],
   [k("sibling", "P47", "P51", "brothers"), {
@@ -5203,71 +4626,6 @@ const INFERENCE_NOTES = new Map([
     ],
     verification: [
       "Promotion requirement: an A/B source statement explicitly naming P47 Hassan (Raadha Aanandha) and P52 Yoosuf (Veeru Aanandha) with relation class `sibling` (brothers).",
-      "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
-      "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
-    ]
-  }],
-  [k("sibling", "P5", "P7", "brothers"), {
-    summary: "P5 Dhinei (Fennaadheeththa) and P7 Wadi (Dhagathaa Suvara) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.",
-    dossier: "docs/research-program/inferences/sibling-p5-p7-brothers.md",
-    logic: [
-      "Shortest direct-claim support path (2 steps) linking this pair:",
-      "sibling P5 Dhinei (Fennaadheeththa) <-> P6 Dhilhel (Dhagathaa Abarana) [brothers] (CLM-0436, SRC-MRF-KINGS)",
-      "sibling P6 Dhilhel (Dhagathaa Abarana) <-> P7 Wadi (Dhagathaa Suvara) [brothers] (CLM-0442, SRC-MRF-KINGS)",
-      "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
-      "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P5 Dhinei (Fennaadheeththa) and P7 Wadi (Dhagathaa Suvara) is still absent."
-    ],
-    verification: [
-      "Promotion requirement: an A/B source statement explicitly naming P5 Dhinei (Fennaadheeththa) and P7 Wadi (Dhagathaa Suvara) with relation class `sibling` (brothers).",
-      "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
-      "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
-    ]
-  }],
-  [k("sibling", "P5", "P8", "brothers"), {
-    summary: "P5 Dhinei (Fennaadheeththa) and P8 Valla Dio (Raa-Araa Desyara) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.",
-    dossier: "docs/research-program/inferences/sibling-p5-p8-brothers.md",
-    logic: [
-      "Shortest direct-claim support path (2 steps) linking this pair:",
-      "parent P5 Dhinei (Fennaadheeththa) -> P216 Fahi Hiriya Maava Kilage (CLM-0581, SRC-ROYALARK-MALDIVES)",
-      "parent P216 Fahi Hiriya Maava Kilage -> P8 Valla Dio (Raa-Araa Desyara) (CLM-0584, SRC-ROYALARK-MALDIVES)",
-      "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
-      "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P5 Dhinei (Fennaadheeththa) and P8 Valla Dio (Raa-Araa Desyara) is still absent."
-    ],
-    verification: [
-      "Promotion requirement: an A/B source statement explicitly naming P5 Dhinei (Fennaadheeththa) and P8 Valla Dio (Raa-Araa Desyara) with relation class `sibling` (brothers).",
-      "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
-      "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
-    ]
-  }],
-  [k("sibling", "P50", "P51", "brothers"), {
-    summary: "P50 Ibrahim (Bavana Furasuddha) and P51 Kalu Mohamed (Dhammaru Bavana) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.",
-    dossier: "docs/research-program/inferences/sibling-p50-p51-brothers.md",
-    logic: [
-      "Shortest direct-claim support path (2 steps) linking this pair:",
-      "parent P50 Ibrahim (Bavana Furasuddha) -> P47 Hassan (Raadha Aanandha) (CLM-0601, SRC-ROYALARK-MALDIVES)",
-      "sibling P47 Hassan (Raadha Aanandha) <-> P51 Kalu Mohamed (Dhammaru Bavana) [half-brothers] (CLM-0639, SRC-ROYALARK-MALDIVES)",
-      "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
-      "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P50 Ibrahim (Bavana Furasuddha) and P51 Kalu Mohamed (Dhammaru Bavana) is still absent."
-    ],
-    verification: [
-      "Promotion requirement: an A/B source statement explicitly naming P50 Ibrahim (Bavana Furasuddha) and P51 Kalu Mohamed (Dhammaru Bavana) with relation class `sibling` (brothers).",
-      "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
-      "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
-    ]
-  }],
-  [k("sibling", "P50", "P52", "brothers"), {
-    summary: "P50 Ibrahim (Bavana Furasuddha) and P52 Yoosuf (Veeru Aanandha) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.",
-    dossier: "docs/research-program/inferences/sibling-p50-p52-brothers.md",
-    logic: [
-      "Shortest direct-claim support path (3 steps) linking this pair:",
-      "parent P50 Ibrahim (Bavana Furasuddha) -> P47 Hassan (Raadha Aanandha) (CLM-0601, SRC-ROYALARK-MALDIVES)",
-      "parent P47 Hassan (Raadha Aanandha) -> P46 Omar (Loka Sundhura) (CLM-0341, SRC-MRF-KINGS)",
-      "parent P46 Omar (Loka Sundhura) -> P52 Yoosuf (Veeru Aanandha) (CLM-0344, SRC-MRF-KINGS)",
-      "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
-      "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P50 Ibrahim (Bavana Furasuddha) and P52 Yoosuf (Veeru Aanandha) is still absent."
-    ],
-    verification: [
-      "Promotion requirement: an A/B source statement explicitly naming P50 Ibrahim (Bavana Furasuddha) and P52 Yoosuf (Veeru Aanandha) with relation class `sibling` (brothers).",
       "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
       "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
     ]
@@ -5320,6 +4678,38 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]
   }],
+  [k("sibling", "P5", "P7", "brothers"), {
+    summary: "P5 Dhinei (Fennaadheeththa) and P7 Wadi (Dhagathaa Suvara) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.",
+    dossier: "docs/research-program/inferences/sibling-p5-p7-brothers.md",
+    logic: [
+      "Shortest direct-claim support path (2 steps) linking this pair:",
+      "sibling P5 Dhinei (Fennaadheeththa) <-> P6 Dhilhel (Dhagathaa Abarana) [brothers] (CLM-0436, SRC-MRF-KINGS)",
+      "sibling P6 Dhilhel (Dhagathaa Abarana) <-> P7 Wadi (Dhagathaa Suvara) [brothers] (CLM-0442, SRC-MRF-KINGS)",
+      "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
+      "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P5 Dhinei (Fennaadheeththa) and P7 Wadi (Dhagathaa Suvara) is still absent."
+    ],
+    verification: [
+      "Promotion requirement: an A/B source statement explicitly naming P5 Dhinei (Fennaadheeththa) and P7 Wadi (Dhagathaa Suvara) with relation class `sibling` (brothers).",
+      "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+      "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+    ]
+  }],
+  [k("sibling", "P5", "P8", "brothers"), {
+    summary: "P5 Dhinei (Fennaadheeththa) and P8 Valla Dio (Raa-Araa Desyara) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.",
+    dossier: "docs/research-program/inferences/sibling-p5-p8-brothers.md",
+    logic: [
+      "Shortest direct-claim support path (2 steps) linking this pair:",
+      "parent P5 Dhinei (Fennaadheeththa) -> P216 Fahi Hiriya Maava Kilage (CLM-0581, SRC-ROYALARK-MALDIVES)",
+      "parent P216 Fahi Hiriya Maava Kilage -> P8 Valla Dio (Raa-Araa Desyara) (CLM-0584, SRC-ROYALARK-MALDIVES)",
+      "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
+      "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P5 Dhinei (Fennaadheeththa) and P8 Valla Dio (Raa-Araa Desyara) is still absent."
+    ],
+    verification: [
+      "Promotion requirement: an A/B source statement explicitly naming P5 Dhinei (Fennaadheeththa) and P8 Valla Dio (Raa-Araa Desyara) with relation class `sibling` (brothers).",
+      "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
+      "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
+    ]
+  }],
   [k("sibling", "P6", "P8", "brothers"), {
     summary: "P6 Dhilhel (Dhagathaa Abarana) and P8 Valla Dio (Raa-Araa Desyara) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.",
     dossier: "docs/research-program/inferences/sibling-p6-p8-brothers.md",
@@ -5336,38 +4726,6 @@ const INFERENCE_NOTES = new Map([
       "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
     ]
   }],
-  [k("sibling", "P78", "P79", "brothers"), {
-    summary: "P78 Ibrahim Iskander (Rannava Loka) and P79 Mohamed Imaduddine (Navaranna Keerithi) are modeled as `sibling` with label `brothers` to preserve a targeted continuity claim without over-promoting certainty.",
-    dossier: "docs/research-program/inferences/sibling-p78-p79-brothers.md",
-    logic: [
-      "Shortest direct-claim support path (2 steps) linking this pair:",
-      "parent P78 Ibrahim Iskander (Rannava Loka) -> P77 Mohamed Imaduddine (Kula Sundhura Siyaaaka) (CLM-0354, SRC-WIKI-MONARCHS)",
-      "parent P77 Mohamed Imaduddine (Kula Sundhura Siyaaaka) -> P79 Mohamed Imaduddine (Navaranna Keerithi) (CLM-0355, SRC-WIKI-MONARCHS)",
-      "This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.",
-      "Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P78 Ibrahim Iskander (Rannava Loka) and P79 Mohamed Imaduddine (Navaranna Keerithi) is still absent."
-    ],
-    verification: [
-      "Promotion requirement: an A/B source statement explicitly naming P78 Ibrahim Iskander (Rannava Loka) and P79 Mohamed Imaduddine (Navaranna Keerithi) with relation class `sibling` (brothers).",
-      "Downgrade/removal trigger: a stronger source that assigns incompatible parentage or explicitly contradicts this pairwise relation.",
-      "Review cadence: re-check after each source-ingestion batch touching this dynasty/branch cluster."
-    ]
-  }],
-  [k("sibling", "P87", "P155", "siblings (shared parent)"), {
-    summary: "P87 Ibrahim Nooredine (Keerithi Maha Radun) and P155 Maandhoogey Bodu Dhorhy Manippulu are modeled as inferred sibling (siblings (shared parent)) through rule `shared-parent-sibling`.",
-    dossier: "docs/research-program/inferences/sibling-p155-p87-siblings-shared-parent.md",
-    logic: [
-      "Support set for rule shared-parent-sibling resolved as follows.",
-      "Supporting edge: parent P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) -> P87 Ibrahim Nooredine (Keerithi Maha Radun) (CLM-0363, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P86 Mohamed Imaduddine as parent of P87 Ibrahim Nooredine.",
-      "Supporting edge: parent P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) -> P155 Maandhoogey Bodu Dhorhy Manippulu (CLM-0362, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P86 Mohamed Imaduddine as parent of P155 Maandhoogey Bodu Dhorhy Manippulu.",
-      "Rule application (shared-parent-sibling): because both endpoints share parent P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka), P87 Ibrahim Nooredine (Keerithi Maha Radun) and P155 Maandhoogey Bodu Dhorhy Manippulu are modeled as inferred sibling-line kin.",
-      "Current modeling remains inferred because direct source text naming sibling (siblings (shared parent)) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P87 Ibrahim Nooredine (Keerithi Maha Radun) and P155 Maandhoogey Bodu Dhorhy Manippulu as sibling (siblings (shared parent)).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule shared-parent-sibling.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
   [k("sibling", "P87", "P222", "siblings (shared parent)"), {
     summary: "P87 Ibrahim Nooredine (Keerithi Maha Radun) and P222 Hassan Izz ud-din are modeled as inferred sibling (siblings (shared parent)) through rule `shared-parent-sibling`.",
     dossier: "docs/research-program/inferences/sibling-p222-p87-siblings-shared-parent.md",
@@ -5380,36 +4738,6 @@ const INFERENCE_NOTES = new Map([
     ],
     verification: [
       "Promotion requirement: explicit A/B source wording naming P87 Ibrahim Nooredine (Keerithi Maha Radun) and P222 Hassan Izz ud-din as sibling (siblings (shared parent)).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule shared-parent-sibling.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("sibling", "P90", "P129", "siblings (shared parent)"), {
-    summary: "P90 Mohamed Imaduddine V (Keerithi Maha Radun) and P129 Princess Veyogey Dhon Goma are modeled as inferred sibling (siblings (shared parent)) through rule `shared-parent-sibling`.",
-    dossier: "docs/research-program/inferences/sibling-p129-p90-siblings-shared-parent.md",
-    logic: [
-      "Support set for rule shared-parent-sibling resolved as follows.",
-      "Supporting edge: parent P87 Ibrahim Nooredine (Keerithi Maha Radun) -> P90 Mohamed Imaduddine V (Keerithi Maha Radun) (CLM-0365, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P87 Ibrahim Nooredine as parent of P90 Mohamed Imaduddine V.",
-      "Rule application (shared-parent-sibling): because both endpoints share parent P87 Ibrahim Nooredine (Keerithi Maha Radun), P90 Mohamed Imaduddine V (Keerithi Maha Radun) and P129 Princess Veyogey Dhon Goma are modeled as inferred sibling-line kin.",
-      "Current modeling remains inferred because direct source text naming sibling (siblings (shared parent)) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P90 Mohamed Imaduddine V (Keerithi Maha Radun) and P129 Princess Veyogey Dhon Goma as sibling (siblings (shared parent)).",
-      "Downgrade/removal trigger: source-backed changes to any support edge used by rule shared-parent-sibling.",
-      "Review cadence: recompute after any parent/sibling edge change in this local branch."
-    ]
-  }],
-  [k("sibling", "P91", "P129", "siblings (shared parent)"), {
-    summary: "P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri) and P129 Princess Veyogey Dhon Goma are modeled as inferred sibling (siblings (shared parent)) through rule `shared-parent-sibling`.",
-    dossier: "docs/research-program/inferences/sibling-p129-p91-siblings-shared-parent.md",
-    logic: [
-      "Support set for rule shared-parent-sibling resolved as follows.",
-      "Supporting edge: parent P87 Ibrahim Nooredine (Keerithi Maha Radun) -> P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri) (CLM-0366, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P87 Ibrahim Nooredine as parent of P91 Mohamed Shamsuddine III.",
-      "Rule application (shared-parent-sibling): because both endpoints share parent P87 Ibrahim Nooredine (Keerithi Maha Radun), P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri) and P129 Princess Veyogey Dhon Goma are modeled as inferred sibling-line kin.",
-      "Current modeling remains inferred because direct source text naming sibling (siblings (shared parent)) for this exact pair is not yet captured."
-    ],
-    verification: [
-      "Promotion requirement: explicit A/B source wording naming P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri) and P129 Princess Veyogey Dhon Goma as sibling (siblings (shared parent)).",
       "Downgrade/removal trigger: source-backed changes to any support edge used by rule shared-parent-sibling.",
       "Review cadence: recompute after any parent/sibling edge change in this local branch."
     ]

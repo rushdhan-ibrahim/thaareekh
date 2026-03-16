@@ -11,7 +11,11 @@ export type SearchReason =
   | 'office'
   | 'dynasty'
   | 'fuzzy'
-  | 'match';
+  | 'match'
+  | 'office-name'
+  | 'office-alias'
+  | 'office-kind'
+  | 'office-fuzzy';
 
 export interface SearchPersonOffice {
   office_id?: string;
@@ -42,6 +46,11 @@ export interface SearchEdge {
 export interface OfficeDefinition {
   id: string;
   name: string;
+  kind?: string;
+  summary?: string;
+  alt_names?: string[];
+  source_refs?: string[];
+  functions?: Array<{ period_id: string; description: string }>;
 }
 
 export interface ParsedQuery {
@@ -53,7 +62,9 @@ export interface ParsedQuery {
 }
 
 export interface SearchHit {
+  type: 'person' | 'office';
   person: SearchPerson;
+  office?: OfficeDefinition;
   score: number;
   reason: SearchReason;
 }
@@ -61,6 +72,7 @@ export interface SearchHit {
 export interface SearchEngine {
   parseQuery: (raw: string) => ParsedQuery;
   scorePerson: (person: SearchPerson, query: ParsedQuery) => SearchHit | null;
+  scoreOffice: (office: OfficeDefinition, query: ParsedQuery) => SearchHit | null;
   rankSearch: (query: string, limit?: number) => SearchHit[];
 }
 
@@ -77,7 +89,11 @@ const reasonKey: Record<SearchReason, string> = {
   office: 'reason_office',
   dynasty: 'reason_dynasty',
   fuzzy: 'reason_fuzzy',
-  match: 'reason_match'
+  match: 'reason_match',
+  'office-name': 'reason_office_name',
+  'office-alias': 'reason_office_alias',
+  'office-kind': 'reason_office_kind',
+  'office-fuzzy': 'reason_office_fuzzy'
 };
 
 function norm(input: unknown): string {
@@ -214,7 +230,7 @@ export function createSearchEngine(
     if (query.o && !personOffices.some((office) => office.includes(query.o!))) return null;
     if (!query.terms.length && (query.dy || query.c || query.t || query.o)) {
       const y = person.re?.[0]?.[0] ?? 99999;
-      return { person, score: 20_000 - y, reason: 'filter' };
+      return { type: 'person', person, score: 20_000 - y, reason: 'filter' };
     }
 
     let score = 0;
@@ -309,16 +325,49 @@ export function createSearchEngine(
     if (!hits) return null;
     if (hits < query.terms.length) score -= (query.terms.length - hits) * 18;
     if (query.dy || query.c || query.t || query.o) score += 10;
-    return { person, score, reason };
+    return { type: 'person', person, score, reason };
+  }
+
+  function scoreOffice(office: OfficeDefinition, query: ParsedQuery): SearchHit | null {
+    if (!query.terms.length) return null;
+    if (query.dy || query.c || query.t) return null;
+    const nm = norm(office.name);
+    const altNames = (office.alt_names || []).map(norm);
+    const kind = norm(office.kind || '');
+    const summary = norm(office.summary || '');
+    let score = 0;
+    let reason: SearchReason = 'office-name';
+    for (const term of query.terms) {
+      if (nm === term) { score += 100; reason = 'office-name'; }
+      else if (nm.startsWith(term)) { score += 85; reason = 'office-name'; }
+      else if (nm.includes(term)) { score += 65; reason = 'office-name'; }
+      else if (altNames.some(a => a === term)) { score += 75; reason = 'office-alias'; }
+      else if (altNames.some(a => a.includes(term))) { score += 50; reason = 'office-alias'; }
+      else if (kind.includes(term)) { score += 25; reason = 'office-kind'; }
+      else if (summary.includes(term)) { score += 15; reason = 'office-name'; }
+      else if (term.length >= 4) {
+        const pool = [nm, ...altNames];
+        const best = pool.reduce((acc, v) => Math.min(acc, editDistance(term, v)), 999);
+        if (best <= 2) { score += 35 - best * 8; reason = 'office-fuzzy'; }
+      }
+    }
+    if (score <= 0) return null;
+    const dummy: SearchPerson = { id: office.id, nm: office.name };
+    return { type: 'office', person: dummy, office, score, reason };
   }
 
   function rankSearch(query: string, limit = MAX_RESULTS): SearchHit[] {
     const parsed = parseQuery(query);
-    return people
+    const personHits = people
       .map((person) => scorePerson(person, parsed))
-      .filter((hit): hit is SearchHit => Boolean(hit))
+      .filter((hit): hit is SearchHit => Boolean(hit));
+    const officeHits = [...officeById.values()]
+      .map((office) => scoreOffice(office, parsed))
+      .filter((hit): hit is SearchHit => Boolean(hit));
+    return [...personHits, ...officeHits]
       .sort((a, b) => {
         if (b.score !== a.score) return b.score - a.score;
+        if (a.type !== b.type) return a.type === 'office' ? 1 : -1;
         const aY = a.person.re?.[0]?.[0] ?? 99999;
         const bY = b.person.re?.[0]?.[0] ?? 99999;
         return aY - bY;
@@ -326,5 +375,5 @@ export function createSearchEngine(
       .slice(0, limit);
   }
 
-  return { parseQuery, scorePerson, rankSearch };
+  return { parseQuery, scorePerson, scoreOffice, rankSearch };
 }

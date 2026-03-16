@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `sibling|P19|P25|half-siblings`  
-Last updated: `2026-02-10`  
+Last updated: `2026-02-19`  
 Inference class: `curated`
 
 ## 1) Edge identity
@@ -16,7 +16,7 @@ Inference class: `curated`
 - Pair summary: P19 Ahmed Shihabuddine (Loka Aadheeththa) and P25 Raadhaafathi (Suvama Abarana) are modeled as `sibling` with label `half-siblings` to preserve a targeted continuity claim without over-promoting certainty.
 - Historical/dynastic context: Lunar -> Lunar
 - Immediate direct-claim anchors around these nodes:
-- CLM-0316: parent P18 Omar Veeru (Loka Abarana) -> P19 Ahmed Shihabuddine (Loka Aadheeththa) (SRC-MRF-KINGS, grade B)
+- CLM-0316: parent P18 Omar Veeru (Loka Abarana) -> P19 Ahmed Shihabuddine (Loka Aadheeththa) (SRC-IBN-BATTUTA-RIHLA, grade A)
 - CLM-0318: parent P18 Omar Veeru (Loka Abarana) -> P25 Raadhaafathi (Suvama Abarana) (SRC-MRF-KINGS, grade B)
 - CLM-0417: sibling P19 Ahmed Shihabuddine (Loka Aadheeththa) <-> P20 Khadijah (Raadha Abarana) [siblings] (SRC-MRF-KINGS, grade B)
 - CLM-0427: sibling P20 Khadijah (Raadha Abarana) <-> P25 Raadhaafathi (Suvama Abarana) [half-sisters] (SRC-MRF-KINGS, grade B)
@@ -25,7 +25,7 @@ Inference class: `curated`
 
 ## 3) Logic chain (pair-specific)
 1. Shortest direct-claim support path (2 steps) linking this pair:
-2. - parent P19 Ahmed Shihabuddine (Loka Aadheeththa) -> P18 Omar Veeru (Loka Abarana) (CLM-0316, SRC-MRF-KINGS)
+2. - parent P19 Ahmed Shihabuddine (Loka Aadheeththa) -> P18 Omar Veeru (Loka Abarana) (CLM-0316, SRC-IBN-BATTUTA-RIHLA)
 3. - parent P18 Omar Veeru (Loka Abarana) -> P25 Raadhaafathi (Suvama Abarana) (CLM-0318, SRC-MRF-KINGS)
 4. This path provides relational adjacency support for the exact two nodes while still lacking explicit wording for the inferred relation label itself.
 5. Current modeling choice remains `inferred` because explicit source wording that names `sibling` for P19 Ahmed Shihabuddine (Loka Aadheeththa) and P25 Raadhaafathi (Suvama Abarana) is still absent.

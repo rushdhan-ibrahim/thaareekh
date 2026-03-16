@@ -1,20 +1,64 @@
 # Phase 0 Continuation Handoff
 
-Date: 2026-02-13
+Date: 2026-02-21
 Status: active
 
 This document is the compact resumption point for modernization work after context compaction.
-For phase-vs-plan reconciliation, see `docs/modernization/phase0/progress-reconciliation-2026-02-13.md`.
+For phase-vs-plan reconciliation, see `docs/modernization/phase0/progress-reconciliation-2026-02-20.md`.
 
 ## Current verified state
-- Full modernization verification is passing locally via `npm run modernization:verify`.
+- Latest full modernization verification run was passing; this checkpoint was validated with targeted gates due local long-chain execution stalls:
+  - `./node_modules/.bin/tsc --noEmit -p apps/web/tsconfig.json --pretty false`
+  - `node --experimental-strip-types scripts/modernization/verify-ts-rebuild-parity.mjs`
+  - `node --experimental-strip-types scripts/modernization/verify-tree-placement-worker-parity.mjs`
+  - `npm run modernization:parity`
+  - `npm run modernization:benchmark-check`
+  - `npm run modernization:benchmark-check:require-ui`
+- Baseline parity is passing against refreshed baseline (2026-02-20): canonical `204 people / 565 edges`, research `204 people / 573 edges`.
 - Rust parity is complete for all currently migrated research pipeline jobs listed in `package.json`.
 - CI workflow includes parity steps for all migrated Rust jobs in `.github/workflows/modernization-parity.yml`.
 - CI workflow now includes mandatory `npm ci`, `npm run typecheck`, and `npm run build:web` gates.
+- `build:web` orchestration is now deterministic:
+  - root script runs direct `tsc --noEmit -p apps/web/tsconfig.json --pretty false` before workspace Vite build;
+  - `apps/web` build script is Vite-only (`vite build`).
 - Benchmark automation is wired via `npm run modernization:benchmark` with snapshots written to `docs/modernization/baselines/benchmarks/`.
 - Benchmark budget checker is wired via `npm run modernization:benchmark-check` and enforced in modernization CI workflow.
-- Latest benchmark snapshot date: 2026-02-13 (`benchmark-latest.json`).
+- UI benchmark lane is now integrated in benchmark payload (`lanes.ui_browser`) with explicit availability policy and strict mode command (`npm run modernization:benchmark-check:require-ui`).
+- UI runner now emits actionable diagnostics for environment failures (CDP port probe errors and per-launch Chrome exit metadata).
+- Strict UI budget gate now passes in full-access local runs (`npm run modernization:benchmark-check:require-ui`).
+- Modernization CI now hardens UI lane execution profile:
+  - `UI_BENCH_SERVE_MODE=http` is pinned;
+  - `CHROME_BIN` is auto-detected before benchmark execution.
+- Phase B render scheduler is active in both entrypoints (`apps/web/src/main.ts`, `src/main.js`) with invalidation flags and frame-batched rebuild dispatch.
+- Phase C initial incremental DOM rollout is active in both rebuild paths (`apps/web/src/graph/rebuild.ts`, `src/graph/rebuild.js`) with persistent mode roots and keyed joins for core graph/tree layers.
+- Phase D simulation lifecycle optimization is now active in both rebuild paths:
+  - simulation instance reuse,
+  - frame-budgeted tick DOM sync,
+  - stable-layout early-stop heuristics.
+- Phase E cache-first tree optimization is now active in both rebuild paths:
+  - tree placement memoization keyed by language/density/node+edge shape signatures.
+- Phase E optional worker-prewarm extension is now integrated in both runtimes:
+  - shared tree placement compute cores (`tree-placement-core`);
+  - background prewarm worker (`tree-placement-worker`) with sync fallback path.
+- Targeted tree-placement worker parity harness is now in place and green:
+  - `scripts/modernization/verify-tree-placement-worker-parity.mjs`
+  - enforced in CI via `npm run modernization:tree-placement-worker-parity`.
+- Tree-placement worker policy is now closed:
+  - decision artifact: `docs/modernization/phase0/tree-worker-policy-decision-2026-02-21.md`;
+  - benchmark artifact: `docs/modernization/baselines/benchmarks/tree-worker-policy-latest.json`;
+  - default policy: enabled by default with opt-out support.
+- Worker policy control surface is now explicit in both runtimes:
+  - URL query: `?tree_worker=on|off`;
+  - globals: `window.__treePlacementWorkerPolicy` (`on|off|auto`) and legacy `window.__disableTreePlacementWorker`.
+- Phase F data-path optimization is now active in both rebuild paths and main orchestration:
+  - persistent `nodeById`, typed adjacency, and selection-edge indexes;
+  - O(1) edge restore path for history/selection where available.
+- Latest benchmark snapshot date: 2026-02-21 (`benchmark-latest.json`).
 - UI trace lane attempt checkpoint is documented in `docs/modernization/phase0/ui-trace-progress-2026-02-13.md`.
+- Verification-ledger UI integration checkpoint is documented in `docs/modernization/phase0/verification-ledger-ui-integration-2026-02-20.md`.
+- Verification ledger module is now lazy-loaded as a split chunk (`relationship-verification.js`) to reduce eager JS payload.
+- Current graph/tree performance execution blueprint is documented in `docs/modernization/phase0/performance-optimization-plan-2026-02-20.md`.
+- Phase G hardening checkpoint for this rollout is documented in `docs/modernization/phase0/phase-g-hardening-checkpoint-2026-02-20.md`.
 
 ## Rust parity ports completed
 - Dataset derive parity (`verify-rust-derive-parity.mjs`).
@@ -42,15 +86,22 @@ For phase-vs-plan reconciliation, see `docs/modernization/phase0/progress-reconc
 - Harness: `scripts/modernization/verify-rust-sync-inference-notes-parity.mjs` validates effective content mapping for all tracker keys.
 - Frontend TS parity scripts currently execute with Node's `--experimental-strip-types`.
 - Rationale: deterministic parity checks can run without requiring local TypeScript toolchain install.
+- In some environments, `cargo run`-driven parity chains can stall in Cargo fingerprint scanning.
+- Preferred mitigation for spot-checks is using the already-built release binary (`target/release/maldives-research-cli`) where command parity harnesses permit it.
 
 ## Canonical commands for re-validation
 - `cargo fmt --all`
 - `cargo check`
+- `cargo run -q -p maldives-research-cli -- sync-edge-verification-index .`
 - `npm run typecheck`
 - `npm run build:web`
+- `npm run research:sync-edge-verification-index`
 - `npm run modernization:verify`
+- `npm run modernization:tree-placement-worker-parity`
+- `npm run modernization:benchmark:tree-worker-policy`
 - `npm run modernization:benchmark`
 - `npm run modernization:benchmark-check`
+- `npm run modernization:benchmark-check:require-ui`
 
 ## Frontend TypeScript migration status — PHASE 3 COMPLETE
 
@@ -79,14 +130,12 @@ Total: ~9,300 lines of TypeScript across 24 modules, 16 parity harnesses, 38 tot
 - CDN externals: d3@7, @floating-ui/dom@1, gsap@3 resolved by importmap at runtime.
 - `sw.js` CACHE_NAME bumped to `v9` with modernized asset list.
 - `apps/web/dist/` tracked in git for static deployment (removed from `.gitignore`).
-- Build: `npm run build:web` — typecheck + Vite build (55 modules, ~400ms).
+- Build: `npm run build:web` passing (direct root `tsc` gate + workspace Vite build).
 
 ## Next prioritized backlog (in order)
-1. **Phase 6**: Shadow-run comparison — run legacy (`src/main.js`) and modernized (`apps/web/dist/assets/main.js`) side by side; manual UX walkthrough.
-2. **Phase 6**: Tag `v2.0.0-modernized`, keep legacy `src/` for 1 release cycle.
-3. **Phase 5**: Integrate CDP-based UI benchmark runner into `modernization:benchmark` (paused due to environment constraints).
-4. **Phase 5**: Add browser trace lanes for FMP, TTI, pan/zoom fps, filter toggle latency.
-5. Optimize Rust cold-start startup path for short-lived CLI invocation.
+1. Optimize Rust cold-start startup path for short-lived CLI invocation.
+2. Extend UI lane with era-slider drag jank metric after strict UI profile is stable.
+3. Decide when strict UI lane should become always-on required after CI stability window.
 
 ## Non-negotiable constraints during migration
 - No functionality loss.

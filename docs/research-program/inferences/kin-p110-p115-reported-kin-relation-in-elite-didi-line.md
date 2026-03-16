@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `kin|P110|P115|reported kin relation in elite Didi line`  
-Last updated: `2026-02-10`  
+Last updated: `2026-02-19`  
 Inference class: `curated`
 
 ## 1) Edge identity

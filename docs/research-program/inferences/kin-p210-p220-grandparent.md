@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `kin|P220|P210|grandparent`  
-Last updated: `2026-02-10`  
+Last updated: `2026-02-19`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
@@ -20,7 +20,7 @@ Inference class: `rule-derived`
 ## 3) Logic chain (pair-specific)
 1. Support set for rule parent-of-parent-grandparent resolved as follows.
 2. Supporting edge: parent P220 Ahmad Manikufa'anu Kalaminja -> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) (CLM-0588, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Ahmad Manikufa'anu Kalaminja as parent of Hassan IX / Dom Manoel.
-3. Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P210 Dom Pedro de Malvidas (CLM-0606, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dom Pedro de Malvidas.
+3. Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P210 Dom Pedro de Malvidas (CLM-0606, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry under Dom Manoel lists Dom Pedro de Malvidas among the children of Dom Manoel and Dona Leonor de Ataide.
 4. Rule application (parent-of-parent-grandparent): with source -> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) and P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> target parent links, P220 Ahmad Manikufa'anu Kalaminja is modeled as inferred grandparent-line kin of P210 Dom Pedro de Malvidas.
 5. Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured.
 

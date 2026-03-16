@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `kin|P130|P132|possible southern-branch continuity (Addu/Fuvahmulah)`  
-Last updated: `2026-02-10`  
+Last updated: `2026-02-19`  
 Inference class: `curated`
 
 ## 1) Edge identity

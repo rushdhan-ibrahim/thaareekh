@@ -9,6 +9,8 @@ This folder tracks implementation of the TypeScript + Rust rewrite.
 - `baselines/`: frozen modernization baselines and dataset exports.
 - `phase0/continuation-handoff.md`: compact restart point after context compaction.
 - `phase0/research-script-migration-matrix.md`: Node->Rust research-script migration tracker.
+- `phase0/verification-ledger-ui-integration-2026-02-20.md`: ledger-backed relation explainability integration checkpoint.
+- `phase0/progress-reconciliation-2026-02-20.md`: latest phase-vs-plan reconciliation checkpoint.
 
 ## Core commands
 - `npm run modernization:baseline`
@@ -33,7 +35,9 @@ This folder tracks implementation of the TypeScript + Rust rewrite.
 - `npm run modernization:refresh-rel-quality-rust`
 - `npm run modernization:refresh-rel-quality-parity`
 - `npm run modernization:sync-inference-notes-rust`
+- `npm run modernization:sync-edge-verification-rust`
 - `npm run modernization:sync-inference-notes-parity`
+- `npm run research:sync-edge-verification-index`
 - `npm run modernization:refresh-person-dossiers-rust`
 - `npm run modernization:refresh-person-dossiers-parity`
 - `npm run modernization:refresh-derived-dossiers-rust`
@@ -66,7 +70,9 @@ This folder tracks implementation of the TypeScript + Rust rewrite.
 - `npm run modernization:ts-pathfinder-parity`
 - `npm run modernization:ts-relationships-parity`
 - `npm run modernization:benchmark`
+- `npm run modernization:benchmark:ui`
 - `npm run modernization:benchmark-check`
+- `npm run modernization:benchmark-check:require-ui`
 - `npm run modernization:verify`
 
 ## Rules

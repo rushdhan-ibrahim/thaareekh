@@ -1,38 +1,6 @@
 // Auto-generated from promotion batch (direct confirmed A/B from research).
 export const people = [
   {
-    "id": "P96",
-    "n": [],
-    "nm": "Donna Ines",
-    "rg": "",
-    "dy": "Hilaaly",
-    "g": "F",
-    "re": [],
-    "yb": 1585,
-    "yd": 1645,
-    "pb": "Goa (likely)",
-    "pd": "Goa (likely)",
-    "facts": [
-      "Bridge figure linking Dom Joao line to later Huraa ancestry."
-    ],
-    "no": "Daughter of Dom Joao (#66); key bridge into the Huraa line.",
-    "aliases": [
-      "Dona Ines",
-      "Dona Inez",
-      "Infanta Dona Inez de Malvidas"
-    ],
-    "regnal_names": [],
-    "titles": [
-      "Infanta"
-    ],
-    "source_refs": [
-      "SRC-MRF-KINGS",
-      "SRC-WIKI-MONARCHS",
-      "SRC-ROYALARK-M5"
-    ],
-    "person_confidence": "A"
-  },
-  {
     "id": "P97",
     "n": [],
     "nm": "Dom Luis de Sousa",
@@ -40,7 +8,7 @@ export const people = [
     "dy": "Hilaaly",
     "g": "M",
     "re": [],
-    "yb": 1605,
+    "yb": 1612,
     "yd": 1665,
     "pb": "Goa (likely)",
     "pd": "Maldives or Goa (uncertain)",
@@ -260,31 +228,6 @@ export const people = [
     "person_confidence": "A"
   },
   {
-    "id": "P105",
-    "n": [],
-    "nm": "Hassan Thakurufan",
-    "rg": "",
-    "dy": "Utheemu",
-    "g": "M",
-    "re": [],
-    "yb": 1525,
-    "yd": 1590,
-    "pb": "Utheemu (likely)",
-    "pd": "Maldives",
-    "facts": [
-      "Appears in co-regency/brother-line narratives with Mohamed Thakurufaanu."
-    ],
-    "no": "Brother/co-regency associate of Mohamed Thakurufaanu in bridge narratives.",
-    "aliases": [],
-    "regnal_names": [],
-    "titles": [],
-    "source_refs": [
-      "SRC-MRF-UTHEEM",
-      "SRC-WIKI-MONARCHS"
-    ],
-    "person_confidence": "B"
-  },
-  {
     "id": "P106",
     "n": [],
     "nm": "Ibrahim Kalaafaan",
@@ -331,33 +274,6 @@ export const people = [
     "aliases": [
       "Golhaavahi Kambulo",
       "Kalavahi Kabulo"
-    ],
-    "regnal_names": [],
-    "titles": [],
-    "source_refs": [
-      "SRC-MRF-HILAALY",
-      "SRC-WIKI-MONARCHS"
-    ],
-    "person_confidence": "B"
-  },
-  {
-    "id": "P108",
-    "n": [],
-    "nm": "Kulhiveri Hilaal Kaiulhanna Kaloge",
-    "rg": "",
-    "dy": "Hilaaly",
-    "g": "M",
-    "re": [],
-    "yb": 1330,
-    "yd": 1390,
-    "pb": "Hulhulé/Hilaal line (likely)",
-    "pd": "Maldives",
-    "facts": [
-      "Father of Hassan I (#30) in Hilaaly founder lineage records."
-    ],
-    "no": "Father of Hassan I (#30), cited as Hilaaly Kalo in bridge research.",
-    "aliases": [
-      "Hilaaly Kalo"
     ],
     "regnal_names": [],
     "titles": [],
@@ -965,7 +881,7 @@ export const people = [
     "dy": "Dhiyamigili",
     "g": "M",
     "re": [],
-    "yb": 1764,
+    "yb": 1766,
     "yd": 1829,
     "pb": "Malé",
     "pd": "Fuvahmulah",
@@ -1097,8 +1013,6 @@ export const people = [
     "dy": "Addu Line",
     "g": "F",
     "re": [],
-    "yb": 1920,
-    "yd": 1990,
     "pb": "Maldives",
     "pd": "Maldives",
     "facts": [
@@ -1473,7 +1387,7 @@ export const people = [
     "dy": "Modern",
     "g": "F",
     "re": [],
-    "yb": 1972,
+    "yb": 1970,
     "pb": "Maldives",
     "pd": "",
     "facts": [
@@ -1496,7 +1410,7 @@ export const people = [
     "dy": "Modern",
     "g": "F",
     "re": [],
-    "yb": 1975,
+    "yb": 1970,
     "pb": "Maldives",
     "pd": "",
     "facts": [
@@ -1519,7 +1433,7 @@ export const people = [
     "dy": "Modern",
     "g": "M",
     "re": [],
-    "yb": 1979,
+    "yb": 1971,
     "pb": "Maldives",
     "pd": "",
     "facts": [
@@ -1542,7 +1456,7 @@ export const people = [
     "dy": "Modern",
     "g": "M",
     "re": [],
-    "yb": 1982,
+    "yb": 1980,
     "pb": "Maldives",
     "pd": "",
     "facts": [
@@ -1588,34 +1502,6 @@ export const people = [
     "person_confidence": "B"
   },
   {
-    "id": "P155",
-    "n": [],
-    "nm": "Maandhoogey Bodu Dhorhy Manippulu",
-    "rg": "",
-    "dy": "Huraagey",
-    "g": "M",
-    "re": [],
-    "yb": 1832,
-    "yd": 1898,
-    "pb": "Maldives",
-    "pd": "Maldives",
-    "facts": [
-      "Documented as eldest son of Sultan Mohamed Imaduddeen IV (#86).",
-      "Documented as father of Sultan Mohamed Mueenuddeen II (#88) and Sultan Mohamed Imaaduddeen VI (#92)."
-    ],
-    "no": "Intermediate father node for the #88/#92 branch.",
-    "aliases": [
-      "Bodu Dorhy Manippulu"
-    ],
-    "regnal_names": [],
-    "titles": [],
-    "source_refs": [
-      "SRC-MRF-KINGS",
-      "SRC-WIKI-MONARCHS"
-    ],
-    "person_confidence": "B"
-  },
-  {
     "id": "P156",
     "n": [],
     "nm": "Rekeihiriya Maava Kilege",
@@ -1631,32 +1517,6 @@ export const people = [
       "Documented in royal-list notes as parent of Sultan Ali (P4)."
     ],
     "no": "Non-sovereign parent node added to connect early Lunar branch records.",
-    "aliases": [],
-    "regnal_names": [],
-    "titles": [
-      "Kilege"
-    ],
-    "source_refs": [
-      "SRC-MRF-KINGS"
-    ],
-    "person_confidence": "B"
-  },
-  {
-    "id": "P157",
-    "n": [],
-    "nm": "Hiriya Maava Kilege",
-    "rg": "",
-    "dy": "Lunar",
-    "g": "F",
-    "re": [],
-    "yb": 1210,
-    "yd": 1275,
-    "pb": "Maldives",
-    "pd": "Maldives",
-    "facts": [
-      "Documented in royal-list notes as parent of Sultan Hudhei (P9)."
-    ],
-    "no": "Non-sovereign parent node added for early Lunar continuity.",
     "aliases": [],
     "regnal_names": [],
     "titles": [
@@ -1730,7 +1590,6 @@ export const people = [
     "g": "M",
     "re": [],
     "yb": 1572,
-    "yd": 1640,
     "pb": "Maldives",
     "pd": "Maldives",
     "facts": [
@@ -1758,7 +1617,6 @@ export const people = [
     "g": "F",
     "re": [],
     "yb": 1575,
-    "yd": 1645,
     "pb": "Maldives",
     "pd": "Maldives",
     "facts": [
@@ -2540,8 +2398,8 @@ export const people = [
     "dy": "Huraagey",
     "g": "M",
     "re": [],
-    "yb": 1904,
-    "yd": 1988,
+    "yb": 1901,
+    "yd": 1944,
     "pb": "Maldives",
     "pd": "Maldives",
     "facts": [
@@ -2742,7 +2600,7 @@ export const people = [
     "dy": "Modern",
     "g": "M",
     "re": [],
-    "yb": 1941,
+    "yb": 1945,
     "yd": 2011,
     "pb": "Maldives",
     "pd": "Maldives",
@@ -3099,19 +2957,6 @@ export const edges = [
   },
   {
     "t": "parent",
-    "s": "P101",
-    "d": "P96",
-    "l": "",
-    "c": "c",
-    "evidence_refs": [
-      "SRC-MRF-KINGS",
-      "SRC-WIKI-MONARCHS"
-    ],
-    "claim_type": "direct",
-    "confidence_grade": "B"
-  },
-  {
-    "t": "parent",
     "s": "P102",
     "d": "P103",
     "l": "",
@@ -3157,31 +3002,6 @@ export const edges = [
     "evidence_refs": [
       "SRC-MRF-HILAALY",
       "SRC-WIKI-MONARCHS"
-    ],
-    "claim_type": "direct",
-    "confidence_grade": "B"
-  },
-  {
-    "t": "parent",
-    "s": "P108",
-    "d": "P30",
-    "l": "",
-    "c": "c",
-    "evidence_refs": [
-      "SRC-MRF-HILAALY",
-      "SRC-WIKI-MONARCHS"
-    ],
-    "claim_type": "direct",
-    "confidence_grade": "B"
-  },
-  {
-    "t": "parent",
-    "s": "P109",
-    "d": "P108",
-    "l": "",
-    "c": "c",
-    "evidence_refs": [
-      "SRC-MRF-HILAALY"
     ],
     "claim_type": "direct",
     "confidence_grade": "B"
@@ -3818,46 +3638,8 @@ export const edges = [
   },
   {
     "t": "parent",
-    "s": "P155",
-    "d": "P88",
-    "l": "",
-    "c": "c",
-    "evidence_refs": [
-      "SRC-MRF-KINGS",
-      "SRC-WIKI-MONARCHS"
-    ],
-    "claim_type": "direct",
-    "confidence_grade": "B"
-  },
-  {
-    "t": "parent",
-    "s": "P155",
-    "d": "P92",
-    "l": "",
-    "c": "c",
-    "evidence_refs": [
-      "SRC-MRF-KINGS",
-      "SRC-WIKI-MONARCHS"
-    ],
-    "claim_type": "direct",
-    "confidence_grade": "B"
-  },
-  {
-    "t": "parent",
     "s": "P156",
     "d": "P4",
-    "l": "",
-    "c": "c",
-    "evidence_refs": [
-      "SRC-MRF-KINGS"
-    ],
-    "claim_type": "direct",
-    "confidence_grade": "B"
-  },
-  {
-    "t": "parent",
-    "s": "P157",
-    "d": "P9",
     "l": "",
     "c": "c",
     "evidence_refs": [
@@ -4206,6 +3988,18 @@ export const edges = [
     "confidence_grade": "B"
   },
   {
+    "t": "sibling",
+    "s": "P91",
+    "d": "P129",
+    "l": "half-siblings (shared mother P185)",
+    "c": "c",
+    "evidence_refs": [
+      "SRC-ROYALARK-MALDIVES"
+    ],
+    "claim_type": "direct",
+    "confidence_grade": "B"
+  },
+  {
     "t": "parent",
     "s": "P186",
     "d": "P92",
@@ -4313,19 +4107,6 @@ export const edges = [
   },
   {
     "t": "parent",
-    "s": "P66",
-    "d": "P96",
-    "l": "",
-    "c": "c",
-    "evidence_refs": [
-      "SRC-MRF-KINGS",
-      "SRC-WIKI-MONARCHS"
-    ],
-    "claim_type": "direct",
-    "confidence_grade": "A"
-  },
-  {
-    "t": "parent",
     "s": "P81",
     "d": "P130",
     "l": "",
@@ -4335,32 +4116,6 @@ export const edges = [
     ],
     "claim_type": "direct",
     "confidence_grade": "B"
-  },
-  {
-    "t": "parent",
-    "s": "P86",
-    "d": "P155",
-    "l": "",
-    "c": "c",
-    "evidence_refs": [
-      "SRC-MRF-KINGS",
-      "SRC-WIKI-MONARCHS"
-    ],
-    "claim_type": "direct",
-    "confidence_grade": "B"
-  },
-  {
-    "t": "parent",
-    "s": "P96",
-    "d": "P97",
-    "l": "",
-    "c": "c",
-    "evidence_refs": [
-      "SRC-MRF-KINGS",
-      "SRC-ROYALARK-M5"
-    ],
-    "claim_type": "direct",
-    "confidence_grade": "A"
   },
   {
     "t": "parent",
@@ -4394,31 +4149,6 @@ export const edges = [
     "c": "c",
     "evidence_refs": [
       "SRC-MRF-KINGS"
-    ],
-    "claim_type": "direct",
-    "confidence_grade": "B"
-  },
-  {
-    "t": "sibling",
-    "s": "P104",
-    "d": "P105",
-    "l": "brothers",
-    "c": "c",
-    "evidence_refs": [
-      "SRC-MRF-UTHEEM",
-      "SRC-WIKI-MONARCHS"
-    ],
-    "claim_type": "direct",
-    "confidence_grade": "B"
-  },
-  {
-    "t": "sibling",
-    "s": "P108",
-    "d": "P192",
-    "l": "brothers",
-    "c": "c",
-    "evidence_refs": [
-      "SRC-MRF-HILAALY"
     ],
     "claim_type": "direct",
     "confidence_grade": "B"
@@ -4534,19 +4264,6 @@ export const edges = [
     "confidence_grade": "B"
   },
   {
-    "t": "sibling",
-    "s": "P67",
-    "d": "P96",
-    "l": "siblings",
-    "c": "c",
-    "evidence_refs": [
-      "SRC-MRF-KINGS",
-      "SRC-WIKI-MONARCHS"
-    ],
-    "claim_type": "direct",
-    "confidence_grade": "A"
-  },
-  {
     "t": "spouse",
     "s": "P110",
     "d": "P113",
@@ -4620,12 +4337,12 @@ export const edges = [
   },
   {
     "t": "spouse",
-    "s": "P155",
+    "s": "P222",
     "d": "P186",
     "l": "married",
     "c": "c",
     "evidence_refs": [
-      "SRC-MRF-KINGS"
+      "SRC-ROYALARK-MALDIVES"
     ],
     "claim_type": "direct",
     "confidence_grade": "B"

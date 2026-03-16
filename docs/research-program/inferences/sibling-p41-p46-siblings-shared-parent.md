@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `sibling|P41|P46|siblings (shared parent)`  
-Last updated: `2026-02-10`  
+Last updated: `2026-02-19`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
@@ -19,7 +19,7 @@ Inference class: `rule-derived`
 
 ## 3) Logic chain (pair-specific)
 1. Support set for rule shared-parent-sibling resolved as follows.
-2. Supporting edge: parent P39 Yoosuf (Loka Aananadha) -> P41 Hadi Hassan (Raadha Veeru) (CLM-0596, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Yoosuf as parent of Hadi Hassan.
+2. Supporting edge: parent P39 Yoosuf (Loka Aananadha) -> P41 Hadi Hassan (Raadha Veeru) (CLM-0596, SRC-ROYALARK-MALDIVES, grade B); excerpt: RoyalArk Maldives lineage reconstruction gives Yoosuf (P39) as father of Hadi Hassan (P41), which aligns with current canonical parent selection.
 3. Supporting edge: parent P39 Yoosuf (Loka Aananadha) -> P46 Omar (Loka Sundhura) (CLM-0336, SRC-MRF-KINGS, grade B); excerpt: Kings list records parent edge P39 to P46.
 4. Rule application (shared-parent-sibling): because both endpoints share parent P39 Yoosuf (Loka Aananadha), P41 Hadi Hassan (Raadha Veeru) and P46 Omar (Loka Sundhura) are modeled as inferred sibling-line kin.
 5. Current modeling remains inferred because direct source text naming sibling (siblings (shared parent)) for this exact pair is not yet captured.

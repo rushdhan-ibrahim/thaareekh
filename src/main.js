@@ -2,13 +2,14 @@ import * as d3 from 'd3';
 import state from './state.js';
 import { people, edges, mode } from './data/sovereigns.merge.js';
 import { dyS } from './utils/dynasties.js';
-import { rebuild } from './graph/rebuild.js';
+import { rebuild, updateEraVisibility } from './graph/rebuild.js';
+import { invalidateChipCache } from './graph/filter.js';
 import { hiN, hiE, clH } from './graph/highlight.js';
 import { cS, initSheet } from './ui/modal.js';
 import { goF } from './ui/navigation.js';
 import { initSearch } from './ui/search.js';
 import { initTheme } from './ui/theme.js';
-import { showD, showInstitutionsPane, showLinkDetail } from './ui/sidebar.js';
+import { showD, showInstitutionsPane, showLinkDetail, showOfficeDetail, getCurrentOfficeId } from './ui/sidebar.js';
 import { initCommandBar } from './ui/commandbar.js';
 import { initHistory, clearHistory, withHistoryMuted } from './ui/history.js';
 import { armCompareFrom, clearCompare, getCompareState, initCompare, setCompareA, setCompareB, setCompareState, swapCompare } from './ui/compare.js';
@@ -23,6 +24,23 @@ import { initOnboarding } from './ui/onboarding.js';
 import { initKeyboardNav } from './ui/keyboard-nav.js';
 import { initTreeOptions, updateTreeOptionsVisibility, refreshTreeOptionLabels } from './ui/tree-options.js';
 
+function applyTreeWorkerPolicyFromQuery() {
+  if (typeof window === "undefined") return;
+  const params = new URLSearchParams(window.location.search);
+  const raw = (params.get("tree_worker") || params.get("treeWorker") || "").trim().toLowerCase();
+  if (!raw) return;
+  if (raw === "off" || raw === "0" || raw === "false" || raw === "disabled") {
+    window.__disableTreePlacementWorker = true;
+    window.__treePlacementWorkerPolicy = "off";
+    return;
+  }
+  if (raw === "on" || raw === "1" || raw === "true" || raw === "enabled") {
+    window.__disableTreePlacementWorker = false;
+    window.__treePlacementWorkerPolicy = "on";
+  }
+}
+applyTreeWorkerPolicyFromQuery();
+
 // Expose goF globally for inline onclick handlers in sidebar HTML
 window.goF = goF;
 window.setCmpA = setCompareA;
@@ -34,12 +52,111 @@ window.clrCmp = clearCompare;
 const savedView = loadViewState();
 const ERA = timelineExtent();
 
+let graphInteractionTimer = null;
+let zoomEventRaf = null;
+let pendingZoomDetail = null;
+let zoomTransformRaf = null;
+let pendingZoomTransform = null;
+let zoomLayerEl = null;
+
+function getZoomLayerEl() {
+  if (zoomLayerEl && document.body.contains(zoomLayerEl)) return zoomLayerEl;
+  zoomLayerEl = document.querySelector('#sv .gg');
+  return zoomLayerEl;
+}
+
+function scheduleZoomTransform(transform) {
+  pendingZoomTransform = transform;
+  if (zoomTransformRaf) return;
+  zoomTransformRaf = requestAnimationFrame(() => {
+    zoomTransformRaf = null;
+    const next = pendingZoomTransform;
+    pendingZoomTransform = null;
+    if (!next) return;
+    const layer = getZoomLayerEl();
+    if (!layer) return;
+    layer.setAttribute('transform', String(next));
+  });
+}
+
+function ensureGraphInteractionStyles() {
+  if (document.getElementById('graph-interaction-optimizations')) return;
+  const style = document.createElement('style');
+  style.id = 'graph-interaction-optimizations';
+  style.textContent = `
+    body.graph-interacting #sv g.graph-edge-labels {
+      display: none !important;
+    }
+    body.graph-interacting #sv g.graph-badges,
+    body.graph-interacting #sv g.tree-badges,
+    body.graph-interacting #sv text.node-reign-label {
+      display: none !important;
+    }
+    body.graph-interacting #sv .node-body,
+    body.graph-interacting #sv .node-accent {
+      filter: none !important;
+    }
+    body.graph-interacting #sv .graph-link,
+    body.graph-interacting #sv .tree-link,
+    body.graph-interacting #sv .nd {
+      shape-rendering: optimizeSpeed;
+      stroke-dasharray: none !important;
+      marker-end: none !important;
+      pointer-events: none !important;
+    }
+    body.graph-interacting #sv .gg {
+      will-change: transform;
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+function emitZoomChanged(detail) {
+  pendingZoomDetail = detail;
+  if (zoomEventRaf) return;
+  zoomEventRaf = requestAnimationFrame(() => {
+    zoomEventRaf = null;
+    const next = pendingZoomDetail;
+    pendingZoomDetail = null;
+    if (!next) return;
+    window.dispatchEvent(new CustomEvent('zoom-changed', { detail: next }));
+  });
+}
+
+function setGraphInteractionMode(active) {
+  if (graphInteractionTimer) {
+    window.clearTimeout(graphInteractionTimer);
+    graphInteractionTimer = null;
+  }
+  if (!active) {
+    graphInteractionTimer = window.setTimeout(() => {
+      graphInteractionTimer = null;
+      document.body.classList.remove('graph-interacting');
+    }, 110);
+    return;
+  }
+  if (state.viewMode !== 'graph') {
+    document.body.classList.remove('graph-interacting');
+    return;
+  }
+  document.body.classList.add('graph-interacting');
+}
+
+ensureGraphInteractionStyles();
+
 // Initialize zoom behavior
-state.zoomBehavior = d3.zoom().scaleExtent([0.08, 4]).on("zoom", e => {
-  state.tr = e.transform;
-  d3.select(".gg").attr("transform", e.transform);
-  window.dispatchEvent(new CustomEvent('zoom-changed', { detail: { x: e.transform.x, y: e.transform.y, k: e.transform.k } }));
-});
+state.zoomBehavior = d3.zoom().scaleExtent([0.08, 4])
+  .on("start", () => {
+    setGraphInteractionMode(true);
+  })
+  .on("zoom", e => {
+    state.tr = e.transform;
+    scheduleZoomTransform(e.transform);
+    emitZoomChanged({ x: e.transform.x, y: e.transform.y, k: e.transform.k });
+  })
+  .on("end", () => {
+    setGraphInteractionMode(false);
+  });
 
 // Update translate extent after rebuilds to prevent panning too far off-screen
 function updateTranslateExtent() {
@@ -57,13 +174,81 @@ function updateTranslateExtent() {
   ]);
 }
 
+const renderInvalidation = {
+  geometryDirty: false,
+  styleDirty: false,
+  selectionDirty: false,
+  overlayDirty: false,
+  eraVisibilityDirty: false
+};
+let renderRaf = 0;
+
+function resetRenderInvalidation() {
+  renderInvalidation.geometryDirty = false;
+  renderInvalidation.styleDirty = false;
+  renderInvalidation.selectionDirty = false;
+  renderInvalidation.overlayDirty = false;
+  renderInvalidation.eraVisibilityDirty = false;
+}
+
+function applySelectionHighlight() {
+  if (state.selId) {
+    hiN(state.selId);
+    return;
+  }
+  if (state.selEdge) {
+    hiE(state.selEdge);
+    return;
+  }
+  clH();
+}
+
+function flushRenderQueue() {
+  if (renderRaf) {
+    cancelAnimationFrame(renderRaf);
+    renderRaf = 0;
+  }
+  const snapshot = { ...renderInvalidation };
+  resetRenderInvalidation();
+  const needsFullRebuild = snapshot.geometryDirty
+    || snapshot.styleDirty
+    || snapshot.overlayDirty
+    || snapshot.eraVisibilityDirty;
+  if (needsFullRebuild) {
+    rebuild();
+    applySelectionHighlight();
+    return;
+  }
+  if (snapshot.selectionDirty) {
+    applySelectionHighlight();
+  }
+}
+
+function requestRender(invalidation = { geometryDirty: true }, { resetZoom = false, immediate = false } = {}) {
+  for (const [key, value] of Object.entries(invalidation)) {
+    if (value) renderInvalidation[key] = true;
+  }
+  if (resetZoom) {
+    state.tr = d3.zoomIdentity;
+  }
+  if (immediate) {
+    flushRenderQueue();
+    return;
+  }
+  if (renderRaf) return;
+  renderRaf = requestAnimationFrame(() => {
+    renderRaf = 0;
+    flushRenderQueue();
+  });
+}
+
 // Theme toggle
 if (savedView?.theme === 'dark' || savedView?.theme === 'light') {
   document.documentElement.dataset.theme = savedView.theme;
   const bt = document.getElementById('bt');
   if (bt) bt.textContent = savedView.theme === 'dark' ? '\u2600' : '\u263E';
 }
-initTheme();
+initTheme(() => requestRender({ styleDirty: true }));
 initSheet();
 initCommandBar();
 initCommandPalette();
@@ -73,7 +258,15 @@ initExporter();
 initFilterPanel();
 initMinimap();
 
-if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+function shouldRegisterServiceWorker() {
+  if (typeof window === 'undefined') return false;
+  const { hostname, search } = window.location;
+  const isLocalHost = hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '::1';
+  const forceEnable = new URLSearchParams(search).get('sw') === 'on';
+  return !isLocalHost || forceEnable;
+}
+
+if (shouldRegisterServiceWorker() && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js').catch(() => {
       // Offline support is best-effort.
@@ -94,7 +287,7 @@ function applyDensityMode(v, { rebuildNow = true } = {}) {
   document.documentElement.dataset.density = state.density;
   const dns = document.getElementById('dns');
   if (dns) dns.value = state.density;
-  if (rebuildNow) rebuild();
+  if (rebuildNow) requestRender({ styleDirty: true });
 }
 
 function syncEraToStoryStep(payload) {
@@ -117,12 +310,23 @@ function centuryLabel(y) {
 }
 
 let eraRaf = 0;
+let eraDebounceTimer = 0;
 function queueEraRebuild() {
   if (eraRaf) return;
   eraRaf = requestAnimationFrame(() => {
     eraRaf = 0;
-    rebuild();
+    requestRender({ eraVisibilityDirty: true });
   });
+}
+function queueEraDebouncedRebuild() {
+  if (eraRaf) { cancelAnimationFrame(eraRaf); eraRaf = 0; }
+  clearTimeout(eraDebounceTimer);
+  eraDebounceTimer = setTimeout(() => {
+    eraDebounceTimer = 0;
+    // Try lightweight path first; only do full rebuild if visible set changed
+    const needsFull = updateEraVisibility();
+    if (needsFull) requestRender({ eraVisibilityDirty: true });
+  }, 150);
 }
 
 function emitEraChanged() {
@@ -238,9 +442,14 @@ function initEraControls() {
   eta.addEventListener("click", () => setEraEnabled(!state.eraEnabled));
   ey.addEventListener("input", () => {
     if (!state.eraEnabled) setEraEnabled(true, { rebuildNow: false });
-    setEraYear(Number(ey.value), { rebuildNow: true });
+    // During drag: update UI immediately, debounce the expensive rebuild
+    setEraYear(Number(ey.value), { rebuildNow: false });
+    queueEraDebouncedRebuild();
   });
   ey.addEventListener("change", () => {
+    // On mouseup: cancel pending debounce and rebuild immediately
+    clearTimeout(eraDebounceTimer);
+    eraDebounceTimer = 0;
     if (!state.eraEnabled) setEraEnabled(true, { rebuildNow: false });
     setEraYear(Number(ey.value), { rebuildNow: true });
   });
@@ -298,6 +507,14 @@ function initFilterPanel() {
 
 function findEdgeFromHistoryEntry(entry) {
   if (!entry || entry.type !== 'edge') return null;
+  if (entry.s && entry.d) {
+    const a = entry.s < entry.d ? entry.s : entry.d;
+    const b = entry.s < entry.d ? entry.d : entry.s;
+    const key = `${a}|${b}|${entry.rel || 'kin'}`;
+    const edgeIdx = state._edgeBySelectionKey;
+    const direct = edgeIdx?.get?.(key);
+    if (direct) return direct;
+  }
   return state.links.find(l => {
     const s = typeof l.source === 'object' ? l.source.id : l.source;
     const t = typeof l.target === 'object' ? l.target.id : l.target;
@@ -353,7 +570,7 @@ function setSidebarOpen(open, { rebuildNow = false } = {}) {
   document.body.classList.toggle("sidebar-collapsed", !state.sidebarOpen);
   renderSidebarToggleUi();
   if (rebuildNow) {
-    rebuild();
+    requestRender({ geometryDirty: true }, { immediate: true });
     setTimeout(updateTranslateExtent, 500);
     return;
   }
@@ -419,23 +636,20 @@ function restoreSelection(snapshot) {
 }
 
 function refreshFocusOverlay() {
-  state.tr = d3.zoomIdentity;
-  rebuild();
-  if (state.selId) {
-    hiN(state.selId);
-    return;
-  }
-  if (state.selEdge) {
-    hiE(state.selEdge);
-    return;
-  }
-  clH();
+  requestRender(
+    { overlayDirty: true, selectionDirty: true },
+    { resetZoom: true }
+  );
 }
 
 initHistory(entry => {
   withHistoryMuted(() => {
     if (entry.type === 'person') {
       goF(entry.id);
+      return;
+    }
+    if (entry.type === 'office') {
+      showOfficeDetail(entry.officeId);
       return;
     }
     if (entry.type === 'edge') {
@@ -474,22 +688,32 @@ initSearch();
 
 // Edge type chip toggles
 document.querySelectorAll(".chip[data-e]").forEach(c => c.addEventListener("click", () => {
-  c.classList.toggle("on"); state.tr = d3.zoomIdentity; rebuild();
+  c.classList.toggle("on");
+  invalidateChipCache();
+  requestRender({ geometryDirty: true }, { resetZoom: true });
 }));
 
 // Confidence chip toggles
 document.querySelectorAll(".chip[data-cf]").forEach(c => c.addEventListener("click", () => {
-  c.classList.toggle("on"); state.tr = d3.zoomIdentity; rebuild();
+  c.classList.toggle("on");
+  invalidateChipCache();
+  requestRender({ geometryDirty: true }, { resetZoom: true });
 }));
 
 // Dynasty filter
-document.getElementById("df").addEventListener("change", () => { state.tr = d3.zoomIdentity; rebuild(); });
+document.getElementById("df").addEventListener("change", () => {
+  requestRender({ geometryDirty: true }, { resetZoom: true });
+});
 
 // Tree filter
-document.getElementById("tf").addEventListener("change", () => { state.tr = d3.zoomIdentity; rebuild(); });
+document.getElementById("tf").addEventListener("change", () => {
+  requestRender({ geometryDirty: true }, { resetZoom: true });
+});
 
 // Source quality filter
-document.getElementById("sqf").addEventListener("change", () => { state.tr = d3.zoomIdentity; rebuild(); });
+document.getElementById("sqf").addEventListener("change", () => {
+  requestRender({ geometryDirty: true }, { resetZoom: true });
+});
 document.getElementById("dns").addEventListener("change", e => {
   applyDensityMode(e.target.value, { rebuildNow: true });
 });
@@ -554,16 +778,17 @@ document.getElementById("fm").addEventListener("click", () => {
 
 // View mode toggles
 document.getElementById("vmg").addEventListener("click", () => {
+  document.body.classList.remove('graph-interacting');
   state.viewMode = "graph";
   document.getElementById("vmg").classList.add("on");
   document.getElementById("vmt").classList.remove("on");
   document.getElementById("vmg").setAttribute("aria-pressed", "true");
   document.getElementById("vmt").setAttribute("aria-pressed", "false");
-  state.tr = d3.zoomIdentity;
-  rebuild();
+  requestRender({ geometryDirty: true }, { resetZoom: true });
   updateTreeOptionsVisibility();
 });
 document.getElementById("vmt").addEventListener("click", () => {
+  document.body.classList.remove('graph-interacting');
   state.viewMode = "tree";
   document.getElementById("vmt").classList.add("on");
   document.getElementById("vmg").classList.remove("on");
@@ -571,8 +796,7 @@ document.getElementById("vmt").addEventListener("click", () => {
   document.getElementById("vmg").setAttribute("aria-pressed", "false");
   const parentChip = document.querySelector('.chip[data-e="parent"]');
   if (parentChip && !parentChip.classList.contains("on")) parentChip.classList.add("on");
-  state.tr = d3.zoomIdentity;
-  rebuild();
+  requestRender({ geometryDirty: true }, { resetZoom: true });
   updateTreeOptionsVisibility();
 });
 
@@ -588,6 +812,7 @@ document.getElementById("resetView")?.addEventListener("click", () => {
 
 // Reset button
 document.getElementById("br").addEventListener("click", () => {
+  document.body.classList.remove('graph-interacting');
   document.getElementById("si").value = "";
   document.getElementById("dd").classList.remove("open");
   document.getElementById("df").value = "__all__";
@@ -596,6 +821,7 @@ document.getElementById("br").addEventListener("click", () => {
   applyDensityMode("comfortable", { rebuildNow: false });
   document.querySelectorAll(".chip[data-e]").forEach(c => c.classList.add("on"));
   document.querySelectorAll(".chip[data-cf]").forEach(c => c.classList.add("on"));
+  invalidateChipCache();
   state.viewMode = "graph";
   document.getElementById("vmg").classList.add("on");
   document.getElementById("vmt").classList.remove("on");
@@ -621,7 +847,7 @@ document.getElementById("br").addEventListener("click", () => {
   cS();
   institutionsReturnSelection = null;
   showEmptySidebar();
-  state.tr = d3.zoomIdentity; rebuild();
+  requestRender({ geometryDirty: true }, { resetZoom: true, immediate: true });
 });
 
 // Populate dynasty dropdown
@@ -657,19 +883,18 @@ window.addEventListener('request-sidebar-open', () => {
   if (!state.sidebarOpen) setSidebarOpen(true);
 });
 
-// Update minimap after simulation settles
-window.addEventListener('zoom-changed', () => updateMinimap());
-
 // ARIA live region announcements
 window.addEventListener('selection-changed', e => {
   const live = document.getElementById('a11y-live');
   if (!live) return;
   const detail = e.detail;
   if (detail?.type === 'person' && detail.id) {
-    const node = state.nodes.find(n => n.id === detail.id);
+    const node = state._nodeById?.get?.(detail.id) || state.nodes.find(n => n.id === detail.id);
     live.textContent = node ? `Selected: ${node.nm || detail.id}` : '';
   } else if (detail?.type === 'edge') {
     live.textContent = 'Relationship selected';
+  } else if (detail?.type === 'office') {
+    live.textContent = `Office selected: ${detail.officeId}`;
   } else {
     live.textContent = '';
   }
@@ -683,6 +908,11 @@ window.addEventListener('lang-changed', () => {
     const vmi = document.getElementById('vmi');
     if (vmi?.classList.contains('on')) {
       showInstitutionsPane();
+      return;
+    }
+    const curOfc = getCurrentOfficeId();
+    if (curOfc) {
+      showOfficeDetail(curOfc);
       return;
     }
     if (state.selId) {
@@ -703,8 +933,13 @@ window.addEventListener("resize", () => {
   state.H = document.getElementById("ga").clientHeight;
 });
 
-// Parallax pattern effect on zoom
+// Parallax pattern effect on zoom (throttled to every other frame)
+let parallaxLast = 0;
 window.addEventListener('zoom-changed', e => {
+  if (document.body.classList.contains('graph-interacting')) return;
+  const now = performance.now();
+  if (now - parallaxLast < 32) return;
+  parallaxLast = now;
   const detail = e.detail;
   if (!detail) return;
   const ga = document.getElementById('ga');

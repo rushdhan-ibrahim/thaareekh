@@ -7,7 +7,6 @@
   stroke-linecap: round;
   stroke-dasharray: 10 8;
   animation: flowedge 1.8s linear infinite;
-  filter: drop-shadow(0 0 3px rgba(53,165,163,.4));
 }
 
 /* Era overlay */
@@ -26,20 +25,19 @@
 
 /* Node selected glow */
 .node-selected rect {
-  filter: drop-shadow(0 0 6px var(--ac));
+  stroke: var(--ac);
   animation: selectedPulse 2s ease-in-out infinite;
 }
 
 /* Connected neighbor node glow (dimmer than selected) */
 .node-connected rect {
-  filter: drop-shadow(0 0 3px var(--ac));
+  stroke: var(--ac);
   animation: connectedNodePulse 2s ease-in-out infinite;
 }
 
 /* Connected edge glow (synchronized with node pulse) */
 .edge-highlight {
-  stroke-width: 3px !important;
-  filter: drop-shadow(0 0 6px var(--ac));
+  stroke: var(--ac) !important;
   animation: edgeGlowPulse 2s ease-in-out infinite;
 }
 

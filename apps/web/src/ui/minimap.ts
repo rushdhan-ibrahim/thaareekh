@@ -46,6 +46,8 @@ let minimapSvg: any = null;
 let minimapG: any = null;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let viewportRect: any = null;
+let _cachedBounds: NodeBounds | null = null;
+let _viewportRaf = 0;
 
 function dynastyColor(dy: string | undefined): string {
   return `var(--dy-${(dy || 'unknown').toLowerCase()})`;
@@ -84,7 +86,15 @@ export function initMinimap(state: AppState, d3: D3Like): void {
     svgEl.transition().duration(300).call(zoomBehavior.transform, transform);
   });
 
-  window.addEventListener('zoom-changed', () => updateViewport(state, d3));
+  const scheduleViewportUpdate = (): void => {
+    if (_viewportRaf) return;
+    _viewportRaf = requestAnimationFrame(() => {
+      _viewportRaf = 0;
+      updateViewport(state, d3);
+    });
+  };
+
+  window.addEventListener('zoom-changed', scheduleViewportUpdate);
 }
 
 export function updateMinimap(state: AppState, d3: D3Like): void {
@@ -92,34 +102,48 @@ export function updateMinimap(state: AppState, d3: D3Like): void {
   const container = document.getElementById('minimap');
   if (!container || container.hidden) return;
 
-  minimapSvg.selectAll('*').remove();
   const bounds = getNodeBounds(state.nodes as Array<{ x?: number; y?: number }>);
-  if (!bounds) return;
+  _cachedBounds = bounds;
+  if (!bounds) {
+    minimapSvg.selectAll('*').remove();
+    minimapG = null;
+    viewportRect = null;
+    return;
+  }
 
   const pad = 10;
   const scale = Math.min((160 - pad * 2) / bounds.w, (100 - pad * 2) / bounds.h);
   const ox = (160 - bounds.w * scale) / 2 - bounds.minX * scale;
   const oy = (100 - bounds.h * scale) / 2 - bounds.minY * scale;
 
-  minimapG = minimapSvg.append('g').attr('transform', `translate(${ox},${oy}) scale(${scale})`);
+  // Create groups once, update transform
+  if (!minimapG) {
+    minimapSvg.selectAll('*').remove();
+    minimapG = minimapSvg.append('g');
+    viewportRect = minimapSvg.append('rect').attr('class', 'minimap-viewport');
+  }
+  minimapG.attr('transform', `translate(${ox},${oy}) scale(${scale})`);
 
-  minimapG.selectAll('circle')
-    .data(state.nodes)
-    .enter()
+  // D3 data-join: only create/remove changed circles
+  const r = Math.max(1.5, 3 / scale);
+  const dots = minimapG.selectAll('circle.minimap-dot')
+    .data(state.nodes, (d: unknown) => (d as PersonNode).id);
+  dots.exit().remove();
+  dots.enter()
     .append('circle')
     .attr('class', 'minimap-dot')
+    .attr('fill', (d: unknown) => dynastyColor((d as PersonNode).dy))
+    .merge(dots)
     .attr('cx', (d: unknown) => (d as { x: number }).x)
     .attr('cy', (d: unknown) => (d as { y: number }).y)
-    .attr('r', Math.max(1.5, 3 / scale))
-    .attr('fill', (d: unknown) => dynastyColor((d as PersonNode).dy));
+    .attr('r', r);
 
-  viewportRect = minimapSvg.append('rect').attr('class', 'minimap-viewport');
   updateViewport(state, d3);
 }
 
-function updateViewport(state: AppState, d3: D3Like): void {
+export function updateViewport(state: AppState, d3: D3Like): void {
   if (!viewportRect || !minimapG) return;
-  const bounds = getNodeBounds(state.nodes as Array<{ x?: number; y?: number }>);
+  const bounds = _cachedBounds || getNodeBounds(state.nodes as Array<{ x?: number; y?: number }>);
   if (!bounds) return;
 
   const pad = 10;

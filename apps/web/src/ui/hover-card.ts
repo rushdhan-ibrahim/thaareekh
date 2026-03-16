@@ -10,6 +10,9 @@ function ensureEl(): HTMLDivElement {
   hoverEl = document.createElement('div');
   hoverEl.className = 'hover-card';
   hoverEl.setAttribute('role', 'tooltip');
+  hoverEl.style.left = '0';
+  hoverEl.style.top = '0';
+  hoverEl.style.willChange = 'transform';
   document.body.appendChild(hoverEl);
   return hoverEl;
 }
@@ -18,7 +21,12 @@ function dynastyColor(dy: string | undefined): string {
   return `var(--dy-${(dy ?? 'unknown').toLowerCase()})`;
 }
 
-function connectionCount(id: string, links: LinkDatum[]): number {
+function connectionCount(id: string, links: LinkDatum[], adj?: Map<string, Set<string>>): number {
+  // Use cached adjacency map for O(1) lookup; fallback to iteration
+  if (adj) {
+    const neighbors = adj.get(id);
+    return neighbors ? neighbors.size : 0;
+  }
   let count = 0;
   links.forEach(l => {
     const s = typeof l.source === 'object' ? l.source.id : l.source;
@@ -31,7 +39,7 @@ function connectionCount(id: string, links: LinkDatum[]): number {
 export function showNodeHoverCard(ev: MouseEvent, d: PersonNode, state: AppState): void {
   if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
   const el = ensureEl();
-  const conns = connectionCount(d.id, state.links);
+  const conns = connectionCount(d.id, state.links, state._adj as Map<string, Set<string>> | undefined);
   const bio = d.bio ?? '';
   const snippet = bio.split('.')[0] ?? '';
   el.innerHTML = `
@@ -44,15 +52,13 @@ export function showNodeHoverCard(ev: MouseEvent, d: PersonNode, state: AppState
     </div>
     ${bio ? `<div class="hover-card-bio">${esc(snippet.slice(0, 120))}${snippet.length > 120 ? '\u2026' : '.'}</div>` : ''}
   `;
-  el.style.left = (ev.clientX + 14) + 'px';
-  el.style.top = (ev.clientY + 14) + 'px';
+  el.style.transform = `translate(${ev.clientX + 14}px,${ev.clientY + 14}px)`;
   el.classList.add('visible');
 }
 
 export function moveHoverCard(ev: MouseEvent): void {
   if (!hoverEl || !hoverEl.classList.contains('visible')) return;
-  hoverEl.style.left = (ev.clientX + 14) + 'px';
-  hoverEl.style.top = (ev.clientY + 14) + 'px';
+  hoverEl.style.transform = `translate(${ev.clientX + 14}px,${ev.clientY + 14}px)`;
 }
 
 export function hideHoverCard(): void {

@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `kin|P18|P27|grandparent`  
-Last updated: `2026-02-10`  
+Last updated: `2026-02-19`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
@@ -20,7 +20,7 @@ Inference class: `rule-derived`
 ## 3) Logic chain (pair-specific)
 1. Support set for rule parent-of-parent-grandparent resolved as follows.
 2. Supporting edge: parent P18 Omar Veeru (Loka Abarana) -> P25 Raadhaafathi (Suvama Abarana) (CLM-0318, SRC-MRF-KINGS, grade B); excerpt: Kings list gives P25 as child of P18 in the same household branch.
-3. Supporting edge: parent P25 Raadhaafathi (Suvama Abarana) -> P27 Dhaain (Keerithi Maha Rehendi) (CLM-0595, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Raadhaafathi as parent of Dhaain.
+3. Supporting edge: parent P25 Raadhaafathi (Suvama Abarana) -> P27 Dhaain (Keerithi Maha Rehendi) (CLM-0595, SRC-ROYALARK-MALDIVES, grade B); excerpt: RoyalArk Maldives lineage reconstruction treats Dhaain (P27) as daughter of Raadhaafathi/Malika Fatima (P25), alongside parent linkage through P26.
 4. Rule application (parent-of-parent-grandparent): with source -> P25 Raadhaafathi (Suvama Abarana) and P25 Raadhaafathi (Suvama Abarana) -> target parent links, P18 Omar Veeru (Loka Abarana) is modeled as inferred grandparent-line kin of P27 Dhaain (Keerithi Maha Rehendi).
 5. Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured.
 

@@ -9,18 +9,18 @@
 }
 
 @keyframes selectedPulse {
-  0%, 100% { filter: drop-shadow(0 0 4px var(--ac)) }
-  50% { filter: drop-shadow(0 0 10px var(--ac)) drop-shadow(0 0 18px rgba(217,121,83,0.3)) }
+  0%, 100% { stroke-width: 2.5px; stroke-opacity: 1 }
+  50% { stroke-width: 4px; stroke-opacity: 0.85 }
 }
 
 @keyframes connectedNodePulse {
-  0%, 100% { filter: drop-shadow(0 0 2px var(--ac)) }
-  50% { filter: drop-shadow(0 0 5px var(--ac)) drop-shadow(0 0 10px rgba(224,144,96,0.15)) }
+  0%, 100% { stroke-width: 2px; stroke-opacity: 0.8 }
+  50% { stroke-width: 3px; stroke-opacity: 0.6 }
 }
 
 @keyframes edgeGlowPulse {
-  0%, 100% { filter: drop-shadow(0 0 5px var(--ac)) drop-shadow(0 0 2px var(--ac)) }
-  50% { filter: drop-shadow(0 0 12px var(--ac)) drop-shadow(0 0 20px rgba(224,144,96,0.35)) }
+  0%, 100% { stroke-width: 3px; stroke-opacity: 1 }
+  50% { stroke-width: 4.5px; stroke-opacity: 0.75 }
 }
 
 @keyframes cmdSlideIn {

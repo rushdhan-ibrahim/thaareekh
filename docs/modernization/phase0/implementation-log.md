@@ -3,6 +3,159 @@
 Date: 2026-02-10
 
 ## Completed in this pass
+- 2026-02-21 inference UX + graph interaction + data consistency hardening:
+  - Improved inferred-relation readability in both runtimes:
+    - `apps/web/src/ui/sidebar.ts`
+    - `src/ui/sidebar.js`
+    - replaced raw technical leakage in default inference steps with plain-language step rendering;
+    - added pair-aware narrative variants (via parent/shared parent/parent-pair);
+    - moved internals further into technical trace while keeping dossier links and verification controls.
+  - Added user-facing inference wording keys:
+    - `apps/web/src/ui/i18n.ts`
+    - `src/ui/i18n.js`
+    - new support-level and plain-language narrative keys for inferred edge cards.
+  - Improved pan/zoom responsiveness and interaction stability:
+    - `apps/web/src/main.ts`
+    - `src/main.js`
+    - throttled zoom transform writes via RAF;
+    - reduced interaction-time rendering overhead (hide edge labels/badges/reign labels only; keep node names visible);
+    - disabled expensive hit-testing during active interaction;
+    - suppressed parallax updates while graph-interacting.
+  - Applied high-confidence knowledge-base consistency corrections:
+    - `src/data/sovereigns.js`
+    - `src/data/sovereigns.research.js`
+    - `src/data/sovereigns.promoted.js`
+    - `src/data/profile.enrichments.js`
+    - aligned structured life years with curated biography anchors where explicit;
+    - removed speculative years causing impossible parent chronology conflicts.
+  - Regenerated consistency audit:
+    - `docs/research-program/findings/profile-relation-consistency-audit-2026-02-21.md`
+    - latest summary: life conflicts `0`, parent chronology conflicts `0`, inferred coverage gaps `0`, unresolved multi-parent dispute `1` (`P30` lineage conflict).
+- Phase E optional worker-prewarm extension integrated in both runtimes:
+  - TypeScript:
+    - `apps/web/src/graph/tree-placement-core.ts`
+    - `apps/web/src/graph/tree-placement-worker.ts`
+    - `apps/web/src/graph/rebuild.ts`
+    - `apps/web/src/main.ts`
+  - legacy JS:
+    - `src/graph/tree-placement-core.js`
+    - `src/graph/tree-placement-worker.js`
+    - `src/graph/rebuild.js`
+  - behavior:
+    - background tree-placement prewarm during graph-mode rebuilds when worker path is available;
+    - worker cache reuse on tree render cache miss;
+    - correctness-preserving sync fallback retained.
+- Phase G hardening updates completed:
+  - added hardening checkpoint doc (`docs/modernization/phase0/phase-g-hardening-checkpoint-2026-02-20.md`);
+  - updated CI workflow for optional strict UI budget enforcement via `MODERNIZATION_REQUIRE_UI_BENCH`:
+    - `.github/workflows/modernization-parity.yml`;
+  - hardened CI UI benchmark profile:
+    - set `UI_BENCH_SERVE_MODE=http` in modernization workflow;
+    - add `CHROME_BIN` auto-detection step before benchmark execution.
+  - added worker determinism parity harness:
+    - `scripts/modernization/verify-tree-placement-worker-parity.mjs`;
+    - `package.json` command: `modernization:tree-placement-worker-parity`;
+    - CI enforcement step in `.github/workflows/modernization-parity.yml`;
+  - stabilized web build orchestration to avoid nested typecheck stalls:
+    - root `build:web` now runs direct `tsc --noEmit -p apps/web/tsconfig.json --pretty false` before workspace build;
+    - `apps/web/package.json` `build` is now `vite build` (typecheck remains separate).
+  - finalized worker policy closeout:
+    - added worker on/off policy benchmark driver `scripts/modernization/evaluate-tree-worker-policy.mjs`;
+    - added package command `modernization:benchmark:tree-worker-policy`;
+    - added policy decision record `docs/modernization/phase0/tree-worker-policy-decision-2026-02-21.md`;
+    - decision: keep worker enabled-by-default with explicit opt-out.
+  - expanded UI benchmark lane with tree switch timings:
+    - `tree_mode_switch_first_latency_ms`;
+    - `tree_mode_switch_latency_ms` (warm samples);
+    - benchmark budgets/checker now include tree switch thresholds.
+  - added runtime worker policy controls in both runtimes:
+    - URL query override `?tree_worker=on|off`;
+    - rebuild resolver honors `window.__treePlacementWorkerPolicy` plus legacy `window.__disableTreePlacementWorker`.
+  - updated performance/reconciliation/handoff docs to reflect worker-prewarm status.
+- Validation for this checkpoint:
+  - `./node_modules/.bin/tsc --noEmit -p apps/web/tsconfig.json --pretty false` passing;
+  - `node --experimental-strip-types scripts/modernization/verify-ts-rebuild-parity.mjs` passing (26/26);
+  - `npm run modernization:parity` passing;
+  - `npm run modernization:tree-placement-worker-parity` passing;
+  - `npm run modernization:benchmark-check` passing;
+  - `npm run modernization:benchmark-check:require-ui` passing;
+  - `npm run modernization:benchmark:tree-worker-policy` passing;
+  - `npm run modernization:benchmark` passing with tree switch metrics in `benchmark-latest.json`;
+  - `npm run build:web` passing;
+  - `node --check src/graph/rebuild.js` passing;
+  - `node --check src/graph/tree-placement-core.js` passing;
+  - `node --check src/graph/tree-placement-worker.js` passing.
+- Tooling adjustment:
+  - added workspace dependency `d3` in `apps/web/package.json` for worker-side tree placement module resolution.
+- Build orchestration note:
+  - previous intermittent local `npm run build:web` nested-script stall is addressed in this pass by separating direct `tsc` and Vite build stages.
+- Completed Phase D/E/F performance rollout in both runtimes with mirrored changes:
+  - TypeScript: `apps/web/src/graph/rebuild.ts`, `apps/web/src/main.ts`
+  - legacy JS: `src/graph/rebuild.js`, `src/main.js`
+  - delivered:
+    - graph simulation reuse + force/data incremental updates;
+    - frame-budgeted graph tick DOM syncing and stable-layout simulation stop;
+    - tree placement memoization with deterministic cache keys and reuse of computed placement metadata;
+    - persistent hot-path lookup indexes (`nodeById`, typed adjacency maps, selection-edge map);
+    - link/node object reuse between rebuilds to reduce churn and preserve warm-start continuity.
+- Completed D/E/F documentation reconciliation:
+  - `docs/modernization/phase0/performance-optimization-plan-2026-02-20.md`
+  - `docs/modernization/phase0/progress-reconciliation-2026-02-20.md`
+  - `docs/modernization/phase0/continuation-handoff.md`
+- Validation after D/E/F rollout:
+  - `npm run build:web` passing;
+  - `npm run modernization:parity` passing;
+  - `node --experimental-strip-types scripts/modernization/verify-ts-rebuild-parity.mjs` passing (26/26);
+  - `npm run modernization:benchmark-check` passing;
+  - `npm run modernization:benchmark-check:require-ui` passing.
+- Encountered issue:
+  - `cargo check` and `npm run modernization:verify` may stall in some environments due prolonged Cargo fingerprint scanning with `cargo run` parity drivers; release-binary spot checks remain functional (`target/release/maldives-research-cli --help`).
+- Delivered Phase C initial incremental rendering rollout in both runtimes:
+  - TypeScript: `apps/web/src/graph/rebuild.ts`
+  - legacy JS: `src/graph/rebuild.js`
+  - introduced persistent mode roots (`mode-graph`, `mode-tree`) and replaced blanket content teardown with keyed joins for core graph/tree layers (links, nodes, labels, badges, section overlays).
+- Updated overlay lifecycle for incremental mode to prevent duplicate graph era overlays across rebuilds.
+- Re-validated modernization parity and benchmark gates after Phase C rollout:
+  - `npm run modernization:parity`
+  - `npm run modernization:ts-rebuild-parity`
+  - `npm run modernization:benchmark-check`
+  - `npm run modernization:benchmark-check:require-ui`
+  - all passing.
+- Retried blocked Phase A items under full-access execution and restored UI lane availability (`status: ok`) via local HTTP serving + CDP launch fallback path.
+- Corrected UI pan/zoom frame metric normalization in `scripts/modernization/ui-browser-benchmarks.mjs` (per-frame timing rather than multi-frame aggregate inflation).
+- Validated strict UI benchmark gate end-to-end:
+  - `npm run modernization:benchmark-check`
+  - `npm run modernization:benchmark-check:require-ui`
+  - both passing with UI metrics inside defined budgets in full-access local runs.
+- Captured refreshed benchmark snapshot (`benchmark-latest.json` / `benchmark-2026-02-20.json`) with `lanes.ui_browser.status = "ok"`.
+- Hardened UI benchmark runner environment handling (`scripts/modernization/ui-browser-benchmarks.mjs`):
+  - added launch fallbacks (`--headless=new` then `--headless`);
+  - added CDP endpoint diagnostics (`cdp_port_probe_error`, launch attempts, Chrome exit metadata);
+  - added optional local static serving mode with file fallback;
+  - added in-page error capture and sample-sufficiency guardrail.
+- Captured updated benchmark snapshot with hardened UI diagnostics (`docs/modernization/baselines/benchmarks/benchmark-2026-02-20.json` / `benchmark-latest.json`).
+- Implemented Phase B render scheduler rollout in both runtimes:
+  - TypeScript entrypoint: `apps/web/src/main.ts`;
+  - legacy JS entrypoint: `src/main.js`;
+  - shared invalidation model (`geometryDirty`, `styleDirty`, `selectionDirty`, `overlayDirty`, `eraVisibilityDirty`) with frame-batched dispatch.
+- Routed high-frequency controls through scheduler (chips, dropdown filters, view-mode toggles, density/theme/overlay flows) to reduce rebuild storms.
+- Updated legacy theme hook to accept injected rebuild dispatcher (`src/ui/theme.js`) so it participates in scheduler batching.
+- Refreshed modernization baseline snapshot (`baseline-2026-02-20.json` + `baseline-latest.json`) to current dataset counts: canonical `204/565`, research `204/573`.
+- Re-validated parity against refreshed baseline (`npm run modernization:parity` passing).
+- Integrated UI benchmark lane into `scripts/modernization/run-benchmarks.mjs` (`lanes.ui_browser`) with explicit UI targets in benchmark payload.
+- Extended benchmark budget checker (`scripts/modernization/verify-benchmark-budgets.mjs`) with:
+  - UI budget enforcement when UI lane is available;
+  - warning-only behavior when unavailable in default mode;
+  - strict UI gating via `--require-ui` / `MODERNIZATION_REQUIRE_UI_BENCH=1`.
+- Added benchmark scripts:
+  - `modernization:benchmark:ui`
+  - `modernization:benchmark-check:require-ui`
+- Captured updated benchmark snapshot (`benchmark-2026-02-20.json`) with UI lane status surfaced explicitly (`cdp_endpoint_unavailable`).
+- Reconciled modernization docs to current state:
+  - updated plan baseline/status (`docs/modernization-plan-typescript-rust-2026-02-10.md`);
+  - updated continuation handoff and backlog ordering (`docs/modernization/phase0/continuation-handoff.md`);
+  - added new reconciliation checkpoint (`docs/modernization/phase0/progress-reconciliation-2026-02-20.md`);
+  - updated benchmark policy doc (`docs/modernization/phase0/benchmark-plan.md`).
 - Established modernization workspace docs and ADR set.
 - Added baseline generation script (`scripts/modernization/generate-baseline.mjs`).
 - Added parity check script (`scripts/modernization/check-parity.mjs`).
@@ -74,7 +227,20 @@ Date: 2026-02-10
 - Build verification: 55 modules transformed, Vite build completes in ~400ms, typecheck clean, 38 parity checks green.
 - Phase 6 shadow-run: full UX walkthrough completed — graph mode, tree mode, tree options, command palette search, filter panel (all 7 sections), sidebar (all 5 tabs: Profile/Biography/Offices/Evidence/Map), era slider, story trails, compare mode, minimap, theme toggle, language switch (EN↔DV), navigation history breadcrumbs, reset view. All features verified functional.
 - Bug fix: found and fixed infinite recursion (`Maximum call stack size exceeded`) in `main.ts` — `showD()` ↔ compare `onChange` ↔ `showD()` cycle when compare was armed during navigation. Added `_sidebarRefreshing` guard flag to break re-entrant calls from compare onChange and lang-changed handlers.
+- Added ledger-backed edge verification index pipeline:
+  - Node generator: `scripts/sync-edge-verification-index.mjs`
+  - Rust CLI command: `sync-edge-verification-index` in `maldives-research-cli`
+  - generated artifact: `src/data/relationship-verification.js`
+- Integrated edge verification metadata into relationship cards in both apps:
+  - legacy JS: `src/ui/sidebar.js`
+  - TS app: `apps/web/src/ui/sidebar.ts` + wiring in `apps/web/src/main.ts`
+- Added TS legacy module typings for relationship-verification import (`apps/web/src/types/legacy-modules.d.ts`).
+- Added verification UI strings to i18n dictionaries (`src/ui/i18n.js`, `apps/web/src/ui/i18n.ts`).
+- Added maintainability checkpoint doc: `docs/modernization/phase0/verification-ledger-ui-integration-2026-02-20.md`.
+- Refined verification integration with lazy-loaded split chunk in both runtimes (edge-detail-triggered load, auto-refresh after load, no duplicate history write on refresh).
+- Added graph/tree performance optimization roadmap with explicit UI budgets, phased execution, and parity gates (`docs/modernization/phase0/performance-optimization-plan-2026-02-20.md`).
 
 ## Pending for full Phase 0 completion
 - Complete feature-by-feature behavior specification with exact acceptance tests.
 - Add browser trace lanes for UI boot/pan/zoom/filter latency and integrate budget checker into CI.
+- Evaluate optional worker offload for pure tree placement compute once profiling demonstrates sustained main-thread pressure.

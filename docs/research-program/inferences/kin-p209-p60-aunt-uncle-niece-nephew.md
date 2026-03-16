@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `kin|P60|P209|aunt/uncle↔niece/nephew`  
-Last updated: `2026-02-10`  
+Last updated: `2026-02-19`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
@@ -19,8 +19,8 @@ Inference class: `rule-derived`
 
 ## 3) Logic chain (pair-specific)
 1. Support set for rule parent-sibling-aunt-uncle resolved as follows.
-2. Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P209 Dom Francisco de Malvidas (CLM-0605, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dom Francisco de Malvidas.
-3. Supporting edge: sibling P60 Mohamed (Singa Bavana) <-> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) [half-brothers (maternal, same mother Golavehi Aisha Rani Kilege)] (CLM-0640, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct sibling (half-brothers (maternal, same mother Golavehi Aisha Rani Kilege)) relation recorded between Mohamed and Hassan IX / Dom Manoel.
+2. Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P209 Dom Francisco de Malvidas (CLM-0605, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry under Dom Manoel lists Dom Francisco de Malvidas among the children of Dom Manoel and Dona Leonor de Ataide.
+3. Supporting edge: sibling P60 Mohamed (Singa Bavana) <-> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) [half-brothers (maternal, same mother Golavehi Aisha Rani Kilege)] (CLM-0640, SRC-ROYALARK-MALDIVES, grade B); excerpt: RoyalArk and Kings-list lineage context support P60 and P61 as maternal half-brothers via shared mother Golavehi Aisha Rani Kilege and different fa...
 4. Rule application (parent-sibling-aunt-uncle): sibling(P61 Hassan IX / Dom Manoel (Dhirikusa Loka), P60 Mohamed (Singa Bavana)) plus parent(P61 Hassan IX / Dom Manoel (Dhirikusa Loka), child) yields inferred aunt/uncle-line kin between P60 Mohamed (Singa Bavana) and P209 Dom Francisco de Malvidas.
 5. Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured.
 

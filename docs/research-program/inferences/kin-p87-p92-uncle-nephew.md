@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `kin|P87|P92|uncle/nephew`  
-Last updated: `2026-02-10`  
+Last updated: `2026-02-19`  
 Inference class: `curated`
 
 ## 1) Edge identity
@@ -19,9 +19,9 @@ Inference class: `curated`
 - CLM-0208: kin P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) <-> P92 Mohamed Imaduddine VI (Keerithi Maha Radun) [grandfather] (SRC-MRF-KINGS, grade B)
 - CLM-0210: kin P87 Ibrahim Nooredine (Keerithi Maha Radun) <-> P88 Mohamed Mueenuddine (Keerithi Maha Radun) [uncle/nephew] (SRC-MRF-KINGS, grade B)
 - CLM-0212: kin P87 Ibrahim Nooredine (Keerithi Maha Radun) <-> P95 Mohamed Farid (Keerithi Maha Radun) [grandfather (via daughter)] (SRC-MRF-KINGS, grade B)
-- CLM-0289: parent P155 Maandhoogey Bodu Dhorhy Manippulu -> P92 Mohamed Imaduddine VI (Keerithi Maha Radun) (SRC-MRF-KINGS, grade B)
 - CLM-0324: parent P186 Maandhoogey Don Didi -> P92 Mohamed Imaduddine VI (Keerithi Maha Radun) (SRC-MRF-KINGS, grade B)
 - CLM-0363: parent P86 Mohamed Imaduddine (Kula Sudha Ira Siyaaaka) -> P87 Ibrahim Nooredine (Keerithi Maha Radun) (SRC-MRF-KINGS, grade B)
+- CLM-0365: parent P87 Ibrahim Nooredine (Keerithi Maha Radun) -> P90 Mohamed Imaduddine V (Keerithi Maha Radun) (SRC-MRF-KINGS, grade B)
 
 ## 3) Logic chain (pair-specific)
 1. Shortest direct-claim support path (2 steps) linking this pair:

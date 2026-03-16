@@ -16,6 +16,7 @@ Goal: migrate all research operation scripts from Node/JS to Rust CLI while pres
 - `source-coverage-audit` parity.
 - `refresh-relationship-ledger-quality` parity.
 - `sync-inference-notes` parity.
+- `sync-edge-verification-index` available in both Rust and Node generators for shared runtime artifact output.
 - `refresh-person-dossiers` parity.
 - `refresh-derived-inference-dossiers` parity.
 - `refresh-curated-inference-dossiers` parity.

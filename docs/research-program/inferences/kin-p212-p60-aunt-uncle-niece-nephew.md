@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `kin|P60|P212|aunt/uncle↔niece/nephew`  
-Last updated: `2026-02-10`  
+Last updated: `2026-02-19`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
@@ -19,8 +19,8 @@ Inference class: `rule-derived`
 
 ## 3) Logic chain (pair-specific)
 1. Support set for rule parent-sibling-aunt-uncle resolved as follows.
-2. Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P212 Dona Catarina de Malvidas (CLM-0608, SRC-ROYALARK-M16, grade B); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dona Catarina de Malvidas.
-3. Supporting edge: sibling P60 Mohamed (Singa Bavana) <-> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) [half-brothers (maternal, same mother Golavehi Aisha Rani Kilege)] (CLM-0640, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct sibling (half-brothers (maternal, same mother Golavehi Aisha Rani Kilege)) relation recorded between Mohamed and Hassan IX / Dom Manoel.
+2. Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P212 Dona Catarina de Malvidas (CLM-0608, SRC-ROYALARK-M16, grade B); excerpt: RoyalArk lineage entry under Dom Manoel lists Dona Catarina de Malvidas as a daughter in the same Dom Manoel and Dona Leonor de Ataide branch.
+3. Supporting edge: sibling P60 Mohamed (Singa Bavana) <-> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) [half-brothers (maternal, same mother Golavehi Aisha Rani Kilege)] (CLM-0640, SRC-ROYALARK-MALDIVES, grade B); excerpt: RoyalArk and Kings-list lineage context support P60 and P61 as maternal half-brothers via shared mother Golavehi Aisha Rani Kilege and different fa...
 4. Rule application (parent-sibling-aunt-uncle): sibling(P61 Hassan IX / Dom Manoel (Dhirikusa Loka), P60 Mohamed (Singa Bavana)) plus parent(P61 Hassan IX / Dom Manoel (Dhirikusa Loka), child) yields inferred aunt/uncle-line kin between P60 Mohamed (Singa Bavana) and P212 Dona Catarina de Malvidas.
 5. Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured.
 

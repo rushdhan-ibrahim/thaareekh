@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `kin|P202|P57|aunt/uncle↔niece/nephew`  
-Last updated: `2026-02-10`  
+Last updated: `2026-02-19`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
@@ -19,8 +19,8 @@ Inference class: `rule-derived`
 
 ## 3) Logic chain (pair-specific)
 1. Support set for rule parent-sibling-aunt-uncle resolved as follows.
-2. Supporting edge: parent P207 Recca -> P57 Ali (Aanandha) (CLM-0579, SRC-MRF-HILAALY, grade B); excerpt: Direct parent relation recorded between Recca as parent of Ali.
-3. Rule application (parent-sibling-aunt-uncle): sibling(P207 Recca, P202 Kamba Dio) plus parent(P207 Recca, child) yields inferred aunt/uncle-line kin between P202 Kamba Dio and P57 Ali (Aanandha).
+2. Supporting edge: parent P193 Princess Recca -> P57 Ali (Aanandha) (CLM-0329, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P193 Princess Recca as parent of P57 Ali.
+3. Rule application (parent-sibling-aunt-uncle): sibling(P193 Princess Recca, P202 Kamba Dio) plus parent(P193 Princess Recca, child) yields inferred aunt/uncle-line kin between P202 Kamba Dio and P57 Ali (Aanandha).
 4. Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -35,7 +35,7 @@ Inference class: `rule-derived`
 
 ## 6) Source basis
 - `SRC-DERIVED-RULES` (Derived family relation rules)
-- `SRC-MRF-HILAALY` (Royal House of Hilaaly)
+- `SRC-MRF-KINGS` (Maldives Kings List)
 - Primary inferred claim row: CLM-0497
 - Inferred claim locator: Inference basis documented in docs/research-program/inferences/kin-p202-p57-aunt-uncle-niece-nephew.md.
 

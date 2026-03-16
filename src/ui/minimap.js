@@ -8,6 +8,8 @@ import { cs } from '../utils/css.js';
 let minimapSvg = null;
 let minimapG = null;
 let viewportRect = null;
+let _cachedBounds = null;
+let _viewportRaf = 0;
 
 function dynastyColor(dy) {
   return `var(--dy-${(dy || 'unknown').toLowerCase()})`;
@@ -38,7 +40,14 @@ export function initMinimap() {
     state.svgEl.transition().duration(300).call(state.zoomBehavior.transform, t);
   });
 
-  window.addEventListener('zoom-changed', () => updateViewport());
+  const scheduleViewportUpdate = () => {
+    if (_viewportRaf) return;
+    _viewportRaf = requestAnimationFrame(() => {
+      _viewportRaf = 0;
+      updateViewport();
+    });
+  };
+  window.addEventListener('zoom-changed', scheduleViewportUpdate);
 }
 
 function getNodeBounds() {
@@ -63,34 +72,48 @@ export function updateMinimap() {
   const container = document.getElementById('minimap');
   if (!container || container.hidden) return;
 
-  minimapSvg.selectAll('*').remove();
   const bounds = getNodeBounds();
-  if (!bounds) return;
+  _cachedBounds = bounds;
+  if (!bounds) {
+    minimapSvg.selectAll('*').remove();
+    minimapG = null;
+    viewportRect = null;
+    return;
+  }
 
   const pad = 10;
   const scale = Math.min((160 - pad * 2) / bounds.w, (100 - pad * 2) / bounds.h);
   const ox = (160 - bounds.w * scale) / 2 - bounds.minX * scale;
   const oy = (100 - bounds.h * scale) / 2 - bounds.minY * scale;
 
-  minimapG = minimapSvg.append('g').attr('transform', `translate(${ox},${oy}) scale(${scale})`);
+  // Create groups once, update transform
+  if (!minimapG) {
+    minimapSvg.selectAll('*').remove();
+    minimapG = minimapSvg.append('g');
+    viewportRect = minimapSvg.append('rect').attr('class', 'minimap-viewport');
+  }
+  minimapG.attr('transform', `translate(${ox},${oy}) scale(${scale})`);
 
-  minimapG.selectAll('circle')
-    .data(state.nodes)
-    .enter()
+  // D3 data-join: only create/remove changed circles
+  const r = Math.max(1.5, 3 / scale);
+  const dots = minimapG.selectAll('circle.minimap-dot')
+    .data(state.nodes, d => d.id);
+  dots.exit().remove();
+  dots.enter()
     .append('circle')
     .attr('class', 'minimap-dot')
+    .attr('fill', d => dynastyColor(d.dy))
+    .merge(dots)
     .attr('cx', d => d.x)
     .attr('cy', d => d.y)
-    .attr('r', Math.max(1.5, 3 / scale))
-    .attr('fill', d => dynastyColor(d.dy));
+    .attr('r', r);
 
-  viewportRect = minimapSvg.append('rect').attr('class', 'minimap-viewport');
   updateViewport();
 }
 
-function updateViewport() {
+export function updateViewport() {
   if (!viewportRect || !minimapG) return;
-  const bounds = getNodeBounds();
+  const bounds = _cachedBounds || getNodeBounds();
   if (!bounds) return;
 
   const pad = 10;

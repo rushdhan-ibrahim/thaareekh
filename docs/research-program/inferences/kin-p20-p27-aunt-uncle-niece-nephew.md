@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `kin|P20|P27|aunt/uncle↔niece/nephew`  
-Last updated: `2026-02-10`  
+Last updated: `2026-02-19`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
@@ -19,7 +19,7 @@ Inference class: `rule-derived`
 
 ## 3) Logic chain (pair-specific)
 1. Support set for rule parent-sibling-aunt-uncle resolved as follows.
-2. Supporting edge: parent P25 Raadhaafathi (Suvama Abarana) -> P27 Dhaain (Keerithi Maha Rehendi) (CLM-0595, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Raadhaafathi as parent of Dhaain.
+2. Supporting edge: parent P25 Raadhaafathi (Suvama Abarana) -> P27 Dhaain (Keerithi Maha Rehendi) (CLM-0595, SRC-ROYALARK-MALDIVES, grade B); excerpt: RoyalArk Maldives lineage reconstruction treats Dhaain (P27) as daughter of Raadhaafathi/Malika Fatima (P25), alongside parent linkage through P26.
 3. Supporting edge: sibling P20 Khadijah (Raadha Abarana) <-> P25 Raadhaafathi (Suvama Abarana) [half-sisters] (CLM-0427, SRC-MRF-KINGS, grade B); excerpt: Kings list marks P20 and P25 as half-sisters.
 4. Rule application (parent-sibling-aunt-uncle): sibling(P25 Raadhaafathi (Suvama Abarana), P20 Khadijah (Raadha Abarana)) plus parent(P25 Raadhaafathi (Suvama Abarana), child) yields inferred aunt/uncle-line kin between P20 Khadijah (Raadha Abarana) and P27 Dhaain (Keerithi Maha Rehendi).
 5. Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured.

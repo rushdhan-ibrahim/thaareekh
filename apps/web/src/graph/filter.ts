@@ -148,20 +148,51 @@ export function applyTreeDynastyFilter(
   };
 }
 
+/**
+ * Compute the set of person IDs active in the current era year.
+ * Standalone helper for lightweight era-only visibility checks.
+ */
+export function computeEraPersonOk(
+  people: PersonNode[],
+  eraEnabled: boolean,
+  eraYear: number,
+  activeInYearByIdFn: (id: string, y: number) => boolean
+): Set<string> {
+  const y = eraEnabled ? Number(eraYear) : NaN;
+  return new Set(
+    people
+      .filter(p => !eraEnabled || activeInYearByIdFn(p.id, y))
+      .map(p => p.id)
+  );
+}
+
+// Cached chip state — invalidated by chip clicks
+let _cachedActiveE: Set<string> | null = null;
+let _cachedActiveConf: Set<string> | null = null;
+
+export function invalidateChipCache(): void {
+  _cachedActiveE = null;
+  _cachedActiveConf = null;
+}
+
 /** Read active edge type chips from DOM. */
 export function activeE(): Set<string> {
+  if (_cachedActiveE) return _cachedActiveE;
   const s = new Set<string>();
   document.querySelectorAll('.chip[data-e]').forEach(c => {
     if (c.classList.contains('on')) s.add((c as HTMLElement).dataset.e ?? '');
   });
+  _cachedActiveE = s;
   return s;
 }
 
 /** Read active confidence chips from DOM. */
 export function activeConfidence(): Set<string> {
+  if (_cachedActiveConf) return _cachedActiveConf;
   const s = new Set<string>();
   document.querySelectorAll('.chip[data-cf]').forEach(c => {
     if (c.classList.contains('on')) s.add((c as HTMLElement).dataset.cf ?? '');
   });
+  _cachedActiveConf = s;
   return s;
 }

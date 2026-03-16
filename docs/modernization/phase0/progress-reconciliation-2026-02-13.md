@@ -3,6 +3,8 @@
 Date: 2026-02-13  
 Status: active
 
+Superseded checkpoint: `docs/modernization/phase0/progress-reconciliation-2026-02-20.md`.
+
 This checkpoint compares current implementation state against the plan in `docs/modernization-plan-typescript-rust-2026-02-10.md`.
 
 ## Phase-by-phase status

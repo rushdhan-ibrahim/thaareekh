@@ -23,6 +23,7 @@ interface OfficeCatalogEntry {
   summary?: string;
   alt_names?: string[];
   source_refs?: string[];
+  functions?: Array<{ period_id: string; description: string }>;
 }
 
 interface OfficeTimelinePeriod {
@@ -64,6 +65,33 @@ interface InferenceDetail {
   verification: string[];
 }
 
+interface RelationshipVerificationMeta {
+  claim_id?: string;
+  confidence?: string;
+  claim_type?: string;
+  confidence_grade?: string;
+  primary_source_id?: string;
+  review_status?: string;
+  canonical_decision?: string;
+  reviewer?: string;
+  last_reviewed?: string;
+  inference_class?: string;
+  inference_rule?: string;
+  dossier_status?: string;
+  dossier_file?: string;
+  tracker_last_updated?: string;
+}
+
+interface RelationshipVerificationModule {
+  relationshipEdgeKey: (edge: { t?: string; s?: string; d?: string; l?: string }) => string;
+  getRelationshipVerification: (edge: Record<string, unknown>) => RelationshipVerificationMeta | null;
+  getRelationshipVerificationDocs: () => {
+    relationship_ledger_path?: string;
+    inference_tracker_path?: string;
+    confidence_explainer_path?: string;
+  };
+}
+
 interface RelNeighbor {
   id: string;
   c: string | undefined;
@@ -94,37 +122,160 @@ let _parOf: (id: string) => RelNeighbor[] = () => [];
 let _chOf: (id: string) => RelNeighbor[] = () => [];
 let _recordPerson: (id: string) => void = () => {};
 let _recordEdge: (link: LinkDatum) => void = () => {};
+let _recordOffice: (officeId: string) => void = () => {};
 let _compareSummaryHtml: () => string = () => '';
 let _handlePersonViewed: (id: string) => void = () => {};
 let _currentPersonId: string | null = null;
+let _currentOfficeId: string | null = null;
+let _currentEdgeLink: LinkDatum | null = null;
 let _oS: (prefer?: string) => void = () => {};
 let _resolvePlace: (text: string | undefined | null) => PlaceAnchor | null = () => null;
 let _extractPlaceMentions: (text: string) => PlaceAnchor[] = () => [];
 let _placeLabelForLang: (anchor: PlaceAnchor, lang: string) => string = (a) => a.en;
+let _officeFunctionForYear: (officeId: string, year: number | null) => string = () => '';
+let _buildOfficeHolders: (ppl: PersonNode[]) => Map<string, Array<{ personId: string; label: string; start: number | null; end: number | null; c: string }>> = () => new Map();
 let _getInferenceNote: (edge: Record<string, unknown>) => { summary?: string; dossier?: string; logic?: string[]; verification?: string[] } | null = () => null;
 let _getInferenceDossierPath: (edge: Record<string, unknown>) => string | null = () => null;
 let _inferenceEdgeKey: (edge: Record<string, unknown>) => string = () => '';
 let _isDerivedInferenceEdge: (edge: Record<string, unknown>) => boolean = () => false;
+let _verificationModule: RelationshipVerificationModule | null = null;
+let _verificationModulePromise: Promise<RelationshipVerificationModule | null> | null = null;
+let _verificationModuleFailed = false;
+let _verificationRefreshQueued = false;
 
 // Pre-computed data
 let RULER_IDS = new Set<string>();
 let ROYAL_ADJ = new Map<string, RoyalAdj[]>();
 
+const DEFAULT_VERIFICATION_DOCS = {
+  relationship_ledger_path: 'docs/research-program/ledgers/relationship-evidence-ledger.csv',
+  inference_tracker_path: 'docs/research-program/ledgers/inference-dossier-tracker.csv',
+  confidence_explainer_path: 'docs/confidence-grade-explainer.md'
+};
+
+function verificationDocs(): {
+  relationship_ledger_path?: string;
+  inference_tracker_path?: string;
+  confidence_explainer_path?: string;
+} {
+  if (_verificationModule?.getRelationshipVerificationDocs) {
+    return _verificationModule.getRelationshipVerificationDocs() || DEFAULT_VERIFICATION_DOCS;
+  }
+  return DEFAULT_VERIFICATION_DOCS;
+}
+
+function verificationEdgeKey(edge: Record<string, unknown>): string {
+  if (_verificationModule?.relationshipEdgeKey) {
+    return _verificationModule.relationshipEdgeKey(edge as { t?: string; s?: string; d?: string; l?: string });
+  }
+  return _inferenceEdgeKey(edge);
+}
+
+function verificationMeta(edge: Record<string, unknown>): RelationshipVerificationMeta | null {
+  if (_verificationModule?.getRelationshipVerification) {
+    return _verificationModule.getRelationshipVerification(edge);
+  }
+  return null;
+}
+
+function queueVerificationRefresh(): void {
+  if (_verificationRefreshQueued || (!_currentEdgeLink && !_currentPersonId)) return;
+  _verificationRefreshQueued = true;
+  Promise.resolve().then(() => {
+    _verificationRefreshQueued = false;
+    if (!_verificationModule) return;
+    if (_currentEdgeLink) {
+      showLinkDetail(_currentEdgeLink, { skipHistory: true });
+      return;
+    }
+    if (_currentPersonId) {
+      showD(_currentPersonId);
+    }
+  });
+}
+
+function ensureVerificationModuleLoaded(): void {
+  if (_verificationModule || _verificationModulePromise || _verificationModuleFailed) return;
+  _verificationModulePromise = import('../../../../src/data/relationship-verification.js')
+    .then((mod) => {
+      _verificationModule = mod as unknown as RelationshipVerificationModule;
+      queueVerificationRefresh();
+      return _verificationModule;
+    })
+    .catch(() => {
+      _verificationModuleFailed = true;
+      return null;
+    })
+    .finally(() => {
+      _verificationModulePromise = null;
+    });
+}
+
 // ---------------------------------------------------------------------------
 // Pure helpers (testable)
 // ---------------------------------------------------------------------------
 
-export function estLife(p: PersonNode): { yb: number | null; yd: number | null; ybEst: boolean; ydEst: boolean } {
+interface LifeEstimate {
+  yb: number | null;
+  yd: number | null;
+  ybEst: boolean;
+  ydEst: boolean;
+  ybFromBio: boolean;
+  ydFromBio: boolean;
+  ybBioConflict: number | null;
+  ydBioConflict: number | null;
+}
+
+function firstYear(text: string): number | null {
+  const m = text.match(/\b(9\d{2}|1\d{3}|20\d{2})\b/);
+  return m ? Number(m[1]) : null;
+}
+
+function extractBioLifeYears(bio: string | undefined): { yb: number | null; yd: number | null } {
+  if (!bio) return { yb: null, yd: null };
+  const text = String(bio);
+  const leadParagraph = text.split(/\n\s*\n/)[0] || text;
+  const scope = leadParagraph.length >= 80 ? leadParagraph : text.slice(0, 700);
+  const birthPatterns = [
+    /\b(?:was\s+)?born(?:\s+(?:around|circa|c\.?|before|after|in|on))?[\s\S]{0,40}?(\d{3,4})\b/i
+  ];
+  const deathPatterns = [
+    /\b(?:he|she|they|sultan|queen|king|dom)\s+died(?:\s+(?:before|after|around|circa|c\.?|in|on))?[\s\S]{0,40}?(\d{3,4})\b/i,
+    /\bdied(?:\s+(?:before|after|around|circa|c\.?|in|on))?[\s\S]{0,40}?(\d{3,4})\b/i
+  ];
+
+  const pick = (patterns: RegExp[]): number | null => {
+    for (const pattern of patterns) {
+      const match = scope.match(pattern);
+      if (match?.[1]) return firstYear(match[1]);
+    }
+    return null;
+  };
+
+  return {
+    yb: pick(birthPatterns),
+    yd: pick(deathPatterns)
+  };
+}
+
+export function estLife(p: PersonNode): LifeEstimate {
   const yrs = (p.re || []).flat().filter((v): v is number => v != null);
   const from = yrs.length ? Math.min(...yrs) : null;
   const to = yrs.length ? Math.max(...yrs) : null;
-  const yb = p.yb ?? (from != null ? from - 30 : null);
-  const yd = p.yd ?? (to != null ? to + 10 : null);
+  const bio = extractBioLifeYears(p.bio);
+  const yb = p.yb ?? bio.yb ?? (from != null ? from - 30 : null);
+  const yd = p.yd ?? bio.yd ?? (to != null ? to + 10 : null);
+  const ybBioConflict = p.yb != null && bio.yb != null && Math.abs(p.yb - bio.yb) >= 2 ? bio.yb : null;
+  const ydBioConflict = p.yd != null && bio.yd != null && Math.abs(p.yd - bio.yd) >= 2 ? bio.yd : null;
   return {
     yb,
     yd,
-    ybEst: p.yb == null && yb != null,
-    ydEst: p.yd == null && yd != null
+    ybEst: p.yb == null && bio.yb == null && yb != null,
+    ydEst: p.yd == null && bio.yd == null && yd != null,
+    ybFromBio: p.yb == null && bio.yb != null,
+    ydFromBio: p.yd == null && bio.yd != null,
+    ybBioConflict,
+    ydBioConflict
   };
 }
 
@@ -337,24 +488,131 @@ function officeRows(p: PersonNode): Array<Record<string, unknown>> {
   return explicit;
 }
 
+// ---------------------------------------------------------------------------
+// Kind icons & border colors for office cards
+// ---------------------------------------------------------------------------
+
+const KIND_ICON: Record<string, string> = {
+  crown: '\u265B',      // ♛
+  judicial: '\u2696',   // ⚖
+  ministerial: '\uD83C\uDFDB', // 🏛 (surrogate pair for U+1F3DB)
+  deputy: '\u2691',     // ⚑
+  executive: '\u25C6',  // ◆
+  institution: '\u2699', // ⚙
+  peerage: '\u2654',    // ♔
+  furadaana: '\u2605',  // ★
+  military: '\u2694'    // ⚔
+};
+
+const KIND_BORDER: Record<string, string> = {
+  crown: 'var(--ac)',
+  judicial: 'var(--dy-dhiyamigili)',
+  ministerial: 'var(--tx2)',
+  deputy: 'var(--dy-huraagey)',
+  executive: 'var(--ac2)',
+  institution: 'var(--bd2)',
+  peerage: 'var(--ac2)',
+  furadaana: 'var(--dy-hilaaly)',
+  military: 'var(--dy-theemuge)'
+};
+
+function kindLabel(kind: string | undefined): string {
+  if (!kind) return _t('office_generic');
+  const map: Record<string, string> = {
+    crown: 'crown_office',
+    judicial: 'judicial_office',
+    ministerial: 'ministerial_office',
+    deputy: 'deputy_office',
+    executive: 'executive_office',
+    institution: 'institution_office',
+    peerage: 'peerage_office',
+    furadaana: 'furadaana_office',
+    military: 'military_office'
+  };
+  return _t(map[kind] || 'office_generic');
+}
+
+function officeCardHtml(o: Record<string, unknown>, p: PersonNode): string {
+  const def = _officeById.get(o.office_id as string || '');
+  const nm = (o.label as string) || (o.office_id === 'OFF-SOVEREIGN' ? sovereignOfficeLabel(p) : (def?.name || (o.office_id as string) || _t('office_generic')));
+  const kind = def?.kind || '';
+  const icon = KIND_ICON[kind] || '\u25CB';
+  const border = KIND_BORDER[kind] || 'var(--bd)';
+  const y = periodLabel(o.start as number | undefined, o.end as number | undefined);
+  const conf = confidenceBadge(o.c as string | undefined);
+  const confText = confidenceLabel((o.c as string) || 'c');
+  const personYear = (o.start as number | undefined) ?? (p.re?.[0]?.[0]) ?? null;
+  const summary = _officeFunctionForYear(o.office_id as string || '', personYear) || def?.summary || '';
+  const note = o.note ? `<div class="ofc-note">${_esc(o.note as string)}</div>` : '';
+  const srcRefs = (o.source_refs as string[] | undefined) || [];
+  const srcPills = srcRefs.length
+    ? `<div class="ofc-srcs">${srcRefs.slice(0, 4).map(id => `<span class="rt">${_esc(id)}</span>`).join(' ')}</div>`
+    : '';
+  return `<div class="ofc" style="--ofc-border:${border}">
+    <div class="ofc-head"><span class="ofc-icon">${icon}</span><span class="ofc-name ofc-link" data-office-id="${def?.id || ''}">${_esc(nm)}</span><span class="ofc-period">${_esc(y)}</span></div>
+    <div class="ofc-meta">${_esc(kindLabel(kind))} \u00b7 ${_esc(confText)} ${conf}</div>
+    ${summary ? `<div class="ofc-summary">${_esc(summary)}</div>` : ''}
+    ${note}${srcPills}
+  </div>`;
+}
+
+function eraContextHtml(p: PersonNode): string {
+  if (!_officeTimeline.length) return '';
+  // Determine person's era year from reign, birth, or death
+  const yrs = (p.re || []).flat().filter((v): v is number => v != null);
+  const personYear = yrs.length ? Math.min(...yrs) : (p.yb ?? p.yd ?? null);
+
+  // Find closest era index
+  let closestIdx = 0;
+  if (personYear != null) {
+    let bestDist = Infinity;
+    _officeTimeline.forEach((period, i) => {
+      const m = (period.period || '').match(/\d{3,4}/);
+      if (m) {
+        const dist = Math.abs(parseInt(m[0], 10) - personYear);
+        if (dist < bestDist) { bestDist = dist; closestIdx = i; }
+      }
+    });
+  }
+
+  // Era markers (horizontal strip)
+  const markers = _officeTimeline.map((period, i) => {
+    const shortLabel = (period.period || period.label).replace(/\([^)]*\)/g, '').trim().split(/\s+/)[0] || '?';
+    const active = i === closestIdx ? ' era-active' : '';
+    return `<span class="era-marker${active}" data-era-idx="${i}">${_esc(shortLabel!)}</span>`;
+  }).join('');
+
+  const strip = `<div class="era-strip">${markers}</div>`;
+
+  // Era cards
+  const cards = _officeTimeline.map((period, i) => {
+    const officePills = (period.offices || []).map(id => {
+      const odef = _officeById.get(id);
+      const nm = odef?.name || id;
+      return `<span class="pn ofc-link" data-office-id="${id}">${_esc(nm)}</span>`;
+    });
+    const pills = officePills.join('');
+    const content = `
+      <div class="era-card-body">
+        <div class="ofc-summary">${_esc(period.summary || '')}</div>
+        ${pills ? `<div class="era-offices"><span class="ofc-meta">${_esc(_t('offices_in_era'))}:</span><div class="pnl">${pills}</div></div>` : ''}
+      </div>`;
+    if (i === closestIdx) {
+      return `<div class="era-card era-card-open"><div class="era-card-head">${_esc(period.label)} <span class="rs">${_esc(period.period || '')}</span></div>${content}</div>`;
+    }
+    return `<details class="era-card"><summary class="era-card-head">${_esc(period.label)} <span class="rs">${_esc(period.period || '')}</span></summary>${content}</details>`;
+  }).join('');
+
+  return `<div class="pcs"><div class="sl">${_esc(_t('historical_context'))}</div>${strip}${cards}</div>`;
+}
+
 function officePanel(p: PersonNode): string {
   const rows = officeRows(p);
   const held = rows.length
-    ? `<ul class="rl">${rows.map(o => {
-      const def = _officeById.get(o.office_id as string || '');
-      const nm = (o.label as string) || (o.office_id === 'OFF-SOVEREIGN' ? sovereignOfficeLabel(p) : (def?.name || (o.office_id as string) || _t('office_generic')));
-      const role = def?.summary || '';
-      const y = periodLabel(o.start as number | undefined, o.end as number | undefined);
-      return `<li class="ri"><div class="rlf"><div class="rn">${_esc(nm)} ${confidenceBadge(o.c as string | undefined)}</div><div class="rs">${_esc(y)}${o.note ? ` \u00b7 ${_esc(o.note as string)}` : ''}</div>${role ? `<div class="rs">${_esc(role)}</div>` : ''}</div></li>`;
-    }).join('')}</ul>`
-    : `<div class="nt" style="color:var(--tx3)">${_esc(_t('no_office_records'))}</div>`;
+    ? `<div class="ofc-list">${rows.map(o => officeCardHtml(o, p)).join('')}</div>`
+    : `<div class="nt" style="color:var(--tx3)">${_esc(_t('no_held_offices'))}</div>`;
 
-  const timeline = `<details class="odt"><summary>${_esc(_t('historical_office_timeline'))}</summary><ul class="rl">${_officeTimeline.map(period => {
-    const officeNames = (period.offices || []).map(id => _officeById.get(id)?.name || id);
-    return `<li class="ri"><div class="rlf"><div class="rn">${_esc(period.label)}</div><div class="rs">${_esc(period.period || '')} \u00b7 ${_esc(officeNames.join(', '))}</div><div class="rs">${_esc(period.summary || '')}</div></div></li>`;
-  }).join('')}</ul></details>`;
-
-  return `<div class="pcs"><div class="sl">${_esc(_t('held_offices_titles'))}</div>${held}</div>${timeline}`;
+  return `<div class="pcs"><div class="sl">${_esc(_t('held_offices'))}</div>${held}</div>${eraContextHtml(p)}`;
 }
 
 function factsPanelHtml(facts: string[]): string {
@@ -374,39 +632,53 @@ function factsPanelHtml(facts: string[]): string {
 function personEvidencePanel(p: PersonNode): string {
   const relEdges = _edges.filter(e => e.s === p.id || e.d === p.id);
   const conf: Record<string, number> = { c: 0, i: 0, u: 0 };
-  const rel: Record<string, number> = { parent: 0, sibling: 0, spouse: 0, kin: 0 };
   relEdges.forEach(e => {
     if (conf[e.c] != null) conf[e.c]! += 1;
-    if (rel[e.t] != null) rel[e.t]! += 1;
   });
-  const relSummary = Object.entries(rel)
-    .filter(([, v]) => v > 0)
-    .sort((a, b) => b[1] - a[1])
-    .map(([k, v]) => `${relationTypeShortLabel(k)}: ${v}`)
-    .join(' \u00b7 ');
+  const total = relEdges.length || 1;
   const refs = collectSourceRefs(p);
   const sourceRows = sourceRowsFromRefs(refs);
   const strong = sourceRows.filter(r => r.quality === 'A' || r.quality === 'B').length;
-  const sourceWord = pluralLabel(sourceRows.length, 'source_word', 'sources_word');
-  const relWord = pluralLabel(relEdges.length, 'relationship_link_word', 'relationship_links_word');
+
+  // Visual confidence bar
+  const pctC = Math.round(((conf.c || 0) / total) * 100);
+  const pctI = Math.round(((conf.i || 0) / total) * 100);
+  const pctU = 100 - pctC - pctI;
+  const bar = `<div class="evi-bar">
+    ${conf.c ? `<span class="evi-seg evi-c" style="width:${pctC}%"></span>` : ''}
+    ${conf.i ? `<span class="evi-seg evi-i" style="width:${pctI}%"></span>` : ''}
+    ${conf.u ? `<span class="evi-seg evi-u" style="width:${pctU}%"></span>` : ''}
+  </div>
+  <div class="evi-legend">
+    <span>\u25A0 ${_esc(_t('confirmed'))}: ${conf.c}</span>
+    <span>\u25E7 ${_esc(_t('inferred'))}: ${conf.i}</span>
+    <span>\u25CB ${_esc(_t('uncertain'))}: ${conf.u}</span>
+  </div>`;
+
+  // Sources summary
+  const sourceLabel = `${_esc(_t('evidence_sources_total'))}: ${sourceRows.length} \u00b7 A/B: ${strong}`;
+  const leadSources = sourceRows.slice(0, 3).map(s => `<li>${_esc(s.title)} <span class="rt">${_esc(s.quality)}</span></li>`).join('');
+  const tailSources = sourceRows.slice(3).map(s => `<li>${_esc(s.title)} <span class="rt">${_esc(s.quality)}</span></li>`).join('');
+
+  // Uncertainty watchlist — uncapped
   const uncertain = relEdges
     .filter(e => e.c !== 'c')
-    .slice(0, 8)
     .map(e => {
       const otherId = e.s === p.id ? e.d : e.s;
       const other = _byId.get(otherId);
       return `<li>${_esc(relationTypeLabel(e.t))} \u00b7 ${_esc(_personName(other || otherId))} ${confidenceBadge(e.c)}</li>`;
     })
     .join('');
-  const leadSources = sourceRows.slice(0, 3).map(s => `<li>${_esc(s.title)} <span class="rt">${_esc(s.quality)}</span></li>`).join('');
-  const tailSources = sourceRows.slice(3).map(s => `<li>${_esc(s.title)} <span class="rt">${_esc(s.quality)}</span></li>`).join('');
+
+  // Map section
+  const mapHtml = mapPanel(p);
+
   return `
     <div class="pcs">
-      <div class="sl">${_esc(_t('evidence_narrative'))}</div>
-      <div class="nt">${_esc(_t('profile_evidence_basis'))} ${sourceRows.length} ${_esc(sourceWord)} ${_esc(_t('and_word'))} ${relEdges.length} ${_esc(relWord)}.</div>
-      <div class="rs">${_esc(_t('confidence_mix'))} \u00b7 ${_esc(_t('confirmed'))}: ${conf.c} \u00b7 ${_esc(_t('inferred'))}: ${conf.i} \u00b7 ${_esc(_t('uncertain'))}: ${conf.u}</div>
-      <div class="rs">${_esc(_t('source_strength_label'))} \u00b7 A/B ${_esc(_t('grade_word'))} ${_esc(_t('sources_word'))}: ${strong}${sourceRows.length ? ` ${_esc(_t('of_word'))} ${sourceRows.length}` : ''}</div>
-      ${relSummary ? `<div class="rs">${_esc(_t('relation_distribution_label'))} \u00b7 ${_esc(relSummary)}</div>` : `<div class="rs">${_esc(_t('no_modeled_relation_links'))}</div>`}
+      <div class="sl">${_esc(_t('evidence_strength'))}</div>
+      ${bar}
+      <div class="rs">${relEdges.length} ${_esc(_t('evidence_links_total'))}</div>
+      <div class="rs">${sourceLabel}</div>
     </div>
     <div class="pcs">
       <div class="sl">${_esc(_t('key_sources'))}</div>
@@ -416,6 +688,10 @@ function personEvidencePanel(p: PersonNode): string {
     <div class="pcs">
       <div class="sl">${_esc(_t('uncertainty_watchlist'))}</div>
       ${uncertain ? `<ul class="pfl">${uncertain}</ul>` : `<div class="nt" style="color:var(--tx3)">${_esc(_t('no_inferred_uncertain_links'))}</div>`}
+    </div>
+    <div class="pcs">
+      <div class="sl">${_esc(_t('geographic_context'))}</div>
+      ${mapHtml}
     </div>
   `;
 }
@@ -489,14 +765,11 @@ function mapPanel(p: PersonNode): string {
     .join(' \u00b7 ');
 
   return `
-    <div class="pcs">
-      <div class="sl">${_esc(_t('map_context'))}</div>
-      ${mapSvg}
-      <div class="rs">${_esc(_t('map_birth'))}: ${birthRow}</div>
-      <div class="rs">${_esc(_t('map_death'))}: ${deathRow}</div>
-      <div class="rs">${_esc(_t('map_context_nodes'))}: ${contextRows || `<span class="pn">${_esc(_t('unknown'))}</span>`}</div>
-      ${routeHints ? `<div class="rs">${_esc(_t('map_routes'))}: ${_esc(routeHints)}</div>` : ''}
-    </div>
+    ${mapSvg}
+    <div class="rs">${_esc(_t('map_birth'))}: ${birthRow}</div>
+    <div class="rs">${_esc(_t('map_death'))}: ${deathRow}</div>
+    <div class="rs">${_esc(_t('map_context_nodes'))}: ${contextRows || `<span class="pn">${_esc(_t('unknown'))}</span>`}</div>
+    ${routeHints ? `<div class="rs">${_esc(_t('map_routes'))}: ${_esc(routeHints)}</div>` : ''}
   `;
 }
 
@@ -505,9 +778,20 @@ function profileCard(p: PersonNode): string {
   const display = _personName(p);
   const names = uniq([p.nm, display, p.rg, ...(p.regnal_names || []), ...(p.aliases || [])]);
   const facts = p.facts?.length ? p.facts : (p.no ? [p.no] : []);
-  const birthPlace = p.pb || _t('unknown');
-  const deathPlace = p.pd || _t('unknown');
-  const lifeText = `${life.yb != null ? life.yb : _t('unknown')}${life.ybEst ? ' (est.)' : ''} \u2192 ${life.yd != null ? life.yd : _t('unknown')}${life.ydEst ? ' (est.)' : ''}`;
+  const birthSuffix = life.ybFromBio ? ` (${_t('life_marker_bio')})` : life.ybEst ? ` (${_t('life_marker_est')})` : '';
+  const deathSuffix = life.ydFromBio ? ` (${_t('life_marker_bio')})` : life.ydEst ? ` (${_t('life_marker_est')})` : '';
+  const lifeText = `${life.yb != null ? life.yb : _t('unknown')}${birthSuffix} \u2192 ${life.yd != null ? life.yd : _t('unknown')}${deathSuffix}`;
+  const lifeWarnings: string[] = [];
+  if (life.ybBioConflict != null && life.yb != null) {
+    lifeWarnings.push(_t('life_birth_conflict')
+      .replace('{bio}', String(life.ybBioConflict))
+      .replace('{life}', String(life.yb)));
+  }
+  if (life.ydBioConflict != null && life.yd != null) {
+    lifeWarnings.push(_t('life_death_conflict')
+      .replace('{bio}', String(life.ydBioConflict))
+      .replace('{life}', String(life.yd)));
+  }
   const royal = royalLinkInfo(p);
   const statusText: Record<string, string> = {
     sovereign: _t('royal_sovereign'),
@@ -525,66 +809,79 @@ function profileCard(p: PersonNode): string {
   const connCount = _edges.filter(e => e.s === p.id || e.d === p.id).length;
   const srcCount = collectSourceRefs(p).length;
 
+  // Sovereign ordinal (#20, etc.)
+  const ordinal = (p.n || []).length ? `<span class="pcd">#${p.n![0]}</span>` : '';
+
+  // --- Header: simplified ---
+  // Dynasty + reign merged into subtitle, 2-cell grid
+  const subtitleParts = [p.dy || _t('unknown_dynasty')];
+  if (reignText !== _t('unknown')) subtitleParts.push(reignText);
+  const subtitle = subtitleParts.join(' \u00b7 ');
+
+  // --- Tab: Story (always default) ---
+  const storyContent = `
+    <div class="pcs">
+      <div class="sl">${_esc(_t('known_names'))}</div>
+      <div class="pnl">${names.length ? names.map(n => `<button class="pn pn-b" data-q="${_esc(n)}">${_esc(n)}</button>`).join('') : `<span class="pn">${_esc(_t('unknown'))}</span>`}</div>
+    </div>
+    <div class="pcs">
+      <div class="sl">${_esc(_t('known_by'))}</div>
+      ${knownAsRows(p)}
+    </div>
+    ${p.titles?.length ? `<div class="pcs"><div class="sl">${_esc(_t('titles'))}</div><div class="pnl">${p.titles.map(title => `<button class="pn pn-b" data-q="${_esc(title)}">${_esc(title)}</button>`).join('')}</div></div>` : ''}
+    ${p.bio
+      ? `<div class="pcs"><div class="sl">${_esc(_t('bio'))}</div><div class="bio-text">${p.bio.split('\n\n').map((para, i) => `<p${i === 0 ? ' class="bio-lead"' : ''}>${_esc(para)}</p>`).join('')}</div></div>`
+      : ''
+    }
+    <div class="pcs">
+      <div class="sl">${_esc(_t('life_consistency'))}</div>
+      <div class="rs">${_esc(_t('life_consistency_hint'))}</div>
+      ${lifeWarnings.length
+        ? `<ul class="pfl">${lifeWarnings.map(row => `<li>${_esc(row)}</li>`).join('')}</ul>`
+        : `<div class="rs">${_esc(_t('life_consistency_ok'))}</div>`
+      }
+    </div>
+    <div class="pcs">
+      <div class="sl">${_esc(_t('royal_links'))}</div>
+      <div class="rli"><span class="pn">${_esc(statusLabel)}</span> ${confidenceBadge(royal.status === 'uncertain' ? 'u' : royal.status === 'none' ? 'u' : undefined)}</div>
+      <div class="rs">${_esc(royal.summary)}</div>
+      ${royal.pathText ? `<div class="rs">${_esc(_t('path'))}: ${_esc(royal.pathText)}</div>` : ''}
+    </div>
+    ${factsPanelHtml(facts)}
+    <div class="pcs">
+      <div class="sl">${_esc(_t('compare'))}</div>
+      <div class="pnl">
+        <button class="gb" onclick="setCmpA('${p.id}')">${_esc(_t('set_a'))}</button>
+        <button class="gb" onclick="setCmpB('${p.id}')">${_esc(_t('set_b'))}</button>
+        <button class="gb" onclick="armCmp('${p.id}')">${_esc(_t('compare_next'))}</button>
+      </div>
+    </div>
+  `;
+
   return `
     <section class="pc" data-person-card style="--dy-color:${dyColor}">
       <div class="pch">
         <div class="pcn">${femaleIcon}${_esc(display)}</div>
-        <div class="pcd">${_esc(p.dy || _t('unknown_dynasty'))}</div>
-        <div class="pc-reign-pill">${_esc(reignText)}</div>
+        <div class="pcd">${_esc(subtitle)}</div>
+        ${ordinal}
       </div>
       <div class="pcg">
-        <div class="pcl"><span>${_esc(_t('reign'))}</span><b>${_esc(reignText)}</b></div>
         <div class="pcl"><span>${_esc(_t('life'))}</span><b>${_esc(lifeText)}</b></div>
         <div class="pcl"><span>${_esc(_t('connections'))}</span><b>${connCount}</b></div>
-        <div class="pcl"><span>${_esc(_t('sources_word'))}</span><b>${srcCount}</b></div>
       </div>
       <div class="ptabs">
-        <button class="ptab${p.bio ? '' : ' on'}" data-tab="overview"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm1 12H7V7h2v5zm0-7H7V3h2v2z"/></svg> ${_esc(_t('profile'))}</button>
-        <button class="ptab${p.bio ? ' on' : ''}" data-tab="bio"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2 1h9l3 3v11a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm1 3h5v1H3V4zm0 3h8v1H3V7zm0 3h8v1H3v-1zm0 3h5v1H3v-1z"/></svg> ${_esc(_t('bio'))}</button>
-        <button class="ptab" data-tab="offices"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2 2h12v2H2zm0 4h12v2H2zm0 4h12v2H2z"/></svg> ${_esc(_t('offices'))}</button>
-        <button class="ptab" data-tab="evidence"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm-1 12H3V3h10v10z"/></svg> ${_esc(_t('evidence'))}</button>
-        <button class="ptab" data-tab="map"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C5.2 0 3 2.2 3 5c0 4 5 11 5 11s5-7 5-11c0-2.8-2.2-5-5-5zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg> ${_esc(_t('map'))}</button>
+        <button class="ptab on" data-tab="story"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2 1h9l3 3v11a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm1 3h5v1H3V4zm0 3h8v1H3V7zm0 3h8v1H3v-1zm0 3h5v1H3v-1z"/></svg> ${_esc(_t('story'))}</button>
+        <button class="ptab" data-tab="offices"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2 2h12v2H2zm0 4h12v2H2zm0 4h12v2H2z"/></svg> ${_esc(_t('offices_roles'))}</button>
+        <button class="ptab" data-tab="evidence"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm-1 12H3V3h10v10z"/></svg> ${_esc(_t('evidence'))} <span class="rt">${srcCount}</span></button>
       </div>
-      <div class="ptpanel${p.bio ? '' : ' on'}" data-panel="overview">
-        <div class="pcs">
-          <div class="sl">${_esc(_t('known_names'))}</div>
-          <div class="pnl">${names.length ? names.map(n => `<button class="pn pn-b" data-q="${_esc(n)}">${_esc(n)}</button>`).join('') : `<span class="pn">${_esc(_t('unknown'))}</span>`}</div>
-        </div>
-        <div class="pcs">
-          <div class="sl">${_esc(_t('known_by'))}</div>
-          ${knownAsRows(p)}
-        </div>
-        ${p.titles?.length ? `<div class="pcs"><div class="sl">${_esc(_t('titles'))}</div><div class="pnl">${p.titles.map(title => `<button class="pn pn-b" data-q="${_esc(title)}">${_esc(title)}</button>`).join('')}</div></div>` : ''}
-        <div class="pcs">
-          <div class="sl">${_esc(_t('royal_links'))}</div>
-          <div class="rli"><span class="pn">${_esc(statusLabel)}</span></div>
-          <div class="rs">${_esc(royal.summary)}</div>
-          ${royal.pathText ? `<div class="rs">${_esc(_t('path'))}: ${_esc(royal.pathText)}</div>` : ''}
-        </div>
-        <div class="pcs">
-          <div class="sl">${_esc(_t('compare'))}</div>
-          <div class="pnl">
-            <button class="gb" onclick="setCmpA('${p.id}')">${_esc(_t('set_a'))}</button>
-            <button class="gb" onclick="setCmpB('${p.id}')">${_esc(_t('set_b'))}</button>
-            <button class="gb" onclick="armCmp('${p.id}')">${_esc(_t('compare_next'))}</button>
-          </div>
-        </div>
-        ${factsPanelHtml(facts)}
-      </div>
-      <div class="ptpanel${p.bio ? ' on' : ''}" data-panel="bio">
-        ${p.bio
-          ? `<div class="bio-text">${p.bio.split('\n\n').map((para, i) => `<p${i === 0 ? ' class="bio-lead"' : ''}>${_esc(para)}</p>`).join('')}</div>`
-          : `<p class="nt">${_esc(_t('no_bio'))}</p>`
-        }
+      <div class="ptpanel on" data-panel="story">
+        ${storyContent}
       </div>
       <div class="ptpanel" data-panel="offices">
         ${officePanel(p)}
       </div>
       <div class="ptpanel" data-panel="evidence">
         ${personEvidencePanel(p)}
-      </div>
-      <div class="ptpanel" data-panel="map">
-        ${mapPanel(p)}
       </div>
     </section>
   `;
@@ -636,6 +933,40 @@ function derivedInferenceDetail(e: EdgeRecord): InferenceDetail | null {
   const basis = (e.inference_basis || {}) as InferenceBasis;
   const sid = e.s;
   const did = e.d;
+  const edgeKey = _inferenceEdgeKey(e as unknown as Record<string, unknown>);
+
+  if (edgeKey === 'kin|P46|P50|grandparent') {
+    return {
+      ruleLabel: _t('inference_rule_parent_of_parent'),
+      summary: `${personLabelWithId(sid)} is modeled as a grandparent-line relative of ${personLabelWithId(did)} via ${personLabelWithId('P47')}.`,
+      logic: [
+        `Supporting edge: parent P46 Omar -> P47 Hassan (CLM-0341, SRC-MRF-KINGS, grade B).`,
+        `Supporting edge: parent P47 Hassan -> P50 Ibrahim (CLM-0601, SRC-ROYALARK-MALDIVES, grade B).`,
+        `Rule application: if A is parent of B and B is parent of C, A is inferred as grandparent-line kin of C.`
+      ],
+      verification: [
+        `Promotion target: direct A/B wording that explicitly names P46 Omar and P50 Ibrahim as grandparent-line kin.`,
+        `Downgrade trigger: source-backed revision to either supporting parent edge in this chain.`
+      ]
+    };
+  }
+
+  if (edgeKey === 'kin|P40|P41|aunt/uncle↔niece/nephew') {
+    return {
+      ruleLabel: _t('inference_rule_parent_sibling'),
+      summary: `${personLabelWithId(sid)} is modeled as aunt/uncle-line kin of ${personLabelWithId(did)} through parent-sibling composition anchored on ${personLabelWithId('P39')}.`,
+      logic: [
+        `Supporting edge: parent P39 Yoosuf -> P41 Hadi Hassan (CLM-0596, SRC-ROYALARK-MALDIVES, grade B).`,
+        `Supporting edge: sibling P39 Yoosuf <-> P40 Aboobakuru [half-brothers] (CLM-0432, SRC-MRF-KINGS, grade B).`,
+        `Rule application: sibling(parent, X) + parent(parent, child) implies inferred aunt/uncle-line kin(X, child).`
+      ],
+      verification: [
+        `Promotion target: explicit A/B source wording naming P40 Aboobakuru and P41 Hadi Hassan as aunt/uncle-line kin.`,
+        `Downgrade trigger: contradiction or reassignment in either the parent edge or the sibling basis edge.`
+      ]
+    };
+  }
+
   if (e.inference_rule === 'shared-parent-sibling') {
     const parent = basis.shared_parent;
     return {
@@ -720,7 +1051,7 @@ function inferenceDetailForEdge(e: EdgeRecord): InferenceDetail | null {
     return {
       ruleLabel: _t('inference_rule_manual'),
       summary: note.summary || _t('inference_no_detail'),
-      dossier: '',
+      dossier: note.dossier || '',
       logic: note.logic || [],
       verification: note.verification || []
     };
@@ -748,48 +1079,127 @@ function localDocHref(path: string | null | undefined): string {
 
 function inferencePanel(e: EdgeRecord): string {
   if (!e || e.c !== 'i') return '';
+  ensureVerificationModuleLoaded();
   const info = inferenceDetailForEdge(e);
   if (!info) return '';
   const eAsRecord = e as unknown as Record<string, unknown>;
-  const dossierPath = info.dossier || _getInferenceDossierPath(eAsRecord);
+  const verification = verificationMeta(eAsRecord);
+  const docs = verificationDocs();
+  const dossierPath = info.dossier || verification?.dossier_file || _getInferenceDossierPath(eAsRecord);
   const dossierHref = localDocHref(dossierPath);
   const edgeKey = _inferenceEdgeKey(eAsRecord);
-  const gradeChip = e.confidence_grade
-    ? `<span class="rt">${_esc(_t('confidence_grade'))} ${_esc(e.confidence_grade)}</span>`
-    : '';
-  const trackerHref = 'docs/research-program/ledgers/inference-dossier-tracker.csv';
+  const supportLevel = confidenceGradeAudienceLabel(e.confidence_grade);
+  const gradeChip = `<span class="rt">${_esc(_t('inference_support_level'))}: ${_esc(supportLevel)}${e.confidence_grade ? ` (${_esc(e.confidence_grade)})` : ''}</span>`;
+  const trackerHref = localDocHref(docs.inference_tracker_path || 'docs/research-program/ledgers/inference-dossier-tracker.csv');
+  const explainerHref = localDocHref(docs.confidence_explainer_path || 'docs/confidence-grade-explainer.md');
   const refs = (e.evidence_refs || [])
     .filter(id => _sourceById.has(id))
     .map(id => {
       const src = _sourceById.get(id);
       return `${src?.title || id} (${id})`;
     });
-  const logic = (info.logic || []).filter(Boolean);
+  const audienceSummary = layRelationNarrative(e, personLabel(e.s), personLabel(e.d), e.l || relationTypeLabel(e.t || 'kin'));
+  const logic = audienceInferenceSteps(e, info);
   const checks = (info.verification || []).filter(Boolean);
+  const verificationStatus = verification
+    ? `${verification.review_status || '-'} / ${verification.canonical_decision || '-'}`
+    : '';
   const basisHtml = refs.length
     ? refs.map(row => `<span class="infp-tag">${_esc(row)}</span>`).join('')
     : '';
   return `
     <div class="pcs infp">
       <div class="infp-top">
-        <div class="sl">${_esc(_t('inference_logic'))}</div>
+        <div class="sl">${_esc(_t('inference_how_link'))}</div>
         <div class="infp-meta">
           <span class="rt rt-i">${_esc(_t('inferred'))}</span>
           ${gradeChip}
-          <span class="rt">${_esc(info.ruleLabel)}</span>
         </div>
       </div>
-      <div class="infp-summary">${_esc(info.summary)}</div>
-      <div class="infp-actions">
-        ${dossierHref ? `<a class="doc-link doc-pill" href="${_esc(dossierHref)}" target="_blank" rel="noopener noreferrer">${_esc(_t('inference_open_dossier'))}</a>` : `<span class="infp-missing">${_esc(_t('inference_dossier_unavailable'))}</span>`}
-        <a class="doc-link doc-pill" href="docs/confidence-grade-explainer.md" target="_blank" rel="noopener noreferrer">${_esc(_t('inference_open_explainer'))}</a>
-        <a class="doc-link doc-pill" href="${trackerHref}" target="_blank" rel="noopener noreferrer">${_esc(_t('inference_open_tracker'))}</a>
-      </div>
-      <div class="infp-path"><span>${_esc(_t('inference_edge_key'))}</span><code>${_esc(edgeKey || '-')}</code></div>
-      ${dossierPath ? `<div class="infp-path"><span>${_esc(_t('inference_dossier_path'))}</span><code>${_esc(dossierPath)}</code></div>` : ''}
+      <div class="infp-summary">${_esc(audienceSummary)}</div>
+      <div class="rs">${_esc(_t('inference_support_level'))}: ${_esc(supportLevel)}${e.confidence_grade ? ` (${_esc(_t('confidence_grade'))} ${_esc(e.confidence_grade)})` : ''}.</div>
+      <div class="rs">${_esc(_t('inference_direct_claim_missing'))}</div>
       ${logic.length ? `<details class="odt infp-det" open><summary>${_esc(_t('inference_logic_steps'))}</summary><ul class="pfl">${logic.map(row => `<li>${_esc(row)}</li>`).join('')}</ul></details>` : ''}
       ${checks.length ? `<details class="odt infp-det"><summary>${_esc(_t('inference_verification_checklist'))}</summary><ul class="pfl">${checks.map(row => `<li>${_esc(row)}</li>`).join('')}</ul></details>` : ''}
-      ${refs.length ? `<div class="infp-bases"><div class="sl">${_esc(_t('inference_bases'))}</div><div class="infp-tags">${basisHtml}</div></div>` : `<div class="rs">${_esc(_t('inference_no_bases'))}</div>`}
+      <div class="infp-actions">
+        ${dossierHref ? `<a class="doc-link doc-pill" href="${_esc(dossierHref)}" target="_blank" rel="noopener noreferrer">${_esc(_t('inference_open_dossier'))}</a>` : `<span class="infp-missing">${_esc(_t('inference_dossier_unavailable'))}</span>`}
+        <a class="doc-link doc-pill" href="${_esc(explainerHref)}" target="_blank" rel="noopener noreferrer">${_esc(_t('inference_open_explainer'))}</a>
+        <a class="doc-link doc-pill" href="${_esc(trackerHref)}" target="_blank" rel="noopener noreferrer">${_esc(_t('inference_open_tracker'))}</a>
+      </div>
+      <details class="odt infp-det">
+        <summary>${_esc(_t('inference_technical_trace'))}</summary>
+        <div class="rs">${_esc(info.summary)}</div>
+        <div class="infp-meta"><span class="rt">${_esc(info.ruleLabel)}</span></div>
+        <div class="infp-path"><span>${_esc(_t('inference_edge_key'))}</span><code>${_esc(edgeKey || '-')}</code></div>
+        ${verificationStatus ? `<div class="infp-path"><span>${_esc(_t('verification_status'))}</span><code>${_esc(verificationStatus)}</code></div>` : ''}
+        ${dossierPath ? `<div class="infp-path"><span>${_esc(_t('inference_dossier_path'))}</span><code>${_esc(dossierPath)}</code></div>` : ''}
+        ${refs.length ? `<div class="infp-bases"><div class="sl">${_esc(_t('inference_bases'))}</div><div class="infp-tags">${basisHtml}</div></div>` : `<div class="rs">${_esc(_t('inference_no_bases'))}</div>`}
+      </details>
+    </div>
+  `;
+}
+
+function edgeVerificationPanel(e: EdgeRecord): string {
+  if (!e) return '';
+  ensureVerificationModuleLoaded();
+  const docs = verificationDocs();
+  const relLedgerHref = localDocHref(docs.relationship_ledger_path || 'docs/research-program/ledgers/relationship-evidence-ledger.csv');
+  const trackerHref = localDocHref(docs.inference_tracker_path || 'docs/research-program/ledgers/inference-dossier-tracker.csv');
+  const explainerHref = localDocHref(docs.confidence_explainer_path || 'docs/confidence-grade-explainer.md');
+  const eAsRecord = e as unknown as Record<string, unknown>;
+  const edgeKey = verificationEdgeKey(eAsRecord) || '-';
+  const meta = verificationMeta(eAsRecord);
+  const loading = !_verificationModule && !_verificationModuleFailed;
+
+  if (loading) {
+    return `
+      <div class="pcs">
+        <div class="sl">${_esc(_t('verification_panel'))}</div>
+        <div class="rs">${_esc(_t('verification_loading'))}</div>
+        <div class="infp-path"><span>${_esc(_t('inference_edge_key'))}</span><code>${_esc(edgeKey)}</code></div>
+      </div>
+    `;
+  }
+
+  if (!meta) {
+    return `
+      <div class="pcs">
+        <div class="sl">${_esc(_t('verification_panel'))}</div>
+        <div class="rs">${_esc(_t('verification_not_indexed'))}</div>
+        <div class="infp-path"><span>${_esc(_t('inference_edge_key'))}</span><code>${_esc(edgeKey)}</code></div>
+        <div class="infp-actions">
+          <a class="doc-link doc-pill" href="${_esc(relLedgerHref)}" target="_blank" rel="noopener noreferrer">${_esc(_t('verification_open_relationship_ledger'))}</a>
+          ${e.c === 'i' ? `<a class="doc-link doc-pill" href="${_esc(trackerHref)}" target="_blank" rel="noopener noreferrer">${_esc(_t('verification_open_inference_tracker'))}</a>` : ''}
+          <a class="doc-link doc-pill" href="${_esc(explainerHref)}" target="_blank" rel="noopener noreferrer">${_esc(_t('inference_open_explainer'))}</a>
+        </div>
+      </div>
+    `;
+  }
+
+  const chips = [
+    meta.review_status ? `<span class="rt">${_esc(_t('verification_review_status'))}: ${_esc(meta.review_status)}</span>` : '',
+    meta.canonical_decision ? `<span class="rt">${_esc(_t('verification_canonical_decision'))}: ${_esc(meta.canonical_decision)}</span>` : ''
+  ].filter(Boolean).join('');
+  const reviewerLine = [meta.reviewer, meta.last_reviewed].filter(Boolean).join(' · ');
+  const dossierHref = localDocHref(meta.dossier_file);
+  const claimMeta = [
+    meta.claim_id ? `${_t('verification_claim_id')}: ${meta.claim_id}` : '',
+    meta.primary_source_id ? `${_t('verification_primary_source')}: ${meta.primary_source_id}` : ''
+  ].filter(Boolean).join(' · ');
+
+  return `
+    <div class="pcs">
+      <div class="sl">${_esc(_t('verification_panel'))}</div>
+      <div class="pnl">${chips}</div>
+      ${claimMeta ? `<div class="rs">${_esc(claimMeta)}</div>` : ''}
+      ${reviewerLine ? `<div class="rs">${_esc(_t('verification_reviewer'))}: ${_esc(reviewerLine)}</div>` : ''}
+      <div class="infp-path"><span>${_esc(_t('inference_edge_key'))}</span><code>${_esc(edgeKey)}</code></div>
+      <div class="infp-actions">
+        <a class="doc-link doc-pill" href="${_esc(relLedgerHref)}" target="_blank" rel="noopener noreferrer">${_esc(_t('verification_open_relationship_ledger'))}</a>
+        ${e.c === 'i' ? `<a class="doc-link doc-pill" href="${_esc(trackerHref)}" target="_blank" rel="noopener noreferrer">${_esc(_t('verification_open_inference_tracker'))}</a>` : ''}
+        ${dossierHref ? `<a class="doc-link doc-pill" href="${_esc(dossierHref)}" target="_blank" rel="noopener noreferrer">${_esc(_t('inference_open_dossier'))}</a>` : ''}
+        <a class="doc-link doc-pill" href="${_esc(explainerHref)}" target="_blank" rel="noopener noreferrer">${_esc(_t('inference_open_explainer'))}</a>
+      </div>
     </div>
   `;
 }
@@ -845,6 +1255,7 @@ function relationCard(link: LinkDatum): string {
       ${e.l ? `<div class="pcs"><div class="sl">${_esc(_t('edge_label'))}</div><div class="nt">${_esc(e.l)}</div></div>` : ''}
       ${e.event_context ? `<div class="pcs"><div class="sl">${_esc(_t('edge_context'))}</div><div class="nt">${_esc(e.event_context)}</div></div>` : ''}
       ${inferencePanel(e)}
+      ${edgeVerificationPanel(e)}
       ${edgeEvidencePanel(e, s, targetPerson)}
       <div class="pcs">
         <div class="sl">${_esc(_t('explore_endpoints'))}</div>
@@ -967,7 +1378,7 @@ function institutionsOverviewHtml(): string {
       return `
         <li class="ri">
           <div class="rlf">
-            <div class="rn"><button class="pn pn-b" data-q="${_esc(o.name)}">${_esc(o.name)}</button> <span class="rt">${_esc(o.kind || _t('office_generic'))}</span></div>
+            <div class="rn"><span class="pn ofc-link" data-office-id="${o.id}">${_esc(o.name)}</span> <span class="rt">${_esc(o.kind || _t('office_generic'))}</span></div>
             <div class="rs">${_esc(o.summary || _t('role_summary_unavailable'))}</div>
             ${aliases ? `<div class="pnl" style="margin-top:4px">${aliases}</div>` : ''}
             ${srcBlock}
@@ -993,8 +1404,11 @@ function institutionsOverviewHtml(): string {
 function institutionsTimelineHtml(): string {
   const rows = (_officeTimeline || []).map(period => {
     const officeNames = (period.offices || [])
-      .map(id => _officeById.get(id)?.name || id)
-      .map(name => `<button class="pn pn-b" data-q="${_esc(name)}">${_esc(name)}</button>`)
+      .map(id => {
+        const odef = _officeById.get(id);
+        const nm = odef?.name || id;
+        return `<span class="pn ofc-link" data-office-id="${id}">${_esc(nm)}</span>`;
+      })
       .join('');
     const srcBlock = officeSourceBlock(period.source_refs);
     return `
@@ -1027,21 +1441,428 @@ function institutionsTimelineHtml(): string {
 // Public API
 // ---------------------------------------------------------------------------
 
+function edgeConfidenceRank(c: string | undefined): number {
+  if (c === 'c') return 0;
+  if (c === 'i') return 1;
+  return 2;
+}
+
+function confidenceGradeAudienceLabel(grade: string | undefined): string {
+  if (grade === 'A') return _t('inference_grade_audience_a');
+  if (grade === 'B') return _t('inference_grade_audience_b');
+  if (grade === 'C') return _t('inference_grade_audience_c');
+  if (grade === 'D') return _t('inference_grade_audience_d');
+  return _t('inference_grade_audience_unknown');
+}
+
+function personLabel(id: string | undefined): string {
+  if (!id) return _t('unknown');
+  const p = _byId.get(id);
+  return p ? _personName(p) : id;
+}
+
+function cleanInferencePerson(raw: string | undefined): string {
+  return String(raw || '')
+    .replace(/\s*\(P\d+\)\s*/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function parseSupportingEdgeStep(step: string): { rel: string; lhs: string; rhs: string } | null {
+  if (!step) return null;
+  const compact = String(step)
+    .replace(/; excerpt:.*/i, '')
+    .trim();
+  const support = compact.match(/^Supporting edge:\s*(parent|sibling|spouse|kin)\s+P\d+\s+(.+?)\s*(?:<->|->)\s*P\d+\s+(.+?)(?:\s+\((?:CLM-|SRC-|grade)[^)]+\).*)?$/i);
+  if (!support) return null;
+  return {
+    rel: (support[1] || '').toLowerCase(),
+    lhs: cleanInferencePerson(support[2]),
+    rhs: cleanInferencePerson(support[3])
+  };
+}
+
+function layRelationNarrative(
+  edge: EdgeRecord,
+  sourceName: string,
+  targetName: string,
+  relationText: string
+): string {
+  const basis = (edge.inference_basis || {}) as InferenceBasis;
+  const rule = edge.inference_rule;
+  const rel = (relationText || '').toLowerCase();
+  if (rule === 'parent-of-parent-grandparent' && basis.via_parent) {
+    return _t('inference_narrative_grandparent_via')
+      .replace('{source}', sourceName)
+      .replace('{target}', targetName)
+      .replace('{via}', personLabel(basis.via_parent));
+  }
+  if (rule === 'shared-parent-sibling' && basis.shared_parent) {
+    return _t('inference_narrative_sibling_shared_parent')
+      .replace('{source}', sourceName)
+      .replace('{target}', targetName)
+      .replace('{parent}', personLabel(basis.shared_parent));
+  }
+  if (rule === 'parent-sibling-aunt-uncle' && basis.via_parent) {
+    return _t('inference_narrative_aunt_uncle_via')
+      .replace('{source}', sourceName)
+      .replace('{target}', targetName)
+      .replace('{via}', personLabel(basis.via_parent));
+  }
+  if (rule === 'children-of-siblings-cousin' && (basis.via_parent_siblings || []).length === 2) {
+    const pair = basis.via_parent_siblings || [];
+    return _t('inference_narrative_cousin_via_parents')
+      .replace('{source}', sourceName)
+      .replace('{target}', targetName)
+      .replace('{p1}', personLabel(pair[0]))
+      .replace('{p2}', personLabel(pair[1]));
+  }
+  if (rule === 'parent-of-parent-grandparent' || rel.includes('grandparent')) {
+    return _t('inference_narrative_grandparent')
+      .replace('{source}', sourceName)
+      .replace('{target}', targetName);
+  }
+  if (rule === 'children-of-siblings-cousin' || rel.includes('cousin')) {
+    return _t('inference_narrative_cousin')
+      .replace('{source}', sourceName)
+      .replace('{target}', targetName);
+  }
+  if (rule === 'parent-sibling-aunt-uncle' || rel.includes('aunt') || rel.includes('uncle')) {
+    return _t('inference_narrative_aunt_uncle')
+      .replace('{source}', sourceName)
+      .replace('{target}', targetName);
+  }
+  if (rule === 'shared-parent-sibling' || rel.includes('sibling')) {
+    return _t('inference_narrative_sibling')
+      .replace('{source}', sourceName)
+      .replace('{target}', targetName);
+  }
+  return _t('inference_narrative_generic')
+    .replace('{source}', sourceName)
+    .replace('{target}', targetName);
+}
+
+function simplifyInferenceStep(step: string, rule: string | undefined): string {
+  if (!step) return '';
+
+  const support = parseSupportingEdgeStep(step);
+  if (support) {
+    const rel = support.rel;
+    const lhs = support.lhs;
+    const rhs = support.rhs;
+    if (rel === 'parent') return _t('inference_step_parent').replace('{a}', lhs).replace('{b}', rhs);
+    if (rel === 'sibling') return _t('inference_step_sibling').replace('{a}', lhs).replace('{b}', rhs);
+    if (rel === 'spouse') return _t('inference_step_spouse').replace('{a}', lhs).replace('{b}', rhs);
+    return _t('inference_step_kin').replace('{a}', lhs).replace('{b}', rhs);
+  }
+
+  const pathStep = step.match(/^(.+?)\s+\u2192\s+(.+?)\s+\[(.+)\]$/);
+  if (pathStep) {
+    const lhs = (pathStep[1] || '').replace(/\s*\(P\d+\)\s*/g, '').trim();
+    const rhs = (pathStep[2] || '').replace(/\s*\(P\d+\)\s*/g, '').trim();
+    const rel = (pathStep[3] || '').toLowerCase();
+    if (rel.includes('parent')) return _t('inference_step_parent').replace('{a}', lhs).replace('{b}', rhs);
+    if (rel.includes('sibling')) return _t('inference_step_sibling').replace('{a}', lhs).replace('{b}', rhs);
+    return _t('inference_step_kin').replace('{a}', lhs).replace('{b}', rhs);
+  }
+
+  let out = step;
+  out = out.replace(/^Support set for rule .+ resolved as follows\.?$/i, _t('inference_step_start'));
+  out = out.replace(/^Supporting edge:\s*/i, '');
+  out = out.replace(/^Rule application \([^)]+\):\s*/i, '');
+  out = out.replace(/^Current modeling remains inferred because /i, _t('inference_step_still_inferred'));
+  out = out.replace(/\bP\d+\s+/g, '');
+  out = out.replace(/\s*\(CLM-[^)]+\)/g, '');
+  out = out.replace(/\bSRC-[A-Z0-9-]+\b/g, '');
+  out = out.replace(/\bgrade\s+[ABCD]\b/gi, '');
+  out = out.replace(/; excerpt:.*/i, '');
+  out = out.replace(/`[^`]+`/g, '');
+  out = out.replace(/\s+/g, ' ').trim().replace(/^[,.;:\s]+|[,.;:\s]+$/g, '');
+  if (/^rule application/i.test(step)) {
+    if (rule === 'parent-of-parent-grandparent') return _t('inference_rule_parent_of_parent_plain');
+    if (rule === 'parent-sibling-aunt-uncle') return _t('inference_rule_parent_sibling_plain');
+    if (rule === 'children-of-siblings-cousin') return _t('inference_rule_children_of_siblings_plain');
+    if (rule === 'shared-parent-sibling') return _t('inference_rule_shared_parent_plain');
+  }
+  if (!out || /\b(CL[A-Z]-\d+|SRC-|parent-of-parent-grandparent|shared-parent-sibling|parent-sibling-aunt-uncle|children-of-siblings-cousin)\b/i.test(out)) {
+    return _t('inference_step_sources_support');
+  }
+  if (out.length > 220) return `${out.slice(0, 216)}...`;
+  return out;
+}
+
+function audienceInferenceSteps(edge: EdgeRecord, info: InferenceDetail | null): string[] {
+  const basis = (edge.inference_basis || {}) as InferenceBasis;
+  const sid = personLabel(edge.s);
+  const did = personLabel(edge.d);
+  const rule = edge.inference_rule;
+  if (rule === 'parent-of-parent-grandparent') {
+    const rows = (basis.parent_edges || [])
+      .filter(r => r.s && r.d)
+      .map(r => _t('inference_step_parent').replace('{a}', personLabel(r.s)).replace('{b}', personLabel(r.d)))
+      .slice(0, 2);
+    const fallbackRows = (info?.logic || [])
+      .map(r => parseSupportingEdgeStep(r))
+      .filter((r): r is { rel: string; lhs: string; rhs: string } => !!r && r.rel === 'parent')
+      .map(r => _t('inference_step_parent').replace('{a}', r.lhs).replace('{b}', r.rhs))
+      .slice(0, 2);
+    const supportRows = rows.length ? rows : fallbackRows;
+    return [...supportRows, _t('inference_rule_parent_of_parent_plain_named').replace('{a}', sid).replace('{b}', did)];
+  }
+  if (rule === 'parent-sibling-aunt-uncle') {
+    const rows = (basis.supporting_edges || [])
+      .map(r => simplifyInferenceStep(edgeStepText(r), rule))
+      .filter(Boolean)
+      .slice(0, 3);
+    const fallbackRows = (info?.logic || [])
+      .map(r => simplifyInferenceStep(r, rule))
+      .filter(Boolean)
+      .slice(0, 3);
+    const supportRows = rows.length ? rows : fallbackRows;
+    return [...supportRows, _t('inference_rule_parent_sibling_plain_named').replace('{a}', sid).replace('{b}', did)];
+  }
+  if (rule === 'children-of-siblings-cousin') {
+    const parentRows = (basis.child_parent_edges || [])
+      .map(r => simplifyInferenceStep(edgeStepText(r), rule))
+      .filter(Boolean);
+    const siblingRow = simplifyInferenceStep(edgeStepText(basis.parent_sibling_edge), rule);
+    const rows = [...parentRows, siblingRow].filter(Boolean).slice(0, 4);
+    const fallbackRows = (info?.logic || [])
+      .map(r => simplifyInferenceStep(r, rule))
+      .filter(Boolean)
+      .slice(0, 4);
+    const supportRows = rows.length ? rows : fallbackRows;
+    return [...supportRows, _t('inference_rule_children_of_siblings_plain_named').replace('{a}', sid).replace('{b}', did)];
+  }
+  if (rule === 'shared-parent-sibling') {
+    const parent = personLabel(basis.shared_parent);
+    const rows = (basis.parent_edges || [])
+      .map(r => simplifyInferenceStep(edgeStepText(r), rule))
+      .filter(Boolean)
+      .slice(0, 2);
+    const fallbackRows = (info?.logic || [])
+      .map(r => simplifyInferenceStep(r, rule))
+      .filter(Boolean)
+      .slice(0, 2);
+    const supportRows = rows.length ? rows : fallbackRows;
+    return [
+      ...supportRows,
+      _t('inference_rule_shared_parent_plain_named')
+        .replace('{parent}', parent)
+        .replace('{a}', sid)
+        .replace('{b}', did)
+    ];
+  }
+  return (info?.logic || []).map(row => simplifyInferenceStep(row, edge.inference_rule)).filter(Boolean);
+}
+
+function bestEdgeBetween(a: string, b: string, relType: string): EdgeRecord | null {
+  const matches = _edges.filter(e =>
+    e.t === relType
+    && ((e.s === a && e.d === b) || (e.s === b && e.d === a))
+  );
+  if (!matches.length) return null;
+  matches.sort((lhs, rhs) =>
+    edgeConfidenceRank(lhs.c) - edgeConfidenceRank(rhs.c)
+    || sourceQualityWeight(rhs.confidence_grade || '') - sourceQualityWeight(lhs.confidence_grade || '')
+    || (rhs.evidence_refs?.length || 0) - (lhs.evidence_refs?.length || 0)
+  );
+  return matches[0] || null;
+}
+
+function kinStoryBlock(ownerId: string, it: RelNeighbor, edge: EdgeRecord | null): string {
+  const relType = it.t || edge?.t || 'kin';
+  if (relType !== 'kin') return '';
+  const relationText = (edge?.l || it.l || '').trim();
+  const relationLine = relationText
+    ? `<div class="rs">${_esc(_t('edge_label'))}: ${_esc(relationText)}</div>`
+    : '';
+  if (!edge || edge.c === 'c') return relationLine;
+
+  const openBtn = `<button class="tb" data-rel-open="1" data-rel-s="${_esc(edge.s)}" data-rel-d="${_esc(edge.d)}" data-rel-t="${_esc(edge.t || 'kin')}">${_esc(_t('relationship'))} \u00b7 ${_esc(_t('go'))}</button>`;
+  if (edge.c === 'u') {
+    return `${relationLine}<details class="odt"><summary>${_esc(_t('uncertain'))}</summary><div class="rs">${_esc(_t('link_uncertain_text'))}</div><div class="pnl">${openBtn}</div></details>`;
+  }
+
+  const info = inferenceDetailForEdge(edge);
+  const summary = info?.summary || _t('inference_no_detail');
+  const verification = verificationMeta(edge as unknown as Record<string, unknown>);
+  const steps = audienceInferenceSteps(edge, info);
+  const leadLogic = steps.slice(0, 2);
+  const tailLogic = steps.slice(2);
+  const dossierPath = info?.dossier || verification?.dossier_file || _getInferenceDossierPath(edge as unknown as Record<string, unknown>);
+  const dossierHref = localDocHref(dossierPath);
+  const owner = _byId.get(ownerId);
+  const other = _byId.get(it.id);
+  const ownerName = _personName(owner || ownerId);
+  const otherName = _personName(other || it.id);
+  const narrative = layRelationNarrative(edge, ownerName, otherName, relationText);
+  const confidenceText = confidenceGradeAudienceLabel(edge.confidence_grade);
+  const moreCount = tailLogic.length;
+  return `
+    ${relationLine}
+    <details class="odt" open>
+      <summary>${_esc(_t('inference_why_relation'))}</summary>
+      <div class="rs">${_esc(narrative)}</div>
+      <div class="rs">${_esc(_t('inference_support_level'))}: ${_esc(confidenceText)}${edge.confidence_grade ? ` (${_esc(_t('confidence_grade'))} ${_esc(edge.confidence_grade)})` : ''}.</div>
+      <div class="rs">${_esc(_t('inference_direct_claim_missing'))}</div>
+      ${leadLogic.length ? `<ul class="pfl">${leadLogic.map(row => `<li>${_esc(row)}</li>`).join('')}</ul>` : ''}
+      ${moreCount ? `<details class="odt"><summary>${_esc(_t('show_more'))} ${moreCount} ${_esc(moreCount === 1 ? _t('more_fact') : _t('more_facts'))}</summary><ul class="pfl">${tailLogic.map(row => `<li>${_esc(row)}</li>`).join('')}</ul></details>` : ''}
+      <div class="infp-actions">
+        ${dossierHref ? `<a class="doc-link doc-pill" href="${_esc(dossierHref)}" target="_blank" rel="noopener noreferrer">${_esc(_t('inference_open_dossier'))}</a>` : ''}
+        ${openBtn}
+      </div>
+      <details class="odt">
+        <summary>${_esc(_t('inference_technical_trace'))}</summary>
+        <div class="rs">${_esc(summary)}</div>
+        ${info?.ruleLabel ? `<div class="pnl"><span class="rt">${_esc(info.ruleLabel)}</span>${verification?.claim_id ? `<span class="rt">${_esc(verification.claim_id)}</span>` : ''}${verification?.review_status ? `<span class="rt">${_esc(verification.review_status)}</span>` : ''}</div>` : ''}
+      </details>
+    </details>
+  `;
+}
+
 export function rlH(title: string, items: RelNeighbor[]): string {
   if (!items.length) return '';
+  const ownerId = _currentPersonId;
   return `<div class="sl">${_esc(title)}</div><ul class="rl">${items.map(it => {
     const p = _byId.get(it.id);
     if (!p) return '';
+    const relType = it.t || 'kin';
+    const edge = ownerId ? bestEdgeBetween(ownerId, it.id, relType) : null;
     const tag = it.c && it.c !== 'c' ? `<span class="rt ${it.c === 'i' ? 'rt-i' : 'rt-u'}">${it.c === 'i' ? _t('inferred') : _t('uncertain')}</span>` : '';
     const srcMeta = it.srcCount
       ? ` \u00b7 ${it.srcCount} ${it.srcCount === 1 ? _t('source_word') : _t('sources_word')}${it.cg ? ` \u00b7 ${_t('grade_word')} ${it.cg}` : ''}`
       : '';
-    return `<li class="ri"><div class="rlf"><div class="rn">${p.g === 'F' ? '\u2640 ' : ''}${_esc(_personName(p))} ${tag}</div><div class="rs">${p.re ? _esc(_fR(p.re)) : ''} \u00b7 ${_esc(p.dy || '?')}${p.n ? ` \u00b7 ${p.n.map(x => '#' + x).join(', ')}` : ''}${srcMeta}</div></div><button class="gb" onclick="goF('${p.id}')">${_esc(_t('go'))}</button></li>`;
+    const kinStory = ownerId ? kinStoryBlock(ownerId, it, edge) : '';
+    return `<li class="ri"><div class="rlf"><div class="rn">${p.g === 'F' ? '\u2640 ' : ''}${_esc(_personName(p))} ${tag}</div><div class="rs">${p.re ? _esc(_fR(p.re)) : ''} \u00b7 ${_esc(p.dy || '?')}${p.n ? ` \u00b7 ${p.n.map(x => '#' + x).join(', ')}` : ''}${srcMeta}</div>${kinStory}</div><button class="gb" onclick="goF('${p.id}')">${_esc(_t('go'))}</button></li>`;
   }).join('')}</ul>`;
 }
 
-export function showLinkDetail(link: LinkDatum): void {
+export function getCurrentOfficeId(): string | null {
+  return _currentOfficeId;
+}
+
+let _holderMap: Map<string, Array<{ personId: string; label: string; start: number | null; end: number | null; c: string }>> | null = null;
+
+function getHolderMap(): Map<string, Array<{ personId: string; label: string; start: number | null; end: number | null; c: string }>> {
+  if (!_holderMap) _holderMap = _buildOfficeHolders(_people);
+  return _holderMap;
+}
+
+function officeDetailCard(office: OfficeCatalogEntry): string {
+  const kind = office.kind || '';
+  const icon = KIND_ICON[kind] || '\u25CB';
+  const holders = getHolderMap().get(office.id) || [];
+  const funcs = office.functions || [];
+  const altNames = office.alt_names || [];
+  const srcRefs = office.source_refs || [];
+  const srcRows = officeSourceRows(srcRefs);
+
+  let html = `<section class="pc">
+    <div class="pch">
+      <div class="pcn">${icon} ${_esc(office.name)}</div>
+      <div class="pcd">${_esc(kindLabel(kind))}</div>
+    </div>
+    <div class="pcg">
+      <div class="pcl"><span>${_esc(kindLabel(kind))}</span><b>${_esc(_t('office_word'))}</b></div>
+      <div class="pcl"><span>${_esc(_t('office_holders'))}</span><b>${holders.length}</b></div>
+      <div class="pcl"><span>${_esc(_t('periods_documented'))}</span><b>${funcs.length}</b></div>
+    </div>`;
+
+  if (office.summary) {
+    html += `<div class="pcs"><div class="sl">${_esc(_t('office_summary'))}</div><div class="ofc-summary">${_esc(office.summary)}</div></div>`;
+  }
+  if (funcs.length) {
+    const funcRows = funcs.map(f => {
+      const period = _officeTimeline.find(p => p.label.includes(f.period_id) || (p as any).id === f.period_id);
+      const pLabel = period ? `${period.label} (${period.period || ''})` : f.period_id;
+      return `<div class="ofc-func-row"><div class="ofc-func-period">${_esc(pLabel)}</div><div class="ofc-func-desc">${_esc(f.description)}</div></div>`;
+    }).join('');
+    html += `<div class="pcs"><div class="sl">${_esc(_t('office_function_evolution'))}</div><div class="ofc-func-list">${funcRows}</div></div>`;
+  }
+  if (altNames.length) {
+    html += `<div class="pcs"><div class="sl">${_esc(_t('office_alt_names'))}</div><div class="pnl">${altNames.map(n => `<span class="pn">${_esc(n)}</span>`).join('')}</div></div>`;
+  }
+  if (srcRows.length) {
+    const srcHtml = srcRows.map(r => `<span class="rt">${_esc(r.id)}</span>`).join(' ');
+    html += `<div class="pcs"><div class="sl">${_esc(_t('sources_label'))}</div><div class="pnl">${srcHtml}</div></div>`;
+  }
+  html += `</section>`;
+  return html;
+}
+
+function officeHolderListHtml(officeId: string): string {
+  const holders = getHolderMap().get(officeId) || [];
+  if (!holders.length) return `<div class="nt" style="color:var(--tx3)">${_esc(_t('no_holders'))}</div>`;
+  return `<div class="sl">${_esc(_t('office_holders'))}</div><ul class="rl">${holders.map(h => {
+    const p = _byId.get(h.personId);
+    const nm = p ? _personName(p) : h.personId;
+    const period = periodLabel(h.start, h.end);
+    return `<li class="ri"><div class="rlf"><div class="rn">${p?.g === 'F' ? '\u2640 ' : ''}${_esc(nm)}</div><div class="rs">${_esc(period)} \u00b7 ${_esc(h.c || '?')}</div></div><button class="gb" onclick="goF('${h.personId}')">${_esc(_t('go'))}</button></li>`;
+  }).join('')}</ul>`;
+}
+
+export function showOfficeDetail(officeId: string): void {
+  const office = _officeById.get(officeId);
+  if (!office) return;
   _currentPersonId = null;
+  _currentOfficeId = officeId;
+  _currentEdgeLink = null;
+  _holderMap = null; // refresh
+  const sT = document.getElementById('sT');
+  if (sT) { sT.textContent = office.name; sT.classList.remove('emp'); }
+  document.getElementById('vmi')?.classList.remove('on');
+  document.getElementById('vmi')?.setAttribute('aria-pressed', 'false');
+  const sM = document.getElementById('sM');
+  if (sM) sM.innerHTML = `<span class="bg">${_esc(kindLabel(office.kind))}</span><span class="bg">${(getHolderMap().get(officeId) || []).length} ${_esc(_t('holders_word'))}</span>`;
+  const card = officeDetailCard(office);
+  const holderHtml = officeHolderListHtml(officeId);
+  crossFadeContent(document.getElementById('sN'), card);
+  crossFadeContent(document.getElementById('sR'), holderHtml);
+  _recordOffice(officeId);
+  window.dispatchEvent(new CustomEvent('selection-changed', { detail: { type: 'office', officeId } }));
+  if (shouldUseBottomSheet()) {
+    const bT = document.getElementById('bT');
+    if (bT) bT.textContent = office.name;
+    const bB = document.getElementById('bB');
+    if (bB) bB.innerHTML = `${card}<div class="dv"></div>${holderHtml}`;
+    _oS();
+  }
+}
+
+// Delegated click handler for [data-office-id] elements
+document.addEventListener('click', e => {
+  const btn = (e.target as Element).closest('[data-office-id]');
+  if (btn) {
+    e.preventDefault();
+    e.stopPropagation();
+    showOfficeDetail((btn as HTMLElement).dataset.officeId!);
+    window.dispatchEvent(new CustomEvent('request-sidebar-open'));
+  }
+});
+
+// Delegated click handler for inline relationship explain/open buttons
+document.addEventListener('click', e => {
+  const btn = (e.target as Element).closest('[data-rel-open]');
+  if (!btn) return;
+  const el = btn as HTMLElement;
+  const s = el.dataset.relS || '';
+  const d = el.dataset.relD || '';
+  const relType = el.dataset.relT || 'kin';
+  if (!s || !d) return;
+  const edge = bestEdgeBetween(s, d, relType);
+  if (!edge) return;
+  e.preventDefault();
+  e.stopPropagation();
+  showLinkDetail({ source: edge.s, target: edge.d, _e: edge });
+  window.dispatchEvent(new CustomEvent('request-sidebar-open'));
+});
+
+export function showLinkDetail(link: LinkDatum, opts: { skipHistory?: boolean } = {}): void {
+  _currentPersonId = null;
+  _currentOfficeId = null;
+  _currentEdgeLink = link || null;
+  ensureVerificationModuleLoaded();
   if (!link) return;
   const sid = typeof link.source === 'object' ? link.source.id : link.source;
   const tid = typeof link.target === 'object' ? link.target.id : link.target;
@@ -1077,7 +1898,7 @@ export function showLinkDetail(link: LinkDatum): void {
   if (sN) sN.innerHTML = `${card}${cmp}${evi}`;
   const sR = document.getElementById('sR');
   if (sR) sR.innerHTML = relRows;
-  _recordEdge(link);
+  if (!opts.skipHistory) _recordEdge(link);
   window.dispatchEvent(new CustomEvent('selection-changed', { detail: { type: 'edge', s: sid, d: tid, rel: e.t || 'kin' } }));
   if (shouldUseBottomSheet()) {
     const bT = document.getElementById('bT');
@@ -1091,8 +1912,11 @@ export function showLinkDetail(link: LinkDatum): void {
 export function showD(id: string): void {
   const p = _byId.get(id);
   if (!p) return;
+  ensureVerificationModuleLoaded();
   const samePerson = _currentPersonId === id;
   _currentPersonId = id;
+  _currentOfficeId = null;
+  _currentEdgeLink = null;
   _handlePersonViewed(id);
   const dyC = `var(--dy-${(p.dy || 'unknown').toLowerCase()})`;
   let m = `<span class="bg"><span class="bdd" style="background:${dyC}"></span>${_esc(p.dy || _t('unknown'))}</span>`;
@@ -1140,6 +1964,8 @@ export function showD(id: string): void {
 
 export function showInstitutionsPane(): void {
   _currentPersonId = null;
+  _currentOfficeId = null;
+  _currentEdgeLink = null;
   document.getElementById('vmi')?.classList.add('on');
   document.getElementById('vmi')?.setAttribute('aria-pressed', 'true');
   const sT = document.getElementById('sT');
@@ -1192,6 +2018,7 @@ export interface SidebarDeps {
   chOf: (id: string) => RelNeighbor[];
   recordPerson: (id: string) => void;
   recordEdge: (link: LinkDatum) => void;
+  recordOffice: (officeId: string) => void;
   compareSummaryHtml: () => string;
   handlePersonViewed: (id: string) => void;
   oS: (prefer?: string) => void;
@@ -1202,6 +2029,8 @@ export interface SidebarDeps {
   getInferenceDossierPath: (edge: Record<string, unknown>) => string | null;
   inferenceEdgeKey: (edge: Record<string, unknown>) => string;
   isDerivedInferenceEdge: (edge: Record<string, unknown>) => boolean;
+  officeFunctionForYear: (officeId: string, year: number | null) => string;
+  buildOfficeHolders: (ppl: PersonNode[]) => Map<string, Array<{ personId: string; label: string; start: number | null; end: number | null; c: string }>>;
 }
 
 export function initSidebar(deps: SidebarDeps): void {
@@ -1222,6 +2051,7 @@ export function initSidebar(deps: SidebarDeps): void {
   _chOf = deps.chOf;
   _recordPerson = deps.recordPerson;
   _recordEdge = deps.recordEdge;
+  _recordOffice = deps.recordOffice;
   _compareSummaryHtml = deps.compareSummaryHtml;
   _handlePersonViewed = deps.handlePersonViewed;
   _oS = deps.oS;
@@ -1232,6 +2062,8 @@ export function initSidebar(deps: SidebarDeps): void {
   _getInferenceDossierPath = deps.getInferenceDossierPath;
   _inferenceEdgeKey = deps.inferenceEdgeKey;
   _isDerivedInferenceEdge = deps.isDerivedInferenceEdge;
+  _officeFunctionForYear = deps.officeFunctionForYear;
+  _buildOfficeHolders = deps.buildOfficeHolders;
 
   // Pre-compute royal adjacency
   RULER_IDS = new Set(_people.filter(p => (p.n || []).length > 0).map(p => p.id));

@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `kin|P61|P213|grandparent`  
-Last updated: `2026-02-10`  
+Last updated: `2026-02-19`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
@@ -20,7 +20,7 @@ Inference class: `rule-derived`
 ## 3) Logic chain (pair-specific)
 1. Support set for rule parent-of-parent-grandparent resolved as follows.
 2. Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P66 Joao’ (Keerithi Maha Radun) (CLM-0347, SRC-MRF-KINGS, grade A); excerpt: Maldives Kings List family/genealogy content lists P61 Hassan IX / Dom Manoel as parent of P66 Joao’.
-3. Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P213 Infanta Dona Ines de Malvidas (CLM-0609, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Joao’ as parent of Infanta Dona Ines de Malvidas.
+3. Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P213 Infanta Dona Ines de Malvidas (CLM-0609, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry under Dom Joao lists Infanta Dona Ines de Malvidas as daughter of Dom Joao and Dona Francisca de Vasconcelos.
 4. Rule application (parent-of-parent-grandparent): with source -> P66 Joao’ (Keerithi Maha Radun) and P66 Joao’ (Keerithi Maha Radun) -> target parent links, P61 Hassan IX / Dom Manoel (Dhirikusa Loka) is modeled as inferred grandparent-line kin of P213 Infanta Dona Ines de Malvidas.
 5. Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured.
 

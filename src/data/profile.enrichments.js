@@ -70,7 +70,7 @@ export const profileEnrichments = [
       'Ibn Battuta visited the Maldives during or shortly after Ahmad Shihab al-Din\u2019s deposition by his sister Khadijah (P20) in 1347.'
     ],
     source_refs: ['SRC-IBN-BATTUTA-RIHLA', 'SRC-HAKLUYT-IBN-BATTUTA-V4'],
-    bio: 'Ahmad Shihab al-Din, the nineteenth sovereign of the Maldives, is one of the most vividly documented figures of the early period thanks to the accounts of Ibn Battuta, who visited the archipelago during or shortly after his reign. Born around 1326, he was the son of Omar Veeru (P18) and the elder brother of the formidable Sultana Khadijah (P20). His Arabic laqab Shihab al-Din, meaning "Star of the Faith," followed the conventions of Arabic royal nomenclature that had become standard since the conversion.\n\nAhmad succeeded his father before June 17, 1341, but his reign was troubled from the outset. He governed under the regency of the powerful Vizier Abdullah ibn Muhammad al-Hadhrami, who effectively controlled the machinery of state. The young sultan\'s personal life was equally complicated: he was briefly married to a daughter of Sultan Muhammad Jamil ud-din, though the marriage was reportedly never consummated, and later married a lady from Mulaku Atoll. Most remarkably, Ahmad was briefly married to Ibn Battuta himself in March 1343, a union that lasted barely a year before divorce.\n\nAhmad\'s reign ended violently when his elder sister Khadijah deposed him in 1347, seizing the throne for herself in what amounted to a palace coup facilitated by the vizier class. The deposed sultan was subsequently assassinated at Haladummati before April 2, 1348. His short and unhappy reign illustrates the precarious nature of royal authority in fourteenth-century Maldives, where the power of viziers and the ambitions of royal women could easily overwhelm a young and politically weak sovereign.'
+    bio: 'Ahmad Shihab al-Din, the nineteenth sovereign of the Maldives, is one of the most vividly documented figures of the early period thanks to the accounts of Ibn Battuta, who visited the archipelago during or shortly after his reign. Born around 1326, he was the son of Omar Veeru (P18) and the elder brother of the formidable Sultana Khadijah (P20). His Arabic laqab Shihab al-Din, meaning "Star of the Faith," followed the conventions of Arabic royal nomenclature that had become standard since the conversion.\n\nAhmad succeeded his father before June 17, 1341, but his reign was troubled from the outset. He governed under the regency of the powerful Vizier Abdullah ibn Muhammad al-Hadhrami, who effectively controlled the machinery of state. The young sultan\'s personal life was equally complicated: he was briefly married to a daughter of Sultan Muhammad Jamil ud-din, though the marriage was reportedly never consummated, and later married a lady from Mulaku Atoll. Most remarkably, Ibn Battuta himself visited the Maldives and contracted marriages at court during Ahmad\'s reign, beginning in March 1343.\n\nAhmad\'s reign ended violently when his elder sister Khadijah deposed him in 1347, seizing the throne for herself in what amounted to a palace coup facilitated by the vizier class. The deposed sultan was subsequently assassinated at Haladummati before April 2, 1348. His short and unhappy reign illustrates the precarious nature of royal authority in fourteenth-century Maldives, where the power of viziers and the ambitions of royal women could easily overwhelm a young and politically weak sovereign.'
   },
   {
     id: 'P21',
@@ -291,10 +291,10 @@ export const profileEnrichments = [
         source_refs: ['SRC-PO-NASIR', 'SRC-WIKI-IBRAHIM-NASIR']
       },
       {
-        office_id: 'OFF-BANDEYRI',
+        office_id: 'OFF-RANNABANDEYRI',
         label: 'Rannabandeyri Kilegefan',
-        c: 'u',
-        note: 'Elite court-office title embedded in documented naming style.',
+        c: 'c',
+        note: 'Furadaana-level Great Officer of State and Keeper of the Crown Jewels; Ibrahim Nasir signed the independence agreement (1965) bearing this title.',
         source_refs: ['SRC-PO-NASIR', 'SRC-WIKI-IBRAHIM-NASIR']
       }
     ],
@@ -674,12 +674,12 @@ export const profileEnrichments = [
     extra_facts: [
       'Founder of the Hilaaly dynasty. Father was Dori Kuja (P217), also known as Kuliveri Hilalu Kaivulanna Kaloge of Hulule, North Male Atoll.',
       'Grandfather Abbas al-Hilal was of Malabar (Indian) origin, giving the dynasty its name.',
-      'Twin brother of Hussain (P32). Married Golavehi Kabulo (P218).',
+      'Twin brother of Hussain (P32). RoyalArk lineage wording identifies Golavehi Kabulo (P218) as mother of the twins (with Dori Kuja/P217), not spouse of P30.',
       'Four sons became sultans: Ibrahim I (P31), Yusuf II (P39), Abu Bakar I (P40), and possibly Osman II.',
       'Deposed Osman of Fehendu (P29) to establish the new dynasty.'
     ],
     source_refs: ['SRC-ROYALARK-MALDIVES'],
-    bio: 'Hassan al-Hilali, the thirtieth sovereign and founder of the Hilaaly dynasty, transformed Maldivian political history by deposing the last Lunar-era ruler Osman of Fehendu (P29) and establishing a new royal house that would rule the archipelago for over two centuries. His full title, Sultan Hassan al-Hilali Sri Dhiru Buwana Maha Radhun, combined Arabic patronymic with Sanskritic regnal style in the characteristic manner of Maldivian royal nomenclature.\n\nHassan\'s origins were distinctly foreign by Maldivian standards. His father was Dori Kuja, also known as Kuliveri Hilalu Kaivulanna Kaloge, a nobleman of Hulule in North Male Atoll. His paternal grandfather, Abbas al-Hilal, was of Malabar (Indian) origin, and it was from this grandfather\'s name that the Hilaaly dynasty derived its designation. The Malabar connection placed the Hilaaly house within the broader networks of Indian Muslim merchant and aristocratic families who had been migrating across the Indian Ocean for centuries.\n\nHassan married Golavehi Kabulo (P218) and fathered four sons who would all play roles in the dynastic succession: Ibrahim I (P31), who succeeded him but was soon deposed; Yusuf II (P39), who enjoyed the longest Hilaaly reign; Abu Bakar I (P40); and possibly a son named Usman. Remarkably, Hassan had a twin brother, Hussain (P32), who would usurp the throne from Hassan\'s young son Ibrahim I in 1398, adding a fraternal rivalry to the complex Hilaaly succession politics.\n\nHassan deposed Osman of Fehendu after Osman\'s brief six-month reign, exiling the last Lunar-era figure to Guraidu in Kolhumadulu Atoll. He died around 1397-1398, and the succession immediately became contested between his young son Ibrahim I and his twin brother Hussain. The Hilaaly dynasty Hassan founded would survive through constant internal warfare, multiple depositions, and foreign interventions until its final extinction in the Portuguese period, leaving an indelible mark on Maldivian royal genealogy.'
+    bio: 'Hassan al-Hilali, the thirtieth sovereign and founder of the Hilaaly dynasty, transformed Maldivian political history by deposing the last Lunar-era ruler Osman of Fehendu (P29) and establishing a new royal house that would rule the archipelago for over two centuries. His full title, Sultan Hassan al-Hilali Sri Dhiru Buwana Maha Radhun, combined Arabic patronymic with Sanskritic regnal style in the characteristic manner of Maldivian royal nomenclature.\n\nHassan\'s origins were distinctly foreign by Maldivian standards. His father was Dori Kuja, also known as Kuliveri Hilalu Kaivulanna Kaloge, a nobleman of Hulule in North Male Atoll. RoyalArk lineage wording identifies his mother as Golavehi Kabulo (P218), spouse of Dori Kuja. His paternal grandfather, Abbas al-Hilal, was of Malabar (Indian) origin, and it was from this grandfather\'s name that the Hilaaly dynasty derived its designation. The Malabar connection placed the Hilaaly house within the broader networks of Indian Muslim merchant and aristocratic families who had been migrating across the Indian Ocean for centuries.\n\nHassan had a twin brother, Hussain (P32), and fathered the line that produced Ibrahim I (P31), Yusuf II (P39), and Abu Bakar I (P40). The succession became highly contested among brothers, sons, and collateral branches, adding persistent fraternal rivalry to Hilaaly politics.\n\nHassan deposed Osman of Fehendu after Osman\'s brief six-month reign, exiling the last Lunar-era figure to Guraidu in Kolhumadulu Atoll. He died around 1397-1398, and the succession immediately became contested between his young son Ibrahim I and his twin brother Hussain. The Hilaaly dynasty Hassan founded would survive through constant internal warfare, multiple depositions, and foreign interventions until its final extinction in the Portuguese period, leaving an indelible mark on Maldivian royal genealogy.'
   },
   {
     id: 'P69',
@@ -857,7 +857,7 @@ export const profileEnrichments = [
   },
   {
     id: 'P129',
-    bio: 'Prince Ibrahim Faamuladheyri Kilegefaanu was a member of the Huraagey royal family who held the court-office title of Faamuladheyri, one of the traditional aristocratic designations in the Maldivian court hierarchy.'
+    bio: 'Princess Veyogey Dhon Goma (c. 1870\u2013c. 1935) was a daughter of Sultan Ibrahim Nooredine II (P87) and Kakaagey Dhon Goma (P185). She married Prince Abdul Majeed Didi (P111), and their son Mohamed Farid Didi (P95) became the last Sultan of the Maldives. Through her, the maternal royal lineage of the Huraagey dynasty passed to the final sovereign.'
   },
   {
     id: 'P131',
@@ -1086,7 +1086,7 @@ export const profileEnrichments = [
   },
   {
     id: 'P218',
-    bio: 'Golavehi Kabulo was the wife of Hassan al-Hilali (P30), the founder of the Hilaaly dynasty. Together they produced a remarkably prolific royal line, with four of their sons becoming sultans: Ibrahim I (P31), Yoosuf II (P39), Abu Bakar I (P40), and possibly a fourth. Through these sons, Golavehi Kabulo was the ancestress of virtually the entire later Hilaaly dynasty, making her one of the most genealogically significant women in Maldivian royal history.'
+    bio: 'Golavehi Kabulo appears in the RoyalArk Hilaaly founder lineage as the wife of Dori Kuja (P217) and mother of the twin princes Hassan al-Hilali (P30) and Hussain (P32). Through Hassan\'s line, she became an ancestress of the later Hilaaly succession, including Ibrahim I (P31), Yoosuf II (P39), and Abu Bakar I (P40). Her placement is therefore generationally upstream of the founder-sultan rather than a spouse within his generation.'
   },
   {
     id: 'P219',
@@ -1127,6 +1127,306 @@ export const profileEnrichments = [
   {
     id: 'P41',
     bio: 'Hadi Hassan III, the forty-first sovereign, was one of the most devout and well-traveled rulers of the Hilaaly dynasty, holding the throne across two accessions (1443-1467 and 1467-1468). His full title, Sultan Hassan III Nasir ul-Mukhatib Hassan Svasti Sri Raadha Veeru Maha Radun, reflects both his Arabic religious credentials and his traditional Maldivian regnal style. He was a son of Yoosuf II (P39), according to RoyalArk genealogies.\n\nBefore ascending the throne, Hadi Hassan served as Qazi (chief judge) under Sultan Danna Mohamed (P38), an appointment that reflects his religious learning and juridical authority. He was also known for his personal piety: he undertook two pilgrimages to Mecca, the first in 1454 and the second in 1466. The second Hajj journey was particularly eventful; he returned with seventy slaves, a detail preserved in the chronicles that illuminates the Indian Ocean slave trade routes connecting Arabia and the Maldives.\n\nHadi Hassan married Golararu Golavehi Sanfa\'a Rani Kilege and fathered Muhammad al-Hafiz (P44), who would succeed him. His second accession came about because of the Arab interloper Sayyid Mohamed (P42), who seized the throne during Hadi Hassan\'s absence on pilgrimage in 1467. Upon his return, Hadi Hassan deposed the usurper and reclaimed his throne, but survived only briefly, dying before July 11, 1469 from what the chronicles describe as an "agonizing disease."'
+  },
+  {
+    id: 'P102',
+    bio: 'Kalhu Ali Thakurufan of Utheemu was the recorded paternal ancestor of Hussain Thakurufan (P103) in the Utheemu family lineage. His name \'Kalhu\' (meaning \'dark\' in Dhivehi) may indicate a physical descriptor. Born around 1465 on Utheemu island, he is the earliest identifiable figure in the patrilineal chain leading to Mohamed Thakurufaanu al-Auzam (P104), the national hero.'
+  },
+  {
+    id: 'P103',
+    bio: 'Hussain Thakurufan, known as Katheebu Hussain of Utheemu, was the father of Mohamed Thakurufaanu al-Auzam (P104), the liberator of the Maldives. He lived on Utheemu island in Haa Alif (Thiladhummathi) Atoll. His title \'Katheebu\' (also written Khatheeb) indicates he held the position of island headman or prayer leader. His son Mohamed and grandsons Ali (P200) and Hassan (P201) would become the architects of the Maldivian liberation from Portuguese rule in 1573. His wife was Lady Aiminaa Dhiye of Ihavandhoo.\n\nThe ancestral home on Utheemu, Utheemu Ganduvaru, is preserved today as a national heritage site and museum commemorating the Thakurufaanu family.'
+  },
+  {
+    id: 'P106',
+    bio: 'Ibrahim Kalaafaan (also spelled Kalaafaanu) was the son of Mohamed Thakurufaanu al-Auzam (P104). His position in the succession is recorded in the Utheemu dynastic lineage, though he does not appear in the standard list of sultans, suggesting he may have served in an administrative or regent capacity rather than as an enthroned sovereign. Born around 1550, he represents the transitional generation between the liberation hero and the later Utheemu sultans who ruled from 1632 onward.'
+  },
+  {
+    id: 'P107',
+    bio: 'Golaavahi Kambulo was the mother of Hassan I (P30), the founder of the Hilaaly dynasty. Born around 1335, she was related to the late Lunar nobility. Her parent edge to P30 establishes her as the maternal link in the founding of the Hilaaly royal house.'
+  },
+  {
+    id: 'P109',
+    bio: 'Muslim Abbas of Hilaal, also known as Hulhuley Abbas, was the grandfather of Hassan I (P30), the founder of the Hilaaly dynasty, and the father of Hilaaly Kalo (P108/P217). Born around 1295, he was the patriarchal figure from the Malabar coast whose descendants established the Hilaaly dynasty in the Maldives.'
+  },
+  {
+    id: 'P112',
+    bio: 'Roanugey Aishath Didi (c. 1888\u2013c. 1960) was the mother of Mohamed Amin Didi (P110), the first President of the Maldives. Her identity is documented in the official presidential profile of her son. She was a member of the Didi aristocratic class.'
+  },
+  {
+    id: 'P113',
+    bio: 'Fathimath Saeed (c. 1915\u2013c. 1980) was the wife of Mohamed Amin Didi (P110), the first President of the Maldives. She is documented as the mother of their daughter Ameena Mohamed Amin (P114) in standard biographical references.'
+  },
+  {
+    id: 'P114',
+    bio: 'Ameena Mohamed Amin (c. 1935\u2013c. 2010), also known as Annabeela Ameena Mohamed Amin, was the daughter of Mohamed Amin Didi (P110), the first President of the Maldives, and his wife Fathimath Saeed (P113).'
+  },
+  {
+    id: 'P116',
+    bio: 'Ahmed Didi (c. 1895\u2013c. 1965) was the father of Ibrahim Nasir (P115), the second President of the Maldives. He is documented in the official presidential profile as the paternal line of the Nasir family.'
+  },
+  {
+    id: 'P117',
+    bio: 'Nayaage Aishath Didi (c. 1900\u2013c. 1975), also known as Aishath Moosa Didi, was the mother of Ibrahim Nasir (P115), the second President of the Maldives. She was the daughter of Moosa Didi (P137), and her maternal lineage traces through several generations back to the Dhiyamigili royal exile branch.'
+  },
+  {
+    id: 'P118',
+    bio: 'Mariyam Saeeda Didi (c. 1930\u2013c. 2012) was the second wife of Ibrahim Nasir (P115), the second President of the Maldives. She was the mother of Ibrahim Nasir Jr. (P145) and also a co-parent of Ali Nasir (P124).'
+  },
+  {
+    id: 'P120',
+    bio: 'Abdul Gayoom Ibrahim (c. 1897\u2013c. 1982) was the father of both Maumoon Abdul Gayoom (P119) and Abdulla Yameen (P121), the third and sixth Presidents of the Maldives respectively. He was a lawyer who served as the seventh Attorney General of the Maldives from 1950 to 1951. His mother was Galolhu Sitti (P135), connecting the family to the Addu Line through a documented maternal chain. He had eight wives, which accounts for the half-brother relationship between Gayoom and Yameen, who had different mothers.'
+  },
+  {
+    id: 'P123',
+    bio: 'Laila Ali Abdulla (born c. 1969) served as First Lady of the Maldives from 2008 to 2012 as the wife of President Mohamed Nasheed (P122). She married Nasheed in 1994 and was the mother of their two daughters, Meera Laila Nasheed (P125) and Zaya Laila Nasheed (P126). She and Nasheed divorced in 2021.'
+  },
+  {
+    id: 'P124',
+    bio: 'Ali Nasir (born c. 1955), also known as Ali Nasir Ibrahim, was a son of Ibrahim Nasir (P115), the second President of the Maldives. His mother was Mariyam Saeeda Didi (P118), Nasir\'s second wife.'
+  },
+  {
+    id: 'P125',
+    bio: 'Meera Laila Nasheed (born c. 1990) is the elder daughter of Mohamed Nasheed (P122), the fourth President of the Maldives, and Laila Ali Abdulla (P123).'
+  },
+  {
+    id: 'P126',
+    bio: 'Zaya Laila Nasheed (born c. 1993) is the younger daughter of Mohamed Nasheed (P122), the fourth President of the Maldives, and Laila Ali Abdulla (P123).'
+  },
+  {
+    id: 'P127',
+    bio: 'Abdul Sattar Umar (born c. 1938) is documented in secondary Maldivian reporting as the father of Mohamed Nasheed (P122), the fourth President of the Maldives. The \'Abdul Sattar\' family name is corroborated by the fact that Nasheed\'s brother is named Nazim Abdul Sattar.'
+  },
+  {
+    id: 'P128',
+    bio: 'Abida Mohamed (born c. 1943) is documented in secondary Maldivian reporting as the mother of Mohamed Nasheed (P122), the fourth President of the Maldives.'
+  },
+  {
+    id: 'P137',
+    bio: 'Moosa Didi (c. 1875\u2013c. 1945) was the father of Nayaage Aishath Didi (P117), the mother of President Ibrahim Nasir (P115). He represents an intermediate ancestor in the documented maternal line of Ibrahim Nasir, tracing back through several generations to the Dhiyamigili royal exile branch.'
+  },
+  {
+    id: 'P138',
+    bio: 'Dhadimagu Ganduvaru Maryam Didi (c. 1848\u2013c. 1925), also known simply as Maryam Didi, was the mother of Moosa Didi (P137) in the maternal line chain of President Ibrahim Nasir (P115). She represents an earlier generation of the Didi aristocratic class connected to the Dhiyamigili exile lineage.'
+  },
+  {
+    id: 'P139',
+    bio: 'Hussain Didi (c. 1818\u2013c. 1890) was the father of Dhadimagu Ganduvaru Maryam Didi (P138) in the maternal-line chain of President Ibrahim Nasir (P115). He was a member of the Didi aristocratic class and connects the Nasir maternal ancestry to the Dhiyamigili-South branch.'
+  },
+  {
+    id: 'P140',
+    bio: 'Al-Nabeel Karayye Hassan Didi (c. 1790\u2013c. 1860) was a son of Prince Ibrahim Faamuladheyri Kilegefaanu (P130), of the Dhiyamigili dynasty. Listed in the Dhiyamigili-South branch, he was among the descendants exiled to the southern atolls after the fall of the Dhiyamigili dynasty. He bore the title Al-Nabeel (the noble), reflecting his princely descent. Through his son Hussain Didi (P139), he is an ancestor of President Ibrahim Nasir (P115) in the maternal line.'
+  },
+  {
+    id: 'P141',
+    bio: 'Aisha Zubair (born c. 1930) was the first wife of Ibrahim Nasir (P115), the second President of the Maldives. She was the mother of Ahmed Nasir (P143) and Mohamed Nasir (P144).'
+  },
+  {
+    id: 'P142',
+    bio: 'Naseema Mohamed (born c. 1942) was the third wife of Ibrahim Nasir (P115), the second President of the Maldives. She was the mother of Ismail Nasir (P146) and Aishath Nasir (P147).'
+  },
+  {
+    id: 'P143',
+    bio: 'Ahmed Nasir (born c. 1950) is a son of Ibrahim Nasir (P115), the second President of the Maldives, and his first wife Aisha Zubair (P141).'
+  },
+  {
+    id: 'P144',
+    bio: 'Mohamed Nasir (born c. 1953) is a son of Ibrahim Nasir (P115), the second President of the Maldives, and his first wife Aisha Zubair (P141).'
+  },
+  {
+    id: 'P145',
+    bio: 'Ibrahim Nasir Jr. (born c. 1958) is a son of Ibrahim Nasir (P115), the second President of the Maldives, and his second wife Mariyam Saeeda Didi (P118).'
+  },
+  {
+    id: 'P146',
+    bio: 'Ismail Nasir (born c. 1965) is a son of Ibrahim Nasir (P115), the second President of the Maldives, and his third wife Naseema Mohamed (P142).'
+  },
+  {
+    id: 'P147',
+    bio: 'Aishath Nasir (born c. 1968) is a daughter of Ibrahim Nasir (P115), the second President of the Maldives, and his third wife Naseema Mohamed (P142).'
+  },
+  {
+    id: 'P148',
+    bio: 'Khadheeja Moosa (c. 1918\u2013c. 2008), also known as Khadija Moosa, was the mother of Maumoon Abdul Gayoom (P119), the third President of the Maldives. She was one of the wives of Abdul Gayoom Ibrahim (P120).'
+  },
+  {
+    id: 'P149',
+    bio: 'Nasreena Ibrahim (born 20 December 1950 in Male) served as First Lady of the Maldives from November 1978 to November 2008, the longest tenure in Maldivian history. She married Maumoon Abdul Gayoom (P119) in Cairo in 1969. They had four children: twin daughters Dunya (P150) and Yumna (P151) born in 1970, son Faris (P152) born in 1971, and son Ghassan (P153) born in 1980. Her brothers Ilyas Ibrahim (P198) and Abbas Ibrahim (P199) were also politically prominent.'
+  },
+  {
+    id: 'P150',
+    bio: 'Dunya Maumoon (born 20 March 1970 in Male) is the elder twin daughter of President Maumoon Abdul Gayoom (P119) and First Lady Nasreena Ibrahim (P149). She studied Social Anthropology at Cambridge University and completed an MPhil at the London School of Economics. She served as the first female Foreign Minister of the Maldives from November 2013 to July 2016.'
+  },
+  {
+    id: 'P151',
+    bio: 'Yumna Maumoon (born 20 March 1970 in Male) is the younger twin daughter of President Maumoon Abdul Gayoom (P119) and First Lady Nasreena Ibrahim (P149). She served as Minister of Arts, Culture, and Heritage from 2018 to 2023 under President Ibrahim Mohamed Solih.'
+  },
+  {
+    id: 'P152',
+    bio: 'Ahmed Faris Maumoon (born 31 March 1971 in Male) is the eldest son of President Maumoon Abdul Gayoom (P119) and First Lady Nasreena Ibrahim (P149). He was a co-founder of the Progressive Party of Maldives (PPM) and served as Member of Parliament for the Dhiggaru constituency. He was recognized as a Prisoner of Conscience by Amnesty International during President Yameen\'s tenure.'
+  },
+  {
+    id: 'P153',
+    bio: 'Mohamed Ghassan Maumoon (born 20 June 1980 in Male) is the youngest child of President Maumoon Abdul Gayoom (P119) and First Lady Nasreena Ibrahim (P149). He studied Molecular Biology and Biomedical Sciences Research at King\'s College London. He has served as Minister of Defence of the Maldives since 2023 under President Muizzu.'
+  },
+  {
+    id: 'P154',
+    bio: 'Hussain Bodu Dorhimeyna Kilegefaanu was a member of the Huraagey royal family and the father of Sultan Mohamed Shamsuddine II (P82). He was documented as the uncle of Sultan Hassan Izzuddine (P80), placing him as a collateral elder in the founding generation of the Huraagey dynasty. His \'Bodu Dorhimeyna Kilege\' title designates the senior Dorhimeyna court position paired with the Kilege peerage title. He was born approximately 1710 and died approximately 1785.'
+  },
+  {
+    id: 'P156',
+    bio: 'Rekeihiriya Maava Kilege was the mother of Sultan Ali I (P4), the fourth sovereign of the Maldives. She is a non-sovereign parent of the Lunar dynasty, serving as the essential genealogical link to P4. Her birth and death dates (c. 1160\u2013c. 1225) are estimated based on her son\'s reign period (1184\u20131193).'
+  },
+  {
+    id: 'P158',
+    bio: 'Volumidi Bodu Kilege was the father of Sultan Aima (P10), the tenth sovereign of the Maldives. He appears in the Lunar dynasty genealogies alongside his wife Hirati Kabadi Kilage (P224) as one of the few early Lunar-era couples for whom both parents of a sovereign are identified. His birth and death dates (c. 1212\u2013c. 1278) are estimated based on his son\'s reign period (1264\u20131266).'
+  },
+  {
+    id: 'P159',
+    bio: 'Hussain Faamuladeyri Kilege was a de-facto ruler or regency figure during the late Hilaaly/early Utheemu contestation period. His title \'Faamuladeyri\' (Faamuladheyri) indicates he held the Great Officer position of Faamuladheyri, one of the six Furadaana offices. Born around 1545, he was active during the period when the Portuguese-backed Hilaaly exile kings claimed nominal sovereignty while Utheemu regents exercised actual power. He is recorded as the father of Abu Naibu Hassan Dorhimeyna Kilege (P160).'
+  },
+  {
+    id: 'P160',
+    bio: 'Abu Naibu Hassan Dorhimeyna Kilege was an Utheemu-era court noble who served as the father of Sultan Mohamed Mohyedine (P71). His title \'Dorhimeyna\' (Dhoshimeynaa) identifies him as holding another of the six Furadaana offices. His role as an intermediate paternal link connects the Utheemu regency period to the later sultanic succession. Son of Hussain Faamuladeyri Kilege (P159).'
+  },
+  {
+    id: 'P161',
+    bio: 'Daravandu Kadida Dio (also written Khadija Dio) was the mother of Sultan Mohamed Mohyedine (P71). Her name \'Daravandu\' may indicate an island or locality of origin. She represents a maternal lineage node in the late Utheemu succession, connecting the collateral branch that produced P71 to the broader Utheemu network.'
+  },
+  {
+    id: 'P163',
+    bio: 'Ilham Hussain (born c. 1958) served as First Lady of the Maldives from 2012 to 2013 as the wife of President Mohamed Waheed Hassan (P162). She was the mother of their three children: Widhadh Waheed (P164), Fidha Waheed (P165), and Jeffrey Salim Waheed (P166).'
+  },
+  {
+    id: 'P164',
+    bio: 'Widhadh Waheed (born c. 1985) is a daughter of Mohamed Waheed Hassan (P162), the fifth President of the Maldives, and Ilham Hussain (P163).'
+  },
+  {
+    id: 'P165',
+    bio: 'Fidha Waheed (born c. 1988) is a daughter of Mohamed Waheed Hassan (P162), the fifth President of the Maldives, and Ilham Hussain (P163).'
+  },
+  {
+    id: 'P166',
+    bio: 'Jeffrey Salim Waheed (born c. 1991), also known as Salim Waheed, is a son of Mohamed Waheed Hassan (P162), the fifth President of the Maldives, and Ilham Hussain (P163). He studied Political Science at Stanford University and has served in diplomatic and government posts.'
+  },
+  {
+    id: 'P168',
+    bio: 'Fazna Ahmed (born c. 1966) served as First Lady of the Maldives from 2018 to 2023 as the wife of President Ibrahim Mohamed Solih (P167). She and Solih had two children: Sarah Ibrahim Solih (P169) and Yaman Ibrahim Solih (P170).'
+  },
+  {
+    id: 'P169',
+    bio: 'Sarah Ibrahim Solih (born c. 1989), also known as Sarah Solih, is a daughter of Ibrahim Mohamed Solih (P167), the seventh President of the Maldives, and Fazna Ahmed (P168).'
+  },
+  {
+    id: 'P170',
+    bio: 'Yaman Ibrahim Solih (born c. 1993), also known as Yaman Solih, is a son of Ibrahim Mohamed Solih (P167), the seventh President of the Maldives, and Fazna Ahmed (P168).'
+  },
+  {
+    id: 'P171',
+    bio: 'Moomina Hassanfulhu (c. 1938\u20132024) was the mother of Ibrahim Mohamed Solih (P167), the seventh President of the Maldives. She was from the island of Hinnavaru in Lhaviyani Atoll.'
+  },
+  {
+    id: 'P173',
+    bio: 'Sajidha Mohamed (born c. 1981), also known as Laisa Sajidha, serves as First Lady of the Maldives as the wife of President Mohamed Muizzu (P172). She is the mother of Yasmin (P177), Umair (P178), and Zaid (P179).'
+  },
+  {
+    id: 'P174',
+    bio: 'Hussain Abdul Rahman (born c. 1949) is the father of Mohamed Muizzu (P172), the eighth President of the Maldives.'
+  },
+  {
+    id: 'P175',
+    bio: 'Husna Adam Ismail Manik (born c. 1954), also known as Husna Adam Ismail, is the mother of Mohamed Muizzu (P172), the eighth President of the Maldives.'
+  },
+  {
+    id: 'P176',
+    bio: 'Fathimath Saudha (born c. 1980) is the younger sister of President Mohamed Muizzu (P172). She was elected as Member of Parliament for the Nilandhoo constituency in the 2024 parliamentary election, running as a People\'s National Congress candidate.'
+  },
+  {
+    id: 'P177',
+    bio: 'Yasmin Muizzu (born 2004) is the eldest child and only daughter of President Mohamed Muizzu (P172) and Sajidha Mohamed (P173).'
+  },
+  {
+    id: 'P178',
+    bio: 'Umair Muizzu (born c. 2008) is the eldest son and second child of President Mohamed Muizzu (P172) and Sajidha Mohamed (P173).'
+  },
+  {
+    id: 'P179',
+    bio: 'Zaid Muizzu (born c. 2012) is the youngest child of President Mohamed Muizzu (P172) and Sajidha Mohamed (P173).'
+  },
+  {
+    id: 'P181',
+    bio: 'Kondey Ali Manikfan was documented as a descendant of the Isdu Sultan Ibrahim Mudzhiruddine (P76) line. He married Princess Aishath Didi (P180), a daughter of Prince Ibrahim Faamuladheyri Kilegefaanu (P130), creating a bridge between the Dhiyamigili southern exile branch and the Isdu-linked lineage. The title \'Manikfan\' indicates noble status. Born around 1788, he represents the collateral persistence of the Isdu dynastic bloodline in the southern atolls.'
+  },
+  {
+    id: 'P183',
+    bio: 'Ganduvaru Hassan Didi was the son of Princess Aishath Didi (P180) and El-Naib Ganduvaru Mohamed Thakurufan (P182). He was an intermediate figure in the Dhiyamigili-South to Addu lineage branch, based in Meedhoo, Addu Atoll. The \'Didi\' title indicates noble rank.'
+  },
+  {
+    id: 'P184',
+    bio: 'Kakaagey Aminah Bodu Didi, also known as Amina Bodu Didi or Amina Manikufa\'anu, was the wife of Sultan Hassan Izzuddine (P80), the founder of the Huraagey dynasty. She was the mother of Sultan Mohamed Muizzuddine (P83), the second Huraagey sultan. Through her sons, she became the ancestral matriarch of the Huraagey royal house.'
+  },
+  {
+    id: 'P185',
+    bio: 'Kakaagey Dhon Goma, also known as Kakage Don Goma, was a wife of Sultan Ibrahim Nooredine II (P87) and the mother of Sultan Mohamed Shamsuddine III (P91). She was also the maternal grandmother of Princess Veyogey Dhon Goma (P129), establishing a female line that connected the Huraagey sultanate to its final ruler.'
+  },
+  {
+    id: 'P186',
+    bio: 'Maandhoogey Don Didi, also known as Nabila Manduge Don Didi, was the wife of the blind prince Hassan Izz ud-din (P222) and the mother of Sultan Mohamed Imaduddine VI (P92). She was from the Maandhoogey household, one of the notable noble houses of Male.'
+  },
+  {
+    id: 'P187',
+    bio: 'Athireegey Khadeeja Didi, also known as Khadija Didi, was a wife of Sultan Mohamed Mueenuddine I (P85). She was from the Athireegey household. Through her marriage to P85, she was the mother of Sultan Mohamed Imaduddine IV (P86), the longest-reigning Huraagey sultan.'
+  },
+  {
+    id: 'P188',
+    bio: 'Kudaedurugey Zulekha Rani Kilegefan, also known as Zulaikha Rani Kilege, was the first wife of Sultan Mohamed Imaduddine IV (P86). She was notable as a commoner whom the sultan elevated to noble rank. She was the mother of Sultan Ibrahim Nooredine II (P87), who ruled across two accessions.'
+  },
+  {
+    id: 'P190',
+    bio: 'Prince Hassan Fareed Didi (1901\u20131944) was a Maldivian royal and statesman, the younger son of Abdul Majeed Didi (P111) and Princess Veyogey Don Goma (P129). He was the brother of King Mohamed Farid (P95) and Ibrahim Fareed Didi (P191). He served as treasurer and Minister of Finance (1932\u20131942), and Minister for Home Affairs (1934\u20131939). He was killed on March 27, 1944, when his ship was torpedoed by a German submarine while en route to Colombo during World War II.'
+  },
+  {
+    id: 'P191',
+    bio: 'Ibrahim Fareed Didi was the youngest son of Abdul Majeed Didi (P111) and Princess Veyogey Don Goma (P129). He was the brother of King Mohamed Farid (P95) and Hassan Fareed Didi (P190). He served as Minister of Education (1952\u20131953), Speaker of the People\'s Majlis (1954\u20131959), and later as acting Minister of Justice (1982\u20131983) and Deputy Minister of Justice (1984).'
+  },
+  {
+    id: 'P194',
+    bio: 'Burecca was the daughter of Princess Recca (P193), and a sibling of Ali V (P57) and Reccy (P196). She married Kalu Mohamed (P51). In some sources she is identified as \'Buraki Rani\' who instigated the assassination of her brother Ali V.'
+  },
+  {
+    id: 'P195',
+    bio: 'Mohamed Farhana Kalo was the spouse of Princess Recca (P193) and the father of Ali V (P57), the fifty-seventh sovereign of the Maldives. He is documented in the Hilaaly genealogical record as a titled court figure.'
+  },
+  {
+    id: 'P196',
+    bio: 'Reccy was a daughter of Princess Recca (P193) and a sibling of Ali V (P57) and Burecca (P194). She is a minor figure in the Hilaaly genealogical record with limited historical documentation.'
+  },
+  {
+    id: 'P198',
+    bio: 'Ilyas Ibrahim (born 18 December 1945) is a Maldivian politician and the brother of Nasreena Ibrahim (P149), the former First Lady, and Abbas Ibrahim (P199). He served as a minister in President Gayoom\'s cabinet and as MP for Male from 1980 to 1995 and for Laamu Atoll from 2003 to 2008. In 1993, when he became Gayoom\'s only rival for the presidential nomination, he was tried in absentia and found guilty of treason, forcing him into political exile.'
+  },
+  {
+    id: 'P199',
+    bio: 'Abbas Ibrahim (born 13 August 1941) is a Maldivian politician and the brother of Nasreena Ibrahim (P149), the former First Lady, and Ilyas Ibrahim (P198). He served as Speaker of the Special Constitutional Majlis from 2004 to 2006, and previously as Minister of Fisheries and Agriculture.'
+  },
+  {
+    id: 'P133',
+    bio: 'Ibrahim Al-Husainee (c. 1865\u20131935) was a member of the Addu Line, documented as a grandchild of Al-Naib Muhammad Thakurufaanu of Addu (P132) in maternal chain reporting. He is an intermediate ancestor in the genealogical line connecting the old Addu naib family to the modern Gayoom political dynasty. His daughter Galolhu Seedhi (P134) continued the maternal chain that ultimately produced Abdul Gayoom Ibrahim (P120), father of President Maumoon Abdul Gayoom.'
+  },
+  {
+    id: 'P134',
+    bio: 'Galolhu Seedhi (c. 1895\u20131970) was the daughter of Ibrahim Al-Husainee (P133) and a key figure in the Addu Line maternal chain. Named in Gayoom family genealogical reporting, she is the mother of Galolhu Sitti (P135) and the maternal grandmother of Abdul Gayoom Ibrahim (P120). Through this lineage, the Addu naib family\u2019s bloodline passed to the modern Gayoom political dynasty.'
+  },
+  {
+    id: 'P135',
+    bio: 'Galolhu Sitti, also known simply as Sitti, was the daughter of Galolhu Seedhi (P134) and the mother of Abdul Gayoom Ibrahim (P120). Her dates remain under review in the current dataset. She represents the direct maternal link between the Addu Line\u2014descending from Al-Naib Muhammad Thakurufaanu of Addu (P132)\u2014and the modern Gayoom family. Her son Abdul Gayoom Ibrahim became the father of President Maumoon Abdul Gayoom, making Sitti the paternal grandmother of the longest-serving Maldivian president.'
+  },
+  {
+    id: 'P180',
+    bio: 'Princess Aishath Didi (c. 1794\u20131868), also known as Dhoshi Didi, was a daughter of Prince Ibrahim Faamuladheyri Kilegefaanu (P130) of the Dhiyamigili dynasty. She married twice: first to Kondey Ali Manikfan (P181) and later to El-Naib Ganduvaru Mohamed Thakurufan (P182). Through her second marriage she bore Ganduvaru Hassan Didi (P183), extending the royal Dhiyamigili bloodline into the southern atolls. She is classified among the Dhiyamigili-South branch, representing the exile descendants who settled in the Fuvahmulah and Meedhoo sphere and bridged the Meedhoo and Addu sub-branches of the dispersed royal family.'
+  },
+  {
+    id: 'P193',
+    bio: 'Princess Recca (c. 1450\u20131520), also known as Rekka, was a daughter of Sultan Aboobakuru I (P40), the fortieth sovereign of the Maldives. She married Mohamed Farhana Kalo (P195), a titled court figure, and bore three children: Ali V (P57), the fifty-seventh sovereign who reigned briefly in 1513; Burecca (P194), who in some sources is identified as the instigator of Ali V\u2019s assassination; and Reccy (P196). Through her son\u2019s short reign and her daughters\u2019 marriages, Recca served as an important bridge in the collateral Hilaaly genealogy, transmitting the royal bloodline into the next generation of the dynasty.'
   }
 ];
 

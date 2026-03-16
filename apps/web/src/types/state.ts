@@ -134,4 +134,6 @@ export interface AppState {
   minimapVisible: boolean;
   _treesMeta: TreeMeta[];
   _badgeData: Array<{ id: string; n: string | number; dy: string | undefined; ox: number; oy: number }>;
+  _adj?: Map<string, Set<string>>;
+  _parentByChild?: Map<string, string[]>;
 }

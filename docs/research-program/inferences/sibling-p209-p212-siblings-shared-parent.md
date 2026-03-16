@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `sibling|P209|P212|siblings (shared parent)`  
-Last updated: `2026-02-10`  
+Last updated: `2026-02-19`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
@@ -19,8 +19,8 @@ Inference class: `rule-derived`
 
 ## 3) Logic chain (pair-specific)
 1. Support set for rule shared-parent-sibling resolved as follows.
-2. Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P209 Dom Francisco de Malvidas (CLM-0605, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dom Francisco de Malvidas.
-3. Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P212 Dona Catarina de Malvidas (CLM-0608, SRC-ROYALARK-M16, grade B); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dona Catarina de Malvidas.
+2. Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P209 Dom Francisco de Malvidas (CLM-0605, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry under Dom Manoel lists Dom Francisco de Malvidas among the children of Dom Manoel and Dona Leonor de Ataide.
+3. Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P212 Dona Catarina de Malvidas (CLM-0608, SRC-ROYALARK-M16, grade B); excerpt: RoyalArk lineage entry under Dom Manoel lists Dona Catarina de Malvidas as a daughter in the same Dom Manoel and Dona Leonor de Ataide branch.
 4. Rule application (shared-parent-sibling): because both endpoints share parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka), P209 Dom Francisco de Malvidas and P212 Dona Catarina de Malvidas are modeled as inferred sibling-line kin.
 5. Current modeling remains inferred because direct source text naming sibling (siblings (shared parent)) for this exact pair is not yet captured.
 

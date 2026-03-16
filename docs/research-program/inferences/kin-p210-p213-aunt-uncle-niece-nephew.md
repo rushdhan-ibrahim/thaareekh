@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `kin|P210|P213|aunt/uncle↔niece/nephew`  
-Last updated: `2026-02-10`  
+Last updated: `2026-02-19`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
@@ -19,8 +19,8 @@ Inference class: `rule-derived`
 
 ## 3) Logic chain (pair-specific)
 1. Support set for rule parent-sibling-aunt-uncle resolved as follows.
-2. Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P213 Infanta Dona Ines de Malvidas (CLM-0609, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Joao’ as parent of Infanta Dona Ines de Malvidas.
-3. Supporting edge: sibling P210 Dom Pedro de Malvidas <-> P66 Joao’ (Keerithi Maha Radun) [brothers (same parents: Dom Manoel + Dona Leonor)] (CLM-0628, SRC-ROYALARK-M16, grade A); excerpt: Direct sibling (brothers (same parents: Dom Manoel + Dona Leonor)) relation recorded between Dom Pedro de Malvidas and Joao’.
+2. Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P213 Infanta Dona Ines de Malvidas (CLM-0609, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry under Dom Joao lists Infanta Dona Ines de Malvidas as daughter of Dom Joao and Dona Francisca de Vasconcelos.
+3. Supporting edge: sibling P210 Dom Pedro de Malvidas <-> P66 Joao’ (Keerithi Maha Radun) [brothers (same parents: Dom Manoel + Dona Leonor)] (CLM-0628, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry lists Dom Joao and Dom Pedro as sons in the same Dom Manoel and Dona Leonor de Ataide sibling set.
 4. Rule application (parent-sibling-aunt-uncle): sibling(P66 Joao’ (Keerithi Maha Radun), P210 Dom Pedro de Malvidas) plus parent(P66 Joao’ (Keerithi Maha Radun), child) yields inferred aunt/uncle-line kin between P210 Dom Pedro de Malvidas and P213 Infanta Dona Ines de Malvidas.
 5. Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured.
 

@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `kin|P91|P95|aunt/uncle↔niece/nephew`  
-Last updated: `2026-02-10`  
+Last updated: `2026-02-19`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
@@ -15,13 +15,14 @@ Inference class: `rule-derived`
 ## 2) Why this specific pair is modeled
 - Pair summary: P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri) and P95 Mohamed Farid (Keerithi Maha Radun) are modeled as inferred kin (aunt/uncle↔niece/nephew) through rule `parent-sibling-aunt-uncle`.
 - Historical/dynastic context: Huraagey -> Huraagey
-- Rule basis status: resolved (1 supporting edge).
+- Rule basis status: resolved (2 supporting edges).
 
 ## 3) Logic chain (pair-specific)
 1. Support set for rule parent-sibling-aunt-uncle resolved as follows.
 2. Supporting edge: parent P129 Princess Veyogey Dhon Goma -> P95 Mohamed Farid (Keerithi Maha Radun) (CLM-0262, SRC-WIKI-MUHAMMAD-FAREED, grade B); excerpt: Muhammad Fareed Didi family/genealogy content lists P129 Princess Veyogey Dhon Goma as parent of P95 Mohamed Farid.
-3. Rule application (parent-sibling-aunt-uncle): sibling(P129 Princess Veyogey Dhon Goma, P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri)) plus parent(P129 Princess Veyogey Dhon Goma, child) yields inferred aunt/uncle-line kin between P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri) and P95 Mohamed Farid (Keerithi Maha Radun).
-4. Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured.
+3. Supporting edge: sibling P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri) <-> P129 Princess Veyogey Dhon Goma [half-siblings (shared mother P185)] (CLM-0649, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct sibling (half-siblings (shared mother P185)) relation recorded between Mohamed Shamsuddine III and Princess Veyogey Dhon Goma.
+4. Rule application (parent-sibling-aunt-uncle): sibling(P129 Princess Veyogey Dhon Goma, P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri)) plus parent(P129 Princess Veyogey Dhon Goma, child) yields inferred aunt/uncle-line kin between P91 Mohamed Shamsuddine III (Kula Sundhura Katthiri) and P95 Mohamed Farid (Keerithi Maha Radun).
+5. Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
 - Possible competing interpretation: cousin-line relation if the sibling basis edge changes generation mapping.
@@ -36,6 +37,7 @@ Inference class: `rule-derived`
 ## 6) Source basis
 - `SRC-DERIVED-RULES` (Derived family relation rules)
 - `SRC-WIKI-MUHAMMAD-FAREED` (Muhammad Fareed Didi)
+- `SRC-ROYALARK-MALDIVES` (RoyalArk Maldives — Complete Genealogical Database (segments 3-16))
 - Primary inferred claim row: CLM-0219
 - Inferred claim locator: Inference basis: parent-sibling-aunt-uncle (see docs/research-program/inferences/kin-p91-p95-aunt-uncle-niece-nephew.md).
 

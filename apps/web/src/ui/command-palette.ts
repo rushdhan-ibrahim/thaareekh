@@ -11,6 +11,7 @@ export interface CommandPaletteDeps {
   personName: (person: SearchPerson) => string;
   t: (key: string) => string;
   goToPerson: (personId: string) => void;
+  goToOffice?: (officeId: string) => void;
   dynastyColor: (dynasty: string | undefined) => string;
 }
 
@@ -61,8 +62,30 @@ export function renderCommandPaletteHtml(
     }
     return `<div class="cmd-palette-empty">${deps.escapeHtml(deps.t('command_empty_hint'))}</div>`;
   }
+  const KIND_ICON: Record<string, string> = {
+    crown: '\u265B', judicial: '\u2696', ministerial: '\uD83C\uDFDB',
+    deputy: '\u2691', executive: '\u25C6', institution: '\u2699',
+    peerage: '\u2654', furadaana: '\u2605', military: '\u2694'
+  };
+  const KIND_KEY: Record<string, string> = {
+    crown: 'crown_office', judicial: 'judicial_office', ministerial: 'ministerial_office',
+    deputy: 'deputy_office', executive: 'executive_office', institution: 'institution_office',
+    peerage: 'peerage_office', furadaana: 'furadaana_office', military: 'military_office'
+  };
   return results
     .map((row, index) => {
+      if (row.type === 'office' && row.office) {
+        const o = row.office;
+        const icon = KIND_ICON[o.kind || ''] || '\u25CB';
+        return `<div class="cmd-result${index === active ? ' active' : ''}" data-idx="${index}">
+      <div class="cmd-result-ofc-dot">${icon}</div>
+      <div class="cmd-result-info">
+        <div class="cmd-result-name">${deps.escapeHtml(o.name)}</div>
+        <div class="cmd-result-meta">${deps.escapeHtml(deps.t(KIND_KEY[o.kind || ''] || 'office_generic'))} \u00b7 ${deps.escapeHtml(deps.t('office_word'))}</div>
+      </div>
+      <span class="cmd-result-badge">${deps.escapeHtml(deps.reasonLabel(row.reason))}</span>
+    </div>`;
+      }
       const person = row.person;
       return `<div class="cmd-result${index === active ? ' active' : ''}" data-idx="${index}">
       <div class="cmd-result-dot" style="background:${deps.dynastyColor(person.dy)}"></div>
@@ -121,7 +144,12 @@ export function initCommandPaletteController(
     const row = state.results[index];
     if (!row) return;
     close();
-    deps.goToPerson(row.person.id);
+    if (row.type === 'office' && row.office && deps.goToOffice) {
+      deps.goToOffice(row.office.id);
+      window.dispatchEvent(new CustomEvent('request-sidebar-open'));
+    } else {
+      deps.goToPerson(row.person.id);
+    }
   }
 
   function renderResults(): void {

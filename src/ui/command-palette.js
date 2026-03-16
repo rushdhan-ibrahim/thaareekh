@@ -3,8 +3,20 @@
  */
 import { rankSearch, reasonLabel } from './search-engine.js';
 import { goF } from './navigation.js';
+import { showOfficeDetail } from './sidebar.js';
 import { personName, t } from './i18n.js';
 import { fR, esc } from '../utils/format.js';
+
+const KIND_ICON = {
+  crown: '\u265B', judicial: '\u2696', ministerial: '\uD83C\uDFDB',
+  deputy: '\u2691', executive: '\u25C6', institution: '\u2699',
+  peerage: '\u2654', furadaana: '\u2605', military: '\u2694'
+};
+const KIND_KEY = {
+  crown: 'crown_office', judicial: 'judicial_office', ministerial: 'ministerial_office',
+  deputy: 'deputy_office', executive: 'executive_office', institution: 'institution_office',
+  peerage: 'peerage_office', furadaana: 'furadaana_office', military: 'military_office'
+};
 
 let active = -1;
 let results = [];
@@ -50,7 +62,12 @@ function choose(idx) {
   const r = results[idx];
   if (!r) return;
   closePalette();
-  goF(r.person.id);
+  if (r.type === 'office') {
+    showOfficeDetail(r.office.id);
+    window.dispatchEvent(new CustomEvent('request-sidebar-open'));
+  } else {
+    goF(r.person.id);
+  }
 }
 
 function renderResults() {
@@ -66,6 +83,18 @@ function renderResults() {
     return;
   }
   resultsEl.innerHTML = results.map((r, i) => {
+    if (r.type === 'office') {
+      const o = r.office;
+      const icon = KIND_ICON[o.kind] || '\u25CB';
+      return `<div class="cmd-result${i === active ? ' active' : ''}" data-idx="${i}">
+        <div class="cmd-result-ofc-dot">${icon}</div>
+        <div class="cmd-result-info">
+          <div class="cmd-result-name">${esc(o.name)}</div>
+          <div class="cmd-result-meta">${esc(t(KIND_KEY[o.kind] || 'office_generic'))} \u00b7 ${esc(t('office_word'))}</div>
+        </div>
+        <span class="cmd-result-badge">${esc(reasonLabel(r.reason))}</span>
+      </div>`;
+    }
     const p = r.person;
     return `<div class="cmd-result${i === active ? ' active' : ''}" data-idx="${i}">
       <div class="cmd-result-dot" style="background:${dynastyColor(p.dy)}"></div>

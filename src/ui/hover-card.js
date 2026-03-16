@@ -13,6 +13,9 @@ function ensureEl() {
   hoverEl = document.createElement('div');
   hoverEl.className = 'hover-card';
   hoverEl.setAttribute('role', 'tooltip');
+  hoverEl.style.left = '0';
+  hoverEl.style.top = '0';
+  hoverEl.style.willChange = 'transform';
   document.body.appendChild(hoverEl);
   return hoverEl;
 }
@@ -22,6 +25,11 @@ function dynastyColor(dy) {
 }
 
 function connectionCount(id) {
+  // Use cached adjacency map for O(1) lookup; fallback to iteration
+  if (state._adj) {
+    const neighbors = state._adj.get(id);
+    return neighbors ? neighbors.size : 0;
+  }
   let count = 0;
   state.links.forEach(l => {
     const s = typeof l.source === 'object' ? l.source.id : l.source;
@@ -46,16 +54,14 @@ export function showNodeHoverCard(ev, d) {
     ${d.bio ? `<div class="hover-card-bio">${esc(d.bio.split('.')[0].slice(0, 120))}${d.bio.split('.')[0].length > 120 ? '\u2026' : '.'}</div>` : ''}
   `;
 
-  // Position using manual offset from mouse (Floating UI imported dynamically if available)
-  el.style.left = (ev.clientX + 14) + 'px';
-  el.style.top = (ev.clientY + 14) + 'px';
+  // GPU-composited positioning via transform (avoids layout thrashing)
+  el.style.transform = `translate(${ev.clientX + 14}px,${ev.clientY + 14}px)`;
   el.classList.add('visible');
 }
 
 export function moveHoverCard(ev) {
   if (!hoverEl || !hoverEl.classList.contains('visible')) return;
-  hoverEl.style.left = (ev.clientX + 14) + 'px';
-  hoverEl.style.top = (ev.clientY + 14) + 'px';
+  hoverEl.style.transform = `translate(${ev.clientX + 14}px,${ev.clientY + 14}px)`;
 }
 
 export function hideHoverCard() {

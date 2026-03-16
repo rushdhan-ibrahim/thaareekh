@@ -14,24 +14,8 @@ export function linkKey(l: LinkDatum): string {
   return `${hSrc}|${hTgt}|${l._e?.t ?? 'kin'}`;
 }
 
-function baseOpacity(el: Element): number {
-  const base = Number(el.getAttribute('data-bo'));
-  return Number.isFinite(base) ? base : 0.8;
-}
-
-function edgeDimOpacity(el: Element, focusMode: boolean): number {
-  const base = baseOpacity(el);
-  if (focusMode) return Math.max(0.06, base * 0.32);
-  return Math.max(0.35, base * 0.75);
-}
-
-function nodeDimOpacity(focusMode: boolean): number {
-  return focusMode ? 0.14 : 0.82;
-}
-
-function nodeBaseOpacity(el: Element | null): number {
-  const low = el?.parentElement?.getAttribute?.('data-pr') === '0';
-  return low ? 0.24 : 1;
+function syncFocusModeClass(state: AppState): void {
+  document.body.classList.toggle('focus-mode', !!state.focusMode);
 }
 
 /**
@@ -41,16 +25,19 @@ function nodeBaseOpacity(el: Element | null): number {
 export function ancestralEdgeKeys(
   id: string,
   links: LinkDatum[],
-  maxDepth: number = 14
+  maxDepth: number = 14,
+  cachedParentByChild?: Map<string, string[]>
 ): Set<string> {
-  const parentByChild = new Map<string, string[]>();
-  links.forEach(l => {
-    if (l._e?.t !== 'parent') return;
-    const { s: hSrc, t: hTgt } = linkIds(l);
-    const arr = parentByChild.get(hTgt) ?? [];
-    arr.push(hSrc);
-    parentByChild.set(hTgt, arr);
-  });
+  const parentByChild = cachedParentByChild ?? new Map<string, string[]>();
+  if (!cachedParentByChild) {
+    links.forEach(l => {
+      if (l._e?.t !== 'parent') return;
+      const { s: hSrc, t: hTgt } = linkIds(l);
+      const arr = parentByChild.get(hTgt) ?? [];
+      arr.push(hSrc);
+      parentByChild.set(hTgt, arr);
+    });
+  }
   const out = new Set<string>();
   const q: Array<{ id: string; d: number }> = [{ id, d: 0 }];
   const seen = new Set<string>([id]);
@@ -75,7 +62,7 @@ function clearFlow(state: AppState): void {
 function applyAncestralFlow(id: string | null, state: AppState): void {
   clearFlow(state);
   if (!id || state.viewMode !== 'tree') return;
-  const keys = ancestralEdgeKeys(id, state.links);
+  const keys = ancestralEdgeKeys(id, state.links, 14, state._parentByChild);
   if (!keys.size) return;
   (state.gL as any)?.classed?.('flow-edge', (d: LinkDatum) => keys.has(linkKey(d)));
 }
@@ -83,29 +70,24 @@ function applyAncestralFlow(id: string | null, state: AppState): void {
 /** Highlight a node and its immediate neighbors. */
 export function hiN(id: string, state: AppState): void {
   state.selEdge = null;
+  const neighbors = state._adj?.get(id);
   const cn = new Set<string>([id]);
-  state.links.forEach(l => {
+  if (neighbors) neighbors.forEach(n => cn.add(n));
+  else state.links.forEach(l => {
     const { s: hSrc, t: hTgt } = linkIds(l);
     if (hSrc === id) cn.add(hTgt);
     if (hTgt === id) cn.add(hSrc);
   });
-  const nd = nodeDimOpacity(state.focusMode);
+  syncFocusModeClass(state);
   const gN = state.gN as any;
   const gL = state.gL as any;
 
   gN?.classed?.('node-selected', (d: { id: string }) => d.id === id);
   gN?.classed?.('node-connected', (d: { id: string }) => d.id !== id && cn.has(d.id));
-  gN?.select?.('rect')?.attr?.('opacity', function (this: Element, d: { id: string }) {
-    if (cn.has(d.id)) return 1;
-    return Math.min(nd, nodeBaseOpacity(this));
-  });
-  gN?.select?.('text')?.attr?.('opacity', function (this: Element, d: { id: string }) {
-    if (cn.has(d.id)) return 1;
-    return Math.min(nd, nodeBaseOpacity(this));
-  });
-  gL?.attr?.('stroke-opacity', function (this: Element, d: LinkDatum) {
+  gN?.classed?.('node-dimmed', (d: { id: string }) => !cn.has(d.id));
+  gL?.classed?.('edge-dimmed', (d: LinkDatum) => {
     const { s: hSrc, t: hTgt } = linkIds(d);
-    return (hSrc === id || hTgt === id) ? 1 : edgeDimOpacity(this, state.focusMode);
+    return hSrc !== id && hTgt !== id;
   });
   gL?.classed?.('edge-highlight', (d: LinkDatum) => {
     const { s: hSrc, t: hTgt } = linkIds(d);
@@ -118,6 +100,7 @@ export function hiN(id: string, state: AppState): void {
 export function hiE(link: LinkDatum, state: AppState): void {
   state.selId = null;
   state.selEdge = link;
+  syncFocusModeClass(state);
   const gN = state.gN as any;
   const gL = state.gL as any;
 
@@ -127,20 +110,8 @@ export function hiE(link: LinkDatum, state: AppState): void {
   clearFlow(state);
 
   const { s: sid, t: tid } = linkIds(link);
-  const nd = state.focusMode ? 0.18 : 0.82;
-
-  gN?.select?.('rect')?.attr?.('opacity', function (this: Element, d: { id: string }) {
-    if (d.id === sid || d.id === tid) return 1;
-    return Math.min(nd, nodeBaseOpacity(this));
-  });
-  gN?.select?.('text')?.attr?.('opacity', function (this: Element, d: { id: string }) {
-    if (d.id === sid || d.id === tid) return 1;
-    return Math.min(nd, nodeBaseOpacity(this));
-  });
-  gL?.attr?.('stroke-opacity', function (this: Element, d: LinkDatum) {
-    if (d === link) return 1;
-    return edgeDimOpacity(this, state.focusMode);
-  });
+  gN?.classed?.('node-dimmed', (d: { id: string }) => d.id !== sid && d.id !== tid);
+  gL?.classed?.('edge-dimmed', (d: LinkDatum) => d !== link);
 }
 
 /** Clear all highlighting. */
@@ -151,17 +122,9 @@ export function clH(state: AppState): void {
 
   gN?.classed?.('node-selected', false);
   gN?.classed?.('node-connected', false);
+  gN?.classed?.('node-dimmed', false);
   gL?.classed?.('edge-highlight', false);
+  gL?.classed?.('edge-dimmed', false);
   clearFlow(state);
-
-  gN?.select?.('rect')?.attr?.('opacity', function (this: Element) {
-    return nodeBaseOpacity(this);
-  });
-  gN?.select?.('text')?.attr?.('opacity', function (this: Element) {
-    return nodeBaseOpacity(this);
-  });
-  gL?.attr?.('stroke-opacity', function (this: Element) {
-    const base = Number(this.getAttribute('data-bo'));
-    return Number.isFinite(base) ? base : 0.8;
-  });
+  document.body.classList.remove('focus-mode');
 }

@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `kin|P221|P211|grandparent`  
-Last updated: `2026-02-10`  
+Last updated: `2026-02-19`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
@@ -20,7 +20,7 @@ Inference class: `rule-derived`
 ## 3) Logic chain (pair-specific)
 1. Support set for rule parent-of-parent-grandparent resolved as follows.
 2. Supporting edge: parent P221 Golavehi Aisha Rani Kilege -> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) (CLM-0590, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Golavehi Aisha Rani Kilege as parent of Hassan IX / Dom Manoel.
-3. Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P211 Dona Leonor de Malvidas (CLM-0607, SRC-ROYALARK-M16, grade B); excerpt: Direct parent relation recorded between Hassan IX / Dom Manoel as parent of Dona Leonor de Malvidas.
+3. Supporting edge: parent P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> P211 Dona Leonor de Malvidas (CLM-0607, SRC-ROYALARK-M16, grade B); excerpt: RoyalArk lineage entry under Dom Manoel lists Dona Leonor de Malvidas as a daughter in the same Dom Manoel and Dona Leonor de Ataide branch.
 4. Rule application (parent-of-parent-grandparent): with source -> P61 Hassan IX / Dom Manoel (Dhirikusa Loka) and P61 Hassan IX / Dom Manoel (Dhirikusa Loka) -> target parent links, P221 Golavehi Aisha Rani Kilege is modeled as inferred grandparent-line kin of P211 Dona Leonor de Malvidas.
 5. Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured.
 

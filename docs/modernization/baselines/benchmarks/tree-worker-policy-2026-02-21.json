@@ -1,0 +1,151 @@
+{
+  "generated_at": "2026-02-21T00:00:28.002Z",
+  "decision": {
+    "recommendation": "enabled_by_default",
+    "rationale": "Worker profile is neutral/improved for tree switching (first delta 4.2ms, p95 delta -3ms, filter delta 1.1ms); keep enabled-by-default with explicit opt-out."
+  },
+  "profiles": {
+    "worker_on": {
+      "status": "ok",
+      "metrics": {
+        "tree_switch_first_ms": 111.4,
+        "tree_switch_p95_ms": 83.6,
+        "tree_switch_mean_ms": 71.367,
+        "filter_toggle_p95_ms": 51.1,
+        "first_interaction_p95_ms": 54.8,
+        "pan_zoom_frame_mean_ms": 15.882
+      },
+      "raw": {
+        "status": "ok",
+        "source": "legacy-graph-ui",
+        "tree_worker_mode": "on",
+        "target_url": "http://127.0.0.1:53924/index.html",
+        "target_source": "http",
+        "boot_ms": {
+          "dom_content_loaded": 1133,
+          "load_event": 1142
+        },
+        "first_interaction_latency_ms": {
+          "samples": 18,
+          "mean": 34.5,
+          "p95": 54.8,
+          "min": 22.6,
+          "max": 54.8
+        },
+        "filter_toggle_latency_ms": {
+          "samples": 20,
+          "mean": 43.975,
+          "p95": 51.1,
+          "min": 37.4,
+          "max": 57.4
+        },
+        "tree_mode_switch_first_latency_ms": 111.4,
+        "tree_mode_switch_latency_ms": {
+          "samples": 9,
+          "mean": 71.367,
+          "p95": 83.6,
+          "min": 62.6,
+          "max": 83.6
+        },
+        "pan_zoom_latency_ms": {
+          "samples": 24,
+          "mean": 50.267,
+          "p95": 54.9,
+          "min": 43.6,
+          "max": 57.4
+        },
+        "pan_zoom_frame_ms": {
+          "samples": 24,
+          "mean": 15.882,
+          "p95": 17.167,
+          "min": 13.7,
+          "max": 18.267
+        },
+        "pan_zoom_estimated_fps": 62.965,
+        "launch": {
+          "headless_flag": "--headless=new",
+          "spawn_error": null,
+          "exit": null,
+          "stderr_tail": [
+            "DevTools listening on ws://127.0.0.1:53925/devtools/browser/e1a6f263-5bfe-4e34-b742-bceb9151c8dc",
+            "Trying to load the allocator multiple times. This is *not* supported.",
+            "[10455:124192314:0221/050016.881237:ERROR:google_apis/gcm/engine/registration_request.cc:290] Registration response error message: DEPRECATED_ENDPOINT"
+          ],
+          "stdout_tail": []
+        },
+        "note": "Measured via headless Chrome DevTools protocol with scripted interactions."
+      }
+    },
+    "worker_off": {
+      "status": "ok",
+      "metrics": {
+        "tree_switch_first_ms": 115.6,
+        "tree_switch_p95_ms": 80.6,
+        "tree_switch_mean_ms": 65.844,
+        "filter_toggle_p95_ms": 52.2,
+        "first_interaction_p95_ms": 62.8,
+        "pan_zoom_frame_mean_ms": 15.837
+      },
+      "raw": {
+        "status": "ok",
+        "source": "legacy-graph-ui",
+        "tree_worker_mode": "off",
+        "target_url": "http://127.0.0.1:53969/index.html",
+        "target_source": "http",
+        "boot_ms": {
+          "dom_content_loaded": 707.4,
+          "load_event": 716.5
+        },
+        "first_interaction_latency_ms": {
+          "samples": 18,
+          "mean": 35.494,
+          "p95": 62.8,
+          "min": 32.4,
+          "max": 62.8
+        },
+        "filter_toggle_latency_ms": {
+          "samples": 20,
+          "mean": 43.14,
+          "p95": 52.2,
+          "min": 37.3,
+          "max": 52.8
+        },
+        "tree_mode_switch_first_latency_ms": 115.6,
+        "tree_mode_switch_latency_ms": {
+          "samples": 9,
+          "mean": 65.844,
+          "p95": 80.6,
+          "min": 60,
+          "max": 80.6
+        },
+        "pan_zoom_latency_ms": {
+          "samples": 24,
+          "mean": 50.25,
+          "p95": 50.9,
+          "min": 39.8,
+          "max": 66
+        },
+        "pan_zoom_frame_ms": {
+          "samples": 24,
+          "mean": 15.837,
+          "p95": 16.1,
+          "min": 12.9,
+          "max": 20.9
+        },
+        "pan_zoom_estimated_fps": 63.141,
+        "launch": {
+          "headless_flag": "--headless=new",
+          "spawn_error": null,
+          "exit": null,
+          "stderr_tail": [
+            "DevTools listening on ws://127.0.0.1:53970/devtools/browser/21b781f2-45ce-4cfa-a093-e648bcf4f48c",
+            "Trying to load the allocator multiple times. This is *not* supported.",
+            "[11178:124194084:0221/050025.898069:ERROR:google_apis/gcm/engine/registration_request.cc:290] Registration response error message: DEPRECATED_ENDPOINT"
+          ],
+          "stdout_tail": []
+        },
+        "note": "Measured via headless Chrome DevTools protocol with scripted interactions."
+      }
+    }
+  }
+}

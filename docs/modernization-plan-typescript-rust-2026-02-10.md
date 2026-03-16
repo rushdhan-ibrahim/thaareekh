@@ -1,7 +1,7 @@
 # TypeScript + Rust Modernization Plan
 
 Date: 2026-02-10  
-Status: in progress (Phase 0/1/4 parity foundation complete with benchmark automation active; Phase 3 active; Phase 2/6 pending)
+Status: in progress (Phase 1/3/4/6 complete; Phase 0/5 active; Phase 2 deferred by current scale)
 
 ## 1. Objective
 Perform a full rewrite of the project using a TypeScript + Rust architecture with zero loss of knowledge/functionality, major performance gains, and substantially better long-term maintainability.
@@ -14,13 +14,14 @@ This plan is constrained by three hard requirements:
 ## 2. Current Baseline (for parity targets)
 
 ### Runtime and data baseline
-- Current app is browser-first ES modules (`index.html` + `src/**/*.js`) with no build system.
+- Current default runtime is the TypeScript/Vite bundle (`apps/web/dist`) loaded by root `index.html`; legacy ES-module runtime remains in `src/**/*.js` for parity and fallback.
 - Data model currently assembled from multiple JS datasets (`core/promoted/research`) with derived inference expansion at runtime.
 - Baseline counts:
-  - canonical mode: 210 people, 608 edges
-  - research mode: 210 people, 627 edges
-  - derived/inferred edges (research): 341
-- Research workspace footprint: 600+ files under `docs/research-program/`.
+  - canonical mode: 204 people, 565 edges
+  - research mode: 204 people, 573 edges
+  - derived/inferred edges (research): 297
+  - uncertain/contested edges (research): 4
+- Research workspace footprint: 675+ files under `docs/research-program/`.
 
 ### Existing functional surface that must be preserved
 - Graph + tree modes.

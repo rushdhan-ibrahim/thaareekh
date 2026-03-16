@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `kin|P211|P67|aunt/uncle↔niece/nephew`  
-Last updated: `2026-02-10`  
+Last updated: `2026-02-19`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
@@ -20,7 +20,7 @@ Inference class: `rule-derived`
 ## 3) Logic chain (pair-specific)
 1. Support set for rule parent-sibling-aunt-uncle resolved as follows.
 2. Supporting edge: parent P66 Joao’ (Keerithi Maha Radun) -> P67 Philippe’ (Keerithi Maha Radun) (CLM-0348, SRC-MRF-KINGS, grade A); excerpt: Maldives Kings List family/genealogy content lists P66 Joao’ as parent of P67 Philippe’.
-3. Supporting edge: sibling P211 Dona Leonor de Malvidas <-> P66 Joao’ (Keerithi Maha Radun) [siblings (same parents: Dom Manoel + Dona Leonor)] (CLM-0630, SRC-ROYALARK-M16, grade B); excerpt: Direct sibling (siblings (same parents: Dom Manoel + Dona Leonor)) relation recorded between Dona Leonor de Malvidas and Joao’.
+3. Supporting edge: sibling P211 Dona Leonor de Malvidas <-> P66 Joao’ (Keerithi Maha Radun) [siblings (same parents: Dom Manoel + Dona Leonor)] (CLM-0630, SRC-ROYALARK-M16, grade B); excerpt: RoyalArk lineage entry lists Dona Leonor de Malvidas and Dom Joao under the same parents (Dom Manoel and Dona Leonor de Ataide).
 4. Rule application (parent-sibling-aunt-uncle): sibling(P66 Joao’ (Keerithi Maha Radun), P211 Dona Leonor de Malvidas) plus parent(P66 Joao’ (Keerithi Maha Radun), child) yields inferred aunt/uncle-line kin between P211 Dona Leonor de Malvidas and P67 Philippe’ (Keerithi Maha Radun).
 5. Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured.
 

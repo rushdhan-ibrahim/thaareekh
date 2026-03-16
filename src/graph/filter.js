@@ -3,19 +3,40 @@ import state from '../state.js';
 import { activeInYearById } from '../data/timeline.js';
 import { personName, t } from '../ui/i18n.js';
 
+/** Compute the set of person IDs active in the current era year. */
+export function computeEraPersonOk() {
+  const y = state.eraEnabled ? Number(state.eraYear) : NaN;
+  return new Set(people
+    .filter(p => !state.eraEnabled || activeInYearById(p.id, y))
+    .map(p => p.id));
+}
+
+// Cached chip state — invalidated by chip clicks (listened in main.js)
+let _cachedActiveE = null;
+let _cachedActiveConf = null;
+
+export function invalidateChipCache() {
+  _cachedActiveE = null;
+  _cachedActiveConf = null;
+}
+
 export function activeE() {
+  if (_cachedActiveE) return _cachedActiveE;
   const s = new Set();
   document.querySelectorAll(".chip[data-e]").forEach(c => {
     if (c.classList.contains("on")) s.add(c.dataset.e);
   });
+  _cachedActiveE = s;
   return s;
 }
 
 export function activeConfidence() {
+  if (_cachedActiveConf) return _cachedActiveConf;
   const s = new Set();
   document.querySelectorAll(".chip[data-cf]").forEach(c => {
     if (c.classList.contains("on")) s.add(c.dataset.cf);
   });
+  _cachedActiveConf = s;
   return s;
 }
 

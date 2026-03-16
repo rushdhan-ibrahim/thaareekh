@@ -3,7 +3,7 @@
  * Extracted from search.js so both inline search and command palette can reuse it.
  */
 import { people, edges } from '../data/sovereigns.merge.js';
-import { officeById } from '../data/offices.js';
+import { officeCatalog, officeById } from '../data/offices.js';
 import { fR } from '../utils/format.js';
 import { personName, t } from './i18n.js';
 
@@ -75,6 +75,10 @@ export function reasonLabel(reason) {
   if (reason === 'office') return t('reason_office');
   if (reason === 'dynasty') return t('reason_dynasty');
   if (reason === 'fuzzy') return t('reason_fuzzy');
+  if (reason === 'office-name') return t('reason_office_name');
+  if (reason === 'office-alias') return t('reason_office_alias');
+  if (reason === 'office-kind') return t('reason_office_kind');
+  if (reason === 'office-fuzzy') return t('reason_office_fuzzy');
   return t('reason_match');
 }
 
@@ -103,7 +107,7 @@ export function scorePerson(p, qParsed) {
   if (qParsed.o && !personOffices.some(o => o.includes(qParsed.o))) return null;
   if (!qParsed.terms.length && (qParsed.dy || qParsed.c || qParsed.t || qParsed.o)) {
     const y = p.re?.[0]?.[0] ?? 99999;
-    return { person: p, score: 20_000 - y, reason: "filter" };
+    return { type: 'person', person: p, score: 20_000 - y, reason: "filter" };
   }
 
   let score = 0;
@@ -153,19 +157,61 @@ export function scorePerson(p, qParsed) {
   if (!hits) return null;
   if (hits < qParsed.terms.length) score -= (qParsed.terms.length - hits) * 18;
   if (qParsed.dy || qParsed.c || qParsed.t || qParsed.o) score += 10;
-  return { person: p, score, reason };
+  return { type: 'person', person: p, score, reason };
+}
+
+export function scoreOffice(office, qParsed) {
+  // Only score offices against free-text terms (not pure filter queries)
+  if (!qParsed.terms.length) return null;
+  // Skip if person-specific filters are active
+  if (qParsed.dy || qParsed.c || qParsed.t) return null;
+
+  const nm = norm(office.name);
+  const altNames = (office.alt_names || []).map(norm);
+  const kind = norm(office.kind || '');
+  const summary = norm(office.summary || '');
+
+  let score = 0;
+  let reason = 'office-name';
+
+  for (const term of qParsed.terms) {
+    if (nm === term) { score += 100; reason = 'office-name'; }
+    else if (nm.startsWith(term)) { score += 85; reason = 'office-name'; }
+    else if (nm.includes(term)) { score += 65; reason = 'office-name'; }
+    else if (altNames.some(a => a === term)) { score += 75; reason = 'office-alias'; }
+    else if (altNames.some(a => a.includes(term))) { score += 50; reason = 'office-alias'; }
+    else if (kind.includes(term)) { score += 25; reason = 'office-kind'; }
+    else if (summary.includes(term)) { score += 15; reason = 'office-name'; }
+    else if (term.length >= 4) {
+      const pool = [nm, ...altNames];
+      const best = pool.reduce((acc, v) => Math.min(acc, editDistance(term, v)), 999);
+      if (best <= 2) { score += 35 - best * 8; reason = 'office-fuzzy'; }
+    }
+  }
+
+  if (score <= 0) return null;
+  return { type: 'office', office, score, reason };
 }
 
 export function rankSearch(q, limit = MAX_RESULTS) {
   const parsed = parseQuery(q);
-  return people
+  const personHits = people
     .map(p => scorePerson(p, parsed))
-    .filter(Boolean)
+    .filter(Boolean);
+  const officeHits = officeCatalog
+    .map(o => scoreOffice(o, parsed))
+    .filter(Boolean);
+  return [...personHits, ...officeHits]
     .sort((a, b) => {
       if (b.score !== a.score) return b.score - a.score;
-      const aY = a.person.re?.[0]?.[0] ?? 99999;
-      const bY = b.person.re?.[0]?.[0] ?? 99999;
-      return aY - bY;
+      if (a.type === 'person' && b.type === 'person') {
+        const aY = a.person.re?.[0]?.[0] ?? 99999;
+        const bY = b.person.re?.[0]?.[0] ?? 99999;
+        return aY - bY;
+      }
+      // Offices sort after persons at same score
+      if (a.type !== b.type) return a.type === 'office' ? 1 : -1;
+      return 0;
     })
     .slice(0, limit);
 }

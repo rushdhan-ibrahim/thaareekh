@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `kin|P104|P68|reported shared Utheemu lineage branch`  
-Last updated: `2026-02-10`  
+Last updated: `2026-02-19`  
 Inference class: `curated`
 
 ## 1) Edge identity
@@ -21,7 +21,7 @@ Inference class: `curated`
 - CLM-0009: kin P66 Joao’ (Keerithi Maha Radun) <-> P104 Mohamed Thakurufaanu al-Auzam [co-regency framework] (SRC-MRF-UTHEEM, grade B)
 - CLM-0228: parent P104 Mohamed Thakurufaanu al-Auzam -> P106 Ibrahim Kalaafaan (SRC-MRF-UTHEEM, grade B)
 - CLM-0350: parent P68 Mohamed Imaduddine (Kula Sundhura Katthiri Bavana) -> P69 Iskander Ibrahim (Kula Ran Meeba Katthiri) (SRC-MRF-KINGS, grade B)
-- CLM-0372: sibling P104 Mohamed Thakurufaanu al-Auzam <-> P105 Hassan Thakurufan [brothers] (SRC-MRF-UTHEEM, grade B)
+- CLM-0612: sibling P200 Ali Thakurufaanu <-> P104 Mohamed Thakurufaanu al-Auzam [brothers] (SRC-MRF-UTHEEM, grade B)
 
 ## 3) Logic chain (pair-specific)
 1. No short direct-claim path (<=4 steps) was found in the current direct-edge set for this exact node pair.

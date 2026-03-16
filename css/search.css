@@ -183,6 +183,18 @@
   display: flex;
   gap: var(--space-4);
 }
+/* --- Command palette office result dot --- */
+.cmd-result-ofc-dot {
+  font-size: 10px;
+  text-align: center;
+  background: var(--bg3);
+  border-radius: 2px;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  flex-shrink: 0;
+}
+
 .cmd-palette-hint kbd {
   font-family: var(--mono);
   padding: 0 3px;

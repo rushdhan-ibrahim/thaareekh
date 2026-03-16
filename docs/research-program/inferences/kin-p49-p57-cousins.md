@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `kin|P49|P57|cousins`  
-Last updated: `2026-02-10`  
+Last updated: `2026-02-19`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
@@ -20,8 +20,8 @@ Inference class: `rule-derived`
 ## 3) Logic chain (pair-specific)
 1. Support set for rule children-of-siblings-cousin resolved as follows.
 2. Supporting edge: parent P202 Kamba Dio -> P49 Sheikh Hassan (Raadha Fanaveeru) (CLM-0572, SRC-MRF-HILAALY, grade B); excerpt: Direct parent relation recorded between Kamba Dio as parent of Sheikh Hassan.
-3. Supporting edge: parent P207 Recca -> P57 Ali (Aanandha) (CLM-0579, SRC-MRF-HILAALY, grade B); excerpt: Direct parent relation recorded between Recca as parent of Ali.
-4. Rule application (children-of-siblings-cousin): children of sibling parents P202 Kamba Dio and P207 Recca are modeled as inferred cousin-line kin (P49 Sheikh Hassan (Raadha Fanaveeru) <-> P57 Ali (Aanandha)).
+3. Supporting edge: parent P193 Princess Recca -> P57 Ali (Aanandha) (CLM-0329, SRC-MRF-KINGS, grade B); excerpt: Maldives Kings List family/genealogy content lists P193 Princess Recca as parent of P57 Ali.
+4. Rule application (children-of-siblings-cousin): children of sibling parents P202 Kamba Dio and P193 Princess Recca are modeled as inferred cousin-line kin (P49 Sheikh Hassan (Raadha Fanaveeru) <-> P57 Ali (Aanandha)).
 5. Current modeling remains inferred because direct source text naming kin (cousins) for this exact pair is not yet captured.
 
 ## 4) Alternative interpretations
@@ -37,6 +37,7 @@ Inference class: `rule-derived`
 ## 6) Source basis
 - `SRC-DERIVED-RULES` (Derived family relation rules)
 - `SRC-MRF-HILAALY` (Royal House of Hilaaly)
+- `SRC-MRF-KINGS` (Maldives Kings List)
 - Primary inferred claim row: CLM-0566
 - Inferred claim locator: Inference basis documented in docs/research-program/inferences/kin-p49-p57-cousins.md.
 

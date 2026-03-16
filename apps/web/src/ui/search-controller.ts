@@ -3,6 +3,12 @@ import type { SearchHit, SearchPerson, SearchReason } from '../search/search-eng
 const DEFAULT_MAX_RESULTS = 12;
 const DEFAULT_INPUT_DELAY_MS = 80;
 
+const KIND_KEY: Record<string, string> = {
+  crown: 'crown_office', judicial: 'judicial_office', ministerial: 'ministerial_office',
+  deputy: 'deputy_office', executive: 'executive_office', institution: 'institution_office',
+  peerage: 'peerage_office', furadaana: 'furadaana_office', military: 'military_office'
+};
+
 export interface SearchControllerDeps {
   rankSearch: (query: string, limit: number) => SearchHit[];
   reasonLabel: (reason: SearchReason) => string;
@@ -11,6 +17,7 @@ export interface SearchControllerDeps {
   personName: (person: SearchPerson) => string;
   t: (key: string) => string;
   goToPerson: (personId: string) => void;
+  goToOffice?: (officeId: string) => void;
 }
 
 export interface SearchControllerOptions {
@@ -134,6 +141,17 @@ export function renderSearchDropdownHtml(
 
   return rows
     .map((row, index) => {
+      if (row.type === 'office' && row.office) {
+        const o = row.office;
+        return `<div class="ddi${index === active ? ' act' : ''}" id="sr-opt-${index}" role="option" aria-selected="${
+          index === active ? 'true' : 'false'
+        }" data-id="${o.id}" data-idx="${index}">
+        <b>${deps.escapeHtml(o.name)}</b>
+        <em>${deps.escapeHtml(deps.t(KIND_KEY[o.kind || ''] || 'office_generic'))} \u00b7 ${deps.escapeHtml(deps.t('office_word'))} \u00b7 ${deps.escapeHtml(
+          deps.reasonLabel(row.reason)
+        )}</em>
+      </div>`;
+      }
       const person = row.person;
       return `<div class="ddi${index === active ? ' act' : ''}" id="sr-opt-${index}" role="option" aria-selected="${
         index === active ? 'true' : 'false'
@@ -179,12 +197,17 @@ export function initSearchController(
   function choose(index: number): void {
     const row = state.rows[index];
     if (!row) return;
-    deps.goToPerson(row.person.id);
     dropdown.classList.remove('open');
     input.removeAttribute('aria-activedescendant');
     input.value = '';
     state.rows = [];
     state.active = -1;
+    if (row.type === 'office' && row.office && deps.goToOffice) {
+      deps.goToOffice(row.office.id);
+      window.dispatchEvent(new CustomEvent('request-sidebar-open'));
+    } else {
+      deps.goToPerson(row.person.id);
+    }
   }
 
   function render(query: string): void {

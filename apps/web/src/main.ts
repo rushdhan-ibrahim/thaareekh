@@ -9,7 +9,7 @@ import type { AppState, PersonNode, LinkDatum, EdgeRecord } from './types/state.
 // Data modules (legacy JS, ambient-typed in legacy-modules.d.ts)
 import { people, edges, mode, byId } from '../../../src/data/sovereigns.merge.js';
 import { sourceById } from '../../../src/data/sources.js';
-import { officeById, officeTimeline } from '../../../src/data/offices.js';
+import { officeById, officeTimeline, officeFunctionForYear, buildOfficeHolders } from '../../../src/data/offices.js';
 import { dynastyTransitions, eraMilestones } from '../../../src/data/era-events.js';
 import { timelineExtent, activeInYearById } from '../../../src/data/timeline.js';
 import { storyTrails } from '../../../src/data/storytrails.js';
@@ -27,7 +27,7 @@ import {
   t, personName, relationLabel, getLang,
   setLanguage, initLanguageControl, refreshChromeLabels
 } from './ui/i18n.js';
-import { filterCore, activeE, activeConfidence, applyTreeDynastyFilter } from './graph/filter.js';
+import { filterCore, activeE, activeConfidence, applyTreeDynastyFilter, computeEraPersonOk, invalidateChipCache } from './graph/filter.js';
 import { hiN, hiE, clH } from './graph/highlight.js';
 import { gNb, parOf, chOf } from './graph/relationships.js';
 import { showNodeHoverCard, moveHoverCard, hideHoverCard } from './ui/hover-card.js';
@@ -37,7 +37,7 @@ import { initSheet, oS, cS } from './ui/modal.js';
 import { initCommandBar } from './ui/commandbar.js';
 import {
   initHistory, clearHistory, withHistoryMuted,
-  recordPerson, recordEdge
+  recordPerson, recordEdge, recordOffice
 } from './ui/history.js';
 import {
   initCompare, clearCompare, getCompareState, setCompareState,
@@ -57,11 +57,29 @@ import {
 } from './ui/tree-options.js';
 import { initTimelineViz } from './ui/timeline-viz.js';
 import {
-  initSidebar, showD, showLinkDetail, showInstitutionsPane
+  initSidebar, showD, showLinkDetail, showInstitutionsPane,
+  showOfficeDetail, getCurrentOfficeId
 } from './ui/sidebar.js';
-import { initRebuild, rebuild } from './graph/rebuild.js';
+import { initRebuild, rebuild, updateEraVisibility } from './graph/rebuild.js';
+import { computeTreePlacement } from './graph/tree-placement-core.ts';
 import { createPathfinder } from './graph/pathfinder.js';
 import { initSearchRuntime } from './ui/search-runtime.js';
+
+function applyTreeWorkerPolicyFromQuery(): void {
+  const params = new URLSearchParams(window.location.search);
+  const raw = (params.get('tree_worker') || params.get('treeWorker') || '').trim().toLowerCase();
+  if (!raw) return;
+  if (raw === 'off' || raw === '0' || raw === 'false' || raw === 'disabled') {
+    (window as any).__disableTreePlacementWorker = true;
+    (window as any).__treePlacementWorkerPolicy = 'off';
+    return;
+  }
+  if (raw === 'on' || raw === '1' || raw === 'true' || raw === 'enabled') {
+    (window as any).__disableTreePlacementWorker = false;
+    (window as any).__treePlacementWorkerPolicy = 'on';
+  }
+}
+applyTreeWorkerPolicyFromQuery();
 
 // ---------------------------------------------------------------------------
 // State
@@ -147,8 +165,89 @@ function boundChOf(id: string): ReturnType<typeof chOf> {
   return chOf(id, state.links as any);
 }
 
+type RenderInvalidation = {
+  geometryDirty: boolean;
+  styleDirty: boolean;
+  selectionDirty: boolean;
+  overlayDirty: boolean;
+  eraVisibilityDirty: boolean;
+};
+
+const renderInvalidation: RenderInvalidation = {
+  geometryDirty: false,
+  styleDirty: false,
+  selectionDirty: false,
+  overlayDirty: false,
+  eraVisibilityDirty: false
+};
+let renderRaf = 0;
+
+function resetRenderInvalidation(): void {
+  renderInvalidation.geometryDirty = false;
+  renderInvalidation.styleDirty = false;
+  renderInvalidation.selectionDirty = false;
+  renderInvalidation.overlayDirty = false;
+  renderInvalidation.eraVisibilityDirty = false;
+}
+
+function applySelectionHighlight(): void {
+  if (state.selId) {
+    boundHiN(state.selId);
+    return;
+  }
+  if (state.selEdge) {
+    boundHiE(state.selEdge);
+    return;
+  }
+  boundClH();
+}
+
+function flushRenderQueue(): void {
+  if (renderRaf) {
+    cancelAnimationFrame(renderRaf);
+    renderRaf = 0;
+  }
+  const snapshot = { ...renderInvalidation };
+  resetRenderInvalidation();
+  const needsFullRebuild = snapshot.geometryDirty
+    || snapshot.styleDirty
+    || snapshot.overlayDirty
+    || snapshot.eraVisibilityDirty;
+  if (needsFullRebuild) {
+    rebuild();
+    applySelectionHighlight();
+    return;
+  }
+  if (snapshot.selectionDirty) {
+    applySelectionHighlight();
+  }
+}
+
+function requestRender(
+  invalidation: Partial<RenderInvalidation> = { geometryDirty: true },
+  opts: { resetZoom?: boolean; immediate?: boolean } = {}
+): void {
+  const entries = Object.entries(invalidation) as Array<[keyof RenderInvalidation, boolean | undefined]>;
+  for (const [key, value] of entries) {
+    if (value) renderInvalidation[key] = true;
+  }
+  if (opts.resetZoom) {
+    state.tr = d3.zoomIdentity as any;
+  }
+  if (opts.immediate) {
+    flushRenderQueue();
+    return;
+  }
+  if (renderRaf) return;
+  renderRaf = requestAnimationFrame(() => {
+    renderRaf = 0;
+    flushRenderQueue();
+  });
+}
+
 // Expose globally for inline onclick handlers in sidebar HTML
 (window as any).goF = boundGoF;
+(window as any).showOfficeDetail = showOfficeDetail;
 (window as any).setCmpA = setCompareA;
 (window as any).setCmpB = setCompareB;
 (window as any).armCmp = armCompareFrom;
@@ -193,14 +292,111 @@ function filt(): { nodes: PersonNode[]; links: EdgeRecord[] } {
 
 const savedView = loadViewState();
 
+let graphInteractionTimer: number | null = null;
+let zoomEventRaf: number | null = null;
+let pendingZoomDetail: { x: number; y: number; k: number } | null = null;
+let zoomTransformRaf: number | null = null;
+let pendingZoomTransform: any = null;
+let zoomLayerEl: SVGGElement | null = null;
+
+function getZoomLayerEl(): SVGGElement | null {
+  if (zoomLayerEl && document.body.contains(zoomLayerEl)) return zoomLayerEl;
+  zoomLayerEl = document.querySelector('#sv .gg');
+  return zoomLayerEl;
+}
+
+function scheduleZoomTransform(transform: any): void {
+  pendingZoomTransform = transform;
+  if (zoomTransformRaf) return;
+  zoomTransformRaf = requestAnimationFrame(() => {
+    zoomTransformRaf = null;
+    const next = pendingZoomTransform;
+    pendingZoomTransform = null;
+    if (!next) return;
+    const layer = getZoomLayerEl();
+    if (!layer) return;
+    layer.setAttribute('transform', String(next));
+  });
+}
+
+function ensureGraphInteractionStyles(): void {
+  if (document.getElementById('graph-interaction-optimizations')) return;
+  const style = document.createElement('style');
+  style.id = 'graph-interaction-optimizations';
+  style.textContent = `
+    body.graph-interacting #sv g.graph-edge-labels {
+      display: none !important;
+    }
+    body.graph-interacting #sv g.graph-badges,
+    body.graph-interacting #sv g.tree-badges,
+    body.graph-interacting #sv text.node-reign-label {
+      display: none !important;
+    }
+    body.graph-interacting #sv .node-body,
+    body.graph-interacting #sv .node-accent {
+      filter: none !important;
+    }
+    body.graph-interacting #sv .graph-link,
+    body.graph-interacting #sv .tree-link,
+    body.graph-interacting #sv .nd {
+      shape-rendering: optimizeSpeed;
+      stroke-dasharray: none !important;
+      marker-end: none !important;
+      pointer-events: none !important;
+    }
+    body.graph-interacting #sv .gg {
+      will-change: transform;
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+function emitZoomChanged(detail: { x: number; y: number; k: number }): void {
+  pendingZoomDetail = detail;
+  if (zoomEventRaf) return;
+  zoomEventRaf = requestAnimationFrame(() => {
+    zoomEventRaf = null;
+    const next = pendingZoomDetail;
+    pendingZoomDetail = null;
+    if (!next) return;
+    window.dispatchEvent(new CustomEvent('zoom-changed', { detail: next }));
+  });
+}
+
+function setGraphInteractionMode(active: boolean): void {
+  if (graphInteractionTimer) {
+    window.clearTimeout(graphInteractionTimer);
+    graphInteractionTimer = null;
+  }
+  if (!active) {
+    graphInteractionTimer = window.setTimeout(() => {
+      graphInteractionTimer = null;
+      document.body.classList.remove('graph-interacting');
+    }, 110);
+    return;
+  }
+  if (state.viewMode !== 'graph') {
+    document.body.classList.remove('graph-interacting');
+    return;
+  }
+  document.body.classList.add('graph-interacting');
+}
+
+ensureGraphInteractionStyles();
+
 // Zoom behavior
-state.zoomBehavior = (d3 as any).zoom().scaleExtent([0.08, 4]).on('zoom', (e: any) => {
-  state.tr = e.transform;
-  (d3 as any).select('.gg').attr('transform', e.transform);
-  window.dispatchEvent(new CustomEvent('zoom-changed', {
-    detail: { x: e.transform.x, y: e.transform.y, k: e.transform.k }
-  }));
-});
+state.zoomBehavior = (d3 as any).zoom().scaleExtent([0.08, 4])
+  .on('start', () => {
+    setGraphInteractionMode(true);
+  })
+  .on('zoom', (e: any) => {
+    state.tr = e.transform;
+    scheduleZoomTransform(e.transform);
+    emitZoomChanged({ x: e.transform.x, y: e.transform.y, k: e.transform.k });
+  })
+  .on('end', () => {
+    setGraphInteractionMode(false);
+  });
 
 function updateTranslateExtent(): void {
   const gNode = document.querySelector('#sv .gg') as SVGGElement | null;
@@ -221,7 +417,7 @@ if (savedView && (savedView.theme === 'dark' || savedView.theme === 'light')) {
   const bt = document.getElementById('bt');
   if (bt) bt.textContent = savedView.theme === 'dark' ? '\u2600' : '\u263E';
 }
-initTheme(rebuild);
+initTheme(() => requestRender({ styleDirty: true }));
 initSheet();
 initCommandBar();
 
@@ -245,6 +441,7 @@ initSidebar({
   chOf: boundChOf as any,
   recordPerson,
   recordEdge: recordEdge as any,
+  recordOffice,
   compareSummaryHtml,
   handlePersonViewed,
   oS,
@@ -254,7 +451,9 @@ initSidebar({
   getInferenceNote: getInferenceNote as any,
   getInferenceDossierPath: getInferenceDossierPath as any,
   inferenceEdgeKey: inferenceEdgeKey as any,
-  isDerivedInferenceEdge: isDerivedInferenceEdge as any
+  isDerivedInferenceEdge: isDerivedInferenceEdge as any,
+  officeFunctionForYear: officeFunctionForYear as any,
+  buildOfficeHolders: buildOfficeHolders as any
 });
 
 // Init rebuild (dependency injection)
@@ -275,6 +474,7 @@ initRebuild({
   showNodeHoverCard: boundShowNodeHoverCard,
   moveHoverCard: boundMoveHoverCard,
   hideHoverCard: boundHideHoverCard,
+  computeTreePlacement,
   dynastyTransitions: dynastyTransitions as any[],
   eraMilestones: eraMilestones as any[],
   timeExtent: ERA as any
@@ -340,7 +540,7 @@ function applyDensityMode(v: string, opts: { rebuildNow?: boolean } = {}): void 
   document.documentElement.dataset.density = state.density;
   const dns = document.getElementById('dns') as HTMLSelectElement | null;
   if (dns) dns.value = state.density;
-  if (opts.rebuildNow !== false) rebuild();
+  if (opts.rebuildNow !== false) requestRender({ styleDirty: true });
 }
 
 function centuryLabel(y: number): string {
@@ -353,12 +553,26 @@ function centuryLabel(y: number): string {
 }
 
 let eraRaf = 0;
+let eraDebounceTimer = 0;
 function queueEraRebuild(): void {
   if (eraRaf) return;
   eraRaf = requestAnimationFrame(() => {
     eraRaf = 0;
-    rebuild();
+    requestRender({ eraVisibilityDirty: true });
   });
+}
+function queueEraDebouncedRebuild(): void {
+  if (eraRaf) { cancelAnimationFrame(eraRaf); eraRaf = 0; }
+  clearTimeout(eraDebounceTimer);
+  eraDebounceTimer = window.setTimeout(() => {
+    eraDebounceTimer = 0;
+    const y = state.eraYear ?? ERA.max;
+    const eraPersonOk = computeEraPersonOk(
+      typedPeople, state.eraEnabled, y, activeInYearById as any
+    );
+    const needsFull = updateEraVisibility(eraPersonOk);
+    if (needsFull) requestRender({ eraVisibilityDirty: true });
+  }, 150);
 }
 
 function emitEraChanged(): void {
@@ -468,10 +682,13 @@ function initEraControls(): void {
   eta.addEventListener('click', () => setEraEnabled(!state.eraEnabled));
   ey.addEventListener('input', () => {
     if (!state.eraEnabled) setEraEnabled(true, { rebuildNow: false });
-    setEraYear(Number(ey.value), { rebuildNow: true });
+    setEraYear(Number(ey.value), { rebuildNow: false });
+    queueEraDebouncedRebuild();
   });
   ey.addEventListener('change', () => {
     if (!state.eraEnabled) setEraEnabled(true, { rebuildNow: false });
+    clearTimeout(eraDebounceTimer);
+    eraDebounceTimer = 0;
     setEraYear(Number(ey.value), { rebuildNow: true });
   });
   epy.addEventListener('click', () => {
@@ -552,8 +769,19 @@ initFilterPanel();
 
 interface HistoryEntry { type: string; id?: string; s?: string; d?: string; rel?: string }
 
+function edgeHistoryKey(s: string, d: string, rel: string): string {
+  const a = s < d ? s : d;
+  const b = s < d ? d : s;
+  return `${a}|${b}|${rel || 'kin'}`;
+}
+
 function findEdgeFromHistoryEntry(entry: HistoryEntry | null): LinkDatum | null {
   if (!entry || entry.type !== 'edge') return null;
+  if (entry.s && entry.d) {
+    const edgeIdx = (state as any)._edgeBySelectionKey as Map<string, LinkDatum> | undefined;
+    const direct = edgeIdx?.get(edgeHistoryKey(entry.s, entry.d, entry.rel || 'kin'));
+    if (direct) return direct;
+  }
   return state.links.find(l => {
     const s = typeof l.source === 'object' ? l.source.id : l.source;
     const tId = typeof l.target === 'object' ? l.target.id : l.target;
@@ -607,7 +835,7 @@ function setSidebarOpen(open: boolean, opts: { rebuildNow?: boolean } = {}): voi
   document.body.classList.toggle('sidebar-collapsed', !state.sidebarOpen);
   renderSidebarToggleUi();
   if (opts.rebuildNow) {
-    rebuild();
+    requestRender({ geometryDirty: true }, { immediate: true });
     setTimeout(updateTranslateExtent, 500);
     return;
   }
@@ -675,11 +903,10 @@ function restoreSelection(snapshot: Record<string, unknown> | null): void {
 }
 
 function refreshFocusOverlay(): void {
-  state.tr = d3.zoomIdentity as any;
-  rebuild();
-  if (state.selId) { boundHiN(state.selId); return; }
-  if (state.selEdge) { boundHiE(state.selEdge); return; }
-  boundClH();
+  requestRender(
+    { overlayDirty: true, selectionDirty: true },
+    { resetZoom: true }
+  );
 }
 
 // History
@@ -688,6 +915,10 @@ initHistory(
     withHistoryMuted(() => {
       if (entry.type === 'person') {
         boundGoF(entry.id);
+        return;
+      }
+      if (entry.type === 'office') {
+        showOfficeDetail(entry.officeId);
         return;
       }
       if (entry.type === 'edge') {
@@ -702,6 +933,7 @@ initHistory(
   },
   {
     byId: typedById,
+    officeById: officeById as any,
     fR, personName: personName as any,
     relationLabel, t
   }
@@ -721,19 +953,29 @@ document.getElementById('ov')?.addEventListener('click', cS);
 // ---------------------------------------------------------------------------
 
 document.querySelectorAll('.chip[data-e]').forEach(c => c.addEventListener('click', () => {
-  c.classList.toggle('on'); state.tr = d3.zoomIdentity as any; rebuild();
+  c.classList.toggle('on');
+  invalidateChipCache();
+  requestRender({ geometryDirty: true }, { resetZoom: true });
 }));
 document.querySelectorAll('.chip[data-cf]').forEach(c => c.addEventListener('click', () => {
-  c.classList.toggle('on'); state.tr = d3.zoomIdentity as any; rebuild();
+  c.classList.toggle('on');
+  invalidateChipCache();
+  requestRender({ geometryDirty: true }, { resetZoom: true });
 }));
 
 // ---------------------------------------------------------------------------
 // Dropdown filters
 // ---------------------------------------------------------------------------
 
-document.getElementById('df')?.addEventListener('change', () => { state.tr = d3.zoomIdentity as any; rebuild(); });
-document.getElementById('tf')?.addEventListener('change', () => { state.tr = d3.zoomIdentity as any; rebuild(); });
-document.getElementById('sqf')?.addEventListener('change', () => { state.tr = d3.zoomIdentity as any; rebuild(); });
+document.getElementById('df')?.addEventListener('change', () => {
+  requestRender({ geometryDirty: true }, { resetZoom: true });
+});
+document.getElementById('tf')?.addEventListener('change', () => {
+  requestRender({ geometryDirty: true }, { resetZoom: true });
+});
+document.getElementById('sqf')?.addEventListener('change', () => {
+  requestRender({ geometryDirty: true }, { resetZoom: true });
+});
 
 document.getElementById('dns')?.addEventListener('change', (e: Event) => {
   applyDensityMode((e.target as HTMLSelectElement).value, { rebuildNow: true });
@@ -814,17 +1056,18 @@ document.getElementById('fm')?.addEventListener('click', () => {
 // ---------------------------------------------------------------------------
 
 document.getElementById('vmg')?.addEventListener('click', () => {
+  document.body.classList.remove('graph-interacting');
   state.viewMode = 'graph';
   document.getElementById('vmg')?.classList.add('on');
   document.getElementById('vmt')?.classList.remove('on');
   document.getElementById('vmg')?.setAttribute('aria-pressed', 'true');
   document.getElementById('vmt')?.setAttribute('aria-pressed', 'false');
-  state.tr = d3.zoomIdentity as any;
-  rebuild();
+  requestRender({ geometryDirty: true }, { resetZoom: true });
   updateTreeOptionsVisibility();
 });
 
 document.getElementById('vmt')?.addEventListener('click', () => {
+  document.body.classList.remove('graph-interacting');
   state.viewMode = 'tree';
   document.getElementById('vmt')?.classList.add('on');
   document.getElementById('vmg')?.classList.remove('on');
@@ -832,8 +1075,7 @@ document.getElementById('vmt')?.addEventListener('click', () => {
   document.getElementById('vmg')?.setAttribute('aria-pressed', 'false');
   const parentChip = document.querySelector('.chip[data-e="parent"]');
   if (parentChip && !parentChip.classList.contains('on')) parentChip.classList.add('on');
-  state.tr = d3.zoomIdentity as any;
-  rebuild();
+  requestRender({ geometryDirty: true }, { resetZoom: true });
   updateTreeOptionsVisibility();
 });
 
@@ -845,6 +1087,7 @@ document.getElementById('bf')?.addEventListener('click', () => fitToContent());
 document.getElementById('resetView')?.addEventListener('click', () => fitToContent());
 
 document.getElementById('br')?.addEventListener('click', () => {
+  document.body.classList.remove('graph-interacting');
   const si = document.getElementById('si') as HTMLInputElement | null;
   if (si) si.value = '';
   document.getElementById('dd')?.classList.remove('open');
@@ -857,6 +1100,7 @@ document.getElementById('br')?.addEventListener('click', () => {
   applyDensityMode('comfortable', { rebuildNow: false });
   document.querySelectorAll('.chip[data-e]').forEach(c => c.classList.add('on'));
   document.querySelectorAll('.chip[data-cf]').forEach(c => c.classList.add('on'));
+  invalidateChipCache();
   state.viewMode = 'graph';
   document.getElementById('vmg')?.classList.add('on');
   document.getElementById('vmt')?.classList.remove('on');
@@ -883,7 +1127,7 @@ document.getElementById('br')?.addEventListener('click', () => {
   cS();
   institutionsReturnSelection = null;
   showEmptySidebar();
-  state.tr = d3.zoomIdentity as any; rebuild();
+  requestRender({ geometryDirty: true }, { resetZoom: true, immediate: true });
 });
 
 // ---------------------------------------------------------------------------
@@ -936,15 +1180,16 @@ window.addEventListener('request-sidebar-open', () => {
   if (!state.sidebarOpen) setSidebarOpen(true);
 });
 
-window.addEventListener('zoom-changed', () => updateMinimap(state, d3 as any));
-
 window.addEventListener('selection-changed', ((e: CustomEvent) => {
   const live = document.getElementById('a11y-live');
   if (!live) return;
   const detail = e.detail;
   if (detail?.type === 'person' && detail.id) {
-    const node = state.nodes.find(n => n.id === detail.id);
+    const nodeById = (state as any)._nodeById as Map<string, PersonNode> | undefined;
+    const node = nodeById?.get(detail.id) || state.nodes.find(n => n.id === detail.id);
     live.textContent = node ? `Selected: ${node.nm || detail.id}` : '';
+  } else if (detail?.type === 'office' && detail.officeId) {
+    live.textContent = `Office selected: ${detail.officeId}`;
   } else if (detail?.type === 'edge') {
     live.textContent = 'Relationship selected';
   } else {
@@ -962,6 +1207,8 @@ window.addEventListener('lang-changed', () => {
     withHistoryMuted(() => {
       const vmi = document.getElementById('vmi');
       if (vmi?.classList.contains('on')) { showInstitutionsPane(); return; }
+      const officeId = getCurrentOfficeId();
+      if (officeId) { showOfficeDetail(officeId); return; }
       if (state.selId) { showD(state.selId); return; }
       if (state.selEdge) { showLinkDetail(state.selEdge); return; }
       showEmptySidebar();
@@ -979,7 +1226,12 @@ window.addEventListener('resize', () => {
   }
 });
 
+let parallaxLast = 0;
 window.addEventListener('zoom-changed', ((e: CustomEvent) => {
+  if (document.body.classList.contains('graph-interacting')) return;
+  const now = performance.now();
+  if (now - parallaxLast < 32) return;
+  parallaxLast = now;
   const detail = e.detail;
   if (!detail) return;
   const ga = document.getElementById('ga');
@@ -990,8 +1242,16 @@ window.addEventListener('zoom-changed', ((e: CustomEvent) => {
   ga.style.setProperty('--pattern-oy', `${oy}px`);
 }) as EventListener);
 
+function shouldRegisterServiceWorker(): boolean {
+  if (typeof window === 'undefined') return false;
+  const { hostname, search } = window.location;
+  const isLocalHost = hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '::1';
+  const forceEnable = new URLSearchParams(search).get('sw') === 'on';
+  return !isLocalHost || forceEnable;
+}
+
 // Service worker registration
-if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+if (shouldRegisterServiceWorker() && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js').catch(() => {
       // Offline support is best-effort.

@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `kin|P67|P97|aunt/uncle↔niece/nephew`  
-Last updated: `2026-02-10`  
+Last updated: `2026-02-19`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
@@ -20,7 +20,7 @@ Inference class: `rule-derived`
 ## 3) Logic chain (pair-specific)
 1. Support set for rule parent-sibling-aunt-uncle resolved as follows.
 2. Supporting edge: parent P213 Infanta Dona Ines de Malvidas -> P97 Dom Luis de Sousa (CLM-0580, SRC-ROYALARK-M16, grade A); excerpt: Direct parent relation recorded between Infanta Dona Ines de Malvidas as parent of Dom Luis de Sousa.
-3. Supporting edge: sibling P213 Infanta Dona Ines de Malvidas <-> P67 Philippe’ (Keerithi Maha Radun) [siblings (same parents: Dom Joao + Dona Francisca)] (CLM-0632, SRC-ROYALARK-M16, grade A); excerpt: Direct sibling (siblings (same parents: Dom Joao + Dona Francisca)) relation recorded between Infanta Dona Ines de Malvidas and Philippe’.
+3. Supporting edge: sibling P213 Infanta Dona Ines de Malvidas <-> P67 Philippe’ (Keerithi Maha Radun) [siblings (same parents: Dom Joao + Dona Francisca)] (CLM-0632, SRC-ROYALARK-M16, grade A); excerpt: RoyalArk lineage entry for Dom Joao and Dona Francisca lists both Dom Felipe (P67) and Infanta Dona Ines (P213), supporting a direct sibling relation.
 4. Rule application (parent-sibling-aunt-uncle): sibling(P213 Infanta Dona Ines de Malvidas, P67 Philippe’ (Keerithi Maha Radun)) plus parent(P213 Infanta Dona Ines de Malvidas, child) yields inferred aunt/uncle-line kin between P67 Philippe’ (Keerithi Maha Radun) and P97 Dom Luis de Sousa.
 5. Current modeling remains inferred because direct source text naming kin (aunt/uncle↔niece/nephew) for this exact pair is not yet captured.
 

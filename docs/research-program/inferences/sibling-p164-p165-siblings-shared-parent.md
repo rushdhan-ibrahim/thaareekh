@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `sibling|P164|P165|siblings (shared parent)`  
-Last updated: `2026-02-10`  
+Last updated: `2026-02-19`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity

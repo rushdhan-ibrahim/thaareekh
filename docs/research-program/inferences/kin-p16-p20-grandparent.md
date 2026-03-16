@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `kin|P16|P20|grandparent`  
-Last updated: `2026-02-10`  
+Last updated: `2026-02-19`  
 Inference class: `rule-derived`
 
 ## 1) Edge identity
@@ -20,7 +20,7 @@ Inference class: `rule-derived`
 ## 3) Logic chain (pair-specific)
 1. Support set for rule parent-of-parent-grandparent resolved as follows.
 2. Supporting edge: parent P16 Salis (Meesuvvara) -> P18 Omar Veeru (Loka Abarana) (CLM-0571, SRC-ROYALARK-MALDIVES, grade B); excerpt: Direct parent relation recorded between Salis as parent of Omar Veeru.
-3. Supporting edge: parent P18 Omar Veeru (Loka Abarana) -> P20 Khadijah (Raadha Abarana) (CLM-0317, SRC-MRF-KINGS, grade B); excerpt: Kings list gives P20 (Khadijah) as child of P18.
+3. Supporting edge: parent P18 Omar Veeru (Loka Abarana) -> P20 Khadijah (Raadha Abarana) (CLM-0317, SRC-IBN-BATTUTA-RIHLA, grade A); excerpt: Ibn Battuta identifies Khadijah as daughter of Sultan Omar, corroborating the P18->P20 parent edge.
 4. Rule application (parent-of-parent-grandparent): with source -> P18 Omar Veeru (Loka Abarana) and P18 Omar Veeru (Loka Abarana) -> target parent links, P16 Salis (Meesuvvara) is modeled as inferred grandparent-line kin of P20 Khadijah (Raadha Abarana).
 5. Current modeling remains inferred because direct source text naming kin (grandparent) for this exact pair is not yet captured.
 
@@ -37,7 +37,7 @@ Inference class: `rule-derived`
 ## 6) Source basis
 - `SRC-DERIVED-RULES` (Derived family relation rules)
 - `SRC-ROYALARK-MALDIVES` (RoyalArk Maldives — Complete Genealogical Database (segments 3-16))
-- `SRC-MRF-KINGS` (Maldives Kings List)
+- `SRC-IBN-BATTUTA-RIHLA` (Rihla (The Travels of Ibn Battuta), Maldives chapters)
 - Primary inferred claim row: CLM-0478
 - Inferred claim locator: Inference basis documented in docs/research-program/inferences/kin-p16-p20-grandparent.md.
 

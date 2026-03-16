@@ -19,7 +19,11 @@ const REASON_LABEL_KEYS: Record<SearchReason, string> = {
   office: 'reason_office',
   dynasty: 'reason_dynasty',
   fuzzy: 'reason_fuzzy',
-  match: 'reason_match'
+  match: 'reason_match',
+  'office-name': 'reason_office_name',
+  'office-alias': 'reason_office_alias',
+  'office-kind': 'reason_office_kind',
+  'office-fuzzy': 'reason_office_fuzzy'
 };
 
 const TRANSLATIONS: Record<Locale, Record<string, string>> = {
@@ -51,7 +55,22 @@ const TRANSLATIONS: Record<Locale, Record<string, string>> = {
     reason_office: 'Office match',
     reason_dynasty: 'Dynasty match',
     reason_fuzzy: 'Fuzzy match',
-    reason_match: 'Match'
+    reason_match: 'Match',
+    reason_office_name: 'office name',
+    reason_office_alias: 'office alias',
+    reason_office_kind: 'office kind',
+    reason_office_fuzzy: 'office (fuzzy)',
+    office_word: 'Office',
+    office_generic: 'Office',
+    crown_office: 'Crown',
+    judicial_office: 'Judicial',
+    ministerial_office: 'Ministerial',
+    deputy_office: 'Deputy',
+    executive_office: 'Executive',
+    institution_office: 'Institution',
+    peerage_office: 'Peerage',
+    furadaana_office: 'Furadaana',
+    military_office: 'Military'
   },
   dv: {
     no_matches: 'މެޗެސް ނުވޭ',
@@ -81,7 +100,22 @@ const TRANSLATIONS: Record<Locale, Record<string, string>> = {
     reason_office: 'އޮފީސް މެޗް',
     reason_dynasty: 'ދިނަސްޓީ މެޗް',
     reason_fuzzy: 'ފަޒީ މެޗް',
-    reason_match: 'މެޗް'
+    reason_match: 'މެޗް',
+    reason_office_name: 'މަޤާމުގެ ނަން',
+    reason_office_alias: 'މަޤާމުގެ ބަދަލު ނަން',
+    reason_office_kind: 'މަޤާމުގެ ބާވަތް',
+    reason_office_fuzzy: 'މަޤާމު (ގާތްގަނޑަކަށް)',
+    office_word: 'މަޤާމު',
+    office_generic: 'މަޤާމު',
+    crown_office: 'ތާޖު',
+    judicial_office: 'ފަނޑިޔާރު',
+    ministerial_office: 'ވަޒީރު',
+    deputy_office: 'ނައިބު',
+    executive_office: 'ވެރިކަން',
+    institution_office: 'މުއައްސަސާ',
+    peerage_office: 'ކިލެގެ',
+    furadaana_office: 'ފުރަދާނަ',
+    military_office: 'ސިފައިން'
   }
 };
 
@@ -202,6 +236,15 @@ function goToPersonFactory(_documentRef: Document, _t: (key: string) => string):
   };
 }
 
+function goToOfficeFactory(): (officeId: string) => void {
+  return (officeId: string) => {
+    const showOfficeDetail = (window as any).showOfficeDetail;
+    if (typeof showOfficeDetail === 'function') {
+      showOfficeDetail(officeId);
+    }
+  };
+}
+
 export function initSearchRuntime(documentRef: Document): { setLocale: (locale: Locale) => void } {
   const dataset = getDataset('research') as unknown as { people: SearchPerson[]; edges: SearchEdge[] };
 
@@ -210,6 +253,7 @@ export function initSearchRuntime(documentRef: Document): { setLocale: (locale: 
   const engine = createSearchEngine(dataset.people ?? [], dataset.edges ?? [], officeById);
   const reasonLabelAdapter = createReasonLabelAdapter(locale.t);
   const goToPerson = goToPersonFactory(documentRef, locale.t);
+  const goToOffice = goToOfficeFactory();
   documentRef.documentElement.lang = locale.getLocale();
 
   applyRuntimeLocaleText(documentRef, locale.t);
@@ -231,7 +275,8 @@ export function initSearchRuntime(documentRef: Document): { setLocale: (locale: 
     escapeHtml,
     personName,
     t: locale.t,
-    goToPerson
+    goToPerson,
+    goToOffice
   });
 
   initCommandPaletteController(documentRef, {
@@ -242,6 +287,7 @@ export function initSearchRuntime(documentRef: Document): { setLocale: (locale: 
     personName,
     t: locale.t,
     goToPerson,
+    goToOffice,
     dynastyColor
   });
 

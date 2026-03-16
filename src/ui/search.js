@@ -1,7 +1,14 @@
 import { rankSearch, reasonLabel } from './search-engine.js';
 import { fR, esc } from '../utils/format.js';
 import { goF } from './navigation.js';
+import { showOfficeDetail } from './sidebar.js';
 import { personName, t } from './i18n.js';
+
+const KIND_KEY = {
+  crown: 'crown_office', judicial: 'judicial_office', ministerial: 'ministerial_office',
+  deputy: 'deputy_office', executive: 'executive_office', institution: 'institution_office',
+  peerage: 'peerage_office', furadaana: 'furadaana_office', military: 'military_office'
+};
 
 export function initSearch() {
   const sI = document.getElementById("si");
@@ -27,12 +34,17 @@ export function initSearch() {
   function choose(idx) {
     const r = state.rows[idx];
     if (!r) return;
-    goF(r.person.id);
     dd.classList.remove("open");
     sI.removeAttribute("aria-activedescendant");
     sI.value = "";
     state.rows = [];
     state.active = -1;
+    if (r.type === 'office') {
+      showOfficeDetail(r.office.id);
+      window.dispatchEvent(new CustomEvent('request-sidebar-open'));
+    } else {
+      goF(r.person.id);
+    }
   }
 
   function render(q) {
@@ -54,6 +66,13 @@ export function initSearch() {
     }
 
     dd.innerHTML = state.rows.map((r, i) => {
+      if (r.type === 'office') {
+        const o = r.office;
+        return `<div class="ddi${i === state.active ? " act" : ""}" id="sr-opt-${i}" role="option" aria-selected="${i === state.active ? "true" : "false"}" data-id="${o.id}" data-idx="${i}">
+          <b>${esc(o.name)}</b>
+          <em>${esc(t(KIND_KEY[o.kind] || 'office_generic'))} \u00b7 ${esc(t('office_word'))} \u00b7 ${esc(reasonLabel(r.reason))}</em>
+        </div>`;
+      }
       const p = r.person;
       return `<div class="ddi${i === state.active ? " act" : ""}" id="sr-opt-${i}" role="option" aria-selected="${i === state.active ? "true" : "false"}" data-id="${p.id}" data-idx="${i}">
         <b>${p.g === "F" ? "\u2640 " : ""}${esc(personName(p))}</b>

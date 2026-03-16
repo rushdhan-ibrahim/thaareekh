@@ -1,7 +1,7 @@
 # Inference Dossier
 
 Edge key: `sibling|P5|P7|brothers`  
-Last updated: `2026-02-10`  
+Last updated: `2026-02-19`  
 Inference class: `curated`
 
 ## 1) Edge identity
