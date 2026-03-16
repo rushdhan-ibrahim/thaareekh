@@ -6,8 +6,8 @@ const STORAGE_KEY = 'maldives-genealogy:onboarding-done';
 
 const STEPS = [
   {
-    title: 'Welcome to Reef Chronicle',
-    body: 'Explore 850 years of Maldivian royal genealogy across 8 dynasties, 160+ individuals, and 300+ connections.',
+    title: 'Welcome to Rannavaaru',
+    body: 'Explore 850 years of Maldivian royal genealogy across 8 dynasties, 160+ individuals, and 300+ connections. This is an evolving research project — entries are continually refined as new sources surface and existing claims are re-examined.',
     target: null // centered
   },
   {
