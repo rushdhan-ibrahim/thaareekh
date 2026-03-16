@@ -23,10 +23,11 @@
 .era-dot { stroke: var(--bg); stroke-width: .7 }
 .era-now-label { font: 8.5px var(--mono); fill: var(--ac) }
 
-/* Node selected glow */
+/* Node selected glow — J: outer glow for visibility at all zoom levels */
 .node-selected rect {
   stroke: var(--ac);
   animation: selectedPulse 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 6px rgba(78,201,176,0.45));
 }
 
 /* Connected neighbor node glow (dimmer than selected) */
@@ -60,11 +61,13 @@
 }
 .minimap:hover { opacity: 1 }
 .minimap svg { width: 100%; height: 100% }
+/* G: viewport glow for easier position spotting */
 .minimap-viewport {
   fill: none;
   stroke: var(--ac);
   stroke-width: 1.5;
   stroke-opacity: 0.7;
+  filter: drop-shadow(0 0 3px rgba(78,201,176,0.5));
 }
 .minimap-dot { stroke: none }
 .minimap[hidden] { display: none }

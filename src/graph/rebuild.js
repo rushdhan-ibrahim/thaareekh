@@ -1105,7 +1105,7 @@ function drawNodes(g, withDrag = false) {
 
 function renderGraph(g) {
   const dens = densityProfile();
-  const base = 0.82;
+  const base = 0.68;
   const nodeById = new Map(state.nodes.map(n => [n.id, n]));
   const progressive = graphProgressiveReveal(state.nodes, state.links);
   const showEdge = d => {

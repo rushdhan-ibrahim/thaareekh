@@ -1079,7 +1079,7 @@ function bindLinkInteractions(sel: any, tooltip: HTMLElement | null): void {
 function renderGraph(g: any): void {
   const d3 = _d3 as any;
   const dens = densityProfile();
-  const base = 0.82;
+  const base = 0.68;
   const nodeById = new Map(_state.nodes.map(n => [n.id, n]));
   const progressive = graphProgressiveReveal(_state.nodes, _state.links);
   const showEdge = (d: any) => {

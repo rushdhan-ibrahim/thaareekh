@@ -456,7 +456,7 @@ function knownAsRows(p: PersonNode): string {
   const rows = (p.known_as || [])
     .map(k => (typeof k === 'string' ? { name: k } : k))
     .filter((k): k is { name?: string; type?: string; c?: string; note?: string } => k != null && typeof k === 'object' && 'name' in k && Boolean((k as { name?: string }).name));
-  if (!rows.length) return `<div class="nt" style="color:var(--tx3)">${_esc(_t('no_known_by_names'))}</div>`;
+  if (!rows.length) return `<div class="nt nt-empty">${_esc(_t('no_known_by_names'))}</div>`;
   return `<ul class="pfl">${rows.map(k => `<li><button class="pn pn-b" data-q="${_esc(k.name || '')}">${_esc(k.name || '')}</button> ${k.type ? `<span class="rt">${_esc(k.type)}</span>` : ''} ${confidenceBadge(k.c)}${k.note ? `<div class="rs">${_esc(k.note)}</div>` : ''}</li>`).join('')}</ul>`;
 }
 
@@ -610,7 +610,7 @@ function officePanel(p: PersonNode): string {
   const rows = officeRows(p);
   const held = rows.length
     ? `<div class="ofc-list">${rows.map(o => officeCardHtml(o, p)).join('')}</div>`
-    : `<div class="nt" style="color:var(--tx3)">${_esc(_t('no_held_offices'))}</div>`;
+    : `<div class="nt nt-empty">${_esc(_t('no_held_offices'))}</div>`;
 
   return `<div class="pcs"><div class="sl">${_esc(_t('held_offices'))}</div>${held}</div>${eraContextHtml(p)}`;
 }
@@ -682,12 +682,12 @@ function personEvidencePanel(p: PersonNode): string {
     </div>
     <div class="pcs">
       <div class="sl">${_esc(_t('key_sources'))}</div>
-      ${leadSources ? `<ul class="pfl">${leadSources}</ul>` : `<div class="nt" style="color:var(--tx3)">${_esc(_t('no_sources'))}</div>`}
+      ${leadSources ? `<ul class="pfl">${leadSources}</ul>` : `<div class="nt nt-empty">${_esc(_t('no_sources'))}</div>`}
       ${tailSources ? `<details class="odt"><summary>${_esc(_t('show_more'))} ${sourceRows.length - 3} ${_esc(sourceRows.length - 3 === 1 ? _t('more_source') : _t('more_sources'))}</summary><ul class="pfl">${tailSources}</ul></details>` : ''}
     </div>
     <div class="pcs">
       <div class="sl">${_esc(_t('uncertainty_watchlist'))}</div>
-      ${uncertain ? `<ul class="pfl">${uncertain}</ul>` : `<div class="nt" style="color:var(--tx3)">${_esc(_t('no_inferred_uncertain_links'))}</div>`}
+      ${uncertain ? `<ul class="pfl">${uncertain}</ul>` : `<div class="nt nt-empty">${_esc(_t('no_inferred_uncertain_links'))}</div>`}
     </div>
     <div class="pcs">
       <div class="sl">${_esc(_t('geographic_context'))}</div>
@@ -888,7 +888,7 @@ function profileCard(p: PersonNode): string {
 }
 
 function srcH(refs: string[]): string {
-  if (!refs || !refs.length) return `<div class="nt" style="color:var(--tx3)">${_esc(_t('no_sources'))}</div>`;
+  if (!refs || !refs.length) return `<div class="nt nt-empty">${_esc(_t('no_sources'))}</div>`;
   const offline = typeof navigator !== 'undefined' && navigator.onLine === false;
   const archiveLink = `<div class="nt" style="margin:4px 0 8px;color:var(--tx3)">${_esc(_t('local_archive'))}: <a href="docs/offline-research-archive.json" target="_blank" rel="noopener noreferrer">docs/offline-research-archive.json</a>${offline ? ` \u00b7 ${_esc(_t('external_links_offline_notice'))}` : ''}</div>`;
   const rows = refs.map(id => {
@@ -901,7 +901,7 @@ function srcH(refs: string[]): string {
     const note = s.notes ? `<div class="rs">${_esc(s.notes)}</div>` : '';
     return `<li class="ri"><div class="rlf"><div class="rn">${linkHtml} <span class="rt">${_esc(s.quality || '?')}</span> <span class="rt">${_esc(s.id)}</span></div><div class="rs">${_esc(s.publisher || '')}${s.access_date ? ' \u00b7 ' + _esc(s.access_date) : ''}</div>${note}</div></li>`;
   }).filter(Boolean) as string[];
-  if (!rows.length) return `<div class="nt" style="color:var(--tx3)">${_esc(_t('no_sources'))}</div>`;
+  if (!rows.length) return `<div class="nt nt-empty">${_esc(_t('no_sources'))}</div>`;
   const cut = rows.length > 4 ? 3 : rows.length;
   const lead = rows.slice(0, cut).join('');
   const tail = rows.slice(cut).join('');
@@ -1224,7 +1224,7 @@ function edgeEvidencePanel(e: EdgeRecord, s: PersonNode, targetPerson: PersonNod
     </div>
     <div class="pcs">
       <div class="sl">${_esc(_t('edge_source_stack'))}</div>
-      ${lead ? `<ul class="pfl">${lead}</ul>` : `<div class="nt" style="color:var(--tx3)">${_esc(_t('no_edge_sources'))}</div>`}
+      ${lead ? `<ul class="pfl">${lead}</ul>` : `<div class="nt nt-empty">${_esc(_t('no_edge_sources'))}</div>`}
       ${tail ? `<details class="odt"><summary>${_esc(_t('show_more'))} ${refs.length - 3} ${_esc(refs.length - 3 === 1 ? _t('more_source') : _t('more_sources'))}</summary><ul class="pfl">${tail}</ul></details>` : ''}
     </div>
   `;
@@ -1386,7 +1386,7 @@ function institutionsOverviewHtml(): string {
         </li>
       `;
     }).join('')
-    : `<div class="nt" style="color:var(--tx3)">${_esc(_t('no_institutions_loaded'))}</div>`;
+    : `<div class="nt nt-empty">${_esc(_t('no_institutions_loaded'))}</div>`;
   return `
     <section class="pc">
       <div class="pch">
@@ -1493,53 +1493,53 @@ function layRelationNarrative(
   const rel = (relationText || '').toLowerCase();
   if (rule === 'parent-of-parent-grandparent' && basis.via_parent) {
     return _t('inference_narrative_grandparent_via')
-      .replace('{source}', sourceName)
-      .replace('{target}', targetName)
+      .replaceAll('{source}', sourceName)
+      .replaceAll('{target}', targetName)
       .replace('{via}', personLabel(basis.via_parent));
   }
   if (rule === 'shared-parent-sibling' && basis.shared_parent) {
     return _t('inference_narrative_sibling_shared_parent')
-      .replace('{source}', sourceName)
-      .replace('{target}', targetName)
+      .replaceAll('{source}', sourceName)
+      .replaceAll('{target}', targetName)
       .replace('{parent}', personLabel(basis.shared_parent));
   }
   if (rule === 'parent-sibling-aunt-uncle' && basis.via_parent) {
     return _t('inference_narrative_aunt_uncle_via')
-      .replace('{source}', sourceName)
-      .replace('{target}', targetName)
+      .replaceAll('{source}', sourceName)
+      .replaceAll('{target}', targetName)
       .replace('{via}', personLabel(basis.via_parent));
   }
   if (rule === 'children-of-siblings-cousin' && (basis.via_parent_siblings || []).length === 2) {
     const pair = basis.via_parent_siblings || [];
     return _t('inference_narrative_cousin_via_parents')
-      .replace('{source}', sourceName)
-      .replace('{target}', targetName)
+      .replaceAll('{source}', sourceName)
+      .replaceAll('{target}', targetName)
       .replace('{p1}', personLabel(pair[0]))
       .replace('{p2}', personLabel(pair[1]));
   }
   if (rule === 'parent-of-parent-grandparent' || rel.includes('grandparent')) {
     return _t('inference_narrative_grandparent')
-      .replace('{source}', sourceName)
-      .replace('{target}', targetName);
+      .replaceAll('{source}', sourceName)
+      .replaceAll('{target}', targetName);
   }
   if (rule === 'children-of-siblings-cousin' || rel.includes('cousin')) {
     return _t('inference_narrative_cousin')
-      .replace('{source}', sourceName)
-      .replace('{target}', targetName);
+      .replaceAll('{source}', sourceName)
+      .replaceAll('{target}', targetName);
   }
   if (rule === 'parent-sibling-aunt-uncle' || rel.includes('aunt') || rel.includes('uncle')) {
     return _t('inference_narrative_aunt_uncle')
-      .replace('{source}', sourceName)
-      .replace('{target}', targetName);
+      .replaceAll('{source}', sourceName)
+      .replaceAll('{target}', targetName);
   }
   if (rule === 'shared-parent-sibling' || rel.includes('sibling')) {
     return _t('inference_narrative_sibling')
-      .replace('{source}', sourceName)
-      .replace('{target}', targetName);
+      .replaceAll('{source}', sourceName)
+      .replaceAll('{target}', targetName);
   }
   return _t('inference_narrative_generic')
-    .replace('{source}', sourceName)
-    .replace('{target}', targetName);
+    .replaceAll('{source}', sourceName)
+    .replaceAll('{target}', targetName);
 }
 
 function simplifyInferenceStep(step: string, rule: string | undefined): string {
@@ -1734,7 +1734,7 @@ export function rlH(title: string, items: RelNeighbor[]): string {
       ? ` \u00b7 ${it.srcCount} ${it.srcCount === 1 ? _t('source_word') : _t('sources_word')}${it.cg ? ` \u00b7 ${_t('grade_word')} ${it.cg}` : ''}`
       : '';
     const kinStory = ownerId ? kinStoryBlock(ownerId, it, edge) : '';
-    return `<li class="ri"><div class="rlf"><div class="rn">${p.g === 'F' ? '\u2640 ' : ''}${_esc(_personName(p))} ${tag}</div><div class="rs">${p.re ? _esc(_fR(p.re)) : ''} \u00b7 ${_esc(p.dy || '?')}${p.n ? ` \u00b7 ${p.n.map(x => '#' + x).join(', ')}` : ''}${srcMeta}</div>${kinStory}</div><button class="gb" onclick="goF('${p.id}')">${_esc(_t('go'))}</button></li>`;
+    return `<li class="ri" data-rel="${_esc(relType)}"><div class="rlf"><div class="rn">${p.g === 'F' ? '\u2640 ' : ''}${_esc(_personName(p))} ${tag}</div><div class="rs">${p.re ? _esc(_fR(p.re)) : ''} \u00b7 ${_esc(p.dy || '?')}${p.n ? ` \u00b7 ${p.n.map(x => '#' + x).join(', ')}` : ''}${srcMeta}</div>${kinStory}</div><button class="gb" onclick="goF('${p.id}')">${_esc(_t('go'))}</button></li>`;
   }).join('')}</ul>`;
 }
 
@@ -1793,7 +1793,7 @@ function officeDetailCard(office: OfficeCatalogEntry): string {
 
 function officeHolderListHtml(officeId: string): string {
   const holders = getHolderMap().get(officeId) || [];
-  if (!holders.length) return `<div class="nt" style="color:var(--tx3)">${_esc(_t('no_holders'))}</div>`;
+  if (!holders.length) return `<div class="nt nt-empty">${_esc(_t('no_holders'))}</div>`;
   return `<div class="sl">${_esc(_t('office_holders'))}</div><ul class="rl">${holders.map(h => {
     const p = _byId.get(h.personId);
     const nm = p ? _personName(p) : h.personId;
@@ -1941,12 +1941,12 @@ export function showD(id: string): void {
     const sN = document.getElementById('sN');
     if (sN) { sN.innerHTML = `${card}${cmp}${evi}`; bindProfileTabs(sN); }
     const sR = document.getElementById('sR');
-    if (sR) sR.innerHTML = rels || `<div class="nt" style="color:var(--tx3)">${_esc(_t('no_connections'))}</div>`;
+    if (sR) sR.innerHTML = rels || `<div class="nt nt-empty">${_esc(_t('no_connections'))}</div>`;
   } else {
     crossFadeContent(document.getElementById('sN'), `${card}${cmp}${evi}`, () => {
       bindProfileTabs(document.getElementById('sN'));
     });
-    crossFadeContent(document.getElementById('sR'), rels || `<div class="nt" style="color:var(--tx3)">${_esc(_t('no_connections'))}</div>`);
+    crossFadeContent(document.getElementById('sR'), rels || `<div class="nt nt-empty">${_esc(_t('no_connections'))}</div>`);
   }
   _recordPerson(id);
   window.dispatchEvent(new CustomEvent('selection-changed', { detail: { type: 'person', id } }));
