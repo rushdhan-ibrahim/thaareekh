@@ -868,8 +868,8 @@ showEmptySidebar();
 // Initial stats & render
 document.getElementById("st").textContent = people.length + " \u00b7 " + edges.length + (mode === "research" ? " \u00b7 research" : "");
 rebuild();
-// Update translate extent once the initial render has settled
-setTimeout(updateTranslateExtent, 1200);
+// Fit to content once the initial render has settled, then update pan limits
+setTimeout(() => { fitToContent(); setTimeout(updateTranslateExtent, 500); }, 1200);
 restoreSelection(savedView);
 initViewStatePersistence(getCompareState);
 initKeyboardNav(fitToContent);
