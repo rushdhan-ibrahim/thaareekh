@@ -41,5 +41,5 @@ export function timelineExtent() {
   if (!Number.isFinite(min) || !Number.isFinite(max)) {
     return { min: 1000, max: 2026 };
   }
-  return { min, max };
+  return { min, max: Math.min(max, new Date().getFullYear()) };
 }
