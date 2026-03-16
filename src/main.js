@@ -870,7 +870,17 @@ document.getElementById("st").textContent = people.length + " \u00b7 " + edges.l
 rebuild();
 // Fit to content on fresh load (no saved zoom), then update pan limits
 const hasSavedZoom = savedView?.zoom && Number.isFinite(savedView.zoom.k) && savedView.zoom.k !== 1;
-setTimeout(() => { if (!hasSavedZoom) fitToContent(); setTimeout(updateTranslateExtent, 500); }, 1200);
+if (!hasSavedZoom) {
+  window.addEventListener('sim-settled', () => {
+    fitToContent();
+    setTimeout(updateTranslateExtent, 500);
+  }, { once: true });
+} else {
+  setTimeout(updateTranslateExtent, 1700);
+}
+if (state.viewMode === 'tree') {
+  setTimeout(() => { fitToContent(); setTimeout(updateTranslateExtent, 500); }, 300);
+}
 restoreSelection(savedView);
 initViewStatePersistence(getCompareState);
 initKeyboardNav(fitToContent);

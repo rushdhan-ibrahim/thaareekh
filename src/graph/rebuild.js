@@ -1208,7 +1208,10 @@ function renderGraph(g) {
         scheduleGraphDomSync(14);
         maybeStopStableGraphSimulation(sim);
       })
-      .on("end", () => document.getElementById("ld").classList.add("dn"));
+      .on("end", () => {
+        document.getElementById("ld").classList.add("dn");
+        window.dispatchEvent(new Event('sim-settled'));
+      });
     state.sim = sim;
   }
 
