@@ -1157,7 +1157,9 @@ const st = document.getElementById('st');
 if (st) st.textContent = typedPeople.length + ' \u00b7 ' + typedEdges.length + (mode === 'research' ? ' \u00b7 research' : '');
 
 rebuild();
-setTimeout(updateTranslateExtent, 1200);
+// Fit to content on fresh load (no saved zoom), then update pan limits
+const hasSavedZoom = savedView?.zoom && Number.isFinite(savedView.zoom.k) && savedView.zoom.k !== 1;
+setTimeout(() => { if (!hasSavedZoom) fitToContent(); setTimeout(updateTranslateExtent, 500); }, 1200);
 restoreSelection(savedView);
 
 initViewStatePersistence(state, d3 as any, getCompareState);
