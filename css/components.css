@@ -130,9 +130,9 @@ body.focus-mode .edge-dimmed { stroke-opacity: 0.06 !important }
   top: 0;
   left: 0;
   right: 0;
-  height: 8px;
-  background: linear-gradient(90deg, var(--dy-color, var(--ac)), transparent 80%);
-  opacity: 0.85;
+  height: 5px;
+  background: linear-gradient(90deg, var(--dy-color, var(--ac)), transparent 60%);
+  opacity: 0.8;
 }
 .pch {
   display: flex;
@@ -816,6 +816,9 @@ body.lang-dv .bio-text { direction: rtl; text-align: right; font-family: 'Noto S
   margin-bottom: 6px;
 }
 .evi-seg { min-width: 2px }
+.evi-seg:first-child { border-radius: 4px 0 0 4px }
+.evi-seg:last-child { border-radius: 0 4px 4px 0 }
+.evi-seg:only-child { border-radius: 4px }
 .evi-c { background: var(--ep, #35a5a3) }
 .evi-i { background: var(--ei, #d4a84b) }
 .evi-u { background: var(--eu, #d98090) }
