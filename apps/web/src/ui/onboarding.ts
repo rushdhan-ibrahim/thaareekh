@@ -8,8 +8,8 @@ interface OnboardingStep {
 
 const STEPS: OnboardingStep[] = [
   {
-    title: 'Welcome to Reef Chronicle',
-    body: 'Explore 850 years of Maldivian royal genealogy across 8 dynasties, 160+ individuals, and 300+ connections.',
+    title: 'Welcome to Rannavaaru',
+    body: 'Explore 850 years of Maldivian dynastic history — dynasties, successions, offices, and the institutional structures that shaped the islands. Currently mapping 160+ individuals and 300+ connections across 8 dynasties, with the aim of growing into a broader repository of Maldivian history beyond genealogy. This is an evolving research project — entries are continually refined as new sources surface and existing claims are re-examined.',
     target: null
   },
   {
