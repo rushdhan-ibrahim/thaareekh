@@ -159,3 +159,58 @@ export const officeTimeline = [
 ];
 
 export const officeById = new Map(officeCatalog.map(o => [o.id, o]));
+
+/**
+ * Return the office function/summary relevant for a given year:
+ * the latest timeline period that includes the office and whose
+ * start year is at or before the given year.
+ * Falls back to the catalog summary if no period matches.
+ */
+export function officeFunctionForYear(officeId, year) {
+  if (!officeId) return '';
+  if (year != null && Number.isFinite(year)) {
+    let best = null;
+    let bestStart = -Infinity;
+    for (const period of officeTimeline) {
+      if (!period.offices.includes(officeId)) continue;
+      const m = /(\d{3,4})/.exec(period.period || '');
+      if (!m) continue;
+      const start = Number(m[1]);
+      if (start <= year && start >= bestStart) {
+        best = period;
+        bestStart = start;
+      }
+    }
+    if (best) return best.summary;
+  }
+  const def = officeById.get(officeId);
+  return def ? def.summary : '';
+}
+
+/**
+ * Build a map of officeId → holder entries from people's offices_held arrays.
+ */
+export function buildOfficeHolders(people) {
+  const map = new Map();
+  for (const p of people) {
+    if (!p.offices_held) continue;
+    for (const o of p.offices_held) {
+      const oid = o.office_id;
+      if (!oid) continue;
+      let arr = map.get(oid);
+      if (!arr) { arr = []; map.set(oid, arr); }
+      arr.push({
+        personId: p.id,
+        label: o.label || p.nm || p.id,
+        start: o.start ?? null,
+        end: o.end ?? null,
+        c: o.c || 'c'
+      });
+    }
+  }
+  // Sort each office's holders by start year
+  for (const [, arr] of map) {
+    arr.sort((a, b) => (a.start ?? 9999) - (b.start ?? 9999));
+  }
+  return map;
+}

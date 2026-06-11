@@ -1,4 +1,6 @@
 import state from '../state.js';
+import { hashCode, mulberry32 } from '../utils/prng.js';
+import { startParticles, stopParticles } from './particles.js';
 
 function linkIds(l) {
   return {
@@ -97,6 +99,42 @@ export function hiN(id) {
     const { s, t } = linkIds(d);
     return s === id || t === id;
   });
+
+  // Self-drawing edges on highlight
+  const reduceMotion = typeof window !== "undefined"
+    && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  if (!reduceMotion) {
+    const rng = mulberry32(hashCode(id));
+    state.gL.each(function (d) {
+      const { s: hSrc, t: hTgt } = linkIds(d);
+      if (hSrc !== id && hTgt !== id) return;
+      const el = this;
+      let len;
+      if (el.tagName === "line") {
+        const x1 = +el.getAttribute("x1"), y1 = +el.getAttribute("y1");
+        const x2 = +el.getAttribute("x2"), y2 = +el.getAttribute("y2");
+        len = Math.hypot(x2 - x1, y2 - y1);
+      } else {
+        len = el.getTotalLength?.() || 0;
+      }
+      if (!len) return;
+      const delay = rng() * 600;         // stagger 0–600ms
+      el.style.strokeDasharray = `${len}`;
+      el.style.strokeDashoffset = `${len}`;
+      el.style.animation = `edgeDraw 1.6s var(--ease-out) ${delay}ms forwards`;
+    });
+  }
+
+  // Start particle flow on highlighted edges
+  if (!reduceMotion) {
+    const highlightedEls = [];
+    state.gL.each(function (d) {
+      const { s: hSrc, t: hTgt } = linkIds(d);
+      if (hSrc === id || hTgt === id) highlightedEls.push(this);
+    });
+    startParticles(highlightedEls);
+  }
+
   applyAncestralFlow(id);
 }
 
@@ -125,10 +163,15 @@ export function hiE(link) {
 
 export function clH() {
   state.selEdge = null;
+  stopParticles();
   state.gN?.classed("node-selected", false);
   state.gN?.classed("node-connected", false);
   state.gL?.classed("edge-highlight", false);
   clearFlow();
+  // Clear self-drawing inline styles so CSS-declared values (e.g. flow-edge dasharray) restore
+  state.gL?.style("stroke-dasharray", null)
+           .style("stroke-dashoffset", null)
+           .style("animation", null);
   state.gN?.select("rect").attr("opacity", function () {
     return nodeBaseOpacity(this);
   });

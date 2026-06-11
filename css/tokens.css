@@ -1,136 +1,215 @@
-/* ===== Design Tokens ===== */
+/* ═══════════════════════════════════════════
+   RANNAVAARU DESIGN TOKENS
+   Manuscript-derived visual system
+   ═══════════════════════════════════════════ */
 
 :root {
-  /* Typography stacks */
-  --sans: "Source Sans 3", "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --display: "Fraunces", "Cormorant Garamond", "Iowan Old Style", "Times New Roman", serif;
-  --mono: "JetBrains Mono", "SF Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-  --thaana: "Noto Sans Thaana", "MV Waheed", var(--sans);
+  /* ═══ TYPOGRAPHY ═══ */
+  --serif:    'EB Garamond', 'Cormorant Garamond', Georgia, serif;
+  --display:  'Cormorant SC', Georgia, serif;
+  --sans:     var(--serif);
+  --mono:     'JetBrains Mono', 'Courier New', monospace;
+  --thaana:   'MV Iyyu Nala', 'MV Boli', 'Noto Sans Thaana', sans-serif;
 
-  /* Radii */
-  --radius: 14px;
-  --radius-sm: 9px;
+  /* ═══ TYPE SCALE (px) ═══ */
+  --fs-xs:    11px;
+  --fs-sm:    12px;
+  --fs-base:  15px;
+  --fs-md:    17px;
+  --fs-lg:    20px;
+  --fs-xl:    24px;
+  --fs-xxl:   28px;
 
-  /* Era atmosphere (driven by JS) */
-  --era-light: .08;
-  --era-warm: .08;
+  /* ═══ SPACING (4px base) ═══ */
+  --sp-1: 4px;   --sp-2: 8px;   --sp-3: 12px;  --sp-4: 16px;
+  --sp-5: 20px;  --sp-6: 24px;  --sp-7: 28px;  --sp-8: 32px;
+  --sp-9: 36px;  --sp-10: 40px; --sp-11: 44px; --sp-12: 48px;
 
-  /* Spacing scale (4px base) */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 20px;
-  --space-6: 24px;
-  --space-7: 28px;
-  --space-8: 32px;
-  --space-9: 36px;
-  --space-10: 40px;
-  --space-11: 44px;
-  --space-12: 48px;
+  /* ═══ RADII ═══ */
+  --radius:    3px;
+  --radius-sm: 1.5px;
+  --radius-lg: 6px;
 
-  /* Type scale */
-  --text-2xs: 9px;
-  --text-xs: 10px;
-  --text-sm: 11px;
-  --text-base: 13px;
-  --text-md: 14px;
-  --text-lg: 16px;
-  --text-xl: 18px;
-  --text-2xl: 22px;
-  --text-3xl: 28px;
+  /* ═══ SHADOWS (warm brown) ═══ */
+  --shadow-sm:  0 1px 3px rgba(60, 42, 20, 0.06);
+  --shadow-md:  0 4px 12px rgba(60, 42, 20, 0.08);
+  --shadow-lg:  0 12px 36px rgba(60, 42, 20, 0.12);
+
+  /* ═══ MOTION ═══ */
+  --ease-out:    cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast:    200ms;
+  --dur-mid:     400ms;
+  --dur-slow:    800ms;
+  --dur-draw:    1600ms;
+  --dur-breath:  12s;
+  --dur-orbit:   90s;
+  --dur-orrery:  80s;
+  --dur-code:    140s;
+  --dur-glow:    22s;
+  --dur-redraw:  30s;
+
+  /* ═══ Era atmosphere (driven by JS) ═══ */
+  --era-light: .06;
+  --era-warm: .06;
+}
+
+/* ═══ LIGHT THEME — "Sunlit Vellum" ═══ */
+[data-theme="light"] {
+  /* Paper surface */
+  --bg:   #ece6dc;
+  --bg2:  #e2dbd0;
+  --sf:   #d8cfc2;
+  --sf2:  #cec4b5;
+
+  /* Ink hierarchy */
+  --tx:   #16130f;
+  --tx2:  #3a342c;
+  --tx3:  #6c645d;
+
+  /* Structural */
+  --bd:   rgb(0 0 0 / 0.08);
+  --bd2:  rgb(0 0 0 / 0.14);
+  --ac:   #8b2d23;
+  --ac2:  #a8473a;
+
+  /* Semantic */
+  --rubric:     #8b2d23;
+  --ash:        #6c645d;
+  --ash-light:  #9e9589;
+  --ghost:      #c4bdb3;
+  --rule:       rgb(0 0 0 / 0.10);
+
+  /* Dynasty colors */
+  --dy-lunar:       #5b7a6e;
+  --dy-hilaaly:     #7a6350;
+  --dy-utheemu:     #8b2d23;
+  --dy-dhiyamigili: #5a6278;
+  --dy-isdu:        #7a6a8a;
+  --dy-huraagey:    #6b7a4e;
+  --dy-devadu:      #8a6e50;
+  --dy-unknown:     #8a8478;
+
+  /* Edge type colors */
+  --ep:   #16130f;
+  --es:   #6c645d;
+  --esp:  #8b2d23;
+  --ek:   #c4bdb3;
+
+  /* Confidence overlays */
+  --ei:   #6c645d;
+  --eu:   #c4bdb3;
+
+  /* Source quality */
+  --sq-a: #16130f;
+  --sq-b: #6c645d;
+  --sq-c: #9e9589;
+  --sq-d: #c4bdb3;
+
+  /* Backward-compat aliases (JS reads these) */
+  --nf: rgba(248,242,230,0.96);
+  --nt: var(--tx);
+  --sh: var(--shadow-md);
+  --hov: rgb(0 0 0 / 0.04);
+  --ac-bg: rgb(139 45 35 / 0.08);
+  --ac-bd: rgb(139 45 35 / 0.22);
+}
+
+/* ═══ DARK THEME — "Candlelit Manuscript" ═══ */
+[data-theme="dark"] {
+  /* Paper surface */
+  --bg:   #1a1714;
+  --bg2:  #221e1a;
+  --sf:   #2e2924;
+  --sf2:  #3a342e;
+
+  /* Ink hierarchy */
+  --tx:   #e8e2d6;
+  --tx2:  #c8c0b4;
+  --tx3:  #9e9589;
+
+  /* Structural */
+  --bd:   rgb(255 255 255 / 0.06);
+  --bd2:  rgb(255 255 255 / 0.12);
+  --ac:   #c4563e;
+  --ac2:  #d4705a;
+
+  /* Semantic */
+  --rubric:     #c4563e;
+  --ash:        #9e9589;
+  --ash-light:  #6c645d;
+  --ghost:      #3d3529;
+  --rule:       rgb(255 255 255 / 0.08);
+
+  /* Dynasty colors */
+  --dy-lunar:       #7da494;
+  --dy-hilaaly:     #a08670;
+  --dy-utheemu:     #c4563e;
+  --dy-dhiyamigili: #7a88a0;
+  --dy-isdu:        #9a8ab0;
+  --dy-huraagey:    #8a9a6e;
+  --dy-devadu:      #b08e6e;
+  --dy-unknown:     #9a9488;
+
+  /* Edge type colors */
+  --ep:   #e8e2d6;
+  --es:   #9e9589;
+  --esp:  #c4563e;
+  --ek:   #3d3529;
+
+  /* Confidence overlays */
+  --ei:   #9e9589;
+  --eu:   #3d3529;
+
+  /* Source quality */
+  --sq-a: #e8e2d6;
+  --sq-b: #9e9589;
+  --sq-c: #6c645d;
+  --sq-d: #3d3529;
 
   /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(0,0,0,0.12);
-  --shadow-md: 0 6px 20px rgba(0,0,0,0.22);
-  --shadow-lg: 0 10px 30px rgba(0,0,0,0.36);
-  --shadow-glow-lagoon: 0 0 18px rgba(78,201,176,0.22);
-  --shadow-glow-gold: 0 0 18px rgba(200,168,96,0.22);
+  --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.15);
+  --shadow-md:  0 4px 12px rgba(0, 0, 0, 0.20);
+  --shadow-lg:  0 12px 36px rgba(0, 0, 0, 0.30);
 
-  /* Transition durations */
-  --dur-fast: 120ms;
-  --dur-normal: 250ms;
-  --dur-slow: 400ms;
-
-  /* Easing */
-  --ease-out: cubic-bezier(0.32, 0.72, 0, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Backward-compat aliases (JS reads these) */
+  --nf: rgba(42,33,24,0.94);
+  --nt: var(--tx);
+  --sh: var(--shadow-md);
+  --hov: rgb(255 255 255 / 0.04);
+  --ac-bg: rgb(196 86 62 / 0.12);
+  --ac-bd: rgb(196 86 62 / 0.28);
 }
 
-/* ===== Dark Theme ===== */
-[data-theme="dark"] {
-  --bg: #111a1f;
-  --bg2: #162028;
-  --sf: #1c2830;
-  --sf2: #24323c;
-  --tx: #f0e8d4;
-  --tx2: #c4b89c;
-  --tx3: #9a8e78;
-  --bd: rgba(220,200,170,0.1);
-  --bd2: rgba(220,200,170,0.18);
-  --ac: #4ec9b0;
-  --ac-bg: rgba(78,201,176,0.14);
-  --ac-bd: rgba(78,201,176,0.28);
-  --ac2: #c8a860;
-  --sq-a: #58c9b6;
-  --sq-b: #c8a365;
-  --sq-c: #e09060;
-  --sq-d: #c4514d;
-  --sh: 0 10px 30px rgba(0,0,0,0.4);
-  --hov: rgba(255,255,255,0.06);
-  --dy-lunar: #5dd4db;
-  --dy-hilaaly: #d49aac;
-  --dy-utheemu: #85b4e0;
-  --dy-dhiyamigili: #d4b474;
-  --dy-isdu: #6ec8a0;
-  --dy-huraagey: #d89888;
-  --dy-devadu: #b4aef0;
-  --dy-unknown: #90a098;
-  --nt: #f2ead8;
-  --ep: rgba(200,220,210,0.55);
-  --es: rgba(93,212,219,0.75);
-  --esp: rgba(240,144,128,0.72);
-  --ek: rgba(224,146,168,0.66);
-  --ei: rgba(228,184,102,0.70);
-  --eu: rgba(240,144,128,0.84);
-  --nf: rgba(22,32,40,0.94);
+/* ═══ DENSITY MODES ═══ */
+[data-density="compact"] {
+  --fs-base: 13px;
+  --fs-md:   15px;
+  --node-h:  28px;
+  --node-pad: 4px 8px;
+  --node-name-size: 11px;
+  --node-sub-size: 9px;
 }
 
-/* ===== Light Theme ===== */
-[data-theme="light"] {
-  --bg: #f2f0eb;
-  --bg2: #e8e6de;
-  --sf: #faf8f3;
-  --sf2: #f0ece4;
-  --tx: #1a2420;
-  --tx2: #3d5248;
-  --tx3: #607068;
-  --bd: rgba(30,50,40,0.12);
-  --bd2: rgba(30,50,40,0.2);
-  --ac: #1a8a82;
-  --ac-bg: rgba(26,138,130,0.10);
-  --ac-bd: rgba(26,138,130,0.24);
-  --ac2: #8a6418;
-  --sq-a: #1a806e;
-  --sq-b: #8a6418;
-  --sq-c: #b05030;
-  --sq-d: #943030;
-  --sh: 0 8px 24px rgba(30,50,40,0.1);
-  --hov: rgba(30,50,40,0.04);
-  --dy-lunar: #0a6878;
-  --dy-hilaaly: #984068;
-  --dy-utheemu: #2860b0;
-  --dy-dhiyamigili: #a06018;
-  --dy-isdu: #187858;
-  --dy-huraagey: #a84030;
-  --dy-devadu: #5858b8;
-  --dy-unknown: #607068;
-  --nt: #1a2420;
-  --ep: rgba(30,50,40,0.50);
-  --es: rgba(10,104,120,0.72);
-  --esp: rgba(168,64,48,0.68);
-  --ek: rgba(152,64,104,0.62);
-  --ei: rgba(160,96,24,0.66);
-  --eu: rgba(168,64,48,0.78);
-  --nf: rgba(250,250,248,0.97);
+[data-density="comfortable"] {
+  --fs-base: 15px;
+  --fs-md:   17px;
+  --node-h:  36px;
+  --node-pad: 6px 10px;
+  --node-name-size: 13px;
+  --node-sub-size: 10px;
+}
+
+[data-density="presentation"] {
+  --fs-base: 17px;
+  --fs-md:   20px;
+  --node-h:  48px;
+  --node-pad: 10px 14px;
+  --node-name-size: 16px;
+  --node-sub-size: 12px;
+}
+
+/* ═══ Selection pulse base width ═══ */
+:root {
+  --select-base-w: 1;
 }

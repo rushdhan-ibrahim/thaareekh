@@ -10,6 +10,8 @@ import { dynastyTransitions, eraMilestones } from '../data/era-events.js';
 import { personName, relationLabel, t } from '../ui/i18n.js';
 import { showNodeHoverCard, moveHoverCard, hideHoverCard } from '../ui/hover-card.js';
 import { computeTreePlacement } from './tree-placement-core.js';
+import { hashCode, mulberry32 } from '../utils/prng.js';
+import { buildOrrery } from './orrery.js';
 
 const TIME_EXTENT = timelineExtent();
 const PROGRESSIVE_THRESHOLD = 140;
@@ -871,7 +873,7 @@ export function rebuild() {
   state._adjByType = adjByType;
   state._edgeBySelectionKey = edgeBySelection;
 
-  // Build cached parentByChild map for ancestral flow (used by highlight.js)
+  // Build parent-by-child map for ancestral flow (not yet consumed; planned cache)
   const pbc = new Map();
   state.links.forEach(l => {
     if (l._e.t !== "parent") return;
@@ -901,7 +903,7 @@ export function rebuild() {
     const defs = state.svgEl.append("defs").attr("class", "persistent-defs");
     // Node drop shadow filter (static)
     const dropFilter = defs.append("filter").attr("id", "nodeShadow").attr("x", "-20%").attr("y", "-20%").attr("width", "140%").attr("height", "140%");
-    dropFilter.append("feDropShadow").attr("dx", 0).attr("dy", 2).attr("stdDeviation", 3).attr("flood-color", "rgba(0,0,0,0.25)").attr("flood-opacity", 0.4);
+    dropFilter.append("feDropShadow").attr("dx", 0).attr("dy", 1.5).attr("stdDeviation", 1.5).attr("flood-color", "rgba(60,42,20,0.15)").attr("flood-opacity", 0.35);
     // Default arrow marker (fallback)
     defs.append("marker").attr("id", "ar-default").attr("viewBox", "0 0 10 10").attr("refX", 10).attr("refY", 5)
       .attr("markerWidth", 5).attr("markerHeight", 5).attr("orient", "auto-start-reverse")
@@ -1069,17 +1071,28 @@ function drawNodes(g, withDrag = false) {
   } else {
     state.gN.on(".drag", null);
   }
+  // Node jitter: seeded per-node PRNG for organic variation
+  const jitterRx = d => {
+    const rng = mulberry32(hashCode(d.id + "|rx"));
+    return d.g === "F" ? 2.2 + rng() * 0.8 : 1.5 + rng() * 1.5; // F: 2.2–3, M: 1.5–3
+  };
+  const jitterAccentW = d => {
+    const rng = mulberry32(hashCode(d.id + "|aw"));
+    return 2.7 + rng() * 0.6; // 2.7–3.3
+  };
   state.gN.select("rect.node-body")
-    .attr("rx", d => d.g === "F" ? 12 : 4).attr("ry", d => d.g === "F" ? 12 : 4)
+    .attr("rx", jitterRx).attr("ry", jitterRx)
     .attr("fill", cs("--nf")).attr("stroke", d => nC(d.dy)).attr("stroke-width", d => d.g === "F" ? 2.2 : 1.5)
     .attr("filter", "url(#nodeShadow)");
   state.gN.select("rect.node-accent")
-    .attr("rx", d => d.g === "F" ? 12 : 4).attr("ry", d => d.g === "F" ? 12 : 4)
+    .attr("rx", jitterRx).attr("ry", jitterRx)
     .attr("fill", d => nC(d.dy)).attr("opacity", 0.85)
-    .attr("width", 3);
+    .attr("width", jitterAccentW);
   state.gN.select("text.node-name")
     .attr("text-anchor", "middle").attr("dy", ".35em").attr("font-size", dens.text)
-    .attr("font-family", "var(--sans)").attr("fill", cs("--nt")).attr("font-weight", 500)
+    .attr("font-family", "var(--serif, var(--sans))").attr("fill", cs("--nt")).attr("font-weight", 500)
+    .style("font-variant", d => (d.n || []).length ? "small-caps" : null)
+    .style("letter-spacing", d => (d.n || []).length ? ".04em" : null)
     .text(d => (d.g === "F" ? "\u2640 " : "") + trimLabel(personName(d), dens.maxLabelChars));
 
   state._badgeData = [];
@@ -1103,6 +1116,33 @@ function drawNodes(g, withDrag = false) {
   });
 }
 
+/** Apply breathing animation to sovereign node rects */
+function applySovereignBreathing(gN, reduceMotion) {
+  if (reduceMotion) return;
+  gN.each(function (d) {
+    if (!(d.n || []).length) return;
+    const rng = mulberry32(hashCode(d.id));
+    const period = 10 + rng() * 6;       // 10–16s
+    const delay = -(rng() * 8);           // phase offset 0–8s (negative = already running)
+    const rect = d3.select(this).select("rect.node-body");
+    rect.style("transform-box", "fill-box")
+        .style("transform-origin", "center")
+        .style("animation", `breatheNode ${period}s ease-in-out ${delay}s infinite`);
+  });
+}
+
+/** Apply breathing animation to sovereign badge text */
+function applyBadgeBreathing(gBadges, reduceMotion) {
+  if (reduceMotion || !gBadges) return;
+  gBadges.each(function (d) {
+    const rng = mulberry32(hashCode(d.id + "|badge"));
+    const period = 4 + rng() * 4;        // 4–8s
+    const delay = -(rng() * 4);           // phase offset 0–4s
+    d3.select(this)
+      .style("animation", `breatheSov ${period}s ease-in-out ${delay}s infinite`);
+  });
+}
+
 function renderGraph(g) {
   const dens = densityProfile();
   const base = 0.68;
@@ -1118,6 +1158,13 @@ function renderGraph(g) {
     if (!progressive) return o;
     return showEdge(d) ? o : Math.min(0.07, o * 0.14);
   };
+  // Orrery rings sit behind everything else
+  const reduceMotionOrr = typeof window !== "undefined"
+    && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  if (!reduceMotionOrr) {
+    buildOrrery(g, state.W / 2, state.H / 2);
+  }
+
   const linkLayer = ensureLayer(g, "graph-links");
   const labelLayer = g.selectAll("g.graph-edge-labels").data([0]).join("g").attr("class", "elg graph-edge-labels");
   const nodeLayer = ensureLayer(g, "graph-nodes");
@@ -1174,6 +1221,12 @@ function renderGraph(g) {
     badgeLayer.selectAll("*").remove();
     state.gBadges = null;
   }
+
+  // Sovereign breathing
+  const reduceMotionG = typeof window !== "undefined"
+    && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  applySovereignBreathing(state.gN, reduceMotionG);
+  applyBadgeBreathing(state.gBadges, reduceMotionG);
 
   if (progressive) {
     state.gN.attr("data-pr", d => progressive.reveal.has(d.id) ? "1" : "0");
@@ -1553,6 +1606,7 @@ function renderTree(g) {
       .attr("font-family", "var(--mono)")
       .attr("fill", cs("--tx3"))
       .attr("opacity", 0.7)
+      .style("font-variant-numeric", "oldstyle-nums")
       .text(d => d);
   state.gN.each(function (d) {
     const hasReign = !!reignSpan(d);
@@ -1587,6 +1641,12 @@ function renderTree(g) {
     badgeLayer.selectAll("*").remove();
     state.gBadges = null;
   }
+
+  // Sovereign breathing (tree mode)
+  const reduceMotionT = typeof window !== "undefined"
+    && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  applySovereignBreathing(state.gN, reduceMotionT);
+  applyBadgeBreathing(state.gBadges, reduceMotionT);
 
   // Zoom-to-fit on tree render
   requestAnimationFrame(() => {

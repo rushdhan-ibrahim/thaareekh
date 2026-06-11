@@ -23,6 +23,9 @@ import { initMinimap, updateMinimap, toggleMinimap } from './ui/minimap.js';
 import { initOnboarding } from './ui/onboarding.js';
 import { initKeyboardNav } from './ui/keyboard-nav.js';
 import { initTreeOptions, updateTreeOptionsVisibility, refreshTreeOptionLabels } from './ui/tree-options.js';
+import { initSidebarSeal, updateSealColor } from './ui/sidebar-seal.js';
+import { initHeadpiece } from './ui/headpiece.js';
+import { initFolioCorners, initEraGlow } from './ui/folio-ornaments.js';
 
 function applyTreeWorkerPolicyFromQuery() {
   if (typeof window === "undefined") return;
@@ -865,6 +868,12 @@ if (!Number.isFinite(state.eraYear)) state.eraYear = ERA.max;
 renderEraUi();
 showEmptySidebar();
 
+// Phase 5 ornaments
+initFolioCorners();
+initEraGlow();
+initHeadpiece();
+initSidebarSeal();
+
 // Initial stats & render
 document.getElementById("st").textContent = people.length + " \u00b7 " + edges.length + (mode === "research" ? " \u00b7 research" : "");
 rebuild();
@@ -902,6 +911,7 @@ window.addEventListener('selection-changed', e => {
   if (detail?.type === 'person' && detail.id) {
     const node = state._nodeById?.get?.(detail.id) || state.nodes.find(n => n.id === detail.id);
     live.textContent = node ? `Selected: ${node.nm || detail.id}` : '';
+    if (node?.dy) updateSealColor(node.dy);
   } else if (detail?.type === 'edge') {
     live.textContent = 'Relationship selected';
   } else if (detail?.type === 'office') {

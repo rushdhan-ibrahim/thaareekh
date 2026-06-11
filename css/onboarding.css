@@ -1,4 +1,4 @@
-/* ===== Onboarding Tour ===== */
+/* ===== Onboarding Tour — Scriptorium ===== */
 
 .onboarding-overlay {
   position: fixed;
@@ -12,42 +12,44 @@
 .onboarding-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.55);
+  background: rgba(26,20,16,0.55);
   transition: clip-path var(--dur-slow) var(--ease-out);
 }
 .onboarding-tooltip {
   position: absolute;
   z-index: 61;
   background: var(--sf);
-  border: 1px solid var(--ac-bd);
+  border: 2px solid var(--ac-bd);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-lg), 0 0 0 1px var(--ac-bd);
-  padding: var(--space-4);
+  box-shadow: var(--shadow-lg);
+  padding: var(--sp-4);
   max-width: 320px;
-  animation: slideUp var(--dur-normal) var(--ease-spring);
+  animation: slideUp var(--dur-mid) var(--ease-spring);
 }
 .onboarding-tooltip h3 {
   font-family: var(--display);
-  font-size: var(--text-lg);
+  font-size: var(--fs-lg);
   font-weight: 600;
-  margin-bottom: var(--space-2);
+  font-variant: small-caps;
+  letter-spacing: 1px;
+  margin-bottom: var(--sp-2);
   color: var(--tx);
 }
 .onboarding-tooltip p {
-  font-size: var(--text-base);
+  font-size: var(--fs-base);
   color: var(--tx2);
   line-height: 1.5;
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--sp-3);
 }
 .onboarding-actions {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-2);
+  gap: var(--sp-2);
 }
 .onboarding-step-indicator {
   display: flex;
-  gap: var(--space-1);
+  gap: var(--sp-1);
 }
 .onboarding-dot {
   width: 6px;
@@ -61,11 +63,11 @@
 }
 .onboarding-btn {
   padding: 6px 14px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   border: 1px solid var(--ac-bd);
   background: var(--ac-bg);
   color: var(--ac);
-  font: var(--text-sm) var(--sans);
+  font: var(--fs-sm) var(--serif);
   font-weight: 600;
   cursor: pointer;
   transition: all var(--dur-fast) var(--ease-out);
@@ -79,14 +81,14 @@
   color: var(--bg);
 }
 .onboarding-btn-primary:hover {
-  background: var(--ac-bd);
+  opacity: 0.9;
 }
 .onboarding-skip {
   padding: 6px 10px;
   border: none;
   background: none;
   color: var(--tx3);
-  font: var(--text-sm) var(--sans);
+  font: var(--fs-sm) var(--serif);
   cursor: pointer;
 }
 .onboarding-skip:hover {

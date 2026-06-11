@@ -1,4 +1,6 @@
 import type { AppState, LinkDatum } from '../types/state';
+import { hashCode, mulberry32 } from '../utils/prng.ts';
+import { startParticles, stopParticles } from './particles.ts';
 
 /** Extract source/target string IDs from a d3 link datum. */
 export function linkIds(l: LinkDatum): { s: string; t: string } {
@@ -111,6 +113,35 @@ export function hiN(id: string, state: AppState): void {
     const { s: hSrc, t: hTgt } = linkIds(d);
     return hSrc === id || hTgt === id;
   });
+
+  // Self-drawing edges + particle flow on highlight
+  const reduceMotion = typeof window !== 'undefined'
+    && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  if (!reduceMotion) {
+    const rng = mulberry32(hashCode(id));
+    const highlightedEls: Element[] = [];
+    gL?.each?.(function (this: Element, d: LinkDatum) {
+      const { s: hSrc, t: hTgt } = linkIds(d);
+      if (hSrc !== id && hTgt !== id) return;
+      const el = this as SVGElement;
+      highlightedEls.push(el);
+      let len: number;
+      if (el.tagName === 'line') {
+        const x1 = +(el.getAttribute('x1') ?? 0), y1 = +(el.getAttribute('y1') ?? 0);
+        const x2 = +(el.getAttribute('x2') ?? 0), y2 = +(el.getAttribute('y2') ?? 0);
+        len = Math.hypot(x2 - x1, y2 - y1);
+      } else {
+        len = (el as unknown as SVGGeometryElement).getTotalLength?.() || 0;
+      }
+      if (!len) return;
+      const delay = rng() * 600;
+      el.style.strokeDasharray = `${len}`;
+      el.style.strokeDashoffset = `${len}`;
+      el.style.animation = `edgeDraw 1.6s var(--ease-out) ${delay}ms forwards`;
+    });
+    startParticles(highlightedEls);
+  }
+
   applyAncestralFlow(id, state);
 }
 
@@ -146,6 +177,7 @@ export function hiE(link: LinkDatum, state: AppState): void {
 /** Clear all highlighting. */
 export function clH(state: AppState): void {
   state.selEdge = null;
+  stopParticles();
   const gN = state.gN as any;
   const gL = state.gL as any;
 
@@ -153,6 +185,10 @@ export function clH(state: AppState): void {
   gN?.classed?.('node-connected', false);
   gL?.classed?.('edge-highlight', false);
   clearFlow(state);
+  // Clear self-drawing inline styles so CSS-declared values restore
+  gL?.style?.('stroke-dasharray', null);
+  gL?.style?.('stroke-dashoffset', null);
+  gL?.style?.('animation', null);
 
   gN?.select?.('rect')?.attr?.('opacity', function (this: Element) {
     return nodeBaseOpacity(this);

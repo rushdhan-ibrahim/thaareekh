@@ -71,6 +71,8 @@ declare module '*offices.js' {
   export const officeCatalog: OfficeCatalogEntry[];
   export const officeById: Map<string, OfficeCatalogEntry>;
   export const officeTimeline: OfficeTimelinePeriod[];
+  export function officeFunctionForYear(officeId: string, year: number | null): string;
+  export function buildOfficeHolders(people: Array<Record<string, unknown>>): Map<string, Array<{ personId: string; label: string; start: number | null; end: number | null; c: string }>>;
 }
 
 declare module '*sources.js' {

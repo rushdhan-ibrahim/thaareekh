@@ -1,12 +1,12 @@
-/* ===== Graph / SVG Styles ===== */
+/* ===== Graph / SVG Styles — Scriptorium ===== */
 
 .elg text { pointer-events: none }
 
-/* Flow edges (ancestral path animation) */
+/* Flow edges (ancestral path animation) — slower, scholarly pace */
 .flow-edge {
   stroke-linecap: round;
   stroke-dasharray: 10 8;
-  animation: flowedge 1.8s linear infinite;
+  animation: flowedge 2.5s linear infinite;
 }
 
 /* Era overlay */
@@ -23,36 +23,37 @@
 .era-dot { stroke: var(--bg); stroke-width: .7 }
 .era-now-label { font: 8.5px var(--mono); fill: var(--ac) }
 
-/* Node selected glow — J: outer glow for visibility at all zoom levels */
-.node-selected rect {
+/* Node selected — brief rubric glow, fires once and holds */
+.node-selected rect.node-body {
   stroke: var(--ac);
-  animation: selectedPulse 2s ease-in-out infinite;
-  filter: drop-shadow(0 0 6px rgba(78,201,176,0.45));
+  animation: selectGlow 800ms ease-out forwards;
 }
 
-/* Connected neighbor node glow (dimmer than selected) */
-.node-connected rect {
+/* Connected neighbor — quick transition to accent, no infinite loop */
+.node-connected rect.node-body {
   stroke: var(--ac);
-  animation: connectedNodePulse 2s ease-in-out infinite;
+  stroke-opacity: 0.7;
+  stroke-width: 2px;
+  transition: stroke var(--dur-fast), stroke-opacity var(--dur-fast);
 }
 
-/* Connected edge glow (synchronized with node pulse) */
+/* Connected edge — accent stroke; self-draw animation applied via JS */
 .edge-highlight {
   stroke: var(--ac) !important;
-  animation: edgeGlowPulse 2s ease-in-out infinite;
+  stroke-opacity: 1 !important;
 }
 
-/* Minimap */
+/* Minimap — sharp corners, 2px solid border, no viewport glow */
 .minimap {
   position: absolute;
-  bottom: var(--space-3);
-  right: var(--space-3);
+  bottom: var(--sp-3);
+  right: var(--sp-3);
   width: 160px;
   height: 100px;
   background: var(--sf);
-  border: 1px solid var(--bd2);
+  border: 2px solid var(--bd2);
   border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
   overflow: hidden;
   z-index: 11;
   cursor: pointer;
@@ -61,18 +62,17 @@
 }
 .minimap:hover { opacity: 1 }
 .minimap svg { width: 100%; height: 100% }
-/* G: viewport glow for easier position spotting */
+/* Viewport rect — simple stroke, no glow filter */
 .minimap-viewport {
   fill: none;
   stroke: var(--ac);
   stroke-width: 1.5;
   stroke-opacity: 0.7;
-  filter: drop-shadow(0 0 3px rgba(78,201,176,0.5));
 }
 .minimap-dot { stroke: none }
 .minimap[hidden] { display: none }
 
-/* Sovereign badge halo — readable above edges and shadows */
+/* Sovereign badge halo */
 .node-badge {
   paint-order: stroke fill;
   stroke: var(--bg);
@@ -87,3 +87,10 @@
 
 /* Reign year sub-label */
 .node-reign-label { pointer-events: none; user-select: none; letter-spacing: 0.3px }
+
+/* ═══ Orrery rings ═══ */
+.orrery-layer { pointer-events: none }
+.orrery-ring { pointer-events: none }
+
+/* ═══ Edge particles ═══ */
+.particle-layer { pointer-events: none }

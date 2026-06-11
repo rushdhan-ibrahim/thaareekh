@@ -1,4 +1,81 @@
-/* ===== Animations & Keyframes ===== */
+/* ═══════════════════════════════════════════
+   RANNAVAARU ANIMATIONS
+   Motion is the design, not polish
+   ═══════════════════════════════════════════ */
+
+/* ═══ AMBIENT — always running ═══ */
+
+@keyframes breatheNode {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.008); }
+}
+
+@keyframes breatheSov {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 0.85; }
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.02); opacity: 0.88; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 0.75; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinReverse {
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes codeScroll {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
+}
+
+@keyframes eraTravel {
+  0%   { top: var(--era-glow-start, 58%); }
+  100% { top: var(--era-glow-end, 72%); }
+}
+
+@keyframes sealBreathe {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.03); }
+}
+
+/* ═══ TRIGGERED — on interaction ═══ */
+
+@keyframes selectGlow {
+  0%   { filter: none; stroke-width: 0.5; }
+  50%  { filter: drop-shadow(0 0 4px rgb(139 45 35 / 0.12)); stroke-width: 1.8; }
+  100% { filter: none; stroke-width: 1.2; }
+}
+
+@keyframes edgeDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes nodeIn {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes headpieceDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes headpieceRedraw {
+  0%, 90% { stroke-dashoffset: 0; }
+  95%     { stroke-dashoffset: var(--len); }
+  100%    { stroke-dashoffset: 0; }
+}
+
+/* ═══ FUNCTIONAL (existing, kept for backward compat) ═══ */
 
 @keyframes sp {
   to { transform: rotate(360deg) }
@@ -8,41 +85,9 @@
   to { stroke-dashoffset: -30 }
 }
 
-@keyframes selectedPulse {
-  0%, 100% { stroke-width: 2.5px; stroke-opacity: 1 }
-  50% { stroke-width: 4px; stroke-opacity: 0.85 }
-}
-
-@keyframes connectedNodePulse {
-  0%, 100% { stroke-width: 2px; stroke-opacity: 0.8 }
-  50% { stroke-width: 3px; stroke-opacity: 0.6 }
-}
-
-@keyframes edgeGlowPulse {
-  0%, 100% { stroke-width: 3px; stroke-opacity: 1 }
-  50% { stroke-width: 4.5px; stroke-opacity: 0.75 }
-}
-
 @keyframes cmdSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-12px) scale(0.97);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes nodeEntrance {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: translateY(-12px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 @keyframes fadeIn {
@@ -65,13 +110,40 @@
   to { opacity: 1; transform: translateY(0) }
 }
 
-@keyframes glowPulse {
-  0%, 100% { box-shadow: 0 0 8px rgba(78,201,176,0.2) }
-  50% { box-shadow: 0 0 16px rgba(78,201,176,0.4) }
+@keyframes spotlightPulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(200,90,58,0.25) }
+  50% { box-shadow: 0 0 0 8px rgba(200,90,58,0.12) }
 }
 
-/* Onboarding spotlight */
-@keyframes spotlightPulse {
-  0%, 100% { box-shadow: 0 0 0 4px rgba(78,201,176,0.3) }
-  50% { box-shadow: 0 0 0 8px rgba(78,201,176,0.15) }
+/* Legacy infinite pulse keyframes removed — Phase 2 replaced with
+   selectGlow (fires once) + transitions for connected nodes */
+
+/* ═══ UTILITY CLASSES ═══ */
+
+.edge-draw {
+  transition: stroke-dashoffset var(--dur-draw) var(--ease-out);
+}
+
+.tree-branch-reveal {
+  animation: edgeDraw 600ms var(--ease-out) forwards;
+  animation-delay: calc(var(--tree-depth, 0) * 40ms);
+}
+
+.is-dormant * {
+  animation-play-state: paused !important;
+}
+
+/* ═══ REDUCED MOTION ═══ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  /* Exception: allow selectGlow to fire once for state communication */
+  .node-selected rect.node-body {
+    animation-duration: 600ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

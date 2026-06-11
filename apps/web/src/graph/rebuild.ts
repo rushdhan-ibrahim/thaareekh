@@ -1,5 +1,7 @@
 import type { AppState, PersonNode, EdgeRecord, LinkDatum } from '../types/state.js';
 import type { TreePlacementInput, TreePlacementOutput } from './tree-placement-core.ts';
+import { hashCode, mulberry32 } from '../utils/prng.ts';
+import { buildOrrery } from './orrery.ts';
 
 type D3Like = typeof import('d3');
 
@@ -969,17 +971,28 @@ function drawNodes(g: any, withDrag: boolean = false): void {
     (_state.gN as any).on('.drag', null);
   }
   const gN = _state.gN as any;
+  // Node jitter: seeded per-node PRNG for organic variation
+  const jitterRx = (d: any) => {
+    const rng = mulberry32(hashCode(d.id + '|rx'));
+    return d.g === 'F' ? 2.2 + rng() * 0.8 : 1.5 + rng() * 1.5; // F: 2.2–3, M: 1.5–3
+  };
+  const jitterAccentW = (d: any) => {
+    const rng = mulberry32(hashCode(d.id + '|aw'));
+    return 2.7 + rng() * 0.6; // 2.7–3.3
+  };
   gN.select('rect.node-body')
-    .attr('rx', (d: any) => d.g === 'F' ? 12 : 4).attr('ry', (d: any) => d.g === 'F' ? 12 : 4)
+    .attr('rx', jitterRx).attr('ry', jitterRx)
     .attr('fill', _cs('--nf')).attr('stroke', (d: any) => _nC(d.dy)).attr('stroke-width', (d: any) => d.g === 'F' ? 2.2 : 1.5)
     .attr('filter', 'url(#nodeShadow)');
   gN.select('rect.node-accent')
-    .attr('rx', (d: any) => d.g === 'F' ? 12 : 4).attr('ry', (d: any) => d.g === 'F' ? 12 : 4)
+    .attr('rx', jitterRx).attr('ry', jitterRx)
     .attr('fill', (d: any) => _nC(d.dy)).attr('opacity', 0.85)
-    .attr('width', 3);
+    .attr('width', jitterAccentW);
   gN.select('text.node-name')
     .attr('text-anchor', 'middle').attr('dy', '.35em').attr('font-size', dens.text)
-    .attr('font-family', 'var(--sans)').attr('fill', _cs('--nt')).attr('font-weight', 500)
+    .attr('font-family', 'var(--serif, var(--sans))').attr('fill', _cs('--nt')).attr('font-weight', 500)
+    .style('font-variant', (d: any) => (d.n || []).length ? 'small-caps' : null)
+    .style('letter-spacing', (d: any) => (d.n || []).length ? '.04em' : null)
     .text((d: any) => (d.g === 'F' ? '\u2640 ' : '') + trimLabel(_personName(d), dens.maxLabelChars));
 
   _state._badgeData = [];
@@ -1001,6 +1014,35 @@ function drawNodes(g: any, withDrag: boolean = false): void {
         oy: bb.y - 1
       });
     }
+  });
+}
+
+/** Apply breathing animation to sovereign node rects */
+function applySovereignBreathing(gN: any, reduceMotion: boolean): void {
+  if (reduceMotion) return;
+  const d3 = _d3 as any;
+  gN.each(function (this: SVGElement, d: any) {
+    if (!(d.n || []).length) return;
+    const rng = mulberry32(hashCode(d.id));
+    const period = 10 + rng() * 6;
+    const delay = -(rng() * 8);
+    const rect = d3.select(this).select('rect.node-body');
+    rect.style('transform-box', 'fill-box')
+        .style('transform-origin', 'center')
+        .style('animation', `breatheNode ${period}s ease-in-out ${delay}s infinite`);
+  });
+}
+
+/** Apply breathing animation to sovereign badge text */
+function applyBadgeBreathing(gBadges: any, reduceMotion: boolean): void {
+  if (reduceMotion || !gBadges) return;
+  const d3 = _d3 as any;
+  gBadges.each(function (this: SVGElement, d: any) {
+    const rng = mulberry32(hashCode(d.id + '|badge'));
+    const period = 4 + rng() * 4;
+    const delay = -(rng() * 4);
+    d3.select(this)
+      .style('animation', `breatheSov ${period}s ease-in-out ${delay}s infinite`);
   });
 }
 
@@ -1092,6 +1134,13 @@ function renderGraph(g: any): void {
     if (!progressive) return o;
     return showEdge(d) ? o : Math.min(0.07, o * 0.14);
   };
+  // Orrery rings sit behind everything else
+  const reduceMotionOrr = typeof window !== 'undefined'
+    && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  if (!reduceMotionOrr) {
+    buildOrrery(g, _state.W / 2, _state.H / 2);
+  }
+
   const linkLayer = ensureLayer(g, 'graph-links');
   const labelLayer = g.selectAll('g.graph-edge-labels').data([0]).join('g').attr('class', 'elg graph-edge-labels');
   const nodeLayer = ensureLayer(g, 'graph-nodes');
@@ -1145,6 +1194,12 @@ function renderGraph(g: any): void {
     badgeLayer.selectAll('*').remove();
     _state.gBadges = null;
   }
+
+  // Sovereign breathing
+  const reduceMotionG = typeof window !== 'undefined'
+    && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  applySovereignBreathing(_state.gN, reduceMotionG);
+  applyBadgeBreathing(_state.gBadges, reduceMotionG);
 
   if (progressive) {
     const gN = _state.gN as any;
@@ -1372,6 +1427,7 @@ function renderTree(g: any): void {
     .attr('font-size', dens.text - 2.5)
     .attr('font-family', 'var(--mono)').attr('fill', _cs('--tx3'))
     .attr('opacity', 0.7)
+    .style('font-variant-numeric', 'oldstyle-nums')
     .text((d: any) => d);
   gN.each(function (this: any, d: any) {
     const hasReign = !!reignSpan(d);
@@ -1403,6 +1459,12 @@ function renderTree(g: any): void {
     badgeLayer.selectAll('*').remove();
     _state.gBadges = null;
   }
+
+  // Sovereign breathing (tree mode)
+  const reduceMotionT = typeof window !== 'undefined'
+    && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  applySovereignBreathing(_state.gN, reduceMotionT);
+  applyBadgeBreathing(_state.gBadges, reduceMotionT);
 
   // Zoom-to-fit
   requestAnimationFrame(() => {
@@ -1559,7 +1621,7 @@ export function rebuild(): void {
     (_state.svgEl as any).selectAll('*').remove();
     const defs = (_state.svgEl as any).append('defs').attr('class', 'persistent-defs');
     const dropFilter = defs.append('filter').attr('id', 'nodeShadow').attr('x', '-20%').attr('y', '-20%').attr('width', '140%').attr('height', '140%');
-    dropFilter.append('feDropShadow').attr('dx', 0).attr('dy', 2).attr('stdDeviation', 3).attr('flood-color', 'rgba(0,0,0,0.25)').attr('flood-opacity', 0.4);
+    dropFilter.append('feDropShadow').attr('dx', 0).attr('dy', 1.5).attr('stdDeviation', 1.5).attr('flood-color', 'rgba(60,42,20,0.15)').attr('flood-opacity', 0.35);
     defs.append('marker').attr('id', 'ar-default').attr('viewBox', '0 0 10 10').attr('refX', 10).attr('refY', 5)
       .attr('markerWidth', 5).attr('markerHeight', 5).attr('orient', 'auto-start-reverse')
       .append('path').attr('d', 'M0 0L10 5L0 10z').attr('fill', _cs('--ep'));

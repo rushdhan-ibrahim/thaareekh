@@ -61,9 +61,13 @@ import {
   showOfficeDetail, getCurrentOfficeId
 } from './ui/sidebar.js';
 import { initRebuild, rebuild, updateEraVisibility } from './graph/rebuild.js';
-import { computeTreePlacement } from './graph/tree-placement-core.ts';
+import { computeTreePlacement } from './graph/tree-placement-core.js';
 import { createPathfinder } from './graph/pathfinder.js';
 import { initSearchRuntime } from './ui/search-runtime.js';
+import { initCodeGhost, setGhostCode } from './ui/code-ghost.js';
+import { initSidebarSeal, updateSealColor } from './ui/sidebar-seal.js';
+import { initHeadpiece } from './ui/headpiece.js';
+import { initFolioCorners, initEraGlow } from './ui/folio-ornaments.js';
 
 function applyTreeWorkerPolicyFromQuery(): void {
   const params = new URLSearchParams(window.location.search);
@@ -115,7 +119,9 @@ const state: AppState = {
   onboardingComplete: false,
   minimapVisible: false,
   _treesMeta: [],
-  _badgeData: []
+  _badgeData: [],
+  _adj: new Map(),
+  _parentByChild: new Map()
 };
 
 // Typed references to data
@@ -1062,6 +1068,7 @@ document.getElementById('vmg')?.addEventListener('click', () => {
   document.getElementById('vmt')?.classList.remove('on');
   document.getElementById('vmg')?.setAttribute('aria-pressed', 'true');
   document.getElementById('vmt')?.setAttribute('aria-pressed', 'false');
+  setGhostCode('graph');
   requestRender({ geometryDirty: true }, { resetZoom: true });
   updateTreeOptionsVisibility();
 });
@@ -1075,6 +1082,7 @@ document.getElementById('vmt')?.addEventListener('click', () => {
   document.getElementById('vmg')?.setAttribute('aria-pressed', 'false');
   const parentChip = document.querySelector('.chip[data-e="parent"]');
   if (parentChip && !parentChip.classList.contains('on')) parentChip.classList.add('on');
+  setGhostCode('tree');
   requestRender({ geometryDirty: true }, { resetZoom: true });
   updateTreeOptionsVisibility();
 });
@@ -1156,9 +1164,15 @@ showEmptySidebar();
 const st = document.getElementById('st');
 if (st) st.textContent = typedPeople.length + ' \u00b7 ' + typedEdges.length + (mode === 'research' ? ' \u00b7 research' : '');
 
+initCodeGhost();
+initFolioCorners();
+initEraGlow();
+initHeadpiece();
+initSidebarSeal();
 rebuild();
 // Fit to content on fresh load (no saved zoom), then update pan limits
-const hasSavedZoom = savedView?.zoom && Number.isFinite(savedView.zoom.k) && savedView.zoom.k !== 1;
+const savedZoom = savedView?.zoom as { k?: number } | undefined;
+const hasSavedZoom = savedZoom && Number.isFinite(savedZoom.k) && savedZoom.k !== 1;
 if (!hasSavedZoom) {
   window.addEventListener('sim-settled', () => {
     fitToContent();
@@ -1200,6 +1214,8 @@ window.addEventListener('selection-changed', ((e: CustomEvent) => {
     const nodeById = (state as any)._nodeById as Map<string, PersonNode> | undefined;
     const node = nodeById?.get(detail.id) || state.nodes.find(n => n.id === detail.id);
     live.textContent = node ? `Selected: ${node.nm || detail.id}` : '';
+    // Update seal to match selected person's dynasty
+    if (node?.dy) updateSealColor(node.dy);
   } else if (detail?.type === 'office' && detail.officeId) {
     live.textContent = `Office selected: ${detail.officeId}`;
   } else if (detail?.type === 'edge') {

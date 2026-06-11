@@ -165,3 +165,27 @@ export function activeConfidence(): Set<string> {
   });
   return s;
 }
+
+/** Compute the set of person IDs active in the current era year. */
+export function computeEraPersonOk(
+  people: PersonNode[],
+  eraEnabled: boolean,
+  year: number,
+  activeInYearById: (id: string, year: number) => boolean
+): Set<string> {
+  return new Set(
+    people
+      .filter(p => !eraEnabled || activeInYearById(p.id, year))
+      .map(p => p.id)
+  );
+}
+
+// Cached chip state
+let _cachedActiveE: Set<string> | null = null;
+let _cachedActiveConf: Set<string> | null = null;
+
+/** Invalidate cached chip DOM reads so they are re-read on next filter pass. */
+export function invalidateChipCache(): void {
+  _cachedActiveE = null;
+  _cachedActiveConf = null;
+}
