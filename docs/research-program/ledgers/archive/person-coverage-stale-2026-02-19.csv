@@ -1,0 +1,7 @@
+person_id,display_name,dynasty,reign_or_role,person_confidence,source_refs_count,aliases_count,titles_count,dossier_status,dossier_file,last_updated,notes
+P96,Donna Ines,Hilaaly,,A,3,3,1,in_progress,docs/research-program/people/P96.md,2026-02-12,"Phase 2 depth refresh completed: claim anchors, source concentration, and inference links added."
+P105,Hassan Thakurufan,Utheemu,,B,2,0,0,in_progress,docs/research-program/people/P105.md,2026-02-12,"Phase 2 depth refresh completed: claim anchors, source concentration, and inference links added."
+P108,Kulhiveri Hilaal Kaiulhanna Kaloge,Hilaaly,,B,2,1,0,in_progress,docs/research-program/people/P108.md,2026-02-12,"Phase 2 depth refresh completed: claim anchors, source concentration, and inference links added."
+P155,Maandhoogey Bodu Dhorhy Manippulu,Huraagey,,B,2,1,0,in_progress,docs/research-program/people/P155.md,2026-02-12,"Phase 2 depth refresh completed: claim anchors, source concentration, and inference links added."
+P157,Hiriya Maava Kilege,Lunar,,B,1,0,1,in_progress,docs/research-program/people/P157.md,2026-02-12,"Phase 2 depth refresh completed: claim anchors, source concentration, and inference links added."
+P207,Recca,Hilaaly,,,0,0,0,in_progress,docs/research-program/people/P207.md,2026-02-12,"Phase 2 depth refresh completed: claim anchors, source concentration, and inference links added."

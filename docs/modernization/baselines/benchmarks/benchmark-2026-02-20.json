@@ -1,0 +1,172 @@
+{
+  "generated_at": "2026-02-20T21:48:01.853Z",
+  "machine": {
+    "node": "v23.6.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "targets": {
+    "search_p95_ms": 100,
+    "path_p95_ms": 100,
+    "ui_first_interaction_p95_ms": 120,
+    "ui_filter_toggle_p95_ms": 120,
+    "ui_pan_zoom_frame_mean_ms": 16.7,
+    "ui_pan_zoom_frame_p95_ms": 24,
+    "ui_pan_zoom_min_fps": 50
+  },
+  "lanes": {
+    "search_query_latency_ms": {
+      "samples": 480,
+      "mean": 0.738,
+      "p95": 1.377,
+      "min": 0.258,
+      "max": 3.02,
+      "note": "Measured via TypeScript search engine rankSearch over representative mixed queries."
+    },
+    "path_query_latency_ms": {
+      "samples": 200,
+      "mean": 0.047,
+      "p95": 0.142,
+      "min": 0,
+      "max": 0.258,
+      "note": "Measured via TypeScript pathfinder over representative pair samples."
+    },
+    "dataset_merge_derived_latency_ms": {
+      "canonical": {
+        "samples": 40,
+        "mean": 0.874,
+        "p95": 1.143,
+        "min": 0.71,
+        "max": 1.415
+      },
+      "research": {
+        "samples": 40,
+        "mean": 1.169,
+        "p95": 1.472,
+        "min": 0.943,
+        "max": 2.804
+      },
+      "note": "Measured via repeated getDataset(mode) materialization."
+    },
+    "research_pipeline_wall_clock_ms": {
+      "cold_start": {
+        "node": {
+          "qa_ledgers": 79.2,
+          "qa_batch_content": 340863.068,
+          "qa_smoke": 2709.727,
+          "suite_total": 343651.996
+        },
+        "rust": {
+          "build_once": 206677.045,
+          "qa_ledgers": 992.628,
+          "qa_batch_content": 93.308,
+          "qa_smoke": 5.04,
+          "suite_total": 1090.976
+        },
+        "rust_speedup_vs_node": 314.995
+      },
+      "node": {
+        "qa_ledgers": {
+          "samples": 5,
+          "mean": 72.136,
+          "p95": 74.026,
+          "min": 70.898,
+          "max": 74.026
+        },
+        "qa_batch_content": {
+          "samples": 5,
+          "mean": 99.289,
+          "p95": 107.358,
+          "min": 95.038,
+          "max": 107.358
+        },
+        "qa_smoke": {
+          "samples": 5,
+          "mean": 38.839,
+          "p95": 39.324,
+          "min": 38.154,
+          "max": 39.324
+        },
+        "suite_total_mean": 210.265
+      },
+      "rust": {
+        "build_once": 206677.045,
+        "qa_ledgers": {
+          "samples": 5,
+          "mean": 7.224,
+          "p95": 7.612,
+          "min": 6.926,
+          "max": 7.612
+        },
+        "qa_batch_content": {
+          "samples": 5,
+          "mean": 22.952,
+          "p95": 24.073,
+          "min": 21.849,
+          "max": 24.073
+        },
+        "qa_smoke": {
+          "samples": 5,
+          "mean": 4.077,
+          "p95": 4.341,
+          "min": 3.932,
+          "max": 4.341
+        },
+        "suite_total_mean": 34.253
+      },
+      "rust_speedup_vs_node": 6.139,
+      "note": "Warm lane uses warmup + 5 measured samples per command for stable wall-clock comparisons."
+    },
+    "ui_browser": {
+      "status": "ok",
+      "source": "legacy-graph-ui",
+      "target_url": "http://127.0.0.1:52580/index.html",
+      "target_source": "http",
+      "boot_ms": {
+        "dom_content_loaded": 6602.2,
+        "load_event": 6616.5
+      },
+      "first_interaction_latency_ms": {
+        "samples": 18,
+        "mean": 35.522,
+        "p95": 81.3,
+        "min": 25.2,
+        "max": 81.3
+      },
+      "filter_toggle_latency_ms": {
+        "samples": 20,
+        "mean": 52.54,
+        "p95": 56.8,
+        "min": 46,
+        "max": 60.9
+      },
+      "pan_zoom_latency_ms": {
+        "samples": 24,
+        "mean": 50.846,
+        "p95": 57,
+        "min": 47,
+        "max": 60
+      },
+      "pan_zoom_frame_ms": {
+        "samples": 24,
+        "mean": 15.978,
+        "p95": 18.067,
+        "min": 14.667,
+        "max": 19
+      },
+      "pan_zoom_estimated_fps": 62.587,
+      "launch": {
+        "headless_flag": "--headless=new",
+        "spawn_error": null,
+        "exit": null,
+        "stderr_tail": [
+          "DevTools listening on ws://127.0.0.1:52581/devtools/browser/768cc132-a05d-4aeb-b793-688a5305b37d",
+          "Trying to load the allocator multiple times. This is *not* supported.",
+          "[93883:122902207:0221/024753.933430:ERROR:google_apis/gcm/engine/registration_request.cc:290] Registration response error message: DEPRECATED_ENDPOINT"
+        ],
+        "stdout_tail": []
+      },
+      "note": "Measured via headless Chrome DevTools protocol with scripted interactions."
+    }
+  }
+}

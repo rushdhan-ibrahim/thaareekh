@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Twelve Further Artefacts for Ink &amp; Light</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+SC:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #ece6dc;
+  --ink: #16130f;
+  --ink-light: #3a342c;
+  --ash: #6c645d;
+  --ash-light: #9e9589;
+  --ghost: #c4bdb3;
+  --rubric: #8b2d23;
+  --rule: rgb(0 0 0 / 0.10);
+  --font-body: 'EB Garamond', Georgia, serif;
+  --font-display: 'Cormorant SC', Georgia, serif;
+  --font-italic: 'Cormorant Garamond', Georgia, serif;
+  --font-code: 'JetBrains Mono', 'Courier New', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 17px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+body {
+  background: #1e1b18;
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.58;
+  display: flex;
+  justify-content: center;
+  padding: 48px 20px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+.folio {
+  background:
+    radial-gradient(ellipse at 30% 15%, rgb(255 255 255 / 0.14), transparent 40%),
+    linear-gradient(175deg, rgb(0 0 0 / 0.02), rgb(255 255 255 / 0.01)),
+    var(--paper);
+  max-width: 920px;
+  width: 100%;
+  padding: 88px 96px;
+  position: relative;
+  isolation: isolate;
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 0.05),
+    0 1px 4px rgb(0 0 0 / 0.06),
+    0 16px 48px rgb(0 0 0 / 0.12);
+}
+.folio::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)'/%3E%3C/svg%3E");
+  opacity: 0.16;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 0;
+}
+.folio::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 55%, rgb(0 0 0 / 0.04) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+.folio > * { position: relative; z-index: 1; }
+.title-block { text-align: center; margin-bottom: 16px; }
+.title-main {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.4rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0;
+  animation: emerge 2.2s cubic-bezier(0.25,0.1,0.25,1) 0.4s forwards;
+}
+.title-sub {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 0.86rem;
+  color: var(--ash);
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+  opacity: 0;
+  animation: emerge 2s ease 0.9s forwards;
+}
+@keyframes emerge {
+  from { opacity:0; transform:translateY(8px); }
+  to { opacity:1; transform:translateY(0); }
+}
+.rubric { color: var(--rubric); }
+.headpiece { display: flex; justify-content: center; margin: 20px 0 42px; }
+.headpiece svg { width: 100%; max-width: 560px; height: auto; }
+.hp-draw { stroke-dasharray: 2000; stroke-dashoffset: 2000; animation: draw 3.5s cubic-bezier(0.4,0,0.2,1) 1.4s forwards; }
+.hp-fill { opacity: 0; animation: fadeIn 1.2s ease 3.2s forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes fadeIn { to { opacity: 1; } }
+.rv {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 1.1s cubic-bezier(0.25,0.1,0.25,1), transform 1.1s cubic-bezier(0.25,0.1,0.25,1);
+}
+.rv.vis { opacity: 1; transform: translateY(0); }
+.divider {
+  text-align: center;
+  margin: 52px 0;
+  user-select: none;
+  color: var(--ink);
+  letter-spacing: 0.5em;
+  font-size: 0.65rem;
+}
+.plate {
+  position: relative;
+  margin: 8px 0 16px;
+  padding: 44px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 340px;
+}
+.plate .code-bg {
+  position: absolute;
+  inset: 0;
+  font-family: var(--font-code);
+  font-size: 0.56rem;
+  line-height: 1.45;
+  color: var(--ghost);
+  opacity: 0;
+  overflow: hidden;
+  padding: 20px;
+  pointer-events: none;
+  white-space: pre;
+  transition: opacity 1.8s ease;
+}
+.plate.vis .code-bg { opacity: 0.18; }
+.plate .art { position: relative; z-index: 2; }
+.plate-num { text-align: center; margin-bottom: 2px; font-family: var(--font-body); font-size: 0.78rem; color: var(--ash); font-variant-numeric: oldstyle-nums; }
+.plate-title { text-align: center; margin-bottom: 52px; font-family: var(--font-italic); font-style: italic; font-size: 0.84rem; color: var(--ash-light); letter-spacing: 0.02em; }
+.colophon {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+  text-align: center;
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 0.76rem;
+  color: var(--ash-light);
+  line-height: 1.9;
+}
+@media (max-width: 740px) {
+  .folio { padding: 44px 28px; }
+  .plate { min-height: 260px; }
+  .title-main { font-size: 1.08rem; letter-spacing: 0.18em; }
+}
+</style>
+<link rel="stylesheet" href="assets/relic-common.css">
+</head>
+<body>
+<article class="folio">
+  <header class="title-block">
+    <h1 class="title-main">Twelve Further Artefacts for Ink <span class="rubric">&amp;</span> Light</h1>
+    <p class="title-sub">a cabinet of talismans, windows, clocks, knots, and stars</p>
+  </header>
+
+  <div class="headpiece">
+    <svg viewBox="0 0 560 24" xmlns="http://www.w3.org/2000/svg">
+      <defs><pattern id="hpU" x="0" y="0" width="32" height="24" patternUnits="userSpaceOnUse">
+        <polygon points="16,3 19,12 16,21 13,12" fill="none" stroke="#16130f" stroke-width="0.7" class="hp-fill"/>
+        <polygon points="16,7 18,12 16,17 14,12" fill="#16130f" class="hp-fill"/>
+        <circle cx="16" cy="1.5" r="0.8" fill="#16130f" class="hp-fill"/>
+        <circle cx="16" cy="22.5" r="0.8" fill="#16130f" class="hp-fill"/>
+        <circle cx="7" cy="12" r="1.2" fill="none" stroke="#16130f" stroke-width="0.4" class="hp-fill"/>
+        <circle cx="25" cy="12" r="1.2" fill="none" stroke="#16130f" stroke-width="0.4" class="hp-fill"/>
+      </pattern></defs>
+      <line x1="0" y1="12" x2="560" y2="12" stroke="#16130f" stroke-width="0.5" class="hp-draw"/>
+      <rect width="560" height="24" fill="url(#hpU)" class="hp-fill"/>
+    </svg>
+  </div>
+
+  <section class="relic-intro rv">
+    <p>These twelve are less like diagrams and more like instruments from an imaginary scriptorium: devices for shadow, memory, devotion, navigation, recurrence, and luminous measurement.</p>
+    <p>The architecture is reusable. Each artefact is seeded, parametric, and rendered through the shared movement library, so this cabinet can keep growing without losing the page's voice.</p>
+  </section>
+
+  <div id="gallery"></div>
+
+  <footer class="colophon">
+    Twelve further artefacts for ink <span class="rubric">&amp;</span> light.<br>
+    Set in EB Garamond <span class="rubric">&amp;</span> JetBrains Mono.<br>
+    Expanded through a shared relic library of seeded, living forms.<br>
+    <span class="rubric">MMXXVI</span>
+  </footer>
+</article>
+
+<script src="assets/movement-library.js"></script>
+<script>
+const PLATES = [
+  {
+    numeral: 'XXV',
+    kind: 'astrolabe',
+    title: 'The Astrolabe — declination circles and the hidden rete',
+    divider: '◆ · ◇ · ◆',
+    seed: 25,
+    code: `// astrolabe
+// circles of altitude,
+// declination, ecliptic,
+// and a rotating rete
+// carrying the bright stars.
+//
+// the sky reduced to brass,
+// then given back to motion.
+const ascension = angle + date;
+const star = polar(radius, ascension);`
+  },
+  {
+    numeral: 'XXVI',
+    kind: 'vesica',
+    title: 'The Vesica — two worlds crossing, one interior door',
+    divider: '✦ · ◆ · ✦',
+    seed: 26,
+    code: `// vesica piscis
+// take two circles of equal radius;
+// place each center on the edge
+// of the other.
+//
+// the almond-shaped overlap
+// becomes a geometry of passage:
+// aperture, womb, eye,
+// and the first cathedral window.`
+  },
+  {
+    numeral: 'XXVII',
+    kind: 'roseWindow',
+    title: 'The Rose Window — tracery turning on a hidden axle',
+    divider: '◇ · ◆ · ◇',
+    seed: 27,
+    code: `// rose tracery
+// petals from circles,
+// circles from petals,
+// a radial grammar of stone.
+//
+// twelve lobes are enough
+// to make the page feel sung.
+for (let i = 0; i < 12; i++)
+  ring.add(rosette(i));`
+  },
+  {
+    numeral: 'XXVIII',
+    kind: 'labyrinth',
+    title: 'The Labyrinth — recursion as pilgrimage',
+    divider: '◆ · ✦ · ◆',
+    seed: 28,
+    code: `// labyrinth
+// not a maze; one path only.
+// every deviation is ordained.
+//
+// the pilgrim's problem is not
+// choosing correctly,
+// but continuing inward.
+while (walls remain)
+  turn();`
+  },
+  {
+    numeral: 'XXIX',
+    kind: 'eclipseEngine',
+    title: 'The Eclipse Engine — shadow translated into measure',
+    divider: '✦ · ◇ · ✦',
+    seed: 29,
+    code: `// eclipse geometry
+// three bodies,
+// one line of occlusion,
+// and a moving disk of absence.
+//
+// the corona is not the sun itself,
+// but the shape of interruption.
+umbra = overlap(light, body);`
+  },
+  {
+    numeral: 'XXX',
+    kind: 'aetherKnot',
+    title: 'The Aether Knot — a braid of returning curves',
+    divider: '◆ · ◇ · ◆',
+    seed: 30,
+    code: `// lemniscate braid
+// curve returns through itself
+// without ever becoming still.
+//
+// a knot of motion,
+// all crossings remembered.
+for (t from 0 to tau)
+  trace(x(t), y(t));`
+  },
+  {
+    numeral: 'XXXI',
+    kind: 'chaplet',
+    title: 'The Chaplet — counted by angle and breath',
+    divider: '◇ · ✦ · ◇',
+    seed: 31,
+    code: `// chaplet
+// a loop of counted bodies,
+// punctuated at intervals.
+//
+// devotion is a clock
+// without gears:
+// only repetition,
+// pause, and return.
+bead[n] = orbit(theta[n]);`
+  },
+  {
+    numeral: 'XXXII',
+    kind: 'waterClock',
+    title: 'The Water Clock — gravity writing time in falling beads',
+    divider: '✦ · ◆ · ✦',
+    seed: 32,
+    code: `// clepsydra
+// a drop falls,
+// a surface receives it,
+// a ring expands.
+//
+// time first appeared this way:
+// not as digits,
+// but as a vessel emptying.
+level -= flowRate(dt);`
+  },
+  {
+    numeral: 'XXXIII',
+    kind: 'pilgrimStar',
+    title: 'The Pilgrim Star — route and constellation as one grammar',
+    divider: '◆ · ✦ · ◆',
+    seed: 33,
+    code: `// star chart
+// path and sky share a syntax:
+// rays, nodes, bearings,
+// and remembered angles.
+//
+// the traveller carries
+// a private orrery.
+heading = ray * orbit;`
+  },
+  {
+    numeral: 'XXXIV',
+    kind: 'lanternWindow',
+    title: 'The Lantern Window — light caught in stone geometry',
+    divider: '◇ · ◆ · ◇',
+    seed: 34,
+    code: `// lantern window
+// a pointed arch,
+// a rose held in suspension,
+// circles nested in the lancet.
+//
+// the wall becomes a lens.
+light = preserve(halo, stone);`
+  },
+  {
+    numeral: 'XXXV',
+    kind: 'sigilBloom',
+    title: 'The Sigil Bloom — four crescents around a seal',
+    divider: '◆ · ◇ · ◆',
+    seed: 35,
+    code: `// sigil bloom
+// crescent, diamond, star.
+// repeat by quarters.
+//
+// not illustration,
+// but pressure:
+// the page gathering toward a seal.
+form = rotate(base, quarter);`
+  },
+  {
+    numeral: 'XXXVI',
+    kind: 'memoryField',
+    title: 'The Memory Field — numbers remembered as weight and interval',
+    divider: '✦ · ◇ · ✦',
+    seed: 36,
+    code: `// mnemonic field
+// suspend values as weight,
+// spacing, and vertical stress.
+//
+// arithmetic before notation:
+// a hanging memory,
+// half score, half prayer.
+mark(x, y, mass);`
+  }
+];
+MovementLibrary.mountGallery(document.getElementById('gallery'), PLATES);
+</script>
+<script src="assets/relic-enhancer.js"></script>
+</body>
+</html>

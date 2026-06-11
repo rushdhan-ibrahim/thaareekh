@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-density="comfortable">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Scriptorium Theme Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+Thaana:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/graph.css">
+<link rel="stylesheet" href="css/search.css">
+<link rel="stylesheet" href="css/tooltip.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/onboarding.css">
+<style>
+  /* Override for preview: allow scrolling */
+  html, body { overflow: auto; height: auto; }
+  body { padding: 0; }
+  .preview-section { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+  .preview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .preview-label { font-family: var(--mono); font-size: 10px; color: var(--tx3); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+  .preview-card { padding: 20px; border: 1px solid var(--bd); border-radius: var(--radius); background: var(--sf); }
+  .theme-toggle { position: fixed; top: 12px; right: 12px; z-index: 100; padding: 8px 16px; border: 2px solid var(--bd2); border-radius: var(--radius-sm); background: var(--sf); color: var(--tx); font: 13px var(--display); font-variant: small-caps; letter-spacing: 1px; cursor: pointer; }
+</style>
+</head>
+<body>
+<button class="theme-toggle" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'">Toggle Theme</button>
+
+<!-- Header Preview -->
+<header class="header-unified">
+  <div class="header-left">
+    <div class="brand"><h1>Rannavaaru</h1><span class="yr">1117 – 1968</span></div>
+    <div class="hsep"></div>
+    <button class="hb">←</button>
+    <button class="hb">→</button>
+    <div class="hsep"></div>
+    <button class="tb on">Graph</button>
+    <button class="tb">Tree</button>
+    <div class="hsep"></div>
+    <button class="tb on">Details</button>
+    <div class="hsep"></div>
+    <button class="hb">⌂</button>
+  </div>
+  <button class="command-trigger">Search names, dynasties… <kbd>/</kbd></button>
+  <div class="header-right">
+    <button class="hb">☰</button>
+    <div class="hsep"></div>
+    <select class="tsel"><option>English</option><option>Dhivehi</option></select>
+    <button class="hb" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'">☀</button>
+  </div>
+</header>
+
+<div class="preview-section">
+
+  <!-- Profile Card -->
+  <div class="preview-label">Profile Card</div>
+  <div class="pc" style="--dy-color: var(--dy-lunar)">
+    <div class="pch">
+      <div class="pcn">Muhammad ibn Abdulla</div>
+    </div>
+    <div class="mr">
+      <span class="bg"><span class="bdd" style="background:var(--dy-lunar)"></span>Lunar</span>
+      <span class="bg">Sultan</span>
+      <span class="bg">r. 1153–1166</span>
+    </div>
+    <div class="pcg">
+      <div class="pcl"><span>Dynasty</span><b>Lunar</b></div>
+      <div class="pcl"><span>Reign</span><b>1153 – 1166</b></div>
+      <div class="pcl"><span>Connections</span><b>7 relationships</b></div>
+      <div class="pcl"><span>Evidence</span><b>Grade A</b></div>
+    </div>
+  </div>
+
+  <div class="preview-grid">
+    <!-- Chips & Controls -->
+    <div class="preview-card">
+      <div class="preview-label">Chips & Controls</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px">
+        <button class="chip on"><span class="cd" style="background:var(--ep)"></span>Parent</button>
+        <button class="chip on"><span class="cd" style="background:var(--es)"></span>Sibling</button>
+        <button class="chip on"><span class="cd" style="background:var(--esp)"></span>Spouse</button>
+        <button class="chip"><span class="cd" style="background:var(--ek)"></span>Kin</button>
+      </div>
+      <div style="display:flex;gap:6px;margin-bottom:12px">
+        <button class="tb on">Graph</button>
+        <button class="tb">Tree</button>
+        <button class="tb">Focus</button>
+        <button class="tb" disabled>Disabled</button>
+      </div>
+      <div style="display:flex;gap:6px">
+        <select class="tsel"><option>All dynasties</option></select>
+        <select class="tsel"><option>All trees</option></select>
+      </div>
+    </div>
+
+    <!-- Badges & Tags -->
+    <div class="preview-card">
+      <div class="preview-label">Badges & Tags</div>
+      <div class="mr">
+        <span class="bg"><span class="bdd" style="background:var(--dy-lunar)"></span>Lunar</span>
+        <span class="bg"><span class="bdd" style="background:var(--dy-hilaaly)"></span>Hilaaly</span>
+        <span class="bg"><span class="bdd" style="background:var(--dy-utheemu)"></span>Utheemu</span>
+        <span class="bg"><span class="bdd" style="background:var(--dy-dhiyamigili)"></span>Dhiyamigili</span>
+        <span class="bg"><span class="bdd" style="background:var(--dy-isdu)"></span>Isdu</span>
+        <span class="bg"><span class="bdd" style="background:var(--dy-huraagey)"></span>Huraagey</span>
+        <span class="bg"><span class="bdd" style="background:var(--dy-devadu)"></span>Devadu</span>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:12px">
+        <span class="rt rt-i">inferred</span>
+        <span class="rt rt-u">uncertain</span>
+      </div>
+    </div>
+
+    <!-- Relation Items -->
+    <div class="preview-card">
+      <div class="preview-label">Relation Items</div>
+      <ul class="rl">
+        <li class="ri" data-rel="parent"><div class="rlf"><div class="rn"><a href="#">Koimala I</a></div><div class="rs">Parent → Child · Confirmed</div></div><button class="gb">Go</button></li>
+        <li class="ri" data-rel="spouse"><div class="rlf"><div class="rn"><a href="#">Rehendhi Khadeeja</a></div><div class="rs">Spouse · Confirmed</div></div><button class="gb">Go</button></li>
+        <li class="ri" data-rel="sibling"><div class="rlf"><div class="rn"><a href="#">Ali ibn Muhammad</a></div><div class="rs">Sibling · Inferred</div></div><span class="rt rt-i">i</span></li>
+        <li class="ri" data-rel="kin"><div class="rlf"><div class="rn"><a href="#">Hassan ibn Ali</a></div><div class="rs">Kin · Uncertain</div></div><span class="rt rt-u">u</span></li>
+      </ul>
+    </div>
+
+    <!-- Section Labels & Dividers -->
+    <div class="preview-card">
+      <div class="preview-label">Sections & Dividers</div>
+      <div class="sl">Legend</div>
+      <div class="lg">
+        <div class="li"><div class="ll" style="background:var(--ep)"></div><span>Parent→Child</span></div>
+        <div class="li"><div class="ll" style="background:var(--es)"></div><span>Sibling</span></div>
+        <div class="li"><div class="ll" style="background:var(--esp)"></div><span>Spouse</span></div>
+        <div class="li"><div class="ll" style="background:var(--ek)"></div><span>Kin</span></div>
+        <div class="li"><div class="ld" style="border-color:var(--ei)"></div><span>Inferred</span></div>
+        <div class="li"><div class="ld" style="border-color:var(--eu)"></div><span>Uncertain</span></div>
+      </div>
+      <div class="dv"></div>
+      <div class="sl">About</div>
+      <div class="at">Nodes = individuals. Inferred edges are deductions; uncertain edges mark ambiguous sources.</div>
+      <div class="dv"></div>
+      <div class="sl">Method &amp; Confidence</div>
+    </div>
+
+    <!-- Evidence Bar -->
+    <div class="preview-card">
+      <div class="preview-label">Evidence Bar</div>
+      <div class="evi-bar">
+        <div class="evi-seg evi-c" style="width:55%"></div>
+        <div class="evi-seg evi-i" style="width:30%"></div>
+        <div class="evi-seg evi-u" style="width:15%"></div>
+      </div>
+      <div class="evi-legend">
+        <span>Confirmed 55%</span>
+        <span>Inferred 30%</span>
+        <span>Uncertain 15%</span>
+      </div>
+    </div>
+
+    <!-- Breadcrumbs -->
+    <div class="preview-card">
+      <div class="preview-label">Breadcrumbs</div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="bc-item"><span class="bc-main">Koimala I</span><span class="bc-meta">Lunar · 1117</span></div>
+        <span class="bc-sep">→</span>
+        <div class="bc-item on"><span class="bc-main">Muhammad ibn Abdulla</span><span class="bc-meta">Lunar · 1153</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter Panel Preview -->
+  <div style="margin-top:24px">
+    <div class="preview-label">Filter Panel (inline preview)</div>
+    <div style="background:var(--sf);border:2px solid var(--bd2);border-radius:var(--radius);padding:16px;max-width:320px">
+      <div class="filter-panel-header" style="margin-bottom:12px">
+        <h3>Filters</h3>
+      </div>
+      <div class="filter-section">
+        <div class="filter-section-label">Dynasty & Tree</div>
+        <div class="filter-row">
+          <select class="tsel"><option>All dynasties</option></select>
+          <select class="tsel"><option>All trees</option></select>
+        </div>
+      </div>
+      <div class="filter-section">
+        <div class="filter-section-label">Edge Types</div>
+        <div class="filter-row">
+          <button class="chip on"><span class="cd" style="background:var(--ep)"></span>Parent</button>
+          <button class="chip on"><span class="cd" style="background:var(--es)"></span>Sibling</button>
+          <button class="chip on"><span class="cd" style="background:var(--esp)"></span>Spouse</button>
+          <button class="chip on"><span class="cd" style="background:var(--ek)"></span>Kin</button>
+        </div>
+      </div>
+      <div class="filter-section">
+        <div class="filter-section-label">Confidence</div>
+        <div class="filter-row">
+          <button class="chip on">Confirmed</button>
+          <button class="chip on">Inferred</button>
+          <button class="chip on">Uncertain</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

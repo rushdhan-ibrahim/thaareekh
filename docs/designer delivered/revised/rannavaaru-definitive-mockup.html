@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rannavaaru</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+SC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ece6dc;--bg2:#e2dbd0;--sf:#d8cfc2;
+  --tx:#16130f;--tx2:#3a342c;--tx3:#6c645d;
+  --bd:rgb(0 0 0/.08);--bd2:rgb(0 0 0/.14);
+  --rubric:#8b2d23;--ash:#6c645d;--ash-light:#9e9589;--ghost:#c4bdb3;
+  --dy-lu:#5b7a6e;--dy-hi:#7a6350;--dy-ut:#8b2d23;--dy-dh:#5a6278;
+  --dy-is:#7a6a8a;--dy-hu:#6b7a4e;--dy-de:#8a6e50;
+  --ep:#16130f;--es:#6c645d;--esp:#8b2d23;--ek:#c4bdb3;
+  --serif:'EB Garamond','Cormorant Garamond',Georgia,serif;
+  --display:'Cormorant SC',Georgia,serif;
+  --mono:'JetBrains Mono','Courier New',monospace;
+  --italic:'Cormorant Garamond',Georgia,serif;
+  --ease:cubic-bezier(.25,.1,.25,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px;-webkit-font-smoothing:antialiased}
+body{
+  background:radial-gradient(circle at 50% -10%,rgb(255 255 255/.04),transparent 40%),linear-gradient(180deg,#221d19,#151210 60%,#0e0c0a);
+  color:var(--tx);font-family:var(--serif);overflow:hidden;height:100vh;display:flex;flex-direction:column;
+}
+
+/* ═══ RUNNING HEAD ═══ */
+.rh{height:36px;display:flex;align-items:center;padding:0 24px;background:var(--bg2);border-bottom:1px solid var(--bd);z-index:10;flex-shrink:0;position:relative}
+.rh-brand{font-family:var(--display);font-variant:small-caps;letter-spacing:.22em;font-size:.78rem;color:var(--tx)}
+.rh-sep{width:1px;height:14px;background:var(--bd);margin:0 12px}
+.rh-date{font-family:var(--mono);font-variant-numeric:oldstyle-nums;font-size:.58rem;color:var(--ash-light);letter-spacing:.05em}
+.rh-center{position:absolute;left:50%;transform:translateX(-50%);font-family:var(--italic);font-style:italic;font-size:.68rem;color:var(--ash);letter-spacing:.03em}
+.rh-r{margin-left:auto;display:flex;align-items:center;gap:8px}
+.rh-btn{background:none;border:none;color:var(--ash-light);font-family:var(--mono);font-size:.55rem;cursor:pointer;letter-spacing:.06em;padding:2px 6px;transition:color 200ms}
+.rh-btn:hover{color:var(--tx)}.rh-btn.on{color:var(--rubric)}
+
+/* ═══ MAIN ═══ */
+.main{display:flex;flex:1;overflow:hidden}
+
+/* ═══ FOLIO ═══ */
+.folio{
+  flex:1;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse at 25% 20%,rgb(255 255 255/.15),transparent 44%),radial-gradient(ellipse at 75% 80%,rgb(255 255 255/.06),transparent 32%),var(--bg);
+  isolation:isolate;
+}
+.folio::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='6' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23g)'/%3E%3C/svg%3E");opacity:.18;mix-blend-mode:multiply;pointer-events:none;z-index:0}
+.folio::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 38%,rgb(0 0 0/.08) 100%);pointer-events:none;z-index:0}
+.folio>*{position:relative;z-index:1}
+
+/* Code ghost — scrolling */
+.code-ghost{position:absolute;inset:0;z-index:0;font-family:var(--mono);font-size:.48rem;line-height:1.3;color:var(--ghost);opacity:.12;overflow:hidden;padding:40px 40px 40px 58px;pointer-events:none}
+.code-ghost-inner{white-space:pre;animation:codeScroll 140s linear infinite}
+@keyframes codeScroll{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+
+/* Margin axis */
+.margin{position:absolute;left:0;top:0;bottom:0;width:48px;border-right:1px solid rgb(0 0 0/.05);z-index:3;pointer-events:none}
+.my{position:absolute;right:7px;font-family:var(--mono);font-size:.46rem;color:var(--ash-light);font-variant-numeric:oldstyle-nums;transform:translateY(-50%)}
+.my::after{content:'';position:absolute;right:-7px;top:50%;width:4px;height:1px;background:currentColor}
+.my.r{color:var(--rubric)}
+.era-glow{position:absolute;left:0;width:48px;height:50px;background:radial-gradient(ellipse at right center,rgb(139 45 35/.06),transparent 70%);pointer-events:none;z-index:2;animation:eraTravel 22s ease-in-out infinite alternate}
+@keyframes eraTravel{0%{top:58%}100%{top:72%}}
+
+/* Crumbs */
+.crumbs{position:absolute;top:7px;left:50%;transform:translateX(-50%);z-index:5;display:flex}
+.cr{font-family:var(--serif);font-size:.65rem;color:var(--ash);background:rgb(236 230 220/.8);padding:2px 9px;border:1px solid var(--bd);border-right:none;cursor:pointer}
+.cr:last-child{border-right:1px solid var(--bd)}.cr:first-child{border-radius:1.5px 0 0 1.5px}.cr:last-child{border-radius:0 1.5px 1.5px 0}
+.cr.now{background:var(--bg);color:var(--tx);border-color:var(--bd2)}
+.cd{display:inline-block;width:4px;height:4px;border-radius:50%;margin-right:3px;vertical-align:middle}
+
+/* Margin filter */
+.mf{position:absolute;top:8px;right:8px;width:132px;z-index:5;font-family:var(--italic);font-style:italic;font-size:.62rem;color:var(--ash);line-height:1.45}
+.mf-s{margin-bottom:6px;padding-bottom:5px;border-bottom:1px dashed rgb(0 0 0/.04)}
+.mf-l{font-family:var(--display);font-style:normal;font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash-light);margin-bottom:2px}
+.mf-c{display:flex;flex-wrap:wrap;gap:2px}
+.mc{font-family:var(--mono);font-style:normal;font-size:.46rem;color:var(--ash);border:1px solid var(--bd);padding:1px 4px;cursor:pointer}
+.mc.on{border-color:var(--bd2);color:var(--tx)}
+.mc .d{display:inline-block;width:3px;height:3px;border-radius:50%;margin-right:2px;vertical-align:middle}
+
+/* Folio corners */
+.fc{position:absolute;pointer-events:none;z-index:2;opacity:.16}
+
+/* Minimap */
+.mm{position:absolute;bottom:8px;right:8px;width:110px;height:68px;background:var(--bg2);border:1px solid var(--bd);z-index:5;overflow:hidden}
+
+/* ═══ SIDEBAR ═══ */
+.sidebar{
+  width:340px;flex-shrink:0;overflow-y:auto;position:relative;isolation:isolate;
+  background:radial-gradient(ellipse at 50% 8%,rgb(255 255 255/.1),transparent 50%),var(--bg2);
+  border-left:1px solid var(--bd);
+}
+.sidebar::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)'/%3E%3C/svg%3E");opacity:.09;mix-blend-mode:multiply;pointer-events:none;z-index:0}
+.sidebar::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 50%,rgb(0 0 0/.03) 100%);pointer-events:none;z-index:0}
+.sidebar>*{position:relative;z-index:1}
+.sidebar::-webkit-scrollbar{width:4px}.sidebar::-webkit-scrollbar-track{background:transparent}.sidebar::-webkit-scrollbar-thumb{background:var(--ghost);border-radius:2px}
+
+.tabs{display:flex;border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:5;background:var(--bg2)}
+.tab{flex:1;padding:8px 0;text-align:center;cursor:pointer;font-family:var(--display);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ash-light);border-bottom:2px solid transparent;transition:all 200ms}
+.tab:hover{color:var(--tx3)}.tab.on{color:var(--tx);border-bottom-color:var(--rubric)}
+
+.seal-block{text-align:center;padding:18px 0 4px}
+.seal{display:inline-block;width:100px;height:100px}
+
+.p-name{font-family:var(--display);font-size:1.28rem;font-variant:small-caps;letter-spacing:.1em;color:var(--tx);text-align:center;line-height:1.2;padding:0 20px}
+.p-title{font-family:var(--italic);font-style:italic;font-size:.76rem;color:var(--rubric);text-align:center;margin-top:2px}
+.p-dates{font-family:var(--mono);font-size:.56rem;color:var(--ash-light);text-align:center;margin-top:3px;font-variant-numeric:oldstyle-nums}
+.nr{display:flex;align-items:center;gap:5px;margin:10px 24px 12px}
+.nr .l{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--bd2),transparent)}.nr .dm{width:6px;height:6px;border:1px solid var(--bd2);transform:rotate(45deg);flex-shrink:0}
+
+.orn{text-align:center;margin:10px 0;color:var(--ash-light);letter-spacing:.45em;font-size:.46rem;user-select:none}
+.sl{font-family:var(--display);font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ash-light);padding:0 24px;margin-bottom:3px}
+.pills{display:flex;flex-wrap:wrap;gap:3px;padding:0 24px;margin-bottom:8px}
+.pl{font-family:var(--mono);font-size:.52rem;color:var(--tx3);background:var(--bg);border:1px solid var(--bd);padding:1px 5px;cursor:pointer;transition:all 150ms}
+.pl:hover{border-color:var(--bd2);color:var(--tx)}.pl.r{color:var(--rubric);border-color:rgb(139 45 35/.18)}
+.sb{display:flex;align-items:center;gap:5px;padding:1px 24px;margin-bottom:2px}
+.sb-n{font-family:var(--italic);font-style:italic;font-size:.76rem;color:var(--tx2)}
+.sb-b{font-family:var(--mono);font-size:.42rem;color:var(--ash-light);border:1px solid var(--bd);padding:0 3px}
+
+.bio{padding:0 24px;margin-bottom:10px}
+.bio p{font-family:var(--serif);font-size:.84rem;color:var(--tx2);text-align:justify;hyphens:auto;line-height:1.6;margin-bottom:7px}
+.bio p:first-of-type{color:var(--tx);font-size:.88rem}
+.ini{float:left;width:42px;height:42px;margin:2px 6px 2px 0}
+.ini svg{width:100%;height:100%}
+
+.rl{margin:0 24px 10px;padding:7px 10px;border-left:2px solid var(--rubric);background:rgb(139 45 35/.02)}
+.rl-l{font-family:var(--display);font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:var(--rubric);margin-bottom:1px}
+.rl-t{font-family:var(--serif);font-size:.72rem;color:var(--tx2);line-height:1.45}
+
+.facts{padding:0 24px;margin-bottom:8px}
+.ft{font-family:var(--serif);font-size:.72rem;color:var(--tx2);padding:3px 0;border-bottom:1px dotted var(--bd);line-height:1.45}
+.ft::before{content:'◇ ';color:var(--ash-light);font-size:.52rem}
+
+.rels{padding:0 24px}
+.rg{margin-bottom:8px}
+.rg-t{font-family:var(--display);font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ash-light);margin-bottom:3px}
+.ri{display:flex;align-items:center;gap:4px;padding:3px 0;border-bottom:1px solid var(--bd);font-size:.74rem}
+.ri-n{color:var(--tx2);cursor:pointer;flex:1}.ri-n:hover{color:var(--tx)}
+.ri-c{font-family:var(--mono);font-size:.42rem;padding:0 3px;border-radius:1px}
+.cc{border:1px solid var(--tx3);color:var(--tx3)}.ci{border:1px dashed var(--ash);color:var(--ash)}
+.ri-go{font-family:var(--mono);font-size:.48rem;color:var(--ash-light);cursor:pointer;padding:0 4px;border:1px solid var(--bd)}
+
+.leg{padding:8px 24px;border-top:1px solid var(--bd);margin-top:4px}
+.leg-t{font-family:var(--display);font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash-light);margin-bottom:3px}
+.li{display:flex;align-items:center;gap:4px;margin-bottom:2px;font-size:.62rem;color:var(--tx3)}
+.ll{width:16px;height:0;border-top-width:2px;border-top-style:solid}.ll.da{border-top-style:dashed}.ll.do{border-top-style:dotted}
+.pf{padding:8px 24px;text-align:center;border-top:1px solid var(--bd);font-family:var(--mono);font-size:.46rem;color:var(--ash-light)}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spinR{to{transform:rotate(-360deg)}}
+@keyframes breathe{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.02);opacity:.88}}
+@keyframes breatheNode{0%,100%{transform:scale(1)}50%{transform:scale(1.008)}}
+@keyframes breatheSov{0%,100%{opacity:.55}50%{opacity:.85}}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:.75}}
+@keyframes selectGlow{0%{filter:none;stroke-width:.5}50%{filter:drop-shadow(0 0 4px rgb(139 45 35/.12));stroke-width:1.8}100%{filter:none;stroke-width:1.2}}
+@keyframes edgeDraw{to{stroke-dashoffset:0}}
+@keyframes nodeIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+@keyframes sealSpin{to{transform:rotate(360deg)}}
+@keyframes sealBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+@keyframes headpieceDraw{to{stroke-dashoffset:0}}
+@keyframes headpieceRedraw{0%,90%{stroke-dashoffset:0}95%{stroke-dashoffset:var(--len)}100%{stroke-dashoffset:0}}
+</style>
+</head>
+<body>
+
+<div class="rh">
+  <span class="rh-brand">Rannavaaru</span><span class="rh-sep"></span>
+  <span class="rh-date">1117 – 1968</span>
+  <span class="rh-center">the royal genealogy of the Maldives</span>
+  <div class="rh-r"><button class="rh-btn on">graph</button><button class="rh-btn">tree</button><span class="rh-sep" style="margin:0"></span><button class="rh-btn">search /</button><button class="rh-btn">◑</button></div>
+</div>
+
+<div class="main">
+
+<!-- ═══ FOLIO ═══ -->
+<div class="folio">
+
+<div class="code-ghost"><div class="code-ghost-inner" id="codeText"></div></div>
+
+<div class="margin">
+  <div class="my" style="top:6%">1117</div><div class="my" style="top:18%">1200</div>
+  <div class="my" style="top:30%">1300</div><div class="my" style="top:42%">1400</div>
+  <div class="my" style="top:54%">1500</div><div class="my r" style="top:64%">1573</div>
+  <div class="my r" style="top:72%">1609</div><div class="my" style="top:82%">1700</div>
+  <div class="my" style="top:91%">1800</div><div class="my" style="top:98%">1968</div>
+  <div class="era-glow"></div>
+</div>
+
+<div class="crumbs">
+  <div class="cr"><span class="cd" style="background:var(--dy-ut)"></span>Muhammad Thakurufaanu</div>
+  <div class="cr"><span class="cd" style="background:var(--dy-ut)"></span>Hassan I</div>
+  <div class="cr now"><span class="cd" style="background:var(--dy-ut)"></span>Ibrahim III</div>
+</div>
+
+<div class="mf">
+  <div class="mf-s"><div class="mf-l">showing</div><div class="mf-c"><span class="mc on"><span class="d" style="background:var(--dy-ut)"></span>Utheemu</span><span class="mc"><span class="d" style="background:var(--dy-hi)"></span>Hilaaly</span><span class="mc"><span class="d" style="background:var(--dy-lu)"></span>Lunar</span></div></div>
+  <div class="mf-s"><div class="mf-l">edges</div><div class="mf-c"><span class="mc on">parent</span><span class="mc on" style="color:var(--rubric)">spouse</span><span class="mc on">sibling</span><span class="mc">kin</span></div></div>
+  <div style="font-family:var(--mono);font-size:.42rem;color:var(--ash-light);margin-top:3px">era 1573 – 1648</div>
+</div>
+
+<div class="fc" style="top:6px;left:52px;width:26px;height:26px"><svg viewBox="0 0 26 26"><polygon points="13,1 15,9 13,17 11,9" fill="none" stroke="var(--tx)" stroke-width=".35" opacity=".5"/><polygon points="13,4 14.5,9 13,14 11.5,9" fill="var(--tx)" opacity=".2"/></svg></div>
+<div class="fc" style="bottom:6px;left:52px;width:22px;height:22px"><svg viewBox="0 0 22 22"><polygon points="11,2 20,11 11,20 2,11" fill="none" stroke="var(--tx)" stroke-width=".3" opacity=".3"/></svg></div>
+
+<div class="mm"><svg width="110" height="68" viewBox="0 0 800 500"><circle cx="380" cy="230" r="3" fill="var(--dy-ut)"/><circle cx="310" cy="155" r="2.5" fill="var(--dy-ut)"/><circle cx="530" cy="215" r="2" fill="var(--dy-ut)"/><circle cx="270" cy="330" r="2" fill="var(--dy-ut)"/><circle cx="470" cy="330" r="2" fill="var(--dy-ut)"/><circle cx="390" cy="380" r="2" fill="var(--dy-ut)"/><circle cx="120" cy="190" r="1.5" fill="var(--dy-hi)" opacity=".4"/><circle cx="620" cy="165" r="1.5" fill="var(--dy-lu)" opacity=".4"/><rect x="200" y="110" width="400" height="320" fill="none" stroke="var(--rubric)" stroke-width="2" opacity=".3"/></svg></div>
+
+<svg id="G" width="100%" height="100%" style="position:absolute;inset:0;z-index:1"></svg>
+
+</div><!-- /folio -->
+
+<!-- ═══ SIDEBAR ═══ -->
+<div class="sidebar">
+
+<div class="tabs"><div class="tab on">Story</div><div class="tab">Offices</div><div class="tab">Evidence</div></div>
+
+<!-- HEADPIECE — self-drawing SVG ornament -->
+<div style="text-align:center;padding:12px 0 0"><svg id="headpiece" viewBox="0 0 200 16" width="200" height="16"></svg></div>
+
+<!-- THE GREAT SEAL -->
+<div class="seal-block"><div class="seal"><svg id="sealSvg" viewBox="0 0 100 100"></svg></div></div>
+
+<div class="p-name">Muhammad Thakurufaanu</div>
+<div class="p-title">Sultan · Forty-seventh Sovereign</div>
+<div class="p-dates">r. 1573 – 1585 · d. 1585 · Malé</div>
+<div class="nr"><span class="l"></span><span class="dm"></span><span class="l"></span></div>
+
+<div class="sl">Known Names</div>
+<div class="pills"><span class="pl r">Muhammad Thakurufaanu al-A'lam</span><span class="pl">Bodu Thakurufaanu</span><span class="pl">Mohamed Thakurufaanu</span></div>
+<div class="sb"><span class="sb-n">The Great</span><span class="sb-b">honorific</span></div>
+<div class="sb"><span class="sb-n">Liberator of the Maldives</span><span class="sb-b">epithet</span></div>
+<div class="orn">◆ · ◇ · ◆</div>
+
+<div class="sl">Titles</div>
+<div class="pills"><span class="pl">Sultan</span><span class="pl">Siri Bavana Sultan</span><span class="pl r">Ghazi</span></div>
+<div class="orn">✦ · ◆ · ✦</div>
+
+<div class="bio">
+<p><span class="ini"><svg viewBox="0 0 42 42"><rect width="42" height="42" fill="var(--tx)" rx="1"/><rect x="1.5" y="1.5" width="39" height="39" fill="none" stroke="var(--bg)" stroke-width=".5"/><rect x="3" y="3" width="36" height="36" fill="none" stroke="var(--bg)" stroke-width=".25"/><circle cx="3" cy="3" r=".8" fill="var(--bg)"/><circle cx="39" cy="3" r=".8" fill="var(--bg)"/><circle cx="3" cy="39" r=".8" fill="var(--bg)"/><circle cx="39" cy="39" r=".8" fill="var(--bg)"/><path d="M6,34 Q11,27 9,21 Q7,15 12,11" fill="none" stroke="var(--bg)" stroke-width=".4" opacity=".4"/><text x="21" y="31" font-family="'EB Garamond',Georgia,serif" font-size="24" font-weight="500" fill="var(--bg)" text-anchor="middle">M</text></svg></span>uhammad Thakurufaanu al-A'lam is the national hero of the Maldives, revered for leading the liberation of the islands from Portuguese occupation. Born in Utheem, Thiladhummathi Atoll, he organised a guerrilla campaign from the northern atolls that culminated in the overthrow of the Portuguese garrison in Malé in 1573.</p>
+<p>His reign marked the founding of the Utheemu dynasty and a new era of sovereignty. He is credited with introducing Thaana script, reorganising the military, and establishing systems that endured for generations.</p>
+</div>
+
+<div class="rl"><div class="rl-l">Royal Link</div><div class="rl-t">Sovereign — founder of the Utheemu dynasty. Direct line from liberation leader to throne.</div></div>
+
+<div class="facts">
+<div class="ft">Led a guerrilla campaign across the atolls for eight years before the final assault on Malé</div>
+<div class="ft">Credited with the introduction of Thaana script to replace the older Dhives Akuru</div>
+<div class="ft">Qaumee Dhuvas commemorates his victory on the first of Rabi' al-Awwal</div>
+</div>
+
+<div class="orn">◇ · ◆ · ◇</div>
+
+<div class="rels">
+<div class="rg"><div class="rg-t">Children</div>
+  <div class="ri"><span class="ri-n">Ibrahim III (Kalaafaanu)</span><span class="ri-c cc">confirmed</span><span class="ri-go">→</span></div>
+  <div class="ri"><span class="ri-n">Hassan I</span><span class="ri-c cc">confirmed</span><span class="ri-go">→</span></div>
+  <div class="ri"><span class="ri-n">Hussain II</span><span class="ri-c cc">confirmed</span><span class="ri-go">→</span></div>
+</div>
+<div class="rg"><div class="rg-t">Siblings</div>
+  <div class="ri"><span class="ri-n">Ali Thakurufaanu</span><span class="ri-c cc">confirmed</span><span class="ri-go">→</span></div>
+  <div class="ri"><span class="ri-n">Hassan Thakurufaanu</span><span class="ri-c cc">confirmed</span><span class="ri-go">→</span></div>
+</div>
+<div class="rg"><div class="rg-t">Spouses</div>
+  <div class="ri"><span class="ri-n" style="color:var(--rubric)">Khadija Kabaafaanu</span><span class="ri-c cc">confirmed</span><span class="ri-go">→</span></div>
+</div>
+</div>
+
+<div class="leg">
+<div class="leg-t">Legend</div>
+<div class="li"><div class="ll" style="border-color:var(--ep)"></div>Parent</div>
+<div class="li"><div class="ll" style="border-color:var(--es)"></div>Sibling</div>
+<div class="li"><div class="ll" style="border-color:var(--esp)"></div>Spouse</div>
+<div class="li"><div class="ll da" style="border-color:var(--ash)"></div>Inferred</div>
+<div class="li"><div class="ll do" style="border-color:var(--ghost)"></div>Uncertain</div>
+</div>
+<div class="pf">P30 · 12 connections · 3 sources · Utheemu</div>
+
+</div><!-- /sidebar -->
+</div><!-- /main -->
+
+<script>
+(function(){
+const NS='http://www.w3.org/2000/svg';
+function M(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const R=M(1573);
+function J(v,a){return v+(R()-0.5)*a}
+function E(t,a,p){const e=document.createElementNS(NS,t);for(const[k,v]of Object.entries(a))e.setAttribute(k,String(v));if(p)p.appendChild(e);return e}
+
+// ═══ CODE GHOST — the algorithm that builds the view ═══
+const codeText=document.getElementById('codeText');
+const code=`// force simulation
+const sim = d3.forceSimulation(persons)
+  .force('link', d3.forceLink(edges)
+    .id(d => d.id)
+    .distance(d => {
+      if (d.t === 'parent') return 80;
+      if (d.t === 'spouse') return 50;
+      return 120;
+    })
+    .strength(d => d.c==='c' ? 0.8 : 0.3))
+  .force('charge', d3.forceManyBody()
+    .strength(-200))
+  .force('center', d3.forceCenter(w/2, h/2))
+  .force('dynasty', dynastyCluster(.15));
+
+// dynasty cluster force
+function dynastyCluster(strength) {
+  const centers = {
+    Lunar:       { x: cx-180, y: cy-120 },
+    Hilaaly:     { x: cx-60,  y: cy-40  },
+    Utheemu:     { x: cx+60,  y: cy+20  },
+    Dhiyamigili: { x: cx+160, y: cy+80  },
+  };
+  return alpha => {
+    for (const n of persons) {
+      const c = centers[n.dy];
+      if (!c) continue;
+      n.vx += (c.x - n.x) * alpha * strength;
+      n.vy += (c.y - n.y) * alpha * strength;
+    }
+  };
+}
+
+// dynasty ring geometry
+// radius = sqrt(reignYears) * scale
+// angle  = (year-1117) / 851 * 2π
+// speed  = 1 / reignYears (longer = slower)
+//
+// the rings rotate at speeds inversely
+// proportional to their total reign span:
+// longer dynasties turn more slowly,
+// as befits their weight in history.
+
+// edge routing with jitter
+function routeEdge(s, d, type) {
+  const rng = mulberry32(hashPair(s.id, d.id));
+  const mx = (s.x + d.x) / 2 + (rng()-.5) * 12;
+  const my = (s.y + d.y) / 2 + (rng()-.5) * 16;
+  return type === 'parent'
+    ? \`M\${s.x},\${s.y+18} C\${s.x},\${my} \${d.x},\${my} \${d.x},\${d.y}\`
+    : \`M\${s.x+w/2},\${s.y+9} L\${d.x},\${d.y+9}\`;
+}
+
+// particle system — flowing dots
+// emitted every 4s along highlighted edges
+// speed varies: .0006 to .0012
+// opacity follows sin(t*π) for soft fade
+// the lineage flows continuously.
+
+// the raadhavalhi as algorithm:
+// person → node
+// relationship → edge
+// dynasty → orbit
+// century → revolution
+// the manuscript computes.
+`;
+codeText.textContent=code+'\n'+code; // duplicate for seamless scroll
+
+// ═══ HEADPIECE — self-drawing ornament that periodically redraws ═══
+(function(){
+  const hp=document.getElementById('headpiece');
+  const parts=[
+    {d:'M0,8 L72,8',sw:.3,op:.18},
+    {d:'M128,8 L200,8',sw:.3,op:.18},
+    {d:'M76,3 L82,8 L76,13',sw:.4,op:.3},
+    {d:'M124,3 L118,8 L124,13',sw:.4,op:.3},
+    {d:'M90,1 L96,8 L90,15 L84,8 Z',sw:.5,op:.4,stroke:'var(--rubric)'},
+    {d:'M110,1 L116,8 L110,15 L104,8 Z',sw:.5,op:.4,stroke:'var(--rubric)'},
+    {d:'M100,0 L105,8 L100,16 L95,8 Z',sw:.6,op:.5,stroke:'var(--rubric)'},
+    {d:'M100,4 L103,8 L100,12 L97,8 Z',sw:.35,op:.25,fill:'var(--rubric)'},
+  ];
+  parts.forEach((p,i)=>{
+    const path=E('path',{d:p.d,fill:p.fill||'none',stroke:p.stroke||'var(--tx)','stroke-width':p.sw,opacity:p.op},hp);
+    if(!p.fill){
+      const len=path.getTotalLength();
+      path.style.strokeDasharray=len;
+      path.style.strokeDashoffset=len;
+      path.style.animation=`headpieceDraw 1.5s var(--ease) ${i*120}ms forwards, headpieceRedraw 30s var(--ease) ${3+i*0.2}s infinite`;
+      path.style.setProperty('--len',len);
+    }
+  });
+})();
+
+// ═══ THE GREAT SEAL — rotating + breathing + counter-rotating ═══
+(function(){
+  const ss=document.getElementById('sealSvg');
+
+  // Outer rotating ring
+  const outer=E('g',{style:'animation:sealSpin 90s linear infinite;transform-origin:50px 50px'},ss);
+  E('circle',{cx:50,cy:50,r:46,fill:'none',stroke:'var(--dy-ut)','stroke-width':.6,opacity:.35},outer);
+  E('circle',{cx:50,cy:50,r:43,fill:'none',stroke:'var(--tx)','stroke-width':.18,opacity:.1,'stroke-dasharray':'1.5,5'},outer);
+  // Cardinal ticks
+  [[50,3],[97,50],[50,97],[3,50]].forEach(([x,y])=>{
+    const dx=x<50?1:x>50?-1:0, dy=y<50?1:y>50?-1:0;
+    E('polygon',{points:`${x},${y} ${x+dy*1.5},${y+dx*4+dy*4} ${x-dy*1.5},${y-dx*4+dy*4}`,fill:'var(--dy-ut)',opacity:.4},outer);
+  });
+  // 8-fold radials
+  [[50,6,50,94],[6,50,94,50],[18,18,82,82],[82,18,18,82]].forEach(([x1,y1,x2,y2])=>{
+    E('line',{x1,y1,x2,y2,stroke:'var(--tx)','stroke-width':.12,opacity:.06},outer);
+  });
+
+  // Inner breathing 16-pointed star
+  const inner=E('g',{style:'animation:sealBreathe 10s ease-in-out infinite;transform-origin:50px 50px'},ss);
+  function star(cx,cy,n,ro,ri){
+    let pts=[];
+    for(let i=0;i<n*2;i++){
+      const a=Math.PI*i/n-Math.PI/2;
+      const r=i%2===0?ro:ri;
+      pts.push((cx+r*Math.cos(a)).toFixed(1)+','+(cy+r*Math.sin(a)).toFixed(1));
+    }
+    return pts.join(' ');
+  }
+  E('polygon',{points:star(50,50,16,38,22),fill:'none',stroke:'var(--dy-ut)','stroke-width':.5,opacity:.45},inner);
+  E('polygon',{points:star(50,50,16,28,17),fill:'none',stroke:'var(--dy-ut)','stroke-width':.3,opacity:.25},inner);
+  E('polygon',{points:star(50,50,8,14,8),fill:'none',stroke:'var(--dy-ut)','stroke-width':.25,opacity:.2},inner);
+  E('circle',{cx:50,cy:50,r:4,fill:'var(--dy-ut)',opacity:.2},inner);
+  // Pulse ring
+  E('circle',{cx:50,cy:50,r:20,fill:'none',stroke:'var(--dy-ut)','stroke-width':.2,opacity:.15,style:'animation:pulse 6s ease-in-out infinite'},inner);
+
+  // Counter-rotating orbit dots
+  const orb=E('g',{style:'animation:spinR 55s linear infinite;transform-origin:50px 50px'},ss);
+  for(let i=0;i<8;i++){
+    const a=Math.PI*2*i/8-Math.PI/2;
+    const x=50+44*Math.cos(a),y=50+44*Math.sin(a);
+    E('circle',{cx:x.toFixed(1),cy:y.toFixed(1),r:i%2===0?1.3:0.8,fill:'var(--dy-ut)',opacity:i%2===0?.3:.18},orb);
+  }
+})();
+
+// ═══ THE GRAPH ═══
+const svg=document.getElementById('G');
+const defs=E('defs',{},svg);
+[['ut','var(--dy-ut)'],['hi','var(--dy-hi)'],['lu','var(--dy-lu)']].forEach(([id,c])=>{
+  const m=E('marker',{id:'a'+id,viewBox:'0 0 8 8',refX:8,refY:4,markerWidth:4.5,markerHeight:4.5,orient:'auto'},defs);
+  E('polygon',{points:'0,4 4,0 8,4 4,8',fill:c},m);
+});
+
+// Dynasty rings — computed from data
+const ringG=E('g',{opacity:.5},svg);
+const cx=360,cy=280;
+const dyn=[
+  {c:'var(--dy-lu)',yrs:268,spd:140},
+  {c:'var(--dy-hi)',yrs:188,spd:110},
+  {c:'var(--dy-ut)',yrs:119,spd:80},
+  {c:'var(--dy-dh)',yrs:67,spd:100},
+  {c:'var(--dy-hu)',yrs:59,spd:105},
+];
+dyn.forEach((d,i)=>{
+  const r=75+i*42+J(0,3);
+  const g=E('g',{style:`animation:spin ${d.spd}s linear infinite;transform-origin:${cx}px ${cy}px`},ringG);
+  E('circle',{cx,cy,r,fill:'none',stroke:d.c,'stroke-width':.45,opacity:.1},g);
+  E('circle',{cx,cy,r:r-4,fill:'none',stroke:d.c,'stroke-width':.12,opacity:.05,'stroke-dasharray':'1.5,6'},g);
+  const arc=(d.yrs/851)*Math.PI*2, sa=-Math.PI/2;
+  const x1=cx+r*Math.cos(sa),y1=cy+r*Math.sin(sa);
+  const x2=cx+r*Math.cos(sa+arc),y2=cy+r*Math.sin(sa+arc);
+  E('path',{d:`M${x1},${y1} A${r},${r} 0 ${arc>Math.PI?1:0} 1 ${x2},${y2}`,fill:'none',stroke:d.c,'stroke-width':1.1,opacity:.07},g);
+  E('polygon',{points:`${x1},${y1-3} ${x1+2},${y1} ${x1},${y1+3} ${x1-2},${y1}`,fill:d.c,opacity:.1},g);
+});
+E('circle',{cx,cy,r:55,fill:'none',stroke:'var(--tx)','stroke-width':.2,opacity:.04,style:`animation:breathe 16s ease-in-out infinite;transform-origin:${cx}px ${cy}px`},ringG);
+E('polygon',{points:`${cx},${cy-6} ${cx+1.5},${cy-1} ${cx+6},${cy} ${cx+1.5},${cy+1} ${cx},${cy+6} ${cx-1.5},${cy+1} ${cx-6},${cy} ${cx-1.5},${cy-1}`,fill:'var(--tx)',opacity:.04},ringG);
+
+// ═══ EDGES ═══
+const edgeG=E('g',{},svg);
+const activePaths=[];
+function pEdge(x1,y1,x2,y2,mk,hi,inf){
+  const my=J((y1+y2)/2,10);
+  const d=`M${J(x1,1)},${J(y1+18,1)} C${J(x1,3)},${J(my,5)} ${J(x2,3)},${J(my,5)} ${J(x2,1)},${J(y2,1)}`;
+  const a={d,fill:'none',stroke:'var(--ep)','stroke-width':hi?.85:.35,opacity:hi?.85:.08};
+  if(inf){a['stroke-dasharray']='5,3';a.opacity=hi?.55:.06}
+  if(mk)a['marker-end']='url(#a'+mk+')';
+  const p=E('path',a,edgeG);
+  if(hi){
+    const l=p.getTotalLength();
+    p.style.strokeDasharray=l;p.style.strokeDashoffset=l;
+    p.style.animation=`edgeDraw 1.6s var(--ease) ${R()*600}ms forwards`;
+    activePaths.push(p);
+  }
+}
+function sEdge(x1,y1,x2,y2,hi){
+  const p=E('path',{d:`M${J(x1,1)},${J(y1,.5)} L${J(x2,1)},${J(y2,.5)}`,fill:'none',stroke:'var(--esp)','stroke-width':hi?.6:.25,opacity:hi?.7:.06},edgeG);
+  if(hi)activePaths.push(p);
+}
+function bEdge(x1,y1,x2,y2,hi){
+  const d=`M${J(x1,.5)},${J(y1,.3)} C${J(x1,2)},${J(y1+14,2)} ${J(x2,2)},${J(y2+14,2)} ${J(x2,.5)},${J(y2,.3)}`;
+  E('path',{d,fill:'none',stroke:'var(--es)','stroke-width':hi?.4:.2,opacity:hi?.6:.06},edgeG);
+}
+
+pEdge(330,150,310,255,'ut',1,0); pEdge(385,265,250,335,'ut',1,0);
+pEdge(385,265,470,335,'ut',1,0); pEdge(385,265,380,380,'ut',1,0);
+sEdge(430,258,510,245,1); bEdge(250,350,380,395,1);
+pEdge(470,350,575,320,'ut',1,1);
+pEdge(110,190,140,275,'hi',0,0); pEdge(610,165,630,250,'lu',0,0);
+sEdge(620,165,690,170,0); pEdge(120,365,175,410,'hi',0,0);
+
+// ═══ NODES ═══
+const nodeG=E('g',{},svg);
+function nd(x,y,nm,sub,dy,sov,sel,dim){
+  const g=E('g',{transform:`translate(${J(x,1.5)},${J(y,1.5)})`},nodeG);
+  if(dim)g.setAttribute('opacity','.25');
+  const dly=200+R()*700;
+  g.style.animation=`nodeIn 600ms var(--ease) ${dly}ms both`;
+  if(sov&&!dim)g.style.animation+=`, breatheNode ${10+R()*6}s ease-in-out ${R()*8}s infinite`;
+
+  const w=nm.length*6.8+26,h=dim?26:34,rx=J(2,.6);
+  const bg=E('rect',{x:0,y:0,width:w,height:h,rx,fill:'var(--bg)',stroke:sel?'var(--bd2)':'var(--bd)','stroke-width':sel?.65:.3},g);
+  if(sel)bg.style.animation='selectGlow 1s var(--ease) forwards';
+
+  E('rect',{x:0,y:0,width:J(3,.3),height:h,rx:1,fill:`var(--dy-${dy})`},g);
+
+  if(sov&&!dim){
+    const sx=11,sy=9;
+    E('polygon',{points:`${sx},${sy-4.5} ${sx+1},${sy-1.3} ${sx+3.5},${sy-.8} ${sx+1.8},${sy+1.3} ${sx+2.2},${sy+4.5} ${sx},${sy+2.8} ${sx-2.2},${sy+4.5} ${sx-1.8},${sy+1.3} ${sx-3.5},${sy-.8} ${sx-1},${sy-1.3}`,fill:'var(--rubric)',opacity:.5,style:`animation:breatheSov 6s ease-in-out ${R()*4}s infinite`},g);
+  }
+  const tx=sov&&!dim?18:8;
+  const ne=E('text',{x:tx,y:dim?13:15,fill:'var(--tx)','font-size':dim?9:11.5,'font-family':"'EB Garamond',Georgia,serif"},g);
+  if(sov&&!dim){ne.setAttribute('font-variant','small-caps');ne.setAttribute('letter-spacing','.04em')}
+  ne.textContent=nm;
+  if(sub)E('text',{x:sov&&!dim?18:8,y:dim?22:27,fill:'var(--tx3)','font-size':dim?6.5:7.5,'font-family':"'JetBrains Mono',monospace",'font-variant-numeric':'oldstyle-nums'},g).textContent=sub;
+}
+
+nd(250,132,'Muhammad Thakurufaanu','r. 1573–1585 · Utheemu','ut',1,0,0);
+nd(335,246,'Ibrahim III','r. 1585–1609 · Kalaafaanu','ut',1,1,0);
+nd(496,230,'Khadija Kabaafaanu','spouse','ut',0,0,0);
+nd(200,325,'Hassan I','r. 1609–1610','ut',1,0,0);
+nd(420,325,'Hussain II','r. 1610–1620','ut',1,0,0);
+nd(330,373,'Muhammad III','r. 1620–1648','ut',1,0,0);
+nd(530,308,'Ibrahim IV','r. 1648 (contested)','ut',1,0,0);
+nd(60,175,'Ali VI','Hilaaly · r. 1558','hi',1,0,1);
+nd(575,150,'Koimala','Lunar · c. 1117','lu',1,0,1);
+nd(70,355,'Hassan IX','Hilaaly · r. 1550','hi',1,0,1);
+nd(600,240,'Muhammad I','Lunar','lu',0,0,1);
+
+// ═══ EDGE PARTICLES — flowing dots along highlighted edges ═══
+const partG=E('g',{},svg);
+function spawnP(path){
+  const len=path.getTotalLength();if(!len)return;
+  const dot=E('circle',{r:J(1.3,.3),fill:'var(--tx)',opacity:0},partG);
+  let t=0;const sp=.0006+R()*.0006;
+  function step(){
+    t+=sp;
+    if(t>1){partG.removeChild(dot);return}
+    const pt=path.getPointAtLength(t*len);
+    dot.setAttribute('cx',pt.x);dot.setAttribute('cy',pt.y);
+    dot.setAttribute('opacity',(Math.sin(t*Math.PI)*.3).toFixed(3));
+    requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+function wave(){activePaths.forEach((p,i)=>setTimeout(()=>spawnP(p),i*180))}
+setInterval(wave,4500);
+setTimeout(wave,2500);
+setTimeout(wave,3800);
+
+})();
+</script>
+</body>
+</html>

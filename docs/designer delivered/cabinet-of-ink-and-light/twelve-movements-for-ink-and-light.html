@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Twelve Movements for Ink & Light</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+SC:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════
+   TOKENS — the restrained palette
+   ═══════════════════════════════════════════ */
+:root {
+  --paper: #ece6dc;
+  --paper-mid: #e2dbd0;
+  --ink: #16130f;
+  --ink-light: #3a342c;
+  --ash: #6c645d;
+  --ash-light: #9e9589;
+  --ghost: #c4bdb3;
+  --rubric: #8b2d23;
+  --rule: rgb(0 0 0 / 0.10);
+
+  --font-body: 'EB Garamond', Georgia, serif;
+  --font-display: 'Cormorant SC', Georgia, serif;
+  --font-italic: 'Cormorant Garamond', Georgia, serif;
+  --font-code: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 17px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+
+body {
+  background: #1e1b18;
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.58;
+  display: flex;
+  justify-content: center;
+  padding: 48px 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   THE PAGE — paper as color, not backdrop
+   ═══════════════════════════════════════════ */
+.folio {
+  background:
+    radial-gradient(ellipse at 30% 15%, rgb(255 255 255 / 0.14), transparent 40%),
+    linear-gradient(175deg, rgb(0 0 0 / 0.02), rgb(255 255 255 / 0.01)),
+    var(--paper);
+  max-width: 920px;
+  width: 100%;
+  padding: 88px 96px;
+  position: relative;
+  isolation: isolate;
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 0.05),
+    0 1px 4px rgb(0 0 0 / 0.06),
+    0 16px 48px rgb(0 0 0 / 0.12);
+}
+
+/* Paper grain — feTurbulence via inline SVG filter */
+.folio::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)'/%3E%3C/svg%3E");
+  opacity: 0.16;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Edge darkening — subtle vignette */
+.folio::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 55%, rgb(0 0 0 / 0.04) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.folio > * { position: relative; z-index: 1; }
+
+/* ═══════════════════════════════════════════
+   TYPOGRAPHY — three families, strict hierarchy
+   ═══════════════════════════════════════════ */
+.title-block { text-align: center; margin-bottom: 16px; }
+.title-main {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 1.45rem; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--ink);
+  opacity: 0; animation: emerge 2.2s cubic-bezier(0.25,0.1,0.25,1) 0.4s forwards;
+}
+.title-sub {
+  font-family: var(--font-italic); font-style: italic;
+  font-size: 0.88rem; color: var(--ash); letter-spacing: 0.05em;
+  margin-top: 4px;
+  opacity: 0; animation: emerge 2s ease 0.9s forwards;
+}
+@keyframes emerge {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Rubric — red ink for structure */
+.rubric { color: var(--rubric); }
+
+/* Folio numbers and figure labels */
+.folio-num, .fig-label {
+  font-variant-numeric: oldstyle-nums;
+  letter-spacing: 0.04em;
+}
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL — gentle, no bounce
+   ═══════════════════════════════════════════ */
+.rv {
+  opacity: 0; transform: translateY(14px);
+  transition: opacity 1.1s cubic-bezier(0.25,0.1,0.25,1),
+              transform 1.1s cubic-bezier(0.25,0.1,0.25,1);
+}
+.rv.vis { opacity: 1; transform: translateY(0); }
+
+/* ═══════════════════════════════════════════
+   BORDER — self-drawing threshold
+   ═══════════════════════════════════════════ */
+.headpiece { display: flex; justify-content: center; margin: 20px 0 48px; }
+.headpiece svg { width: 100%; max-width: 560px; height: auto; }
+.hp-draw {
+  stroke-dasharray: 2000; stroke-dashoffset: 2000;
+  animation: draw 3.5s cubic-bezier(0.4,0,0.2,1) 1.4s forwards;
+}
+.hp-fill { opacity: 0; animation: fadeIn 1.2s ease 3.2s forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* ═══════════════════════════════════════════
+   ORNAMENT DIVIDERS — only at thresholds
+   ═══════════════════════════════════════════ */
+.divider {
+  text-align: center; margin: 52px 0; user-select: none;
+  color: var(--ink); letter-spacing: 0.5em; font-size: 0.65rem;
+}
+
+/* ═══════════════════════════════════════════
+   PLATE — the geometric figure container
+   ═══════════════════════════════════════════ */
+.plate {
+  position: relative;
+  margin: 8px 0 16px;
+  padding: 44px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 340px;
+}
+.plate .code-bg {
+  position: absolute; inset: 0;
+  font-family: var(--font-code); font-size: 0.56rem; line-height: 1.45;
+  color: var(--ghost); opacity: 0; overflow: hidden;
+  padding: 20px; pointer-events: none; white-space: pre;
+  transition: opacity 1.8s ease;
+}
+.plate.vis .code-bg { opacity: 0.18; }
+.plate .art { position: relative; z-index: 2; }
+
+/* Plate label: Roman numeral + caption */
+.plate-num {
+  text-align: center; margin-bottom: 2px;
+  font-family: var(--font-body); font-size: 0.78rem;
+  color: var(--ash); font-variant-numeric: oldstyle-nums;
+}
+.plate-title {
+  text-align: center; margin-bottom: 52px;
+  font-family: var(--font-italic); font-style: italic;
+  font-size: 0.84rem; color: var(--ash-light); letter-spacing: 0.02em;
+}
+
+/* ═══════════════════════════════════════════
+   DRAW PATH — SVG lines that reveal on scroll
+   ═══════════════════════════════════════════ */
+.drw {
+  transition: stroke-dashoffset 2.8s cubic-bezier(0.4,0,0.2,1);
+}
+.vis .drw { stroke-dashoffset: 0 !important; }
+
+/* ═══════════════════════════════════════════
+   MOTION VOCABULARY — astronomical, not app-like
+   ═══════════════════════════════════════════ */
+@keyframes spin    { to { transform: rotate(360deg); } }
+@keyframes spinR   { to { transform: rotate(-360deg); } }
+@keyframes breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.018); } }
+@keyframes float   { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@keyframes pulse   { 0%,100% { opacity: 0.45; } 50% { opacity: 0.9; } }
+
+@keyframes pendulum {
+  0%   { transform: rotate(var(--a)); }
+  50%  { transform: rotate(var(--b)); }
+  100% { transform: rotate(var(--a)); }
+}
+
+@keyframes rippleOut {
+  0%   { r: 4; opacity: 0.7; stroke-width: 0.8; }
+  100% { r: 140; opacity: 0; stroke-width: 0.15; }
+}
+
+/* ═══════════════════════════════════════════
+   COLOPHON
+   ═══════════════════════════════════════════ */
+.colophon {
+  margin-top: 56px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+  text-align: center; font-family: var(--font-italic); font-style: italic;
+  font-size: 0.76rem; color: var(--ash-light); line-height: 1.9;
+}
+
+@media (max-width: 740px) {
+  .folio { padding: 44px 28px; }
+  .plate { min-height: 260px; padding: 28px 0; }
+  .title-main { font-size: 1.15rem; letter-spacing: 0.2em; }
+}
+</style>
+<link rel="stylesheet" href="assets/relic-common.css">
+</head>
+<body>
+<article class="folio">
+
+  <header class="title-block">
+    <h1 class="title-main">Twelve Movements for Ink <span class="rubric">&amp;</span> Light</h1>
+    <p class="title-sub">a library of animated geometric forms</p>
+  </header>
+
+  <!-- ═══════ HEADPIECE ═══════ -->
+  <div class="headpiece">
+    <svg viewBox="0 0 560 24" xmlns="http://www.w3.org/2000/svg">
+      <defs><pattern id="hpU" x="0" y="0" width="32" height="24" patternUnits="userSpaceOnUse">
+        <polygon points="16,3 19,12 16,21 13,12" fill="none" stroke="#16130f" stroke-width="0.7" class="hp-fill"/>
+        <polygon points="16,7 18,12 16,17 14,12" fill="#16130f" class="hp-fill"/>
+        <circle cx="16" cy="1.5" r="0.8" fill="#16130f" class="hp-fill"/>
+        <circle cx="16" cy="22.5" r="0.8" fill="#16130f" class="hp-fill"/>
+        <circle cx="7" cy="12" r="1.2" fill="none" stroke="#16130f" stroke-width="0.4" class="hp-fill"/>
+        <circle cx="25" cy="12" r="1.2" fill="none" stroke="#16130f" stroke-width="0.4" class="hp-fill"/>
+      </pattern></defs>
+      <line x1="0" y1="12" x2="560" y2="12" stroke="#16130f" stroke-width="0.5" class="hp-draw"/>
+      <rect width="560" height="24" fill="url(#hpU)" class="hp-fill"/>
+    </svg>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       I. THE ORRERY
+       ══════════════════════════════════════════════ -->
+  <div class="plate rv" id="p1">
+    <div class="code-bg">float orbit(vec2 p, float r, float w) {
+    return abs(length(p) - r) - w;
+}
+void main() {
+    vec2 uv = (gl_FragCoord.xy * 2.0
+        - res) / res.y;
+    float d = orbit(uv, 0.6, 0.01);
+    d = min(d, orbit(
+        rotate(uv, t*0.3), 0.4, 0.008));
+    gl_FragColor = vec4(
+        smoothstep(0.005, 0.0, d));
+}</div>
+    <svg class="art" viewBox="0 0 300 300" width="280" height="280" id="orrery-svg"></svg>
+  </div>
+  <div class="plate-num rv"><span class="rubric">I</span></div>
+  <div class="plate-title rv">The Orrery — concentric rings in contrary motion</div>
+  <div class="divider rv">◆ · ◇ · ◆</div>
+
+  <!-- ══════════════════════════════════════════════
+       II. THE LOOM — Lissajous
+       ══════════════════════════════════════════════ -->
+  <div class="plate rv" id="p2">
+    <div class="code-bg">// Lissajous curve:
+// x(t) = A·sin(a·t + δ)
+// y(t) = B·sin(b·t)
+//
+// when a/b is rational
+// the curve closes.
+// when irrational
+// it fills the rectangle.
+
+function lissajous(
+  t: number,
+  a: number,
+  b: number,
+  delta: number
+): [number, number] {
+  return [
+    Math.sin(a * t + delta),
+    Math.sin(b * t)
+  ];
+}</div>
+    <svg class="art" viewBox="0 0 300 300" width="280" height="280" id="loom-svg"></svg>
+  </div>
+  <div class="plate-num rv"><span class="rubric">II</span></div>
+  <div class="plate-title rv">The Loom — a Lissajous figure weaving its knot</div>
+  <div class="divider rv">✦ · ◆ · ✦</div>
+
+  <!-- ══════════════════════════════════════════════
+       III. THE TIDE — ripples
+       ══════════════════════════════════════════════ -->
+  <div class="plate rv" id="p3">
+    <div class="code-bg">function wave(
+  r: number, t: number,
+  k: number, omega: number
+): number {
+  const amp = 1 / Math.sqrt(
+    Math.max(r, 0.01));
+  return amp * Math.cos(
+    k * r - omega * t);
+}
+// superposition:
+// drop two stones and watch
+// the interference emerge
+// from nothing but addition</div>
+    <svg class="art" viewBox="0 0 300 300" width="280" height="280">
+      <circle cx="130" cy="155" r="2.5" fill="var(--ink)"/>
+      <circle cx="130" cy="155" fill="none" stroke="var(--ink)" style="animation:rippleOut 4.5s ease-out infinite 0s" r="4"/>
+      <circle cx="130" cy="155" fill="none" stroke="var(--ink)" style="animation:rippleOut 4.5s ease-out infinite 0.9s" r="4"/>
+      <circle cx="130" cy="155" fill="none" stroke="var(--ink)" style="animation:rippleOut 4.5s ease-out infinite 1.8s" r="4"/>
+      <circle cx="130" cy="155" fill="none" stroke="var(--ink)" style="animation:rippleOut 4.5s ease-out infinite 2.7s" r="4"/>
+      <circle cx="130" cy="155" fill="none" stroke="var(--ink)" style="animation:rippleOut 4.5s ease-out infinite 3.6s" r="4"/>
+      <circle cx="185" cy="130" r="1.8" fill="var(--ink)"/>
+      <circle cx="185" cy="130" fill="none" stroke="var(--ink)" style="animation:rippleOut 5s ease-out infinite 0.3s" r="3" opacity="0.55"/>
+      <circle cx="185" cy="130" fill="none" stroke="var(--ink)" style="animation:rippleOut 5s ease-out infinite 1.3s" r="3" opacity="0.55"/>
+      <circle cx="185" cy="130" fill="none" stroke="var(--ink)" style="animation:rippleOut 5s ease-out infinite 2.3s" r="3" opacity="0.55"/>
+      <circle cx="185" cy="130" fill="none" stroke="var(--ink)" style="animation:rippleOut 5s ease-out infinite 3.3s" r="3" opacity="0.55"/>
+      <circle cx="185" cy="130" fill="none" stroke="var(--ink)" style="animation:rippleOut 5s ease-out infinite 4.3s" r="3" opacity="0.55"/>
+      <!-- faint reference rings -->
+      <circle cx="150" cy="150" r="60" fill="none" stroke="var(--ink)" stroke-width="0.1" stroke-dasharray="1,6"/>
+      <circle cx="150" cy="150" r="110" fill="none" stroke="var(--ink)" stroke-width="0.08" stroke-dasharray="1,8"/>
+    </svg>
+  </div>
+  <div class="plate-num rv"><span class="rubric">III</span></div>
+  <div class="plate-title rv">The Tide — two sources, their ripples interfering</div>
+  <div class="divider rv">◇ · ◆ · ◇</div>
+
+  <!-- ══════════════════════════════════════════════
+       IV. THE CHOIR — pendulum wave
+       ══════════════════════════════════════════════ -->
+  <div class="plate rv" id="p4">
+    <div class="code-bg">interface Pendulum {
+  length: number;
+  frequency: number;
+}
+function choir(n: number) {
+  const f0 = 0.5, delta = 0.018;
+  return Array.from({length: n},
+    (_, i) => ({
+      length: 180 - i * 6,
+      frequency: f0 + i * delta
+    }));
+}</div>
+    <svg class="art" viewBox="0 0 380 230" width="360" height="215" id="choir-svg"></svg>
+  </div>
+  <div class="plate-num rv"><span class="rubric">IV</span></div>
+  <div class="plate-title rv">The Choir — fifteen pendulums detuned by δ</div>
+  <div class="divider rv">◆ · ✦ · ◆</div>
+
+  <!-- ══════════════════════════════════════════════
+       V. THE SEED — phyllotaxis
+       ══════════════════════════════════════════════ -->
+  <div class="plate rv" id="p5">
+    <div class="code-bg">const GOLDEN_ANGLE =
+  Math.PI * (3 - Math.sqrt(5));
+  // ≈ 137.508°
+
+function phyllotaxis(
+  n: number, c: number = 8
+): [number, number] {
+  const r = c * Math.sqrt(n);
+  const theta = n * GOLDEN_ANGLE;
+  return [
+    r * Math.cos(theta),
+    r * Math.sin(theta)
+  ];
+}
+// the sunflower's secret:
+// no two seeds share
+// a radial line.</div>
+    <svg class="art" viewBox="0 0 300 300" width="280" height="280" id="seed-svg"></svg>
+  </div>
+  <div class="plate-num rv"><span class="rubric">V</span></div>
+  <div class="plate-title rv">The Seed — <span class="rubric">200</span> points at the golden angle, unfurling</div>
+  <div class="divider rv">✦ · ◇ · ✦</div>
+
+  <!-- ══════════════════════════════════════════════
+       VI. THE GASKET — Sierpinski
+       ══════════════════════════════════════════════ -->
+  <div class="plate rv" id="p6">
+    <div class="code-bg">function sierpinski(
+  ax, ay, bx, by, cx, cy,
+  depth: number
+): void {
+  if (depth === 0) {
+    triangle(ax,ay,bx,by,cx,cy);
+    return;
+  }
+  const abx=(ax+bx)/2;
+  const aby=(ay+by)/2;
+  const bcx=(bx+cx)/2;
+  const bcy=(by+cy)/2;
+  const cax=(cx+ax)/2;
+  const cay=(cy+ay)/2;
+  sierpinski(ax,ay,abx,aby,
+    cax,cay,depth-1);
+  sierpinski(abx,aby,bx,by,
+    bcx,bcy,depth-1);
+  sierpinski(cax,cay,bcx,bcy,
+    cx,cy,depth-1);
+}</div>
+    <svg class="art" viewBox="0 0 320 285" width="300" height="265" id="gasket-svg"></svg>
+  </div>
+  <div class="plate-num rv"><span class="rubric">VI</span></div>
+  <div class="plate-title rv">The Gasket — removal as creation, D ≈ <span class="rubric">1.585</span></div>
+  <div class="divider rv">◇ · ◆ · ◇</div>
+
+  <!-- ══════════════════════════════════════════════
+       VII. THE ROSE — compass
+       ══════════════════════════════════════════════ -->
+  <div class="plate rv" id="p7">
+    <div class="code-bg">// the compass rose
+// 32 points of direction
+// each spoke a ray from center
+//
+// cardinal: N E S W — longest
+// ordinal: NE SE SW NW
+// half-winds: NNE ENE ESE etc.
+//
+// function spokeLength(
+//   index, total
+// ): number {
+//   if (index%(total/4)===0) return 1.0;
+//   if (index%(total/8)===0) return 0.7;
+//   return 0.45;
+// }</div>
+    <svg class="art" viewBox="0 0 300 300" width="280" height="280" id="rose-svg"></svg>
+  </div>
+  <div class="plate-num rv"><span class="rubric">VII</span></div>
+  <div class="plate-title rv">The Compass Rose — <span class="rubric">32</span> points, turning without rest</div>
+  <div class="divider rv">◆ · ◇ · ◆</div>
+
+  <!-- ══════════════════════════════════════════════
+       VIII. THE HOURGLASS
+       ══════════════════════════════════════════════ -->
+  <div class="plate rv" id="p8">
+    <div class="code-bg">// granular flow through
+// a constriction
+//
+// Q = C·ρ·√g·(D - k·d)^(5/2)
+//
+// Beverloo's Law:
+// the flow rate is
+// independent of the
+// height of sand above.
+//
+// time is not measured
+// by what remains
+// but by what passes</div>
+    <svg class="art" viewBox="0 0 200 320" width="180" height="295" id="hourglass-svg"></svg>
+  </div>
+  <div class="plate-num rv"><span class="rubric">VIII</span></div>
+  <div class="plate-title rv">The Hourglass — Beverloo's Law; flow independent of height</div>
+  <div class="divider rv">✦ · ◆ · ✦</div>
+
+  <!-- ══════════════════════════════════════════════
+       IX. THE HELIX
+       ══════════════════════════════════════════════ -->
+  <div class="plate rv" id="p9">
+    <div class="code-bg">// the double helix
+// two strands winding
+// around a common axis
+//
+// x₁(t) = r·cos(t)
+// y₁(t) = t · pitch
+// x₂(t) = r·cos(t + π)
+// y₂(t) = t · pitch
+//
+// the information is not
+// in the strands
+// but in the bonds
+// between them</div>
+    <svg class="art" viewBox="0 0 200 340" width="180" height="320" id="helix-svg"></svg>
+  </div>
+  <div class="plate-num rv"><span class="rubric">IX</span></div>
+  <div class="plate-title rv">The Helix — two strands, the information in the space between</div>
+  <div class="divider rv">◇ · ✦ · ◇</div>
+
+  <!-- ══════════════════════════════════════════════
+       X. THE CANTOR DUST
+       ══════════════════════════════════════════════ -->
+  <div class="plate rv" id="p10">
+    <div class="code-bg">function cantor(
+  x, width, y,
+  depth, maxDepth
+): void {
+  fill(x, y, width, 4);
+  if (depth < maxDepth) {
+    const third = width / 3;
+    cantor(x, third,
+      y+28, depth+1, maxDepth);
+    cantor(x + 2*third, third,
+      y+28, depth+1, maxDepth);
+  }
+}
+// after ∞ iterations:
+// total length = 0
+// number of points = ∞
+// D = log2/log3 ≈ 0.631</div>
+    <svg class="art" viewBox="0 0 600 220" width="560" height="200" id="cantor-svg"></svg>
+  </div>
+  <div class="plate-num rv"><span class="rubric">X</span></div>
+  <div class="plate-title rv">The Cantor Dust — infinite points, zero length, D ≈ <span class="rubric">0.631</span></div>
+  <div class="divider rv">◆ · ◇ · ◆</div>
+
+  <!-- ══════════════════════════════════════════════
+       XI. THE REFLECTION — bilateral symmetry
+       ══════════════════════════════════════════════ -->
+  <div class="plate rv" id="p11">
+    <div class="code-bg">// Noether's theorem:
+// every differentiable
+// symmetry of the action
+// yields a conserved quantity
+//
+// time → energy
+// space → momentum
+// rotation → angular momentum
+//
+// the mirror is not decoration.
+// it is the structure
+// of physical law itself.</div>
+    <svg class="art" viewBox="0 0 300 300" width="280" height="280" id="reflection-svg"></svg>
+  </div>
+  <div class="plate-num rv"><span class="rubric">XI</span></div>
+  <div class="plate-title rv">The Reflection — Noether's theorem; symmetry as conservation</div>
+  <div class="divider rv">✦ · ◆ · ✦</div>
+
+  <!-- ══════════════════════════════════════════════
+       XII. THE ATTRACTOR — Lorenz
+       ══════════════════════════════════════════════ -->
+  <div class="plate rv" id="p12">
+    <div class="code-bg">// the Lorenz system
+// σ = 10, ρ = 28, β = 8/3
+//
+// dx/dt = σ(y - x)
+// dy/dt = x(ρ - z) - y
+// dz/dt = xy - βz
+//
+// deterministic chaos:
+// the equations are simple.
+// the trajectory never repeats.
+// D ≈ 2.06
+//
+// the butterfly that Lorenz
+// discovered was not metaphor.
+// it was the shape
+// of weather itself.</div>
+    <svg class="art" viewBox="0 0 340 240" width="320" height="220" id="lorenz-svg"></svg>
+  </div>
+  <div class="plate-num rv"><span class="rubric">XII</span></div>
+  <div class="plate-title rv">The Attractor — Lorenz's butterfly; D ≈ <span class="rubric">2.06</span></div>
+
+  <!-- ═══════ END MARK ═══════ -->
+  <div style="text-align:center;margin:52px 0 24px;">
+    <svg viewBox="0 0 200 40" width="180" xmlns="http://www.w3.org/2000/svg">
+      <line x1="20" y1="20" x2="78" y2="20" stroke="var(--ink)" stroke-width="0.4"/>
+      <line x1="122" y1="20" x2="180" y2="20" stroke="var(--ink)" stroke-width="0.4"/>
+      <polygon points="100,9 111,20 100,31 89,20" fill="none" stroke="var(--ink)" stroke-width="0.7"/>
+      <polygon points="100,13 107,20 100,27 93,20" fill="var(--rubric)" opacity="0.7"/>
+      <polygon points="78,17 83,20 78,23 73,20" fill="var(--ink)"/>
+      <polygon points="122,17 127,20 122,23 117,20" fill="var(--ink)"/>
+      <circle cx="20" cy="20" r="1.8" fill="var(--ink)"/>
+      <circle cx="180" cy="20" r="1.8" fill="var(--ink)"/>
+    </svg>
+  </div>
+
+  <footer class="colophon">
+    Twelve movements for ink <span class="rubric">&amp;</span> light.<br>
+    Set in EB Garamond <span class="rubric">&amp;</span> JetBrains Mono.<br>
+    After the aesthetic of <em>instance_11</em>.<br><br>
+    <span class="rubric">MMXXVI</span>
+  </footer>
+
+</article>
+
+<script>
+(function() {
+  'use strict';
+
+  /* ═══════ PRNG — mulberry32 for deterministic jitter ═══════ */
+  function mulberry32(a) {
+    return function() {
+      a |= 0; a = a + 0x6D2B79F5 | 0;
+      var t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  const rng = mulberry32(42);
+  function jitter(v, amount) { return v + (rng() - 0.5) * amount; }
+  function jitterPt(x, y, amt) { return [jitter(x, amt), jitter(y, amt)]; }
+
+  const NS = 'http://www.w3.org/2000/svg';
+  function el(tag, attrs, parent) {
+    const e = document.createElementNS(NS, tag);
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, String(v));
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  /* ═══════ INTERSECTION OBSERVER ═══════ */
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, { rootMargin: '0px 0px -40px 0px', threshold: 0.1 });
+  document.querySelectorAll('.rv,.plate').forEach(x => obs.observe(x));
+
+  /* ═══════ DRAW PATHS ═══════ */
+  document.querySelectorAll('.drw').forEach(p => {
+    try { const l = p.getTotalLength(); p.style.strokeDasharray = l; p.style.strokeDashoffset = l; } catch(e) {}
+  });
+
+  /* ═══════ PARALLAX ═══════ */
+  const plates = document.querySelectorAll('.plate');
+  window.addEventListener('scroll', () => {
+    plates.forEach(plate => {
+      const r = plate.getBoundingClientRect(), vh = window.innerHeight;
+      if (r.top < vh && r.bottom > 0) {
+        const p = (vh - r.top) / (vh + r.height), off = (p - 0.5) * 12;
+        const s = plate.querySelector('.art'), c = plate.querySelector('.code-bg');
+        if (s) s.style.transform = `translateY(${-off}px)`;
+        if (c) c.style.transform = `translateY(${off * 0.5}px)`;
+      }
+    });
+  }, { passive: true });
+
+  /* ═══════ I. ORRERY — with jitter ═══════ */
+  (function() {
+    const svg = document.getElementById('orrery-svg'); if (!svg) return;
+    const c = 150;
+
+    // outer rotating ring
+    const g1 = el('g', { style: 'animation:spin 55s linear infinite;transform-origin:150px 150px' }, svg);
+    el('circle', { cx:c, cy:c, r:jitter(132,2), fill:'none', stroke:'var(--ink)', 'stroke-width':0.4, class:'drw' }, g1);
+    el('circle', { cx:c, cy:c, r:jitter(127,1.5), fill:'none', stroke:'var(--ink)', 'stroke-width':0.2, 'stroke-dasharray':'2,7' }, g1);
+    // cardinal arrows
+    [[c,16],[284,c],[c,284],[16,c]].forEach(([x,y]) => {
+      const [jx,jy] = jitterPt(x,y,1.5);
+      el('polygon', { points:`${jx},${jy} ${jx+2.5},${jy+(y<c?8:-8)} ${jx-2.5},${jy+(y<c?8:-8)}`, fill:'var(--ink)' }, g1);
+    });
+
+    // inner counter-rotating ring
+    const g2 = el('g', { style: 'animation:spinR 40s linear infinite;transform-origin:150px 150px' }, svg);
+    el('circle', { cx:c, cy:c, r:jitter(98,2), fill:'none', stroke:'var(--ink)', 'stroke-width':0.65, class:'drw' }, g2);
+    // cross hairs
+    el('line', { x1:52, y1:c, x2:248, y2:c, stroke:'var(--ink)', 'stroke-width':0.2 }, g2);
+    el('line', { x1:c, y1:52, x2:c, y2:248, stroke:'var(--ink)', 'stroke-width':0.2 }, g2);
+    el('line', { x1:80, y1:80, x2:220, y2:220, stroke:'var(--ink)', 'stroke-width':0.12 }, g2);
+    el('line', { x1:220, y1:80, x2:80, y2:220, stroke:'var(--ink)', 'stroke-width':0.12 }, g2);
+    // ordinal diamonds
+    [[c,52],[248,c],[c,248],[52,c]].forEach(([x,y]) => {
+      el('polygon', { points:`${x},${y-5} ${x+3},${y} ${x},${y+5} ${x-3},${y}`, fill:'var(--ink)' }, g2);
+    });
+
+    // inner ring
+    el('circle', { cx:c, cy:c, r:jitter(58,2), fill:'none', stroke:'var(--ink)', 'stroke-width':0.45, class:'drw' }, svg);
+
+    // orbital bodies with jitter
+    const bodies = [[118,113,5.5],[173,127,3.2],[142,173,4.3],[183,160,2.4],[127,147,6.2]];
+    const gf = el('g', { style:'animation:float 9s ease-in-out infinite' }, svg);
+    bodies.forEach(([bx,by,br]) => {
+      el('circle', { cx:jitter(bx,3), cy:jitter(by,3), r:jitter(br,0.5), fill:'var(--ink)' }, gf);
+    });
+
+    // central star
+    const s = c;
+    el('polygon', { points:`${s},${s-9} ${s+2},${s-1} ${s+9},${s} ${s+2},${s+1} ${s},${s+9} ${s-2},${s+1} ${s-9},${s} ${s-2},${s-1}`, fill:'var(--ink)' }, svg);
+
+    // pulse ring
+    el('circle', { cx:c, cy:c, r:23, fill:'none', stroke:'var(--ink)', 'stroke-width':0.3, style:'animation:pulse 5s ease-in-out infinite' }, svg);
+
+    // init draw paths
+    svg.querySelectorAll('.drw').forEach(p => { try { const l = p.getTotalLength(); p.style.strokeDasharray = l; p.style.strokeDashoffset = l; } catch(e){} });
+  })();
+
+  /* ═══════ II. LOOM — Lissajous with jitter ═══════ */
+  (function() {
+    const svg = document.getElementById('loom-svg'); if (!svg) return;
+    const cx = 150, cy = 150, amp = 112;
+
+    // frame
+    el('rect', { x:22, y:22, width:256, height:256, fill:'none', stroke:'var(--ink)', 'stroke-width':0.25, class:'drw' }, svg);
+    el('line', { x1:cx, y1:22, x2:cx, y2:278, stroke:'var(--ink)', 'stroke-width':0.1, 'stroke-dasharray':'2,7' }, svg);
+    el('line', { x1:22, y1:cy, x2:278, y2:cy, stroke:'var(--ink)', 'stroke-width':0.1, 'stroke-dasharray':'2,7' }, svg);
+
+    function lissPath(a, b, delta, steps) {
+      let d = '';
+      for (let i = 0; i <= steps; i++) {
+        const t = (i / steps) * 2 * Math.PI;
+        const x = cx + amp * Math.sin(a * t + delta) + (rng()-0.5)*0.6;
+        const y = cy + amp * Math.sin(b * t) + (rng()-0.5)*0.6;
+        d += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1);
+      }
+      return d;
+    }
+
+    const main = el('path', { d:lissPath(3,2,Math.PI/4,400), fill:'none', stroke:'var(--ink)', 'stroke-width':0.9, class:'drw' }, svg);
+    el('path', { d:lissPath(5,4,Math.PI/6,600), fill:'none', stroke:'var(--ink)', 'stroke-width':0.25, opacity:0.2, class:'drw' }, svg);
+
+    // ratio label in rubric
+    el('text', { x:38, y:42, 'font-family':"'EB Garamond',Georgia,serif", 'font-size':10, fill:'var(--rubric)', 'font-style':'italic' }, svg).textContent = 'a : b = 3 : 2';
+
+    // tracing dot
+    const dot = el('circle', { cx:cx, cy:cy, r:3, fill:'var(--ink)' }, svg);
+    let t = 0;
+    (function anim() {
+      t += 0.01;
+      dot.setAttribute('cx', cx + amp * Math.sin(3 * t + Math.PI/4));
+      dot.setAttribute('cy', cy + amp * Math.sin(2 * t));
+      requestAnimationFrame(anim);
+    })();
+
+    svg.querySelectorAll('.drw').forEach(p => { try { const l = p.getTotalLength(); p.style.strokeDasharray = l; p.style.strokeDashoffset = l; } catch(e){} });
+  })();
+
+  /* ═══════ IV. CHOIR — pendulums ═══════ */
+  (function() {
+    const svg = document.getElementById('choir-svg'); if (!svg) return;
+    el('line', { x1:8, y1:14, x2:372, y2:14, stroke:'var(--ink)', 'stroke-width':1.3, class:'drw' }, svg);
+
+    const n = 15;
+    for (let i = 0; i < n; i++) {
+      const x = 20 + i * 24;
+      const len = 190 - i * 6 + (rng()-0.5)*3;
+      const maxA = 20 - i * 0.9;
+      const dur = 3.2 - i * 0.07 + (rng()-0.5)*0.04;
+      const delay = i * 0.045;
+      const bobR = 4 - i * 0.1;
+
+      const g = el('g', {
+        style: `transform-origin:${x}px 14px;--a:${-maxA}deg;--b:${maxA}deg;animation:pendulum ${dur.toFixed(2)}s ease-in-out infinite ${delay.toFixed(3)}s`,
+        stroke: 'var(--ink)', 'stroke-width': 0.5, 'stroke-linecap': 'round', fill: 'var(--ink)'
+      }, svg);
+      el('line', { x1:x, y1:14, x2:jitter(x,0.8), y2:14+len }, g);
+      el('circle', { cx:jitter(x,0.5), cy:14+len, r:jitter(bobR,0.3) }, g);
+    }
+
+    svg.querySelectorAll('.drw').forEach(p => { try { const l = p.getTotalLength(); p.style.strokeDasharray = l; p.style.strokeDashoffset = l; } catch(e){} });
+  })();
+
+  /* ═══════ V. SEED — phyllotaxis ═══════ */
+  (function() {
+    const svg = document.getElementById('seed-svg'); if (!svg) return;
+    const cx = 150, cy = 150, GA = Math.PI * (3 - Math.sqrt(5)), sc = 7.2, N = 200;
+
+    // faint guide circles
+    [45,85,125].forEach(r => el('circle', { cx, cy, r, fill:'none', stroke:'var(--ink)', 'stroke-width':0.1, 'stroke-dasharray':'1.5,7' }, svg));
+
+    for (let i = 0; i < N; i++) {
+      const r = sc * Math.sqrt(i), theta = i * GA;
+      const x = cx + r * Math.cos(theta) + (rng()-0.5)*1.2;
+      const y = cy + r * Math.sin(theta) + (rng()-0.5)*1.2;
+      const radius = Math.max(0.8, 3.6 - i * 0.013) + (rng()-0.5)*0.3;
+      const c = el('circle', { cx:x.toFixed(1), cy:y.toFixed(1), r:radius.toFixed(1), fill:'var(--ink)' }, svg);
+      c.style.cssText = `opacity:0;transform:scale(0);transition:opacity 0.5s ease ${i*0.012}s,transform 0.6s cubic-bezier(0.34,1.56,0.64,1) ${i*0.012}s;transform-origin:${x.toFixed(1)}px ${y.toFixed(1)}px`;
+      c.classList.add('sd');
+    }
+
+    // golden angle annotation in rubric
+    el('text', { x:260, y:36, 'font-family':"'EB Garamond',Georgia,serif", 'font-size':8, fill:'var(--rubric)', 'font-style':'italic' }, svg).textContent = '137.508°';
+
+    const seedObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) svg.querySelectorAll('.sd').forEach(d => { d.style.opacity='1'; d.style.transform='scale(1)'; }); });
+    }, { threshold: 0.15 });
+    seedObs.observe(svg.closest('.plate'));
+  })();
+
+  /* ═══════ VI. GASKET — Sierpinski with jitter ═══════ */
+  (function() {
+    const svg = document.getElementById('gasket-svg'); if (!svg) return;
+    function sierp(ax,ay,bx,by,cx,cy,depth,delay) {
+      if (depth === 0) {
+        const pts = `${jitter(ax,1)},${jitter(ay,1)} ${jitter(bx,1)},${jitter(by,1)} ${jitter(cx,1)},${jitter(cy,1)}`;
+        const p = el('polygon', { points:pts, fill:'none', stroke:'var(--ink)', 'stroke-width':Math.max(0.15, 0.7-delay*0.06) }, svg);
+        p.style.cssText = `opacity:0;transition:opacity 0.6s ease ${delay*0.12}s`;
+        p.classList.add('gt');
+        return;
+      }
+      const abx=(ax+bx)/2, aby=(ay+by)/2, bcx=(bx+cx)/2, bcy=(by+cy)/2, cax=(cx+ax)/2, cay=(cy+ay)/2;
+      sierp(ax,ay,abx,aby,cax,cay,depth-1,delay);
+      sierp(abx,aby,bx,by,bcx,bcy,depth-1,delay+1);
+      sierp(cax,cay,bcx,bcy,cx,cy,depth-1,delay+2);
+    }
+    sierp(160,5, 5,278, 315,278, 4, 0);
+
+    // dimension annotation in rubric
+    el('text', { x:160, y:284, 'font-family':"'EB Garamond',Georgia,serif", 'font-size':8, fill:'var(--rubric)', 'text-anchor':'middle', 'font-style':'italic' }, svg).textContent = 'D = log 3 / log 2';
+
+    const gObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) svg.querySelectorAll('.gt').forEach(t => t.style.opacity='1'); });
+    }, { threshold: 0.12 });
+    gObs.observe(svg.closest('.plate'));
+  })();
+
+  /* ═══════ VII. COMPASS ROSE — with jitter ═══════ */
+  (function() {
+    const svg = document.getElementById('rose-svg'); if (!svg) return;
+    const c = 150;
+
+    const gOuter = el('g', { style:'animation:spin 120s linear infinite;transform-origin:150px 150px' }, svg);
+    el('circle', { cx:c, cy:c, r:jitter(133,1.5), fill:'none', stroke:'var(--ink)', 'stroke-width':0.5, class:'drw' }, gOuter);
+    el('circle', { cx:c, cy:c, r:jitter(128,1), fill:'none', stroke:'var(--ink)', 'stroke-width':0.2, 'stroke-dasharray':'1.5,5' }, gOuter);
+
+    // 16 spokes
+    for (let i = 0; i < 16; i++) {
+      const a = (i / 16) * Math.PI * 2 - Math.PI/2;
+      const isCard = i % 4 === 0, isOrd = i % 2 === 0;
+      const len = isCard ? 128 : isOrd ? 90 : 60;
+      const sw = isCard ? 1 : isOrd ? 0.5 : 0.25;
+      const op = isCard ? 1 : isOrd ? 0.7 : 0.4;
+      const x2 = c + Math.cos(a) * jitter(len, 1.5);
+      const y2 = c + Math.sin(a) * jitter(len, 1.5);
+      el('line', { x1:c, y1:c, x2:x2.toFixed(1), y2:y2.toFixed(1), stroke:'var(--ink)', 'stroke-width':sw, opacity:op }, gOuter);
+      // arrow tip for cardinals
+      if (isCard) {
+        el('polygon', { points:`${x2},${y2} ${x2+Math.cos(a+2.7)*6},${y2+Math.sin(a+2.7)*6} ${x2+Math.cos(a-2.7)*6},${y2+Math.sin(a-2.7)*6}`, fill:'var(--ink)' }, gOuter);
+      }
+    }
+
+    el('circle', { cx:c, cy:c, r:jitter(48,1), fill:'none', stroke:'var(--ink)', 'stroke-width':0.3 }, gOuter);
+
+    // counter-rotating inner star
+    const gInner = el('g', { style:'animation:spinR 85s linear infinite;transform-origin:150px 150px' }, svg);
+    let starPts = '';
+    for (let i = 0; i < 10; i++) {
+      const a = (i / 10) * Math.PI * 2 - Math.PI/2;
+      const r = i % 2 === 0 ? 30 : 14;
+      starPts += `${(c + Math.cos(a)*jitter(r,0.8)).toFixed(1)},${(c + Math.sin(a)*jitter(r,0.8)).toFixed(1)} `;
+    }
+    el('polygon', { points:starPts.trim(), fill:'none', stroke:'var(--ink)', 'stroke-width':0.5 }, gInner);
+
+    el('circle', { cx:c, cy:c, r:2.5, fill:'var(--ink)' }, svg);
+
+    // cardinal labels — static, rubric
+    [['N',c,10],['E',294,c+4],['S',c,296],['W',7,c+4]].forEach(([l,x,y]) => {
+      el('text', { x, y, 'font-family':"'EB Garamond',Georgia,serif", 'font-size':9, fill:'var(--rubric)', 'text-anchor':'middle' }, svg).textContent = l;
+    });
+
+    svg.querySelectorAll('.drw').forEach(p => { try { const l = p.getTotalLength(); p.style.strokeDasharray = l; p.style.strokeDashoffset = l; } catch(e){} });
+  })();
+
+  /* ═══════ VIII. HOURGLASS — particles ═══════ */
+  (function() {
+    const svg = document.getElementById('hourglass-svg'); if (!svg) return;
+
+    // outline with slight jitter
+    function jPath(pts) { return pts.map((p,i) => (i===0?'M':'L')+jitter(p[0],0.8).toFixed(1)+','+jitter(p[1],0.8).toFixed(1)).join(' '); }
+    el('path', { d:jPath([[42,10],[42,118],[96,160],[42,202],[42,310]]), fill:'none', stroke:'var(--ink)', 'stroke-width':0.9, class:'drw' }, svg);
+    el('path', { d:jPath([[158,10],[158,118],[104,160],[158,202],[158,310]]), fill:'none', stroke:'var(--ink)', 'stroke-width':0.9, class:'drw' }, svg);
+    el('line', { x1:42, y1:10, x2:158, y2:10, stroke:'var(--ink)', 'stroke-width':1.1, class:'drw' }, svg);
+    el('line', { x1:42, y1:310, x2:158, y2:310, stroke:'var(--ink)', 'stroke-width':1.1, class:'drw' }, svg);
+
+    // neck ornament
+    el('circle', { cx:100, cy:160, r:5, fill:'none', stroke:'var(--ink)', 'stroke-width':0.25 }, svg);
+
+    // static bottom sand
+    for (let i = 0; i < 35; i++) {
+      el('circle', { cx:jitter(100,28), cy:jitter(280,18), r:jitter(1.2,0.4), fill:'var(--ink)', opacity:0.3 }, svg);
+    }
+
+    // falling grains
+    function grain() {
+      const g = el('circle', { cx:jitter(100,8), cy:jitter(110,25), r:jitter(1.1,0.3), fill:'var(--ink)', opacity:0.5 }, svg);
+      const dur = 2.5 + rng() * 2;
+      g.style.transition = `transform ${dur}s ease-in, opacity ${dur}s ease`;
+      requestAnimationFrame(() => { g.style.transform = `translateY(${100+rng()*40}px)`; g.style.opacity = '0.1'; });
+      setTimeout(() => { if (g.parentNode) g.remove(); }, dur * 1000 + 300);
+    }
+    setInterval(grain, 450);
+
+    svg.querySelectorAll('.drw').forEach(p => { try { const l = p.getTotalLength(); p.style.strokeDasharray = l; p.style.strokeDashoffset = l; } catch(e){} });
+  })();
+
+  /* ═══════ IX. HELIX ═══════ */
+  (function() {
+    const svg = document.getElementById('helix-svg'); if (!svg) return;
+    const cx = 100, amp = 52, steps = 140;
+    let d1='', d2='';
+    for (let i = 0; i <= steps; i++) {
+      const t = (i / steps) * 7 * Math.PI;
+      const y = 16 + (i / steps) * 310;
+      const x1 = cx + amp * Math.sin(t) + (rng()-0.5)*0.8;
+      const x2 = cx + amp * Math.sin(t + Math.PI) + (rng()-0.5)*0.8;
+      d1 += (i===0?'M':'L') + x1.toFixed(1)+','+y.toFixed(1);
+      d2 += (i===0?'M':'L') + x2.toFixed(1)+','+y.toFixed(1);
+      if (i % 12 === 6 && i > 0 && i < steps) {
+        el('line', { x1:x1.toFixed(1), y1:y.toFixed(1), x2:x2.toFixed(1), y2:y.toFixed(1), stroke:'var(--ink)', 'stroke-width':0.25, opacity:0.3 }, svg);
+        el('circle', { cx:x1.toFixed(1), cy:y.toFixed(1), r:1.3, fill:'var(--rubric)', opacity:0.5 }, svg);
+        el('circle', { cx:x2.toFixed(1), cy:y.toFixed(1), r:1.3, fill:'var(--rubric)', opacity:0.5 }, svg);
+      }
+    }
+    const p1 = el('path', { d:d1, fill:'none', stroke:'var(--ink)', 'stroke-width':0.9, class:'drw' }, svg);
+    const p2 = el('path', { d:d2, fill:'none', stroke:'var(--ink)', 'stroke-width':0.9, class:'drw' }, svg);
+    [p1,p2].forEach(p => { try { const l = p.getTotalLength(); p.style.strokeDasharray=l; p.style.strokeDashoffset=l; } catch(e){} });
+  })();
+
+  /* ═══════ X. CANTOR ═══════ */
+  (function() {
+    const svg = document.getElementById('cantor-svg'); if (!svg) return;
+    function cantor(x, w, y, depth, maxD) {
+      const h = Math.max(1.5, 5 - depth * 0.5);
+      const r = el('rect', { x:jitter(x,0.5), y:jitter(y,0.3), width:w, height:h, fill:'var(--ink)', rx:0.3 }, svg);
+      r.style.cssText = `opacity:0;transition:opacity 0.7s ease ${depth*0.5}s`;
+      r.classList.add('cb');
+      if (depth < maxD) {
+        const third = w / 3;
+        cantor(x, third, y + 30, depth + 1, maxD);
+        cantor(x + 2*third, third, y + 30, depth + 1, maxD);
+      }
+    }
+    cantor(24, 552, 8, 0, 6);
+
+    for (let i = 0; i <= 6; i++) {
+      const t = el('text', { x:10, y:12+i*30, 'font-family':"'EB Garamond',Georgia,serif", 'font-size':7, fill:i===0?'var(--rubric)':'var(--ash-light)', 'font-style':'italic' }, svg);
+      t.textContent = 'n='+i;
+    }
+
+    const cObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) svg.querySelectorAll('.cb').forEach(b => b.style.opacity='1'); });
+    }, { threshold: 0.12 });
+    cObs.observe(svg.closest('.plate'));
+  })();
+
+  /* ═══════ XI. REFLECTION ═══════ */
+  (function() {
+    const svg = document.getElementById('reflection-svg'); if (!svg) return;
+    // axis
+    el('line', { x1:150, y1:12, x2:150, y2:288, stroke:'var(--ink)', 'stroke-width':0.35, 'stroke-dasharray':'3,5', class:'drw' }, svg);
+
+    const gBreath = el('g', { style:'animation:breathe 12s ease-in-out infinite;transform-origin:150px 150px' }, svg);
+
+    // generate organic curve with jitter, then mirror it
+    const pts = [];
+    for (let i = 0; i <= 20; i++) {
+      const t = i / 20;
+      const y = 35 + t * 240;
+      const wave = Math.sin(t * Math.PI * 2.5) * 35 + Math.sin(t * Math.PI * 4) * 12;
+      pts.push([145 - Math.abs(wave) + (rng()-0.5)*3, y + (rng()-0.5)*2]);
+    }
+
+    let dL = '', dR = '';
+    pts.forEach(([x,y],i) => {
+      const mx = 300 - x; // mirror
+      dL += (i===0?'M':'L') + x.toFixed(1)+','+y.toFixed(1);
+      dR += (i===0?'M':'L') + mx.toFixed(1)+','+y.toFixed(1);
+    });
+
+    el('path', { d:dL, fill:'none', stroke:'var(--ink)', 'stroke-width':0.9, class:'drw' }, gBreath);
+    el('path', { d:dR, fill:'none', stroke:'var(--ink)', 'stroke-width':0.9, class:'drw' }, gBreath);
+
+    // connecting ribs
+    pts.forEach(([x,y], i) => {
+      if (i % 3 === 1) {
+        const mx = 300 - x;
+        el('line', { x1:x.toFixed(1), y1:y.toFixed(1), x2:mx.toFixed(1), y2:y.toFixed(1), stroke:'var(--ink)', 'stroke-width':0.2, opacity:0.35 }, gBreath);
+        el('circle', { cx:x.toFixed(1), cy:y.toFixed(1), r:1.3, fill:'var(--ink)' }, gBreath);
+        el('circle', { cx:mx.toFixed(1), cy:y.toFixed(1), r:1.3, fill:'var(--ink)' }, gBreath);
+      }
+    });
+
+    el('text', { x:150, y:24, 'font-family':"'EB Garamond',Georgia,serif", 'font-size':7, fill:'var(--rubric)', 'text-anchor':'middle', 'font-style':'italic' }, svg).textContent = 'axis of symmetry';
+
+    svg.querySelectorAll('.drw').forEach(p => { try { const l = p.getTotalLength(); p.style.strokeDasharray=l; p.style.strokeDashoffset=l; } catch(e){} });
+  })();
+
+  /* ═══════ XII. LORENZ ATTRACTOR ═══════ */
+  (function() {
+    const svg = document.getElementById('lorenz-svg'); if (!svg) return;
+    const sigma=10, rho=28, beta=8/3;
+    let x=0.1, y=0, z=0;
+    const dt=0.004, steps=10000;
+    let d='';
+    for (let i = 0; i < steps; i++) {
+      const dx = sigma*(y-x)*dt, dy = (x*(rho-z)-y)*dt, dz = (x*y-beta*z)*dt;
+      x+=dx; y+=dy; z+=dz;
+      const px = 170 + x * 4.2, py = 235 - z * 4;
+      d += (i===0?'M':'L') + px.toFixed(1)+','+py.toFixed(1);
+    }
+    const path = el('path', { d, fill:'none', stroke:'var(--ink)', 'stroke-width':0.35, opacity:0.65, class:'drw' }, svg);
+    try {
+      const l = path.getTotalLength();
+      path.style.strokeDasharray = l;
+      path.style.strokeDashoffset = l;
+      path.style.transition = 'stroke-dashoffset 10s cubic-bezier(0.4,0,0.2,1)';
+    } catch(e){}
+
+    // two lobe centers — rubric dots
+    el('circle', { cx:jitter(130,2), cy:jitter(130,2), r:1.5, fill:'var(--rubric)', opacity:0.5 }, svg);
+    el('circle', { cx:jitter(210,2), cy:jitter(130,2), r:1.5, fill:'var(--rubric)', opacity:0.5 }, svg);
+  })();
+
+})();
+</script>
+<script src="assets/movement-library.js"></script>
+<script src="assets/relic-enhancer.js"></script>
+</body>
+</html>

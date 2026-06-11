@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>On the Unfolding of Form</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Cormorant+SC:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --paper: #ece6dc;
+  --paper-dark: #e2dbd0;
+  --ink: #16130f;
+  --ink-light: #3a342c;
+  --ink-faint: #6c645d;
+  --ink-ghost: #9e9589;
+  --ghost: #c4bdb3;
+  --rubric: #8b2d23;
+  --rule: rgb(0 0 0 / 0.10);
+  --font-body: 'EB Garamond', 'Cormorant Garamond', Georgia, serif;
+  --font-display: 'Cormorant SC', 'Cormorant Garamond', Georgia, serif;
+  --font-italic: 'Cormorant Garamond', Georgia, serif;
+  --font-code: 'JetBrains Mono', 'Courier New', monospace;
+  --baseline: 1.72;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 17px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+body {
+  background: #1e1b18;
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: var(--baseline);
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ═══════ FOLIO ═══════ */
+.folio {
+  background:
+    radial-gradient(ellipse at 30% 15%, rgb(255 255 255 / 0.14), transparent 40%),
+    linear-gradient(175deg, rgb(0 0 0 / 0.02), rgb(255 255 255 / 0.01)),
+    var(--paper);
+  max-width: 960px;
+  width: 100%;
+  padding: 80px 100px;
+  position: relative;
+  isolation: isolate;
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 0.05),
+    0 1px 4px rgb(0 0 0 / 0.06),
+    0 16px 48px rgb(0 0 0 / 0.12);
+  overflow: hidden;
+}
+.folio::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)'/%3E%3C/svg%3E");
+  opacity: 0.16;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 0;
+}
+.folio::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 55%, rgb(0 0 0 / 0.04) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+.folio > * { position: relative; z-index: 1; }
+
+/* ═══════ SCROLL REVEALS ═══════ */
+.reveal {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 0.9s cubic-bezier(0.25,0.1,0.25,1), transform 0.9s cubic-bezier(0.25,0.1,0.25,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.12s; }
+.reveal-delay-2 { transition-delay: 0.24s; }
+.reveal-delay-3 { transition-delay: 0.36s; }
+
+.code-block .code-line {
+  opacity: 0; transform: translateX(-8px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.code-block.visible .code-line { opacity: 1; transform: translateX(0); }
+
+.draw-path {
+  stroke-dasharray: 1000; stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.visible .draw-path { stroke-dashoffset: 0; }
+
+.illuminated-initial {
+  float: left; width: 72px; height: 72px;
+  margin-right: 12px; margin-bottom: 4px; margin-top: 3px;
+  opacity: 0; transform: scale(0.92);
+  transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+}
+.visible .illuminated-initial { opacity: 1; transform: scale(1); }
+.illuminated-initial svg { width: 100%; height: 100%; }
+
+/* ═══════ TITLE ═══════ */
+.title-block { text-align: center; margin-bottom: 48px; padding-bottom: 40px; }
+.title-main {
+  font-family: var(--font-display); font-weight: 400; font-size: 1.65rem;
+  letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink);
+  margin-bottom: 6px; opacity: 0;
+  animation: titleReveal 1.8s cubic-bezier(0.25,0.1,0.25,1) 0.3s forwards;
+}
+.title-sub {
+  font-family: var(--font-italic); font-style: italic; font-weight: 400;
+  font-size: 0.92rem; color: var(--ink-faint); letter-spacing: 0.06em;
+  opacity: 0; animation: titleReveal 1.8s cubic-bezier(0.25,0.1,0.25,1) 0.7s forwards;
+}
+@keyframes titleReveal {
+  from { opacity: 0; transform: translateY(10px); letter-spacing: 0.5em; }
+  to { opacity: 1; transform: translateY(0); letter-spacing: 0.28em; }
+}
+
+/* ═══════ BORDER ═══════ */
+.ornamental-border { display: flex; justify-content: center; margin: 28px 0 36px; overflow: hidden; }
+.ornamental-border svg { width: 100%; max-width: 580px; height: auto; }
+.border-draw { stroke-dasharray: 2000; stroke-dashoffset: 2000; animation: borderDraw 3s cubic-bezier(0.4,0,0.2,1) 1.2s forwards; }
+@keyframes borderDraw { to { stroke-dashoffset: 0; } }
+.border-fill { opacity: 0; animation: fadeIn 1s ease 2.8s forwards; }
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* ═══════ TYPOGRAPHY ═══════ */
+.section { margin-bottom: 48px; position: relative; }
+.section-number {
+  font-family: var(--font-body); font-size: 1.1rem; font-weight: 400;
+  color: var(--ink); margin-bottom: 20px; display: flex;
+  justify-content: space-between; align-items: baseline;
+}
+.section-number .right { font-size: 0.85rem; color: var(--ink-faint); }
+.prose {
+  font-family: var(--font-body); font-size: 1.06rem; line-height: var(--baseline);
+  color: var(--ink-light); margin-bottom: 24px; text-align: justify;
+  hyphens: auto; -webkit-hyphens: auto;
+}
+.prose em { font-family: var(--font-italic); font-style: italic; }
+.prose strong { font-weight: 600; }
+.prose .math { font-family: var(--font-italic); font-style: italic; }
+.section-heading {
+  font-family: var(--font-display); font-weight: 400; font-size: 1.05rem;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink);
+  text-align: center; margin-bottom: 4px;
+}
+.section-heading-sub {
+  font-family: var(--font-italic); font-style: italic; font-weight: 400;
+  font-size: 0.88rem; color: var(--ink-faint); text-align: center;
+  margin-bottom: 32px; letter-spacing: 0.04em;
+}
+
+/* ═══════ CODE ═══════ */
+.code-block {
+  font-family: var(--font-code); font-size: 0.78rem; line-height: 1.65;
+  color: var(--ink); margin: 32px 0; padding: 24px 28px;
+  background: var(--paper-dark); border: 1px solid rgba(0,0,0,0.06);
+  overflow-x: auto; position: relative;
+}
+.code-block .comment { color: var(--ink-faint); font-style: italic; }
+.code-line { display: block; white-space: pre; }
+.code-line .line-num {
+  display: inline-block; width: 28px; color: var(--ink-ghost);
+  text-align: right; margin-right: 16px; user-select: none; font-size: 0.72rem;
+}
+
+/* ═══════ FIGURES ═══════ */
+.figure { margin: 40px 0; text-align: center; }
+.figure svg { max-width: 100%; }
+.figure-caption {
+  font-family: var(--font-body); font-size: 0.82rem; color: var(--ink-faint);
+  margin-top: 12px; letter-spacing: 0.04em;
+  opacity: 0; transition: opacity 0.8s ease 0.6s;
+}
+.figure.visible .figure-caption { opacity: 1; }
+
+/* ═══════ MARGIN NOTES ═══════ */
+.margin-note {
+  position: absolute; right: -170px; width: 140px;
+  font-family: var(--font-italic); font-style: italic;
+  font-size: 0.72rem; line-height: 1.45; color: var(--ink-faint);
+}
+@media (max-width: 1100px) {
+  .margin-note {
+    position: relative; right: auto; width: auto;
+    display: block; text-align: right; margin: -12px 0 16px;
+    padding-right: 4px; font-size: 0.75rem;
+  }
+}
+
+/* ═══════ ORNAMENTS ═══════ */
+.ornament { text-align: center; margin: 36px 0; color: var(--ink); letter-spacing: 0.6em; font-size: 0.7rem; user-select: none; }
+.ornament-end { text-align: center; margin: 48px 0 20px; user-select: none; }
+
+/* ═══════ THEOREM ═══════ */
+.theorem { margin: 28px 0; padding: 20px 28px; border-left: 2px solid var(--ink-ghost); }
+.theorem-label { font-family: var(--font-display); font-size: 0.82rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 8px; }
+.theorem .prose { margin-bottom: 0; font-style: italic; font-family: var(--font-italic); }
+
+/* ═══════ TWO-COLUMN ═══════ */
+.two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin: 32px 0; align-items: start; }
+.two-column .code-block { margin: 0; font-size: 0.72rem; }
+.two-column .prose { font-size: 0.95rem; margin: 0; }
+
+/* ═══════ COLOPHON ═══════ */
+.colophon {
+  margin-top: 64px; padding-top: 32px; border-top: 1px solid rgba(0,0,0,0.08);
+  text-align: center; font-family: var(--font-italic); font-style: italic;
+  font-size: 0.78rem; color: var(--ink-ghost); line-height: 1.8;
+}
+code { font-family: var(--font-code); font-size: 0.85em; background: rgba(0,0,0,0.04); padding: 1px 5px; border-radius: 2px; }
+
+/* ═══════════════════════════════════════════
+   THE GEOMETRIC PLATES — shared structure
+   ═══════════════════════════════════════════ */
+
+.geometric-plate {
+  position: relative; margin: 48px 0; padding: 40px 0;
+  display: flex; justify-content: center; align-items: center;
+  min-height: 340px;
+}
+.geometric-plate .code-underlay {
+  position: absolute; inset: 0; font-family: var(--font-code);
+  font-size: 0.6rem; line-height: 1.5; color: var(--ink-ghost);
+  opacity: 0; overflow: hidden; padding: 16px; pointer-events: none;
+  transition: opacity 1.4s ease; white-space: pre;
+}
+.geometric-plate.visible .code-underlay { opacity: 0.25; }
+.geometric-plate .geo-svg { position: relative; z-index: 2; }
+.plate-caption {
+  text-align: center; margin-top: -16px; margin-bottom: 44px;
+  font-family: var(--font-body); font-size: 0.82rem; color: var(--ink-faint);
+  letter-spacing: 0.04em;
+}
+
+/* ═══════════════════════════════════════════
+   PLATE I — THE ORBITAL FIELD
+   ═══════════════════════════════════════════ */
+
+@keyframes slowRotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes slowRotateReverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+@keyframes orbitalFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes gentlePulse { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
+
+.rotate-slow { animation: slowRotate 60s linear infinite; transform-origin: center; }
+.rotate-slow-reverse { animation: slowRotateReverse 45s linear infinite; transform-origin: center; }
+.orbital-float { animation: orbitalFloat 8s ease-in-out infinite; }
+.gentle-pulse { animation: gentlePulse 4s ease-in-out infinite; }
+
+/* ═══════════════════════════════════════════
+   PLATE II — THE SPIRAL OF ACCUMULATION
+   ═══════════════════════════════════════════ */
+
+@keyframes spiralGrow {
+  from { stroke-dashoffset: 800; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes spiralBreath {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.015); }
+}
+@keyframes dotAppear {
+  from { r: 0; opacity: 0; }
+  to { opacity: 1; }
+}
+
+.spiral-breath { animation: spiralBreath 12s ease-in-out infinite; transform-origin: center; }
+
+.spiral-segment {
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  transition: stroke-dashoffset 3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.visible .spiral-segment { stroke-dashoffset: 0; }
+
+.spiral-dot {
+  opacity: 0;
+  transition: opacity 0.6s ease, r 0.6s ease;
+}
+.visible .spiral-dot { opacity: 1; }
+
+/* ═══════════════════════════════════════════
+   PLATE III — THE LATTICE OF DIVISION
+   ═══════════════════════════════════════════ */
+
+@keyframes latticeReveal {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.lattice-cell {
+  opacity: 0;
+  transform-origin: center;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.visible .lattice-cell { opacity: 1; transform: scale(1); }
+
+@keyframes latticePulse {
+  0%, 100% { stroke-width: 0.5; }
+  50% { stroke-width: 0.8; }
+}
+
+.lattice-pulse { animation: latticePulse 6s ease-in-out infinite; }
+
+/* ═══════════════════════════════════════════
+   PLATE IV — THE PENDULUM CHOIR
+   ═══════════════════════════════════════════ */
+
+@keyframes pendulumSwing {
+  0% { transform: rotate(var(--swing-start)); }
+  50% { transform: rotate(var(--swing-end)); }
+  100% { transform: rotate(var(--swing-start)); }
+}
+
+.pendulum-line {
+  transform-origin: var(--pivot-x) var(--pivot-y);
+  animation: pendulumSwing var(--swing-duration) ease-in-out infinite;
+  animation-delay: var(--swing-delay, 0s);
+}
+
+@keyframes waveShimmer {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+/* ═══════════════════════════════════════════
+   PLATE V — THE SEED
+   ═══════════════════════════════════════════ */
+
+@keyframes unfurl {
+  from { transform: scale(0) rotate(-90deg); opacity: 0; }
+  to { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes petalBreath {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+.seed-petal {
+  opacity: 0;
+  transform: scale(0) rotate(-90deg);
+  transform-origin: center;
+  transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease;
+}
+.visible .seed-petal {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.seed-ring {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.visible .seed-ring { opacity: 1; }
+
+.seed-breath { animation: petalBreath 8s ease-in-out infinite; transform-origin: center; }
+
+@media (max-width: 720px) {
+  .folio { padding: 40px 32px; }
+  .two-column { grid-template-columns: 1fr; }
+  .title-main { font-size: 1.3rem; letter-spacing: 0.18em; }
+  .geometric-plate { min-height: 260px; }
+}
+</style>
+<link rel="stylesheet" href="assets/relic-common.css">
+</head>
+<body>
+
+<article class="folio">
+
+  <!-- ════════════ TITLE ════════════ -->
+  <header class="title-block">
+    <h1 class="title-main">On the Unfolding of Form</h1>
+    <p class="title-sub">being a meditation on recursion, self-similarity, &amp; the geometry of living things</p>
+  </header>
+
+  <div class="ornamental-border">
+    <svg viewBox="0 0 580 28" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="borderUnit" x="0" y="0" width="36" height="28" patternUnits="userSpaceOnUse">
+          <polygon points="18,4 22,14 18,24 14,14" fill="none" stroke="#1c1814" stroke-width="0.8" class="border-fill"/>
+          <polygon points="18,8 20,14 18,20 16,14" fill="#1c1814" class="border-fill"/>
+          <circle cx="18" cy="2" r="1" fill="#1c1814" class="border-fill"/>
+          <circle cx="18" cy="26" r="1" fill="#1c1814" class="border-fill"/>
+          <circle cx="9" cy="14" r="1.5" fill="none" stroke="#1c1814" stroke-width="0.5" class="border-fill"/>
+          <circle cx="27" cy="14" r="1.5" fill="none" stroke="#1c1814" stroke-width="0.5" class="border-fill"/>
+        </pattern>
+      </defs>
+      <line x1="0" y1="14" x2="580" y2="14" stroke="#1c1814" stroke-width="0.6" class="border-draw"/>
+      <rect width="580" height="28" fill="url(#borderUnit)" class="border-fill"/>
+      <rect x="0" y="12" width="6" height="4" fill="#1c1814" class="border-fill"/>
+      <rect x="574" y="12" width="6" height="4" fill="#1c1814" class="border-fill"/>
+    </svg>
+  </div>
+
+  <!-- ════════════ §1 ════════════ -->
+  <section class="section">
+    <div class="section-number reveal"><span class="left">§1</span><span class="right">I</span></div>
+    <div class="reveal" style="position:relative;">
+      <div class="margin-note" style="top:0;">cf. Mandelbrot<br><em>Les objets fractals</em><br>c. 1975</div>
+      <div class="illuminated-initial">
+        <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+          <rect width="72" height="72" fill="#1c1814"/>
+          <rect x="3" y="3" width="66" height="66" fill="none" stroke="#f0ebe0" stroke-width="1"/>
+          <rect x="6" y="6" width="60" height="60" fill="none" stroke="#f0ebe0" stroke-width="0.5"/>
+          <circle cx="6" cy="6" r="2" fill="#f0ebe0"/><circle cx="66" cy="6" r="2" fill="#f0ebe0"/>
+          <circle cx="6" cy="66" r="2" fill="#f0ebe0"/><circle cx="66" cy="66" r="2" fill="#f0ebe0"/>
+          <path d="M12,56 Q18,48 16,40 Q14,32 20,28 Q26,24 24,18 Q22,14 28,12" fill="none" stroke="#f0ebe0" stroke-width="0.8" class="draw-path"/>
+          <text x="36" y="52" font-family="'EB Garamond',Georgia,serif" font-size="40" font-weight="500" fill="#f0ebe0" text-anchor="middle">C</text>
+        </svg>
+      </div>
+      <p class="prose">onsider the fern. Observe how each frond carries within it the blueprint of the whole: every leaflet a diminished echo of the branch that bears it, every branch a diminished echo of the plant entire. This is not metaphor but geometry. The fern does not <em>resemble</em> itself at smaller scales — it <em>is</em> itself at smaller scales, constructed by the repeated application of a single transformation. What the geometer calls an iterated function system, the fern calls growth.</p>
+    </div>
+    <p class="prose reveal reveal-delay-1">There is a principle at work here older than any mathematics we have devised to describe it. Nature discovered recursion long before we did. She simply never bothered to write it down.</p>
+    <p class="prose reveal reveal-delay-2">Let us write it down.</p>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PLATE I — THE ORBITAL FIELD
+       an orrery of nested rings, each containing the echo of the whole
+       ═══════════════════════════════════════════════════════════ -->
+
+  <div class="geometric-plate reveal" id="plate-orbital">
+    <div class="code-underlay">float sdCircle(vec2 p, float r) {
+    return length(p) - r;
+}
+vec2 rotate(vec2 p, float a) {
+    float c = cos(a), s = sin(a);
+    return vec2(c*p.x - s*p.y,
+                s*p.x + c*p.y);
+}
+float orbit(vec2 p, float r, float w) {
+    return abs(length(p) - r) - w;
+}
+void main() {
+    vec2 uv = (gl_FragCoord.xy * 2.0
+        - res) / res.y;
+    float d = orbit(uv, 0.6, 0.01);
+    d = min(d, orbit(
+        rotate(uv, iTime*0.3),
+        0.4, 0.008));
+    d = min(d, orbit(
+        rotate(uv, -iTime*0.2),
+        0.25, 0.005));
+    float c = smoothstep(
+        0.005, 0.0, d);
+    gl_FragColor = vec4(c);
+}</div>
+    <svg class="geo-svg" viewBox="0 0 300 300" width="280" height="280" xmlns="http://www.w3.org/2000/svg">
+      <g class="rotate-slow" style="transform-origin:150px 150px;">
+        <circle cx="150" cy="150" r="130" fill="none" stroke="#1c1814" stroke-width="0.5" class="draw-path"/>
+        <circle cx="150" cy="150" r="125" fill="none" stroke="#1c1814" stroke-width="0.3" stroke-dasharray="3,8"/>
+        <g fill="#1c1814">
+          <polygon points="150,18 153,26 147,26"/><polygon points="282,150 274,153 274,147"/>
+          <polygon points="150,282 147,274 153,274"/><polygon points="18,150 26,147 26,153"/>
+        </g>
+      </g>
+      <g class="rotate-slow-reverse" style="transform-origin:150px 150px;">
+        <circle cx="150" cy="150" r="100" fill="none" stroke="#1c1814" stroke-width="0.8" class="draw-path"/>
+        <line x1="50" y1="150" x2="250" y2="150" stroke="#1c1814" stroke-width="0.3"/>
+        <line x1="150" y1="50" x2="150" y2="250" stroke="#1c1814" stroke-width="0.3"/>
+        <line x1="79" y1="79" x2="221" y2="221" stroke="#1c1814" stroke-width="0.2"/>
+        <line x1="221" y1="79" x2="79" y2="221" stroke="#1c1814" stroke-width="0.2"/>
+        <g fill="#1c1814">
+          <polygon points="150,50 153,56 150,62 147,56"/>
+          <polygon points="250,150 244,153 238,150 244,147"/>
+          <polygon points="150,250 147,244 150,238 153,244"/>
+          <polygon points="50,150 56,147 62,150 56,153"/>
+        </g>
+      </g>
+      <circle cx="150" cy="150" r="60" fill="none" stroke="#1c1814" stroke-width="0.6" class="draw-path"/>
+      <g class="orbital-float">
+        <circle cx="120" cy="110" r="5" fill="#1c1814"/>
+        <circle cx="170" cy="125" r="3.5" fill="#1c1814"/>
+        <circle cx="145" cy="170" r="4" fill="#1c1814"/>
+        <circle cx="180" cy="160" r="2.5" fill="#1c1814"/>
+        <circle cx="130" cy="145" r="6" fill="#1c1814"/>
+      </g>
+      <polygon points="150,140 152,148 160,150 152,152 150,160 148,152 140,150 148,148" fill="#1c1814"/>
+      <circle cx="150" cy="150" r="25" fill="none" stroke="#1c1814" stroke-width="0.4" class="gentle-pulse draw-path"/>
+    </svg>
+  </div>
+  <div class="plate-caption reveal">fig 1 — the orbital field; a self-similar system of rings</div>
+
+  <div class="ornament reveal">◆ &nbsp; ◇ &nbsp; ◆</div>
+
+  <!-- ════════════ §2 ════════════ -->
+  <section class="section">
+    <div class="section-number reveal"><span class="left">§2</span><span class="right">II</span></div>
+    <div class="section-heading reveal">On the Nature of Self-Reference</div>
+    <div class="section-heading-sub reveal reveal-delay-1">wherein a function is permitted to know itself</div>
+    <div class="reveal reveal-delay-2" style="position:relative;">
+      <div class="margin-note" style="top:60px;">The L-system,<br>after Lindenmayer,<br>c. 1968</div>
+      <p class="prose">A recursive function is one that calls upon itself in its own definition. This circularity, which might seem paradoxical, is in fact the most natural form of description we possess. To define a tree: a trunk, from which emerge branches, each of which is a smaller tree. The definition is finite. The structure it generates is not.</p>
+    </div>
+    <div class="theorem reveal">
+      <div class="theorem-label">Definition I</div>
+      <p class="prose">Let <span class="math">f</span> be a transformation of the plane. An object <span class="math">S</span> is called <strong>self-similar</strong> under <span class="math">f</span> if <span class="math">S = f(S) ∪ S</span>, that is, if the whole contains within it a transformed copy of itself, and this containment may be applied without limit.</p>
+    </div>
+    <p class="prose reveal">The power of this definition is not abstract. It is <em>generative</em>. Given a rule and a starting condition, self-similarity produces complexity from simplicity, infinity from finitude, form from pure relation.</p>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PLATE II — THE SPIRAL OF ACCUMULATION
+       a golden spiral that grows outward, breathing, with ratio annotations
+       ═══════════════════════════════════════════════════════════ -->
+
+  <div class="geometric-plate reveal" id="plate-spiral">
+    <div class="code-underlay">const PHI = (1 + Math.sqrt(5)) / 2;
+// ≈ 1.6180339887...
+
+function goldenSpiral(
+  ctx: CanvasRenderingContext2D,
+  x: number, y: number,
+  size: number,
+  depth: number
+) {
+  if (depth === 0) return;
+
+  ctx.beginPath();
+  ctx.arc(x, y, size,
+    0, Math.PI / 2);
+  ctx.stroke();
+
+  // the next square is smaller
+  // by exactly 1/φ
+  const next = size / PHI;
+
+  // rotate the coordinate frame
+  // 90° and recurse
+  goldenSpiral(
+    ctx,
+    x + size - next,
+    y + size,
+    next,
+    depth - 1
+  );
+}
+
+// the spiral converges on
+// the "eye" — a fixed point
+// of the golden rectangle's
+// infinite self-division</div>
+    <svg class="geo-svg" viewBox="0 0 320 320" width="300" height="300" xmlns="http://www.w3.org/2000/svg">
+      <g class="spiral-breath" style="transform-origin:210px 172px;">
+      <!--
+        Golden rectangle spiral. We tile squares inside a rectangle.
+        The full frame is 280×280 starting at (20,20).
+        φ ≈ 1.618, so we split as: 173 | 107 on each axis.
+
+        Square A: 280×280 → arc center bottom-right (300,300), r=280, sweeps from top-right to bottom-left
+        But for a *proper* golden spiral, each quarter-arc lives in a square:
+
+        Sq1: (20,20)   280×280  — but 280 is not golden, let's use a clean layout:
+
+        Using a well-known golden spiral construction:
+        Squares in order, each a quarter turn:
+        S1: 170×170 at (130,20)   arc from (300,190) center=(130,190) r=170  
+        S2: 105×105 at (25,20)    arc from (130,20) center=(130,125) r=105
+        S3:  65×65  at (65,125)   arc from (65,190) center=(130,190) r=65
+        S4:  40×40  at (90,150)   arc from (130,150) center=(130,190) r=40
+        S5:  25×25  at (90,150)   etc — gets tiny
+
+        Simpler approach: just draw a clean multi-arc path.
+      -->
+
+      <!-- Construction lines — golden rectangle divisions -->
+      <g stroke="var(--ink)" fill="none" stroke-width="0.3" opacity="0.35">
+        <rect x="20" y="20" width="275" height="275" class="draw-path"/>
+        <line x1="190" y1="20" x2="190" y2="295" class="draw-path"/>
+        <line x1="190" y1="125" x2="295" y2="125" class="draw-path"/>
+        <line x1="230" y1="125" x2="230" y2="190" class="draw-path"/>
+        <line x1="190" y1="150" x2="230" y2="150" class="draw-path"/>
+      </g>
+
+      <!-- The spiral — quarter-circle arcs within golden squares -->
+      <!-- Sq1: 170×170 at (20,20)→(190,190). Arc center=(20,190), r=170, from (190,190)→(20,20) sweeping CW -->
+      <path d="M 190,190 A 170,170 0 0,0 20,20" fill="none" stroke="var(--ink)" stroke-width="1.4" class="spiral-segment"/>
+      <!-- Sq2: 105×105 at (190,20)→(295,125). Arc center=(190,125), r=105 -->
+      <path d="M 20,20 A 105,105 0 0,0 295,125" fill="none" stroke="var(--ink)" stroke-width="1.1" class="spiral-segment"/>
+      <!-- Sq3: 65×65. Center=(230,190), r=65 -->
+      <path d="M 295,125 A 65,65 0 0,0 230,190" fill="none" stroke="var(--ink)" stroke-width="0.85" class="spiral-segment"/>
+      <!-- Sq4: 40×40. Center=(230,150), r=40 -->
+      <path d="M 230,190 A 40,40 0 0,0 190,150" fill="none" stroke="var(--ink)" stroke-width="0.6" class="spiral-segment"/>
+      <!-- Sq5: 25×25. Center=(190,175), r=25 -->
+      <path d="M 190,150 A 25,25 0 0,0 215,175" fill="none" stroke="var(--ink)" stroke-width="0.45" class="spiral-segment"/>
+      <!-- Sq6: tiny -->
+      <path d="M 215,175 A 15,15 0 0,0 200,190" fill="none" stroke="var(--ink)" stroke-width="0.3" class="spiral-segment"/>
+
+      <!-- Ratio annotations -->
+      <text x="105" y="108" font-family="'EB Garamond',Georgia,serif" font-size="11" fill="var(--rubric)" font-style="italic" opacity="0.5">φ</text>
+      <text x="242" y="78" font-family="'EB Garamond',Georgia,serif" font-size="9" fill="var(--ink-faint)" font-style="italic" opacity="0.45">1/φ</text>
+      <text x="258" y="160" font-family="'EB Garamond',Georgia,serif" font-size="8" fill="var(--ink-faint)" font-style="italic" opacity="0.4">1/φ²</text>
+
+      <!-- The "eye" — convergence point -->
+      <circle cx="210" cy="172" r="2.5" fill="var(--ink)"/>
+      <circle cx="210" cy="172" r="10" fill="none" stroke="var(--ink)" stroke-width="0.3" class="gentle-pulse"/>
+
+      <!-- Corner dots marking golden division points -->
+      <circle cx="190" cy="190" r="2.5" fill="var(--ink)" class="spiral-dot"/>
+      <circle cx="20" cy="20" r="2" fill="var(--ink)" class="spiral-dot"/>
+      <circle cx="295" cy="125" r="1.8" fill="var(--ink)" class="spiral-dot"/>
+      <circle cx="230" cy="190" r="1.5" fill="var(--ink)" class="spiral-dot"/>
+      <circle cx="190" cy="150" r="1.3" fill="var(--ink)" class="spiral-dot"/>
+      <circle cx="215" cy="175" r="1.1" fill="var(--ink)" class="spiral-dot"/>
+      </g>
+    </svg>
+  </div>
+  <div class="plate-caption reveal">fig 2 — the spiral of accumulation; golden ratio φ converging on its eye</div>
+
+  <div class="ornament reveal">✦ &nbsp; ◆ &nbsp; ✦</div>
+
+  <!-- ════════════ §3 — CODE ════════════ -->
+  <section class="section">
+    <div class="section-number reveal"><span class="left">§3</span><span class="right">III</span></div>
+    <div class="reveal" style="position:relative;">
+      <div class="margin-note" style="top:0;">Barnsley's fern, 1988.<br><em>Fractals Everywhere.</em></div>
+      <div class="illuminated-initial">
+        <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+          <rect width="72" height="72" fill="#1c1814"/>
+          <rect x="3" y="3" width="66" height="66" fill="none" stroke="#f0ebe0" stroke-width="1"/>
+          <rect x="6" y="6" width="60" height="60" fill="none" stroke="#f0ebe0" stroke-width="0.5"/>
+          <circle cx="6" cy="6" r="2" fill="#f0ebe0"/><circle cx="66" cy="6" r="2" fill="#f0ebe0"/>
+          <circle cx="6" cy="66" r="2" fill="#f0ebe0"/><circle cx="66" cy="66" r="2" fill="#f0ebe0"/>
+          <text x="36" y="52" font-family="'EB Garamond',Georgia,serif" font-size="40" font-weight="500" fill="#f0ebe0" text-anchor="middle">T</text>
+        </svg>
+      </div>
+      <p class="prose">he Barnsley fern is constructed by the random iteration of four affine transformations. The stem, the smallest leaflets, and the overall frond are all produced by the same system — differing only in which transformation carries the point forward.</p>
+    </div>
+    <div class="code-block reveal">
+      <span class="code-line"><span class="line-num">1</span><span class="comment">// the fern, as iterated function system</span></span>
+      <span class="code-line"><span class="line-num">2</span>function barnsleyFern(x: number, y: number): [number, number] {</span>
+      <span class="code-line"><span class="line-num">3</span>    const r = Math.random();</span>
+      <span class="code-line"><span class="line-num">4</span>    if (r < 0.01) return [0, 0.16 * y];</span>
+      <span class="code-line"><span class="line-num">5</span>    if (r < 0.86) return [</span>
+      <span class="code-line"><span class="line-num">6</span>        0.85 * x + 0.04 * y,</span>
+      <span class="code-line"><span class="line-num">7</span>        -0.04 * x + 0.85 * y + 1.6 ];</span>
+      <span class="code-line"><span class="line-num">8</span>    if (r < 0.93) return [</span>
+      <span class="code-line"><span class="line-num">9</span>        0.20 * x - 0.26 * y,</span>
+      <span class="code-line"><span class="line-num">10</span>        0.23 * x + 0.22 * y + 1.6 ];</span>
+      <span class="code-line"><span class="line-num">11</span>    return [ -0.15 * x + 0.28 * y,</span>
+      <span class="code-line"><span class="line-num">12</span>             0.26 * x + 0.24 * y + 0.44 ];</span>
+      <span class="code-line"><span class="line-num">13</span>}</span>
+    </div>
+    <p class="prose reveal">Four transformations. Four lines of arithmetic. And from these, the entire fern emerges — not drawn but <em>grown</em>, point by point, each iteration choosing its path by chance and yet converging, always, on the same form.</p>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PLATE III — THE LATTICE OF DIVISION
+       a Sierpinski-like fractal grid — triangles within triangles,
+       each generation smaller, pulsing at different rates
+       ═══════════════════════════════════════════════════════════ -->
+
+  <div class="geometric-plate reveal" id="plate-lattice">
+    <div class="code-underlay">function sierpinski(
+  ctx: CanvasRenderingContext2D,
+  ax: number, ay: number,
+  bx: number, by: number,
+  cx: number, cy: number,
+  depth: number
+): void {
+  if (depth === 0) {
+    ctx.beginPath();
+    ctx.moveTo(ax, ay);
+    ctx.lineTo(bx, by);
+    ctx.lineTo(cx, cy);
+    ctx.closePath();
+    ctx.fill();
+    return;
+  }
+
+  // midpoints of each edge
+  const abx = (ax + bx) / 2;
+  const aby = (ay + by) / 2;
+  const bcx = (bx + cx) / 2;
+  const bcy = (by + cy) / 2;
+  const cax = (cx + ax) / 2;
+  const cay = (cy + ay) / 2;
+
+  // recurse into three corners
+  // the center triangle is void
+  sierpinski(ctx,
+    ax, ay, abx, aby,
+    cax, cay, depth - 1);
+  sierpinski(ctx,
+    abx, aby, bx, by,
+    bcx, bcy, depth - 1);
+  sierpinski(ctx,
+    cax, cay, bcx, bcy,
+    cx, cy, depth - 1);
+}</div>
+    <svg class="geo-svg" viewBox="0 0 320 290" width="300" height="270" xmlns="http://www.w3.org/2000/svg">
+      <!-- Generation 0 — outer triangle -->
+      <polygon points="160,10 10,270 310,270" fill="none" stroke="#1c1814" stroke-width="1" class="draw-path lattice-pulse" style="stroke-dasharray:800;stroke-dashoffset:800"/>
+
+      <!-- Generation 1 — three triangles -->
+      <g class="lattice-cell" style="transition-delay:0.3s">
+        <polygon points="160,10 85,140 235,140" fill="none" stroke="#1c1814" stroke-width="0.7"/>
+        <polygon points="85,140 10,270 160,270" fill="none" stroke="#1c1814" stroke-width="0.7"/>
+        <polygon points="235,140 160,270 310,270" fill="none" stroke="#1c1814" stroke-width="0.7"/>
+        <!-- Void triangle (inverted) — faintly marked -->
+        <polygon points="85,140 235,140 160,270" fill="none" stroke="#1c1814" stroke-width="0.3" stroke-dasharray="4,4" opacity="0.4"/>
+      </g>
+
+      <!-- Generation 2 — nine triangles -->
+      <g class="lattice-cell" style="transition-delay:0.8s" opacity="0.7">
+        <!-- Top cluster -->
+        <polygon points="160,10 122.5,75 197.5,75" fill="none" stroke="#1c1814" stroke-width="0.4"/>
+        <polygon points="122.5,75 85,140 160,140" fill="none" stroke="#1c1814" stroke-width="0.4"/>
+        <polygon points="197.5,75 160,140 235,140" fill="none" stroke="#1c1814" stroke-width="0.4"/>
+        <!-- Bottom-left cluster -->
+        <polygon points="85,140 47.5,205 122.5,205" fill="none" stroke="#1c1814" stroke-width="0.4"/>
+        <polygon points="47.5,205 10,270 85,270" fill="none" stroke="#1c1814" stroke-width="0.4"/>
+        <polygon points="122.5,205 85,270 160,270" fill="none" stroke="#1c1814" stroke-width="0.4"/>
+        <!-- Bottom-right cluster -->
+        <polygon points="235,140 197.5,205 272.5,205" fill="none" stroke="#1c1814" stroke-width="0.4"/>
+        <polygon points="197.5,205 160,270 235,270" fill="none" stroke="#1c1814" stroke-width="0.4"/>
+        <polygon points="272.5,205 235,270 310,270" fill="none" stroke="#1c1814" stroke-width="0.4"/>
+      </g>
+
+      <!-- Generation 3 hints — just tiny dots at vertices -->
+      <g class="lattice-cell" style="transition-delay:1.4s" opacity="0.4">
+        <circle cx="160" cy="10" r="1.5" fill="#1c1814"/>
+        <circle cx="85" cy="140" r="1.5" fill="#1c1814"/>
+        <circle cx="235" cy="140" r="1.5" fill="#1c1814"/>
+        <circle cx="10" cy="270" r="1.5" fill="#1c1814"/>
+        <circle cx="160" cy="270" r="1.5" fill="#1c1814"/>
+        <circle cx="310" cy="270" r="1.5" fill="#1c1814"/>
+        <!-- Midpoints -->
+        <circle cx="122.5" cy="75" r="1" fill="#1c1814"/>
+        <circle cx="197.5" cy="75" r="1" fill="#1c1814"/>
+        <circle cx="47.5" cy="205" r="1" fill="#1c1814"/>
+        <circle cx="122.5" cy="205" r="1" fill="#1c1814"/>
+        <circle cx="197.5" cy="205" r="1" fill="#1c1814"/>
+        <circle cx="272.5" cy="205" r="1" fill="#1c1814"/>
+      </g>
+
+      <!-- Dimension annotation -->
+      <text x="160" y="288" font-family="'EB Garamond',Georgia,serif" font-size="9" fill="#8b7d6b" text-anchor="middle" font-style="italic">D = log 3 / log 2 ≈ 1.585</text>
+    </svg>
+  </div>
+  <div class="plate-caption reveal">fig 3 — the lattice of division; the Sierpiński gasket in three generations</div>
+
+  <div class="ornament reveal">◇ &nbsp; ◆ &nbsp; ◇</div>
+
+  <!-- ════════════ §4 ════════════ -->
+  <section class="section">
+    <div class="section-number reveal"><span class="left">§4</span><span class="right">IV</span></div>
+    <div class="section-heading reveal">On Dimension as Fraction</div>
+    <div class="section-heading-sub reveal reveal-delay-1">the coastline paradox and the measure of roughness</div>
+    <div class="reveal reveal-delay-2" style="position:relative;">
+      <div class="margin-note" style="top:24px;">Richardson,<br><em>The problem of contiguity</em>,<br>1961</div>
+      <p class="prose">A line has dimension one. A plane has dimension two. But what is the dimension of a coastline? The coastline does not converge to a finite length as the ruler shrinks — it <em>diverges</em>. The coast is longer than any line but thinner than any surface. Its dimension is neither one nor two but somewhere between: a fraction.</p>
+    </div>
+    <div class="theorem reveal">
+      <div class="theorem-label">Definition II</div>
+      <p class="prose">The <strong>Hausdorff dimension</strong> <span class="math">D</span> of a self-similar set composed of <span class="math">N</span> copies of itself, each scaled by factor <span class="math">r</span>, satisfies <span class="math">D = log N / log(1/r)</span>.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PLATE IV — THE PENDULUM CHOIR
+       a row of pendulums swinging at slightly different frequencies,
+       creating wave interference patterns — visualizing harmonics
+       ═══════════════════════════════════════════════════════════ -->
+
+  <div class="geometric-plate reveal" id="plate-pendulum">
+    <div class="code-underlay">// the choir of pendulums
+// each swings at frequency
+// f(n) = f₀ + n·δ
+// producing beats and
+// interference patterns
+
+interface Pendulum {
+  length: number;
+  angle: number;
+  frequency: number;
+  phase: number;
+}
+
+function choir(n: number): Pendulum[] {
+  const f0 = 0.5;    // base freq
+  const delta = 0.02; // detuning
+
+  return Array.from(
+    { length: n },
+    (_, i) => ({
+      length: 120 - i * 2,
+      angle: 0,
+      frequency: f0 + i * delta,
+      phase: 0
+    })
+  );
+}
+
+function step(
+  p: Pendulum,
+  t: number
+): number {
+  return Math.sin(
+    2 * Math.PI *
+    p.frequency * t +
+    p.phase
+  ) * 30;
+}
+
+// at time t, the ensemble
+// traces a wave whose
+// envelope breathes with
+// period 1/δ — the beat
+// frequency of detuning</div>
+    <svg class="geo-svg" viewBox="0 0 360 260" width="340" height="240" xmlns="http://www.w3.org/2000/svg">
+      <!-- Support bar -->
+      <line x1="10" y1="20" x2="350" y2="20" stroke="#1c1814" stroke-width="1.5" class="draw-path" style="stroke-dasharray:340;stroke-dashoffset:340"/>
+
+      <!-- Pivot points -->
+      <g fill="#1c1814" class="draw-path">
+        <circle cx="30" cy="20" r="2"/><circle cx="60" cy="20" r="2"/>
+        <circle cx="90" cy="20" r="2"/><circle cx="120" cy="20" r="2"/>
+        <circle cx="150" cy="20" r="2"/><circle cx="180" cy="20" r="2"/>
+        <circle cx="210" cy="20" r="2"/><circle cx="240" cy="20" r="2"/>
+        <circle cx="270" cy="20" r="2"/><circle cx="300" cy="20" r="2"/>
+        <circle cx="330" cy="20" r="2"/>
+      </g>
+
+      <!-- Pendulum lines — each with slightly different swing -->
+      <g stroke="#1c1814" stroke-width="0.6" stroke-linecap="round">
+        <line x1="30" y1="20" x2="30" y2="220" class="pendulum-line" style="--pivot-x:30px;--pivot-y:20px;--swing-start:-18deg;--swing-end:18deg;--swing-duration:3.0s;--swing-delay:0s"/>
+        <line x1="60" y1="20" x2="60" y2="215" class="pendulum-line" style="--pivot-x:60px;--pivot-y:20px;--swing-start:-17deg;--swing-end:17deg;--swing-duration:2.9s;--swing-delay:0.05s"/>
+        <line x1="90" y1="20" x2="90" y2="210" class="pendulum-line" style="--pivot-x:90px;--pivot-y:20px;--swing-start:-16deg;--swing-end:16deg;--swing-duration:2.8s;--swing-delay:0.1s"/>
+        <line x1="120" y1="20" x2="120" y2="205" class="pendulum-line" style="--pivot-x:120px;--pivot-y:20px;--swing-start:-15deg;--swing-end:15deg;--swing-duration:2.7s;--swing-delay:0.15s"/>
+        <line x1="150" y1="20" x2="150" y2="200" class="pendulum-line" style="--pivot-x:150px;--pivot-y:20px;--swing-start:-14deg;--swing-end:14deg;--swing-duration:2.6s;--swing-delay:0.2s"/>
+        <line x1="180" y1="20" x2="180" y2="195" class="pendulum-line" style="--pivot-x:180px;--pivot-y:20px;--swing-start:-13deg;--swing-end:13deg;--swing-duration:2.5s;--swing-delay:0.25s"/>
+        <line x1="210" y1="20" x2="210" y2="190" class="pendulum-line" style="--pivot-x:210px;--pivot-y:20px;--swing-start:-12deg;--swing-end:12deg;--swing-duration:2.4s;--swing-delay:0.3s"/>
+        <line x1="240" y1="20" x2="240" y2="185" class="pendulum-line" style="--pivot-x:240px;--pivot-y:20px;--swing-start:-11deg;--swing-end:11deg;--swing-duration:2.3s;--swing-delay:0.35s"/>
+        <line x1="270" y1="20" x2="270" y2="180" class="pendulum-line" style="--pivot-x:270px;--pivot-y:20px;--swing-start:-10deg;--swing-end:10deg;--swing-duration:2.2s;--swing-delay:0.4s"/>
+        <line x1="300" y1="20" x2="300" y2="175" class="pendulum-line" style="--pivot-x:300px;--pivot-y:20px;--swing-start:-9deg;--swing-end:9deg;--swing-duration:2.1s;--swing-delay:0.45s"/>
+        <line x1="330" y1="20" x2="330" y2="170" class="pendulum-line" style="--pivot-x:330px;--pivot-y:20px;--swing-start:-8deg;--swing-end:8deg;--swing-duration:2.0s;--swing-delay:0.5s"/>
+      </g>
+
+      <!-- Bobs -->
+      <g fill="#1c1814">
+        <circle cx="30" cy="220" r="4" class="pendulum-line" style="--pivot-x:30px;--pivot-y:20px;--swing-start:-18deg;--swing-end:18deg;--swing-duration:3.0s;--swing-delay:0s"/>
+        <circle cx="60" cy="215" r="4" class="pendulum-line" style="--pivot-x:60px;--pivot-y:20px;--swing-start:-17deg;--swing-end:17deg;--swing-duration:2.9s;--swing-delay:0.05s"/>
+        <circle cx="90" cy="210" r="3.8" class="pendulum-line" style="--pivot-x:90px;--pivot-y:20px;--swing-start:-16deg;--swing-end:16deg;--swing-duration:2.8s;--swing-delay:0.1s"/>
+        <circle cx="120" cy="205" r="3.6" class="pendulum-line" style="--pivot-x:120px;--pivot-y:20px;--swing-start:-15deg;--swing-end:15deg;--swing-duration:2.7s;--swing-delay:0.15s"/>
+        <circle cx="150" cy="200" r="3.5" class="pendulum-line" style="--pivot-x:150px;--pivot-y:20px;--swing-start:-14deg;--swing-end:14deg;--swing-duration:2.6s;--swing-delay:0.2s"/>
+        <circle cx="180" cy="195" r="3.4" class="pendulum-line" style="--pivot-x:180px;--pivot-y:20px;--swing-start:-13deg;--swing-end:13deg;--swing-duration:2.5s;--swing-delay:0.25s"/>
+        <circle cx="210" cy="190" r="3.2" class="pendulum-line" style="--pivot-x:210px;--pivot-y:20px;--swing-start:-12deg;--swing-end:12deg;--swing-duration:2.4s;--swing-delay:0.3s"/>
+        <circle cx="240" cy="185" r="3" class="pendulum-line" style="--pivot-x:240px;--pivot-y:20px;--swing-start:-11deg;--swing-end:11deg;--swing-duration:2.3s;--swing-delay:0.35s"/>
+        <circle cx="270" cy="180" r="2.8" class="pendulum-line" style="--pivot-x:270px;--pivot-y:20px;--swing-start:-10deg;--swing-end:10deg;--swing-duration:2.2s;--swing-delay:0.4s"/>
+        <circle cx="300" cy="175" r="2.6" class="pendulum-line" style="--pivot-x:300px;--pivot-y:20px;--swing-start:-9deg;--swing-end:9deg;--swing-duration:2.1s;--swing-delay:0.45s"/>
+        <circle cx="330" cy="170" r="2.5" class="pendulum-line" style="--pivot-x:330px;--pivot-y:20px;--swing-start:-8deg;--swing-end:8deg;--swing-duration:2.0s;--swing-delay:0.5s"/>
+      </g>
+
+      <!-- Frequency labels -->
+      <text x="30" y="245" font-family="'JetBrains Mono',monospace" font-size="6" fill="#b5a999" text-anchor="middle">f₀</text>
+      <text x="180" y="245" font-family="'JetBrains Mono',monospace" font-size="6" fill="#b5a999" text-anchor="middle">f₀+5δ</text>
+      <text x="330" y="245" font-family="'JetBrains Mono',monospace" font-size="6" fill="#b5a999" text-anchor="middle">f₀+10δ</text>
+    </svg>
+  </div>
+  <div class="plate-caption reveal">fig 4 — the pendulum choir; eleven frequencies detuned by δ, producing interference</div>
+
+  <div class="ornament reveal">✦ &nbsp; ◇ &nbsp; ✦</div>
+
+  <!-- ════════════ §5 ════════════ -->
+  <section class="section">
+    <div class="section-number reveal"><span class="left">§5</span><span class="right">V</span></div>
+    <div class="section-heading reveal">On the Breath of Trees</div>
+    <div class="section-heading-sub reveal reveal-delay-1">the recursive structure of the bronchial passage</div>
+    <div class="two-column reveal">
+      <div>
+        <p class="prose">The human lung is a fractal. The trachea divides into two bronchi, each bronchus into two bronchioles — twenty-three generations of bifurcation. This architecture is not arbitrary. It is <em>optimal</em>. Murray's Law states that the cube of the parent vessel's radius equals the sum of the cubes of its children. The fractal is not ornament but engineering.</p>
+      </div>
+      <div class="code-block" style="font-size:0.71rem;margin:0;">
+        <span class="code-line"><span class="line-num">1</span><span class="comment">// Murray's Law of branching</span></span>
+        <span class="code-line"><span class="line-num">2</span>function grow(</span>
+        <span class="code-line"><span class="line-num">3</span>    r: number,</span>
+        <span class="code-line"><span class="line-num">4</span>    depth: number</span>
+        <span class="code-line"><span class="line-num">5</span>): Branch {</span>
+        <span class="code-line"><span class="line-num">6</span>    if (depth === 0) return {</span>
+        <span class="code-line"><span class="line-num">7</span>        radius: r, length: r*3,</span>
+        <span class="code-line"><span class="line-num">8</span>        children: [] };</span>
+        <span class="code-line"><span class="line-num">9</span>    const cr = r*Math.pow(.5,1/3);</span>
+        <span class="code-line"><span class="line-num">10</span>    return { radius: r,</span>
+        <span class="code-line"><span class="line-num">11</span>      length: r * 3,</span>
+        <span class="code-line"><span class="line-num">12</span>      children: [</span>
+        <span class="code-line"><span class="line-num">13</span>        grow(cr, depth-1),</span>
+        <span class="code-line"><span class="line-num">14</span>        grow(cr, depth-1)]</span>
+        <span class="code-line"><span class="line-num">15</span>    };</span>
+        <span class="code-line"><span class="line-num">16</span>}</span>
+      </div>
+    </div>
+    <p class="prose reveal">Twenty-three levels of recursion. Seventy square metres of surface, folded into two fists. Our breath is recursive.</p>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PLATE V — THE SEED
+       a radiating mandala / botanical form that unfurls from center,
+       petals arranged by golden angle, breathing gently
+       ═══════════════════════════════════════════════════════════ -->
+
+  <div class="geometric-plate reveal" id="plate-seed">
+    <div class="code-underlay">// phyllotaxis — the geometry
+// of leaf arrangement
+//
+// each seed is placed at
+// angle: n × 137.508°
+// radius: c × √n
+//
+// where 137.508° is the
+// golden angle:
+// 360° × (1 - 1/φ)
+
+const GOLDEN_ANGLE =
+  Math.PI * (3 - Math.sqrt(5));
+
+function phyllotaxis(
+  n: number,
+  c: number = 8
+): [number, number] {
+  const r = c * Math.sqrt(n);
+  const theta = n * GOLDEN_ANGLE;
+  return [
+    r * Math.cos(theta),
+    r * Math.sin(theta)
+  ];
+}
+
+// the sunflower's secret:
+// no two seeds share a
+// radial line. the packing
+// is optimal. the angle
+// is irrational. the beauty
+// is necessary.</div>
+    <svg class="geo-svg seed-breath" viewBox="0 0 320 320" width="300" height="300" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer guide circles -->
+      <g class="seed-ring" style="transition-delay:0.2s">
+        <circle cx="160" cy="160" r="145" fill="none" stroke="#1c1814" stroke-width="0.3" stroke-dasharray="3,6"/>
+        <circle cx="160" cy="160" r="120" fill="none" stroke="#1c1814" stroke-width="0.2" stroke-dasharray="2,8"/>
+        <circle cx="160" cy="160" r="90" fill="none" stroke="#1c1814" stroke-width="0.2" stroke-dasharray="2,8"/>
+      </g>
+
+      <!-- Radial lines — golden angle spokes -->
+      <g stroke="#1c1814" stroke-width="0.15" opacity="0.3" class="seed-ring" style="transition-delay:0.4s">
+        <line x1="160" y1="160" x2="160" y2="15"/>
+        <line x1="160" y1="160" x2="290" y2="70"/>
+        <line x1="160" y1="160" x2="280" y2="250"/>
+        <line x1="160" y1="160" x2="60" y2="280"/>
+        <line x1="160" y1="160" x2="30" y2="100"/>
+      </g>
+
+      <!-- Phyllotactic spiral of dots — generated at golden angle intervals -->
+      <!-- Ring 1: inner seeds (large) -->
+      <g class="seed-petal" style="transition-delay:0.6s">
+        <circle cx="160" cy="160" r="3.5" fill="#1c1814"/>
+      </g>
+      <g class="seed-petal" style="transition-delay:0.7s">
+        <circle cx="172" cy="148" r="3.2" fill="#1c1814"/>
+        <circle cx="148" cy="170" r="3.2" fill="#1c1814"/>
+      </g>
+      <g class="seed-petal" style="transition-delay:0.8s">
+        <circle cx="155" cy="140" r="3" fill="#1c1814"/>
+        <circle cx="178" cy="164" r="3" fill="#1c1814"/>
+        <circle cx="147" cy="178" r="3" fill="#1c1814"/>
+        <circle cx="170" cy="180" r="3" fill="#1c1814"/>
+        <circle cx="140" cy="155" r="3" fill="#1c1814"/>
+      </g>
+
+      <!-- Ring 2: middle seeds -->
+      <g class="seed-petal" style="transition-delay:1.0s">
+        <circle cx="190" cy="140" r="2.5" fill="#1c1814"/>
+        <circle cx="130" cy="145" r="2.5" fill="#1c1814"/>
+        <circle cx="185" cy="185" r="2.5" fill="#1c1814"/>
+        <circle cx="140" cy="190" r="2.5" fill="#1c1814"/>
+        <circle cx="155" cy="125" r="2.5" fill="#1c1814"/>
+        <circle cx="195" cy="165" r="2.5" fill="#1c1814"/>
+        <circle cx="125" cy="170" r="2.5" fill="#1c1814"/>
+        <circle cx="175" cy="195" r="2.5" fill="#1c1814"/>
+      </g>
+
+      <!-- Ring 3: outer seeds (smaller, more numerous) -->
+      <g class="seed-petal" style="transition-delay:1.3s" opacity="0.8">
+        <circle cx="210" cy="130" r="2" fill="#1c1814"/>
+        <circle cx="115" cy="135" r="2" fill="#1c1814"/>
+        <circle cx="205" cy="200" r="2" fill="#1c1814"/>
+        <circle cx="120" cy="200" r="2" fill="#1c1814"/>
+        <circle cx="150" cy="110" r="2" fill="#1c1814"/>
+        <circle cx="215" cy="160" r="2" fill="#1c1814"/>
+        <circle cx="105" cy="160" r="2" fill="#1c1814"/>
+        <circle cx="195" cy="210" r="2" fill="#1c1814"/>
+        <circle cx="130" cy="215" r="2" fill="#1c1814"/>
+        <circle cx="175" cy="105" r="2" fill="#1c1814"/>
+        <circle cx="220" cy="145" r="2" fill="#1c1814"/>
+        <circle cx="110" cy="180" r="2" fill="#1c1814"/>
+      </g>
+
+      <!-- Ring 4: outermost seeds (tiny) -->
+      <g class="seed-petal" style="transition-delay:1.6s" opacity="0.5">
+        <circle cx="230" cy="120" r="1.5" fill="#1c1814"/>
+        <circle cx="100" cy="125" r="1.5" fill="#1c1814"/>
+        <circle cx="225" cy="215" r="1.5" fill="#1c1814"/>
+        <circle cx="105" cy="215" r="1.5" fill="#1c1814"/>
+        <circle cx="145" cy="95" r="1.5" fill="#1c1814"/>
+        <circle cx="235" cy="155" r="1.5" fill="#1c1814"/>
+        <circle cx="90" cy="155" r="1.5" fill="#1c1814"/>
+        <circle cx="210" cy="225" r="1.5" fill="#1c1814"/>
+        <circle cx="115" cy="230" r="1.5" fill="#1c1814"/>
+        <circle cx="190" cy="95" r="1.5" fill="#1c1814"/>
+        <circle cx="240" cy="175" r="1.5" fill="#1c1814"/>
+        <circle cx="85" cy="175" r="1.5" fill="#1c1814"/>
+        <circle cx="170" cy="90" r="1.5" fill="#1c1814"/>
+        <circle cx="95" cy="195" r="1.5" fill="#1c1814"/>
+        <circle cx="230" cy="195" r="1.5" fill="#1c1814"/>
+        <circle cx="135" cy="90" r="1.5" fill="#1c1814"/>
+      </g>
+
+      <!-- Golden angle annotation -->
+      <path d="M160,160 L160,130" fill="none" stroke="#8b7d6b" stroke-width="0.4"/>
+      <path d="M160,130 A30,30 0 0,1 182,140" fill="none" stroke="#8b7d6b" stroke-width="0.4"/>
+      <text x="186" y="132" font-family="'EB Garamond',Georgia,serif" font-size="7" fill="#8b7d6b" font-style="italic">137.5°</text>
+    </svg>
+  </div>
+  <div class="plate-caption reveal">fig 5 — the seed; phyllotaxis by golden angle, the sunflower's secret geometry</div>
+
+  <div class="ornament reveal">◆ &nbsp; ✦ &nbsp; ◆</div>
+
+  <!-- ════════════ §6 ════════════ -->
+  <section class="section">
+    <div class="section-number reveal"><span class="left">§6</span><span class="right">VI</span></div>
+    <div class="reveal" style="position:relative;">
+      <div class="margin-note" style="top:0;">cf. D'Arcy Thompson,<br><em>On Growth and Form</em>,<br>1917</div>
+      <div class="illuminated-initial">
+        <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+          <rect width="72" height="72" fill="#1c1814"/>
+          <rect x="3" y="3" width="66" height="66" fill="none" stroke="#f0ebe0" stroke-width="1"/>
+          <rect x="6" y="6" width="60" height="60" fill="none" stroke="#f0ebe0" stroke-width="0.5"/>
+          <circle cx="6" cy="6" r="2" fill="#f0ebe0"/><circle cx="66" cy="6" r="2" fill="#f0ebe0"/>
+          <circle cx="6" cy="66" r="2" fill="#f0ebe0"/><circle cx="66" cy="66" r="2" fill="#f0ebe0"/>
+          <path d="M36,36 Q42,36 42,30 Q42,24 36,24 Q30,24 30,30 Q30,38 38,38 Q46,38 46,28" fill="none" stroke="#f0ebe0" stroke-width="0.7" class="draw-path"/>
+          <text x="36" y="53" font-family="'EB Garamond',Georgia,serif" font-size="36" font-weight="500" fill="#f0ebe0" text-anchor="middle">W</text>
+        </svg>
+      </div>
+      <p class="prose">hat, then, is the meaning of all this self-reference? Why should nature so consistently choose the recursive over the explicit, the rule over the blueprint? The answer, I believe, is compression. A genome cannot specify the position of every cell in a body any more than a programmer can specify the position of every pixel on a screen. Both must work by <em>rules that generate structure</em>. Recursion is nature's compression algorithm.</p>
+    </div>
+    <p class="prose reveal">But it is more than that. It is also her aesthetic. The spiral of the nautilus follows the same logarithmic curve at every scale. The branching of an oak rhymes with its smallest twig. These are not accidents of optimisation. They are expressions of a deeper principle: that the most economical description of a complex form is also, quite often, the most beautiful.</p>
+    <p class="prose reveal reveal-delay-1">We who write code know this instinct well. The elegant program is the one whose structure mirrors its purpose, whose recursion feels inevitable rather than clever. The fern and the function share this quality. Both are economical. Both are generative. Both unfold.</p>
+  </section>
+
+  <div class="ornament reveal">✦ &nbsp; ◇ &nbsp; ✦</div>
+
+  <!-- ════════════ §7 — CODA ════════════ -->
+  <section class="section">
+    <div class="section-number reveal"><span class="left">§7</span><span class="right">VII</span></div>
+    <p class="prose reveal">We began with a fern and we end with a question. If the forms of nature arise from the iterated application of simple rules — if the world's complexity is, at root, recursive — then what is the base case? In physics, the Planck length. In biology, the cell. In mathematics, there is no base case. The recursion can continue forever.</p>
+    <p class="prose reveal reveal-delay-1">Perhaps this is what draws us to these forms. They gesture toward infinity while remaining graspable. Every fractal is a proof that the infinite can be finitely described, that the unbounded can be contained, that a rule small enough to fit in a single function can unfold into a world.</p>
+    <p class="prose reveal reveal-delay-2">The fern does not know it is beautiful. The coastline does not know it is infinite. The lung does not know it is optimal. But we know. And in writing down their rules, in expressing their geometry as functions that call themselves, we do not merely <em>describe</em> these forms. We participate in the act of unfolding. We become, for a moment, what the fern has always been: a finite rule, generating without end.</p>
+  </section>
+
+  <!-- ═══════ END ORNAMENT ═══════ -->
+  <div class="ornament-end reveal">
+    <svg viewBox="0 0 200 40" width="200" xmlns="http://www.w3.org/2000/svg">
+      <line x1="20" y1="20" x2="80" y2="20" stroke="#1c1814" stroke-width="0.5" class="draw-path" style="stroke-dasharray:60;stroke-dashoffset:60"/>
+      <line x1="120" y1="20" x2="180" y2="20" stroke="#1c1814" stroke-width="0.5" class="draw-path" style="stroke-dasharray:60;stroke-dashoffset:60"/>
+      <polygon points="100,10 110,20 100,30 90,20" fill="none" stroke="#1c1814" stroke-width="0.8" class="draw-path" style="stroke-dasharray:60;stroke-dashoffset:60"/>
+      <polygon points="100,14 106,20 100,26 94,20" fill="#1c1814"/>
+      <polygon points="80,17 84,20 80,23 76,20" fill="#1c1814"/>
+      <polygon points="120,17 124,20 120,23 116,20" fill="#1c1814"/>
+      <circle cx="68" cy="20" r="1.5" fill="#1c1814"/>
+      <circle cx="132" cy="20" r="1.5" fill="#1c1814"/>
+      <circle cx="20" cy="20" r="2" fill="#1c1814"/>
+      <circle cx="180" cy="20" r="2" fill="#1c1814"/>
+    </svg>
+  </div>
+
+  <footer class="colophon reveal">
+    Set in EB Garamond &amp; JetBrains Mono.<br>
+    Composed in the manner of the early printed treatise,<br>
+    after the aesthetic of <em>instance_11</em>.<br><br>
+    MMXXVI
+  </footer>
+
+</article>
+
+<script>
+(function() {
+  'use strict';
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        if (entry.target.classList.contains('code-block')) {
+          entry.target.querySelectorAll('.code-line').forEach((line, i) => {
+            line.style.transitionDelay = (i * 0.04) + 's';
+          });
+        }
+      }
+    });
+  }, { rootMargin: '0px 0px -60px 0px', threshold: 0.15 });
+
+  document.querySelectorAll('.reveal, .code-block, .figure, .geometric-plate').forEach(el => observer.observe(el));
+
+  // SVG path length calculation
+  document.querySelectorAll('.draw-path').forEach(path => {
+    if (path.getTotalLength) {
+      try {
+        const len = path.getTotalLength();
+        if (len > 0) { path.style.strokeDasharray = len; path.style.strokeDashoffset = len; }
+      } catch(e) {}
+    }
+  });
+
+  // Spiral segments
+  document.querySelectorAll('.spiral-segment').forEach(path => {
+    if (path.getTotalLength) {
+      try {
+        const len = path.getTotalLength();
+        if (len > 0) { path.style.strokeDasharray = len; path.style.strokeDashoffset = len; }
+      } catch(e) {}
+    }
+  });
+
+  // Lattice cell stagger
+  document.querySelectorAll('#plate-lattice .lattice-cell').forEach((cell, i) => {
+    cell.style.transitionDelay = (0.3 + i * 0.5) + 's';
+  });
+
+  // Seed petal stagger already handled via inline transition-delay
+
+  // Parallax on all plates
+  const plates = document.querySelectorAll('.geometric-plate');
+  window.addEventListener('scroll', () => {
+    plates.forEach(plate => {
+      const rect = plate.getBoundingClientRect();
+      const vh = window.innerHeight;
+      if (rect.top < vh && rect.bottom > 0) {
+        const progress = (vh - rect.top) / (vh + rect.height);
+        const offset = (progress - 0.5) * 16;
+        const svg = plate.querySelector('.geo-svg');
+        const code = plate.querySelector('.code-underlay');
+        if (svg) svg.style.transform = `translateY(${-offset}px)`;
+        if (code) code.style.transform = `translateY(${offset * 0.6}px)`;
+      }
+    });
+  }, { passive: true });
+
+})();
+</script>
+
+<script src="assets/movement-library.js"></script>
+<script src="assets/relic-enhancer.js"></script>
+</body>
+</html>
