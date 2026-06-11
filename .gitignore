@@ -8,6 +8,11 @@ apps/web/tsconfig.tsbuildinfo
 # Stale legacy build output (superseded by apps/web/dist)
 /dist/
 
+# Re-include the deployed bundle: the user-global gitignore has an
+# unanchored "dist/" rule that would otherwise swallow new chunk files
+!apps/web/dist/
+!apps/web/dist/**
+
 # Per-machine Claude Code settings
 .claude/settings.local.json
 
