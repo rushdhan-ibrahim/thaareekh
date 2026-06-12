@@ -1,4 +1,4 @@
-const CACHE_NAME = 'maldives-genealogy-v20';
+const CACHE_NAME = 'maldives-genealogy-v21';
 
 const CORE_ASSETS = [
   './',
@@ -9,9 +9,6 @@ const CORE_ASSETS = [
 ];
 
 const EXTERNAL_ASSETS = [
-  'https://cdn.jsdelivr.net/npm/d3@7/+esm',
-  'https://cdn.jsdelivr.net/npm/@floating-ui/dom@1/+esm',
-  'https://cdn.jsdelivr.net/npm/gsap@3/+esm',
   'https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cormorant+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+Thaana:wght@400;500;600;700&display=swap'
 ];
 
