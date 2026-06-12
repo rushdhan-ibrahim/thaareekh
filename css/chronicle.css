@@ -722,3 +722,85 @@
   margin-top: 3px;
   opacity: 0.95;
 }
+
+/* ============================================================
+   Reading mode — the folio expands to the centre of the screen
+   ============================================================ */
+
+/* The ornaments belong to the empty state; while reading, the page
+   scrolls free of any frozen band. */
+.side.has-sel .st .seal-block,
+.side.has-sel .st .headpiece-block { display: none; }
+.side.has-sel .st { padding-top: var(--sp-2, 8px); min-height: 0; }
+
+.side-expand {
+  position: absolute;
+  top: 10px;
+  right: 44px;
+  width: 26px;
+  height: 26px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--bd);
+  border-radius: var(--radius-sm, 2px);
+  background: none;
+  color: var(--tx3);
+  font-size: 13px;
+  cursor: pointer;
+  z-index: 3;
+  transition: color var(--dur-fast, 200ms) ease, border-color var(--dur-fast, 200ms) ease;
+}
+.side.has-sel .side-expand { display: inline-flex; }
+.side-expand:hover { color: var(--ac); border-color: var(--ac); }
+.side-expand.on { color: var(--ac); border-color: var(--ac); }
+
+.folio-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 32;
+  background: color-mix(in srgb, var(--bg) 52%, black 26%);
+  backdrop-filter: blur(2.5px);
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+.folio-veil.show { opacity: 1; }
+
+body.folio-expanded main { grid-template-columns: 1fr; }
+
+.side.expanded {
+  position: fixed;
+  z-index: 33;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(720px, 94vw);
+  height: min(88vh, 920px);
+  border: 1px solid var(--bd2);
+  border-left: 1px solid var(--bd2);
+  border-radius: var(--radius-lg, 6px);
+  box-shadow: 0 28px 80px rgba(20, 12, 4, 0.55), 0 4px 18px rgba(20, 12, 4, 0.35);
+}
+.side.expanded .sb {
+  padding-left: clamp(28px, 7%, 56px);
+  padding-right: clamp(28px, 7%, 56px);
+  padding-bottom: 40px;
+}
+.side.expanded .folio { max-width: 58ch; margin: 0 auto; }
+.side.expanded .empty-folio { max-width: 58ch; margin: 0 auto; }
+.side.expanded .fp-name { font-size: clamp(28px, 4.2vw, 36px); }
+.side.expanded .bio-text { font-size: 1.04rem; line-height: 1.78; }
+.side.expanded .bio-lead { font-size: 1.1rem; }
+.side.expanded .kr-name { font-size: var(--fs-lg, 15px); }
+.side.expanded .folio-nav { padding-top: var(--sp-3, 12px); }
+.side.expanded .side-expand { right: 48px; top: 14px; }
+.side.expanded .side-close { top: 14px; right: 14px; }
+
+@media (max-width: 1024px) {
+  /* the bottom sheet's drag-to-full is the mobile reading mode */
+  .side-expand { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .folio-veil { transition: none !important; }
+}

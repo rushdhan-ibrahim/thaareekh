@@ -1777,3 +1777,71 @@ export function showInstitutionsPane() {
     oS();
   }
 }
+
+// ---------------------------------------------------------------------------
+// Reading mode — expand the folio to the centre of the screen
+// Mirror of the TS implementation in apps/web/src/ui/sidebar.ts.
+// ---------------------------------------------------------------------------
+
+let _folioExpanded = false;
+
+function setFolioExpanded(on) {
+  if (on === _folioExpanded) return;
+  _folioExpanded = on;
+  const side = document.querySelector('.side');
+  side?.classList.toggle('expanded', on);
+  document.body.classList.toggle('folio-expanded', on);
+  let veil = document.querySelector('.folio-veil');
+  if (on) {
+    if (!veil) {
+      veil = document.createElement('div');
+      veil.className = 'folio-veil';
+      veil.addEventListener('click', () => setFolioExpanded(false));
+      document.body.appendChild(veil);
+    }
+    requestAnimationFrame(() => veil?.classList.add('show'));
+  } else if (veil) {
+    veil.classList.remove('show');
+    const v = veil;
+    window.setTimeout(() => v.remove(), 280);
+  }
+  const btn = document.getElementById('folioExpand');
+  if (btn) {
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.classList.toggle('on', on);
+    btn.textContent = on ? '\u2924' : '\u2922';
+    btn.title = on ? 'Return to the margin (Esc)' : 'Expand reading view (E)';
+  }
+}
+
+export function toggleFolioExpand() {
+  setFolioExpanded(!_folioExpanded);
+}
+
+function initFolioExpand() {
+  document.getElementById('folioExpand')?.addEventListener('click', () => toggleFolioExpand());
+  // Capture phase so an expanded reading view swallows Escape before
+  // the global handler clears the selection underneath it.
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && _folioExpanded) {
+      e.preventDefault();
+      e.stopPropagation();
+      setFolioExpanded(false);
+      return;
+    }
+    if ((e.key === 'e' || e.key === 'E') && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      const el = document.activeElement;
+      const typing = el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement ||
+        el instanceof HTMLSelectElement || (el instanceof HTMLElement && el.isContentEditable);
+      if (typing) return;
+      if (!document.querySelector('.side.has-sel')) return;
+      e.preventDefault();
+      toggleFolioExpand();
+    }
+  }, true);
+  window.addEventListener('selection-changed', e => {
+    if (e.detail?.type === 'none') setFolioExpanded(false);
+  });
+}
+
+initFolioExpand();

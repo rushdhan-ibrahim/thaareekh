@@ -2046,6 +2046,73 @@ export interface SidebarDeps {
   buildOfficeHolders: (ppl: PersonNode[]) => Map<string, Array<{ personId: string; label: string; start: number | null; end: number | null; c: string }>>;
 }
 
+
+// ---------------------------------------------------------------------------
+// Reading mode — expand the folio to the centre of the screen
+// ---------------------------------------------------------------------------
+
+let _folioExpanded = false;
+
+function setFolioExpanded(on: boolean): void {
+  if (on === _folioExpanded) return;
+  _folioExpanded = on;
+  const side = document.querySelector('.side');
+  side?.classList.toggle('expanded', on);
+  document.body.classList.toggle('folio-expanded', on);
+  let veil = document.querySelector('.folio-veil') as HTMLElement | null;
+  if (on) {
+    if (!veil) {
+      veil = document.createElement('div');
+      veil.className = 'folio-veil';
+      veil.addEventListener('click', () => setFolioExpanded(false));
+      document.body.appendChild(veil);
+    }
+    requestAnimationFrame(() => veil?.classList.add('show'));
+  } else if (veil) {
+    veil.classList.remove('show');
+    const v = veil;
+    window.setTimeout(() => v.remove(), 280);
+  }
+  const btn = document.getElementById('folioExpand');
+  if (btn) {
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.classList.toggle('on', on);
+    btn.textContent = on ? '\u2924' : '\u2922';
+    btn.title = on ? 'Return to the margin (Esc)' : 'Expand reading view (E)';
+  }
+}
+
+export function toggleFolioExpand(): void {
+  setFolioExpanded(!_folioExpanded);
+}
+
+function initFolioExpand(): void {
+  document.getElementById('folioExpand')?.addEventListener('click', () => toggleFolioExpand());
+  // Capture phase so an expanded reading view swallows Escape before
+  // the global handler clears the selection underneath it.
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && _folioExpanded) {
+      e.preventDefault();
+      e.stopPropagation();
+      setFolioExpanded(false);
+      return;
+    }
+    if ((e.key === 'e' || e.key === 'E') && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      const el = document.activeElement;
+      const typing = el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement ||
+        el instanceof HTMLSelectElement || (el instanceof HTMLElement && el.isContentEditable);
+      if (typing) return;
+      if (!document.querySelector('.side.has-sel')) return;
+      e.preventDefault();
+      toggleFolioExpand();
+    }
+  }, true);
+  window.addEventListener('selection-changed', e => {
+    const detail = (e as CustomEvent).detail as { type?: string } | undefined;
+    if (detail?.type === 'none') setFolioExpanded(false);
+  });
+}
+
 export function initSidebar(deps: SidebarDeps): void {
   _byId = deps.byId;
   _people = deps.people;
@@ -2074,6 +2141,7 @@ export function initSidebar(deps: SidebarDeps): void {
   _getInferenceNote = deps.getInferenceNote;
   _getInferenceDossierPath = deps.getInferenceDossierPath;
   _inferenceEdgeKey = deps.inferenceEdgeKey;
+  initFolioExpand();
   _isDerivedInferenceEdge = deps.isDerivedInferenceEdge;
   _officeFunctionForYear = deps.officeFunctionForYear;
   _buildOfficeHolders = deps.buildOfficeHolders;
