@@ -943,3 +943,24 @@ body.page-hidden .node-badge {
   background: color-mix(in srgb, var(--bg) 40%, black 18%);
 }
 [data-theme='light'] .scrub-bubble { box-shadow: 0 2px 10px rgba(60, 42, 20, 0.18); }
+
+/* ============================================================
+   Field fixes from device screenshots — crumbs, ghost, light edges
+   ============================================================ */
+
+/* Breadcrumb pills must never paint over each other: they keep their
+   size and the rail scrolls; text clips honestly inside its pill. */
+.floating-crumbs .bc-item { flex-shrink: 0; }
+.bc-main, .bc-meta { overflow: hidden; }
+@media (max-width: 640px) {
+  /* a phone shows where you are and where you came from — no more */
+  #bc > :nth-last-child(n + 4) { display: none; }
+  .floating-crumbs { max-width: calc(100% - var(--sp-6, 24px)); }
+}
+
+/* The algorithm whispers in the dark; on vellum it must barely breathe,
+   and on a phone it stays out of the chronicle's way entirely. */
+[data-theme='light'] .code-ghost { opacity: 0.05; }
+@media (max-width: 640px) {
+  .code-ghost { display: none; }
+}
