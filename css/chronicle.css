@@ -804,3 +804,34 @@ body.folio-expanded main { grid-template-columns: 1fr; }
 @media (prefers-reduced-motion: reduce) {
   .folio-veil { transition: none !important; }
 }
+
+/* ============================================================
+   Mobile parity — header that fits, sheet that reads
+   ============================================================ */
+
+/* The reign-arc must not balloon at sheet width */
+.folio-plate .reign-arc { max-width: 340px; height: 12px; }
+
+@media (max-width: 640px) {
+  /* The sheet opens itself on selection; Details and Export are
+     desktop furniture. What remains fits 390px with room to breathe. */
+  .header-unified #vms2,
+  .header-unified #exf { display: none; }
+  .header-unified { gap: var(--sp-2, 8px); overflow-x: auto; scrollbar-width: none; }
+  .header-unified .hsep { display: none; }
+  .header-unified::-webkit-scrollbar { display: none; }
+  .command-trigger { min-width: 56px; padding: 7px 10px; }
+}
+
+@media (pointer: coarse) {
+  .fn-pill { padding: 10px 2px; }
+  .folio-actions .gb { padding: 7px 12px; }
+  .ef-pick { padding: 8px 12px; }
+  .kin-row { padding-top: 10px; padding-bottom: 10px; }
+}
+
+/* Reading-grade type when the sheet is drawn to full */
+.bs.snap-full .bsb .bio-text { font-size: 1.02rem; line-height: 1.72; }
+.bs.snap-full .bsb .folio { max-width: 60ch; margin: 0 auto; }
+.bsb { padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px)); }
+.bshd { cursor: pointer; }

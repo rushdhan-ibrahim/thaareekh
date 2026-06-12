@@ -1967,7 +1967,7 @@ export function showD(id: string): void {
     if (bT) bT.textContent = (p.g === 'F' ? '\u2640 ' : '') + _personName(p);
     const bB = document.getElementById('bB');
     if (bB) {
-      bB.innerHTML = `<div class="mr">${m}</div>${card}${cmp}`;
+      bB.innerHTML = `${card}${cmp}`;
       bindProfileTabs(bB);
     }
     _oS();

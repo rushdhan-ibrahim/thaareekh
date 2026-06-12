@@ -63,7 +63,17 @@ export function cS(): void {
   drag = null;
 }
 
+function bindSheetHeaderToggle(): void {
+  document.querySelector('.bshd')?.addEventListener('click', e => {
+    if ((e.target as HTMLElement).closest('#bX')) return;
+    const bs = document.getElementById('bs');
+    if (!bs?.classList.contains('op')) return;
+    setSheetSnap(bs.classList.contains('snap-full') ? 'half' : 'full');
+  });
+}
+
 export function initSheet(): void {
+  bindSheetHeaderToggle();
   const bs = bsEl();
   const handle = document.querySelector('.bsh');
   if (!bs || !handle) return;

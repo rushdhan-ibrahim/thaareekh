@@ -1519,7 +1519,7 @@ export function showD(id) {
   window.dispatchEvent(new CustomEvent('selection-changed', { detail: { type: 'person', id } }));
   if (shouldUseBottomSheet()) {
     document.getElementById('bT').textContent = (p.g === 'F' ? '\u2640 ' : '') + personName(p);
-    document.getElementById('bB').innerHTML = `<div class="mr">${m}</div>${card}${cmp}`;
+    document.getElementById('bB').innerHTML = `${card}${cmp}`;
     bindProfileTabs(document.getElementById('bB'));
     oS();
   }
