@@ -122,6 +122,15 @@ jobs:
       - name: Verify TypeScript relationships parity
         run: node --experimental-strip-types scripts/modernization/verify-ts-relationships-parity.mjs
 
+      - name: Verify TypeScript marginalia parity
+        run: node --experimental-strip-types scripts/modernization/verify-ts-marginalia-parity.mjs
+
+      - name: Verify TypeScript era-scrubber-core parity
+        run: node --experimental-strip-types scripts/modernization/verify-ts-era-scrubber-core-parity.mjs
+
+      - name: Verify TypeScript audio-maps parity
+        run: node --experimental-strip-types scripts/modernization/verify-ts-audio-maps-parity.mjs
+
       - name: Run modernization benchmark snapshot
         run: npm run modernization:benchmark
 

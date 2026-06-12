@@ -16,6 +16,9 @@ concurrency:
 
 jobs:
   build:
+    # Pages is enabled only on the thaareekh publish repo; skip (not fail)
+    # on other remotes so the shared history stays green everywhere.
+    if: github.repository == 'rushdhan-ibrahim/thaareekh'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
