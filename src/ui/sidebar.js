@@ -959,7 +959,7 @@ function profileCard(p, kinHtml = '') {
         <h3 class="fp-name">${femaleIcon}${esc(display)}</h3>
         <div class="fp-dates">${esc(lifeText)}${ordinalChip}</div>
         ${reignsHtml}
-        ${reignArcSvg(p)}
+        ${reignArcSvg(p, 1117, 1968, 320, 14)}
       </header>
       <nav class="folio-nav" data-folio-nav>
         <button class="fn-pill on" type="button" data-target="chronicle">${esc(t('story'))}</button>

@@ -41,7 +41,7 @@ export function setSheetSnap(next) {
   setSnapClass(next);
 }
 
-export function oS(prefer = 'half') {
+export function oS(prefer = 'full') {
   const bs = bsEl();
   const ov = ovEl();
   if (!bs || !ov) return;

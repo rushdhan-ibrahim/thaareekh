@@ -26,7 +26,7 @@ const TRANSLATIONS: Record<Locale, Record<string, string>> = {
   en: {
     no_matches: 'No matches',
     command_empty_hint: 'Start typing to search names, dynasties, and titles.',
-    search_placeholder: 'Search name/known-as/title/# · filters: dy:hilaaly c:u o:fandiyaaru',
+    search_placeholder: 'Search name/known-as/title/# \u00b7 filters: dy:hilaaly c:u o:fandiyaaru',
     search_aria: 'Search people',
     clear_search_aria: 'Clear search',
     command_input_placeholder: 'Search people, dynasties, offices, titles, and aliases',
@@ -166,7 +166,7 @@ function applyRuntimeLocaleText(documentRef: Document, t: (key: string) => strin
 
   const searchInput = documentRef.getElementById('si');
   if (searchInput instanceof HTMLInputElement) {
-    searchInput.placeholder = t('search_placeholder');
+    searchInput.placeholder = window.matchMedia?.('(max-width: 640px)').matches ? t('command_search_placeholder') : t('search_placeholder');
     searchInput.setAttribute('aria-label', t('search_aria'));
   }
 

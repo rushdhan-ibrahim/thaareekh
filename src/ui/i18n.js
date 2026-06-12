@@ -728,7 +728,7 @@ export function refreshChromeLabels() {
   }
   // Command palette input
   const cmdInput = document.getElementById('cmdInput');
-  if (cmdInput) cmdInput.placeholder = t('search_placeholder');
+  if (cmdInput) cmdInput.placeholder = window.matchMedia?.('(max-width: 640px)').matches ? t('command_search_placeholder') : t('search_placeholder');
   // Legend & About
   setText('lgH', t('legend'));
   setText('lgPC', t('legend_parent_child'));

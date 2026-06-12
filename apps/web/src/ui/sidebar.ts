@@ -863,7 +863,7 @@ function profileCard(p: PersonNode, kinHtml: string = ''): string {
         <h3 class="fp-name">${femaleIcon}${_esc(display)}</h3>
         <div class="fp-dates">${_esc(lifeText)}${ordinalChip}</div>
         ${reignsHtml}
-        ${reignArcSvg(p)}
+        ${reignArcSvg(p, 1117, 1968, 320, 14)}
       </header>
       <nav class="folio-nav" data-folio-nav>
         <button class="fn-pill on" type="button" data-target="chronicle">${_esc(_t('story'))}</button>

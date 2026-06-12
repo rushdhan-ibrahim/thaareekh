@@ -278,7 +278,7 @@ const D: Record<Locale, TranslationDict> = {
     siblings: 'Siblings',
     spouses: 'Spouses',
     other_kin: 'Other Kin',
-    search_placeholder: 'Search name/known-as/title/# · filters: dy:hilaaly c:u o:fandiyaaru',
+    search_placeholder: 'Search name/known-as/title/# \u00b7 filters: dy:hilaaly c:u o:fandiyaaru',
     early_sovereigns: 'Early Sovereigns',
     minor_trees: 'Minor Trees',
     unconnected: 'Unconnected',
@@ -731,7 +731,8 @@ export function refreshChromeLabels(): void {
     else { const k = document.createElement('kbd'); k.textContent = '/'; cmdTrigger.appendChild(k); }
   }
   const cmdInput = document.getElementById('cmdInput');
-  if (cmdInput && cmdInput instanceof HTMLInputElement) cmdInput.placeholder = t('search_placeholder');
+  // Phones get the short invitation; the filter syntax stays on desktop.
+  if (cmdInput && cmdInput instanceof HTMLInputElement) cmdInput.placeholder = window.matchMedia?.('(max-width: 640px)').matches ? t('command_search_placeholder') : t('search_placeholder');
   setText('lgH', t('legend'));
   setText('lgPC', t('legend_parent_child'));
   setText('lgSb', t('legend_sibling'));
