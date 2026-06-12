@@ -1,6 +1,7 @@
 import type {
   PersonNode, EdgeRecord, LinkDatum, InferenceBasis
 } from '../types/state.js';
+import { reignArcSvg, tallyMarks, sealHtml } from './marginalia.ts';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -864,6 +865,7 @@ function profileCard(p: PersonNode): string {
         <div class="pcn">${femaleIcon}${_esc(display)}</div>
         <div class="pcd">${_esc(subtitle)}</div>
         ${ordinal}
+        ${reignArcSvg(p)}
       </div>
       <div class="pcg">
         <div class="pcl"><span>${_esc(_t('life'))}</span><b>${_esc(lifeText)}</b></div>
@@ -872,7 +874,7 @@ function profileCard(p: PersonNode): string {
       <div class="ptabs">
         <button class="ptab on" data-tab="story"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2 1h9l3 3v11a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm1 3h5v1H3V4zm0 3h8v1H3V7zm0 3h8v1H3v-1zm0 3h5v1H3v-1z"/></svg> ${_esc(_t('story'))}</button>
         <button class="ptab" data-tab="offices"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2 2h12v2H2zm0 4h12v2H2zm0 4h12v2H2z"/></svg> ${_esc(_t('offices_roles'))}</button>
-        <button class="ptab" data-tab="evidence"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm-1 12H3V3h10v10z"/></svg> ${_esc(_t('evidence'))} <span class="rt">${srcCount}</span></button>
+        <button class="ptab" data-tab="evidence"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm-1 12H3V3h10v10z"/></svg> ${_esc(_t('evidence'))} ${srcCount > 0 ? tallyMarks(srcCount) : `<span class="rt">${srcCount}</span>`}</button>
       </div>
       <div class="ptpanel on" data-panel="story">
         ${storyContent}
@@ -1248,7 +1250,7 @@ function relationCard(link: LinkDatum): string {
       </div>
       <div class="pcg">
         <div class="pcl"><span>${_esc(_t('edge_type'))}</span><b>${_esc(relationTypeLabel(e.t || 'kin'))}</b></div>
-        <div class="pcl"><span>${_esc(_t('edge_confidence'))}</span><b>${_esc(confidenceLabel(c))}${e.confidence_grade ? ` (${_esc(_t('confidence_grade'))} ${_esc(e.confidence_grade)})` : ''}</b></div>
+        <div class="pcl"><span>${_esc(_t('edge_confidence'))}</span><b>${e.confidence_grade ? sealHtml(e.confidence_grade) + ' ' : ''}${_esc(confidenceLabel(c))}${e.confidence_grade ? ` (${_esc(_t('confidence_grade'))} ${_esc(e.confidence_grade)})` : ''}</b></div>
         <div class="pcl"><span>${_esc(_t('edge_source'))}</span><b>${_esc(_personName(s))}</b></div>
         <div class="pcl"><span>${_esc(_t('edge_target'))}</span><b>${_esc(_personName(targetPerson))}</b></div>
       </div>

@@ -9,6 +9,7 @@ import { compareSummaryHtml, handlePersonViewed } from './compare.js';
 import { extractPlaceMentions, placeLabelForLang, resolvePlace } from '../data/geo.js';
 import { getLang, personName, relationLabel, t } from './i18n.js';
 import { getInferenceNote, getInferenceDossierPath, inferenceEdgeKey, isDerivedInferenceEdge } from '../data/inference-notes.js';
+import { reignArcSvg, tallyMarks, sealHtml } from './marginalia.js';
 
 let currentOfficeId = null;
 let currentRelationLink = null;
@@ -958,6 +959,7 @@ function profileCard(p) {
         <div class="pcn">${femaleIcon}${esc(display)}</div>
         <div class="pcd">${esc(subtitle)}</div>
         ${ordinal}
+        ${reignArcSvg(p)}
       </div>
       <div class="pcg">
         <div class="pcl"><span>${esc(t('life'))}</span><b>${esc(lifeText)}</b></div>
@@ -966,7 +968,7 @@ function profileCard(p) {
       <div class="ptabs">
         <button class="ptab on" data-tab="story"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2 1h9l3 3v11a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm1 3h5v1H3V4zm0 3h8v1H3V7zm0 3h8v1H3v-1zm0 3h5v1H3v-1z"/></svg> ${esc(t('story'))}</button>
         <button class="ptab" data-tab="offices"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2 2h12v2H2zm0 4h12v2H2zm0 4h12v2H2z"/></svg> ${esc(t('offices_roles'))}</button>
-        <button class="ptab" data-tab="evidence"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm-1 12H3V3h10v10z"/></svg> ${esc(t('evidence'))} <span class="rt">${srcCount}</span></button>
+        <button class="ptab" data-tab="evidence"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm-1 12H3V3h10v10z"/></svg> ${esc(t('evidence'))} ${srcCount > 0 ? tallyMarks(srcCount) : `<span class="rt">${srcCount}</span>`}</button>
       </div>
       <div class="ptpanel on" data-panel="story">
         ${storyContent}
@@ -1411,7 +1413,7 @@ function relationCard(link) {
       </div>
       <div class="pcg">
         <div class="pcl"><span>${esc(t('edge_type'))}</span><b>${esc(relationTypeLabel(e.t || 'kin'))}</b></div>
-        <div class="pcl"><span>${esc(t('edge_confidence'))}</span><b>${esc(confidenceLabel(c))}${e.confidence_grade ? ` (${esc(t('confidence_grade'))} ${esc(e.confidence_grade)})` : ''}</b></div>
+        <div class="pcl"><span>${esc(t('edge_confidence'))}</span><b>${e.confidence_grade ? sealHtml(e.confidence_grade) + ' ' : ''}${esc(confidenceLabel(c))}${e.confidence_grade ? ` (${esc(t('confidence_grade'))} ${esc(e.confidence_grade)})` : ''}</b></div>
         <div class="pcl"><span>${esc(t('edge_source'))}</span><b>${esc(personName(s))}</b></div>
         <div class="pcl"><span>${esc(t('edge_target'))}</span><b>${esc(personName(targetPerson))}</b></div>
       </div>

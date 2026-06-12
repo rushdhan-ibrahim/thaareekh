@@ -1,6 +1,7 @@
 import state from '../state.js';
 import { hashCode, mulberry32 } from '../utils/prng.js';
 import { startParticles, stopParticles } from './particles.js';
+import { audioEvent } from '../audio/scriptorium-audio.js';
 
 function linkIds(l) {
   return {
@@ -133,7 +134,14 @@ export function hiN(id) {
       if (hSrc === id || hTgt === id) highlightedEls.push(this);
     });
     startParticles(highlightedEls);
+    if (highlightedEls.length) audioEvent('edge-draw', { count: highlightedEls.length });
   }
+
+  const person = state.nodes.find(n => n.id === id);
+  audioEvent('select', {
+    dy: person?.dy ?? null,
+    sovereign: Boolean(person?.n && person.n.length)
+  });
 
   applyAncestralFlow(id);
 }

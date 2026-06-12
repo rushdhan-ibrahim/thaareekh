@@ -2,6 +2,7 @@ import state from '../state.js';
 import { byId } from '../data/sovereigns.merge.js';
 import { sourceById } from '../data/sources.js';
 import { getLang } from './i18n.js';
+import { audioEvent } from '../audio/scriptorium-audio.js';
 
 function linkIds(l) {
   return {
@@ -227,6 +228,7 @@ export function initExporter() {
     const v = sel.value;
     sel.value = '';
     if (!v) return;
+    audioEvent('export');
     if (v === 'png') {
       await exportPng();
       return;

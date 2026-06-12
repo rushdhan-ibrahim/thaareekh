@@ -1,4 +1,5 @@
 import type { AppState, PersonNode, LinkDatum, EdgeRecord } from '../types/state.js';
+import { audioEvent } from '../audio/scriptorium-audio.ts';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -295,6 +296,7 @@ export function initExporter(deps: ExporterDeps): void {
     const v = sel.value;
     sel.value = '';
     if (!v) return;
+    audioEvent('export');
     if (v === 'png') {
       await exportPng();
       return;

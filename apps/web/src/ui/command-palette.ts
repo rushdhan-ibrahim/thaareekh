@@ -1,4 +1,5 @@
 import type { SearchHit, SearchPerson, SearchReason } from '../search/search-engine';
+import { audioEvent } from '../audio/scriptorium-audio.ts';
 
 const DEFAULT_LIMIT = 20;
 const DEFAULT_INPUT_DELAY_MS = 60;
@@ -141,6 +142,7 @@ export function initCommandPaletteController(
   }
 
   function open(): void {
+    audioEvent('palette');
     paletteEl.classList.add('open');
     inputEl.value = '';
     state.active = -1;

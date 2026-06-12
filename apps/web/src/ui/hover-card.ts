@@ -1,6 +1,7 @@
 import type { PersonNode, AppState, LinkDatum } from '../types/state';
 import { personName } from './i18n';
 import { fR, esc } from '../utils/format';
+import { audioEvent } from '../audio/scriptorium-audio.ts';
 
 let hoverEl: HTMLDivElement | null = null;
 let hideTimer: ReturnType<typeof setTimeout> | null = null;
@@ -30,6 +31,7 @@ function connectionCount(id: string, links: LinkDatum[]): number {
 
 export function showNodeHoverCard(ev: MouseEvent, d: PersonNode, state: AppState): void {
   if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+  audioEvent('hover');
   const el = ensureEl();
   const conns = connectionCount(d.id, state.links);
   const bio = d.bio ?? '';

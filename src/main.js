@@ -26,6 +26,12 @@ import { initTreeOptions, updateTreeOptionsVisibility, refreshTreeOptionLabels }
 import { initSidebarSeal, updateSealColor } from './ui/sidebar-seal.js';
 import { initHeadpiece } from './ui/headpiece.js';
 import { initFolioCorners, initEraGlow } from './ui/folio-ornaments.js';
+import { initAudio, audioEvent } from './audio/scriptorium-audio.js';
+import { initSoundToggle } from './ui/sound-toggle.js';
+import { initOverture } from './ui/overture.js';
+import { initColophon } from './ui/colophon.js';
+import { initEraScrubber } from './ui/era-scrubber.js';
+import { initTrailPlayer } from './ui/trail-player.js';
 
 function applyTreeWorkerPolicyFromQuery() {
   if (typeof window === "undefined") return;
@@ -787,6 +793,7 @@ document.getElementById("vmg").addEventListener("click", () => {
   document.getElementById("vmt").classList.remove("on");
   document.getElementById("vmg").setAttribute("aria-pressed", "true");
   document.getElementById("vmt").setAttribute("aria-pressed", "false");
+  audioEvent('mode');
   requestRender({ geometryDirty: true }, { resetZoom: true });
   updateTreeOptionsVisibility();
 });
@@ -799,6 +806,7 @@ document.getElementById("vmt").addEventListener("click", () => {
   document.getElementById("vmg").setAttribute("aria-pressed", "false");
   const parentChip = document.querySelector('.chip[data-e="parent"]');
   if (parentChip && !parentChip.classList.contains("on")) parentChip.classList.add("on");
+  audioEvent('mode');
   requestRender({ geometryDirty: true }, { resetZoom: true });
   updateTreeOptionsVisibility();
 });
@@ -873,6 +881,12 @@ initFolioCorners();
 initEraGlow();
 initHeadpiece();
 initSidebarSeal();
+initAudio();
+initSoundToggle();
+initColophon();
+initOverture();
+initEraScrubber({ people });
+initTrailPlayer();
 
 // Initial stats & render
 document.getElementById("st").textContent = people.length + " \u00b7 " + edges.length + (mode === "research" ? " \u00b7 research" : "");

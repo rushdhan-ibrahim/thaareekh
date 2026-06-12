@@ -1,6 +1,7 @@
 import type { AppState, LinkDatum } from '../types/state';
 import { hashCode, mulberry32 } from '../utils/prng.ts';
 import { startParticles, stopParticles } from './particles.ts';
+import { audioEvent } from '../audio/scriptorium-audio.ts';
 
 /** Extract source/target string IDs from a d3 link datum. */
 export function linkIds(l: LinkDatum): { s: string; t: string } {
@@ -140,7 +141,14 @@ export function hiN(id: string, state: AppState): void {
       el.style.animation = `edgeDraw 1.6s var(--ease-out) ${delay}ms forwards`;
     });
     startParticles(highlightedEls);
+    if (highlightedEls.length) audioEvent('edge-draw', { count: highlightedEls.length });
   }
+
+  const person = state.nodes.find(n => n.id === id);
+  audioEvent('select', {
+    dy: person?.dy ?? null,
+    sovereign: Boolean(person?.n && (person.n as unknown[]).length)
+  });
 
   applyAncestralFlow(id, state);
 }

@@ -5,6 +5,15 @@ import { buildOrrery } from './orrery.ts';
 
 type D3Like = typeof import('d3');
 
+let _firstRenderAnnounced = false;
+/** Hide the boot loader and, exactly once, announce the first render. */
+function announceFirstRender(): void {
+  document.getElementById('ld')?.classList.add('dn');
+  if (_firstRenderAnnounced) return;
+  _firstRenderAnnounced = true;
+  document.dispatchEvent(new CustomEvent('graph-first-render'));
+}
+
 // ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
@@ -607,7 +616,7 @@ function maybeStopStableGraphSimulation(sim: any): void {
   sim.alphaTarget?.(0);
   sim.stop?.();
   syncGraphDom();
-  document.getElementById('ld')?.classList.add('dn');
+  announceFirstRender();
 }
 
 function graphProgressiveReveal(
@@ -1236,7 +1245,7 @@ function renderGraph(g: any): void {
         maybeStopStableGraphSimulation(sim);
       })
       .on('end', () => {
-        document.getElementById('ld')?.classList.add('dn');
+        announceFirstRender();
         window.dispatchEvent(new Event('sim-settled'));
       });
     _state.sim = sim;
@@ -1732,7 +1741,7 @@ export function rebuild(): void {
     const reduceMotion = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     const delay = reduceMotion ? 0 : 1400;
     setTimeout(() => {
-      document.getElementById('ld')?.classList.add('dn');
+      announceFirstRender();
       _state.loaderHidden = true;
     }, delay);
   }

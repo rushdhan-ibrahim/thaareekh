@@ -4,6 +4,7 @@
 import { personName } from './i18n.js';
 import { fR, esc } from '../utils/format.js';
 import state from '../state.js';
+import { audioEvent } from '../audio/scriptorium-audio.js';
 
 let hoverEl = null;
 let hideTimer = null;
@@ -33,6 +34,7 @@ function connectionCount(id) {
 
 export function showNodeHoverCard(ev, d) {
   if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+  audioEvent('hover');
   const el = ensureEl();
   const conns = connectionCount(d.id);
   el.innerHTML = `

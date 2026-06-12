@@ -68,6 +68,12 @@ import { initCodeGhost, setGhostCode } from './ui/code-ghost.js';
 import { initSidebarSeal, updateSealColor } from './ui/sidebar-seal.js';
 import { initHeadpiece } from './ui/headpiece.js';
 import { initFolioCorners, initEraGlow } from './ui/folio-ornaments.js';
+import { initAudio, audioEvent } from './audio/scriptorium-audio.js';
+import { initSoundToggle } from './ui/sound-toggle.js';
+import { initOverture } from './ui/overture.js';
+import { initColophon } from './ui/colophon.js';
+import { initEraScrubber } from './ui/era-scrubber.js';
+import { initTrailPlayer } from './ui/trail-player.js';
 
 function applyTreeWorkerPolicyFromQuery(): void {
   const params = new URLSearchParams(window.location.search);
@@ -1069,6 +1075,7 @@ document.getElementById('vmg')?.addEventListener('click', () => {
   document.getElementById('vmg')?.setAttribute('aria-pressed', 'true');
   document.getElementById('vmt')?.setAttribute('aria-pressed', 'false');
   setGhostCode('graph');
+  audioEvent('mode');
   requestRender({ geometryDirty: true }, { resetZoom: true });
   updateTreeOptionsVisibility();
 });
@@ -1083,6 +1090,7 @@ document.getElementById('vmt')?.addEventListener('click', () => {
   const parentChip = document.querySelector('.chip[data-e="parent"]');
   if (parentChip && !parentChip.classList.contains('on')) parentChip.classList.add('on');
   setGhostCode('tree');
+  audioEvent('mode');
   requestRender({ geometryDirty: true }, { resetZoom: true });
   updateTreeOptionsVisibility();
 });
@@ -1169,6 +1177,12 @@ initFolioCorners();
 initEraGlow();
 initHeadpiece();
 initSidebarSeal();
+initAudio();
+initSoundToggle();
+initColophon();
+initOverture();
+initEraScrubber({ people: typedPeople as any });
+initTrailPlayer();
 rebuild();
 // Fit to content on fresh load (no saved zoom), then update pan limits
 const savedZoom = savedView?.zoom as { k?: number } | undefined;

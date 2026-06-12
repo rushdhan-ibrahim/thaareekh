@@ -13,6 +13,15 @@ import { computeTreePlacement } from './tree-placement-core.js';
 import { hashCode, mulberry32 } from '../utils/prng.js';
 import { buildOrrery } from './orrery.js';
 
+let _firstRenderAnnounced = false;
+/** Hide the boot loader and, exactly once, announce the first render. */
+function announceFirstRender() {
+  document.getElementById('ld')?.classList.add('dn');
+  if (_firstRenderAnnounced) return;
+  _firstRenderAnnounced = true;
+  document.dispatchEvent(new CustomEvent('graph-first-render'));
+}
+
 const TIME_EXTENT = timelineExtent();
 const PROGRESSIVE_THRESHOLD = 140;
 let treePlacementCache = null;
@@ -697,7 +706,7 @@ function maybeStopStableGraphSimulation(sim) {
   sim.alphaTarget?.(0);
   sim.stop?.();
   syncGraphDom();
-  document.getElementById("ld")?.classList.add("dn");
+  announceFirstRender();
 }
 
 function restoreSelectionHighlight() {
@@ -1017,7 +1026,7 @@ export function rebuild() {
     const reduceMotion = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     const delay = reduceMotion ? 0 : 1400;
     setTimeout(() => {
-      document.getElementById("ld").classList.add("dn");
+      announceFirstRender();
       state.loaderHidden = true;
     }, delay);
   }
@@ -1262,7 +1271,7 @@ function renderGraph(g) {
         maybeStopStableGraphSimulation(sim);
       })
       .on("end", () => {
-        document.getElementById("ld").classList.add("dn");
+        announceFirstRender();
         window.dispatchEvent(new Event('sim-settled'));
       });
     state.sim = sim;

@@ -5,6 +5,7 @@ import { rankSearch, reasonLabel } from './search-engine.js';
 import { goF } from './navigation.js';
 import { personName, t } from './i18n.js';
 import { fR, esc } from '../utils/format.js';
+import { audioEvent } from '../audio/scriptorium-audio.js';
 
 let active = -1;
 let results = [];
@@ -23,6 +24,7 @@ function dynastyColor(dy) {
 }
 
 function openPalette() {
+  audioEvent('palette');
   const { palette, input } = getEls();
   if (!palette) return;
   palette.classList.add('open');
