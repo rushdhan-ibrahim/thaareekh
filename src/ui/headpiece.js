@@ -64,7 +64,7 @@ export function initHeadpiece() {
       path.style.strokeDasharray = String(len);
       path.style.strokeDashoffset = String(len);
       path.style.setProperty('--len', String(len));
-      path.style.animation = `headpieceDraw 1.5s var(--ease-out) ${i * 120}ms forwards, headpieceRedraw 30s var(--ease-out) ${3 + i * 0.2}s infinite`;
+      path.style.animation = `headpieceDraw 1.5s var(--ease-out) ${i * 120}ms forwards`;
     });
   });
 }

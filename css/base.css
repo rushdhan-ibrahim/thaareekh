@@ -173,6 +173,8 @@ body.lang-dv kbd {
   );
   pointer-events: none;
   z-index: 2;
+  top: var(--era-glow-start, 58%);
+  will-change: transform;
   animation: eraTravel var(--dur-glow) ease-in-out infinite alternate;
 }
 

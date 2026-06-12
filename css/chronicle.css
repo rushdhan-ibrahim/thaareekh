@@ -835,3 +835,81 @@ body.folio-expanded main { grid-template-columns: 1fr; }
 .bs.snap-full .bsb .folio { max-width: 60ch; margin: 0 auto; }
 .bsb { padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px)); }
 .bshd { cursor: pointer; }
+
+/* ============================================================
+   Performance — composited ornaments, paused ambience on gesture
+   ============================================================ */
+
+/* Animated ornaments live on their own tiny layers: their motion can
+   no longer invalidate the sidebar (mask, gradients, folio) per frame. */
+.seal-block,
+.headpiece-block,
+.folio-corner,
+.era-glow {
+  contain: layout style paint;
+}
+.seal-block { will-change: transform; transform: translateZ(0); }
+.seal-svg { contain: paint; }
+
+/* While the hand is on the graph, the chronicle holds its breath. */
+body.graph-interacting .graph-nodes rect,
+body.graph-interacting .node-badge,
+body.graph-interacting .orrery-layer *,
+body.graph-interacting .seal-svg g,
+body.graph-interacting .edge-highlight {
+  animation-play-state: paused !important;
+}
+
+/* A hidden tab burns no candles. */
+body.page-hidden .seal-svg g,
+body.page-hidden .orrery-layer *,
+body.page-hidden .graph-nodes rect,
+body.page-hidden .node-badge {
+  animation-play-state: paused !important;
+}
+
+/* ============================================================
+   Performance — the orrery underlay (composited rings)
+   ============================================================ */
+.orrery-host {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  contain: strict;
+  opacity: 0.5;
+}
+#ga > svg { position: relative; z-index: 1; }
+.orrery-space {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+.orrery-anchor { position: absolute; left: 0; top: 0; }
+.orrery-anchor > svg {
+  position: absolute;
+  display: block;
+  will-change: transform;
+}
+.o-ring { animation: spin 100s linear infinite; }
+.o-breathe { animation: breathe 16s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .o-ring, .o-breathe { animation: none !important; }
+}
+
+/* The page rests still; the lineage you touch breathes. */
+.graph-nodes g.node-selected rect.node-body,
+.graph-nodes g.node-connected rect.node-body {
+  animation: breatheNode var(--bperiod, 12s) ease-in-out var(--bdelay, 0s) infinite;
+}
+.node-badge.badge-breathing {
+  animation: breatheSov var(--bperiod, 6s) ease-in-out var(--bdelay, 0s) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .graph-nodes g.node-selected rect.node-body,
+  .graph-nodes g.node-connected rect.node-body,
+  .node-badge.badge-breathing { animation: none !important; }
+}

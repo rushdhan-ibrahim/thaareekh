@@ -11,7 +11,7 @@ import { personName, relationLabel, t } from '../ui/i18n.js';
 import { showNodeHoverCard, moveHoverCard, hideHoverCard } from '../ui/hover-card.js';
 import { computeTreePlacement } from './tree-placement-core.js';
 import { hashCode, mulberry32 } from '../utils/prng.js';
-import { buildOrrery } from './orrery.js';
+import { buildOrrery, updateOrreryTransform } from './orrery.js';
 
 let _firstRenderAnnounced = false;
 /** Hide the boot loader and, exactly once, announce the first render. */
@@ -911,8 +911,6 @@ export function rebuild() {
     state.svgEl.selectAll("*").remove();
     const defs = state.svgEl.append("defs").attr("class", "persistent-defs");
     // Node drop shadow filter (static)
-    const dropFilter = defs.append("filter").attr("id", "nodeShadow").attr("x", "-20%").attr("y", "-20%").attr("width", "140%").attr("height", "140%");
-    dropFilter.append("feDropShadow").attr("dx", 0).attr("dy", 1.5).attr("stdDeviation", 1.5).attr("flood-color", "rgba(60,42,20,0.15)").attr("flood-opacity", 0.35);
     // Default arrow marker (fallback)
     defs.append("marker").attr("id", "ar-default").attr("viewBox", "0 0 10 10").attr("refX", 10).attr("refY", 5)
       .attr("markerWidth", 5).attr("markerHeight", 5).attr("orient", "auto-start-reverse")
@@ -1039,6 +1037,7 @@ function drawNodes(g, withDrag = false) {
     .join(
       enter => {
         const gn = enter.append("g").attr("class", "node");
+        gn.append("rect").attr("class", "node-shadow");
         gn.append("rect").attr("class", "node-body");
         gn.append("rect").attr("class", "node-accent").attr("width", 3);
         gn.append("text").attr("class", "node-name");
@@ -1092,7 +1091,10 @@ function drawNodes(g, withDrag = false) {
   state.gN.select("rect.node-body")
     .attr("rx", jitterRx).attr("ry", jitterRx)
     .attr("fill", cs("--nf")).attr("stroke", d => nC(d.dy)).attr("stroke-width", d => d.g === "F" ? 2.2 : 1.5)
-    .attr("filter", "url(#nodeShadow)");
+;
+  state.gN.select("rect.node-shadow")
+    .attr("rx", jitterRx).attr("ry", jitterRx)
+    .attr("fill", "rgba(56,40,22,0.20)");
   state.gN.select("rect.node-accent")
     .attr("rx", jitterRx).attr("ry", jitterRx)
     .attr("fill", d => nC(d.dy)).attr("opacity", 0.85)
@@ -1113,6 +1115,7 @@ function drawNodes(g, withDrag = false) {
     const w = bb.width + p * 2;
     const h = bb.height + 10;
     d3.select(this).select("rect.node-body").attr("x", bb.x - p).attr("y", bb.y - 5).attr("width", w).attr("height", h);
+    d3.select(this).select("rect.node-shadow").attr("x", bb.x - p).attr("y", bb.y - 3.5).attr("width", w).attr("height", h);
     d3.select(this).select(".node-accent").attr("x", bb.x - p).attr("y", bb.y - 5).attr("height", h);
     d._hw = w / 2; d._hh = h / 2;
     if ((d.n || []).length > 0) {
@@ -1134,9 +1137,13 @@ function applySovereignBreathing(gN, reduceMotion) {
     const period = 10 + rng() * 6;       // 10–16s
     const delay = -(rng() * 8);           // phase offset 0–8s (negative = already running)
     const rect = d3.select(this).select("rect.node-body");
+    // Per-node character stays as custom properties; the animation itself
+    // runs only on the selected lineage (see chronicle.css) so a resting
+    // page never invalidates the SVG scene.
     rect.style("transform-box", "fill-box")
         .style("transform-origin", "center")
-        .style("animation", `breatheNode ${period}s ease-in-out ${delay}s infinite`);
+        .style("--bperiod", `${period.toFixed(2)}s`)
+        .style("--bdelay", `${delay.toFixed(2)}s`);
   });
 }
 
@@ -1148,7 +1155,8 @@ function applyBadgeBreathing(gBadges, reduceMotion) {
     const period = 4 + rng() * 4;        // 4–8s
     const delay = -(rng() * 4);           // phase offset 0–4s
     d3.select(this)
-      .style("animation", `breatheSov ${period}s ease-in-out ${delay}s infinite`);
+      .style("--bperiod", `${period.toFixed(2)}s`)
+      .style("--bdelay", `${delay.toFixed(2)}s`);
   });
 }
 
@@ -1171,7 +1179,8 @@ function renderGraph(g) {
   const reduceMotionOrr = typeof window !== "undefined"
     && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
   if (!reduceMotionOrr) {
-    buildOrrery(g, state.W / 2, state.H / 2);
+    buildOrrery(state.svgEl?.node()?.parentElement ?? null, state.W / 2, state.H / 2);
+    updateOrreryTransform(state.tr);
   }
 
   const linkLayer = ensureLayer(g, "graph-links");

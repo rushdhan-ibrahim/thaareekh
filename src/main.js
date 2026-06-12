@@ -3,6 +3,7 @@ import state from './state.js';
 import { people, edges, mode } from './data/sovereigns.merge.js';
 import { dyS } from './utils/dynasties.js';
 import { rebuild, updateEraVisibility } from './graph/rebuild.js';
+import { updateOrreryTransform } from './graph/orrery.js';
 import { invalidateChipCache } from './graph/filter.js';
 import { hiN, hiE, clH } from './graph/highlight.js';
 import { cS, initSheet } from './ui/modal.js';
@@ -32,6 +33,10 @@ import { initOverture } from './ui/overture.js';
 import { initColophon } from './ui/colophon.js';
 import { initEraScrubber } from './ui/era-scrubber.js';
 import { initTrailPlayer } from './ui/trail-player.js';
+
+document.addEventListener('visibilitychange', () => {
+  document.body.classList.toggle('page-hidden', document.hidden);
+});
 
 function applyTreeWorkerPolicyFromQuery() {
   if (typeof window === "undefined") return;
@@ -161,6 +166,7 @@ state.zoomBehavior = d3.zoom().scaleExtent([0.08, 4])
   .on("zoom", e => {
     state.tr = e.transform;
     scheduleZoomTransform(e.transform);
+    updateOrreryTransform(e.transform);
     emitZoomChanged({ x: e.transform.x, y: e.transform.y, k: e.transform.k });
   })
   .on("end", () => {

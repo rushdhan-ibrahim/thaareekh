@@ -1,7 +1,7 @@
 import type { AppState, PersonNode, EdgeRecord, LinkDatum } from '../types/state.js';
 import type { TreePlacementInput, TreePlacementOutput } from './tree-placement-core.ts';
 import { hashCode, mulberry32 } from '../utils/prng.ts';
-import { buildOrrery } from './orrery.ts';
+import { buildOrrery, updateOrreryTransform } from './orrery.ts';
 
 type D3Like = typeof import('d3');
 
@@ -942,6 +942,7 @@ function drawNodes(g: any, withDrag: boolean = false): void {
     .join(
       (enter: any) => {
         const gn = enter.append('g').attr('class', 'node');
+        gn.append('rect').attr('class', 'node-shadow');
         gn.append('rect').attr('class', 'node-body');
         gn.append('rect').attr('class', 'node-accent').attr('width', 3);
         gn.append('text').attr('class', 'node-name');
@@ -991,8 +992,10 @@ function drawNodes(g: any, withDrag: boolean = false): void {
   };
   gN.select('rect.node-body')
     .attr('rx', jitterRx).attr('ry', jitterRx)
-    .attr('fill', _cs('--nf')).attr('stroke', (d: any) => _nC(d.dy)).attr('stroke-width', (d: any) => d.g === 'F' ? 2.2 : 1.5)
-    .attr('filter', 'url(#nodeShadow)');
+    .attr('fill', _cs('--nf')).attr('stroke', (d: any) => _nC(d.dy)).attr('stroke-width', (d: any) => d.g === 'F' ? 2.2 : 1.5);
+  gN.select('rect.node-shadow')
+    .attr('rx', jitterRx).attr('ry', jitterRx)
+    .attr('fill', 'rgba(56,40,22,0.20)');
   gN.select('rect.node-accent')
     .attr('rx', jitterRx).attr('ry', jitterRx)
     .attr('fill', (d: any) => _nC(d.dy)).attr('opacity', 0.85)
@@ -1014,6 +1017,7 @@ function drawNodes(g: any, withDrag: boolean = false): void {
     const w = bb.width + p * 2;
     const h = bb.height + 10;
     sel.select('rect.node-body').attr('x', bb.x - p).attr('y', bb.y - 5).attr('width', w).attr('height', h);
+    sel.select('rect.node-shadow').attr('x', bb.x - p).attr('y', bb.y - 3.5).attr('width', w).attr('height', h);
     sel.select('.node-accent').attr('x', bb.x - p).attr('y', bb.y - 5).attr('height', h);
     d._hw = w / 2; d._hh = h / 2;
     if ((d.n || []).length > 0) {
@@ -1036,9 +1040,13 @@ function applySovereignBreathing(gN: any, reduceMotion: boolean): void {
     const period = 10 + rng() * 6;
     const delay = -(rng() * 8);
     const rect = d3.select(this).select('rect.node-body');
+    // Per-node character stays as custom properties; the animation itself
+    // runs only on the selected lineage (see chronicle.css) so a resting
+    // page never invalidates the SVG scene.
     rect.style('transform-box', 'fill-box')
         .style('transform-origin', 'center')
-        .style('animation', `breatheNode ${period}s ease-in-out ${delay}s infinite`);
+        .style('--bperiod', `${period.toFixed(2)}s`)
+        .style('--bdelay', `${delay.toFixed(2)}s`);
   });
 }
 
@@ -1051,7 +1059,8 @@ function applyBadgeBreathing(gBadges: any, reduceMotion: boolean): void {
     const period = 4 + rng() * 4;
     const delay = -(rng() * 4);
     d3.select(this)
-      .style('animation', `breatheSov ${period}s ease-in-out ${delay}s infinite`);
+      .style('--bperiod', `${period.toFixed(2)}s`)
+      .style('--bdelay', `${delay.toFixed(2)}s`);
   });
 }
 
@@ -1147,7 +1156,8 @@ function renderGraph(g: any): void {
   const reduceMotionOrr = typeof window !== 'undefined'
     && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
   if (!reduceMotionOrr) {
-    buildOrrery(g, _state.W / 2, _state.H / 2);
+    buildOrrery(((_state.svgEl as any)?.node()?.parentElement ?? null) as HTMLElement | null, _state.W / 2, _state.H / 2);
+    updateOrreryTransform(_state.tr as any);
   }
 
   const linkLayer = ensureLayer(g, 'graph-links');
@@ -1629,8 +1639,6 @@ export function rebuild(): void {
   if (!(_state as any)._svgScaffold) {
     (_state.svgEl as any).selectAll('*').remove();
     const defs = (_state.svgEl as any).append('defs').attr('class', 'persistent-defs');
-    const dropFilter = defs.append('filter').attr('id', 'nodeShadow').attr('x', '-20%').attr('y', '-20%').attr('width', '140%').attr('height', '140%');
-    dropFilter.append('feDropShadow').attr('dx', 0).attr('dy', 1.5).attr('stdDeviation', 1.5).attr('flood-color', 'rgba(60,42,20,0.15)').attr('flood-opacity', 0.35);
     defs.append('marker').attr('id', 'ar-default').attr('viewBox', '0 0 10 10').attr('refX', 10).attr('refY', 5)
       .attr('markerWidth', 5).attr('markerHeight', 5).attr('orient', 'auto-start-reverse')
       .append('path').attr('d', 'M0 0L10 5L0 10z').attr('fill', _cs('--ep'));

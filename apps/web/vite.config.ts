@@ -13,8 +13,8 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      // CDN-loaded libraries stay external; resolved by importmap at runtime
-      external: ['d3', '@floating-ui/dom', 'gsap'],
+      // Libraries bundle and tree-shake; the importmap remains only for
+      // the legacy no-build runtime at the repo root.
       output: {
         // Stable filenames for static deployment (no content hashes)
         entryFileNames: 'assets/main.js',

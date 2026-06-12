@@ -2142,6 +2142,11 @@ export function initSidebar(deps: SidebarDeps): void {
   _getInferenceDossierPath = deps.getInferenceDossierPath;
   _inferenceEdgeKey = deps.inferenceEdgeKey;
   initFolioExpand();
+  // Warm the verification ledger off the critical path so the first
+  // selection never pays its import cost.
+  const warm = () => ensureVerificationModuleLoaded();
+  if (typeof requestIdleCallback === 'function') requestIdleCallback(warm, { timeout: 4000 });
+  else setTimeout(warm, 2500);
   _isDerivedInferenceEdge = deps.isDerivedInferenceEdge;
   _officeFunctionForYear = deps.officeFunctionForYear;
   _buildOfficeHolders = deps.buildOfficeHolders;

@@ -61,6 +61,7 @@ import {
   showOfficeDetail, getCurrentOfficeId
 } from './ui/sidebar.js';
 import { initRebuild, rebuild, updateEraVisibility } from './graph/rebuild.js';
+import { updateOrreryTransform } from './graph/orrery.js';
 import { computeTreePlacement } from './graph/tree-placement-core.js';
 import { createPathfinder } from './graph/pathfinder.js';
 import { initSearchRuntime } from './ui/search-runtime.js';
@@ -90,6 +91,10 @@ function applyTreeWorkerPolicyFromQuery(): void {
   }
 }
 applyTreeWorkerPolicyFromQuery();
+
+document.addEventListener('visibilitychange', () => {
+  document.body.classList.toggle('page-hidden', document.hidden);
+});
 
 // ---------------------------------------------------------------------------
 // State
@@ -404,6 +409,7 @@ state.zoomBehavior = (d3 as any).zoom().scaleExtent([0.08, 4])
   .on('zoom', (e: any) => {
     state.tr = e.transform;
     scheduleZoomTransform(e.transform);
+    updateOrreryTransform(e.transform);
     emitZoomChanged({ x: e.transform.x, y: e.transform.y, k: e.transform.k });
   })
   .on('end', () => {

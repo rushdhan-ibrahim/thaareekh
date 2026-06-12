@@ -53,6 +53,12 @@ export function stopParticles() {
   staggerTimers.forEach(clearTimeout);
   staggerTimers = [];
   activeEdges = [];
+  if (driverRaf) {
+    cancelAnimationFrame(driverRaf);
+    driverRaf = 0;
+  }
+  liveDots.forEach(d => d.dot.remove());
+  liveDots = [];
   if (particleGroup) {
     particleGroup.remove();
     particleGroup = null;
@@ -96,20 +102,33 @@ function spawnParticle(edgeEl, rng) {
   dot.setAttribute('pointer-events', 'none');
   particleGroup.appendChild(dot);
 
-  let t = 0;
-  const speed = 0.0006 + (rng?.() ?? Math.random()) * 0.0006;
+  liveDots.push({ dot, t: 0, speed: 0.0006 + (rng?.() ?? Math.random()) * 0.0006, getPoint });
+  ensureDriver();
+}
 
-  function step() {
-    t += speed;
-    if (t > 1 || !particleGroup) {
-      dot.remove();
+let liveDots = [];
+let driverRaf = 0;
+
+/** One shared rAF loop drives every particle. */
+function ensureDriver() {
+  if (driverRaf) return;
+  const frame = () => {
+    if (!particleGroup || liveDots.length === 0) {
+      driverRaf = 0;
       return;
     }
-    const pt = getPoint(t);
-    dot.setAttribute('cx', pt.x);
-    dot.setAttribute('cy', pt.y);
-    dot.setAttribute('opacity', (Math.sin(t * Math.PI) * 0.3).toFixed(3));
-    requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
+    const keep = [];
+    for (const d of liveDots) {
+      d.t += d.speed;
+      if (d.t > 1) { d.dot.remove(); continue; }
+      const pt = d.getPoint(d.t);
+      d.dot.setAttribute('cx', pt.x);
+      d.dot.setAttribute('cy', pt.y);
+      d.dot.setAttribute('opacity', (Math.sin(d.t * Math.PI) * 0.3).toFixed(3));
+      keep.push(d);
+    }
+    liveDots = keep;
+    driverRaf = requestAnimationFrame(frame);
+  };
+  driverRaf = requestAnimationFrame(frame);
 }

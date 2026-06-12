@@ -39,8 +39,9 @@
 }
 
 @keyframes eraTravel {
-  0%   { top: var(--era-glow-start, 58%); }
-  100% { top: var(--era-glow-end, 72%); }
+  /* translateY (composited) — animating `top` re-layouts the chamber */
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(var(--era-drift, 120px)); }
 }
 
 @keyframes sealBreathe {

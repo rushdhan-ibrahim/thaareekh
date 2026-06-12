@@ -1845,3 +1845,8 @@ function initFolioExpand() {
 }
 
 initFolioExpand();
+// Warm the verification ledger off the critical path so the first
+// selection never pays its import cost.
+const __warmVerification = () => ensureVerificationModuleLoaded();
+if ('requestIdleCallback' in window) window.requestIdleCallback(__warmVerification, { timeout: 4000 });
+else window.setTimeout(__warmVerification, 2500);
