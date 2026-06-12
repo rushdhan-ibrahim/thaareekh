@@ -54,7 +54,8 @@ export function initEraScrubber(deps: ScrubberDeps): void {
     const who = reigningAt(year, deps.people);
     const label = who.length ? ` · ${ordinalLabel(who[0]!)}` : '';
     bubble.textContent = `${year}${label}`;
-    bubble.style.left = `${(prog * 100).toFixed(2)}%`;
+    // Clamp so the bubble never clips outside the wrap at the extremes
+    bubble.style.left = `${(6 + prog * 88).toFixed(2)}%`;
     bubble.classList.toggle('ghost', ghost);
     bubble.classList.add('show');
     window.clearTimeout(hideTimer);

@@ -36,7 +36,7 @@ function buildVeil(full: boolean): HTMLElement {
     ? '<div class="ov-plate"><h1 class="ov-title">Rannavaaru</h1>' +
       '<div class="ov-rule"></div>' +
       '<p class="ov-sub">Maldives Royal Genealogy · 1117–1968</p>' +
-      '<p class="ov-hint">click to enter</p></div>'
+      '<p class="ov-hint">tap anywhere to begin</p></div>'
     : '';
   document.body.appendChild(v);
   return v;

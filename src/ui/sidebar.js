@@ -365,18 +365,21 @@ function kinStoryBlock(ownerId, it, edge) {
 export function rlH(title, items) {
   if (!items.length) return '';
   const ownerId = currentPersonId;
-  return `<div class="sl">${esc(title)}</div><ul class="rl">${items.map(it => {
+  return `<div class="kin-group"><h5 class="kin-rubric">${esc(title)} <span class="kin-count">${items.length}</span></h5><ul class="rl">${items.map(it => {
     const p = byId.get(it.id);
     if (!p) return '';
     const relType = it.t || 'kin';
     const edge = ownerId ? bestEdgeBetween(ownerId, it.id, relType) : null;
     const tag = it.c && it.c !== 'c' ? `<span class="rt ${it.c === 'i' ? 'rt-i' : 'rt-u'}">${it.c === 'i' ? t('inferred') : t('uncertain')}</span>` : '';
-    const srcMeta = it.srcCount
-      ? ` \u00b7 ${it.srcCount} ${it.srcCount === 1 ? t('source_word') : t('sources_word')}${it.cg ? ` \u00b7 ${t('grade_word')} ${it.cg}` : ''}`
+    const srcTitle = it.srcCount
+      ? `${it.srcCount} ${it.srcCount === 1 ? t('source_word') : t('sources_word')}${it.cg ? ` \u00b7 ${t('grade_word')} ${it.cg}` : ''}`
       : '';
+    const srcMeta = it.srcCount ? `<span class="kr-src" title="${esc(srcTitle)}">${tallyMarks(Math.min(it.srcCount, 5))}</span>` : '';
     const kinStory = ownerId ? kinStoryBlock(ownerId, it, edge) : '';
-    return `<li class="ri" data-rel="${esc(relType)}"><div class="rlf"><div class="rn">${p.g === 'F' ? '\u2640 ' : ''}${esc(personName(p))} ${tag}</div><div class="rs">${p.re ? esc(fR(p.re)) : ''} \u00b7 ${esc(p.dy || '?')}${p.n ? ` \u00b7 ${p.n.map(x => '#' + x).join(', ')}` : ''}${srcMeta}</div>${kinStory}</div><button class="gb" onclick="goF('${p.id}')">${esc(t('go'))}</button></li>`;
-  }).join('')}</ul>`;
+    const dyKey = (p.dy || 'unknown').toLowerCase();
+    const dates = p.re ? esc(fR(p.re)) : '';
+    return `<li class="ri kin-row" data-rel="${esc(relType)}" style="--dy-color:var(--dy-${dyKey})" role="link" tabindex="0" onclick="goF('${p.id}')" onkeydown="if(event.key==='Enter')goF('${p.id}')"><div class="rlf"><div class="kr-name">${p.g === 'F' ? '\u2640 ' : ''}${esc(personName(p))}${p.n ? ` <span class="kr-ord">\u2116\u2009${p.n[0]}</span>` : ''} ${tag}</div><div class="kr-meta">${dates ? `<span>${dates}</span>` : ''}<span class="kr-dy">${esc(p.dy || '?')}</span>${srcMeta}</div>${kinStory}</div></li>`;
+  }).join('')}</ul></div>`;
 }
 
 function uniq(arr) {
@@ -870,7 +873,7 @@ function officePanel(p) {
   return `<div class="pcs"><div class="sl">${esc(t('held_offices'))}</div>${held}</div>${eraContextHtml(p)}`;
 }
 
-function profileCard(p) {
+function profileCard(p, kinHtml = '') {
   const life = estLife(p);
   const display = personName(p);
   const names = uniq([p.nm, display, p.rg, ...(p.regnal_names || []), ...(p.aliases || [])]);
@@ -905,16 +908,13 @@ function profileCard(p) {
   const connCount = edges.filter(e => e.s === p.id || e.d === p.id).length;
   const srcCount = collectSourceRefs(p).length;
 
-  // Sovereign ordinal
-  const ordinal = (p.n || []).length ? `<span class="pcd">#${p.n[0]}</span>` : '';
-
-  // Dynasty + reign merged into subtitle
-  const subtitleParts = [p.dy || t('unknown_dynasty')];
-  if (reignText !== t('unknown')) subtitleParts.push(reignText);
-  const subtitle = subtitleParts.join(' \u00b7 ');
-
-  // Story tab content
+  // Story tab content (always default)
   const storyContent = `
+    ${p.bio
+      ? `<div class="bio-text">${p.bio.split('\n\n').map((para, i) => `<p${i === 0 ? ' class="bio-lead"' : ''}>${esc(para)}</p>`).join('')}</div>`
+      : `<div class="nt nt-empty">${esc(t('no_sources'))}</div>`
+    }
+    ${factsPanelHtml(facts)}
     <div class="pcs">
       <div class="sl">${esc(t('known_names'))}</div>
       <div class="pnl">${names.length ? names.map(n => `<button class="pn pn-b" data-q="${esc(n)}">${esc(n)}</button>`).join('') : `<span class="pn">${esc(t('unknown'))}</span>`}</div>
@@ -923,63 +923,68 @@ function profileCard(p) {
       <div class="sl">${esc(t('known_by'))}</div>
       ${knownAsRows(p)}
     </div>
-    ${p.titles?.length ? `<div class="pcs"><div class="sl">${esc(t('titles'))}</div><div class="pnl">${p.titles.map(ti => `<button class="pn pn-b" data-q="${esc(ti)}">${esc(ti)}</button>`).join('')}</div></div>` : ''}
-    ${p.bio
-      ? `<div class="pcs"><div class="sl">${esc(t('bio'))}</div><div class="bio-text">${p.bio.split('\n\n').map((para, i) => `<p${i === 0 ? ' class="bio-lead"' : ''}>${esc(para)}</p>`).join('')}</div></div>`
-      : ''
-    }
-    <div class="pcs">
-      <div class="sl">${esc(t('life_consistency'))}</div>
-      <div class="rs">${esc(t('life_consistency_hint'))}</div>
-      ${lifeWarnings.length
-        ? `<ul class="pfl">${lifeWarnings.map(row => `<li>${esc(row)}</li>`).join('')}</ul>`
-        : `<div class="rs">${esc(t('life_consistency_ok'))}</div>`
-      }
-    </div>
-    <div class="pcs">
-      <div class="sl">${esc(t('royal_links'))}</div>
-      <div class="rli"><span class="pn">${esc(statusText)}</span> ${confidenceBadge(royal.status === 'uncertain' ? 'u' : royal.status === 'none' ? 'u' : undefined)}</div>
-      <div class="rs">${esc(royal.summary)}</div>
-      ${royal.pathText ? `<div class="rs">${esc(t('path'))}: ${esc(royal.pathText)}</div>` : ''}
-    </div>
-    ${factsPanelHtml(facts)}
-    <div class="pcs">
-      <div class="sl">${esc(t('compare'))}</div>
-      <div class="pnl">
-        <button class="gb" onclick="setCmpA('${p.id}')">${esc(t('set_a'))}</button>
-        <button class="gb" onclick="setCmpB('${p.id}')">${esc(t('set_b'))}</button>
-        <button class="gb" onclick="armCmp('${p.id}')">${esc(t('compare_next'))}</button>
+    ${p.titles?.length ? `<div class="pcs"><div class="sl">${esc(t('titles'))}</div><div class="pnl">${p.titles.map(title => `<button class="pn pn-b" data-q="${esc(title)}">${esc(title)}</button>`).join('')}</div></div>` : ''}
+    <details class="folio-apparatus">
+      <summary>${esc(t('life_consistency'))} \u00b7 ${esc(t('royal_links'))}</summary>
+      <div class="pcs">
+        <div class="sl">${esc(t('life_consistency'))}</div>
+        <div class="rs">${esc(t('life_consistency_hint'))}</div>
+        ${lifeWarnings.length
+          ? `<ul class="pfl">${lifeWarnings.map(row => `<li>${esc(row)}</li>`).join('')}</ul>`
+          : `<div class="rs">${esc(t('life_consistency_ok'))}</div>`
+        }
       </div>
+      <div class="pcs">
+        <div class="sl">${esc(t('royal_links'))}</div>
+        <div class="rli"><span class="pn">${esc(statusText)}</span> ${confidenceBadge(royal.status === 'uncertain' ? 'u' : royal.status === 'none' ? 'u' : undefined)}</div>
+        <div class="rs">${esc(royal.summary)}</div>
+        ${royal.pathText ? `<div class="rs">${esc(t('path'))}: ${esc(royal.pathText)}</div>` : ''}
+      </div>
+    </details>
+    <div class="folio-actions">
+      <button class="gb" onclick="setCmpA('${p.id}')">${esc(t('set_a'))}</button>
+      <button class="gb" onclick="setCmpB('${p.id}')">${esc(t('set_b'))}</button>
+      <button class="gb" onclick="armCmp('${p.id}')">${esc(t('compare_next'))}</button>
     </div>
   `;
 
+  const reignsHtml = reignText !== t('unknown')
+    ? `<div class="fp-reigns">${esc(t('reign_abbrev'))}\u2009${esc(reignText).replace(/;\s*/g, ' \u00b7 ')}</div>`
+    : '';
+  const ordinalChip = (p.n || []).length ? `<span class="fp-ordinal">\u2116\u2009${p.n[0]}</span>` : '';
   return `
-    <section class="pc" data-person-card style="--dy-color:${dyColor}">
-      <div class="pch">
-        <div class="pcn">${femaleIcon}${esc(display)}</div>
-        <div class="pcd">${esc(subtitle)}</div>
-        ${ordinal}
+    <article class="folio" data-person-card style="--dy-color:${dyColor}">
+      <header class="folio-plate">
+        <div class="fp-house">${esc(p.dy || t('unknown_dynasty'))}</div>
+        <h3 class="fp-name">${femaleIcon}${esc(display)}</h3>
+        <div class="fp-dates">${esc(lifeText)}${ordinalChip}</div>
+        ${reignsHtml}
         ${reignArcSvg(p)}
-      </div>
-      <div class="pcg">
-        <div class="pcl"><span>${esc(t('life'))}</span><b>${esc(lifeText)}</b></div>
-        <div class="pcl"><span>${esc(t('connections'))}</span><b>${connCount}</b></div>
-      </div>
-      <div class="ptabs">
-        <button class="ptab on" data-tab="story"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2 1h9l3 3v11a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm1 3h5v1H3V4zm0 3h8v1H3V7zm0 3h8v1H3v-1zm0 3h5v1H3v-1z"/></svg> ${esc(t('story'))}</button>
-        <button class="ptab" data-tab="offices"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2 2h12v2H2zm0 4h12v2H2zm0 4h12v2H2z"/></svg> ${esc(t('offices_roles'))}</button>
-        <button class="ptab" data-tab="evidence"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm-1 12H3V3h10v10z"/></svg> ${esc(t('evidence'))} ${srcCount > 0 ? tallyMarks(srcCount) : `<span class="rt">${srcCount}</span>`}</button>
-      </div>
-      <div class="ptpanel on" data-panel="story">
+      </header>
+      <nav class="folio-nav" data-folio-nav>
+        <button class="fn-pill on" type="button" data-target="chronicle">${esc(t('story'))}</button>
+        <button class="fn-pill" type="button" data-target="kin">${esc(t('kin_header'))} <i class="fn-n">${connCount}</i></button>
+        <button class="fn-pill" type="button" data-target="offices">${esc(t('offices_roles'))}</button>
+        <button class="fn-pill" type="button" data-target="sources">${esc(t('evidence'))}</button>
+      </nav>
+      <section class="folio-sec" data-sec="chronicle">
+        <h4 class="fs-rubric">${esc(t('story'))}</h4>
         ${storyContent}
-      </div>
-      <div class="ptpanel" data-panel="offices">
+      </section>
+      <section class="folio-sec" data-sec="kin">
+        <h4 class="fs-rubric">${esc(t('kin_header'))} <i class="fn-n">${connCount}</i></h4>
+        ${kinHtml || `<div class="nt nt-empty">${esc(t('no_connections'))}</div>`}
+      </section>
+      <section class="folio-sec" data-sec="offices">
+        <h4 class="fs-rubric">${esc(t('offices_roles'))}</h4>
         ${officePanel(p)}
-      </div>
-      <div class="ptpanel" data-panel="evidence">
+      </section>
+      <section class="folio-sec" data-sec="sources">
+        <h4 class="fs-rubric">${esc(t('evidence'))} ${srcCount > 0 ? tallyMarks(srcCount) : ''}</h4>
         ${personEvidencePanel(p)}
-      </div>
-    </section>
+        ${srcH(collectSourceRefs(p))}
+      </section>
+    </article>
   `;
 }
 
@@ -1033,14 +1038,17 @@ function bindQueryButtons(root) {
 
 function bindProfileTabs(root) {
   if (!root) return;
-  root.querySelectorAll('[data-person-card]').forEach(card => {
-    const tabs = card.querySelectorAll('.ptab');
-    const panels = card.querySelectorAll('.ptpanel');
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const target = tab.dataset.tab;
-        tabs.forEach(t => t.classList.toggle('on', t === tab));
-        panels.forEach(p => p.classList.toggle('on', p.dataset.panel === target));
+  root.querySelectorAll('[data-folio-nav]').forEach(nav => {
+    const pills = nav.querySelectorAll('.fn-pill');
+    const folio = nav.closest('.folio');
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        const target = pill.dataset.target;
+        if (!target || !folio) return;
+        const sec = folio.querySelector(`[data-sec="${target}"]`);
+        pills.forEach(pp => pp.classList.toggle('on', pp === pill));
+        const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+        sec?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
       });
     });
   });
@@ -1435,6 +1443,7 @@ function relationCard(link) {
 }
 
 export function showLinkDetail(link, opts = {}) {
+  document.querySelector('.side')?.classList.add('has-sel');
   if (!link) return;
   currentPersonId = null;
   currentRelationLink = link;
@@ -1493,25 +1502,24 @@ export function showD(id) {
   if (p.n) m += `<span class="bg">${p.n.map(x => '#' + x).join(', ')}</span>`;
   if (p.g === 'F') m += '<span class="bg">\u2640</span>';
   if (p.regnal_names?.length) m += `<span class="bg">${esc(t('regnal'))} ${esc(p.regnal_names[0])}</span>`;
-  const refs = collectSourceRefs(p);
-  const card = profileCard(p);
+  const rels = rlH(t('parents'), parOf(id)) + rlH(t('spouses'), gNb(id, 'spouse')) + rlH(t('children'), chOf(id)) + rlH(t('siblings'), gNb(id, 'sibling')) + rlH(t('other_kin'), gNb(id, 'kin'));
+  const card = profileCard(p, rels);
   const cmp = compareSummaryHtml();
-  const evi = srcH(refs);
-  const rels = rlH(t('parents'), parOf(id)) + rlH(t('children'), chOf(id)) + rlH(t('siblings'), gNb(id, 'sibling')) + rlH(t('spouses'), gNb(id, 'spouse')) + rlH(t('other_kin'), gNb(id, 'kin'));
   document.getElementById('sT').textContent = (p.g === 'F' ? '\u2640 ' : '') + personName(p);
   document.getElementById('vmi')?.classList.remove('on');
   document.getElementById('vmi')?.setAttribute('aria-pressed', 'false');
   document.getElementById('sT').classList.remove('emp');
   document.getElementById('sM').innerHTML = m;
-  crossFadeContent(document.getElementById('sN'), `${card}${cmp}${evi}`, () => {
+  document.querySelector('.side')?.classList.add('has-sel');
+  crossFadeContent(document.getElementById('sN'), `${card}${cmp}`, () => {
     bindProfileTabs(document.getElementById('sN'));
   });
-  crossFadeContent(document.getElementById('sR'), rels || `<div class="nt nt-empty">${esc(t('no_connections'))}</div>`);
+  crossFadeContent(document.getElementById('sR'), '');
   recordPerson(id);
   window.dispatchEvent(new CustomEvent('selection-changed', { detail: { type: 'person', id } }));
   if (shouldUseBottomSheet()) {
     document.getElementById('bT').textContent = (p.g === 'F' ? '\u2640 ' : '') + personName(p);
-    document.getElementById('bB').innerHTML = `<div class="mr">${m}</div>${card}${cmp}${evi}<div class="dv"></div>${rels}`;
+    document.getElementById('bB').innerHTML = `<div class="mr">${m}</div>${card}${cmp}`;
     bindProfileTabs(document.getElementById('bB'));
     oS();
   }
@@ -1691,6 +1699,7 @@ function officeHolderListHtml(officeId) {
 }
 
 export function showOfficeDetail(officeId) {
+  document.querySelector('.side')?.classList.add('has-sel');
   const office = officeById.get(officeId);
   if (!office) return;
   currentPersonId = null;
@@ -1745,6 +1754,7 @@ document.addEventListener('click', e => {
 });
 
 export function showInstitutionsPane() {
+  document.querySelector('.side')?.classList.add('has-sel');
   currentPersonId = null;
   currentRelationLink = null;
   currentOfficeId = null;

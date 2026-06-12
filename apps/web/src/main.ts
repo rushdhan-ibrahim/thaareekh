@@ -812,14 +812,30 @@ function snapshotSelectedEdge(link: LinkDatum | null): HistoryEntry | null {
   return { type: 'edge', s, d, rel: link._e?.t || 'kin' };
 }
 
+function emptyFolioHtml(): string {
+  const picks = (typedPeople as Array<{ id: string; nm?: string; n?: unknown[]; bio?: string; dy?: string; re?: unknown }>)
+    .filter(p => Array.isArray(p.n) && p.n.length && p.bio)
+    .slice(0, 3);
+  const chips = picks.map(p =>
+    `<button class="ef-pick" type="button" style="--dy-color:var(--dy-${(p.dy || 'unknown').toLowerCase()})" onclick="goF('${p.id}')">${p.nm ?? p.id}</button>`
+  ).join('');
+  return `
+    <div class="empty-folio">
+      <div class="ef-mark">\u273F</div>
+      <p class="ef-line">${t('click_node_details')}</p>
+      ${chips ? `<div class="ef-sub">${t('begin_with')}</div><div class="ef-picks">${chips}</div>` : ''}
+    </div>`;
+}
+
 function showEmptySidebar(): void {
   const sT = document.getElementById('sT');
   const sM = document.getElementById('sM');
   const sN = document.getElementById('sN');
   const sR = document.getElementById('sR');
+  document.querySelector('.side')?.classList.remove('has-sel');
   if (sT) { sT.textContent = t('select_sovereign'); sT.classList.add('emp'); }
   if (sM) sM.innerHTML = '';
-  if (sN) sN.innerHTML = t('click_node_details');
+  if (sN) sN.innerHTML = emptyFolioHtml();
   if (sR) sR.innerHTML = '';
   window.dispatchEvent(new CustomEvent('selection-changed', { detail: { type: 'none' } }));
 }

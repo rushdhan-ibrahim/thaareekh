@@ -547,11 +547,27 @@ function snapshotSelectedEdge(link) {
   };
 }
 
+function emptyFolioHtml() {
+  const picks = people
+    .filter(p => Array.isArray(p.n) && p.n.length && p.bio)
+    .slice(0, 3);
+  const chips = picks.map(p =>
+    `<button class="ef-pick" type="button" style="--dy-color:var(--dy-${(p.dy || 'unknown').toLowerCase()})" onclick="goF('${p.id}')">${p.nm ?? p.id}</button>`
+  ).join('');
+  return `
+    <div class="empty-folio">
+      <div class="ef-mark">\u273F</div>
+      <p class="ef-line">${t('click_node_details')}</p>
+      ${chips ? `<div class="ef-sub">${t('begin_with')}</div><div class="ef-picks">${chips}</div>` : ''}
+    </div>`;
+}
+
 function showEmptySidebar() {
+  document.querySelector('.side')?.classList.remove('has-sel');
   document.getElementById("sT").textContent = t('select_sovereign');
   document.getElementById("sT").classList.add("emp");
   document.getElementById("sM").innerHTML = "";
-  document.getElementById("sN").innerHTML = t('click_node_details');
+  document.getElementById("sN").innerHTML = emptyFolioHtml();
   document.getElementById("sR").innerHTML = "";
   window.dispatchEvent(new CustomEvent('selection-changed', { detail: { type: 'none' } }));
 }
