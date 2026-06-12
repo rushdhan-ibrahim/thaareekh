@@ -1,4 +1,4 @@
-const CACHE_NAME = 'maldives-genealogy-v17';
+const CACHE_NAME = 'maldives-genealogy-v18';
 
 const CORE_ASSETS = [
   './',
